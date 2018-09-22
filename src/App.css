@@ -1,0 +1,19 @@
+body{
+  background-color: rgba(251,251,251,1);
+  font-family: 'Raleway', sans-serif;
+}
+html {
+  font-family: 'Raleway', sans-serif;
+}
+.AppBar {
+  border: 1px solid transparent;
+  border-bottom-color: rgb(223,224,228);
+}
+
+.MainMenu-active-152 span {
+  color: #ef6c00;
+  font-weight: 600;
+}
+.MainMenu-active-152 svg {
+  color: #ef6c00;
+}
