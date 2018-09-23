@@ -7,13 +7,19 @@ import './App.css'
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#ffffff',
+      light: 'rgb(66, 133, 244)',
+      main: 'rgb(51, 103, 214)',
+      dark: '#1E3D7F',
+      contrastText: '#fff',
     },
     secondary: {
       light: '#ff9d3f',
       main: '#ef6c00',
       dark: '#b53d00',
       contrastText: '#212121',
+    },
+    third: {
+      main: 'green'
     },
     grey: {
       light: 'rgba(251,251,251,1)',
@@ -23,6 +29,7 @@ const theme = createMuiTheme({
       light: 'rgb(66, 133, 244)',
       main: 'rgb(51, 103, 214)'
     },
+    btnblue: 'rgb(66, 133, 244)',
     error: {
       warning: 'yellow',
       light: '#FFEBEE',
@@ -30,6 +37,12 @@ const theme = createMuiTheme({
       dark: '#B71C1C',
       contrastText: '#B71C1C',
     },
+  },
+  margin: {
+    unit: '24px'
+  },
+  padding: {
+    unit: '24px'
   },
   typography: {
     // Tell Material-UI what's the font-size on the html element is.

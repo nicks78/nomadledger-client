@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 import Logo from '../../logo.png';
 import MainMenu from './menu'
+import {ApxCopyright} from '../common'
 
 const drawerWidth = 240;
 
@@ -29,7 +30,10 @@ const styles = theme => ({
         position: 'relative',
         height: '100vh',
         width: drawerWidth,
-        marginTop: '66px',
+        marginTop: '0px',
+        [theme.breakpoints.up('md')]: {
+            marginTop: '66px',
+        },
         boxShadow: '2px 0 10px -8px black'
     },
     
@@ -42,6 +46,7 @@ const styles = theme => ({
     appBar: {
         position: 'absolute',
         marginLeft: drawerWidth,
+        backgroundColor: 'white',
         boxShadow: 'none',
         border: '1px solid transparent',
         borderBottomColor: 'rgba(0, 0, 0, 0.12)',
@@ -53,7 +58,6 @@ const styles = theme => ({
         flex: 1,
         marginLeft: '20px',
         fontSize: '20px',
-        color: theme.palette.secondary,
         fontWeight: "500"
     },
     content: {
@@ -86,15 +90,16 @@ class Layout extends React.Component {
                     onClick={this.handleDrawerToggle}
                     className={classes.navIconHide}
                     >
-                    <MenuIcon />
+                    <MenuIcon style={{ color: '#ef6c00' }}/>
                 </IconButton>
                 <Hidden smDown>
                     <Typography >
                         <img src={Logo} alt="logo" height="40" width="auto" /> 
                     </Typography>
                 </Hidden>
+                
                 <Typography color="secondary" className={classes.title}>
-                    PAX COMPTA.com
+                <Hidden smDown>APX DEV</Hidden>
                 </Typography>
                     <Button color="secondary" onClick={ () => { this.props._onChangeLocale(locale) } }>{ locale.lang === 'fr' ? 'EN' : 'FR' }</Button>
                 </Toolbar>
@@ -115,7 +120,8 @@ class Layout extends React.Component {
                 }}
             >
                 <MainMenu locale={ locale }/>
-            </Drawer>
+                <ApxCopyright />      
+                </Drawer>
             </Hidden>
             <Hidden smDown implementation="css">
                 <Drawer
@@ -126,6 +132,7 @@ class Layout extends React.Component {
                     }}
                 >
                 <MainMenu locale={ locale } />
+                <ApxCopyright /> 
             </Drawer>
             </Hidden>
 

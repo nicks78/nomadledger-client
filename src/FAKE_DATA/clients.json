@@ -9,10 +9,10 @@
         "logo": "https://cdn4.buysellads.net/uu/1/3386/1525189943-38523.png",
         "company": {
             "name": "APX DEV",
-            "street": "",
-            "city": "",
-            "zip": "",
-            "country": "" 
+            "street": "12 rue de paris",
+            "city": "Paris",
+            "zip": "Paris",
+            "country": "France" 
             
         }
     },
@@ -24,7 +24,7 @@
         "email": "nicolas@apx-dev.com",
         "logo": "https://cdn4.buysellads.net/uu/1/3386/1525189943-38523.png",
         "company": {
-            "name": "APX DEV",
+            "name": "SAMSUNG",
             "street": "",
             "city": "",
             "zip": "",
@@ -40,7 +40,7 @@
         "email": "nicolas@apx-dev.com",
         "logo": "https://cdn4.buysellads.net/uu/1/3386/1525189943-38523.png",
         "company": {
-            "name": "APX DEV",
+            "name": "APPLE",
             "street": "",
             "city": "",
             "zip": "",

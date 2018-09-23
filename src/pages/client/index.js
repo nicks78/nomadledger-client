@@ -1,26 +1,34 @@
 //manager/src/pages/client/index.js
 
 import React, { Component } from 'react'
-import {getClients, getClient} from './actions'
+import {getClients, getClient, createClient, createClientState} from './actions'
 import {connect} from 'react-redux'
 import {ApxTable, Spinner, ApxAlert} from '../../components/common'
 import AddClient from './addClient'
 import ShowClient from './showClient'
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-
-
+import IconButton from '@material-ui/core/IconButton';
+import ArrowBackIcon from '@material-ui/icons/ArrowBackOutlined'
 
 class Client extends Component {
 
 
     state = {
         showClient: false,
+        keyLocation: ''
     }
 
     componentDidMount(){
         if( this.props.receivedAt === null )
             this.props.getClients();
+        this.setState({keyLocation: this.props.location.key})
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.location.key !== this.state.keyLocation){
+            this.setState({ showClient: false, keyLocation: nextProps.location.key })
+        }
     }
 
     renderSingleClient = (id) => {
@@ -33,9 +41,14 @@ class Client extends Component {
         }
     }
 
+    returnToList = () => {
+        this.setState({ showClient: false })
+    }
+
     render() {
     
-    const {listClients, isFetching, isError, client} = this.props
+    const {listClients, isFetching, isError, client, locale, createClient, createClientState, newClient} = this.props
+    const { showClient } = this.state
 
     if(isFetching){
         return <Spinner />
@@ -48,7 +61,7 @@ class Client extends Component {
         listClients.map((row, index) => {
         return (
           <TableRow key={index}>
-            <TableCell onClick={ () => { this.renderSingleClient(row._id) } }>{row.company.name}</TableCell>
+            <TableCell onClick={ () => { this.renderSingleClient(row._id) } }><span  style={ styles.link }>{row.company.name}</span></TableCell>
             <TableCell>{row.firstname}&nbsp;{row.lastname}</TableCell>
             <TableCell numeric>{row.phone}</TableCell>
             <TableCell>{row.email}</TableCell>
@@ -58,12 +71,15 @@ class Client extends Component {
 
     return (
         <div style={styles.container}>
-            
-            <AddClient locale={ this.props.locale } initData=""/>
-            <br />
+
             {
-                this.state.showClient ?
-                    <ShowClient client={ client }/>
+                showClient ? 
+                    <IconButton onClick={ this.returnToList }><ArrowBackIcon/></IconButton>
+                : <AddClient locale={ locale } initData="" createClient={ createClient } createClientState={ createClientState } newClient={newClient} />
+            }
+            {
+                showClient ?
+                    <ShowClient client={ client } />
                 : <ApxTable isFetching={isFetching} tableRow={ tableRow }/>
             }
             
@@ -74,8 +90,12 @@ class Client extends Component {
 }
 
 
-const styles = {
+const styles =  {
     container: {
+    },
+    link: {
+        color: '#ef6c00',
+        cursor: 'pointer'
     },
     sidebar: {
         height: '100vh',
@@ -95,9 +115,10 @@ const mapStateToProps = (state) => {
         listClients: state.client.listClients,
         receivedAt: state.client.receivedAt,
         locale: state.locale.locale,
-        client: state.client.client
+        client: state.client.client,
+        newClient: state.client.newClient
     }
 }
 
 
-export default connect(mapStateToProps, {getClients, getClient})(Client);
+export default connect(mapStateToProps, { getClients, getClient, createClient, createClientState })(Client);

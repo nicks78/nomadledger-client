@@ -2,7 +2,7 @@
 
 
 // import axios from 'axios';
-import { REQUEST_CLIENTS, FAILED_CLIENTS, RECEIVE_CLIENTS, GET_CLIENT, CREATE_CLIENT } from '../../redux/actionsTypes'
+import { REQUEST_CLIENTS, FAILED_CLIENTS, RECEIVE_CLIENTS, GET_CLIENT, CLIENT_STATE  } from '../../redux/actionsTypes'
 
 
 // TMP DATA
@@ -50,29 +50,36 @@ export function createClient( data ){
   
       dispatch(requestClients())
 
-      var data = {
-        _id: "2",
-        firstname: "Eric",
-        lastname: "Pax",
-        phone: "0695026075",
-        email: "nicolas@apx-dev.com",
-        logo: "https://cdn4.buysellads.net/uu/1/3386/1525189943-38523.png",
-        company: {
-            name: "APX DEV",
-            street: "",
-            city: "",
-            zip: "",
-            country: "" 
-        }
-      }
+      // var data = {
+      //   _id: "2",
+      //   firstname: "Eric",
+      //   lastname: "Pax",
+      //   phone: "0695026075",
+      //   email: "nicolas@apx-dev.com",
+      //   logo: "https://cdn4.buysellads.net/uu/1/3386/1525189943-38523.png",
+      //   company: {
+      //       name: "APX DEV",
+      //       street: "",
+      //       city: "",
+      //       zip: "",
+      //       country: "" 
+      //   }
+      // }
 
       setTimeout(() => {
-          dispatch(setClient( data ))  
-      }, 300)
+          dispatch(setClient( clients ))  
+      }, 3000)
 
       if(1 === 2){
           dispatch(failedClients())
       }      
+  }
+}
+
+export function createClientState (fieldName, value){
+  return {
+    type: CLIENT_STATE,
+    payload: { fieldName, value }
   }
 }
 

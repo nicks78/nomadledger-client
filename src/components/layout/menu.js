@@ -7,13 +7,15 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-import HomeIcon from '@material-ui/icons/Home';
-import GroupIcon from '@material-ui/icons/Group';
-import FolderIcon from '@material-ui/icons/Folder';
-import CallMadeIcon from '@material-ui/icons/CallMade';
-import StoreIcon from '@material-ui/icons/Store';
-import ReceiptIcon from '@material-ui/icons/Receipt';
-import HeadsetMicIcon from '@material-ui/icons/HeadsetMic';
+import HomeIcon from '@material-ui/icons/HomeOutlined';
+import GroupIcon from '@material-ui/icons/GroupOutlined';
+import FolderIcon from '@material-ui/icons/FolderOutlined';
+import CallMadeIcon from '@material-ui/icons/CallMadeOutlined';
+import StoreIcon from '@material-ui/icons/StoreOutlined';
+import ReceiptIcon from '@material-ui/icons/ReceiptOutlined';
+import HeadsetMicIcon from '@material-ui/icons/HeadsetMicOutlined';
+import Hidden from '@material-ui/core/Hidden';
+import Logo from '../../logo.png';
 
 
 const styles = theme => ({
@@ -26,9 +28,10 @@ const styles = theme => ({
   },
   listText: {
       textTransform: 'uppercase',
-      fontWeight: '500',
-      color: theme.palette.secondary.light
-  }
+      fontWeight: '900',
+      color: 'red',// theme.palette.secondary.light
+  },
+
 });
 
 const MainMenu = (props) => {
@@ -36,6 +39,12 @@ const MainMenu = (props) => {
  
     return (
         <div className={classes.root}>
+            <Hidden mdUp>
+                <div style={{ padding: '24px', textAlign: 'center', backgroundColor: '#b53d00' }}>
+                    <img src={Logo} alt="logo" height="40" width="auto" /> 
+                    <p style={{marginBottom: '0px'}}>APX DEV</p>
+                </div>
+            </Hidden>
             <List component="nav" disablePadding>
                 <ListItem button component={NavLink}  to="/home" activeClassName={classes.active}>
                 <ListItemIcon >
@@ -107,6 +116,8 @@ const MainMenu = (props) => {
                 <ListItemText primary="Spam" />
                 </ListItem>
             </List>
+
+            
         </div>
   );
 }
