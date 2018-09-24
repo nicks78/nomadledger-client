@@ -67,33 +67,33 @@ const MainMenu = (props) => {
                     <ListItemText className={ classes.listText } primary={ locale.quote.name } />
                 </ListItem>
 
-                <ListItem button>
+                <ListItem button component={NavLink}  to="/invoices" activeClassName={classes.active}>
                     <ListItemIcon>
                         <FolderIcon />
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.invoice.name } />
                 </ListItem>
 
-                <ListItem button>
+                <ListItem button component={NavLink}  to="/payback" activeClassName={classes.active}>
                     <ListItemIcon>
                         <FolderIcon />
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.payback.name } />
                 </ListItem>
-
-                <ListItem button>
-                    <ListItemIcon>
-                        <StoreIcon />
-                    </ListItemIcon>
-                    <ListItemText className={ classes.listText } primary={ locale.product.name } />
-                </ListItem>
-                <ListItem button>
+                <ListItem button component={NavLink}  to="/services" activeClassName={classes.active}>
                     <ListItemIcon>
                         <HeadsetMicIcon />
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.service.name } />
                 </ListItem>
-                <ListItem button>
+                <ListItem button component={NavLink}  to="/products" activeClassName={classes.active}>
+                    <ListItemIcon>
+                        <StoreIcon />
+                    </ListItemIcon>
+                    <ListItemText className={ classes.listText } primary={ locale.product.name } />
+                </ListItem>
+                
+                <ListItem button component={NavLink}  to="/expenses" activeClassName={classes.active}>
                     <ListItemIcon>
                         <ReceiptIcon />
                     </ListItemIcon>

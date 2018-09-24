@@ -1,6 +1,5 @@
 //manager/src/components/common/upload.js
 
-
 import React  from 'react'
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -13,15 +12,14 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/CloseOutlined'
 
 const styles = theme => ({
+
     input: {
         display: 'none'
     },
     closeIcon: {
         color: 'red',
-        paddingLeft: 10
     },
     gallery: {
-        width: '100%'
     },
     listItem: {
         width: '100%'
@@ -31,19 +29,20 @@ const styles = theme => ({
 
 const  Upload = (props) => {
 
-    const {classes, images, authNumberFile } = props
-    console.log(images.length)
+    const {classes, images, limitUploadFile, removeItem, docType } = props
+
 
     return (
+    
     <div className={ classes.root}>
         <List className={ classes.gallery }>
             {
                 images.map((value, index) => {
                     return  <ListItem key={index} dense button className={classes.listItem}>
-                                <Avatar alt={value.name} src={URL.createObjectURL(value)} />
+                                <Avatar  alt={value.name} src={value.blob} />
                                 <ListItemText primary={value.name} />
                                 <ListItemSecondaryAction>
-                                    <IconButton className={classes.closeIcon} onClick={ () => { alert('delete') }  }>
+                                    <IconButton className={classes.closeIcon} onClick={ () => { removeItem(value.lastModified, 'lastModified', 'doc') }  }>
                                         <CloseIcon />
                                     </IconButton>
                                 </ListItemSecondaryAction>
@@ -52,10 +51,10 @@ const  Upload = (props) => {
             }
         </List>
     <br />
-        {  images.length < authNumberFile &&
+        {  images.length < limitUploadFile &&
             <div className={classes.button}>
                 <input
-                    accept="image/*"
+                    accept={docType}
                     className={classes.input}
                     id="flat-button-file"
                     multiple

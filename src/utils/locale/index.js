@@ -44,6 +44,9 @@ const Locale = {
             },
             button: {
                 add_client: "Ajouter un client",
+                add_product: "Ajouter un produit",
+                add_service: "Ajouter un service",
+                add_expense: "Ajouter une depense",
                 return_list: "Retour à la liste",
                 save: "Enregistrer",
                 edit: 'Editer',
@@ -58,8 +61,14 @@ const Locale = {
             form: {
                 title: {
                     add_client: "Enregistrer un nouveau client",
+                    add_product: "Enregistrer un nouveau produit",
+                    add_service: "Enregistrer un service",
+                    add_expense: "Enregistrer une depense",
                     label_client: "Coordonnée client",
                     label_company: "Informations compagnie",
+                    label_product: "Informations produit",
+                    label_service: "Informations service",
+                    label_expense: "Informations depense",
                     label_assets: "Photo / Documents",                    
                 },
                 field: {
@@ -75,6 +84,11 @@ const Locale = {
                     zip: "Code postal",
                     city: 'Ville',
                     country: 'Pays',
+                    product_name: "Nom du produit",
+                    service_name: "Nom du service",
+                    expense_name: "Nom de la depense",
+                    description: "Description",
+                    price: "Prix"
                     
                 },
                 helperText: {
@@ -123,6 +137,8 @@ const Locale = {
             },
             button: {
                 add_client: "Add customer",
+                add_product: "Add product",
+                add_service: "Add service",
                 return_list: "Back to list",
                 save: "Save",
                 edit: 'Edit',
@@ -136,10 +152,16 @@ const Locale = {
             },
             form: {
                 title: {
-                    add_client: "Register new customer",
+                    add_client: "Add a new customer",
+                    add_product: "Add a new produit",
+                    add_service: "Add service",
+                    add_expense: "Add expense",
                     label_client: "Customer profile",
                     label_company: "Company profile",
-                    label_assets: "Photo / Documents"
+                    label_assets: "Photo / Documents",
+                    label_product: "Product details",
+                    label_service: "Service details",
+                    label_expense: "Expense detail"
                 },
                 field: {
                     firstname: "Firstname",
@@ -153,7 +175,12 @@ const Locale = {
                     address: 'Address',
                     zip: 'Zip',
                     city: 'City',
-                    country: 'Country'
+                    country: 'Country',
+                    product_name: "Product name",
+                    service_name: "Service name",
+                    expense_name: "Expense name",
+                    description: "Description",
+                    price: "Price"
                 },
                 helperText: {
                     phone_code: "Please select country code"

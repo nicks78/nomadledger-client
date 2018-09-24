@@ -1,0 +1,18 @@
+[
+    {
+        "_id": "8739279",
+        "ref": "FT-389",
+        "name": "macbook",
+        "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempore fugit eligendi inventore iure ullam asperiores optio a labore iste excepturi, adipisci itaque eum fuga? Quas hic impedit ullam ex sed.",
+        "price": 123.90
+
+    },
+    {
+        "_id": "312",
+        "ref": "FT-897",
+        "name": "pc",
+        "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempore fugit eligendi inventore iure ullam asperiores optio a labore iste excepturi, adipisci itaque eum fuga? Quas hic impedit ullam ex sed.",
+        "price": 233.90
+
+    }
+]

@@ -75,7 +75,7 @@ class Client extends Component {
             {
                 showClient ? 
                     <IconButton onClick={ this.returnToList }><ArrowBackIcon/></IconButton>
-                : <AddClient locale={ locale } initData="" createClient={ createClient } createClientState={ createClientState } newClient={newClient} />
+                : <AddClient locale={ locale } createClient={ createClient } createClientState={ createClientState } newData={newClient} />
             }
             {
                 showClient ?

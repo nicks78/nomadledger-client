@@ -50,22 +50,6 @@ export function createClient( data ){
   
       dispatch(requestClients())
 
-      // var data = {
-      //   _id: "2",
-      //   firstname: "Eric",
-      //   lastname: "Pax",
-      //   phone: "0695026075",
-      //   email: "nicolas@apx-dev.com",
-      //   logo: "https://cdn4.buysellads.net/uu/1/3386/1525189943-38523.png",
-      //   company: {
-      //       name: "APX DEV",
-      //       street: "",
-      //       city: "",
-      //       zip: "",
-      //       country: "" 
-      //   }
-      // }
-
       setTimeout(() => {
           dispatch(setClient( clients ))  
       }, 3000)
