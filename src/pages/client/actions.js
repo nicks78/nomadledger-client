@@ -1,8 +1,9 @@
 // daytrip/src/screens/city/actions.js
 
 
-// import axios from 'axios';
-import { REQUEST_CLIENTS, FAILED_CLIENTS, RECEIVE_CLIENTS, GET_CLIENT, CLIENT_STATE  } from '../../redux/actionsTypes'
+import axios from 'axios';
+import { API_ENDPOINT, API_ADRESSES } from '../../api/constant'
+import { REQUEST_CLIENTS, FAILED_CLIENTS, RECEIVE_CLIENTS, GET_CLIENT, CLIENT_STATE, CREATE_CLIENT  } from '../../redux/actionsTypes'
 
 
 // TMP DATA
@@ -15,14 +16,23 @@ export function getClients( ){
 
         dispatch(requestClients())
 
-        setTimeout(() => {
-            dispatch(receiveClients(clients))  
-        }, 300)
-
-        if(1 === 2){
-            dispatch(failedClients())
-        }
-            
+        axios.get(`${API_ENDPOINT}${API_ADRESSES.GET_CLIENT}`, {
+          method: 'GET',
+          mode: 'cors',
+          headers: {
+              'x-access-token': localStorage.getItem('token')
+          }
+        })
+        .then(function (response) { 
+            return response.data
+        }) 
+        .then( res => {
+          if(res.success){
+              dispatch(receiveClients( res.payload ))  
+              }else{
+                dispatch(failedClients())
+              }
+        })              
     }
 }
 
@@ -43,20 +53,49 @@ export function getClient( id ){
   }
 }
 
+
+function setClient(client) {
+  return {
+    type: GET_CLIENT,
+    isFetching: false,
+    client: client[0]
+  }
+}
+
+
+
 // CREATE NEW CLIENT
-export function createClient( data ){
+export function createClient( ){
 
-  return dispatch => {
+  return (dispatch, getState) => {
   
-      dispatch(requestClients())
+      dispatch(requestClients());
 
-      setTimeout(() => {
-          dispatch(setClient( clients ))  
-      }, 3000)
+      axios.post(`${API_ENDPOINT}${API_ADRESSES.CLIENTS}/create`,
+        { data: getState().client.newClient },
+        { headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': localStorage.getItem('token')
+        }
+      })
+      .then(function (response) { 
+          return response.data
+      }) 
+      .then( res => {
+            if(res.success){
+              dispatch(setCreateClient( res.client ))  
+            }else{
+              dispatch(failedClients())
+            }
+      })   
+  }
+}
 
-      if(1 === 2){
-          dispatch(failedClients())
-      }      
+function setCreateClient(client){
+  return {
+      type: CREATE_CLIENT,
+      isFetching: false,
+      client: client
   }
 }
 
@@ -67,13 +106,6 @@ export function createClientState (fieldName, value){
   }
 }
 
-function setClient(client) {
-  return {
-    type: GET_CLIENT,
-    isFetching: false,
-    client: client[0]
-  }
-}
 
 function requestClients() {
   return {

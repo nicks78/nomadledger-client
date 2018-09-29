@@ -61,7 +61,7 @@ class Client extends Component {
         listClients.map((row, index) => {
         return (
           <TableRow key={index}>
-            <TableCell onClick={ () => { this.renderSingleClient(row._id) } }><span  style={ styles.link }>{row.company.name}</span></TableCell>
+            <TableCell onClick={ () => { this.renderSingleClient(row._id) } }><span  style={ styles.link }></span></TableCell>
             <TableCell>{row.firstname}&nbsp;{row.lastname}</TableCell>
             <TableCell numeric>{row.phone}</TableCell>
             <TableCell>{row.email}</TableCell>

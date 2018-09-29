@@ -33,3 +33,11 @@ export const RECEIVE_EXPENSES = 'receive_expenses'
 export const FAILED_EXPENSES = 'failed_expenses'
 export const EXPENSE_STATE = 'expense_state' // Create tmp expense state data
 export const GET_EXPENSE = 'get_expense'
+
+// PROVIDER FOLDER
+export const REQUEST_PROVIDERS = 'request_providers'
+export const RECEIVE_PROVIDERS = 'receive_providers'
+export const FAILED_PROVIDERS = 'failed_providers'
+export const PROVIDER_STATE = 'provider_state' // Create tmp provider state data
+export const GET_PROVIDER = 'get_provider'
+

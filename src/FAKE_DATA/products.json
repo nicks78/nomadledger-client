@@ -3,16 +3,43 @@
         "_id": "8739279",
         "ref": "FT-389",
         "name": "macbook",
+        "quantity": 90,
+        "sold": 10,
+        "category": "",
+        "isActive": true,
+        "brand": "",
+        "supplier": {
+            "company": "",
+            "contact_name": "",
+            "email": "",
+            "phone_code": "",
+            "phone": ""
+        },
         "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempore fugit eligendi inventore iure ullam asperiores optio a labore iste excepturi, adipisci itaque eum fuga? Quas hic impedit ullam ex sed.",
-        "price": 123.90
+        "price": 123.90,
+        "currency": "€",
+        "img": []
 
     },
     {
         "_id": "312",
         "ref": "FT-897",
         "name": "pc",
+        "quantity": 90,
+        "sold": 10,
+        "category": "",
+        "isActive": true,
+        "brand": "",
+        "supplier": {
+            "company": "",
+            "contact_name": "",
+            "email": "",
+            "phone_code": "",
+            "phone": ""
+        },
         "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempore fugit eligendi inventore iure ullam asperiores optio a labore iste excepturi, adipisci itaque eum fuga? Quas hic impedit ullam ex sed.",
-        "price": 233.90
+        "price": 233.90,
+        "img": []
 
     }
 ]

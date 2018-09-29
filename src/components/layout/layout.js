@@ -11,6 +11,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Logo from '../../logo.png';
 import MainMenu from './menu'
 import {ApxCopyright} from '../common'
+import Avatar from '@material-ui/core/Avatar';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+
+
 
 const drawerWidth = 240;
 
@@ -65,20 +70,42 @@ const styles = theme => ({
         overflowY: 'auto',
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing.unit * 3,
+    },
+    avatar: {
+        cursor: 'pointer',
+        transition: 'all 0.2s ease',
+        '&:hover img': {
+            width: '120%',
+            transition: 'all 0.2s ease',
+
+        }
     }
 })
 
 class Layout extends React.Component {
     state = {
         mobileOpen: false,
+        anchorEl: null,
     };
 
     handleDrawerToggle = () => {
         this.setState(state => ({ mobileOpen: !state.mobileOpen }));
     };
+
+    handleMenu = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    };
+    
+    handleClose = () => {
+        this.setState({ anchorEl: null });
+    };
+
+
     render() {
 
     const { classes, locale } = this.props;
+    const { anchorEl } = this.state;
+    const open = Boolean(anchorEl);
 
     return (
         <div className={ classes.root}>
@@ -100,6 +127,33 @@ class Layout extends React.Component {
                 
                 <Typography color="secondary" className={classes.title}>
                 <Hidden smDown>APX DEV</Hidden>
+                </Typography>
+
+                <Typography>
+                <Avatar
+                    component="span"
+                    onClick={ this.handleMenu }
+                    alt="Nicolas"
+                    src="https://material-ui.com/static/images/uxceo-128.jpg"
+                    className={ classes.avatar }
+                />
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={open}
+                  onClose={this.handleClose}
+                >
+                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                  <MenuItem onClick={this.handleClose}>Deconnexion</MenuItem>
+                </Menu>
                 </Typography>
                     <Button color="secondary" onClick={ () => { this.props._onChangeLocale(locale) } }>{ locale.lang === 'fr' ? 'EN' : 'FR' }</Button>
                 </Toolbar>

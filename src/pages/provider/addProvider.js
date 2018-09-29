@@ -1,19 +1,19 @@
-//manager/src/pages/product/addProduct.js
+//manager/src/pages/provider/addProvider.js
 
 import React from 'react'
 import AddItem from '../../components/lib/addItem'
 
-const AddProduct = (props) => {
+const AddProvider = (props) => {
 
     const {locale} = props
 
     const fields = [
       {
-        title: locale.form.title.add_product, 
-        label: locale.form.title.label_product,
+        title: locale.form.title.add_provider, 
+        label: locale.form.title.label_provider,
         fields: [
             {
-              name: 'product_name',
+              name: 'company_name',
               type:"text"
             },
             {
@@ -38,8 +38,8 @@ const AddProduct = (props) => {
             formFields={fields} 
             locale={locale} 
             newData={props.newData} 
-            addBtnTitle={ locale.button.add_product } 
-            headerText={ locale.form.title.add_product }
+            addBtnTitle={ locale.button.add_provider } 
+            headerText={ locale.form.title.add_provider }
             limitUploadFile={3}
             createItem={ props.createItem }
             createItemState={ props.createItemState }
@@ -48,4 +48,4 @@ const AddProduct = (props) => {
     )
 }
 
-export default AddProduct;
+export default AddProvider;

@@ -14,6 +14,10 @@ const Locale = {
                 name: "Clients",
                 url: "client"
             },
+            service_provider:{
+                name: "Prestataire",
+                url: "client"
+            },
             invoice:{
                 name: "Factures",
                 url: "factures"
@@ -47,6 +51,7 @@ const Locale = {
                 add_product: "Ajouter un produit",
                 add_service: "Ajouter un service",
                 add_expense: "Ajouter une depense",
+                add_provider: "Ajouter un prestataire",
                 return_list: "Retour à la liste",
                 save: "Enregistrer",
                 edit: 'Editer',
@@ -64,16 +69,19 @@ const Locale = {
                     add_product: "Enregistrer un nouveau produit",
                     add_service: "Enregistrer un service",
                     add_expense: "Enregistrer une depense",
+                    add_provider: "Enregistrer un prestataire",
                     label_client: "Coordonnée client",
                     label_company: "Informations compagnie",
                     label_product: "Informations produit",
                     label_service: "Informations service",
                     label_expense: "Informations depense",
+                    label_provider: "Informations prestataire",
                     label_assets: "Photo / Documents",                    
                 },
                 field: {
                     firstname: "Prénom",
                     lastname: "Nom",
+                    company_name: "Nom de société",
                     phone_code: 'Code pays',
                     phone: "Téléphone",
                     email: "Couriel",
@@ -105,6 +113,10 @@ const Locale = {
             },
             client:{
                 name: "Customers",
+                url: "client"
+            },
+            service_provider:{
+                name: "Service provider",
                 url: "client"
             },
             invoice:{
@@ -139,6 +151,8 @@ const Locale = {
                 add_client: "Add customer",
                 add_product: "Add product",
                 add_service: "Add service",
+                add_expense: "Add expense",
+                add_provider: "Add provider",
                 return_list: "Back to list",
                 save: "Save",
                 edit: 'Edit',
@@ -156,16 +170,19 @@ const Locale = {
                     add_product: "Add a new produit",
                     add_service: "Add service",
                     add_expense: "Add expense",
+                    add_provider: "Add provider",
                     label_client: "Customer profile",
                     label_company: "Company profile",
                     label_assets: "Photo / Documents",
                     label_product: "Product details",
                     label_service: "Service details",
-                    label_expense: "Expense detail"
+                    label_expense: "Expense detail",
+                    label_provider: "Service provider detail",
                 },
                 field: {
                     firstname: "Firstname",
                     lastname: "Lastname",
+                    company_name: "Company name",
                     phone_code: 'Country code',
                     phone: "Phone",
                     email: "Email",

@@ -17,3 +17,10 @@ html {
 .MainMenu-active-152 svg {
   color: #ef6c00;
 }
+
+
+.MainMenu-active-160 span, .MainMenu-active-160 svg{
+    color: #ef6c00;
+    text-transform: uppercase;
+    font-weight: 900;
+}

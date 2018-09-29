@@ -3,7 +3,7 @@
 
 // daytrip/src/screens/city/cityReducer.js
 
-import { REQUEST_CLIENTS, FAILED_CLIENTS, RECEIVE_CLIENTS, GET_CLIENT, CLIENT_STATE } from '../../redux/actionsTypes'
+import { REQUEST_CLIENTS, FAILED_CLIENTS, RECEIVE_CLIENTS, GET_CLIENT, CLIENT_STATE, CREATE_CLIENT } from '../../redux/actionsTypes'
 
 
 const initialState = {
@@ -46,6 +46,13 @@ export default (state = initialState, action) => {
         return {
             ...state,
             newClient: { ...state.newClient, [ action.payload.fieldName] : action.payload.value  }    
+        }
+    case CREATE_CLIENT:
+        return {
+            ...state,
+            isFetching: action.isFetching,
+            newClient: {},
+            listClients: [ ...state.listClients, action.client ]
         }
     default:
         return state

@@ -34,7 +34,7 @@ const Form = (props) => {
                         case 'email':
                             return <Grid item xs={xs} sm={md} key={index}>
                             <TextField
-                                id={index}
+                                id={cp.name}
                                 type="email"
                                 label={locale.form.field[cp.name]}
                                 className={ classes.textField}
@@ -45,7 +45,7 @@ const Form = (props) => {
                         default:
                             return <Grid item xs={12} sm={6} key={index}>
                                     <TextField
-                                        id={index}
+                                        id={cp.name}
                                         type={cp.type}
                                         label={locale.form.field[cp.name]}
                                         className={ classes.textField}

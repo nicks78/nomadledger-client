@@ -10,6 +10,7 @@ import Client from '../pages/client'
 import Product from '../pages/product'
 import Service from '../pages/service'
 import Expense from '../pages/expense'
+import Provider from '../pages/provider'
 
 // Component
 import Layout from '../components/layout/layout'
@@ -30,6 +31,7 @@ class Routes extends React.Component {
                         <Route exact path="/products" component={Product} />
                         <Route exact path="/services" component={Service} />
                         <Route exact path="/expenses" component={Expense} />
+                        <Route exact path="/service-provider" component={Provider} />
                     </Layout>
                 </Router>
             

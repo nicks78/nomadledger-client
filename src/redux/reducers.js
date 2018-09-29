@@ -7,11 +7,13 @@ import localeReducer from '../utils/locale/localeReducer'
 import productReducer from '../pages/product/productReducer'
 import serviceReducer from '../pages/service/serviceReducer'
 import expenseReducer from '../pages/expense/expenseReducer'
+import providerReducer from '../pages/provider/providerReducer'
 
 export default combineReducers({
     client: clientReducer,
     locale: localeReducer,
     product: productReducer,
     service: serviceReducer,
-    expense: expenseReducer
+    expense: expenseReducer,
+    provider: providerReducer
 })
