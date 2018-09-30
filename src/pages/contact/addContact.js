@@ -1,30 +1,31 @@
-//manager/src/pages/client/addClient.js
+//manager/src/pages/client/addContact.js
 
 import React  from 'react'
 import AddItem from '../../components/lib/addItem'
 
 
-const AddClient = (props) => {    
+const AddContact = (props) => {    
 
     const {locale} = props
 
     const fields = [
       {
-        title: locale.form.title.add_client, 
+        title: locale.form.title.add_contact, 
         label: locale.form.title.label_company,
+        section_1: false,
         fields: [
             { name: 'company',type:"text" },
             { name: 'register',type:"text"},
             { name: 'vat', type:"number" },
-            { name: 'address', type:"text" },
-            { name: 'zip', type:"text" },
-            { name: 'city', type:"text" },
-            { name: 'country', type:"text" }
+            { name: '_street', type:"text" },
+            { name: '_zip', type:"text" },
+            { name: '_city', type:"text" },
+            { name: '_country', type:"text" }
           ]
       },
       {
-        title: locale.form.title.add_client, 
-        label: locale.form.title.label_client,
+        title: locale.form.title.add_contact, 
+        label: locale.form.title.label_contact,
         fields: [
             { name: 'firstname',type:"text" },
             { name: 'lastname',type:"text"},
@@ -34,22 +35,24 @@ const AddClient = (props) => {
           ]
       }
     ]
-
     return (
+
       <div>
           <AddItem 
             formFields={fields} 
             locale={locale} 
             newData={props.newData} 
-            addBtnTitle={ locale.button.add_client } 
-            headerText={ locale.form.title.add_client }
+            addBtnTitle={ locale.button.add_contact } 
+            headerText={ locale.form.title.add_contact }
             limitUploadFile={1}
-            createItem={ props.createClient }
-            createItemState={ props.createClientState }
+            isCreating={ props.isCreating }
+            reducer="CONTACT"
+            createItem={ props.createContact }
+            createItemState={ props.createContactState }
             />
       </div>
             
     )
 }
 
-export default AddClient;
+export default AddContact;

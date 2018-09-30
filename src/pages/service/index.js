@@ -1,7 +1,7 @@
 //manager/src/pages/service/index.js
 
 import React, { Component } from 'react'
-import {getServices, createServiceState, getService } from './actions'
+import { createItem, getItemList, getItem, createState } from '../../redux/high-order-component'
 import {connect} from 'react-redux'
 import {ApxTable, Spinner, ApxAlert} from '../../components/common'
 import ShowService from './showService'
@@ -16,12 +16,13 @@ class Service extends Component {
 
     state = {
         showService: false,
+        reducer: 'SERVICE',
         keyLocation: ''
     }
 
     componentDidMount(){
         if( this.props.receivedAt === null )
-            this.props.getServices();
+            this.props.getItemList(this.state.reducer);
         this.setState({keyLocation: this.props.location.key})
     }
 
@@ -37,7 +38,7 @@ class Service extends Component {
         if( service && service._id === id ){
             return;
         }else{
-            this.props.getService(id);
+            this.props.getItem(this.state.reducer, id);
         }
     }
 
@@ -47,7 +48,7 @@ class Service extends Component {
 
     render() {
     
-    const {listServices, isFetching, isError,  locale, service, newService } = this.props
+    const {listServices, isFetching, isError,  locale, service, newService, createItem, createState, isCreating } = this.props
     const { showService } = this.state
 
     if(isFetching){
@@ -61,7 +62,7 @@ class Service extends Component {
         listServices.map((row, index) => {
         return (
           <TableRow key={index}>
-            <TableCell onClick={ () => { this.renderSingleService(row._id) } }><span  style={ styles.link }>{row.name}</span></TableCell>
+            <TableCell onClick={ () => { this.renderSingleService(row._id) } }><span  style={ styles.link }>{row.service_name}</span></TableCell>
           </TableRow>
         );
       })
@@ -71,7 +72,7 @@ class Service extends Component {
             {
                 showService ? 
                     <IconButton onClick={ this.returnToList }><ArrowBackIcon/></IconButton>
-                : <AddService locale={ locale } initData="" newData={newService} createItemState={ this.props.createServiceState } createItem={ () => {alert('new service')} }/>
+                : <AddService locale={ locale } initData="" newData={newService} createServiceState={  createState } createService={ createItem  } isCreating={isCreating}/>
             }
             {
                 showService ?
@@ -105,15 +106,16 @@ const styles =  {
 
 const mapStateToProps = (state) => {
     return {
-        isFetching: state.service.isFetching,
-        isError: state.service.isError,
-        listServices: state.service.listServices,
-        receivedAt: state.service.receivedAt,
+        isFetching: state.library.service.isFetching,
+        isCreating: state.library.service.isCreating,
+        isError: state.library.service.isError,
+        listServices: state.library.service.list,
+        receivedAt: state.library.service.receivedAt,
         locale: state.locale.locale,
-        newService: state.service.newService,
-        service: state.service.service
+        service: state.library.service.item,
+        newService: state.library.service.tmp_state
     }
 }
 
 
-export default connect(mapStateToProps, { getServices, createServiceState, getService })(Service);
+export default connect(mapStateToProps, { createItem, getItemList, getItem, createState  })(Service);

@@ -8,7 +8,7 @@ const ShowExpense = (props) => {
     return (
       <div>
         test
-          { props.depense.name}
+          { props.expense.expense_name}
       </div>
     )
 }

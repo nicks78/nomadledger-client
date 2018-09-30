@@ -9,7 +9,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import HomeIcon from '@material-ui/icons/HomeOutlined';
 import GroupIcon from '@material-ui/icons/GroupOutlined';
-import PublicIcon from '@material-ui/icons/PublicOutlined';
 import CallMadeIcon from '@material-ui/icons/CallMadeOutlined';
 import StoreIcon from '@material-ui/icons/StoreOutlined';
 import ReceiptIcon from '@material-ui/icons/ReceiptOutlined';
@@ -58,17 +57,11 @@ const MainMenu = (props) => {
                     <ListItemText className={ classes.listText } primary={ locale.home.name } />
                 </ListItem>
 
-                <ListItem button component={NavLink}  to="/clients" activeClassName={classes.active}>
+                <ListItem button component={NavLink}  to="/contacts" activeClassName={classes.active}>
                     <ListItemIcon>
                         <GroupIcon />
                     </ListItemIcon>
-                    <ListItemText className={ classes.listText } primary={ locale.client.name } />
-                </ListItem>
-                <ListItem button component={NavLink}  to="/service-provider" activeClassName={classes.active}>
-                    <ListItemIcon>
-                        <PublicIcon />
-                    </ListItemIcon>
-                    <ListItemText className={ classes.listText } primary={ locale.service_provider.name } />
+                    <ListItemText className={ classes.listText } primary={ locale.contact.name } />
                 </ListItem>
              
                 <ListItem button component={NavLink}  to="/services" activeClassName={classes.active}>

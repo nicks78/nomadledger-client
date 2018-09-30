@@ -18,4 +18,5 @@ const store = createStore(reducers,
     window.devToolsExtension ? window.devToolsExtension() : f => f
 ));
 
+
 export default store;

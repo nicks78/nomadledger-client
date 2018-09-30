@@ -4,11 +4,10 @@ import React from 'react'
 
 const ShowService = (props) => {
 
-  console.log(props)
     return (
       <div>
         test
-          { props.service.name}
+          { props.service.service_name}
       </div>
     )
 }

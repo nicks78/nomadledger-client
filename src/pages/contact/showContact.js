@@ -1,4 +1,4 @@
-//manager/src/pages/client/showClient.js
+//manager/src/pages/client/showContact.js
 
 import React  from 'react'
 import Paper from '@material-ui/core/Paper'
@@ -13,13 +13,13 @@ const styles = theme => ({
   }
 })
 
-const ShowClient = (props) => {
+const ShowContact = (props) => {
     const { classes } = props
     return (
       <Paper className={ classes.root }>
-          {props.client.company.name}
+          {props.contact.company}
       </Paper>
     )
 }
 
-export default withStyles(styles)(ShowClient);
+export default withStyles(styles)(ShowContact);

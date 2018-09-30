@@ -3,7 +3,8 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { ApxExpanded, ApxUpload, ApxForm, ApxRightDrawer } from '../../components/common'
+import { ApxExpanded, ApxUpload, ApxForm, ApxRightDrawer, Spinner } from '../../components/common'
+
 
 const styles = theme => ({
     root: {
@@ -25,6 +26,7 @@ const styles = theme => ({
     },
     button: {
         color: 'white',
+        marginRight: 10
     },
     container: {
         display: 'flex',
@@ -56,7 +58,7 @@ class Add extends Component {
         if(fieldName === 'doc'){ // Check if form input file
             value = this.handleFile(event.target.files[0]);
         }
-        this.props.createItemState( fieldName, value )
+        this.props.createItemState( this.props.reducer, fieldName, value )
     }
 
     handleFile (file) {
@@ -78,18 +80,18 @@ class Add extends Component {
                 newImages.push(images[i]);
             }
         }
-        this.props.createItemState( fieldName, newImages )
+        this.props.createItemState( this.props.reducer, fieldName, newImages )
     }
 
 
     handleCreateItem = ()  => {
-        this.props.createItem(this.props.newData)
+        this.props.createItem(this.props.reducer, this.props.newData)
     }
     
 
     render() {
 
-        const { locale, newData, classes, formFields, addBtnTitle, headerText, limitUploadFile } = this.props
+        const { locale, newData, classes, formFields, addBtnTitle, headerText, limitUploadFile, isCreating } = this.props
 
         const formDrawer = (
                 <div className={ classes.formWindow}>
@@ -98,7 +100,7 @@ class Add extends Component {
                             formFields.map(( form, index) => {
                                 return  <div key={index} className={  classes.card }>
                                             <ApxExpanded heading={ form.label }>
-                                                <ApxForm formField={form.fields} formHandler={ this.handleChange } locale={ locale } xs={12} md={6} objData={newData}/>
+                                                <ApxForm formField={form.fields} formHandler={ this.handleChange } locale={ locale } xs={12} md={6} objData={ newData }/>
                                             </ApxExpanded>        
                                         </div>
                             })
@@ -115,12 +117,11 @@ class Add extends Component {
 
         return (
             <div className={ classes.root}>
-                <Button variant="contained" color="primary"  className={  classes.button } onClick={this.toggleDrawer('right', true)}>{ addBtnTitle }</Button>
-                <span>&nbsp;{ Object.keys(this.props.newData).length > 0 ? "En cours..." : "" }</span>
-                
-                <ApxRightDrawer toggleDrawer={ this.toggleDrawer } side="right" open={ this.state.right} title={ headerText }>
-                        {formDrawer}
-                </ApxRightDrawer>
+            <Button variant="contained" color="primary"  className={  classes.button } onClick={this.toggleDrawer('right', true)}>{ addBtnTitle }</Button>
+            <ApxRightDrawer toggleDrawer={ this.toggleDrawer } side="right" open={ this.state.right} title={ headerText }>
+                    { isCreating ? <Spinner /> : formDrawer }
+            </ApxRightDrawer>
+
             </div>
     )
   }

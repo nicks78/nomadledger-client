@@ -6,11 +6,10 @@ import { getLocale } from '../utils/locale/actions'
 
 // Pages
 import Home from '../pages/home'
-import Client from '../pages/client'
+import Contact from '../pages/contact'
 import Product from '../pages/product'
 import Service from '../pages/service'
 import Expense from '../pages/expense'
-import Provider from '../pages/provider'
 
 // Component
 import Layout from '../components/layout/layout'
@@ -27,11 +26,10 @@ class Routes extends React.Component {
         return( <Router>
                     <Layout locale={this.props.locale} _onChangeLocale={this.handleChangeLocale}>   
                         <Route exact path="/home" component={Home} />
-                        <Route exact path="/clients" component={Client} />
+                        <Route exact path="/contacts" component={Contact} />
                         <Route exact path="/products" component={Product} />
                         <Route exact path="/services" component={Service} />
                         <Route exact path="/expenses" component={Expense} />
-                        <Route exact path="/service-provider" component={Provider} />
                     </Layout>
                 </Router>
             

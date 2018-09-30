@@ -29,8 +29,10 @@ const AddService = (props) => {
             addBtnTitle={ locale.button.add_service } 
             headerText={ locale.form.title.add_service }
             limitUploadFile={1}
-            createItem={ props.createItem }
-            createItemState={ props.createItemState }
+            isCreating={ props.isCreating }
+            createItem={ props.createService }
+            reducer="SERVICE"
+            createItemState={ props.createServiceState }
             />
       </div>
     )

@@ -18,9 +18,7 @@ const styles = theme => ({
 
 const Alert = (props) => {
 
-    const {classes} = props
-    console.log(classes)
-  
+    const {classes} = props  
 
     return (
         <Paper className={ classes.root }>

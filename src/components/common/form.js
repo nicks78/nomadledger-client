@@ -28,22 +28,32 @@ const Form = (props) => {
     return ( <Grid container className={classes.root} spacing={8}>
             {
                 formField.map((cp, index) => {
-                    switch (cp.name) {
-                        case 'phone_code':
+                    if (cp.name === "phone_code") {
                             return <Grid item xs={xs} sm={md} key={index}><ApxPhoneCode value={ objData.phone_code || '' } handleAction={  formHandler } locale={ locale }/></Grid>
-                        case 'email':
-                            return <Grid item xs={xs} sm={md} key={index}>
+                    }else if( cp.name === "email" ){
+                        return <Grid item xs={xs} sm={md} key={index}>
                             <TextField
                                 id={cp.name}
                                 type="email"
                                 label={locale.form.field[cp.name]}
                                 className={ classes.textField}
-                                value={objData[cp.name] || ''}
+                                value={objData[cp.name] || '' }
                                 onChange={ formHandler(cp.name)}
                                 margin="normal"
                             /></Grid>
-                        default:
+                    }else if( cp.name.startsWith("_")){
                             return <Grid item xs={12} sm={6} key={index}>
+                                    <TextField
+                                        id={cp.name}
+                                        type={cp.type}
+                                        label={locale.form.field[cp.name]}
+                                        className={ classes.textField}
+                                        value={ objData.addresses[cp.name] || ''}
+                                        onChange={ formHandler(cp.name)}
+                                        margin="normal"
+                                    /></Grid>
+                    }else{
+                        return <Grid item xs={12} sm={6} key={index}>
                                     <TextField
                                         id={cp.name}
                                         type={cp.type}
@@ -53,7 +63,7 @@ const Form = (props) => {
                                         onChange={ formHandler(cp.name)}
                                         margin="normal"
                                     /></Grid>
-                    } 
+                    }
                 })
             }
             </Grid>

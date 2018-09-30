@@ -10,13 +10,13 @@ const Locale = {
                 name: "Accueil",
                 url: "accueil"
             },
-            client:{
-                name: "Clients",
-                url: "client"
+            contact:{
+                name: "contacts",
+                url: "contact"
             },
             service_provider:{
                 name: "Prestataire",
-                url: "client"
+                url: "contact"
             },
             invoice:{
                 name: "Factures",
@@ -47,7 +47,7 @@ const Locale = {
                 url: "factures"
             },
             button: {
-                add_client: "Ajouter un client",
+                add_contact: "Ajouter un contact",
                 add_product: "Ajouter un produit",
                 add_service: "Ajouter un service",
                 add_expense: "Ajouter une depense",
@@ -59,18 +59,18 @@ const Locale = {
                 upload: "téléverser"
             },
             page: {
-                client: {
+                contact: {
                     table: ['Société', 'Téléphone', 'Email']
                 }
             },
             form: {
                 title: {
-                    add_client: "Enregistrer un nouveau client",
+                    add_contact: "Enregistrer un nouveau contact",
                     add_product: "Enregistrer un nouveau produit",
                     add_service: "Enregistrer un service",
                     add_expense: "Enregistrer une depense",
                     add_provider: "Enregistrer un prestataire",
-                    label_client: "Coordonnée client",
+                    label_contact: "Coordonnée contact",
                     label_company: "Informations compagnie",
                     label_product: "Informations produit",
                     label_service: "Informations service",
@@ -88,10 +88,10 @@ const Locale = {
                     company: "Société",
                     register: "Siret",
                     vat: 'TVA',
-                    address: 'Adresse',
-                    zip: "Code postal",
-                    city: 'Ville',
-                    country: 'Pays',
+                    _street: 'Adresse',
+                    _zip: "Code postal",
+                    _city: 'Ville',
+                    _country: 'Pays',
                     product_name: "Nom du produit",
                     service_name: "Nom du service",
                     expense_name: "Nom de la depense",
@@ -111,13 +111,13 @@ const Locale = {
                 name: "Home",
                 url: "home"
             },
-            client:{
+            contact:{
                 name: "Customers",
-                url: "client"
+                url: "contact"
             },
             service_provider:{
                 name: "Service provider",
-                url: "client"
+                url: "contact"
             },
             invoice:{
                 name: "Invoices",
@@ -148,7 +148,7 @@ const Locale = {
                 url: "factures"
             },
             button: {
-                add_client: "Add customer",
+                add_contact: "Add customer",
                 add_product: "Add product",
                 add_service: "Add service",
                 add_expense: "Add expense",
@@ -160,18 +160,18 @@ const Locale = {
                 upload: "Upload"
             },
             page: {
-                client: {
+                contact: {
                     table: ['Société', 'Téléphone', 'Email']
                 }
             },
             form: {
                 title: {
-                    add_client: "Add a new customer",
+                    add_contact: "Add a new customer",
                     add_product: "Add a new produit",
                     add_service: "Add service",
                     add_expense: "Add expense",
                     add_provider: "Add provider",
-                    label_client: "Customer profile",
+                    label_contact: "Customer profile",
                     label_company: "Company profile",
                     label_assets: "Photo / Documents",
                     label_product: "Product details",
@@ -189,10 +189,10 @@ const Locale = {
                     company: "Company",
                     register: "Register number",
                     vat: 'TVA',
-                    address: 'Address',
-                    zip: 'Zip',
-                    city: 'City',
-                    country: 'Country',
+                    _address: 'Street',
+                    _zip: 'Zip',
+                    _city: 'City',
+                    _country: 'Country',
                     product_name: "Product name",
                     service_name: "Service name",
                     expense_name: "Expense name",

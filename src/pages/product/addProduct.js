@@ -41,6 +41,8 @@ const AddProduct = (props) => {
             addBtnTitle={ locale.button.add_product } 
             headerText={ locale.form.title.add_product }
             limitUploadFile={3}
+            isCreating={ props.isCreating }
+            reducer="PRODUCT"
             createItem={ props.createItem }
             createItemState={ props.createItemState }
             />

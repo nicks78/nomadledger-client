@@ -1,7 +1,7 @@
 //manager/src/pages/expense/index.js
 
 import React, { Component } from 'react'
-import {getExpenses, createExpenseState, getExpense } from './actions'
+import { createItem, getItemList, getItem, createState } from '../../redux/high-order-component'
 import {connect} from 'react-redux'
 import {ApxTable, Spinner, ApxAlert} from '../../components/common'
 import ShowExpense from './showExpense'
@@ -16,12 +16,16 @@ class Expense extends Component {
 
     state = {
         showExpense: false,
+        reducer: "EXPENSE",
         keyLocation: ''
     }
 
     componentDidMount(){
         if( this.props.receivedAt === null )
-            this.props.getExpenses();
+            this.props.getItemList(this.state.reducer);
+            this.props.getItemList('SERVICE');
+            this.props.getItemList('CONTACT');
+            this.props.getItemList('PRODUCT');
         this.setState({keyLocation: this.props.location.key})
     }
 
@@ -37,7 +41,7 @@ class Expense extends Component {
         if( expense && expense._id === id ){
             return;
         }else{
-            this.props.getExpense(id);
+            this.props.getItem(this.state.reducer, id);
         }
     }
 
@@ -47,7 +51,7 @@ class Expense extends Component {
 
     render() {
     
-    const {listExpenses, isFetching, isError,  locale, expense, newExpense } = this.props
+    const {listExpenses, isFetching, isError,  locale, expense, newExpense, createState, createItem, isCreating } = this.props
     const { showExpense } = this.state
 
     if(isFetching){
@@ -61,7 +65,7 @@ class Expense extends Component {
         listExpenses.map((row, index) => {
         return (
           <TableRow key={index}>
-            <TableCell onClick={ () => { this.renderSingleExpense(row._id) } }><span  style={ styles.link }>{row.name}</span></TableCell>
+            <TableCell onClick={ () => { this.renderSingleExpense(row._id) } }><span  style={ styles.link }>{row.expense_name}</span></TableCell>
           </TableRow>
         );
       })
@@ -71,7 +75,7 @@ class Expense extends Component {
             {
                 showExpense ? 
                     <IconButton onClick={ this.returnToList }><ArrowBackIcon/></IconButton>
-                : <AddExpense locale={ locale } initData="" newData={newExpense} createItemState={ this.props.createExpenseState } createItem={ () => {alert('new epense')} }/>
+                : <AddExpense locale={ locale } initData="" newData={newExpense} createExpenseState={ createState } createExpense={ createItem } isCreating={isCreating}/>
             }
             {
                 showExpense ?
@@ -105,15 +109,16 @@ const styles =  {
 
 const mapStateToProps = (state) => {
     return {
-        isFetching: state.expense.isFetching,
-        isError: state.expense.isError,
-        listExpenses: state.expense.listExpenses,
-        receivedAt: state.expense.receivedAt,
+        isFetching: state.library.expense.isFetching,
+        isCreating: state.library.expense.isCreating,
+        isError: state.library.expense.isError,
+        listExpenses: state.library.expense.list,
+        receivedAt: state.library.expense.receivedAt,
         locale: state.locale.locale,
-        newExpense: state.expense.newExpense,
-        expense: state.expense.expense
+        newExpense: state.library.expense.tmp_state,
+        expense: state.library.expense.item
     }
 }
 
 
-export default connect(mapStateToProps, { getExpenses, createExpenseState, getExpense })(Expense);
+export default connect(mapStateToProps, { createItem, getItemList, getItem, createState  })(Expense);

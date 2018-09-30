@@ -29,8 +29,10 @@ const AddExpense = (props) => {
             addBtnTitle={ locale.button.add_expense } 
             headerText={ locale.form.title.add_expense }
             limitUploadFile={1}
-            createItem={ props.createItem }
-            createItemState={ props.createItemState }
+            reducer="EXPENSE"
+            isCreating={ props.isCreating }
+            createItem={ props.createExpense }
+            createItemState={ props.createExpenseState }
             upload={false}
             />
       </div>

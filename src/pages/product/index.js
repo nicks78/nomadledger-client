@@ -1,7 +1,7 @@
 //manager/src/pages/product/index.js
 
 import React, { Component } from 'react'
-import {getProducts, createProductState, getProduct } from './actions'
+import { createItem, getItemList, getItem, createState } from '../../redux/high-order-component'
 import {connect} from 'react-redux'
 import {ApxTable, Spinner, ApxAlert} from '../../components/common'
 import ShowProduct from './showProduct'
@@ -16,12 +16,13 @@ class Product extends Component {
 
     state = {
         showProduct: false,
+        reducer: 'PRODUCT',
         keyLocation: ''
     }
 
     componentDidMount(){
         if( this.props.receivedAt === null )
-            this.props.getProducts();
+            this.props.getItemList(this.state.reducer);
         this.setState({keyLocation: this.props.location.key})
     }
 
@@ -37,7 +38,7 @@ class Product extends Component {
         if( product && product._id === id ){
             return;
         }else{
-            this.props.getProduct(id);
+            this.props.getItem(this.state.reducer, id);
         }
     }
 
@@ -47,7 +48,7 @@ class Product extends Component {
 
     render() {
     
-    const {listProducts, isFetching, isError,  locale, product, newProduct } = this.props
+    const {listProducts, isFetching, isError,  locale, product, newProduct, createState, createItem, isCreating } = this.props
     const { showProduct } = this.state
 
     if(isFetching){
@@ -62,8 +63,8 @@ class Product extends Component {
         return (
           <TableRow key={index}>
             <TableCell onClick={ () => { this.renderSingleProduct(row._id) } }><span  style={ styles.link }>{row.ref}</span></TableCell>
-            <TableCell>{row.name}</TableCell>
-            <TableCell numeric>{row.description.slice(0, 20)}</TableCell>
+            <TableCell>{row.product_name}</TableCell>
+            <TableCell numeric>{row.description}</TableCell>
             <TableCell>{row.price}</TableCell>
           </TableRow>
         );
@@ -74,7 +75,7 @@ class Product extends Component {
             {
                 showProduct ? 
                     <IconButton onClick={ this.returnToList }><ArrowBackIcon/></IconButton>
-                : <AddProduct locale={ locale } initData="" newData={newProduct} createItemState={ this.props.createProductState } createItem={ () => {alert('new product')} }/>
+                : <AddProduct locale={ locale } initData="" newData={newProduct} createItemState={ createState } createItem={ createItem } isCreating={ isCreating  }/>
             }
             {
                 showProduct ?
@@ -108,15 +109,16 @@ const styles =  {
 
 const mapStateToProps = (state) => {
     return {
-        isFetching: state.product.isFetching,
-        isError: state.product.isError,
-        listProducts: state.product.listProducts,
-        receivedAt: state.product.receivedAt,
+        isFetching: state.library.product.isFetching,
+        isError: state.library.product.isError,
+        isCreating: state.library.product.isCreating,
+        listProducts: state.library.product.list,
+        receivedAt: state.library.product.receivedAt,
         locale: state.locale.locale,
-        newProduct: state.product.newProduct,
-        product: state.product.product
+        newProduct: state.library.product.tmp_state,
+        product: state.library.product.item
     }
 }
 
 
-export default connect(mapStateToProps, { getProducts, createProductState, getProduct })(Product);
+export default connect(mapStateToProps, { createItem, getItemList, getItem, createState  })(Product);
