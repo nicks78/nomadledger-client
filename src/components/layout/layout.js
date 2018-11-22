@@ -1,5 +1,6 @@
 import React  from 'react'
 import { withStyles } from '@material-ui/core/styles';
+import { Link } from "react-router-dom";
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Drawer from '@material-ui/core/Drawer';
@@ -51,7 +52,7 @@ const styles = theme => ({
     appBar: {
         position: 'absolute',
         marginLeft: drawerWidth,
-        backgroundColor: 'white',
+        background: 'linear-gradient(rgba(30,30,30,.9),#1e1e1e)',
         boxShadow: 'none',
         border: '1px solid transparent',
         borderBottomColor: 'rgba(0, 0, 0, 0.12)',
@@ -151,7 +152,7 @@ class Layout extends React.Component {
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                  <MenuItem component={Link}  to="/account" >My account</MenuItem>
                   <MenuItem onClick={this.handleClose}>Deconnexion</MenuItem>
                 </Menu>
                 </Typography>

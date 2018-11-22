@@ -48,8 +48,9 @@ class Service extends Component {
 
     render() {
     
-    const {listServices, isFetching, isError,  locale, service, newService, createItem, createState, isCreating } = this.props
+    const {listServices, isFetching, isError,  locale, service, newService, createItem, createState, isCreating , progress} = this.props
     const { showService } = this.state
+
 
     if(isFetching){
         return <Spinner />
@@ -72,7 +73,15 @@ class Service extends Component {
             {
                 showService ? 
                     <IconButton onClick={ this.returnToList }><ArrowBackIcon/></IconButton>
-                : <AddService locale={ locale } initData="" newData={newService} createServiceState={  createState } createService={ createItem  } isCreating={isCreating}/>
+                : <AddService 
+                        locale={ locale } 
+                        initData="" 
+                        newData={newService} 
+                        progress={progress}
+                        createServiceState={  createState } 
+                        createService={ createItem  } 
+                        isCreating={isCreating} 
+                    />
             }
             {
                 showService ?
@@ -112,6 +121,7 @@ const mapStateToProps = (state) => {
         listServices: state.library.service.list,
         receivedAt: state.library.service.receivedAt,
         locale: state.locale.locale,
+        progress: state.library.service.progress,
         service: state.library.service.item,
         newService: state.library.service.tmp_state
     }

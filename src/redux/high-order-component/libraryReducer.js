@@ -4,8 +4,10 @@ import baseReducer from '../baseReducer'
 
 
 class BaseState {
-    tmp_state = { addresses: {}  };
+    tmp_state = { };
     item = null;
+    progress = 0 ;
+    isUpdating = false;
     receivedAt = null;
     isCreating = false;
     isFetching = false;
@@ -19,6 +21,7 @@ class InitialState {
     expense = new BaseState();
     service = new BaseState();
     product = new BaseState();
+    account = new BaseState();
 }
   
 export default (state = new InitialState(), action) => {
@@ -43,6 +46,11 @@ export default (state = new InitialState(), action) => {
         return {
           ...state,
           product: baseReducer(state.product, action)
+        }
+      case 'ACCOUNT': 
+        return {
+          ...state,
+          product: baseReducer(state.account, action)
         }
       default: return state;
     }

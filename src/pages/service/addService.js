@@ -3,39 +3,59 @@
 import React from 'react'
 import AddItem from '../../components/lib/addItem'
 
-const AddService = (props) => {
 
-    const {locale} = props
+
+class AddService extends React.Component {
+
+  state = {
+      reducer: "SERVICE"
+  };
+
+  toggleDrawer = (side, open) => () => {
+      this.setState({
+        [side]: open,
+      });
+  }
+
+  handleChange = name => (event) => {
+        var fieldName = name;
+        var value = event.target.value
+        this.props.createServiceState( this.state.reducer, fieldName, value )
+  }
+
+  render(){
+    const {locale, newData} = this.props
 
     const fields = [
       {
         title: locale.form.title.add_service, 
         label: locale.form.title.label_service,
+        section_1: false,
         fields: [
-            {
-              name: 'service_name',
-              type:"text"
-            },
+            { name: 'service_name',type:"text" },
+            { name: 'service_description',type:"text"},
+            { name: 'service_price', type:"text"},
+            { name: 'service_note', type:"longtext", multiline: true, rowsMax:"4" },
           ]
-      }
+      },
     ]
-
     return (
-      <div>
+
           <AddItem 
             formFields={fields} 
             locale={locale} 
-            newData={props.newData} 
+            newData={newData} 
             addBtnTitle={ locale.button.add_service } 
             headerText={ locale.form.title.add_service }
-            limitUploadFile={1}
-            isCreating={ props.isCreating }
-            createItem={ props.createService }
+            limitUploadFile={0}
+            isCreating={ this.props.isCreating }
+            progress={ this.props.progress }
             reducer="SERVICE"
-            createItemState={ props.createServiceState }
+            createItem={ this.props.createService || null  }
+            createItemState={ this.props.createServiceState }
             />
-      </div>
     )
+  }
 }
 
 export default AddService;

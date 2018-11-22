@@ -24,7 +24,7 @@ export function getItem( actionType, id ){
     }) 
     .then( res => {
         if(res.success){
-            dispatch(setItem(actionType, res.payload ))  
+          dispatch(setItem(actionType, res.payload ))  
         }else{
             dispatch(requestFailed(actionType))
         }

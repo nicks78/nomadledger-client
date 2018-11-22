@@ -3,8 +3,8 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { ApxExpanded, ApxUpload, ApxForm, ApxRightDrawer, Spinner } from '../../components/common'
-
+import { ApxExpanded, ApxUpload, ApxForm, ApxRightDrawer, Spinner } from '../common'
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const styles = theme => ({
     root: {
@@ -55,7 +55,7 @@ class Add extends Component {
         var fieldName = name;
         var value = event.target.value
 
-        if(fieldName === 'doc'){ // Check if form input file
+        if(fieldName === 'doc'){ // If input file
             value = this.handleFile(event.target.files[0]);
         }
         this.props.createItemState( this.props.reducer, fieldName, value )
@@ -66,6 +66,7 @@ class Add extends Component {
             var imagesArray = this.props.newData.doc ?  this.props.newData.doc : [];
             file.blob = URL.createObjectURL(file) 
             imagesArray.push(file)
+            
         }else{
             alert('FILE TYPE NOT AUTHORIZED !')
         }
@@ -91,8 +92,8 @@ class Add extends Component {
 
     render() {
 
-        const { locale, newData, classes, formFields, addBtnTitle, headerText, limitUploadFile, isCreating } = this.props
-
+        const { locale, newData, classes, formFields, addBtnTitle, headerText, limitUploadFile, isCreating, progress } = this.props
+    
         const formDrawer = (
                 <div className={ classes.formWindow}>
                     <form className={ classes.container} noValidate autoComplete="off">
@@ -105,10 +106,13 @@ class Add extends Component {
                                         </div>
                             })
                         }
-                    <div className={  classes.card }>
-                        <ApxExpanded heading={locale.form.title.label_assets}>
-                                <ApxUpload onChange={this.handleChange('doc')} docType="image/*" removeItem={this.handleRemoveItem} images={ newData.doc || [] } title={ locale.button.upload } limitUploadFile={limitUploadFile}/>
-                        </ApxExpanded>
+                        <div className={  classes.card }>
+                        { limitUploadFile > 0 ? 
+                            <ApxExpanded heading={locale.form.title.label_assets}>
+                                    <ApxUpload onChange={this.handleChange('doc')} docType="all" removeItem={this.handleRemoveItem} images={ newData.doc || [] } title={ locale.button.upload } limitUploadFile={limitUploadFile}/>
+                            </ApxExpanded> 
+                            : null 
+                        }
                     </div>
                     </form>
                     <Button variant="contained" color="secondary"  style={{ float: 'right', marginTop: '24px',marginBottom: '24px', color: 'white' }} onClick={ this.handleCreateItem }>{ locale.button.save }</Button>
@@ -119,8 +123,15 @@ class Add extends Component {
             <div className={ classes.root}>
             <Button variant="contained" color="primary"  className={  classes.button } onClick={this.toggleDrawer('right', true)}>{ addBtnTitle }</Button>
             <ApxRightDrawer toggleDrawer={ this.toggleDrawer } side="right" open={ this.state.right} title={ headerText }>
-                    { isCreating ? <Spinner /> : formDrawer }
+                    { 
+                        isCreating ? 
+                        <div style={{ margin: 10 }}>
+                            <Spinner /><br />
+                            <p>{progress} %</p>
+                            <LinearProgress color="secondary" variant="determinate" value={ progress  } />
+                        </div> : formDrawer }
             </ApxRightDrawer>
+            <Button variant="contained" color="primary"  style={{position: 'absolute', bottom: 10, right: 10, width: "80px", height: '80px', borderRadius: '50%', display:'block'}} onClick={this.toggleDrawer('right', true)}>+</Button>
 
             </div>
     )

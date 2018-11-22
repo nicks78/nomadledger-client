@@ -11,7 +11,7 @@ const Locale = {
                 url: "accueil"
             },
             contact:{
-                name: "contacts",
+                name: "Contacts",
                 url: "contact"
             },
             service_provider:{
@@ -52,6 +52,8 @@ const Locale = {
                 add_service: "Ajouter un service",
                 add_expense: "Ajouter une depense",
                 add_provider: "Ajouter un prestataire",
+                register: "S'enregistrer",
+                login: "Se connecter",
                 return_list: "Retour à la liste",
                 save: "Enregistrer",
                 edit: 'Editer',
@@ -62,6 +64,11 @@ const Locale = {
                 contact: {
                     table: ['Société', 'Téléphone', 'Email']
                 }
+            },
+            text: {
+                address: "Adresse",
+                company: "Société",
+                represented_by: "Représente par"
             },
             form: {
                 title: {
@@ -79,29 +86,50 @@ const Locale = {
                     label_assets: "Photo / Documents",                    
                 },
                 field: {
+                    password: 'Mot de passe',
                     firstname: "Prénom",
                     lastname: "Nom",
+                    company_register: "Siret",
+                    company_vat: "TVA",
                     company_name: "Nom de société",
+                    company_line_code: "Code pays",
+                    company_line: "Ligne standard",
                     phone_code: 'Code pays',
                     phone: "Téléphone",
                     email: "Couriel",
                     company: "Société",
                     register: "Siret",
                     vat: 'TVA',
-                    _street: 'Adresse',
-                    _zip: "Code postal",
-                    _city: 'Ville',
-                    _country: 'Pays',
+                    addresses_street: "Adresse", 
+                    addresses_zip: "Code postal", 
+                    addresses_city: "Ville", 
+                    addresses_country: "Pays", 
+
                     product_name: "Nom du produit",
+
+
                     service_name: "Nom du service",
+                    service_description: "Déscription",
+                    service_price: "Prix",
+                    service_note: "Information interne",
+
                     expense_name: "Nom de la depense",
                     description: "Description",
                     price: "Prix"
                     
                 },
                 helperText: {
-                    phone_code: "Sélectionner le code pays"
+                    select_phone_code: "Sélectionner le code pays",
+                    select_country_code: "Sélectionner pays"
                 }
+            },
+            message: {
+                success_create: "Felicitation",
+                success_update: "Mise à jour avec succes",
+
+                error_create: "Error create",
+                error_update: "Error update",
+                error_sent: "Email non envoyer",
             }
         },
     en: 
@@ -153,6 +181,8 @@ const Locale = {
                 add_service: "Add service",
                 add_expense: "Add expense",
                 add_provider: "Add provider",
+                register: "Sign Up",
+                login: 'Sign In',
                 return_list: "Back to list",
                 save: "Save",
                 edit: 'Edit',
@@ -163,6 +193,10 @@ const Locale = {
                 contact: {
                     table: ['Société', 'Téléphone', 'Email']
                 }
+            },
+            text: {
+                address: "Address",
+                represented_by: "Represented by"
             },
             form: {
                 title: {
@@ -180,28 +214,47 @@ const Locale = {
                     label_provider: "Service provider detail",
                 },
                 field: {
+                    password: 'Password',
                     firstname: "Firstname",
                     lastname: "Lastname",
                     company_name: "Company name",
+                    company_register: "Register number",
+                    company_vat: "VAT",
+                    company_line_code: "Country code",
+                    company_line: "Land line",
+                    addresses_street: "Address", 
+                    addresses_zip: "Zip", 
+                    addresses_city: "City", 
+                    addresses_country: "Country", 
                     phone_code: 'Country code',
                     phone: "Phone",
                     email: "Email",
                     company: "Company",
                     register: "Register number",
-                    vat: 'TVA',
-                    _address: 'Street',
-                    _zip: 'Zip',
-                    _city: 'City',
-                    _country: 'Country',
+                    vat: 'VAT',
                     product_name: "Product name",
                     service_name: "Service name",
+                    service_description: "Description",
+                    service_price: "Price",
+                    service_note: "Sales informations",
+
+
                     expense_name: "Expense name",
                     description: "Description",
                     price: "Price"
                 },
                 helperText: {
-                    phone_code: "Please select country code"
+                    select_phone_code: "Please select country code",
+                    select_country_code: "Please select a country"
                 }
+            },
+            message: {
+                success_create: "Congratulation",
+                success_update: "Updated !",
+                
+                error_create: "Error ",
+                error_update: "Error update",
+                error_sent: "Email has not neen sent",
             }
         },
 }

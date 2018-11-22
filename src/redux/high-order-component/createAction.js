@@ -3,7 +3,7 @@
 
 import axios from 'axios';
 import { API_ENDPOINT, apiCall } from '../../api/constant'
-import { requestCreation, requestFailed  } from './'
+import { requestCreation, requestFailed, progress  } from './'
 
 
 // CREATE NEW ITEM
@@ -19,12 +19,25 @@ export const createItem = ( actionType ) => {
 
         // // Set loading time
         dispatch(requestCreation(actionType));
-        
+
+        const formData = new FormData();
+        // Set file
+        if(state.doc)
+        for (var x = 0; x < state.doc.length; x++) {
+            formData.append("files", state.doc[x]);
+        }
+        // Set input 
+        formData.append('state', JSON.stringify(state));
+
         axios.post(`${API_ENDPOINT}${apiCall(actionType).endPoints.post}`,
-          { data: state },
+            formData,   
           { headers: {
-              'Content-Type': 'application/json',
-              'x-access-token': localStorage.getItem('token')
+                'x-access-token': localStorage.getItem('token'),
+                'content-type': 'application/form-data'
+          },
+          onUploadProgress: progressEvent => { // Check progression for upload
+                var p =  ( progressEvent.loaded / progressEvent.total ) * 100
+                dispatch(progress(actionType, parseInt(p, 10)))
           }
         })
         .then(function (response) { 

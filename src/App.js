@@ -39,14 +39,14 @@ const theme = createMuiTheme({
     },
   },
   margin: {
-    unit: '24px'
+    unit: '2%'
   },
   padding: {
-    unit: '24px'
+    unit: '2%'
   },
   typography: {
     // Tell Material-UI what's the font-size on the html element is.
-    htmlFontSize: 19,
+    htmlFontSize: 15,
     fontFamily: "'RaleWay', sans-serif"
   }
 });

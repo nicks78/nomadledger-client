@@ -7,13 +7,13 @@ import { requestData, requestFailed  } from './'
 
 
 // GET FULL LIST OF ITEM
-export function getItemList( actionType ){
+export function getItemList( actionType, query = "" ){
 
     return dispatch => {
 
         dispatch(requestData(actionType))
 
-        axios.get(`${API_ENDPOINT}${apiCall(actionType).endPoints.get}`, {
+        axios.get(`${API_ENDPOINT}${apiCall(actionType).endPoints.get}${query}`, {
           method: 'GET',
           mode: 'cors',
           headers: {
@@ -25,7 +25,7 @@ export function getItemList( actionType ){
         }) 
         .then( res => {
           if(res.success){
-              dispatch(receiveItems(actionType, res.payload ))  
+              dispatch(receiveItems(actionType, res.payload, res.skip ))  
               }else{
                 dispatch(requestFailed(actionType))
               }
@@ -33,7 +33,7 @@ export function getItemList( actionType ){
     }
 }
 
-function receiveItems(actionType, items) {
+function receiveItems(actionType, items, skip) {
   return {
     type: `RECEIVE`,
     subtype: actionType,

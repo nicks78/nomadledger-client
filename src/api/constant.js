@@ -6,23 +6,13 @@ export const GOOGLE_API = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBrD
 
 
 
-// export const API_ADRESSES = {
-//     GET_CONTACT: 'contact/list',
-//     POST_CONTACT: 'contact/create',
-//     DELETE_CONTACT: 'contact/delete',
-//     GET_CLIENT: 'client/list',
-//     POST_CLIENT: 'contact/create',
-//     DELETE_CLIENT: 'contact/delete',
-// };
-
-
 export const apiCall = (name) => {
     const endPoints = {
-        get: `list/${name.toLowerCase()}`,
-        get_one: `single-row/${name.toLowerCase()}`,
-        post: `create/${name.toLowerCase()}`,
-        put: `update/${name.toLowerCase()}`,
-        delete: `delete/${name.toLowerCase()}`,
+        get: `${name.toLowerCase()}/list`,
+        get_one: `${name.toLowerCase()}/single-row`,
+        post: `${name.toLowerCase()}/create`,
+        put: `${name.toLowerCase()}/update`,
+        delete: `${name.toLowerCase()}/delete`,
     };
     return {
         endPoints

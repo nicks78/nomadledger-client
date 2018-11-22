@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Grid} from '@material-ui/core'
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-
+import {BarCharts} from '../components/common'
 
 class Home extends Component {
   render() {
@@ -13,16 +13,16 @@ class Home extends Component {
                 <Grid item xs={12} sm={6}>
                     <Paper elevation={1}>
                     <Typography variant="display4" gutterBottom>
-                        Number clients
+                        Number clients display4
                     </Typography>
                     <Typography variant="display3" gutterBottom>
-                        Number invoices
+                        Number invoices display3
                     </Typography>
                     <Typography variant="display2" gutterBottom>
-                        Number devis
+                        Number devis display2
                     </Typography>
                     <Typography variant="display1" gutterBottom>
-                        Monthly graph with income
+                        Monthly graph with income display1
                     </Typography>
                     <Typography variant="headline" gutterBottom>
                         Headline
@@ -53,6 +53,8 @@ class Home extends Component {
                             Paper can be used to build surface or other elements for your application.
                         </Typography>
                     </Paper>
+
+                    <BarCharts />
                 </Grid>
             </Grid>
 

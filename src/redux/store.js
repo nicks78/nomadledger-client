@@ -6,7 +6,7 @@ import reducers from './reducers';
 
 const logger = (store) => (next) => (action) => {
     if(typeof action !== "function"){
-        console.log('dispatching:', action);
+        console.log('Dispatching:', action);
     }
     return next(action);
 }

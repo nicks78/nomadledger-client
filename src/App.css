@@ -1,3 +1,7 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
 body{
   background-color: rgba(251,251,251,1);
   font-family: 'Raleway', sans-serif;
@@ -19,8 +23,65 @@ html {
 }
 
 
-.MainMenu-active-160 span, .MainMenu-active-160 svg{
-    color: #ef6c00;
-    text-transform: uppercase;
-    font-weight: 900;
+.MainMenu-active-160 span, 
+.MainMenu-active-160 svg {
+    color: #ef6c00 !important;
+}
+
+a {
+  text-decoration: none;
+  color: #ef6c00 !important;
+}
+a svg {
+  color: inherit
+}
+a:hover {
+  text-decoration: none;
+  color: #b53d00 !important;
+}
+
+.link {
+  text-decoration: none;
+  position: relative;
+  color: #ef6c00;
+  padding-bottom: 2px;
+}
+
+.link:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  border-bottom: 1px solid #b53d00;
+  transition: 0.4s;
+}
+
+.link:hover:after {
+  width: 100%;
+}
+
+@media(max-width: 480px){
+  .Layout-content-7{
+    padding: 0px !important
+  }
+}
+
+/* 
+  Font 
+*/
+
+
+/****************************************************
+        BUTTON
+*****************************************************/
+
+.icon-button{
+  color: #ef6c00;
+  cursor: pointer;
+  width: 0.8em !important;
+  transition: 1s ease
+}
+.icon-button:hover {
+  color: #b53d00;
 }

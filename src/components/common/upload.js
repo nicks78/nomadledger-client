@@ -31,7 +31,6 @@ const  Upload = (props) => {
 
     const {classes, images, limitUploadFile, removeItem, docType } = props
 
-
     return (
     
     <div className={ classes.root}>
@@ -57,7 +56,6 @@ const  Upload = (props) => {
                     accept={docType}
                     className={classes.input}
                     id="flat-button-file"
-                    multiple
                     onChange={ props.onChange }
                     type="file"
                 />

@@ -22,12 +22,15 @@ const Styles = theme => ({
         width: '100%',
         maxWidth: 360,
         backgroundColor: theme.palette.background.paper,
+        fontSize: '10%!important'
     },
     active: {
-        color: theme.palette.secondary.light,
+        color: theme.palette.secondary.light
     },
     listText: {
-        textTransform: 'uppercase',
+       '& span': {
+           color: 'rgba(0,0,0,0.54)'
+       }
     },
     header: { 
         padding: '24px', 
@@ -57,27 +60,27 @@ const MainMenu = (props) => {
                     <ListItemText className={ classes.listText } primary={ locale.home.name } />
                 </ListItem>
 
-                <ListItem button component={NavLink}  to="/contacts" activeClassName={classes.active}>
+                <ListItem button component={NavLink}  to="/contact" activeClassName={classes.active}>
                     <ListItemIcon>
                         <GroupIcon />
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.contact.name } />
                 </ListItem>
              
-                <ListItem button component={NavLink}  to="/services" activeClassName={classes.active}>
+                <ListItem button component={NavLink}  to="/service" activeClassName={classes.active}>
                     <ListItemIcon>
                         <HeadsetMicIcon />
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.service.name } />
                 </ListItem>
-                <ListItem button component={NavLink}  to="/products" activeClassName={classes.active}>
+                <ListItem button component={NavLink}  to="/product" activeClassName={classes.active}>
                     <ListItemIcon>
                         <StoreIcon />
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.product.name } />
                 </ListItem>
                 
-                <ListItem button component={NavLink}  to="/expenses" activeClassName={classes.active}>
+                <ListItem button component={NavLink}  to="/expense" activeClassName={classes.active}>
                     <ListItemIcon>
                         <ReceiptIcon />
                     </ListItemIcon>

@@ -3,14 +3,11 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { createItem, getItemList, getItem, createState } from '../../redux/high-order-component'
-import {ApxTable, Spinner, ApxAlert} from '../../components/common'
+import { Spinner, ApxAlert} from '../../components/common'
 import AddContact from './addContact'
-import ShowContact from './showContact'
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import IconButton from '@material-ui/core/IconButton';
-import ArrowBackIcon from '@material-ui/icons/ArrowBackOutlined'
-
+// import IconButton from '@material-ui/core/IconButton';
+// import ArrowBackIcon from '@material-ui/icons/ArrowBackOutlined'
+import Table from '../../components/lib/table'
 
 
 class Contact extends Component {
@@ -23,7 +20,6 @@ class Contact extends Component {
     }
 
     componentDidMount(){
-        
         if( this.props.receivedAt === null  )
             this.props.getItemList(this.state.reducer)
         this.setState({keyLocation: this.props.location.key})
@@ -51,43 +47,54 @@ class Contact extends Component {
 
     render() {
     
-    const {listContacts, isFetching, isError, contact, locale, createItem, createState, newContact, isCreating} = this.props
-    const { showContact } = this.state
-
+    const {listContacts, isFetching, isError, locale, createItem, createState, newContact, isCreating, progress} = this.props
+    
     if(isFetching){
         return <Spinner />
     }
+   
     if(isError){
         return <ApxAlert message="Erreur message" reducer={ this.state.reducer }/>
     }
 
-    var tableRow = 
-        listContacts.map((row, index) => {
-        return (
-          <TableRow key={index}>
-            <TableCell onClick={ () => { this.renderSingleContact(row._id) } }><span  style={ styles.link }>{row.company}</span></TableCell>
-            <TableCell>{row.firstname}&nbsp;{row.lastname}</TableCell>
-            <TableCell numeric>{row.createAt}</TableCell>
-            <TableCell>{row.email}</TableCell>
-          </TableRow>
-        );
-      })
+    const tableIndex = [
+        {
+            label: locale.form.field.company,
+            field: 'company',
+            type: 'text',
+            numeric: false
+        },
+        {
+            label: locale.form.field.firstname +'/'+ locale.form.field.lastname,
+            field: 'firstname',
+            type: 'text',
+            numeric: false
+        },
+        {
+            label: locale.form.field.email,
+            field: 'email',
+            type: 'text',
+            numeric: false
+        },
+        {
+            label: locale.form.field.phone,
+            field: 'phone',
+            type: 'number',
+            numeric: true
+        },
+        
+    ]
+
+
 
     return (
         <div style={styles.container}>
-
-            {
-                showContact ? 
-                    <IconButton onClick={ this.returnToList }><ArrowBackIcon/></IconButton>
-                : <AddContact locale={ locale } createContact={ createItem } createContactState={  createState } newData={newContact} isCreating={ isCreating  }/>
-            }
-            {
-                showContact ?
-                    <ShowContact contact={ contact } />
-                : <ApxTable isFetching={isFetching} tableRow={ tableRow }/>
-            }
-            
-            
+            <AddContact progress={progress} locale={ locale } createContact={ createItem } createContactState={  createState } newData={newContact} isCreating={ isCreating  }/>     
+            <Table 
+                listData={listContacts} 
+                tableIndex={tableIndex} 
+                isFetching={isFetching} 
+                reducer={this.state.reducer}/>    
         </div>
     )
   }
@@ -113,7 +120,7 @@ const styles =  {
 }
 
 const mapStateToProps = (state) => {
-    console.log('STATE', state.library)
+
     return {
         isFetching: state.library.contact.isFetching,
         isCreating: state.library.contact.isCreating,
@@ -121,8 +128,8 @@ const mapStateToProps = (state) => {
         listContacts: state.library.contact.list,
         receivedAt: state.library.contact.receivedAt,
         locale: state.locale.locale,
-        contact: state.library.contact.item,
-        newContact: state.library.contact.tmp_state
+        newContact: state.library.contact.tmp_state,
+        progress: state.library.contact.progress
     }
 }
 

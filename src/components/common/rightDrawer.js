@@ -3,14 +3,15 @@
 import React from 'react'
 import Drawer from '@material-ui/core/Drawer';
 import { withStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/CloseOutlined'
-import Typography from '@material-ui/core/Typography';
+import {Divider, Typography, IconButton} from '@material-ui/core';
 
 const styles = theme => ({
     drawer: {
         backgroundColor: theme.palette.grey.light,
-        height: '100%'
+        height: '100%',
+        minWidth: '300px',
+        maxWidth: '450px',
     },
     icon: {
         color: 'red',
@@ -18,7 +19,7 @@ const styles = theme => ({
     },
     span: {
         marginTop: 44,
-        marginLeft: 24,
+        paddingLeft: 20,
     }
 })
 
@@ -30,15 +31,19 @@ const RightDrawer = (props) => {
         <Drawer anchor={side} open={ open } onClose={ toggleDrawer(side, false) }>
             <div className={ classes.drawer }>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <div className={ classes.span }><Typography color="textSecondary" variant="title">{title}</Typography>
-                
+                <div className={ classes.span }>
+                    <Typography color="textPrimary" variant="title">{title}</Typography>
+                    
                 </div>
                 
                 <div>
                     <IconButton className={  classes.icon } onClick={ toggleDrawer(side, false) }><CloseIcon /></IconButton>
                 </div>
             </div>
-                {props.children}
+            <Divider style={{marginTop: 10}}/>
+                <div>
+                    {props.children}
+                </div>
             </div>
         </Drawer>
     )

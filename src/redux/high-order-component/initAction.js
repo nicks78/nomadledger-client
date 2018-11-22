@@ -11,6 +11,15 @@ export const requestData = (actionType) => {
     }
 }
 
+export const requestUpdate = (actionType) => {
+    return {
+        type: `REQUEST_UPDATE`,
+        subtype: actionType,
+        isUpdating: true,
+        isError: false
+    }
+}
+
 export const requestCreation = (actionType) => {
     return {
         type: `REQUEST_CREATE`,
@@ -35,5 +44,13 @@ export const resetState = (actionType) =>  {
     return {
         type: `RESET`,
         subtype: actionType,
+    }
+}
+
+export const progress = (actionType, value) =>  {
+    return {
+        type: `PROGRESS`,
+        subtype: actionType,
+        value
     }
 }
