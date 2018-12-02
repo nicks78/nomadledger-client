@@ -1,7 +1,7 @@
 //manager/src/pages/client/addContact.js
 
 import React  from 'react'
-import AddItem from '../../components/lib/addItem'
+import AddItem from '../../lib/addItem'
 import {phone_code, country} from '../../utils/static_data'
 
 

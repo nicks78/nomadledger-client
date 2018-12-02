@@ -107,7 +107,7 @@ const TextLabelValue = (props) => {
                 c 
             : 
             <div>
-            <Typography variant="caption" component={"p"} href={props.href || ""}>
+            <Typography variant="caption" component={"p"} href={props.href || ""} >
                 <span style={{float:'left', fontWeight: "bold"}}>{props.label} :<br /></span>
             </Typography>
             <Typography variant="caption" component={props.html_tag || "p"} href={props.href || ""}>
@@ -115,6 +115,7 @@ const TextLabelValue = (props) => {
             </Typography>
             </div>
         }
+        
         </div>
 
     )

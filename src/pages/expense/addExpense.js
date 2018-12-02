@@ -1,7 +1,7 @@
 //manager/src/pages/expense/addExpense.js
 
 import React from 'react'
-import AddItem from '../../components/lib/addItem'
+import AddItem from '../../lib/addItem'
 
 const AddExpense = (props) => {
 

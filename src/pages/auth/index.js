@@ -1,12 +1,15 @@
 //manager/src/pages/auth/index.js
 import React, { Component } from 'react'
-import { createStateUser, createUser } from './actions'
+import {connect} from 'react-redux'
+import { createStateUser, createUser, resetUser } from './actions'
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import {connect} from 'react-redux'
+
 import {ApxForm, ApxBanner, Spinner} from '../../components/common'
+
+
 
 
 const styles = {
@@ -55,6 +58,11 @@ class Auth extends Component {
 
     state = {
         showLogin: true,
+        openSnack: true
+    }
+
+    componentWillUnmount(){
+        this.props.resetUser();
     }
 
     handleChange = name => event => {
@@ -67,11 +75,11 @@ class Auth extends Component {
     onSubmit = () => {
         this.props.createUser()
     }
-    
+
 
     render() {
     
-    const { locale, newUser, isFetching, isError, message } = this.props
+    const { locale, newUser, isFetching, isError, message, isCreated } = this.props
 
     const form = {
           title: locale.form.title.add_contact, 
@@ -81,10 +89,13 @@ class Auth extends Component {
                 { name: 'email', type:"email", required: true },
                 { name: 'password',type:"password", required: true},
             ]
-        }
+    }
+
     
     return (
       <div style={ styles.container}>
+
+      
 
         <ApxBanner />
         
@@ -96,9 +107,14 @@ class Auth extends Component {
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis ex voluptates numquam exercitationem libero ducimus omnis iusto sit veritatis, magnam doloribus adipisci ullam autem qui et alias! Dolor, quo saepe! Nobis ex voluptates numquam exercitationem libero ducimus omnis iusto sit veritatis, magnam doloribus adipisci ullam autem qui et alias! Dolor, quo saepe! Nobis ex voluptates numquam exercitationem libero ducimus omnis iusto sit veritatis, magnam doloribus adipisci ullam autem qui et alias! Dolor, quo saepe!
             </Typography>
         </div>
+
+        <div>
+        {   isError ? <p> {locale.message[message]}</p> : null }
+        {   isCreated ? <p>{locale.message[message]}</p> : null }
+        </div>
         
         <div style={ styles.section_3 }>
-        { isError && <p> {locale.message[message]}</p> }
+        
             {
                 !isFetching ? 
                 <Paper style={ styles.form }>
@@ -118,6 +134,8 @@ class Auth extends Component {
             : <Spinner />
             }
         </div>
+
+
 
         <div style={ styles.section_4 }>
             <Typography variant="headline" style={ styles.headline }>
@@ -150,16 +168,17 @@ class Auth extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log("STATE", state.auth)
+
     return {
         isFetching: state.auth.isFetching,
         isError: state.auth.isError,
         message: state.auth.message,
         locale: state.locale.locale,
         newUser: state.auth.state_user,
+        isCreated: state.auth.isCreated
     }
 }
 
 
 
-export default connect(mapStateToProps, {createStateUser, createUser})(Auth);
+export default connect(mapStateToProps, {createStateUser, createUser, resetUser})(Auth);

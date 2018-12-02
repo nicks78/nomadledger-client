@@ -1,7 +1,7 @@
 //manager/src/pages/product/addProduct.js
 
 import React from 'react'
-import AddItem from '../../components/lib/addItem'
+import AddItem from '../../lib/addItem'
 
 const AddProduct = (props) => {
 

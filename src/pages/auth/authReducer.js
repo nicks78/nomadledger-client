@@ -1,8 +1,9 @@
 //src/pages/auth/authReducer.js
 
 const initialState = {
-    isLoggedIn: false,
+    isCreated: false,
     isFetching: false,
+    isLoggedIn: false,
     isError: false,
     user: null,
     message: '',
@@ -19,33 +20,41 @@ const authReducer = (state = initialState, action) => {
             return  { 
                 ...state,
                 isFetching: action.isFetching,
-                isError: action.isError
+                isCreated: false,
+                isError: false
             }
         case `FAILED_USER`:
             return  { 
                 ...state,
                 isFetching: action.isFetching,
                 isError: action.isError,
+                isLoggedIn: false,
+                isCreated: false,
                 message: action.message
             }
         case `CREATE_USER`:
             return  { 
                 ...state, 
-                isFetching: action.isFetching,
+                isFetching: false,
+                isCreated: true,
                 state_user: initialState.state_user,
-                user: action.user
             }
         case `GET_USER`:
             return  { 
                 ...state,
-                isLoggedIn: action.isLoggedIn
+                isFetching: false,
+                isLoggedIn: true
             }
         case `STATE_USER`:
             return {
                 ...state,
                 state_user: { ...state.state_user, [ action.payload.fieldName ] : action.payload.value }
             }
+        case `RESET_USER`:
+            return initialState
 
+        case `LOGOUT_USER`:
+            return initialState
         default:
             return state;
     }

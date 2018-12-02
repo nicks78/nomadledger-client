@@ -1,7 +1,7 @@
-//Users/nic/Sites/manager/src/redux/HOC/getAction.js
+//manager/src/redux/HOC/getAction.js
 
 import axios from 'axios';
-import { API_ENDPOINT, apiCall } from '../../api/constant'
+import { API_ENDPOINT, apiCall } from '../../utils/constant'
 import { requestData, requestFailed  } from './'
 
 
@@ -15,9 +15,6 @@ export function getItem( actionType, id ){
     axios.get(`${API_ENDPOINT}${apiCall(actionType).endPoints.get_one}/${id}`, {
       method: 'GET',
       mode: 'cors',
-      headers: {
-          'x-access-token': localStorage.getItem('token')
-      }
     })
     .then(function (response) { 
         return response.data
@@ -26,9 +23,14 @@ export function getItem( actionType, id ){
         if(res.success){
           dispatch(setItem(actionType, res.payload ))  
         }else{
-            dispatch(requestFailed(actionType))
+          dispatch(requestFailed(actionType))
         }
-    })           
+    })
+    .catch(function (error) {
+      // handle error
+      var message = error.response ? error.response.data.message : 'error_500'
+      dispatch(requestFailed(actionType, message));
+    })          
   }
 }
 

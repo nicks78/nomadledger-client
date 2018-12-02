@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { createState, updateItem } from '../../../redux/high-order-component'
+import { createState, updateItem } from '../../../redux/actions'
 import EditIcon from '@material-ui/icons/EditOutlined'
 import CheckIcon from '@material-ui/icons/CheckOutlined'
 import EditContactInfo from './editContactInfo'

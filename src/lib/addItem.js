@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { ApxExpanded, ApxUpload, ApxForm, ApxRightDrawer, Spinner } from '../common'
+import { ApxExpanded, ApxUpload, ApxForm, ApxRightDrawer, Spinner } from '../components/common'
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 const styles = theme => ({

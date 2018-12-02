@@ -1,59 +1,72 @@
 //src/pages/account/index.js
 
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
-import { createItem, getItemList, getItem, createState } from '../../redux/high-order-component'
-import EditContactInfo from '../contact/dashboard/editContactInfo'
+import { withStyles } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper'
+import Grid from '@material-ui/core/Grid'
+import SettingsIcon from '@material-ui/icons/SettingsOutlined'
+import User from './user'
+import Company from './company'
+
+
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    marginBottom: 18
+  },
+  paper: {
+      padding: 24
+  },
+  control: {
+    padding: theme.spacing.unit * 2,
+  },
+  icon: {
+    position: 'relative',
+    top: '6px',
+    right: '5px',
+    color: 'rgba(0,0,0,.54)'
+  }
+});
+
 
 
 class Account extends Component {
 
-
-  state = {
-    showContact: false,
-    reducer: 'ACCOUNT',
-    keyLocation: ''
-}
-
-
-  handleEditProfile = (e) => {
-    console.log(e.target.name)
-  }
-
   render() {
+
+    const { classes } = this.props
+
+
     return (
       <div>
-          <p>Paramettre de l'application</p>
-          <p>Edit company</p>
-          <p>Edit information personnel</p>
-          <p></p>
+          <Grid container className={classes.root} spacing={16}>
+             
+                <Grid item xs={12}>
+                <Paper className={classes.paper}>
+                  <Company />
+                </Paper>
+                </Grid>
+              
+          </Grid>
 
-          <EditContactInfo 
-                label="mafia"
-                value="name"
-                edit={true}
-                field="mafia"
-                editProfile={this.handleEditProfile}
-            />
+          
+          <Grid container spacing={16}> 
+                <Grid item xs={12} md={8}>
+                  <Paper className={classes.paper} elevation={1}>
+                    <User /> 
+                  </Paper>
+              </Grid>
 
+              <Grid item xs={12} md={4}>
+                  <Paper className={classes.paper} >
+                    <SettingsIcon className={ classes.icon } />Setting
+                  </Paper>
+              </Grid>
+          </Grid>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-
-  return {
-      isFetching: state.library.account.isFetching,
-      isCreating: state.library.account.isCreating,
-      isError: state.library.account.isError,
-      listaccounts: state.library.account.list,
-      receivedAt: state.library.account.receivedAt,
-      locale: state.locale.locale,
-      newaccount: state.library.account.tmp_state,
-      progress: state.library.account.progress
-  }
-}
-
-
-export default connect(mapStateToProps, { createItem, getItemList, getItem, createState })(Account);
+export default withStyles(styles)(Account);

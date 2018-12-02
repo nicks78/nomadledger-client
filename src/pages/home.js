@@ -1,12 +1,26 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
+import { getItemList } from '../redux/actions'
 import {Grid} from '@material-ui/core'
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import {BarCharts} from '../components/common'
 
 class Home extends Component {
-  render() {
-    return (
+
+    state = {
+        showContact: false,
+        reducer: 'STAT',
+        keyLocation: ''
+    }
+
+    componentDidMount(){
+        // this.props.getItemList(this.state.reducer)
+    }
+
+
+    render() {
+        return (
         <div style={styles.container}>
 
             <Grid container spacing={16}>
@@ -81,4 +95,13 @@ const styles = {
 }
 
 
-export default Home;
+const mapStateToProps = (state) => {
+
+    return {
+        isFetching: state.library.stat.isFetching,
+        item: state.library.stat.item
+    }
+}
+
+
+export default connect(mapStateToProps, { getItemList })(Home);

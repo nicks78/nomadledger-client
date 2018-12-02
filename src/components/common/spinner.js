@@ -9,6 +9,7 @@ const Spinner = () => {
 
 const styles = {
     container: {
+        marginTop: '20%',
         textAlign: 'center'
     }
 }

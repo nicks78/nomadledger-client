@@ -1,7 +1,7 @@
 //manager/src/pages/service/index.js
 
 import React, { Component } from 'react'
-import { createItem, getItemList, getItem, createState } from '../../redux/high-order-component'
+import { createItem, getItemList, getItem, createState } from '../../redux/actions'
 import {connect} from 'react-redux'
 import {ApxTable, Spinner, ApxAlert} from '../../components/common'
 import ShowService from './showService'

@@ -2,7 +2,7 @@
 
 
 import axios from 'axios';
-import { API_ENDPOINT, apiCall } from '../../api/constant'
+import { API_ENDPOINT, apiCall } from '../../utils/constant'
 import { requestUpdate, requestFailed  } from './'
 
 
@@ -37,7 +37,12 @@ export const updateItem = ( actionType, id ) => {
               }else{
                 dispatch(requestFailed(actionType))
               }
-        })   
+        }) 
+        .catch(function (error) {
+            // handle error
+            var message = error.response ? error.response.data.message : 'error_500'
+            dispatch(requestFailed(actionType, message));
+        })    
     }
   }
   

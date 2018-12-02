@@ -1,6 +1,6 @@
 //manager/src/redux/HOC/libraryReducer.js
 
-import baseReducer from '../baseReducer'
+import baseReducer from './baseReducer'
 
 
 class BaseState {
@@ -21,7 +21,9 @@ class InitialState {
     expense = new BaseState();
     service = new BaseState();
     product = new BaseState();
-    account = new BaseState();
+    company = new BaseState();
+    user    = new BaseState();
+    stat    = new BaseState();
 }
   
 export default (state = new InitialState(), action) => {
@@ -47,10 +49,10 @@ export default (state = new InitialState(), action) => {
           ...state,
           product: baseReducer(state.product, action)
         }
-      case 'ACCOUNT': 
+      case 'STAT': 
         return {
           ...state,
-          product: baseReducer(state.account, action)
+          stat: baseReducer(state.stat, action)
         }
       default: return state;
     }

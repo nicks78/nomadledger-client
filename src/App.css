@@ -14,20 +14,6 @@ html {
   border-bottom-color: rgb(223,224,228);
 }
 
-.MainMenu-active-152 span {
-  color: #ef6c00;
-  font-weight: 600;
-}
-.MainMenu-active-152 svg {
-  color: #ef6c00;
-}
-
-
-.MainMenu-active-160 span, 
-.MainMenu-active-160 svg {
-    color: #ef6c00 !important;
-}
-
 a {
   text-decoration: none;
   color: #ef6c00 !important;

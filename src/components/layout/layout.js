@@ -1,5 +1,6 @@
 import React  from 'react'
 import { withStyles } from '@material-ui/core/styles';
+import {API_ENDPOINT} from '../../utils/constant'
 import { Link } from "react-router-dom";
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -32,9 +33,11 @@ const styles = theme => ({
         width: '100%',
     },
     toolbar: theme.mixins.toolbar,
+    
     drawerPaper: {
         position: 'relative',
         height: '100vh',
+        backgroundColor: 'rgb(250,250,250)',
         width: drawerWidth,
         marginTop: '0px',
         [theme.breakpoints.up('md')]: {
@@ -52,7 +55,7 @@ const styles = theme => ({
     appBar: {
         position: 'absolute',
         marginLeft: drawerWidth,
-        background: 'linear-gradient(rgba(30,30,30,.9),#1e1e1e)',
+        background: 'rgb(250,250,250)',
         boxShadow: 'none',
         border: '1px solid transparent',
         borderBottomColor: 'rgba(0, 0, 0, 0.12)',
@@ -69,7 +72,7 @@ const styles = theme => ({
     content: {
         flexGrow: 1,
         overflowY: 'auto',
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: 'rgb(238,238,238)',// theme.palette.background.default,
         padding: theme.spacing.unit * 3,
     },
     avatar: {
@@ -135,7 +138,7 @@ class Layout extends React.Component {
                     component="span"
                     onClick={ this.handleMenu }
                     alt="Nicolas"
-                    src="https://material-ui.com/static/images/uxceo-128.jpg"
+                    src={`${API_ENDPOINT}image/view${'/default/default_avatar.png' }`}
                     className={ classes.avatar }
                 />
                 <Menu
@@ -153,10 +156,10 @@ class Layout extends React.Component {
                   onClose={this.handleClose}
                 >
                   <MenuItem component={Link}  to="/account" >My account</MenuItem>
-                  <MenuItem onClick={this.handleClose}>Deconnexion</MenuItem>
+                  <MenuItem onClick={this.props.logout}>Deconnexion</MenuItem>
                 </Menu>
                 </Typography>
-                    <Button color="secondary" onClick={ () => { this.props._onChangeLocale(locale) } }>{ locale.lang === 'fr' ? 'EN' : 'FR' }</Button>
+                    <Button color="secondary" onClick={ () => { this.props._onChangeLocale(locale.lang === 'fr' ? 'en' : 'fr') } }>{ locale.lang === 'fr' ? 'EN' : 'FR' }</Button>
                 </Toolbar>
             </AppBar>
             
@@ -174,8 +177,8 @@ class Layout extends React.Component {
                     keepMounted: true, // Better open performance on mobile.
                 }}
             >
-                <MainMenu locale={ locale }/>
-                <ApxCopyright />      
+                <MainMenu locale={ locale }  />
+                    <ApxCopyright />      
                 </Drawer>
             </Hidden>
             <Hidden smDown implementation="css">

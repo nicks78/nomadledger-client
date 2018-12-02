@@ -13,6 +13,7 @@ import CallMadeIcon from '@material-ui/icons/CallMadeOutlined';
 import StoreIcon from '@material-ui/icons/StoreOutlined';
 import ReceiptIcon from '@material-ui/icons/ReceiptOutlined';
 import HeadsetMicIcon from '@material-ui/icons/HeadsetMicOutlined';
+import ListAltIcon from '@material-ui/icons/ListAltOutlined';
 import Hidden from '@material-ui/core/Hidden';
 import Logo from '../../logo.png';
 import Bg from '../../utils/img/bg.jpg'
@@ -21,16 +22,28 @@ const Styles = theme => ({
     root: {
         width: '100%',
         maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
+        backgroundColor: 'rgb(250,250,250)',
         fontSize: '10%!important'
     },
     active: {
-        color: theme.palette.secondary.light
+        backgroundColor: 'rgba(90,90,90, 1)',
+        // borderBottom: '1px solid #cecece8a',
+        // borderTop: '1px solid #cecece8a',
+        '& span': {
+            color: theme.palette.secondary.main + '!important',
+            fontWeight: 'bold'
+        },
+        '& svg': {
+            color: theme.palette.secondary.main + '!important'
+        }
     },
     listText: {
        '& span': {
            color: 'rgba(0,0,0,0.54)'
-       }
+       },
+       '& svg': {
+        color: 'rgba(0,0,0,0.54)'
+    }
     },
     header: { 
         padding: '24px', 
@@ -62,39 +75,45 @@ const MainMenu = (props) => {
 
                 <ListItem button component={NavLink}  to="/contact" activeClassName={classes.active}>
                     <ListItemIcon>
-                        <GroupIcon />
+                        <GroupIcon  />
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.contact.name } />
                 </ListItem>
              
                 <ListItem button component={NavLink}  to="/service" activeClassName={classes.active}>
                     <ListItemIcon>
-                        <HeadsetMicIcon />
+                        <HeadsetMicIcon  />
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.service.name } />
                 </ListItem>
                 <ListItem button component={NavLink}  to="/product" activeClassName={classes.active}>
                     <ListItemIcon>
-                        <StoreIcon />
+                        <StoreIcon  />
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.product.name } />
                 </ListItem>
                 
                 <ListItem button component={NavLink}  to="/expense" activeClassName={classes.active}>
                     <ListItemIcon>
-                        <ReceiptIcon />
+                        <ReceiptIcon  />
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.expense.name } />
                 </ListItem>
 
                 <ListItem button>
                     <ListItemIcon>
-                        <CallMadeIcon />
+                        <CallMadeIcon  />
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.vat.name } />
                 </ListItem>
+                <ListItem button>
+                    <ListItemIcon>
+                        <ListAltIcon  />
+                    </ListItemIcon>
+                    <ListItemText className={ classes.listText } primary={ locale.task.name } />
+                </ListItem>
             </List>
-            <Divider />
+            <Divider style={{borderColor: 'white'}}/>
             <List component="nav">
                 <ListItem button>
                 <ListItemText primary="Trash" />

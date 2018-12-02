@@ -1,7 +1,7 @@
 //manager/src/pages/service/addService.js
 
 import React from 'react'
-import AddItem from '../../components/lib/addItem'
+import AddItem from '../../lib/addItem'
 
 
 

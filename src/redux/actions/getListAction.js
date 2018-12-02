@@ -2,8 +2,9 @@
 
 
 import axios from 'axios';
-import { API_ENDPOINT, apiCall } from '../../api/constant'
+import { API_ENDPOINT, apiCall } from '../../utils/constant'
 import { requestData, requestFailed  } from './'
+
 
 
 // GET FULL LIST OF ITEM
@@ -12,24 +13,27 @@ export function getItemList( actionType, query = "" ){
     return dispatch => {
 
         dispatch(requestData(actionType))
+        axios.defaults.withCredentials = true;
 
         axios.get(`${API_ENDPOINT}${apiCall(actionType).endPoints.get}${query}`, {
           method: 'GET',
-          mode: 'cors',
-          headers: {
-              'x-access-token': localStorage.getItem('token')
-          }
+          mode: 'cors'
         })
         .then(function (response) { 
             return response.data
         }) 
         .then( res => {
           if(res.success){
-              dispatch(receiveItems(actionType, res.payload, res.skip ))  
+                dispatch(receiveItems(actionType, res.payload, res.skip ))  
               }else{
                 dispatch(requestFailed(actionType))
               }
-        })              
+        })
+        .catch(function (error) {
+          // handle error
+          var message = error.response ? error.response.data.message : 'error_500'
+          dispatch(requestFailed(actionType, message));
+        })             
     }
 }
 

@@ -2,12 +2,12 @@
 
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { createItem, getItemList, getItem, createState } from '../../redux/high-order-component'
+import { createItem, getItemList, getItem, createState } from '../../redux/actions'
 import { Spinner, ApxAlert} from '../../components/common'
 import AddContact from './addContact'
 // import IconButton from '@material-ui/core/IconButton';
 // import ArrowBackIcon from '@material-ui/icons/ArrowBackOutlined'
-import Table from '../../components/lib/table'
+import Table from '../../lib/table'
 
 
 class Contact extends Component {
@@ -20,7 +20,7 @@ class Contact extends Component {
     }
 
     componentDidMount(){
-        if( this.props.receivedAt === null  )
+        // if( this.props.receivedAt === null  )
             this.props.getItemList(this.state.reducer)
         this.setState({keyLocation: this.props.location.key})
     }
@@ -47,14 +47,14 @@ class Contact extends Component {
 
     render() {
     
-    const {listContacts, isFetching, isError, locale, createItem, createState, newContact, isCreating, progress} = this.props
+    const {listContacts, isFetching, isError, locale, createItem, createState, newContact, isCreating, progress, message} = this.props
     
     if(isFetching){
         return <Spinner />
     }
    
     if(isError){
-        return <ApxAlert message="Erreur message" reducer={ this.state.reducer }/>
+        return <ApxAlert message={locale.message[message]} reducer={ this.state.reducer }/>
     }
 
     const tableIndex = [
@@ -129,7 +129,8 @@ const mapStateToProps = (state) => {
         receivedAt: state.library.contact.receivedAt,
         locale: state.locale.locale,
         newContact: state.library.contact.tmp_state,
-        progress: state.library.contact.progress
+        progress: state.library.contact.progress,
+        message: state.library.contact.message
     }
 }
 

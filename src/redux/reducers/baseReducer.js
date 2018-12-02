@@ -1,5 +1,5 @@
 // manager/src/redux/baseReducer.js
-import {updateArrayOfObject} from '../utils/help_function'
+import {updateArrayOfObject} from '../../utils/help_function'
 
 
 class BaseState {
@@ -11,6 +11,7 @@ class BaseState {
     isCreating = false;
     isFetching = false;
     isError = false;
+    message = '';
     list = []
 }
 
@@ -42,6 +43,7 @@ const baseReducer = (state = new BaseState(), action) => {
             return {
                 ...state,
                 isFetching: action.isFetching,
+                message: action.message,
                 receivedAt: action.receivedAt, 
                 isError: action.isError,
             }
@@ -93,13 +95,15 @@ const baseReducer = (state = new BaseState(), action) => {
 
         case `RESET`: 
             return new BaseState()
-
-        case `RESET_STATE`: 
+            
+        case `UPLOAD`:
             return {
                 ...state,
-                tmp_state: action.payload
+                item: action.item,
+                isCreating: action.isCreating,
+                progress: 0,
             }
-
+            
         default:
             return state;
     }

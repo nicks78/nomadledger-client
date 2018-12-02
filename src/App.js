@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
 import Routes from './routes'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css'
+
+
+// #33B3A9 == green
+// #1F2A3F == darck green
 
 const theme = createMuiTheme({
   palette: {
@@ -16,11 +19,9 @@ const theme = createMuiTheme({
       light: '#ff9d3f',
       main: '#ef6c00',
       dark: '#b53d00',
-      contrastText: '#212121',
+      contrastText: '#fff',
     },
-    third: {
-      main: 'green'
-    },
+    green:  '#4CAF50',
     grey: {
       light: 'rgba(251,251,251,1)',
       main: 'rgb(223,224,228)',
@@ -69,11 +70,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ( state ) => {
-  return {
-      auth: state.authReducer,
-  }
-}
-
-
-export default connect(mapStateToProps)(App);
+export default App;

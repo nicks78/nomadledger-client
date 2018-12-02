@@ -30,10 +30,11 @@ export const requestCreation = (actionType) => {
 }
 
 
-export const requestFailed = (actionType) =>  {
+export const requestFailed = (actionType, message = 'error_505') =>  {
     return {
         type: `FAILED`,
         subtype: actionType,
+        message: message,
         isFetching: false,
         receivedAt: null,
         isError: true

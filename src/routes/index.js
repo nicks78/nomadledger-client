@@ -1,11 +1,14 @@
 import React from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { Router, Route, Switch } from 'react-router-dom'
+import {history} from './history'
 import {connect} from 'react-redux'
-import { getLocale } from '../utils/locale/actions'
+import { getLocale, initLocale } from '../utils/locale/actions'
+import { getLogout } from '../pages/auth/actions'
+import PrivateRoute from './privateRoute'
 
 // Login
 import Auth from '../pages/auth'
-
+import Login from '../pages/auth/login'
 
 // Pages
 import Home from '../pages/home'
@@ -15,58 +18,62 @@ import Account from '../pages/account'
 import Product from '../pages/product'
 import Service from '../pages/service'
 import Expense from '../pages/expense'
-import NotFound from './notFount'
 
-// Component
+import NotFound from './notFound'
 import Layout from '../components/layout/layout'
+
 class Routes extends React.Component {
+
+    componentDidMount(){
+        this.props.initLocale('fr')
+    }
 
 
     handleChangeLocale = (locale) => {
         this.props.getLocale(locale)
     }
 
-    renderLoginPage = () => {
-        return <Auth />
-    }
-
-    renderHomePage = () => {
-        return( <BrowserRouter basename="/">
-                    <Switch>
-                    <Layout locale={this.props.locale} _onChangeLocale={this.handleChangeLocale}>   
-                        <Route path="/home" component={Home} />
-                        <Route path="/account" component={Account} />
-                        <Route exact path="/contact" component={Contact} />
-                        <Route path="/contact/view/:id" component={ShowContact} />
-                        <Route path="/product" component={Product} />
-                        <Route path="/service" component={Service} />
-                        <Route path="/expense" component={Expense} />
-                        {/* <Route path="*" component={NotFound} /> */}
-                    </Layout>
-                    
-                    </Switch>
-                    
-                </BrowserRouter>
-        )
-    }
-
 
     render(){
-        
-        if(!this.props.auth){
-            return this.renderHomePage();
-        }else{
-            return this.renderLoginPage();
-        }
+     
+        const { isLoggedIn, locale } = this.props
+
+        return (
+            <Router basename="/" history={history}>
+                    <React.Fragment>
+                        <Switch>
+                        <Route exact path="/" component={Auth} />
+                        <Route exact path="/login" component={Login} />
+                        
+                        { isLoggedIn ? 
+                            <Layout _onChangeLocale={this.handleChangeLocale} logout={this.props.getLogout} locale={locale}>
+                            <Switch>
+                                <PrivateRoute path="/home" component={ Home } auth={isLoggedIn}/>
+                                <PrivateRoute path="/account" component={Account}  auth={isLoggedIn}/>
+                                <PrivateRoute exact path="/contact" component={Contact}  auth={isLoggedIn}/>
+                                <PrivateRoute path="/contact/view/:id" component={ShowContact}  auth={isLoggedIn}/>
+                                <PrivateRoute path="/product" component={Product}  auth={isLoggedIn}/>
+                                <PrivateRoute path="/service" component={Service}  auth={isLoggedIn}/>
+                                <PrivateRoute path="/expense" component={Expense}  auth={isLoggedIn}/>
+                                <PrivateRoute path="*" component={NotFound}  auth={isLoggedIn}/>
+                            </Switch>
+                            </Layout>
+                            : null
+                        }
+                        <Route path="*" component={NotFound} />
+                    </Switch>
+                </React.Fragment>
+            </Router>
+       )
     }
 }
 
 const mapStateToProps = (state) => {
     return {
         locale: state.locale.locale,
-        auth: state.auth.isLoggedIn
+        isLoggedIn: state.auth.isLoggedIn   
     }
 }
 
 
-export default connect(mapStateToProps, {getLocale})(Routes);
+export default connect(mapStateToProps, {getLocale, getLogout, initLocale})(Routes);

@@ -2,7 +2,7 @@
 
 
 import axios from 'axios';
-import { API_ENDPOINT, apiCall } from '../../api/constant'
+import { API_ENDPOINT, apiCall } from '../../utils/constant'
 import { requestCreation, requestFailed, progress  } from './'
 
 
@@ -31,14 +31,14 @@ export const createItem = ( actionType ) => {
 
         axios.post(`${API_ENDPOINT}${apiCall(actionType).endPoints.post}`,
             formData,   
-          { headers: {
-                'x-access-token': localStorage.getItem('token'),
+            { 
+              headers: {
                 'content-type': 'application/form-data'
-          },
-          onUploadProgress: progressEvent => { // Check progression for upload
+            },
+            onUploadProgress: progressEvent => { // Check progression for upload
                 var p =  ( progressEvent.loaded / progressEvent.total ) * 100
                 dispatch(progress(actionType, parseInt(p, 10)))
-          }
+            }
         })
         .then(function (response) { 
             return response.data
@@ -49,7 +49,12 @@ export const createItem = ( actionType ) => {
               }else{
                 dispatch(requestFailed(actionType))
               }
-        })   
+        })
+        .catch(function (error) {
+            // handle error
+            var message = error.response ? error.response.data.message : 'error_500'
+            dispatch(requestFailed(actionType, message));
+        })  
     }
   }
   

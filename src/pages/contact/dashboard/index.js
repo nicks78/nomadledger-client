@@ -2,19 +2,24 @@
 
 import React  from 'react'
 import {connect} from 'react-redux'
+import {API_ENDPOINT} from '../../../utils/constant'
 import { Spinner, ApxAlert, ApxTable} from '../../../components/common'
 import Paper from '@material-ui/core/Paper'
-import { getItem, resetState, createState } from '../../../redux/high-order-component'
+import { getItem, resetState, createState, uploadFileToServer } from '../../../redux/actions'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
 import ContactInfo from './contactInfo'
 import Divider from '@material-ui/core/Divider'
-import AppBar from '@material-ui/core/AppBar';
-import SwipeableViews from 'react-swipeable-views';
+import AppBar from '@material-ui/core/AppBar'
+import SwipeableViews from 'react-swipeable-views'
+import CameraAltIcon from '@material-ui/icons/CameraAltOutlined'
 import StatContact from './stat'
 import Invoice from '../../invoice'
+import IconButton from '@material-ui/core/IconButton'
+import LinearProgress from '@material-ui/core/LinearProgress';
+
 
 const styles = {
   root: {
@@ -52,10 +57,27 @@ class ShowContact extends React.Component {
       this.setState({ value });
     }
 
-    render(){
-      const { contact, isFetching, isError, locale } = this.props
- 
+    handleFile (file) {
+      if(file.type === 'image/png' || file.type === 'image/jpeg' ){ // Check file format 
+          return file
+      }else{
+          alert('FILE TYPE NOT AUTHORIZED !')
+      }
+      return file
+    }
 
+    uploadFile = (event) => {
+      var value = this.handleFile(event.target.files[0]);
+      var fieldName = event.target.name;
+      var model = this.state.reducer;
+      var actionType = this.state.reducer;
+
+      this.props.uploadFileToServer( actionType, model, value, this.props.match.params.id, fieldName, this.props.contact.logo )
+    }
+
+    render(){
+      const { contact, isFetching, isError, locale, progress, isCreating } = this.props
+ 
       if(isFetching || contact === null){
         return <Spinner />
       }
@@ -67,9 +89,30 @@ class ShowContact extends React.Component {
         <Grid container spacing={8}>
 
             <Grid item xs={12} md={3}>
-                <div style={{ height: 150, width: 100, borderRadius: 100, margin: '0 auto' }}>
-                    <img src={`http://localhost:8080/api/v1/image/view${contact.logo}`} alt="logo" width="100%" />
+                <div style={{ minHeight: 150, width: 100, borderRadius: 100, margin: '0 auto' }}>
+                    <img src={`${API_ENDPOINT}image/view${contact.logo || '/default/default_logo.png' }`} alt="logo" width="100%" />
+                    
+                    { isCreating ? <LinearProgress color="secondary" variant="determinate" value={ progress  } /> : null }
+                    <div style={{ margin: 5, textAlign: 'center' }}>
+                        <input
+                            accept="image/*"
+                            style={{ display: 'none' }}
+                            id="contained-button-file"
+                            onChange={ this.uploadFile }
+                            name="logo"
+                            type="file"
+                          />
+                      
+                      <label htmlFor="contained-button-file">
+                      <IconButton variant="contained" component="span" >
+                        <CameraAltIcon />
+                      </IconButton>
+                      
+                    </label>
+                    
+                    </div>
                 </div>
+
               <Divider />
               
               <ContactInfo  locale={locale} contact={ contact } createState={this.props.createState} id={contact._id}/>
@@ -119,8 +162,10 @@ const mapStateToProps = (state) => {
       receivedAt: state.library.contact.receivedAt,
       locale: state.locale.locale,
       contact: state.library.contact.item,
-      newContact: state.library.contact.tmp_state
+      newContact: state.library.contact.tmp_state,
+      progress: state.library.contact.progress,
+      isCreating: state.library.contact.isCreating
   }
 }
 
-export default connect( mapStateToProps, { getItem, resetState, createState })(ShowContact);
+export default connect( mapStateToProps, { getItem, resetState, createState , uploadFileToServer})(ShowContact);

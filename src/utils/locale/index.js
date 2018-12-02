@@ -43,8 +43,12 @@ const Locale = {
                 url: "factures"
             },
             vat:{
-                name: "tva",
+                name: "Tva",
                 url: "factures"
+            },
+            task:{
+                name: "Tache",
+                url: "tache"
             },
             button: {
                 add_contact: "Ajouter un contact",
@@ -63,7 +67,8 @@ const Locale = {
             page: {
                 contact: {
                     table: ['Société', 'Téléphone', 'Email']
-                }
+                },
+                header_01: "Information profil"
             },
             text: {
                 address: "Adresse",
@@ -124,12 +129,19 @@ const Locale = {
                 }
             },
             message: {
-                success_create: "Felicitation",
+                success_create: "Felicitation !",
                 success_update: "Mise à jour avec succes",
+                success_sent: "Email envoye",
 
                 error_create: "Error create",
                 error_update: "Error update",
                 error_sent: "Email non envoyer",
+                error_user_not_found: "user_not_found",
+                error_wrong_password: "Mot de passe incorrect",
+                error_500: "mauvaise requete",
+                error_400: "error 400",
+                error_wrong_token: "error wrong token",
+                error_no_token: "error no token"
             }
         },
     en: 
@@ -172,8 +184,12 @@ const Locale = {
                 url: "factures"
             },
             vat:{
-                name: "vat",
+                name: "Vat",
                 url: "factures"
+            },
+            task:{
+                name: "Task",
+                url: "tache"
             },
             button: {
                 add_contact: "Add customer",
@@ -192,7 +208,8 @@ const Locale = {
             page: {
                 contact: {
                     table: ['Société', 'Téléphone', 'Email']
-                }
+                },
+                header_01: "Information profile"
             },
             text: {
                 address: "Address",
@@ -251,10 +268,17 @@ const Locale = {
             message: {
                 success_create: "Congratulation",
                 success_update: "Updated !",
+                success_sent: "Email envoye",
                 
                 error_create: "Error ",
                 error_update: "Error update",
                 error_sent: "Email has not neen sent",
+                error_user_not_found: "User not found",
+                error_wrong_password: "Wrong password",
+                error_500: "bad request",
+                error_400: "error 400",
+                error_wrong_token: "error wrong token",
+                error_no_token: "error no token"
             }
         },
 }
