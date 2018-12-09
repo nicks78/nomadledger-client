@@ -1,13 +1,13 @@
 
 const country = [
-    { label_fr: "France",  label_en:"France", value:"FR"},
-    { label_fr: "La réunion",  label_en:"Réunion", value:"RE"},
-    { label_fr: "Martinique",  label_en:"Martinique", value:"MQ"},
-    { label_fr: "Royaume-Uni",  label_en:"United Kingdom", value:"GB"},
-    { label_fr: "Italie",  label_en:"Italy", value:"IT"},
-    { label_fr: "Finlande",  label_en:"Finland",  value:"FI"},
-    { label_fr: "Irlande",  label_en:"Ireland",  value:"IE"},
-    { label_fr: "Malte",  label_en:"Malta",  value:"MT"}
+    { fr: "France",  en:"France", value:"FR"},
+    { fr: "La réunion",  en:"Réunion", value:"RE"},
+    { fr: "Martinique",  en:"Martinique", value:"MQ"},
+    { fr: "Royaume-Uni",  en:"United Kingdom", value:"GB"},
+    { fr: "Italie",  en:"Italy", value:"IT"},
+    { fr: "Finlande",  en:"Finland",  value:"FI"},
+    { fr: "Irlande",  en:"Ireland",  value:"IE"},
+    { fr: "Malte",  en:"Malta",  value:"MT"}
 ]
 
 export { country };

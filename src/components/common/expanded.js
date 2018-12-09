@@ -15,7 +15,7 @@ const styles = theme => ({
         fontSize: '16px'
     },
     expand: {
-        backgroundColor: theme.palette.primary.light
+        backgroundColor: theme.palette.primary.main
     },
     detail: {
         

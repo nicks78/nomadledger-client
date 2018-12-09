@@ -1,13 +1,34 @@
 import React from 'react';
+import { withStyles } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 
-const ApxCopyright = () => {
+
+const styles = theme => ({
+  root: {
+      position: 'absolute', 
+      bottom: 60, 
+      padding: '20px',
+      fontSize: '9px !important'
+  },
+  span: {
+      color: 'blue', 
+      cursor: 'pointer'
+  }
+});
+
+
+const Copyright = (props) => {
+
+  const {classes} = props
 
   return (
-        <Typography variant="caption" style={{ position: 'absolute', bottom: 60, padding: '20px',fontSize: '5px !important' }}>
-                &copy;Copyright 2018 by <span style={{ color: 'blue', cursor: 'pointer'}} onClick={ () => { window.open('https://apx-dev.com', '_blank') }}>APX Development Limited</span>. All right reserved.
+        <Typography variant="caption" className={ classes.root }>
+                &copy;Copyright 2018 by <span className={ classes.span } onClick={ () => { window.open('https://apx-dev.com', '_blank') }}>APX Development Limited</span>. All right reserved.
         </Typography> 
   );
 }
+
+
+const ApxCopyright =  withStyles(styles)(Copyright)
 
 export { ApxCopyright };

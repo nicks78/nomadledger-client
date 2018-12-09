@@ -4,10 +4,10 @@ html, body {
 }
 body{
   background-color: rgba(251,251,251,1);
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 html {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 .AppBar {
   border: 1px solid transparent;
@@ -50,6 +50,9 @@ a:hover {
 @media(max-width: 480px){
   .Layout-content-7{
     padding: 0px !important
+  }
+  .MuiPaper-rounded-19 {
+    border-radius: 0px !important;
   }
 }
 

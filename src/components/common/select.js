@@ -3,33 +3,49 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 
+
 const styles = theme => ({
     textField: {
-        marginLeft: '10px',
-        marginRight: '10px',
-        width: '90%',
+        width: '100%',
         marginTop: '0px',
-        float: 'left',
     },
     menu: {
         width: 'auto'
     }
 })
-
+/**
+ * 
+ * @param arrayField List of options
+ * @param field Name of the field in database
+ * @param helperText Text helper for UI
+ * @param locale List of translated text
+ * @func handleAction handle selected option 
+ */
 const Select = (props) => {
 
-    var label = props.locale.lang === 'en' ? 'label_en' : 'label_fr';
     const {classes, arrayField, field, helperText} = props
+
+    const selected = (event) => {
+        
+        var value = event.target.value
+        for(var i =0; i < arrayField.length ; i++){
+            if(value === arrayField[i]['fr'] || value === arrayField[i]['en']){
+                event.target.value =  arrayField[i]
+            }
+        }
+        return props.handleAction(event)   
+    }
 
     return (
       <div>
           <TextField
-            id="standard-select"
+            id={field}
             select
-            label="Select"
+            label={props.locale.form.field[field]}
             className={classes.textField}
+            name={field}
             value={ props.value || ''}
-            onChange={props.handleAction(field)}
+            onChange={ (evt) => { selected(evt) } }
             SelectProps={{
                 MenuProps: {
                   className: classes.menu,
@@ -39,8 +55,8 @@ const Select = (props) => {
             margin="normal"
             >
             {arrayField.map((option, index) => (
-                <MenuItem key={index} value={option.value}>
-                    {option[label]}
+                <MenuItem key={index} value={ option[localStorage.getItem('locale')]}>
+                    {option[props.locale.lang]} {option.value && '(' + option.value +')'}
                 </MenuItem>
             ))}
             </TextField>
@@ -51,3 +67,4 @@ const Select = (props) => {
 const ApxSelect =  withStyles(styles)(Select)
 
 export { ApxSelect };
+

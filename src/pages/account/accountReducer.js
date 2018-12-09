@@ -4,14 +4,15 @@ import baseAccountReducer from './baseAccountReducer'
 
 
 class BaseState {
-    tmp_state = { };
+    tmp_state = {};
     item = null;
-    progress = 0 ;
     isUpdating = false;
     receivedAt = null;
+    progress = 0;
     isCreating = false;
     isFetching = false;
     isError = false;
+    message = '';
     list = []
 }
 

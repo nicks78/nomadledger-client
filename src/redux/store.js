@@ -1,6 +1,6 @@
 // redux store 
 import { createStore, applyMiddleware, compose } from 'redux';
-import { setAuthUser } from '../pages/auth/actions'
+import { setAuthUser, getLogout } from '../pages/auth/actions'
 
 import thunk from 'redux-thunk';
 import reducers from './reducers';
@@ -12,9 +12,6 @@ const logger = (store) => (next) => (action) => {
     return next(action);
 }
 
-
-
-
 const store = createStore(reducers,
     compose(
     applyMiddleware(logger, thunk),
@@ -25,6 +22,8 @@ const store = createStore(reducers,
 var x =   document.cookie.replace('auth=', '')
 if( parseInt(x, 10) ){
     store.dispatch(setAuthUser())
+}else{
+    store.dispatch(getLogout())
 }
 
 export default store;

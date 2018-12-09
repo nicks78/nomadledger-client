@@ -2,8 +2,10 @@
 
 import React  from 'react'
 import {connect} from 'react-redux'
+import { withStyles } from '@material-ui/core';
 import {API_ENDPOINT} from '../../../utils/constant'
 import { Spinner, ApxAlert, ApxTable} from '../../../components/common'
+import UploadImg from '../../../lib/uploadImg'
 import Paper from '@material-ui/core/Paper'
 import { getItem, resetState, createState, uploadFileToServer } from '../../../redux/actions'
 import Grid from '@material-ui/core/Grid'
@@ -14,18 +16,36 @@ import ContactInfo from './contactInfo'
 import Divider from '@material-ui/core/Divider'
 import AppBar from '@material-ui/core/AppBar'
 import SwipeableViews from 'react-swipeable-views'
-import CameraAltIcon from '@material-ui/icons/CameraAltOutlined'
 import StatContact from './stat'
 import Invoice from '../../invoice'
-import IconButton from '@material-ui/core/IconButton'
-import LinearProgress from '@material-ui/core/LinearProgress';
 
 
-const styles = {
+const styles = theme => ({
   root: {
       padding: '24px'
-  }
-}
+  },
+  contactWrapper: {
+    marginBottom: 24, 
+    marginLeft: 16 
+  },
+  tabRoot: {
+    fontSize: '0.85rem',
+    transition: 'all .2s ease',
+    '&:hover': {
+      color: '#008489',
+      opacity: 1,
+    },
+    '&$tabSelected': {
+      color: '#008489',
+      fontWeight: theme.typography.fontWeightMedium,
+      
+    },
+    '&:focus': {
+      color: '#008489',
+    },
+  },
+  tabSelected: {},
+})
 
 function TabContainer({ children, dir }) {
   return (
@@ -57,26 +77,8 @@ class ShowContact extends React.Component {
       this.setState({ value });
     }
 
-    handleFile (file) {
-      if(file.type === 'image/png' || file.type === 'image/jpeg' ){ // Check file format 
-          return file
-      }else{
-          alert('FILE TYPE NOT AUTHORIZED !')
-      }
-      return file
-    }
-
-    uploadFile = (event) => {
-      var value = this.handleFile(event.target.files[0]);
-      var fieldName = event.target.name;
-      var model = this.state.reducer;
-      var actionType = this.state.reducer;
-
-      this.props.uploadFileToServer( actionType, model, value, this.props.match.params.id, fieldName, this.props.contact.logo )
-    }
-
     render(){
-      const { contact, isFetching, isError, locale, progress, isCreating } = this.props
+      const { contact, isFetching, isError, locale, progress, isCreating, classes } = this.props
  
       if(isFetching || contact === null){
         return <Spinner />
@@ -85,33 +87,19 @@ class ShowContact extends React.Component {
         return <ApxAlert message="Erreur message" reducer={ this.state.reducer }/>
       }
       return (
-        <Paper style={ styles.root }>
+        <Paper className={ classes.root }>
         <Grid container spacing={8}>
 
             <Grid item xs={12} md={3}>
-                <div style={{ minHeight: 150, width: 100, borderRadius: 100, margin: '0 auto' }}>
-                    <img src={`${API_ENDPOINT}image/view${contact.logo || '/default/default_logo.png' }`} alt="logo" width="100%" />
-                    
-                    { isCreating ? <LinearProgress color="secondary" variant="determinate" value={ progress  } /> : null }
-                    <div style={{ margin: 5, textAlign: 'center' }}>
-                        <input
-                            accept="image/*"
-                            style={{ display: 'none' }}
-                            id="contained-button-file"
-                            onChange={ this.uploadFile }
-                            name="logo"
-                            type="file"
-                          />
-                      
-                      <label htmlFor="contained-button-file">
-                      <IconButton variant="contained" component="span" >
-                        <CameraAltIcon />
-                      </IconButton>
-                      
-                    </label>
-                    
-                    </div>
-                </div>
+                <UploadImg 
+                    field="logo"
+                    _handleUploadFile={ this.props.uploadFileToServer }
+                    reducer={this.state.reducer}
+                    progress={progress}
+                    idModel={this.props.match.params.id}
+                    isUploading={isCreating}
+                    image={<img src={`${API_ENDPOINT}image/view${ contact.logo || '/default/default_logo.png' }`} alt="logo" width="100%" height={null} />}
+                  />
 
               <Divider />
               
@@ -119,23 +107,24 @@ class ShowContact extends React.Component {
               
             </Grid>
             <Grid item xs={12} md={9}>
-            <div>
-            <div style={{height: 50, marginBottom: 24, marginLeft: 16 }}>
+            
+            <div className={ classes.contactWrapper}>
                 <StatContact />
             </div>
             <div style={{ marginLeft: 16}}>
-            <AppBar position="static" style={{backgroundColor: '#FF8119'}}>
+            <AppBar position="static" style={{backgroundColor: '#fff', color: '#000'}}>
               <Tabs value={this.state.value} 
                     onChange={this.handleChange}
+                    classes={classes.tabsRoot}
                     fullWidth
                     >
-                <Tab label={locale.invoice.name} />
-                <Tab label={locale.quote.name} />
-                <Tab label={locale.payback.name} />
+                <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={locale.invoice.name} />
+                <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={locale.quote.name} />
+                <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={locale.payback.name} />
               </Tabs>
             </AppBar>
               <SwipeableViews
-                style={{backgroundColor: 'beige'}}
+                
                 index={this.state.value}
                 onChangeIndex={this.handleChangeIndex}
               >
@@ -144,7 +133,7 @@ class ShowContact extends React.Component {
                 <TabContainer><ApxTable title={locale.payback.name}/></TabContainer>
               </SwipeableViews>
               </div>
-            </div>
+            
             </Grid>
         </Grid>
               
@@ -168,4 +157,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect( mapStateToProps, { getItem, resetState, createState , uploadFileToServer})(ShowContact);
+const IndexShowContact = withStyles(styles)(ShowContact)
+
+export default connect( mapStateToProps, { getItem, resetState, createState , uploadFileToServer})(IndexShowContact);

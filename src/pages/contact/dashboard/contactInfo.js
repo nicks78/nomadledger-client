@@ -1,12 +1,41 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+import { withStyles } from '@material-ui/core';
+import {country, phone_code, company_type} from '../../../utils/static_data'
 import { createState, updateItem } from '../../../redux/actions'
-import EditIcon from '@material-ui/icons/EditOutlined'
-import CheckIcon from '@material-ui/icons/CheckOutlined'
-import EditContactInfo from './editContactInfo'
+import {ApxButtonEdit} from '../../../components/common'
+import EditInput from '../../../lib/editInput'
+import EditSelect from '../../../lib/editSelect'
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Input from '@material-ui/core/Input';
+
+
+const styles = theme => ({
+    root: {
+        marginTop: '24px'
+    },
+    iconBtn: {
+        float: 'right',
+    },
+    icon: {
+        top: '-12px',
+        right: '-12px'
+    },
+    circular: {
+        width: 20, 
+        height: 20
+    },
+    editIcon: {
+        width: '0.7em !important',
+        height: '0.7em !important',
+        transition: '1s ease',
+    },
+    checkicon: {
+        color: theme.palette.green
+    }
+})
+
 
 
 class ContactInfo extends Component {
@@ -18,7 +47,7 @@ class ContactInfo extends Component {
     }
 
     // Store change data reducer
-    handleEditProfile = (e) => {
+    handleFormEdit = (e) => {
         var fieldName =  e.target.name
         var value =  e.target.value
 
@@ -27,12 +56,12 @@ class ContactInfo extends Component {
     }
 
 
-    showUpdateForm = (e) => {
+    openEdit = (e) => {
         this.setState({showEdit: !this.state.showEdit})
     }  
 
     // Update database
-    saveUpdate = (e) => {
+    updateDocument = (e) => {
         this.setState({showEdit: false});
 
         // Save the data to database
@@ -40,120 +69,141 @@ class ContactInfo extends Component {
     }   
 
     render() {
-        const {locale, contact, isUpdating, tmp_state} = this.props
+        const {locale, contact, isUpdating, tmp_state, classes} = this.props
         const { showEdit } = this.state;
 
         
-        return (
-            <div style={{marginTop: '24px'}}>
-            <div style={{ float: 'right' }}>
-            
-            {   !isUpdating ?
-                <span>
-                    { showEdit ? <CheckIcon onClick={this.saveUpdate}/> : <EditIcon className="icon-button" onClick={ this.showUpdateForm }/> }
-                </span>
-                : <CircularProgress style={{ width: 20, height: 20 }}color="secondary" />
-            }
-            </div>
+       
+
+        return ( 
+            <div className={ classes.root }>
+                <div className={ classes.iconBtn }>
+                
+                {   !isUpdating ?
+                    <ApxButtonEdit 
+                    style={{top: '-5px', right: '-12px'}}
+                    updateDocument={this.updateDocument}
+                    openEdit={this.openEdit} 
+                    showEdit={showEdit}
+                  />
+                    : <CircularProgress className={ classes.circular }color="secondary" />
+                }
+                </div>
             
             { !showEdit ? 
-                <Typography variant="headline" gutterBottom>
+                <Typography variant="h1" gutterBottom>
                     {contact.company_name}
                 </Typography>
                 : 
                 <Input
                     defaultValue={contact.company_name}
                     placeholder={ locale.form.field.company }
-                    onChange={this.handleEditProfile}
+                    onChange={this.handleFormEdit}
                     name="company_name"
                     style={{width: '80%'}} 
                 />
             }
+            <br />
             
-            <EditContactInfo 
+            <EditInput 
                 label={ locale.form.field.firstname }
-                value={contact.firstname }
-                edit={showEdit}
+                value={ tmp_state.firstname ||  contact.firstname }
+                showEdit={showEdit}
                 field="firstname"
-                editProfile={this.handleEditProfile}
+                handleAction={this.handleFormEdit}
             />
-            <EditContactInfo 
+            <EditInput 
                 label={ locale.form.field.lastname }
-                value={contact.lastname }
-                edit={showEdit}
+                value={tmp_state.lastname ||  contact.lastname }
+                showEdit={showEdit}
                 field="lastname"
-                editProfile={this.handleEditProfile}
+                handleAction={this.handleFormEdit}
             />
-            <EditContactInfo 
-                html_tag="a"
-                href={`tel:${ contact.phone_code }${contact.phone.replace('0', '')}`}
-                label={locale.form.field.phone}
-                type="select"
+            <EditSelect 
+                arrayField={phone_code}
+                field="phone_code"
+                helperText="select_phone_code"
+                handleAction={ this.handleFormEdit }
                 locale={locale}
-                valuePhone={contact.phone}
-                selected={tmp_state.phone_code || "+33"}
-                value={`(${ contact.phone_code })${contact.phone.replace('0', '')}`}
-                edit={showEdit}
-                field="phone"
-                editProfile={this.handleEditProfile}
+                showEdit={showEdit}
+                label={locale.form.field.phone_code }
+                value={  contact.phone_code[localStorage.getItem("locale")] }
             />
-            <EditContactInfo 
+            <EditInput 
+                label={locale.form.field.phone}
+                value={tmp_state.phone || contact.phone}
+                showEdit={showEdit}
+                field="phone"
+                handleAction={this.handleFormEdit}
+            />
+            <EditInput 
                 html_tag="a"
                 href={`mailto:${contact.email}`}
                 label={locale.form.field.email}
-                value={contact.email}
-                edit={showEdit}
+                value={tmp_state.email || contact.email}
+                showEdit={showEdit}
                 field="email"
-                editProfile={this.handleEditProfile}
+                handleAction={this.handleFormEdit}
             />
             <br />
             <br />
-            <EditContactInfo 
+            <EditInput 
                 label={locale.form.field.addresses_street}
-                value={contact.addresses_street}
-                edit={showEdit}
+                value={tmp_state.addresses_street || contact.addresses_street}
+                showEdit={showEdit}
                 field="addresses_street"
-                editProfile={this.handleEditProfile}
+                handleAction={this.handleFormEdit}
             />
-            <EditContactInfo 
+            <EditInput 
                 label={locale.form.field.addresses_zip}
-                value={contact.addresses_zip}
-                edit={showEdit}
+                value={tmp_state.addresses_zip || contact.addresses_zip}
+                showEdit={showEdit}
                 field="addresses_zip"
-                editProfile={this.handleEditProfile}
+                handleAction={this.handleFormEdit}
             />
-            <EditContactInfo 
+            <EditInput 
                 label={locale.form.field.addresses_city}
-                value={contact.addresses_city}
-                edit={showEdit}
+                value={ tmp_state.addresses_city || contact.addresses_city}
+                showEdit={showEdit}
                 field="addresses_city"
-                editProfile={this.handleEditProfile}
+                handleAction={this.handleFormEdit}
             />
-            <EditContactInfo 
-                label={locale.form.field.addresses_country}
-                value={contact.addresses_country}
-                edit={showEdit}
-                field="addresses_country"
-                type="select"
-                locale={locale}
-                selected={contact.addresses_country}
-                editProfile={this.handleEditProfile}
-            />
+            <EditSelect 
+                    arrayField={country}
+                    field="addresses_country"
+                    helperText="select_country_code"
+                    handleAction={ this.handleFormEdit }
+                    locale={locale}
+                    showEdit={showEdit}
+                    label={locale.form.field.addresses_country }
+                    value={  contact.addresses_country[localStorage.getItem("locale")] }
+                />
+            
             <br />
             <br />
-            <EditContactInfo 
+            <EditSelect 
+                    arrayField={company_type}
+                    field="company_type"
+                    helperText="select_company_type"
+                    handleAction={ this.handleFormEdit }
+                    locale={locale}
+                    showEdit={showEdit}
+                    label={locale.form.field.company_type }
+                    value={  contact.company_type[localStorage.getItem("locale")] }
+                />
+            <EditInput 
                 label={locale.form.field.company_register}
-                value={contact.company_register}
-                edit={showEdit}
+                value={ tmp_state.company_register || contact.company_register}
+                showEdit={showEdit}
                 field="company_register"
-                editProfile={this.handleEditProfile}
+                handleAction={this.handleFormEdit}
             />
-            <EditContactInfo 
+            <EditInput 
                 label={locale.form.field.company_vat}
-                value={contact.company_vat}
-                edit={showEdit}
+                value={ tmp_state.company_vat || contact.company_vat}
+                showEdit={showEdit}
                 field="company_vat"
-                editProfile={this.handleEditProfile}
+                handleAction={this.handleFormEdit}
             />
         
         <br />
@@ -167,7 +217,8 @@ const mapStateToProps = (state) => {
         isUpdating: state.library.contact.isUpdating,
         tmp_state: state.library.contact.tmp_state
     }
-  }
+}
   
+const styledContactInfo = withStyles(styles)(ContactInfo);
 
-export default connect(mapStateToProps, {createState, updateItem})(ContactInfo);
+export default connect(mapStateToProps, { createState, updateItem })(styledContactInfo);

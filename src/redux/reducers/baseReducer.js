@@ -66,7 +66,8 @@ const baseReducer = (state = new BaseState(), action) => {
         case `STATE`: 
             return {
                 ...state,
-                tmp_state: { ...state.tmp_state, [ action.payload.fieldName ] : action.payload.value }
+                tmp_state: { ...state.tmp_state, [ action.payload.fieldName ] : action.payload.value },
+                item: { ...state.item, [ action.payload.fieldName ] : action.payload.value }
             }
             
         case `CREATE`:

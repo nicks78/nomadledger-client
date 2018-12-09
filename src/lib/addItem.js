@@ -3,8 +3,9 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { ApxExpanded, ApxUpload, ApxForm, ApxRightDrawer, Spinner } from '../components/common'
+import { ApxExpanded, ApxUpload, ApxForm, ApxRightDrawer, Spinner, ApxButtonCircle } from '../components/common'
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Hidden from '@material-ui/core/Hidden';
 
 const styles = theme => ({
     root: {
@@ -35,6 +36,15 @@ const styles = theme => ({
     card: {
         marginTop: theme.margin.unit,
         width: '100%'
+    },
+    btnSave: {
+        float: 'right', 
+        marginTop: '24px',
+        marginBottom: '24px', 
+        color: 'white' 
+    },
+    loading: {
+        margin: 10
     }
 })
 
@@ -51,11 +61,12 @@ class Add extends Component {
         });
     };
 
-    handleChange = name => event => {
-        var fieldName = name;
-        var value = event.target.value
+    handleChange = (event) => {
+        var fieldName = event.target.name;
+        var value = event.target.value;
 
         if(fieldName === 'doc'){ // If input file
+            
             value = this.handleFile(event.target.files[0]);
         }
         this.props.createItemState( this.props.reducer, fieldName, value )
@@ -65,8 +76,7 @@ class Add extends Component {
         if(file.type === 'image/png' || file.type === 'image/jpeg' ){ // Check file format 
             var imagesArray = this.props.newData.doc ?  this.props.newData.doc : [];
             file.blob = URL.createObjectURL(file) 
-            imagesArray.push(file)
-            
+            imagesArray.push(file) 
         }else{
             alert('FILE TYPE NOT AUTHORIZED !')
         }
@@ -84,8 +94,7 @@ class Add extends Component {
         this.props.createItemState( this.props.reducer, fieldName, newImages )
     }
 
-
-    handleCreateItem = ()  => {
+    _handleCreateItem = ()  => {
         this.props.createItem(this.props.reducer, this.props.newData)
     }
     
@@ -109,30 +118,41 @@ class Add extends Component {
                         <div className={  classes.card }>
                         { limitUploadFile > 0 ? 
                             <ApxExpanded heading={locale.form.title.label_assets}>
-                                    <ApxUpload onChange={this.handleChange('doc')} docType="all" removeItem={this.handleRemoveItem} images={ newData.doc || [] } title={ locale.button.upload } limitUploadFile={limitUploadFile}/>
+                                    <ApxUpload onChange={ (event) => { this.handleChange(event) } } docType="all" removeItem={this.handleRemoveItem} images={ newData.doc || [] } title={ locale.button.upload } limitUploadFile={limitUploadFile}/>
                             </ApxExpanded> 
                             : null 
                         }
                     </div>
                     </form>
-                    <Button variant="contained" color="secondary"  style={{ float: 'right', marginTop: '24px',marginBottom: '24px', color: 'white' }} onClick={ this.handleCreateItem }>{ locale.button.save }</Button>
+                    <Button variant="contained" color="secondary" className={ classes.btnSave } onClick={ this._handleCreateItem }>{ locale.button.save }</Button>
                 </div>
           );
 
         return (
             <div className={ classes.root}>
-            <Button variant="contained" color="primary"  className={  classes.button } onClick={this.toggleDrawer('right', true)}>{ addBtnTitle }</Button>
+            <Hidden only={['xs', 'sm']}>
+                <Button variant="contained" color="secondary"  className={  classes.button } onClick={this.toggleDrawer('right', true)}>{ addBtnTitle }</Button>
+            </Hidden>
             <ApxRightDrawer toggleDrawer={ this.toggleDrawer } side="right" open={ this.state.right} title={ headerText }>
                     { 
                         isCreating ? 
-                        <div style={{ margin: 10 }}>
+                        <div className={ classes.loading }>
                             <Spinner /><br />
                             <p>{progress} %</p>
                             <LinearProgress color="secondary" variant="determinate" value={ progress  } />
-                        </div> : formDrawer }
+                        </div> 
+                        : formDrawer 
+                    }
             </ApxRightDrawer>
-            <Button variant="contained" color="primary"  style={{position: 'absolute', bottom: 10, right: 10, width: "80px", height: '80px', borderRadius: '50%', display:'block'}} onClick={this.toggleDrawer('right', true)}>+</Button>
-
+            <Hidden only={['lg', 'xl', 'md']}>
+                <ApxButtonCircle 
+                    handleAction={this.toggleDrawer}
+                    open={true}
+                    variant="contained"
+                    color="primary"
+                    side="right"
+                />
+            </Hidden>
             </div>
     )
   }

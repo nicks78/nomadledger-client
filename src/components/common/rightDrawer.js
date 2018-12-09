@@ -13,16 +13,30 @@ const styles = theme => ({
         minWidth: '300px',
         maxWidth: '450px',
     },
-    icon: {
-        color: 'red',
-        float: 'right',
+    titleWrap: {
+        display: 'flex', 
+        justifyContent: 'space-between'
     },
     span: {
         marginTop: 44,
         paddingLeft: 20,
+    },
+    icon: {
+        color: 'red',
+        float: 'right',
+    },
+    divider:{
+        marginTop: 10
     }
 })
 
+/**
+ * 
+ * @param side Which side to open (right/left)
+ * @param open true/false
+ * @param title Title of the drawer
+ * @func toggleDrawer handle open/close the drawer
+ */
 const RightDrawer = (props) => {
 
     const { classes, toggleDrawer, side, open, title } = props
@@ -30,17 +44,16 @@ const RightDrawer = (props) => {
     return (
         <Drawer anchor={side} open={ open } onClose={ toggleDrawer(side, false) }>
             <div className={ classes.drawer }>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div className={ classes.titleWrap }>
                 <div className={ classes.span }>
                     <Typography color="textPrimary" variant="title">{title}</Typography>
-                    
                 </div>
                 
                 <div>
                     <IconButton className={  classes.icon } onClick={ toggleDrawer(side, false) }><CloseIcon /></IconButton>
                 </div>
             </div>
-            <Divider style={{marginTop: 10}}/>
+            <Divider className={ classes.divider }/>
                 <div>
                     {props.children}
                 </div>

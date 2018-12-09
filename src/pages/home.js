@@ -26,41 +26,38 @@ class Home extends Component {
             <Grid container spacing={16}>
                 <Grid item xs={12} sm={6}>
                     <Paper elevation={1}>
-                    <Typography variant="display4" gutterBottom>
-                        Number clients display4
+                    <Typography component="h2" variant="h1" gutterBottom>
+                        h1. Gros titre
                     </Typography>
-                    <Typography variant="display3" gutterBottom>
-                        Number invoices display3
+                    <Typography variant="h2" gutterBottom>
+                        h2. Sous Titre
                     </Typography>
-                    <Typography variant="display2" gutterBottom>
-                        Number devis display2
+                    
+                    <Typography variant="subtitle1" gutterBottom>
+                        subtitle1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
                     </Typography>
-                    <Typography variant="display1" gutterBottom>
-                        Monthly graph with income display1
+                    <Typography variant="subtitle2" gutterBottom>
+                        subtitle2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
                     </Typography>
-                    <Typography variant="headline" gutterBottom>
-                        Headline
+                    <Typography variant="body1" gutterBottom>
+                        body1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
+                        unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam
+                        dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
                     </Typography>
-                    <Typography variant="title" gutterBottom>
-                        Title
+                    <Typography variant="button" gutterBottom>
+                        button text
                     </Typography>
-                    <Typography variant="subheading" gutterBottom>
-                        Subheading
+                    <Typography variant="caption" gutterBottom>
+                        caption text
                     </Typography>
-                    <Typography variant="body2" gutterBottom>
-                        Body 2
-                    </Typography>
-                    <Typography variant="body1" gutterBottom align="right">
-                        Body 1
-                    </Typography>
-                    <Typography variant="caption" gutterBottom align="center">
-                        Caption
+                    <Typography variant="overline" gutterBottom>
+                        Titre des banners
                     </Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <Paper elevation={1}>
-                        <Typography variant="headline" component="h3">
+                        <Typography variant="subtitle1">
                             This is a sheet of paper.
                         </Typography>
                         <Typography component="p">

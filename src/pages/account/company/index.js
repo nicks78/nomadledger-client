@@ -1,30 +1,38 @@
+//manager/src/pages/account/company/index.js
+
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {Spinner} from '../../../components/common'
-import { withStyles } from '@material-ui/core';
-import EditIcon from '@material-ui/icons/EditOutlined'
-import CheckIcon from '@material-ui/icons/CheckOutlined'
-import { getAccount, updateDocument, createState } from '../actions'
-import EditContactInfo from '../../contact/dashboard/editContactInfo'
+import { getAccount, updateDocument, createState, uploadFileToServer } from '../actions'
+import { withStyles } from '@material-ui/core'
+import {API_ENDPOINT} from '../../../utils/constant'
+
+import {Spinner, ApxAlert, ApxButtonEdit} from '../../../components/common'
+import UploadImg from '../../../lib/uploadImg'
+import {country} from '../../../utils/static_data'
+import EditInput from '../../../lib/editInput'
+import EditSelect from '../../../lib/editSelect'
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid'
-import { ApxUploadImg } from '../../../components/common';
-import IconButton from '@material-ui/core/IconButton'
 import Input from '@material-ui/core/Input';
-
 
 const styles = theme => ({
 
   divider: {
-    marginTop: 15,
-    marginBottom: 15,
+    clear: 'both',
+    // marginTop: 10,
+    marginBottom: 10,
   },
   icon: {
     float: 'right',
+    backgroundColor: '#008489',
+    
   },
   checkicon: {
     color: theme.palette.green
+  },
+  input: {
+    width: '80%'
   }
 })
 
@@ -59,13 +67,8 @@ class Company extends Component {
     this.props.updateDocument(this.state.reducer)
   }
 
-  onChange  = () => {
-
-  }
-
-
   render() {
-    const {company, uploadFile, progress, isCreating, locale, classes, isFetching} = this.props;
+    const {company, progress, isUploading, locale, classes, isFetching, isError, message} = this.props;
     const {showEdit} = this.state
 
 
@@ -73,31 +76,36 @@ class Company extends Component {
       return <Spinner />
     }
 
-
     return (
       <div>
         <Grid container spacing={16}>
             <Grid item xs={12} md={3}>
-                  <ApxUploadImg 
+                  <UploadImg 
+                    field="company_logo"
+                    _handleUploadFile={ this.props.uploadFileToServer }
+                    reducer={this.state.reducer}
                     progress={progress}
-                    isCreating={isCreating}
-                    uploadFile={uploadFile}
-                    image={company.company_logo}
+                    oldFile={company.company_logo}
+                    isUploading={isUploading}
+                    image={ <img src={`${API_ENDPOINT}image/view${ company.company_logo || '/default/default_logo.png' }`} alt="logo" width="100%" height={null} />}
                   />
+               
             </Grid>
 
             <Grid item  xs={12} md={9}>
-            <IconButton className={ classes.icon } color="secondary">
-                { showEdit ? <CheckIcon onClick={ this.updateDocument } className={ classes.checkicon}/> : <EditIcon color="primary" onClick={ this.openEdit } /> }
-              </IconButton>
-              <Typography variant="display1">
+              <ApxButtonEdit 
+                  updateDocument={this.updateDocument}
+                  openEdit={this.openEdit} 
+                  showEdit={showEdit}
+              />
+              <Typography variant="h1">
               { showEdit ? 
                 <Input
-                    defaultValue={company.company_name}
+                    defaultValue={ company.company_name}
                     placeholder={ locale.form.field.company_name }
                     onChange={this.handleFormEdit}
                     name="company_name"
-                    style={{width: '80%'}} 
+                    className={ classes.input }
                 />  : company.company_name }
               </Typography>
 
@@ -105,51 +113,62 @@ class Company extends Component {
 
                   <Grid item xs={12} md={5}>
 
+                  { isError && <ApxAlert message={message} /> }
 
-                  <EditContactInfo 
+                  <EditInput 
                       label={ locale.form.field.company_register }
-                      value={company.company_register}
-                      edit={showEdit}
+                      value={ company.company_register}
+                      showEdit={showEdit}
+                      locale={locale}
                       field="company_register"
-                      editProfile={this.handleFormEdit}
+                      handleAction={this.handleFormEdit}
                   />
-                  <EditContactInfo 
+                  <EditInput 
                       label={ locale.form.field.company_vat }
-                      value={company.company_vat}
-                      edit={showEdit}
+                      value={ company.company_vat}
+                      showEdit={showEdit}
+                      locale={locale}
                       field="company_vat"
-                      editProfile={this.handleFormEdit}
+                      handleAction={this.handleFormEdit}
                   />
-      <br />
+
       <Divider className={classes.divider}/>
-                  <EditContactInfo 
+                  <EditInput 
                       label={ locale.form.field.addresses_street }
-                      value={company.addresses_street}
-                      edit={showEdit}
+                      value={ company.addresses_street}
+                      showEdit={showEdit}
+                      locale={locale}
                       field="addresses_street"
-                      editProfile={this.handleFormEdit}
+                      handleAction={this.handleFormEdit}
                   />
-                  <EditContactInfo 
+                  <EditInput 
                       label={ locale.form.field.addresses_zip }
-                      value={company.addresses_zip}
-                      edit={showEdit}
+                      value={ company.addresses_zip}
+                      showEdit={showEdit}
+                      locale={locale}
                       field="addresses_zip"
-                      editProfile={this.handleFormEdit}
+                      handleAction={this.handleFormEdit}
                   />
-                  <EditContactInfo 
+                  <EditInput 
                       label={ locale.form.field.addresses_city }
-                      value={company.addresses_city}
-                      edit={showEdit}
+                      value={ company.addresses_city}
+                      showEdit={showEdit}
+                      locale={locale}
                       field="addresses_city"
-                      editProfile={this.handleFormEdit}
+                      handleAction={this.handleFormEdit}
                   />
-                  <EditContactInfo 
-                      label={ locale.form.field.addresses_country }
-                      value={company.addresses_country}
-                      edit={showEdit}
-                      field="addresses_country"
-                      editProfile={this.handleFormEdit}
-                  />
+
+                  <EditSelect 
+                    arrayField={country}
+                    field="addresses_country"
+                    helperText="select_country_code"
+                    handleAction={ this.handleFormEdit }
+                    locale={locale}
+                    showEdit={showEdit}
+                    label={locale.form.field.addresses_country }
+                    value={ company.addresses_country[localStorage.getItem("locale")]}
+                />
+              
 
                   </Grid>
         
@@ -167,8 +186,9 @@ const mapStateToProps = (state) => {
     return {
         isFetching: state.account.company.isFetching,
         isError: state.account.company.isError,
-        tmp_state: state.account.company.tmp_state,
+        message: state.account.company.message,
         receivedAt: state.account.company.receivedAt,
+        isUploading: state.account.company.isUploading,
         locale: state.locale.locale,
         company: state.account.company.item, 
         progress: state.account.company.progress
@@ -177,4 +197,4 @@ const mapStateToProps = (state) => {
 
 const styledCompany = withStyles(styles)(Company);
 
-export default connect(mapStateToProps, { getAccount, updateDocument, createState })(styledCompany);
+export default connect(mapStateToProps, { getAccount, updateDocument, createState, uploadFileToServer })(styledCompany);

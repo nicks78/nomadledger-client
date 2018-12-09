@@ -19,7 +19,11 @@ export const uploadFileToServer = ( actionType, file, id, field, oldFile ) => {
 
     return (dispatch) => {
 
-        var oldfile = oldFile.replace('/docs/', '').replace('/images/', '')
+        var oldfile = '';
+        if(oldFile){
+            oldfile = oldFile.replace('/docs/', '').replace('/images/', '')
+        }
+
         // Set action name
         var url_path = actionType.toLowerCase() + '/upload?id=' +id+ '&field=' + field +'&oldfile='+ oldfile
 

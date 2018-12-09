@@ -26,7 +26,7 @@ const Styles = theme => ({
         fontSize: '10%!important'
     },
     active: {
-        backgroundColor: 'rgba(90,90,90, 1)',
+        backgroundColor: 'rgba(0, 0, 0, 0.08)',
         // borderBottom: '1px solid #cecece8a',
         // borderTop: '1px solid #cecece8a',
         '& span': {

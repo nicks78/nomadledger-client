@@ -13,8 +13,6 @@ const styles = theme => ({
         marginBottom: theme.margin.unit
     },
     textField: {
-        // marginLeft: '10px',
-        // marginRight: '10px',
         width: '100%',
         marginTop: '0px',
         float: 'left',
@@ -29,11 +27,12 @@ const Form = (props) => {
             {
                 formField.map((cp, index) => {
                     if (cp.type === "select") {
+
                         return <Grid item xs={xs} sm={md} key={index}>
                                     <ApxSelect 
                                         arrayField={ cp.selections } 
                                         field={cp.name} 
-                                        value={ objData[cp.name] || '' } 
+                                        value={ objData[cp.name] && objData[cp.name][localStorage.getItem('locale')]  } 
                                         handleAction={  formHandler } 
                                         locale={ locale }
                                         helperText={ cp.helperText }/>
@@ -44,10 +43,11 @@ const Form = (props) => {
                                         id={cp.name}
                                         multiline
                                         rows="4"
+                                        name={cp.name}
                                         label={locale.form.field[cp.name]}
                                         className={ classes.textField}
                                         value={objData[cp.name] || ''}
-                                        onChange={ formHandler(cp.name)}
+                                        onChange={ formHandler }
                                         margin="normal"
                                         />
                                 </Grid>
@@ -57,10 +57,11 @@ const Form = (props) => {
                                         id={cp.name}
                                         required={ cp.required || false }
                                         type={cp.type}
+                                        name={cp.name}
                                         label={locale.form.field[cp.name]}
                                         className={ classes.textField}
                                         value={objData[cp.name] || ''}
-                                        onChange={ formHandler(cp.name)}
+                                        onChange={ formHandler }
                                         margin="normal"
                                     /></Grid>
                     }

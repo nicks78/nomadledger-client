@@ -24,7 +24,6 @@ export const updateItem = ( actionType, id ) => {
         axios.post(`${API_ENDPOINT}${apiCall(actionType).endPoints.put}`,
             {data: state},
             { headers: {
-                    'x-access-token': localStorage.getItem('token'),
                     'Content-Type': 'application/json',
             }
         })

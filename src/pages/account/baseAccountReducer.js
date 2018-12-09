@@ -29,6 +29,7 @@ const baseAccountReducer = (state = new BaseState(), action) => {
             return {
                 ...state,
                 isFetching: action.isFetching,
+                isUploading: action.isUploading, 
                 message: action.message,
                 receivedAt: action.receivedAt, 
                 isError: action.isError,
@@ -37,12 +38,27 @@ const baseAccountReducer = (state = new BaseState(), action) => {
             return {
                 ...state,
                 item: action.item,
+                isError: false,
+                isUploading: action.isUploading, 
+                progress: 0,
                 isFetching: action.isFetching,
             }
         case `STATE`: 
             return {
                 ...state,
-                tmp_state: { ...state.tmp_state, [ action.payload.fieldName ] : action.payload.value }
+                tmp_state: { ...state.tmp_state, [ action.payload.fieldName ] : action.payload.value },
+                item: { ...state.item, [ action.payload.fieldName ] : action.payload.value }
+            }
+        case `PROGRESS`:
+            return {
+                ...state,
+                progress: action.value,
+            }
+
+        case `UPLOADING`:
+            return {
+                ...state,
+                isUploading: action.isUploading,
             }
         case `RESET_STATE`: 
             return new BaseState()

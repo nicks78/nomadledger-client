@@ -1,35 +1,53 @@
+//manager/src/pages/account/user/index.js
+
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {API_ENDPOINT} from '../../../utils/constant'
+import {phone_code} from '../../../utils/static_data'
 import { withStyles } from '@material-ui/core';
-import {Spinner} from '../../../components/common'
-import { getAccount } from '../actions'
-// import EditContactInfo from '../../contact/dashboard/editContactInfo'
-import Typography from '@material-ui/core/Typography';
+import UploadImg from '../../../lib/uploadImg'
+import {Spinner, ApxTitleBar, ApxAlert} from '../../../components/common'
+import { getAccount, uploadFileToServer , createState, updateDocument, updatePassword} from '../actions'
 import Avatar from '@material-ui/core/Avatar';
+import Grid from '@material-ui/core/Grid'
+import EditInput from '../../../lib/editInput'
+import EditSelect from '../../../lib/editSelect'
+import Divider from '@material-ui/core/Divider';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+
 
 const styles = theme => ({
-
-  banner: {
-    backgroundColor: theme.palette.primary.light,
-    padding: 15,
-    borderRadius: 4
-  },
-  header_01: {
-    color: 'white'
+  root: {
+    flexGrow: 1,
   },
   avatar: {
     width: 60,
     height: 60,
+    margin: '0 auto',
+    borderRadius: '50%',
+    objectFit: 'cover'
   },
   wrapper: {
     padding: 24
+  },
+  divider: {
+    clear: 'both',
+    marginTop: 24,
+    marginBottom: 24,
   }
-
 })
 
 
 class User extends Component {
+
+    state = {
+      reducer: "USER",
+      showEdit: false,
+      password: '',
+      password_confirm: ''
+    }
 
   componentDidMount(){
     if(this.props.receivedAt === null ){
@@ -37,35 +55,158 @@ class User extends Component {
     }
   }
 
+  openEdit = () => {
+    console.log('YEAH')
+    this.setState({showEdit: !this.state.showEdit})
+  }
 
+  handleFormEdit  = event => {
+    var name = event.target.name;
+    var value = event.target.value
+
+    // Temporary save data into redux store
+    this.props.createState(this.state.reducer, name, value)
+  }
+  updateDocument = () => {
+    this.setState({showEdit: false})
+    this.props.updateDocument(this.state.reducer)
+  }
+
+  handlePassword = (event) => {
+    var name = event.target.name;
+    var value = event.target.value
+
+    this.setState({ [name] : value })
+  }
+
+  _updatePassword = () => {
+
+    if(this.state.password === this.state.password_confirm){
+        this.props.updatePassword(this.state.password )
+    }else{
+      alert( this.props.locale.message.alert_password_not_match )
+    }
+  }
 
   render() {
-    const {  user, locale, classes, isFetching } = this.props;
+    const {  user, locale, classes, isFetching, isUploading, progress, isError, message } = this.props;
+    const {showEdit, password, password_confirm} = this.state
 
     if( isFetching  || user === null ){
       return <Spinner />
     }
-
+console.log(showEdit)
     return (
       <div>
-          <div className={ classes.banner}>
-            <Typography variant="subheading" className={ classes.header_01}>
-                { locale.page.header_01 }
-            </Typography>
-          </div>
+          <ApxTitleBar 
+            text={locale.page.header_01 }
+            showEdit={showEdit}
+            openAction={ this.openEdit }
+            editAction={ this.updateDocument }
+          />
+
+        { isError && <ApxAlert message={message} /> }
 
           <div className={ classes.wrapper }>
-            <Avatar
-                component="p"
-                onClick={ this.handleMenu }
-                alt="Nicolas"
-                src={`${API_ENDPOINT}image/view${ user.avatar || '/default/default_avatar.png' }`}
-                className={ classes.avatar }
-            />
+          <Grid container className={classes.root} spacing={16}>
+                <Grid item  xs={12} md={2}>
+                <UploadImg 
+                    field="avatar"
+                    _handleUploadFile={ this.props.uploadFileToServer }
+                    reducer={this.state.reducer}
+                    progress={progress}
+                    oldFile={user.avatar}
+                    isUploading={isUploading}
+                    image={ 
+                      <Avatar
+                        component="p"
+                        alt="Nicolas"
+                        src={`${API_ENDPOINT}image/view${ user.avatar || '/default/default_avatar.png' }`}
+                        className={ classes.avatar }
+                    />
+                    }
+                  />
+                </Grid>
 
+                <Grid item xs={12} md={10}>
+                      <EditInput 
+                          label={ locale.form.field.firstname }
+                          value={  user.firstname }
+                          showEdit={showEdit}
+                          locale={locale}
+                          field="firstname"
+                          handleAction={this.handleFormEdit}
+                      />
+                      <EditInput 
+                          label={ locale.form.field.lastname }
+                          value={ user.lastname }
+                          showEdit={showEdit}
+                          locale={locale}
+                          field="lastname"
+                          handleAction={this.handleFormEdit}
+                      />
+                      <EditSelect 
+                          arrayField={phone_code}
+                          field="phone_code"
+                          helperText="select_phone_code"
+                          handleAction={ this.handleFormEdit }
+                          locale={locale}
+                          showEdit={showEdit}
+                          label={locale.form.field.phone_code }
+                          value={ user.phone_code[localStorage.getItem("locale")]}
+                      />
+                      <EditInput 
+                          label={ locale.form.field.phone }
+                          value={ user.phone }
+                          showEdit={showEdit}
+                          locale={locale}
+                          field="phone"
+                          handleAction={this.handleFormEdit}
+                      />
+                      <EditInput 
+                          html_tag="a"
+                          href={`mailto:${user.email}`}
+                          label={ locale.form.field.email }
+                          value={ user.email }
+                          showEdit={showEdit}
+                          locale={locale}
+                          field="email"
+                          handleAction={this.handleFormEdit}
+                      />
+
+
+                    <div className={classes.divider} >
+                      <Divider />
+                    </div>
+
+
+                  <form className={classes.container} autoComplete="off">
+                    <TextField 
+                          id="password"
+                          label={locale.form.field.password}
+                          className={classes.textField}
+                          value={password}
+                          name="password"
+                          onChange={ this.handlePassword  }
+                          margin="normal"
+                      />
+                      <br />
+                      <TextField 
+                          id="password_confirm"
+                          label={locale.form.field.password_confirm}
+                          className={classes.textField}
+                          value={password_confirm}
+                          name="password_confirm"
+                          onChange={ this.handlePassword  }
+                          margin="normal"
+                      />
+                        <br />
+                      <Button color="secondary" variant="contained" onClick={ this._updatePassword }>Save new password</Button>
+                  
+                  </form>    
+                </Grid>
+          </Grid>
           </div>
-
-          
       </div>
     )
   }
@@ -73,17 +214,19 @@ class User extends Component {
 
 
 const mapStateToProps = (state) => {
-
+  
       return {
           isFetching: state.account.user.isFetching,
           isError: state.account.user.isError,
+          message: state.account.user.message,
           receivedAt: state.account.user.receivedAt,
           locale: state.locale.locale,
           user: state.account.user.item, 
-          progress: state.account.user.progress
+          isUploading: state.account.user.isUploading, 
+          progress: state.account.user.progress,
       }
   }
   
-  const styledUser = withStyles(styles)(User);
+  const styledUser = withStyles(styles,  { withTheme: true })(User);
   
-  export default connect(mapStateToProps, { getAccount })(styledUser);
+  export default connect(mapStateToProps, { getAccount, uploadFileToServer, createState, updateDocument, updatePassword })(styledUser);

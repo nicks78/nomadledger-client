@@ -29,7 +29,8 @@ const styles = theme => ({
 
 const  Upload = (props) => {
 
-    const {classes, images, limitUploadFile, removeItem, docType } = props
+    const {classes, images, limitUploadFile, removeItem, docType } = props;
+    const idInput =  Date.now().toString()
 
     return (
     
@@ -55,11 +56,12 @@ const  Upload = (props) => {
                 <input
                     accept={docType}
                     className={classes.input}
-                    id="flat-button-file"
+                    id={idInput}
+                    name="doc"
                     onChange={ props.onChange }
                     type="file"
                 />
-                <label htmlFor="flat-button-file">
+                <label htmlFor={idInput}>
                     <Button variant="outlined" color="secondary" component="span" className={classes.button}>
                         {props.title}
                     </Button>

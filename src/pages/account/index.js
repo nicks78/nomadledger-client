@@ -4,9 +4,9 @@ import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
-import SettingsIcon from '@material-ui/icons/SettingsOutlined'
 import User from './user'
 import Company from './company'
+import Setting from './setting'
 
 
 
@@ -51,7 +51,7 @@ class Account extends Component {
           </Grid>
 
           
-          <Grid container spacing={16}> 
+          <Grid container spacing={24}> 
                 <Grid item xs={12} md={8}>
                   <Paper className={classes.paper} elevation={1}>
                     <User /> 
@@ -60,7 +60,7 @@ class Account extends Component {
 
               <Grid item xs={12} md={4}>
                   <Paper className={classes.paper} >
-                    <SettingsIcon className={ classes.icon } />Setting
+                    <Setting/>
                   </Paper>
               </Grid>
           </Grid>

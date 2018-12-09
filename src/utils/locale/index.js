@@ -68,7 +68,8 @@ const Locale = {
                 contact: {
                     table: ['Société', 'Téléphone', 'Email']
                 },
-                header_01: "Information profil"
+                header_01: "Information profil",
+                header_02: "Paramètres société"
             },
             text: {
                 address: "Adresse",
@@ -88,10 +89,14 @@ const Locale = {
                     label_service: "Informations service",
                     label_expense: "Informations depense",
                     label_provider: "Informations prestataire",
-                    label_assets: "Photo / Documents",                    
+                    label_assets: "Photo / Documents",   
+                    label_tax: "Année fiscale",
+                    label_start_tax: "Debut",
+                    label_end_tax: "Fin",              
                 },
                 field: {
                     password: 'Mot de passe',
+                    password_confirm: 'Confirme mot de passe',
                     firstname: "Prénom",
                     lastname: "Nom",
                     company_register: "Siret",
@@ -99,6 +104,7 @@ const Locale = {
                     company_name: "Nom de société",
                     company_line_code: "Code pays",
                     company_line: "Ligne standard",
+                    company_type: "Type de société",  
                     phone_code: 'Code pays',
                     phone: "Téléphone",
                     email: "Couriel",
@@ -109,6 +115,7 @@ const Locale = {
                     addresses_zip: "Code postal", 
                     addresses_city: "Ville", 
                     addresses_country: "Pays", 
+                    num_format: "Format des chiffres",
 
                     product_name: "Nom du produit",
 
@@ -125,7 +132,9 @@ const Locale = {
                 },
                 helperText: {
                     select_phone_code: "Sélectionner le code pays",
-                    select_country_code: "Sélectionner pays"
+                    select_country_code: "Sélectionner pays",
+                    select_service_type: "Sélectionner le type de service",
+                    select_num_format: "Selectionner format des chiffres"
                 }
             },
             message: {
@@ -141,7 +150,9 @@ const Locale = {
                 error_500: "mauvaise requete",
                 error_400: "error 400",
                 error_wrong_token: "error wrong token",
-                error_no_token: "error no token"
+                error_no_token: "error no token",
+
+                alert_password_not_match: "Mots de passe ne correspondent pas"
             }
         },
     en: 
@@ -209,7 +220,8 @@ const Locale = {
                 contact: {
                     table: ['Société', 'Téléphone', 'Email']
                 },
-                header_01: "Information profile"
+                header_01: "Information profile",
+                header_02: "Company setting"
             },
             text: {
                 address: "Address",
@@ -229,9 +241,13 @@ const Locale = {
                     label_service: "Service details",
                     label_expense: "Expense detail",
                     label_provider: "Service provider detail",
+                    label_tax: "Tax year",
+                    label_start_tax: "Start",
+                    label_end_tax: "End",
                 },
                 field: {
                     password: 'Password',
+                    password_confirm: 'Confirm password',
                     firstname: "Firstname",
                     lastname: "Lastname",
                     company_name: "Company name",
@@ -239,12 +255,14 @@ const Locale = {
                     company_vat: "VAT",
                     company_line_code: "Country code",
                     company_line: "Land line",
+                    company_type: "Company type", 
                     addresses_street: "Address", 
                     addresses_zip: "Zip", 
                     addresses_city: "City", 
                     addresses_country: "Country", 
                     phone_code: 'Country code',
                     phone: "Phone",
+                    num_format: "Number format",
                     email: "Email",
                     company: "Company",
                     register: "Register number",
@@ -262,7 +280,9 @@ const Locale = {
                 },
                 helperText: {
                     select_phone_code: "Please select country code",
-                    select_country_code: "Please select a country"
+                    select_country_code: "Please select a country",
+                    select_service_type: "Select service type",
+                    select_num_format: "Select num format"
                 }
             },
             message: {
@@ -278,7 +298,9 @@ const Locale = {
                 error_500: "bad request",
                 error_400: "error 400",
                 error_wrong_token: "error wrong token",
-                error_no_token: "error no token"
+                error_no_token: "error no token",
+
+                alert_password_not_match: "Password not match"
             }
         },
 }

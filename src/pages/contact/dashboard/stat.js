@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper'
 class StatContact extends Component {
   render() {
     return (
-        <Grid container spacing={8}>
+        <Grid container spacing={24}>
         <Grid item xs={12} md={4}>
           <Paper style={{padding: 10, backgroundColor: '#26a69a'}} elevation={1}>
               <Typography style={{ color: 'white'}} variant="body1" component="h3">
