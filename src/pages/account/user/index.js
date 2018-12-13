@@ -3,18 +3,17 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {API_ENDPOINT} from '../../../utils/constant'
-import {phone_code} from '../../../utils/static_data'
 import { withStyles } from '@material-ui/core';
 import UploadImg from '../../../lib/uploadImg'
 import {Spinner, ApxTitleBar, ApxAlert} from '../../../components/common'
-import { getAccount, uploadFileToServer , createState, updateDocument, updatePassword} from '../actions'
+import { uploadFileToServer , updateDocument, updatePassword} from '../actions'
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid'
 import EditInput from '../../../lib/editInput'
-import EditSelect from '../../../lib/editSelect'
 import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Phone from '../../../lib/phone'
 
 
 
@@ -30,7 +29,7 @@ const styles = theme => ({
     objectFit: 'cover'
   },
   wrapper: {
-    padding: 24
+    padding: 0
   },
   divider: {
     clear: 'both',
@@ -49,23 +48,8 @@ class User extends Component {
       password_confirm: ''
     }
 
-  componentDidMount(){
-    if(this.props.receivedAt === null ){
-        this.props.getAccount("USER")
-    }
-  }
-
   openEdit = () => {
-    console.log('YEAH')
     this.setState({showEdit: !this.state.showEdit})
-  }
-
-  handleFormEdit  = event => {
-    var name = event.target.name;
-    var value = event.target.value
-
-    // Temporary save data into redux store
-    this.props.createState(this.state.reducer, name, value)
   }
   updateDocument = () => {
     this.setState({showEdit: false})
@@ -90,12 +74,12 @@ class User extends Component {
 
   render() {
     const {  user, locale, classes, isFetching, isUploading, progress, isError, message } = this.props;
-    const {showEdit, password, password_confirm} = this.state
+    const {showEdit, password, password_confirm, reducer} = this.state
 
     if( isFetching  || user === null ){
       return <Spinner />
     }
-console.log(showEdit)
+
     return (
       <div>
           <ApxTitleBar 
@@ -109,7 +93,7 @@ console.log(showEdit)
 
           <div className={ classes.wrapper }>
           <Grid container className={classes.root} spacing={16}>
-                <Grid item  xs={12} md={2}>
+                <Grid item  xs={12}>
                 <UploadImg 
                     field="avatar"
                     _handleUploadFile={ this.props.uploadFileToServer }
@@ -128,14 +112,14 @@ console.log(showEdit)
                   />
                 </Grid>
 
-                <Grid item xs={12} md={10}>
+                <Grid item xs={12}>
                       <EditInput 
                           label={ locale.form.field.firstname }
                           value={  user.firstname }
                           showEdit={showEdit}
                           locale={locale}
                           field="firstname"
-                          handleAction={this.handleFormEdit}
+                          handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
                       />
                       <EditInput 
                           label={ locale.form.field.lastname }
@@ -143,26 +127,22 @@ console.log(showEdit)
                           showEdit={showEdit}
                           locale={locale}
                           field="lastname"
-                          handleAction={this.handleFormEdit}
+                          handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
                       />
-                      <EditSelect 
-                          arrayField={phone_code}
-                          field="phone_code"
-                          helperText="select_phone_code"
-                          handleAction={ this.handleFormEdit }
-                          locale={locale}
-                          showEdit={showEdit}
-                          label={locale.form.field.phone_code }
-                          value={ user.phone_code[localStorage.getItem("locale")]}
+                      <Phone 
+                        locale={locale} 
+                        showEdit={showEdit}
+                        fieldCode="phone_code"
+                        field="phone"
+                        handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
+                        helperText="select_phone_code"
+                        labelCode={locale.form.field.phone_code }
+                        label={ locale.form.field.phone }
+                        valueCode={user.phone_code}
+                        value={user.phone}
+                        reducer="USER"
                       />
-                      <EditInput 
-                          label={ locale.form.field.phone }
-                          value={ user.phone }
-                          showEdit={showEdit}
-                          locale={locale}
-                          field="phone"
-                          handleAction={this.handleFormEdit}
-                      />
+                      
                       <EditInput 
                           html_tag="a"
                           href={`mailto:${user.email}`}
@@ -171,7 +151,7 @@ console.log(showEdit)
                           showEdit={showEdit}
                           locale={locale}
                           field="email"
-                          handleAction={this.handleFormEdit}
+                          handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
                       />
 
 
@@ -229,4 +209,4 @@ const mapStateToProps = (state) => {
   
   const styledUser = withStyles(styles,  { withTheme: true })(User);
   
-  export default connect(mapStateToProps, { getAccount, uploadFileToServer, createState, updateDocument, updatePassword })(styledUser);
+  export default connect(mapStateToProps, {  uploadFileToServer, updateDocument, updatePassword })(styledUser);

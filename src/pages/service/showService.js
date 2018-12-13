@@ -7,7 +7,7 @@ const ShowService = (props) => {
     return (
       <div>
         test
-          { props.service.service_name}
+          { props.service_name}
       </div>
     )
 }

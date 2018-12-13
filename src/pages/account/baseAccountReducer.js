@@ -40,8 +40,10 @@ const baseAccountReducer = (state = new BaseState(), action) => {
                 item: action.item,
                 isError: false,
                 isUploading: action.isUploading, 
+                receivedAt: action.receivedAt,
                 progress: 0,
                 isFetching: action.isFetching,
+                tmp_state: {}
             }
         case `STATE`: 
             return {

@@ -138,7 +138,7 @@ class Layout extends React.Component {
                     component="span"
                     onClick={ this.handleMenu }
                     alt="Nicolas"
-                    src={`${API_ENDPOINT}image/view${'/default/default_avatar.png' }`}
+                    src={`${API_ENDPOINT}image/view${ localStorage.getItem('avatar') ||  '/default/default_avatar.png' }`}
                     className={ classes.avatar }
                 />
                 <Menu

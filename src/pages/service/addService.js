@@ -24,7 +24,7 @@ class AddService extends React.Component {
   }
 
   render(){
-    const {locale, newData} = this.props
+    const {locale, newData, category} = this.props
 
     const fields = [
       {
@@ -32,10 +32,10 @@ class AddService extends React.Component {
         label: locale.form.title.label_service,
         section_1: false,
         fields: [
-            { name: 'service_name',type:"text" },
-            { name: 'service_description',type:"text"},
+            { name: 'service_name', type:"text" },
             { name: 'service_price', type:"text"},
-            { name: 'service_note', type:"longtext", multiline: true, rowsMax:"4" },
+            { name: 'service_category', type:"select", selections: category, helperText: "select_category" },
+            { name: 'service_description', type:"longtext", multiline: true, rowsMax:"4" },
           ]
       },
     ]

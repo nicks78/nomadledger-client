@@ -25,10 +25,10 @@ const Banner = (props) => {
 
   return (
     <div className={ classes.banner }>
-            <Typography variant="display3" className={ classes.title }>
+            <Typography variant="h1" className={ classes.title }>
                     APX-COMPTA
             </Typography>
-            <Typography variant="display1" className={ classes.subtitle }>
+            <Typography variant="h2" className={ classes.subtitle }>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt.
             </Typography>
     </div>

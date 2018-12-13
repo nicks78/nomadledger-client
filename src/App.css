@@ -31,6 +31,7 @@ a:hover {
   position: relative;
   color: #ef6c00;
   padding-bottom: 2px;
+  cursor: pointer;
 }
 
 .link:after {

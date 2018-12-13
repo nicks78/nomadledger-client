@@ -35,7 +35,7 @@ const Select = (props) => {
         }
         return props.handleAction(event)   
     }
-
+ 
     return (
       <div>
           <TextField
@@ -55,6 +55,7 @@ const Select = (props) => {
             margin="normal"
             >
             {arrayField.map((option, index) => (
+                
                 <MenuItem key={index} value={ option[localStorage.getItem('locale')]}>
                     {option[props.locale.lang]} {option.value && '(' + option.value +')'}
                 </MenuItem>

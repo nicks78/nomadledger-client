@@ -96,7 +96,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
+
     return {
         message: state.auth.message,
         isFetching: state.auth.isFetching,

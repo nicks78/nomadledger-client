@@ -8,7 +8,7 @@ import {Divider, Typography, IconButton} from '@material-ui/core';
 
 const styles = theme => ({
     drawer: {
-        backgroundColor: theme.palette.grey.light,
+        backgroundColor: '#fff',
         height: '100%',
         minWidth: '300px',
         maxWidth: '450px',
@@ -46,7 +46,7 @@ const RightDrawer = (props) => {
             <div className={ classes.drawer }>
             <div className={ classes.titleWrap }>
                 <div className={ classes.span }>
-                    <Typography color="textPrimary" variant="title">{title}</Typography>
+                    <Typography color="textPrimary" variant="overline">{title}</Typography>
                 </div>
                 
                 <div>

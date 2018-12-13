@@ -24,11 +24,7 @@ export function getAccount(actionType){
         return response.data
     }) 
     .then( res => {
-        if(res.success){
-          dispatch(setAccount( actionType, res.payload ))  
-        }else{
-          dispatch(requestFailed(actionType))
-        }
+        dispatch(setAccount( actionType, res.payload ))  
     })
     .catch(function (error) {
       // handle error
@@ -47,13 +43,9 @@ export function updateDocument(actionType){
 
     return (dispatch, getState) => {
   
-    //   dispatch(requestData(actionType))
-
       var data = getState().account[actionType.toLowerCase()].tmp_state;
 
-      console.log(getState().account[actionType.toLowerCase()].tmp_state)
-
-        // if(Object.keys(data).length > 0 ){
+        if(Object.keys(data).length > 0 ){
         
             axios.post(`${API_ENDPOINT}account/update/infos/${actionType.toLowerCase()}`, {
                     data: data
@@ -69,9 +61,39 @@ export function updateDocument(actionType){
                 var message = error.response ? error.response.data.message : 'error_500'
                 dispatch(requestFailed(actionType, message));
             })   
-        // }else{
-        //     return null
-        // }       
+        }else{
+            return null
+        }       
+    }
+}
+
+// PUSH - PULL  DOCUMENT
+/**
+ * @param actionType 
+ * 
+ */
+export function pushToDocument(actionType, data, apiRoute ){
+
+    return (dispatch) => {
+        if(Object.keys(data).length > 0 ){
+        
+            axios.post(`${API_ENDPOINT}${apiRoute}${actionType.toLowerCase()}`, {
+                    data: data
+            })
+            .then(function (response) { 
+                return response.data
+            }) 
+            .then( res => {
+                    dispatch(setAccount( actionType, res.payload ))  
+            })
+            .catch(function (error) {
+                // handle error
+                var message = error.response ? error.response.data.message : 'error_500'
+                dispatch(requestFailed(actionType, message));
+            })   
+        }else{
+            return null
+        }       
     }
 }
 
@@ -190,8 +212,6 @@ export function uploading ( actionType ){
 }
   
 
-
-
 function requestData(actionType) {
     return {
         type: `REQUEST`,
@@ -201,7 +221,7 @@ function requestData(actionType) {
 }
 
 
-function setAccount( actionType, item) {
+export function setAccount( actionType, item) {
 
     return {
         type: `GET`,

@@ -27,7 +27,7 @@ const Form = (props) => {
             {
                 formField.map((cp, index) => {
                     if (cp.type === "select") {
-
+                        
                         return <Grid item xs={xs} sm={md} key={index}>
                                     <ApxSelect 
                                         arrayField={ cp.selections } 

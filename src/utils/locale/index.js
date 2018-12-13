@@ -50,6 +50,10 @@ const Locale = {
                 name: "Tache",
                 url: "tache"
             },
+            archive:{
+                name: "Archive",
+                url: "archive"
+            },
             button: {
                 add_contact: "Ajouter un contact",
                 add_product: "Ajouter un produit",
@@ -69,12 +73,14 @@ const Locale = {
                     table: ['Société', 'Téléphone', 'Email']
                 },
                 header_01: "Information profil",
-                header_02: "Paramètres société"
+                header_02: "Paramètres société",
+                service: "Vos services"
             },
             text: {
                 address: "Adresse",
                 company: "Société",
-                represented_by: "Représente par"
+                represented_by: "Représente par",
+                selected: "sélectionner"
             },
             form: {
                 title: {
@@ -89,7 +95,11 @@ const Locale = {
                     label_service: "Informations service",
                     label_expense: "Informations depense",
                     label_provider: "Informations prestataire",
-                    label_assets: "Photo / Documents",   
+                    label_assets: "Photo / Documents",  
+                    label_comp_info: "Compagnie information",
+                    label_contact_info: "Contact information",
+                    label_comp_address: "Compagnie adresse", 
+                    label_other: "Autres",
                     label_tax: "Année fiscale",
                     label_start_tax: "Debut",
                     label_end_tax: "Fin",              
@@ -118,12 +128,20 @@ const Locale = {
                     num_format: "Format des chiffres",
 
                     product_name: "Nom du produit",
+                    product_description: "Déscription",
+                    product_category: "Catégorie",
+                    product_price: "Prix",
 
 
                     service_name: "Nom du service",
                     service_description: "Déscription",
                     service_price: "Prix",
+                    service_category: "Catégorie",
                     service_note: "Information interne",
+
+                    category: "Ajouter une Categorie",
+                    add_vat: "Taux TVA",
+                    name_vat: "Nom de TVA",
 
                     expense_name: "Nom de la depense",
                     description: "Description",
@@ -134,7 +152,8 @@ const Locale = {
                     select_phone_code: "Sélectionner le code pays",
                     select_country_code: "Sélectionner pays",
                     select_service_type: "Sélectionner le type de service",
-                    select_num_format: "Selectionner format des chiffres"
+                    select_num_format: "Selectionner format des chiffres",
+                    select_category: "Sélectionner une catégorie"
                 }
             },
             message: {
@@ -153,6 +172,29 @@ const Locale = {
                 error_no_token: "error no token",
 
                 alert_password_not_match: "Mots de passe ne correspondent pas"
+            },
+            table: {
+                title_service: "Service",
+                title_contact: "Contact",
+                title_invoice: "Facture",
+                title_quote: "Devis",
+                title_payback: "Avoir",
+                price: "Prix",
+                description: "Déscription",
+                category: "Catégorie",
+                service_name: "Nom du service",
+                product_name: "Nom du produit",
+                total: "Total",
+                vat: "TVA",
+                quantity: "Quantité",
+                label_rows_per_page: "Colonnes par page:",
+                full_name: "Nom complet",
+                phone: "Téléphone",
+                email: "Couriel",
+                company: "Société",
+                of: "à"
+
+
             }
         },
     en: 
@@ -202,6 +244,10 @@ const Locale = {
                 name: "Task",
                 url: "tache"
             },
+            archive:{
+                name: "Archive",
+                url: "archive"
+            },
             button: {
                 add_contact: "Add customer",
                 add_product: "Add product",
@@ -221,11 +267,14 @@ const Locale = {
                     table: ['Société', 'Téléphone', 'Email']
                 },
                 header_01: "Information profile",
-                header_02: "Company setting"
+                header_02: "Company setting",
+                service: "Your services"
             },
             text: {
                 address: "Address",
-                represented_by: "Represented by"
+                company: "Company",
+                represented_by: "Represented by",
+                selected: "selected"
             },
             form: {
                 title: {
@@ -241,6 +290,10 @@ const Locale = {
                     label_service: "Service details",
                     label_expense: "Expense detail",
                     label_provider: "Service provider detail",
+                    label_comp_info: "Compagnie information",
+                    label_contact_info: "Contact information",
+                    label_comp_address: "Compagnie adresse", 
+                    label_other: "Others",
                     label_tax: "Tax year",
                     label_start_tax: "Start",
                     label_end_tax: "End",
@@ -267,12 +320,22 @@ const Locale = {
                     company: "Company",
                     register: "Register number",
                     vat: 'VAT',
+
                     product_name: "Product name",
+                    product_description: "Description",
+                    product_category: "Catégory",
+                    product_price: "Price",
+
+
                     service_name: "Service name",
                     service_description: "Description",
                     service_price: "Price",
+                    service_category: "Category",
                     service_note: "Sales informations",
 
+                    category: "Add category",
+                    add_vat: "Value VAT",
+                    name_vat: "VAT name",
 
                     expense_name: "Expense name",
                     description: "Description",
@@ -282,7 +345,8 @@ const Locale = {
                     select_phone_code: "Please select country code",
                     select_country_code: "Please select a country",
                     select_service_type: "Select service type",
-                    select_num_format: "Select num format"
+                    select_num_format: "Select num format",
+                    select_category: "Select a category"
                 }
             },
             message: {
@@ -301,6 +365,28 @@ const Locale = {
                 error_no_token: "error no token",
 
                 alert_password_not_match: "Password not match"
+            },
+            table: {
+                title_service: "Service",
+                title_contact: "Contact",
+                title_invoice: "Invoice",
+                title_quote: "Quote",
+                title_payback: "Payback",
+                price: "Price",
+                description: "Description",
+                category: "Category",
+                service_name: "Service name",
+                product_name: "Product name",
+                total: "Total",
+                vat: "VAT",
+                quantity: "Quantity",
+                label_rows_per_page: "Rows per page:",
+                full_name: "Full name",
+                phone: "Phone",
+                email: "Email",
+                company: "Company",
+                of: "of"
+
             }
         },
 }

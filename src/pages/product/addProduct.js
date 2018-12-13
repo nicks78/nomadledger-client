@@ -5,30 +5,18 @@ import AddItem from '../../lib/addItem'
 
 const AddProduct = (props) => {
 
-    const {locale} = props
+    const {locale, category} = props
 
     const fields = [
       {
         title: locale.form.title.add_product, 
         label: locale.form.title.label_product,
         fields: [
-            {
-              name: 'product_name',
-              type:"text"
-            },
-            {
-              name: 'price',
-              type:"number"
-            },
-            {
-              name: 'vat',
-              type:"text"
-            },
-            {
-              name: 'description',
-              type:"text"
-            }
-          ]
+          { name: 'product_name', type:"text" },
+          { name: 'product_price', type:"text"},
+          { name: 'product_category', type:"select", selections: category, helperText: "select_category" },
+          { name: 'product_description', type:"longtext", multiline: true, rowsMax:"4" },
+        ]
       }
     ]
 

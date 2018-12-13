@@ -1,15 +1,25 @@
 //manager/src/pages/service/index.js
 
 import React, { Component } from 'react'
-import { createItem, getItemList, getItem, createState } from '../../redux/actions'
+import { Link } from 'react-router-dom'
+import { createItem, getItemList, getItem, createState, getTotal } from '../../redux/actions'
 import {connect} from 'react-redux'
-import {ApxTable, Spinner, ApxAlert} from '../../components/common'
+import { TableCell, TableRow, Paper, Table, TableHead, TableBody, withStyles, Tooltip} from '@material-ui/core';
+import { ApxAlert, ApxTableToolBar} from '../../components/common'
 import ShowService from './showService'
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import IconButton from '@material-ui/core/IconButton';
-import ArrowBackIcon from '@material-ui/icons/ArrowBackOutlined'
 import AddService from './addService'
+import {cvtNumToUserPref} from '../../utils/help_function'
+import Pagination from '../../lib/pagination'
+
+// STYLES
+const styles = theme =>  ({
+    tableHead: {
+        backgroundColor: "rgb(238,238,238)"
+    },
+    customWidth: {
+        maxWidth: 300,
+      },
+})
 
 class Service extends Component {
 
@@ -17,12 +27,14 @@ class Service extends Component {
     state = {
         showService: false,
         reducer: 'SERVICE',
-        keyLocation: ''
+        keyLocation: '',
+        rowCount: 0,
     }
 
     componentDidMount(){
         if( this.props.receivedAt === null )
-            this.props.getItemList(this.state.reducer);
+            this.props.getTotal(this.state.reducer)
+            this.props.getItemList(this.state.reducer, "?limit=5&skip=0");
         this.setState({keyLocation: this.props.location.key})
     }
 
@@ -32,86 +44,80 @@ class Service extends Component {
         }
     }
 
-    renderSingleService = (id) => {
-        var {service }= this.props
-        this.setState({ showService: true })
-        if( service && service._id === id ){
-            return;
-        }else{
-            this.props.getItem(this.state.reducer, id);
-        }
-    }
-
-    returnToList = () => {
-        this.setState({ showService: false })
-    }
-
     render() {
     
-    const {listServices, isFetching, isError,  locale, service, newService, createItem, createState, isCreating , progress} = this.props
-    const { showService } = this.state
+    const {listServices, isError,  locale, service, newService, createItem, createState, isCreating , progress, category, classes} = this.props
+    const { showService, reducer } = this.state
+  
 
-
-    if(isFetching){
-        return <Spinner />
-    }
     if(isError){
         return <ApxAlert message="Erreur message" />
     }
 
-    var tableRow = 
-        listServices.map((row, index) => {
-        return (
-          <TableRow key={index}>
-            <TableCell onClick={ () => { this.renderSingleService(row._id) } }><span  style={ styles.link }>{row.service_name}</span></TableCell>
-          </TableRow>
-        );
-      })
 
     return (
-        <div style={styles.container}>
-            {
-                showService ? 
-                    <IconButton onClick={ this.returnToList }><ArrowBackIcon/></IconButton>
-                : <AddService 
-                        locale={ locale } 
-                        initData="" 
-                        newData={newService} 
-                        progress={progress}
-                        createServiceState={  createState } 
-                        createService={ createItem  } 
-                        isCreating={isCreating} 
-                    />
-            }
+        <div className={ classes.container }>
+        
+            <AddService 
+                locale={ locale } 
+                newData={newService} 
+                progress={progress}
+                createServiceState={  createState } 
+                createService={ createItem  } 
+                isCreating={isCreating} 
+                category={category}
+            />
+            <Paper>
             {
                 showService ?
                     <ShowService service={ service } />
-                : <ApxTable isFetching={isFetching} tableRow={ tableRow }/>
+                :   <div><ApxTableToolBar
+                        numSelected={0}
+                        title={locale.table.title_service}
+                        selected={locale.page.selected}
+                    />
+                    <Table>
+                    <TableHead className={classes.tableHead}>
+                        <TableRow>
+                            <TableCell>{locale.table.service_name}</TableCell>
+                            <TableCell numeric>{locale.table.price}</TableCell>
+                            <TableCell>{locale.table.category}</TableCell>
+                            <TableCell>{locale.table.description}</TableCell>
+                        </TableRow>
+                        </TableHead>
+
+                        <TableBody>
+                            {
+                                listServices.map(( service, index) => {
+                                    return  <TableRow key={index}>
+                                                <TableCell><Link to={{ pathname: `/${reducer.toLowerCase()}/view/${service._id.toLowerCase()}`, state: { reducer: reducer } }}><span  className="link">{service.service_name}</span></Link></TableCell>
+                                                <TableCell numeric>{cvtNumToUserPref(service.service_price)}</TableCell>
+                                                <TableCell>{service.service_category[localStorage.getItem('locale')]}</TableCell> 
+                                                <Tooltip className={classes.customWidth} title={service.service_description}><TableCell>{service.service_description.slice(0,5)}...</TableCell></Tooltip>
+                                            </TableRow>
+                                })
+                            }
+                            
+                        </TableBody>
+                    </Table>
+                    <Pagination
+                        total={this.props.total}
+                        rowsPerPageOptions={this.props.rowsPerPageOptions}
+                        label={locale.table.label_rows_per_page}
+                        reducer={reducer}
+                        label2={locale.table.of}
+                        onGetItemList={ this.props.getItemList }
+                    />
+                    </div>
             }          
-            
+            </Paper>
         </div>
     )
   }
 }
 
 
-const styles =  {
-    container: {
-    },
-    link: {
-        color: '#ef6c00',
-        cursor: 'pointer'
-    },
-    sidebar: {
-        height: '100vh',
-        boxShadow: '2px 0 10px -5px black',
-        zIndex: 3
-    },
-    content: {
-        backgroundColor: 'rgb(240, 240, 240)',
-        zIndex: 1,
-    }
-}
+
 
 const mapStateToProps = (state) => {
     return {
@@ -123,9 +129,13 @@ const mapStateToProps = (state) => {
         locale: state.locale.locale,
         progress: state.library.service.progress,
         service: state.library.service.item,
-        newService: state.library.service.tmp_state
+        newService: state.library.service.tmp_state,
+        total: state.library.service.total,
+        rowsPerPageOptions:state.library.service.rowsPerPageOptions,
+        category: state.account.company.item ?  state.account.company.item.category_name : []
     }
 }
 
+const StyledService = withStyles(styles)(Service)
 
-export default connect(mapStateToProps, { createItem, getItemList, getItem, createState  })(Service);
+export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, getTotal  })(StyledService);

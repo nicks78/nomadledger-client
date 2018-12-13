@@ -12,6 +12,8 @@ class BaseState {
     isFetching = false;
     isError = false;
     message = '';
+    total = 0;
+    rowsPerPageOptions = [];
     list = []
 }
 
@@ -103,6 +105,15 @@ const baseReducer = (state = new BaseState(), action) => {
                 item: action.item,
                 isCreating: action.isCreating,
                 progress: 0,
+            }
+        case `TOTAL`:
+        console.log(action)
+            return {
+                ...state,
+                total: action.total,
+                isFetching: action.isFetching,
+                rowsPerPageOptions: action.rowsPerPageOptions
+                
             }
             
         default:

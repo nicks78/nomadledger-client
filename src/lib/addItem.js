@@ -149,7 +149,7 @@ class Add extends Component {
                     handleAction={this.toggleDrawer}
                     open={true}
                     variant="contained"
-                    color="primary"
+                    color="secondary"
                     side="right"
                 />
             </Hidden>

@@ -17,6 +17,7 @@ import ShowContact from '../pages/contact/dashboard'
 import Account from '../pages/account'
 import Product from '../pages/product'
 import Service from '../pages/service'
+import ShowService from '../pages/service/showService'
 import Expense from '../pages/expense'
 
 import NotFound from './notFound'
@@ -53,7 +54,8 @@ class Routes extends React.Component {
                                 <PrivateRoute exact path="/contact" component={Contact}  auth={isLoggedIn}/>
                                 <PrivateRoute path="/contact/view/:id" component={ShowContact}  auth={isLoggedIn}/>
                                 <PrivateRoute path="/product" component={Product}  auth={isLoggedIn}/>
-                                <PrivateRoute path="/service" component={Service}  auth={isLoggedIn}/>
+                                <PrivateRoute exact path="/service" component={Service}  auth={isLoggedIn}/>
+                                <PrivateRoute path="/service/view/:id" component={ShowService}  auth={isLoggedIn}/>
                                 <PrivateRoute path="/expense" component={Expense}  auth={isLoggedIn}/>
                                 <PrivateRoute path="*" component={NotFound}  auth={isLoggedIn}/>
                             </Switch>

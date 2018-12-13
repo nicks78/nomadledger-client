@@ -9,7 +9,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import HomeIcon from '@material-ui/icons/HomeOutlined';
 import GroupIcon from '@material-ui/icons/GroupOutlined';
-import CallMadeIcon from '@material-ui/icons/CallMadeOutlined';
 import StoreIcon from '@material-ui/icons/StoreOutlined';
 import ReceiptIcon from '@material-ui/icons/ReceiptOutlined';
 import HeadsetMicIcon from '@material-ui/icons/HeadsetMicOutlined';
@@ -39,10 +38,10 @@ const Styles = theme => ({
     },
     listText: {
        '& span': {
-           color: 'rgba(0,0,0,0.54)'
+           color: theme.palette.grey.main
        },
        '& svg': {
-        color: 'rgba(0,0,0,0.54)'
+        color: theme.palette.grey.main
     }
     },
     header: { 
@@ -100,12 +99,7 @@ const MainMenu = (props) => {
                     <ListItemText className={ classes.listText } primary={ locale.expense.name } />
                 </ListItem>
 
-                <ListItem button>
-                    <ListItemIcon>
-                        <CallMadeIcon  />
-                    </ListItemIcon>
-                    <ListItemText className={ classes.listText } primary={ locale.vat.name } />
-                </ListItem>
+                
                 <ListItem button>
                     <ListItemIcon>
                         <ListAltIcon  />
@@ -115,11 +109,8 @@ const MainMenu = (props) => {
             </List>
             <Divider style={{borderColor: 'white'}}/>
             <List component="nav">
-                <ListItem button>
-                <ListItemText primary="Trash" />
-                </ListItem>
-                <ListItem button>
-                <ListItemText primary="Spam" />
+                <ListItem button component={NavLink}  to="/archive" activeClassName={classes.active}>
+                    <ListItemText primary={ locale.archive.name } />
                 </ListItem>
             </List>
         </div>

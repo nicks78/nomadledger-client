@@ -12,7 +12,9 @@ class BaseState {
     isCreating = false;
     isFetching = false;
     isError = false;
-    list = []
+    list = [];
+    total = 0;
+    rowsPerPageOptions = [];
 }
 
 

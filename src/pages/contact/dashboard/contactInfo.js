@@ -7,6 +7,7 @@ import {ApxButtonEdit} from '../../../components/common'
 import EditInput from '../../../lib/editInput'
 import EditSelect from '../../../lib/editSelect'
 import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Input from '@material-ui/core/Input';
 
@@ -33,6 +34,10 @@ const styles = theme => ({
     },
     checkicon: {
         color: theme.palette.green
+    },
+    divider: {
+        clear: 'both',
+        marginBottom: 10
     }
 })
 
@@ -104,7 +109,10 @@ class ContactInfo extends Component {
                 />
             }
             <br />
-            
+            <Typography variant="subtitle2">
+                      {locale.form.title.label_contact_info}
+            </Typography>
+            <Divider className={ classes.divider }/>
             <EditInput 
                 label={ locale.form.field.firstname }
                 value={ tmp_state.firstname ||  contact.firstname }
@@ -127,7 +135,7 @@ class ContactInfo extends Component {
                 locale={locale}
                 showEdit={showEdit}
                 label={locale.form.field.phone_code }
-                value={  contact.phone_code[localStorage.getItem("locale")] }
+                value={  contact.phone_code && contact.phone_code[localStorage.getItem("locale")] }
             />
             <EditInput 
                 label={locale.form.field.phone}
@@ -146,7 +154,10 @@ class ContactInfo extends Component {
                 handleAction={this.handleFormEdit}
             />
             <br />
-            <br />
+            <Typography variant="subtitle2">
+                      {locale.form.title.label_comp_address}
+            </Typography>
+            <Divider className={ classes.divider }/>
             <EditInput 
                 label={locale.form.field.addresses_street}
                 value={tmp_state.addresses_street || contact.addresses_street}
@@ -176,11 +187,14 @@ class ContactInfo extends Component {
                     locale={locale}
                     showEdit={showEdit}
                     label={locale.form.field.addresses_country }
-                    value={  contact.addresses_country[localStorage.getItem("locale")] }
+                    value={  contact.addresses_country && contact.addresses_country[localStorage.getItem("locale")] }
                 />
             
             <br />
-            <br />
+            <Typography variant="subtitle2">
+                      {locale.form.title.label_comp_info}
+            </Typography>
+            <Divider className={ classes.divider }/>
             <EditSelect 
                     arrayField={company_type}
                     field="company_type"
@@ -189,7 +203,7 @@ class ContactInfo extends Component {
                     locale={locale}
                     showEdit={showEdit}
                     label={locale.form.field.company_type }
-                    value={  contact.company_type[localStorage.getItem("locale")] }
+                    value={  contact.company_type && contact.company_type[localStorage.getItem("locale")] }
                 />
             <EditInput 
                 label={locale.form.field.company_register}

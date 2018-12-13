@@ -48,7 +48,7 @@ class Product extends Component {
 
     render() {
     
-    const {listProducts, isFetching, isError,  locale, product, newProduct, createState, createItem, isCreating } = this.props
+    const {listProducts, isFetching, isError,  locale, product, newProduct, createState, createItem, isCreating, category } = this.props
     const { showProduct } = this.state
 
     if(isFetching){
@@ -75,7 +75,7 @@ class Product extends Component {
             {
                 showProduct ? 
                     <IconButton onClick={ this.returnToList }><ArrowBackIcon/></IconButton>
-                : <AddProduct locale={ locale } initData="" newData={newProduct} createItemState={ createState } createItem={ createItem } isCreating={ isCreating  }/>
+                : <AddProduct category={category}locale={ locale } initData="" newData={newProduct} createItemState={ createState } createItem={ createItem } isCreating={ isCreating  }/>
             }
             {
                 showProduct ?
@@ -116,7 +116,8 @@ const mapStateToProps = (state) => {
         receivedAt: state.library.product.receivedAt,
         locale: state.locale.locale,
         newProduct: state.library.product.tmp_state,
-        product: state.library.product.item
+        product: state.library.product.item,
+        category: state.account.company.item && state.account.company.item.category_name
     }
 }
 

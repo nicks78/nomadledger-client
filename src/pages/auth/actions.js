@@ -14,7 +14,7 @@ export const createUser = ( actionType ) => {
     return (dispatch, getState) => {
     
         // Get current state
-        var state = getState().auth.state_user
+        var state = getState().auth.state_AUTH
 
         // // Set loading time
         dispatch(requestUser());
@@ -64,8 +64,12 @@ export function authUser(data){
             return response.data
         }) 
         .then( res => {
-            localStorage.setItem('locale', res.locale)
+            // Set locale
+            localStorage.setItem('locale', res.locale);
+
+            // Set user auth
             dispatch(setAuthUser());
+
             // Redirect to home page
             history.push('/home')
             
@@ -102,15 +106,16 @@ export function getLogout(){
         history.replace("/login");
       })
       .catch(function (error) {
-          // Do something when error
-            console.log(error)
+            // Do something when error
+            var message = error.response ? error.response.data.message : 'error_500'
+            dispatch(requestFailed(message));
       })     
     }
 }
 
 export function setLogout(){
     return {
-        type: `LOGOUT_USER`,
+        type: `LOGOUT_AUTH`,
         isLoggedIn: false,
     }
 }
@@ -118,14 +123,14 @@ export function setLogout(){
 
 function requestUser(){
     return {
-        type: `REQUEST_USER`,
+        type: `REQUEST_AUTH`,
         isFetching: true,
     }
 }
 
 export function setAuthUser(){
     return {
-        type: `GET_USER`,
+        type: `GET_AUTH`,
         isFetching: false,
         isLoggedIn: true,
     }
@@ -133,14 +138,14 @@ export function setAuthUser(){
   
 function setCreateUser( message ){
     return {
-        type: `CREATE_USER`,
+        type: `CREATE_AUTH`,
         message: message
     }
 }
 
 function requestFailed( message ) {
     return {
-        type: `FAILED_USER`,
+        type: `FAILED_AUTH`,
         isFetching: false,
         isError: true,
         message: message
@@ -149,13 +154,13 @@ function requestFailed( message ) {
 
 export function createStateUser ( fieldName, value ){
     return {
-      type: `STATE_USER`,
+      type: `STATE_AUTH`,
       payload: {fieldName, value}
     }
 }
 
 export function resetUser (){
     return {
-      type: `RESET_USER`
+      type: `RESET_AUTH`
     }
 }

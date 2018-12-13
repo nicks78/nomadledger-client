@@ -16,14 +16,14 @@ const authReducer = (state = initialState, action) => {
     
 
     switch (action.type) {
-        case `REQUEST_USER`:
+        case `REQUEST_AUTH`:
             return  { 
                 ...state,
                 isFetching: action.isFetching,
                 isCreated: false,
                 isError: false
             }
-        case `FAILED_USER`:
+        case `FAILED_AUTH`:
             return  { 
                 ...state,
                 isFetching: action.isFetching,
@@ -32,28 +32,28 @@ const authReducer = (state = initialState, action) => {
                 isCreated: false,
                 message: action.message
             }
-        case `CREATE_USER`:
+        case `CREATE_AUTH`:
             return  { 
                 ...state, 
                 isFetching: false,
                 isCreated: true,
                 state_user: initialState.state_user,
             }
-        case `GET_USER`:
+        case `GET_AUTH`:
             return  { 
                 ...state,
                 isFetching: false,
                 isLoggedIn: true
             }
-        case `STATE_USER`:
+        case `STATE_AUTH`:
             return {
                 ...state,
                 state_user: { ...state.state_user, [ action.payload.fieldName ] : action.payload.value }
             }
-        case `RESET_USER`:
+        case `RESET_AUTH`:
             return initialState
 
-        case `LOGOUT_USER`:
+        case `LOGOUT_AUTH`:
             return initialState
         default:
             return state;
