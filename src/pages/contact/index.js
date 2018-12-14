@@ -2,11 +2,11 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import {Table, TableHead, TableBody, Checkbox, Paper, TableCell, TableRow, withStyles} from '@material-ui/core';
 import {connect} from 'react-redux'
 import { createItem, getItemList, getItem, createState, getTotal} from '../../redux/actions'
 import { Spinner, ApxAlert, ApxTableToolBar} from '../../components/common'
 import AddContact from './addContact'
-import {Table, TableHead, TableBody, Checkbox, Paper, TableCell, TableRow, withStyles} from '@material-ui/core';
 import Pagination from '../../lib/pagination'
 
 
@@ -99,7 +99,7 @@ class Contact extends Component {
 
     render() {
     
-    const {listContacts, isFetching, isError, locale, createItem, createState, newContact, isCreating, progress, message, classes} = this.props
+    const {listContacts, isFetching, isError, locale, createItem, createState, newContact, isCreating, progress, message, classes, contactGroup} = this.props
     const { selected, rowCount, reducer } = this.state
 
 
@@ -114,12 +114,12 @@ class Contact extends Component {
 
     return (
         <div className={classes.container}>
-            <AddContact progress={progress} locale={ locale } createContact={ createItem } createContactState={  createState } newData={newContact} isCreating={ isCreating  }/>
+            <AddContact progress={progress} contactGroup={contactGroup} locale={ locale } createContact={ createItem } createContactState={  createState } newData={newContact} isCreating={ isCreating  }/>
             <Paper>
                 <ApxTableToolBar
                         numSelected={selected.length}
                         title={locale.table.title_contact}
-                        selected={locale.page.selected}
+                        selected={locale.table.selected}
                     />
                     <Table>
                     <TableHead className={classes.tableHead}>
@@ -132,6 +132,7 @@ class Contact extends Component {
                                 />
                             </TableCell>
                             <TableCell>{ locale.table.company }</TableCell>
+                            <TableCell>{ locale.table.group }</TableCell>
                             <TableCell>{locale.table.full_name}</TableCell>
                             <TableCell>{locale.table.phone}</TableCell>
                             <TableCell>{locale.table.email}</TableCell>
@@ -147,10 +148,12 @@ class Contact extends Component {
                                                 <TableCell padding="checkbox" onClick={ event => { this.onSelectedField(event, contact._id) } } >
                                                     <Checkbox checked={isSelected} />
                                                 </TableCell>
+                                                
                                                 <TableCell><Link to={{ pathname: `/${reducer.toLowerCase()}/view/${contact._id.toLowerCase()}`, state: { reducer: reducer } }}><span  className="link">{contact.company_name}</span></Link></TableCell>
+                                                <TableCell>{contact.contact_group[localStorage.getItem('locale') || 'fr']}</TableCell>
                                                 <TableCell>{ contact.firstname } {contact.lastname}</TableCell>
-                                                <TableCell><a href={`tel:${contact.phone_code.value}${contact.phone.replace('0', '')}`} target="_blank"><span  className="link">({contact.phone_code.value}) {contact.phone.replace('0', '')}</span></a></TableCell>
-                                                <TableCell><a href={`mailto:${contact.email}`} target="_blank"><span className="link">{contact.email}</span></a></TableCell>
+                                                <TableCell><a href={`tel:${contact.phone_code.value}${contact.phone.replace('0', '')}`}><span  className="link">({contact.phone_code.value}) {contact.phone.replace('0', '')}</span></a></TableCell>
+                                                <TableCell><a href={`mailto:${contact.email}`}><span className="link">{contact.email}</span></a></TableCell>
                                                 
                                             </TableRow>
                                 })
@@ -186,7 +189,8 @@ const mapStateToProps = (state) => {
         newContact: state.library.contact.tmp_state,
         progress: state.library.contact.progress,
         message: state.library.contact.message,
-        total: state.library.contact.total
+        total: state.library.contact.total,
+        contactGroup: state.account.company.item ?  state.account.company.item.contact_group : []
     }
 }
 

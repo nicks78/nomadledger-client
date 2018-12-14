@@ -32,9 +32,10 @@ class Service extends Component {
     }
 
     componentDidMount(){
-        if( this.props.receivedAt === null )
+        if( this.props.receivedAt === null ){
             this.props.getTotal(this.state.reducer)
             this.props.getItemList(this.state.reducer, "?limit=5&skip=0");
+        }
         this.setState({keyLocation: this.props.location.key})
     }
 

@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {pushToDocument, getAccount} from './actions'
-import { withStyles, TextField, Typography } from '@material-ui/core'
+import { withStyles, TextField } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddOutlined'
 import {ApxTag, Spinner} from '../../components/common'
 import { checkNumFormatRegex } from '../../utils/help_function'
@@ -17,7 +17,7 @@ const styles = theme => ({
       marginBottom: 24
   },
   addVat: {
-      position: 'relative'
+        position: 'relative'
   },
   textField: {
       width: '45%',
@@ -97,7 +97,7 @@ class AddVat extends Component {
 
                     <div className={ classes.addVat}>
                         <TextField 
-                                id="vat"
+                                id="vatname"
                                 label={locale.form.field.name_vat}
                                 className={classes.textField}
                                 value={this.state.name}
@@ -122,9 +122,6 @@ class AddVat extends Component {
                     </div>
 
                     <div className={ classes.tagWrapper}>
-                    <Typography variant="subtitle2">
-                        {locale.page.setting_h2_002}
-                    </Typography>
 
                     {
                         company.vat.map((vat, index) => {

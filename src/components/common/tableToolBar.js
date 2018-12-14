@@ -4,6 +4,8 @@ withStyles,
 Toolbar,
 Typography,
 Tooltip,
+Menu,
+MenuItem,
 IconButton } from '@material-ui/core';
 import FilterListIcon from '@material-ui/icons/FilterListOutlined'
 import DeleteIcon from '@material-ui/icons/DeleteOutlined'
@@ -34,20 +36,58 @@ const styles = theme => ({
     },
 })
 
-const EnhancedToolBar = (props) => {
+class EnhancedToolBar extends React.Component {
 
-    const { numSelected, classes } = props;
+    state = {
+      anchorEl: null,
+      mobileMoreAnchorEl: null,
+    };
+
+    handleMobileMenuOpen = (event) => {
+      this.setState({ mobileMoreAnchorEl: event.currentTarget });
+    };
+
+    handleMenu = event => {
+      this.setState({ anchorEl: event.currentTarget });
+    };
+
+    handleProfileMenuOpen = event => {
+      this.setState({ anchorEl: event.currentTarget });
+    };
+
+    render(){
+
+    const { numSelected, classes, selected } = this.props;
+
+    const { anchorEl, mobileMoreAnchorEl } = this.state;
+    const isMenuOpen = Boolean(anchorEl);
+    // const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+   
+
+    const renderMenu = (
+      <Menu
+        anchorEl={null}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={isMenuOpen}
+        // onClose={}
+      >
+        <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+      </Menu>
+    );
+
 
     return (
       <Toolbar>
       <div className={classes.title}>
         {numSelected > 0 ? (
           <Typography color="inherit" variant="subtitle2">
-            {numSelected} selected
+            {numSelected} {selected}
           </Typography>
         ) : (
           <Typography variant="subtitle2" id="tableTitle">
-            {props.title}
+            {this.props.title}
           </Typography>
         )}
       </div>
@@ -61,14 +101,21 @@ const EnhancedToolBar = (props) => {
           </Tooltip>
         ) : (
           <Tooltip title="Filter list">
-            <IconButton aria-label="Filter list">
-              <FilterListIcon />
+          
+            <IconButton 
+              aria-owns={isMenuOpen ? 'material-appbar' : undefined }
+              aria-label="Filter list" onClick={this.handleProfileMenuOpen} >
+              {renderMenu}
+              <FilterListIcon onClick={this.handleMenuClose} />
+              
             </IconButton>
           </Tooltip>
         )}
       </div>
+      
     </Toolbar>
     )
+  }
 
 }
 

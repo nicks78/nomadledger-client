@@ -65,8 +65,8 @@ class Auth extends Component {
         this.props.resetUser();
     }
 
-    handleChange = name => event => {
-        var fieldName = name;
+    handleChange = (event) => {
+        var fieldName = event.target.name;
         var value = event.target.value
 
         this.props.createStateUser( fieldName, value )

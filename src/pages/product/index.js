@@ -1,95 +1,14 @@
 //manager/src/pages/product/index.js
 
 import React, { Component } from 'react'
-import { createItem, getItemList, getItem, createState } from '../../redux/actions'
+import { createItem, getItemList, getItem, createState, getTotal } from '../../redux/actions'
 import {connect} from 'react-redux'
-import {ApxTable, Spinner, ApxAlert} from '../../components/common'
-import ShowProduct from './showProduct'
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import IconButton from '@material-ui/core/IconButton';
-import ArrowBackIcon from '@material-ui/icons/ArrowBackOutlined'
+import { withStyles, Grid, Button} from '@material-ui/core';
+import { Spinner, ApxAlert} from '../../components/common'
 import AddProduct from './addProduct'
+import ProductCard from './productCard'
 
-class Product extends Component {
-
-
-    state = {
-        showProduct: false,
-        reducer: 'PRODUCT',
-        keyLocation: ''
-    }
-
-    componentDidMount(){
-        if( this.props.receivedAt === null )
-            this.props.getItemList(this.state.reducer);
-        this.setState({keyLocation: this.props.location.key})
-    }
-
-    componentWillReceiveProps(nextProps){
-        if(nextProps.location.key !== this.state.keyLocation){
-            this.setState({ showProduct: false, keyLocation: nextProps.location.key })
-        }
-    }
-
-    renderSingleProduct = (id) => {
-        var {product }= this.props
-        this.setState({ showProduct: true })
-        if( product && product._id === id ){
-            return;
-        }else{
-            this.props.getItem(this.state.reducer, id);
-        }
-    }
-
-    returnToList = () => {
-        this.setState({ showProduct: false })
-    }
-
-    render() {
-    
-    const {listProducts, isFetching, isError,  locale, product, newProduct, createState, createItem, isCreating, category } = this.props
-    const { showProduct } = this.state
-
-    if(isFetching){
-        return <Spinner />
-    }
-    if(isError){
-        return <ApxAlert message="Erreur message" />
-    }
-
-    var tableRow = 
-        listProducts.map((row, index) => {
-        return (
-          <TableRow key={index}>
-            <TableCell onClick={ () => { this.renderSingleProduct(row._id) } }><span  style={ styles.link }>{row.ref}</span></TableCell>
-            <TableCell>{row.product_name}</TableCell>
-            <TableCell numeric>{row.description}</TableCell>
-            <TableCell>{row.price}</TableCell>
-          </TableRow>
-        );
-      })
-
-    return (
-        <div style={styles.container}>
-            {
-                showProduct ? 
-                    <IconButton onClick={ this.returnToList }><ArrowBackIcon/></IconButton>
-                : <AddProduct category={category}locale={ locale } initData="" newData={newProduct} createItemState={ createState } createItem={ createItem } isCreating={ isCreating  }/>
-            }
-            {
-                showProduct ?
-                    <ShowProduct product={ product } />
-                : <ApxTable isFetching={isFetching} tableRow={ tableRow }/>
-            }          
-            
-        </div>
-    )
-  }
-}
-
-
-const styles =  {
+const styles = theme =>  ({
     container: {
     },
     link: {
@@ -104,8 +23,88 @@ const styles =  {
     content: {
         backgroundColor: 'rgb(240, 240, 240)',
         zIndex: 1,
+    },
+    loadMore: {
+        marginTop: 24,
+        marginBottom: 24
+    },
+    button: {
+        width: '100%'
     }
+})
+
+
+
+class Product extends Component {
+
+
+    state = {
+        showProduct: false,
+        reducer: 'PRODUCT',
+        limit: 6,
+        keyLocation: ''
+    }
+
+    componentDidMount(){
+        if( this.props.receivedAt === null ){
+            this.props.getTotal(this.state.reducer)
+            this.props.getItemList(this.state.reducer, `?limit=${this.state.limit}&skip=0`);
+        }
+        this.setState({keyLocation: this.props.location.key})
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.location.key !== this.state.keyLocation){
+            this.setState({ showProduct: false, keyLocation: nextProps.location.key })
+        }
+    }
+
+    hanldeLoadMore = () => {
+        this.props.getItemList(this.state.reducer, `?limit=${this.state.limit + 6 }&skip=0`);
+        this.setState({ limit: this.state.limit + 6 });
+    }
+
+    render() {
+    
+    const {listProducts, isFetching, isError,  locale, newProduct, createState, createItem, isCreating, category, classes } = this.props
+
+    if( isFetching ){
+        return <Spinner />
+    }
+    if( isError ){
+        return <ApxAlert message="Erreur message" />
+    }
+
+
+    
+    return (
+        <div style={styles.container}>
+
+            <AddProduct category={category}locale={ locale } initData="" newData={newProduct} createItemState={ createState } createItem={ createItem } isCreating={ isCreating  }/>
+            
+            <Grid container spacing={24}>
+            {
+                listProducts.map((product, index) => {
+                    return <Grid item xs={12} sm={6} md={3}  key={index}>
+                                <ProductCard  product={product} />
+                            </Grid>
+                })
+            }
+            </Grid>
+            
+            <div className={ classes.loadMore }>
+                <Button variant="outlined" color="secondary" className={classes.button} onClick={ this.hanldeLoadMore }>
+                    {locale.page.product.load_more_product}
+                </Button>
+            </div>
+            
+        </div>
+    )
+  }
 }
+
+
+
 
 const mapStateToProps = (state) => {
     return {
@@ -117,9 +116,11 @@ const mapStateToProps = (state) => {
         locale: state.locale.locale,
         newProduct: state.library.product.tmp_state,
         product: state.library.product.item,
-        category: state.account.company.item && state.account.company.item.category_name
+        category: state.account.company.item && state.account.company.item.category_name,
+        total: state.library.product.total
     }
 }
 
+const StyledProduct = withStyles(styles)(Product)
 
-export default connect(mapStateToProps, { createItem, getItemList, getItem, createState  })(Product);
+export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, getTotal  })(StyledProduct);

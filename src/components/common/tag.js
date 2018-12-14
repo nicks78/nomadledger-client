@@ -16,13 +16,13 @@ const styles = theme => ({
 
 const Tag = (props) => {
 
-  const {classes, actionTag, label, variant } = props
+  const {classes, actionTag, label, variant, color } = props
   
   return (
     <Chip
         label={label}
         onDelete={actionTag}
-        color="primary"
+        color={ color || "primary" }
         variant={variant || 'default'}
         className={classes.chip}
       />

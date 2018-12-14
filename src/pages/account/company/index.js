@@ -74,7 +74,7 @@ class Company extends Component {
                     progress={progress}
                     oldFile={company.company_logo}
                     isUploading={isUploading}
-                    image={ <img src={`${API_ENDPOINT}image/view${ company.company_logo || '/default/default_logo.png' }`} alt="logo" width="100%" height={null} />}
+                    image={ <img src={`${API_ENDPOINT}image/view${ company.company_logo.path || '/default/default_logo.png' }`} alt="logo" width="100%" height={null} />}
                   />
                
             </Grid>

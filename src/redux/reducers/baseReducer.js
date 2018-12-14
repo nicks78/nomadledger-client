@@ -76,6 +76,7 @@ const baseReducer = (state = new BaseState(), action) => {
             return {
                 ...state,
                 isCreating: action.isCreating,
+                total: state.total + 1,
                 progress: action.value,
                 tmp_state: {},
                 list: [ ...state.list, action.item ]
@@ -107,7 +108,6 @@ const baseReducer = (state = new BaseState(), action) => {
                 progress: 0,
             }
         case `TOTAL`:
-        console.log(action)
             return {
                 ...state,
                 total: action.total,

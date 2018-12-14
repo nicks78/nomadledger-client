@@ -98,7 +98,7 @@ class ShowContact extends React.Component {
                     progress={progress}
                     idModel={this.props.match.params.id}
                     isUploading={isCreating}
-                    image={<img src={`${API_ENDPOINT}image/view${ contact.logo || '/default/default_logo.png' }`} alt="logo" width="100%" height={null} />}
+                    image={<img src={`${API_ENDPOINT}image/view${ contact.logo.path || '/default/default_logo.png' }`} alt="logo" width="100%" height={null} />}
                   />
 
               <Divider />

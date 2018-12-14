@@ -74,7 +74,11 @@ const Locale = {
                 },
                 header_01: "Information profil",
                 header_02: "Paramètres société",
-                service: "Vos services"
+                
+                service: "Vos services",
+                product: {
+                    load_more_product: "Voir plus de produit"
+                }
             },
             text: {
                 address: "Adresse",
@@ -127,10 +131,16 @@ const Locale = {
                     addresses_country: "Pays", 
                     num_format: "Format des chiffres",
 
+                    contact_group: "Groupe",
+
                     product_name: "Nom du produit",
                     product_description: "Déscription",
                     product_category: "Catégorie",
+                    product_buying_price: "Prix d'achat",
+                    product_selling_price: "Prix de vente",
                     product_price: "Prix",
+                    product_currency: "Devise",
+                    product_stock: "En stock",
 
 
                     service_name: "Nom du service",
@@ -140,6 +150,7 @@ const Locale = {
                     service_note: "Information interne",
 
                     category: "Ajouter une Categorie",
+                    add_group: "Ajouter un group",
                     add_vat: "Taux TVA",
                     name_vat: "Nom de TVA",
 
@@ -192,7 +203,9 @@ const Locale = {
                 phone: "Téléphone",
                 email: "Couriel",
                 company: "Société",
-                of: "à"
+                of: "à",
+                selected: "sélectionner",
+                group: "Groupe"
 
 
             }
@@ -268,7 +281,10 @@ const Locale = {
                 },
                 header_01: "Information profile",
                 header_02: "Company setting",
-                service: "Your services"
+                service: "Your services",
+                product: {
+                    load_more_product: "Load more product"
+                }
             },
             text: {
                 address: "Address",
@@ -321,10 +337,16 @@ const Locale = {
                     register: "Register number",
                     vat: 'VAT',
 
+                    contact_group: "Group",
+
                     product_name: "Product name",
                     product_description: "Description",
                     product_category: "Catégory",
                     product_price: "Price",
+                    product_buying_price: "Buying price",
+                    product_selling_price: "Selling price",
+                    product_currency: "Currency",
+                    product_stock: "In stock",
 
 
                     service_name: "Service name",
@@ -334,6 +356,7 @@ const Locale = {
                     service_note: "Sales informations",
 
                     category: "Add category",
+                    add_group: "Add a group",
                     add_vat: "Value VAT",
                     name_vat: "VAT name",
 
@@ -368,6 +391,7 @@ const Locale = {
             },
             table: {
                 title_service: "Service",
+                selected: "selected",
                 title_contact: "Contact",
                 title_invoice: "Invoice",
                 title_quote: "Quote",
@@ -385,7 +409,8 @@ const Locale = {
                 phone: "Phone",
                 email: "Email",
                 company: "Company",
-                of: "of"
+                of: "of",
+                group: "Group"
 
             }
         },

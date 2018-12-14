@@ -7,7 +7,7 @@ import {phone_code, country} from '../../utils/static_data'
 
 const AddContact = (props) => {    
 
-    const {locale} = props
+    const {locale, contactGroup} = props
 
     const fields = [
       {
@@ -16,6 +16,7 @@ const AddContact = (props) => {
         section_1: false,
         fields: [
             { name: 'company_name',type:"text" },
+            { name: 'contact_group', type:"select", selections: contactGroup },
             { name: 'company_register',type:"text"},
             { name: 'company_vat', type:"number"},
             { name: 'addresses_street', type:"text" },

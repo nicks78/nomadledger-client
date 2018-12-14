@@ -14,7 +14,7 @@ export const createUser = ( actionType ) => {
     return (dispatch, getState) => {
     
         // Get current state
-        var state = getState().auth.state_AUTH
+        var state = getState().auth.state_user
 
         // // Set loading time
         dispatch(requestUser());

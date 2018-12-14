@@ -15,7 +15,7 @@ const styles = theme => ({
   title: {
       marginBottom: 24
   },
-  addCategory: {
+  addContactGroup: {
       position: 'relative'
   },
   textField: {
@@ -39,7 +39,7 @@ const styles = theme => ({
 
 
 
-class AddCategory extends Component {
+class AddContactGroup extends Component {
 
 
   state = {
@@ -56,16 +56,16 @@ class AddCategory extends Component {
 
   _pushToDoc = () => {
     var data = {
-      category_name: { fr: this.state.value, en:  this.state.value}
+        contact_group: { fr: this.state.value, en:  this.state.value}
     }
     this.setState({value: ''})
     this.props.pushToDocument(this.state.reducer, data, this.state.addApi )
   }
 
 
-  deleteCategory = (id) => {
+  deleteContact = (id) => {
       var data = {
-        category_name: {_id: id}
+        contact_group: {_id: id}
       }
     this.props.pushToDocument(this.state.reducer, data, this.state.deleteApi )
   }
@@ -81,13 +81,13 @@ class AddCategory extends Component {
     return (
       <div>
         
-            <div className={ classes.addCategory}>
-                <TextField 
-                        id="category_name"
-                        label={locale.form.field.category}
+            <div className={ classes.addContactGroup}>
+                    <TextField 
+                        id="contact_group"
+                        label={locale.form.field.add_group}
                         className={classes.textField}
                         value={this.state.value}
-                        name="category_name"
+                        name="contact_group"
                         onChange={this._handleFormEdit}
                         margin="normal"
                     />
@@ -98,12 +98,15 @@ class AddCategory extends Component {
             </div>
 
                     <div className={ classes.tagWrapper}>
+
                     {
-                        company.category_name.map((category, index) => {
+                        company.contact_group.map((contact, index) => {
                           return <ApxTag 
                                   key={index}
-                                  actionTag={ () => { this.deleteCategory(category._id) } }
-                                  label={ category[localStorage.getItem('locale')] }
+                                  color="default"
+                                  variant="outlined"
+                                  actionTag={ () => { this.deleteContact(contact._id) } }
+                                  label={ contact[localStorage.getItem('locale')] }
                                 />
                         })
                     }
@@ -129,6 +132,6 @@ const mapStateToProps = (state) => {
 
 
 
-const StyledAddCategory =  withStyles(styles)(AddCategory);
+const StyledAddContactGroup =  withStyles(styles)(AddContactGroup);
 
-export default connect(mapStateToProps, {getAccount, pushToDocument})(StyledAddCategory);
+export default connect(mapStateToProps, {getAccount, pushToDocument})(StyledAddContactGroup);

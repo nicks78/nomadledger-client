@@ -16,6 +16,7 @@ import Contact from '../pages/contact'
 import ShowContact from '../pages/contact/dashboard'
 import Account from '../pages/account'
 import Product from '../pages/product'
+import ShowProduct from '../pages/product/showProduct'
 import Service from '../pages/service'
 import ShowService from '../pages/service/showService'
 import Expense from '../pages/expense'
@@ -44,7 +45,7 @@ class Routes extends React.Component {
                     <React.Fragment>
                         <Switch>
                         <Route exact path="/" component={Auth} />
-                        <Route exact path="/login" component={Login} />
+                        <Route path="/login" component={Login} />
                         
                         { isLoggedIn ? 
                             <Layout _onChangeLocale={this.handleChangeLocale} logout={this.props.getLogout} locale={locale}>
@@ -53,7 +54,8 @@ class Routes extends React.Component {
                                 <PrivateRoute path="/account" component={Account}  auth={isLoggedIn}/>
                                 <PrivateRoute exact path="/contact" component={Contact}  auth={isLoggedIn}/>
                                 <PrivateRoute path="/contact/view/:id" component={ShowContact}  auth={isLoggedIn}/>
-                                <PrivateRoute path="/product" component={Product}  auth={isLoggedIn}/>
+                                <PrivateRoute exact path="/product" component={Product}  auth={isLoggedIn}/>
+                                <PrivateRoute path="/product/view/:id" component={ShowProduct}  auth={isLoggedIn}/>
                                 <PrivateRoute exact path="/service" component={Service}  auth={isLoggedIn}/>
                                 <PrivateRoute path="/service/view/:id" component={ShowService}  auth={isLoggedIn}/>
                                 <PrivateRoute path="/expense" component={Expense}  auth={isLoggedIn}/>

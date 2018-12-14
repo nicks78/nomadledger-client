@@ -10,6 +10,7 @@ import Setting from './setting'
 import {Spinner} from '../../components/common'
 import AddCategory from './addCategory'
 import AddVat from './addVat'
+import AddContactGroup from './addContactGroup'
 
 
 const styles = theme => ({
@@ -97,7 +98,14 @@ class Account extends Component {
                                 <AddCategory />
                               </Grid>
                               <br />
-                              <Grid item sx={12} md={6}>
+                              <Grid item xs={12} md={6}>
+                              <Typography variant="subtitle2"  >
+                                      Grouper vos contacts 
+                                </Typography>
+                                <Divider className={ classes.divider }/>
+                                  <AddContactGroup />
+                              </Grid>
+                              <Grid item xs={12} md={6}>
                               <Typography variant="subtitle2"  >
                                       Gerer vos TVA
                                 </Typography>
