@@ -53,10 +53,6 @@ class Company extends Component {
     this.props.updateDocument(this.state.reducer)
   }
 
-  handleDate = (name, value) => {
-    this.props.createState(this.state.reducer, name, value)
-  }
-
   render() {
     const {company, progress, isUploading, locale, classes, isError, message} = this.props;
     const {showEdit, reducer} = this.state;
@@ -142,8 +138,9 @@ class Company extends Component {
                     {
                         showEdit ? 
                             <ApxDatePicker 
-                                handleDate={ this.handleDate }
-                                value={company.start_date.label} 
+                                handleDate={ (event) => { this.props.handleFormEdit(event, reducer) }}
+                                value={company.start_date.label}
+                                label={locale.form.title.label_start_tax}
                                 field="start_date"
                             />
                         : 
@@ -155,8 +152,9 @@ class Company extends Component {
                      {
                         showEdit ? 
                             <ApxDatePicker 
-                                handleDate={ this.handleDate }
+                                handleDate={ (event) => { this.props.handleFormEdit(event, reducer) }}
                                 value={company.end_date.label} 
+                                label={locale.form.title.label_end_tax}
                                 field="end_date"
                             />
                         : 

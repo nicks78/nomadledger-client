@@ -19,7 +19,7 @@ const EditSelect = (props) => {
     const {arrayField, field, helperText, handleAction, locale, showEdit, label, value } = props
 
     if(showEdit){
-        return <ApxSelect 
+        return  <ApxSelect 
                     arrayField={arrayField}
                     field={field}
                     value={value}

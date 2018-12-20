@@ -157,6 +157,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-const IndexShowContact = withStyles(styles)(ShowContact)
+const StyledShowContact = withStyles(styles)(ShowContact)
 
-export default connect( mapStateToProps, { getItem, resetState, createState , uploadFileToServer})(IndexShowContact);
+export default connect( mapStateToProps, { getItem, resetState, createState , uploadFileToServer})(StyledShowContact);

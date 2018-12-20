@@ -24,7 +24,7 @@ export function getItemList( actionType, query = "" ){
         }) 
         .then( res => {
           if(res.success){
-                dispatch(receiveItems(actionType, res.payload, res.skip ))  
+                dispatch(receiveItems(actionType, res.payload ))  
               }else{
                 dispatch(requestFailed(actionType))
               }
@@ -63,7 +63,8 @@ export function getTotal( actionType ){
   }
 }
 
-function receiveItems(actionType, items, skip) {
+
+function receiveItems(actionType, items) {
   return {
     type: `RECEIVE`,
     subtype: actionType,
@@ -72,6 +73,7 @@ function receiveItems(actionType, items, skip) {
     receivedAt: Date.now()
   }
 }
+
 
 function setTotal(actionType, res) {
   

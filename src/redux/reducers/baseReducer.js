@@ -115,7 +115,6 @@ const baseReducer = (state = new BaseState(), action) => {
                 rowsPerPageOptions: action.rowsPerPageOptions
                 
             }
-            
         default:
             return state;
     }

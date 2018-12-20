@@ -61,6 +61,25 @@ a:hover {
   Font 
 */
 
+.DayPicker-wrapper {
+    font-size: 14px;
+    background-color: white;
+    position: absolute !important;
+}
+
+.DayPicker-Day:hover {
+  background-color: #008489 !important;
+  color: white;
+}
+
+.DayPicker-Day--highlighted {
+  background-color: #008489;
+  color: white;
+}
+
+.DayPicker-wrapper{
+  z-index: 4;
+}
 
 /****************************************************
         BUTTON

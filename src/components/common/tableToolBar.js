@@ -59,7 +59,7 @@ class EnhancedToolBar extends React.Component {
 
     const { numSelected, classes, selected } = this.props;
 
-    const { anchorEl, mobileMoreAnchorEl } = this.state;
+    const { anchorEl } = this.state;
     const isMenuOpen = Boolean(anchorEl);
     // const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
    

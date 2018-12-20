@@ -91,10 +91,10 @@ class Service extends Component {
                             {
                                 listServices.map(( service, index) => {
                                     return  <TableRow key={index}>
-                                                <TableCell><Link to={{ pathname: `/${reducer.toLowerCase()}/view/${service._id.toLowerCase()}`, state: { reducer: reducer } }}><span  className="link">{service.service_name}</span></Link></TableCell>
-                                                <TableCell numeric>{cvtNumToUserPref(service.service_price)}</TableCell>
-                                                <TableCell>{service.service_category[localStorage.getItem('locale')]}</TableCell> 
-                                                <Tooltip className={classes.customWidth} title={service.service_description}><TableCell>{service.service_description.slice(0,5)}...</TableCell></Tooltip>
+                                                <TableCell><Link to={{ pathname: `/${reducer.toLowerCase()}/view/${service._id.toLowerCase()}`, state: { reducer: reducer } }}><span  className="link">{service.name}</span></Link></TableCell>
+                                                <TableCell numeric>{cvtNumToUserPref(service.price)}</TableCell>
+                                                <TableCell>{service.category[localStorage.getItem('locale')]}</TableCell> 
+                                                <Tooltip className={classes.customWidth} title={service.description}><TableCell>{service.description.slice(0,5)}...</TableCell></Tooltip>
                                             </TableRow>
                                 })
                             }

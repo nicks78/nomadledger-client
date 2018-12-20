@@ -19,13 +19,17 @@ class BaseState {
 
 
 class InitialState {
-    contact = new BaseState();
-    expense = new BaseState();
-    service = new BaseState();
-    product = new BaseState();
-    company = new BaseState();
-    user    = new BaseState();
-    stat    = new BaseState();
+    contact   = new BaseState();
+    expense   = new BaseState();
+    service   = new BaseState();
+    product   = new BaseState();
+    task      = new BaseState();
+    company   = new BaseState();
+    user      = new BaseState();
+    stat      = new BaseState();
+    quote     = new BaseState();
+    invoice   = new BaseState();
+    payback   = new BaseState();
 }
   
 export default (state = new InitialState(), action) => {
@@ -55,6 +59,26 @@ export default (state = new InitialState(), action) => {
         return {
           ...state,
           stat: baseReducer(state.stat, action)
+        }
+      case 'TASK': 
+        return {
+          ...state,
+          task: baseReducer(state.task, action)
+        }
+      case 'QUOTE': 
+        return {
+          ...state,
+          quote: baseReducer(state.quote, action)
+        }
+      case 'INVOICE': 
+        return {
+          ...state,
+          invoice: baseReducer(state.invoice, action)
+        }
+      case 'PAYBACK': 
+        return {
+          ...state,
+          payback: baseReducer(state.payback, action)
         }
       default: return state;
     }

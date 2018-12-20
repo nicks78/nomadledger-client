@@ -13,19 +13,6 @@ import Pagination from '../../lib/pagination'
 const styles =  theme => ({
     container: {
     },
-    link: {
-        color: '#ef6c00',
-        cursor: 'pointer'
-    },
-    sidebar: {
-        height: '100vh',
-        boxShadow: '2px 0 10px -5px black',
-        zIndex: 3
-    },
-    content: {
-        backgroundColor: 'rgb(240, 240, 240)',
-        zIndex: 1,
-    },
     tableHead: {
         backgroundColor: "rgb(238,238,238)"
     }

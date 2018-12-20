@@ -1,7 +1,7 @@
 //manager/src/pages/product/productCard.js
 import React from 'react'
 import {API_ENDPOINT} from '../../utils/constant'
-import { withStyles, CardHeader, Card, IconButton, CardMedia, CardContent, Typography, CardActions, Avatar, } from "@material-ui/core";
+import { withStyles, CardHeader, Card, IconButton, CardMedia, Avatar, } from "@material-ui/core";
 import MoreVertIcon from '@material-ui/icons/MoreVertOutlined'
 import {cvtNumToUserPref} from '../../utils/help_function'
 
@@ -38,8 +38,8 @@ const ProductCard = (props) => {
         <Card>
         <CardHeader
             avatar={
-                <Avatar aria-label={product.product_name} className={classes.avatar}>
-                    { product.product_name.charAt(0) }
+                <Avatar aria-label={product.name} className={classes.avatar}>
+                    { product.name.charAt(0) }
                 </Avatar>
             }
             action={
@@ -47,12 +47,12 @@ const ProductCard = (props) => {
                 <MoreVertIcon />
                 </IconButton>
             }
-            title={product.product_name}
-            subheader={ cvtNumToUserPref(product.product_buying_price) + ' ' + product.product_currency.value}
+            title={product.name}
+            subheader={ cvtNumToUserPref(product.buying_price) + ' ' + product.currency.value}
             />
             <CardMedia
                 className={classes.media}
-                image={`${API_ENDPOINT}image/view${ product.product_img[0] ? product.product_img[0].path : '/default/default_logo.png' }`}
+                image={`${API_ENDPOINT}image/view${ product.img[0] ? product.img[0].path : '/default/default_logo.png' }`}
                 title="Paella dish"
                 />
         </Card>

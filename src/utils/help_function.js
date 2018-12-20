@@ -42,3 +42,13 @@ export const cvtNumToUserPref = (num) => {
 
     return result.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
+
+export const  removeFromArray = (array, element) => {
+    var newArray = [];
+    for(var i = 0; i < array.length; i++){
+        if(array[i]._id !== element._id){
+            newArray.push(array[i])
+        }
+    }
+    return newArray
+}

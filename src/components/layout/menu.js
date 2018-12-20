@@ -6,6 +6,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Collapse from '@material-ui/core/Collapse';
 import Divider from '@material-ui/core/Divider';
 import HomeIcon from '@material-ui/icons/HomeOutlined';
 import GroupIcon from '@material-ui/icons/GroupOutlined';
@@ -13,6 +14,9 @@ import StoreIcon from '@material-ui/icons/StoreOutlined';
 import ReceiptIcon from '@material-ui/icons/ReceiptOutlined';
 import HeadsetMicIcon from '@material-ui/icons/HeadsetMicOutlined';
 import ListAltIcon from '@material-ui/icons/ListAltOutlined';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalanceOutlined'
+import ExpandLess from '@material-ui/icons/ExpandLessOutlined';
+import ExpandMore from '@material-ui/icons/ExpandMoreOutlined';
 import Hidden from '@material-ui/core/Hidden';
 import Logo from '../../logo.png';
 import Bg from '../../utils/img/bg.jpg'
@@ -26,8 +30,6 @@ const Styles = theme => ({
     },
     active: {
         backgroundColor: 'rgba(0, 0, 0, 0.08)',
-        // borderBottom: '1px solid #cecece8a',
-        // borderTop: '1px solid #cecece8a',
         '& span': {
             color: theme.palette.secondary.main + '!important',
             fontWeight: 'bold'
@@ -42,19 +44,37 @@ const Styles = theme => ({
        },
        '& svg': {
         color: theme.palette.grey.main
-    }
+        }
+    },
+    icon: {
+        color: theme.palette.grey.main
     },
     header: { 
         padding: '24px', 
         textAlign: 'center', 
         backgroundImage: `url(${Bg})`,
         backgroundSize: 'cover'
-    }
+    },
+    nested: {
+        '& span': {
+           color: theme.palette.grey.dark
+       },
+    },
 
 });
 
-const MainMenu = (props) => {
-    const { classes, locale } = props;
+class MainMenu extends React.Component {
+
+    state = {
+        open: false,
+    }
+
+    handleClick = () => {
+        this.setState(state => ({ open: !this.state.open }));
+    }
+
+    render() {
+    const { classes, locale } = this.props;
  
     return (
         <div className={classes.root}>
@@ -78,6 +98,27 @@ const MainMenu = (props) => {
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.contact.name } />
                 </ListItem>
+
+                <ListItem button onClick={this.handleClick}>
+                <ListItemIcon>
+                    <AccountBalanceIcon className={ classes.icon }/>
+                </ListItemIcon>
+                <ListItemText inset className={ classes.listText } primary={ locale.bookkeeping.name } />
+                { this.state.open ? <ExpandLess /> : <ExpandMore />}
+                </ListItem>
+                    <Collapse in={ this.state.open} timeout="auto" unmountOnExit>
+                        <List >
+                            <ListItem button component={NavLink} className={ classes.nested } to="/bookkeeping/quote" activeClassName={classes.active}>
+                                <ListItemText inset  primary={ locale.quote.name }/>
+                            </ListItem>
+                            <ListItem button component={NavLink} className={ classes.nested } to="/bookkeeping/invoice" activeClassName={classes.active}>
+                                <ListItemText inset  primary={ locale.invoice.name }/>
+                            </ListItem>
+                            <ListItem button component={NavLink} className={ classes.nested } to="/bookkeeping/payback" activeClassName={classes.active}>
+                                <ListItemText inset  primary={ locale.payback.name }/>
+                            </ListItem>
+                        </List>
+                    </Collapse>
              
                 <ListItem button component={NavLink}  to="/service" activeClassName={classes.active}>
                     <ListItemIcon>
@@ -100,7 +141,7 @@ const MainMenu = (props) => {
                 </ListItem>
 
                 
-                <ListItem button>
+                <ListItem button component={NavLink}  to="/task" activeClassName={classes.active}>
                     <ListItemIcon>
                         <ListAltIcon  />
                     </ListItemIcon>
@@ -114,7 +155,8 @@ const MainMenu = (props) => {
                 </ListItem>
             </List>
         </div>
-  );
+        )
+    }
 }
 
 MainMenu.propTypes = {

@@ -2,20 +2,21 @@
 
 import React from 'react'
 import AddItem from '../../lib/addItem'
+import {currency} from '../../utils/static_data'
 
 const AddExpense = (props) => {
 
-    const {locale} = props
+    const {locale, category} = props
 
     const fields = [
       {
         title: locale.form.title.add_expense, 
         label: locale.form.title.label_expense,
         fields: [
-            {
-              name: 'expense_name',
-              type:"text"
-            },
+            { name: 'name', type:"text" },
+            { name: 'category', type:"select", selections: category, helperText: "select_category" },
+            { name: 'currency', type:"select", selections: currency, helperText: "select_currency" },
+            { name: 'price', type:"number" },
           ]
       }
     ]

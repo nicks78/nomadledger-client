@@ -7,7 +7,8 @@ const country = [
     { fr: "Italie",  en:"Italy", value:"IT"},
     { fr: "Finlande",  en:"Finland",  value:"FI"},
     { fr: "Irlande",  en:"Ireland",  value:"IE"},
-    { fr: "Malte",  en:"Malta",  value:"MT"}
+    { fr: "Malte",  en:"Malta",  value:"MT"},
+    { fr: "Vietnam",  en:"Viet Nam",  value:"VN"}
 ]
 
 export { country };

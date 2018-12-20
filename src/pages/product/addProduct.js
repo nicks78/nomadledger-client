@@ -14,13 +14,13 @@ const AddProduct = (props) => {
         title: locale.form.title.add_product, 
         label: locale.form.title.label_product,
         fields: [
-          { name: 'product_name', type:"text" },
-          { name: 'product_buying_price', type:"number"},
-          { name: 'product_selling_price', type:"number"},
-          { name: 'product_stock', type:"number"},
-          { name: 'product_currency', type:"select", selections: currency, helperText: "select_currency" },
-          { name: 'product_category', type:"select", selections: category, helperText: "select_category" },
-          { name: 'product_description', type:"longtext", multiline: true, rowsMax:"4" },
+          { name: 'name', type:"text" },
+          { name: 'buying_price', type:"number"},
+          { name: 'price', type:"number"},
+          { name: 'stock', type:"number"},
+          { name: 'currency', type:"select", selections: currency, helperText: "select_currency" },
+          { name: 'category', type:"select", selections: category, helperText: "select_category" },
+          { name: 'description', type:"longtext", multiline: true, rowsMax:"4" },
         ]
       }
     ]

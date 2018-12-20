@@ -20,6 +20,12 @@ import ShowProduct from '../pages/product/showProduct'
 import Service from '../pages/service'
 import ShowService from '../pages/service/showService'
 import Expense from '../pages/expense'
+import ShowExpense from '../pages/expense'
+import Task from '../pages/task'
+import Quote from '../pages/quote'
+import AddQuote from '../pages/quote/addQuote'
+import Invoice from '../pages/invoice'
+import Payback from '../pages/payback'
 
 import NotFound from './notFound'
 import Layout from '../components/layout/layout'
@@ -52,13 +58,30 @@ class Routes extends React.Component {
                             <Switch>
                                 <PrivateRoute path="/home" component={ Home } auth={isLoggedIn}/>
                                 <PrivateRoute path="/account" component={Account}  auth={isLoggedIn}/>
+
                                 <PrivateRoute exact path="/contact" component={Contact}  auth={isLoggedIn}/>
                                 <PrivateRoute path="/contact/view/:id" component={ShowContact}  auth={isLoggedIn}/>
+
                                 <PrivateRoute exact path="/product" component={Product}  auth={isLoggedIn}/>
                                 <PrivateRoute path="/product/view/:id" component={ShowProduct}  auth={isLoggedIn}/>
+
                                 <PrivateRoute exact path="/service" component={Service}  auth={isLoggedIn}/>
                                 <PrivateRoute path="/service/view/:id" component={ShowService}  auth={isLoggedIn}/>
-                                <PrivateRoute path="/expense" component={Expense}  auth={isLoggedIn}/>
+
+                                <PrivateRoute exact path="/expense" component={Expense}  auth={isLoggedIn}/>
+                                <PrivateRoute path="/expense/view/:id" component={ShowExpense}  auth={isLoggedIn}/>
+
+                                <PrivateRoute exact path="/task" component={Task}  auth={isLoggedIn}/>
+
+                                <PrivateRoute exact path="/bookkeeping/quote" component={Quote}  auth={isLoggedIn}/>
+                                <PrivateRoute path="/bookkeeping/quote/add" component={AddQuote}  auth={isLoggedIn}/>
+                                <PrivateRoute path="/bookkeeping/quote/view/:id" component={Quote}  auth={isLoggedIn}/>
+
+
+                                <PrivateRoute exact path="/bookkeeping/invoice" component={Invoice}  auth={isLoggedIn}/>
+                                <PrivateRoute exact path="/bookkeeping/payback" component={Payback}  auth={isLoggedIn}/>
+
+
                                 <PrivateRoute path="*" component={NotFound}  auth={isLoggedIn}/>
                             </Switch>
                             </Layout>

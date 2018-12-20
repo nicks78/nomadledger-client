@@ -1,35 +1,30 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, Grid, Typography } from '@material-ui/core';
 import {date} from '../../utils/static_data'
-import DayPickerInput from 'react-day-picker/DayPickerInput';
+import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
-
-const styles = theme => ({
-  root: {
-
-  },
-  picker: {
-      fontSize: '13px',
-  },
-  textField: {
-      width: '100%'
-  }
-});
-
-
+import DateRangeIcon from '@material-ui/icons/DateRangeOutlined'
+ 
+/**
+ * @param value 
+ * @param field
+ * @func handleDate
+ * 
+ */
 class DatePickers extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
         selectedDay: new Date(),
+        show: false,
+
       }
     }
    
-    handleDayChange = (date, modifiers, dayPickerInput) => {
-        var fieldName = dayPickerInput.props.name
-
+    handleDayChange = (date) => {
         this.setState({
             selectedDay: date,
+            show: false
         });
 
         var month = date.getMonth() + 1;
@@ -38,41 +33,80 @@ class DatePickers extends React.Component {
         var obj = {
             date: new Date(date),
             label: date.getDate() +'/'+ month +'/'+ date.getFullYear(),
+            intl_format: date.getFullYear() +'/'+ month +'/'+ date.getDate(),
             timestamp: date.getTime()
         }
 
-        this.props.handleDate(fieldName, obj)
+        var event = {
+            target: { value: obj, name: this.props.field }
+        }
+
+        this.props.handleDate(event)
+    }
+
+    handleShow = () => {
+        this.setState({ show: !this.state.show })
     }
 
    
     render() {
-    const { classes, field, value } = this.props
+    const { classes, value, label } = this.props
     const { selectedDay} = this.state
     var locale = localStorage.getItem('locale');
 
-   
+    var modifiers = {
+        highlighted: new Date(selectedDay),
+    }
+
 
       return (
             <div className={classes.root}>
-                    <DayPickerInput 
-                        
-                        onDayChange={this.handleDayChange}
-                        locale={locale}
-                        name={field}
-                        placeholder={ value || date[locale].placeholder}
-                        selectedDays={ selectedDay }
-                        dayPickerProps={{
-                            weekdaysLong: date[locale].week_long,
-                            weekdaysShort: date[locale].week_short,
-                            months: date[locale].month,
-                            className:classes.picker 
-                        }}
-                    />
 
+                <Grid container spacing={24}>
+
+                    <Grid item xs={1}>
+                        <span className={ classes.span }><DateRangeIcon className={ classes.icon } onClick={this.handleShow} /></span>
+                    </Grid>
+
+                    <Grid item xs={11}>
+                        <Typography variant="subtitle2">{label} :<span style={{float: 'right', clear: 'both', color: 'rgba(0, 0, 0, 0.87)'}}>{value || date[locale].placeholder }</span></Typography>
+                    </Grid>
+
+                </Grid>
+                    
+                {   this.state.show ? 
+                            <DayPicker 
+                                onDayClick={  this.handleDayChange }
+                                weekdaysLong={ date[locale].week_long}
+                                selectedDay={selectedDay}
+                                weekdaysShort={ date[locale].week_short}
+                                months={ date[locale].month}
+                                modifiers={modifiers}
+                            />                         
+                    : null 
+                }
             </div>
       )
     }
-  }
+}
+
+const styles = theme => ({
+    icon: {
+        color: 'rgb(148, 148, 148)', 
+        cursor: 'pointer', 
+        fontSize: '20px',
+        
+    },
+    span: {
+        fontSize: 14,
+        '& :hover ': {
+            color: theme.palette.primary.main
+        }
+    },
+    textField: {
+        width: '100%'
+    },
+})
 
 const ApxDatePicker =  withStyles(styles)(DatePickers)
 

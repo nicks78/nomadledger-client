@@ -14,6 +14,10 @@ const Locale = {
                 name: "Contacts",
                 url: "contact"
             },
+            bookkeeping: {
+                name: "Compta",
+                url: "compta"
+            },
             service_provider:{
                 name: "Prestataire",
                 url: "contact"
@@ -84,7 +88,8 @@ const Locale = {
                 address: "Adresse",
                 company: "Société",
                 represented_by: "Représente par",
-                selected: "sélectionner"
+                selected: "sélectionner",
+                markdown: "Simple editeur de text pour vos devis"
             },
             form: {
                 title: {
@@ -121,6 +126,8 @@ const Locale = {
                     company_type: "Type de société",  
                     phone_code: 'Code pays',
                     phone: "Téléphone",
+                    line_code: 'Code pays',
+                    land_line: "Ligne fixe",
                     email: "Couriel",
                     company: "Société",
                     register: "Siret",
@@ -132,31 +139,26 @@ const Locale = {
                     num_format: "Format des chiffres",
 
                     contact_group: "Groupe",
+                    contact_drop: "Client",
 
-                    product_name: "Nom du produit",
-                    product_description: "Déscription",
-                    product_category: "Catégorie",
-                    product_buying_price: "Prix d'achat",
-                    product_selling_price: "Prix de vente",
-                    product_price: "Prix",
-                    product_currency: "Devise",
-                    product_stock: "En stock",
+                    name: "Nom",
+                    description: "Déscription",
+                    category: "Catégorie",
+                    buying_price: "Prix d'achat",
+                    selling_price: "Prix de vente",
+                    price: "Prix",
+                    currency: "Devise",
+                    stock: "En stock",
+                    receipt: "Reçu",
 
+                    notes: "Information interne",
 
-                    service_name: "Nom du service",
-                    service_description: "Déscription",
-                    service_price: "Prix",
-                    service_category: "Catégorie",
-                    service_note: "Information interne",
-
-                    category: "Ajouter une Categorie",
+                    add_category: "Ajouter une Categorie",
                     add_group: "Ajouter un group",
                     add_vat: "Taux TVA",
-                    name_vat: "Nom de TVA",
 
-                    expense_name: "Nom de la depense",
-                    description: "Description",
-                    price: "Prix"
+                    expired_at: "Valide jusqu'au",
+                    created_at: "Créer le"
                     
                 },
                 helperText: {
@@ -164,7 +166,8 @@ const Locale = {
                     select_country_code: "Sélectionner pays",
                     select_service_type: "Sélectionner le type de service",
                     select_num_format: "Selectionner format des chiffres",
-                    select_category: "Sélectionner une catégorie"
+                    select_category: "Sélectionner une catégorie",
+                    select_contact: "Sélectionner un client",
                 }
             },
             message: {
@@ -205,7 +208,11 @@ const Locale = {
                 company: "Société",
                 of: "à",
                 selected: "sélectionner",
-                group: "Groupe"
+                group: "Groupe",
+                receipt: "Reçu",
+                expense_name: "Nom",
+                date: "Date",
+                name: "Nom"
 
 
             }
@@ -220,6 +227,10 @@ const Locale = {
             contact:{
                 name: "Customers",
                 url: "contact"
+            },
+            bookkeeping: {
+                name: "Bookkeeping",
+                url: "bookkeeping"
             },
             service_provider:{
                 name: "Service provider",
@@ -290,7 +301,8 @@ const Locale = {
                 address: "Address",
                 company: "Company",
                 represented_by: "Represented by",
-                selected: "selected"
+                selected: "selected",
+                markdown: "Markdown editor"
             },
             form: {
                 title: {
@@ -330,6 +342,8 @@ const Locale = {
                     addresses_city: "City", 
                     addresses_country: "Country", 
                     phone_code: 'Country code',
+                    line_code: 'Country code',
+                    land_line: "Land line",
                     phone: "Phone",
                     num_format: "Number format",
                     email: "Email",
@@ -338,38 +352,34 @@ const Locale = {
                     vat: 'VAT',
 
                     contact_group: "Group",
+                    contact_drop: "Client",
 
-                    product_name: "Product name",
-                    product_description: "Description",
-                    product_category: "Catégory",
-                    product_price: "Price",
-                    product_buying_price: "Buying price",
-                    product_selling_price: "Selling price",
-                    product_currency: "Currency",
-                    product_stock: "In stock",
+                    name: "Product name",
+                    description: "Description",
+                    category: "Catégory",
+                    price: "Price",
+                    buying_price: "Buying price",
+                    selling_price: "Selling price",
+                    currency: "Currency",
+                    stock: "In stock",
+                    notes: "Sales informations",
+                    receipt: "Receipt",
 
-
-                    service_name: "Service name",
-                    service_description: "Description",
-                    service_price: "Price",
-                    service_category: "Category",
-                    service_note: "Sales informations",
-
-                    category: "Add category",
+                    add_category: "Add category",
                     add_group: "Add a group",
                     add_vat: "Value VAT",
                     name_vat: "VAT name",
 
-                    expense_name: "Expense name",
-                    description: "Description",
-                    price: "Price"
+                    expired_at: "Expired at",
+                    created_at: "Create at"
                 },
                 helperText: {
                     select_phone_code: "Please select country code",
                     select_country_code: "Please select a country",
                     select_service_type: "Select service type",
                     select_num_format: "Select num format",
-                    select_category: "Select a category"
+                    select_category: "Select a category",
+                    select_contact: "Select a client"
                 }
             },
             message: {
@@ -410,7 +420,11 @@ const Locale = {
                 email: "Email",
                 company: "Company",
                 of: "of",
-                group: "Group"
+                group: "Group",
+                receipt: "Receipt",
+                date: "Date",
+                expense_name: "Name",
+
 
             }
         },
