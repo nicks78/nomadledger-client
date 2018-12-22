@@ -2,7 +2,7 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
-import { createState , setListItem, addRemoveQuantity, removeItem} from '../bookkeeping/actions'
+import { createState , setListItem, addRemoveQuantity, removeItem, discountPrice} from '../bookkeeping/actions'
 import { 
 Paper, 
 IconButton, 
@@ -18,9 +18,11 @@ import DeleteIcon from '@material-ui/icons/DeleteOutlined'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import {cvtNumToUserPref} from '../../utils/help_function'
-import { ApxtextIndexValue, ApxSelect, ApxDatePicker} from '../../components/common'
+import { ApxtextIndexValue, ApxContenEditable,  ApxSelect, ApxDatePicker} from '../../components/common'
 import {currency} from '../../utils/static_data'
 import AutoComplete from '../../lib/autoComplete'
+// import {checkNumFormatRegex } from '../../utils/help_function'
+
 
 
 class AddQuote extends React.Component {
@@ -33,10 +35,22 @@ class AddQuote extends React.Component {
         this.props.createState( "QUOTE", name, value)
     }
 
+    getInput = (event, id) => {
+        var fieldName = event.target.id
+        var value = event.target.innerText
+
+        // Update store
+        this.props.discountPrice( "QUOTE", id, fieldName, value)
+        // console.log(checkNumFormatRegex(value))
+
+        
+    }
+
     render(){
 
-    const { locale, classes, newQuote, listItems} = this.props
-    console.log(newQuote)
+    const { locale, classes, newQuote, listItems} = this.props;
+
+    
     
     var infoContact = ["company_name", "firstname", "lastname", "email"]
     return (
@@ -106,7 +120,7 @@ class AddQuote extends React.Component {
                     <Grid container spacing={24}>
                             <Grid item xs={6}>
                                 <AutoComplete
-                                    disabled={ newQuote.currency && newQuote.company_name ? "" : "disabled" }
+                                    // disabled={ newQuote.currency && newQuote.company_name ? "" : "disabled" }
                                     field="name"
                                     model="service"
                                     reducer="QUOTE"
@@ -117,7 +131,7 @@ class AddQuote extends React.Component {
 
                             <Grid item xs={6}>
                                 <AutoComplete 
-                                    disabled={ newQuote.currency && newQuote.company_name ? "" : "disabled" }
+                                    disabled={ newQuote.currency && newQuote.company_name ? false : true }
                                     field="name"
                                     model="product"
                                     reducer="QUOTE"
@@ -146,7 +160,7 @@ class AddQuote extends React.Component {
                         <TableBody>
                             {   
                             listItems.map(( item, index) => {
-                                console.log(item)
+                                
                                 return  <TableRow key={index}>
                                             <TableCell>{ item.tmp.ref}</TableCell>
                                             <TableCell>{ item.tmp.name }</TableCell>
@@ -159,7 +173,7 @@ class AddQuote extends React.Component {
                                             <ArrowDropDownIcon onClick={ () => { this.props.addRemoveQuantity("QUOTE", item._id, "down")}} />
                                             
                                             </TableCell>
-                                            <TableCell>{ item.discount }</TableCell>
+                                            <TableCell><ApxContenEditable value={item.discount} id={item._id} actionInput={this.getInput} name="discount" /></TableCell>
                                             <TableCell>{ cvtNumToUserPref(item.total) }</TableCell>
                                             <TableCell ><IconButton onClick={ () => { this.props.removeItem("QUOTE", item)}} ><DeleteIcon color="secondary"/></IconButton></TableCell>
                                             
@@ -203,4 +217,4 @@ const mapStateToProps = (state) => {
 
 const StyledAddQuote = withStyles(styles)(AddQuote)
 
-export default connect(mapStateToProps, { createState, setListItem, addRemoveQuantity, removeItem })(StyledAddQuote);
+export default connect(mapStateToProps, { createState, setListItem, addRemoveQuantity, removeItem, discountPrice })(StyledAddQuote);

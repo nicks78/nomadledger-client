@@ -81,8 +81,6 @@ export function setListItem( actionType, name, item ) {
         _id: item._id,
         tmp: item
     }
-
-
     return {
         type: `STATE_ITEM`,
         subtype: actionType,
@@ -99,6 +97,16 @@ export function addRemoveQuantity ( actionType, id, move ){
       subtype: actionType,
       move: move,
       id: id,
+    }
+}
+
+export function discountPrice ( actionType, id, fieldName, value ){
+    
+    return  {
+        type: `DISCOUNT`,
+        subtype: actionType,
+        _id: id,
+        payload: {fieldName, value},
     }
 }
 

@@ -68,6 +68,12 @@ const authReducer = (state = initialState, action) => {
                 list_items: manageQuantity(state.list_items, action),
             }
 
+        case `DISCOUNT`:
+            return {
+                ...state,
+                list_items: discountPrice(state.list_items, action),
+            }
+
         case `REMOVE_ITEM`:
             return {
                 ...state,
@@ -81,15 +87,29 @@ const authReducer = (state = initialState, action) => {
 export default authReducer;
 
 
+function discountPrice(array, element){
+    var list = array;
+    var obj = list.filter((x) => {   
+        if(x._id === element._id) { 
+            x.discount = parseFloat(element.payload.value)
+            x.total = (x.total - x.discount).toFixed(2)
+            return x
+        } 
+        return false
+    });
+    list = Object.assign(obj, list);
+    return list;
+}
+
 function removeDuplicateAndAddQuantity(array, element) {
     var list = array;
     var obj = list.filter((x) => {   
         if(x._id === element.payload._id) { 
             x.quantity = x.quantity +1; 
-            x.total = x.total_ht * x.quantity
+            x.total = (x.total_ht * x.quantity).toFixed(2)
             return x
         } 
-        return 
+        return false
     });
     
     if(obj.length === 0 ){
