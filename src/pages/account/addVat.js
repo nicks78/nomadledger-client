@@ -9,6 +9,8 @@ import {ApxTag, Spinner} from '../../components/common'
 import { checkNumFormatRegex } from '../../utils/help_function'
 
 
+
+
 const styles = theme => ({
   root: {
       padding: 24
@@ -65,6 +67,12 @@ class AddVat extends Component {
 
     _pushToDoc = () => {
         var num = checkNumFormatRegex( this.state.value )
+
+        if(this.state.name === ''){
+            alert("Must give a name !")
+            return ;
+        }
+        
         if( num && this.state.name ){
             var data = {
             vat: { name: this.state.name, value: num }
@@ -98,7 +106,7 @@ class AddVat extends Component {
                     <div className={ classes.addVat}>
                         <TextField 
                                 id="vatname"
-                                label={locale.form.field.name_vat}
+                                label={locale.form.field.name}
                                 className={classes.textField}
                                 value={this.state.name}
                                 name="name"
@@ -108,6 +116,7 @@ class AddVat extends Component {
 
                             <TextField 
                                 id="vat"
+                                type="number"
                                 label={locale.form.field.add_vat}
                                 className={classes.textField}
                                 value={this.state.value}
