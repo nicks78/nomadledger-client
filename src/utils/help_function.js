@@ -27,6 +27,15 @@ export const checkNumFormatRegex = (num) => {
     return false
 }
 
+export const convertToNumber = (num) => {
+    var res ;
+    if(typeof num === 'string'){
+        res = num.replace(',', '.')
+    }
+    res = parseFloat(res)
+    return res;
+}
+
 
 export const cvtNumToUserPref = (num) => {
 

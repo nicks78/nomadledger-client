@@ -17,7 +17,7 @@ import Divider from '@material-ui/core/Divider'
 import AppBar from '@material-ui/core/AppBar'
 import SwipeableViews from 'react-swipeable-views'
 import StatContact from './stat'
-import Invoice from '../../invoice'
+import Invoice from '../../bookkeeping/invoice'
 
 
 const styles = theme => ({

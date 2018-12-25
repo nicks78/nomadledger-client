@@ -19,7 +19,7 @@ export function getBookList( actionType, query = "" ){
             return response.data
         }) 
         .then( res => {
-            dispatch(receiveContacts(actionType, res.payload ))  
+            dispatch(receiveDocuments(actionType, res.payload ))  
         })
         .catch(function (error) {
           // handle error
@@ -51,7 +51,8 @@ function requestFailed( actionType, message ) {
     }
 }
 
-function receiveContacts( actionType, items ) {
+// Receive all documents list ( invoice || quote || payback )
+function receiveDocuments( actionType, items ) {
     return {
         type: `RECEIVE`,
         subtype: actionType,
@@ -69,26 +70,59 @@ export function createState ( actionType, fieldName, value ){
     }
 }
 
+// Set a list of items (service/products)
 export function setListItem( actionType, name, item ) {
 
-    // Convert to currency
-    var from_currency = item.currency.en
-    var tmp = {
-        quantity: 1,
-        discount: 0.00,
-        total_ht: convertToCurrency(from_currency, item.price, "GBP"),
-        total: convertToCurrency(from_currency, item.price, "GBP"),
-        _id: item._id,
-        tmp: item
-    }
     return {
         type: `STATE_ITEM`,
         subtype: actionType,
         isFetching: false,
         isError: false,
         name: name,
-        payload:  tmp
+        payload:  item
     }
+
+    
+}
+
+export function getListItem( actionType, name, item ) {
+    console.log("GETITEMS", name)
+    return (dispatch, getState) => {
+
+        var currency = getState().book[actionType.toLowerCase()].item.currency;
+
+        var tmp = {
+            quantity: 1,
+            type: item.type,
+            discount: 0.00,
+            currency: currency.en || item.currency.en,
+            unit_price: currencyCovertorApi( item.currency.en, item.price, currency.en ),
+            total: currencyCovertorApi( item.currency.en, item.price, currency.en ),
+            _id: item._id,
+            tmp: item
+        }
+        
+        dispatch(setListItem(actionType, name, tmp))
+    }
+}
+
+// Convert each item into the selected currency
+export function convertToCurrency(actionType, currency) {
+
+    return (dispatch, getState) => {
+
+        var listItems = getState().book[actionType.toLowerCase()].list_items;
+        
+        for(var i = 0; i < listItems.length; i++){
+            var item = listItems[i]
+            item.total = currencyCovertorApi(item.base_currency, item.total, currency.en);
+            item.unit_price = currencyCovertorApi( item.currency.en, item.unit_price, currency.en );
+            item.base_currency =  currency.en;
+        }
+
+        dispatch(createState(actionType, "list_items", listItems))
+    }
+
 }
 
 export function addRemoveQuantity ( actionType, id, move ){
@@ -118,12 +152,8 @@ export function removeItem ( actionType, item ){
     }
 }
 
-
-function convertToCurrency(from, price, to) {
-
-    var result = price * 1.14;
-    var b = result.toString().substring(0, result.toString().indexOf(".") + 3)
-
-    return parseFloat(b);
-
+// Add CURRENCY CONVERTOR API
+export function currencyCovertorApi(from, price, to) {
+    // var result = parseFloat((price * 1.35).toFixed(2));
+    return price;
 }

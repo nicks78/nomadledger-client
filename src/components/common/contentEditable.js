@@ -8,7 +8,6 @@ const styles = theme => ({
 const ContenEditable = (props) => {
 
   const { value, actionInput, id, name } = props;
-  
   return (
         <div    id={name}
                 suppressContentEditableWarning={true} 

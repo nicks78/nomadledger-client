@@ -54,12 +54,14 @@ const Select = (props) => {
             helperText={props.locale.form.helperText[helperText]}
             margin="normal"
             >
-            {arrayField.map((option, index) => (
+            {
+                arrayField.map((option, index) => (
                 
                 <MenuItem key={index} value={ option[localStorage.getItem('locale')]}>
                     {option[props.locale.lang]} {option.value && '(' + option.value +')'}
                 </MenuItem>
-            ))}
+            ))
+            }
             </TextField>
       </div>
     )

@@ -212,11 +212,7 @@ const Locale = {
                 receipt: "Reçu",
                 expense_name: "Nom",
                 date: "Date",
-                name: "Nom",
-                ref: "Référence",
-                incl: "inclus",
-                subtotal :  "Total HT",
-                total_ttc: "Total TTC",
+                name: "Nom"
 
 
             }
@@ -430,9 +426,9 @@ const Locale = {
                 expense_name: "Name",
                 ref: "Reference",
                 name: "Name",
-                incl: "incl",
-                subtotal :  "Subtotal",
-                total_ttc: "Total incl VAT",
+                
+
+
             }
         },
 }

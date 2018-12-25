@@ -8,9 +8,15 @@ const styles = theme => ({
     root: {
         clear: 'both'
     },
+    spanWrapper: {
+        lineHeight: '1.6em'
+    },
     value: {
         float: "right",
     },
+    label: {
+        float: "left"
+    }
 });
 
 const TextIndexValue = (props) => {
@@ -19,11 +25,11 @@ const TextIndexValue = (props) => {
 
   return (
     <div className={classes.root}>
-        <Typography variant="body1" component={html_tag || "p"} href={href || null }>
-            <span className={ classes.value }>{value}</span>
+            <Typography className={ classes.spanWrapper } variant="caption" component="p">
+            <span className={ classes.label }>{label} :</span>
         </Typography>
-        <Typography variant="caption" component="p">
-            <span className={ classes.label }>{label} :<br /></span>
+        <Typography className={ classes.spanWrapper } variant="body1" component={html_tag || "p"} href={href || null }>
+            <span className={ classes.value }>{value}</span>
         </Typography>
         
     </div>

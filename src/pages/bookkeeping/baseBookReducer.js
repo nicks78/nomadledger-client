@@ -1,6 +1,7 @@
 //src/pages/bookkeeping/baseBookReducer.js
 
 import {removeFromArray} from '../../utils/help_function'
+import { removeDuplicateAndAddQuantity, discountPrice, manageQuantity} from './common/_helper'
 
 const initialState = {
     tmp_state : {},
@@ -31,7 +32,6 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 isFetching: action.isFetching,
                 isError: action.isError,
-                isLoggedIn: false,
                 isCreated: false,
                 message: action.message
             }
@@ -47,19 +47,21 @@ const authReducer = (state = initialState, action) => {
             return  { 
                 ...state,
                 isFetching: false,
-                isLoggedIn: true
+                isError: false,
+                item: action.item
             }
         case `STATE_ITEM`:
             return  { 
                 ...state, 
                 isFetching: false,
-                list_items: removeDuplicateAndAddQuantity(state.list_items, action)
+                isError: false,
+                list_items: removeDuplicateAndAddQuantity(state.list_items, action),
             }
         case `STATE`:
             return {
                 ...state,
                 tmp_state: { ...state.tmp_state, [ action.payload.fieldName ] : action.payload.value },
-                item: { ...state.item, [ action.payload.fieldName ] : action.payload.value }
+                item: { ...state.item, [ action.payload.fieldName ] : action.payload.value },
             }
 
         case `UP_DOWN_QUANTITY`:
@@ -86,57 +88,3 @@ const authReducer = (state = initialState, action) => {
 
 export default authReducer;
 
-
-function discountPrice(array, element){
-    var list = array;
-    var obj = list.filter((x) => {   
-        if(x._id === element._id) { 
-            x.discount = parseFloat(element.payload.value)
-            x.total = (x.total - x.discount).toFixed(2)
-            return x
-        } 
-        return false
-    });
-    list = Object.assign(obj, list);
-    return list;
-}
-
-function removeDuplicateAndAddQuantity(array, element) {
-    var list = array;
-    var obj = list.filter((x) => {   
-        if(x._id === element.payload._id) { 
-            x.quantity = x.quantity +1; 
-            x.total = (x.total_ht * x.quantity).toFixed(2)
-            return x
-        } 
-        return false
-    });
-    
-    if(obj.length === 0 ){
-        list = [...list, element.payload]
-    }else{
-        list = Object.assign(obj, list)
-    }
-
-    return list
-}
-
-function manageQuantity(list, action){
-    // function to update array
-    var newData = list.map(obj => {
-        if(obj._id === action.id){
-            if(obj.quantity !== 1 && action.move === "down"){
-                obj.quantity = obj.quantity -1;
-                obj.total = obj.total_ht * obj.quantity
-            }else if(action.move === "up"){
-                obj.quantity = obj.quantity +1 ;
-                obj.total = obj.total_ht * obj.quantity
-            }
-            return obj
-        }else{
-            return obj
-        }  
-    });
-
-    return newData
-}

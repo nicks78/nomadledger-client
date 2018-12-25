@@ -48,6 +48,7 @@ class AddVat extends Component {
   state = {
     value: '',
     name: '',
+    indice: 0,
     reducer: "COMPANY",
     addApi: 'push-pull/update/push/',
     deleteApi: 'push-pull/update/pull/'
@@ -62,7 +63,10 @@ class AddVat extends Component {
     _handleFormEdit = (event) => {
         var name = event.target.name;
         var value = event.target.value;
-        this.setState({[name]: value})
+
+        
+
+        this.setState({[name]: value })
     }
 
     _pushToDoc = () => {
@@ -75,12 +79,17 @@ class AddVat extends Component {
         
         if( num && this.state.name ){
             var data = {
-            vat: { name: this.state.name, value: num }
+                vat: { 
+                    en: this.state.name, 
+                    fr: this.state.name, 
+                    value: this.state.value + " %",
+                    indice: num 
+                }
             }
-            this.setState({value: 0.00, name: ''})
+            this.setState({value: "", name: '', indice: 0 })
             this.props.pushToDocument(this.state.reducer, data, this.state.addApi )
         }else{
-            alert("Format de numero ou nom incorrect !")
+            alert("Format de numero ou nom incorrect (ex: 18.06 | 18,06 )!")
         }
     }
 
@@ -116,7 +125,7 @@ class AddVat extends Component {
 
                             <TextField 
                                 id="vat"
-                                type="number"
+                                type="text"
                                 label={locale.form.field.add_vat}
                                 className={classes.textField}
                                 value={this.state.value}
@@ -138,7 +147,7 @@ class AddVat extends Component {
                                   key={index}
                                   variant="outlined"
                                   actionTag={ () => { this.deleteCategory(vat._id) } }
-                                  label={ vat.name +'  ('+ vat.value +'%)' }
+                                  label={ vat[localStorage.getItem('locale')] + ' ('+ vat.value +")"}
                                 />
                         })
                     }

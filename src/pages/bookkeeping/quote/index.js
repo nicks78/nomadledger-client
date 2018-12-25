@@ -3,12 +3,12 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 import {connect} from 'react-redux'
-import { getBookList } from '../bookkeeping/actions'
-import { getTotal } from '../../redux/actions'
+import { getBookList } from '../actions'
+import { getTotal } from '../../../redux/actions'
 import { withStyles, Button, Hidden ,Table, TableHead, TableBody, Checkbox, Paper, TableCell, TableRow,} from '@material-ui/core';
-import {ApxTableToolBar, Spinner, ApxAlert} from '../../components/common'
+import {ApxTableToolBar, Spinner, ApxAlert} from '../../../components/common'
 // import {RichEditor} from '../../components/common'
-import Pagination from '../../lib/pagination'
+import Pagination from '../../../lib/pagination'
 
 
 class Quote extends Component {
