@@ -29,6 +29,41 @@ export function getBookList( actionType, query = "" ){
     }
 }
 
+export function createDocument (actionType) {
+    return (dispatch, getState) => {
+
+        var data = getState().book[actionType.toLowerCase()].tmp_state;
+        data.list_items = getState().book[actionType.toLowerCase()].list_items
+
+        data.contact_id = data.company_name._id;
+
+        dispatch(requestData(actionType));
+        // Set withCredentials
+        axios.defaults.withCredentials = true;
+
+        axios.post(`${API_ENDPOINT}bookkeeping/${actionType.toLowerCase()}/create`,
+            { 
+                data: data,
+                mode: 'cors'
+            },   
+            { headers: {
+                    'Content-Type': 'application/json'
+            }
+        })
+        .then(function (response) { 
+            return response.data
+        }) 
+        .then( res => {
+            console.log(res)
+        })
+        .catch(function (error) {
+          // handle error
+          var message = error.response ? error.response.data.message : 'error_500'
+          dispatch(requestFailed(actionType, message));
+        })             
+    }
+}
+
 
 
 function requestData( actionType ) {
@@ -36,7 +71,7 @@ function requestData( actionType ) {
         type: `REQUEST`,
         subtype: actionType,
         isFetching: false,
-        isError: true
+        isError: false
     }
 }
 
@@ -57,7 +92,7 @@ function receiveDocuments( actionType, items ) {
         type: `RECEIVE`,
         subtype: actionType,
         isFetching: false,
-        isError: true,
+        isError: false,
         payload: items
     }
 }
@@ -70,7 +105,40 @@ export function createState ( actionType, fieldName, value ){
     }
 }
 
-// Set a list of items (service/products)
+/**
+ * Called when add new item in store
+ * @param actionType 
+ * @param name // database field name
+ * @param item 
+ */
+export function getListItem( actionType, name, item ) {
+    return (dispatch, getState) => {
+
+        var currency = getState().book[actionType.toLowerCase()].item.currency;
+        var convertedPrice = Promise.resolve(currencyConvertorApi( item.currency.en, item.price, currency.en ));
+
+        convertedPrice.then( (unit_price) => {
+            var tmp = {
+                    quantity: 1,
+                    type: item.type,
+                    desc: item.name, 
+                    discount: 0,
+                    currency: currency.en || item.currency.en,
+                    unit_price: unit_price,
+                    total: unit_price,
+                    item_id: item._id,
+                    tmp: item
+                }
+            dispatch(setListItem(actionType, name, tmp))
+        })
+        .catch(function (error) {
+            // handle error
+            dispatch(requestFailed(actionType, "error_500"));
+        })        
+    }
+}
+
+// Add item to list (service/products)
 export function setListItem( actionType, name, item ) {
 
     return {
@@ -80,49 +148,36 @@ export function setListItem( actionType, name, item ) {
         isError: false,
         name: name,
         payload:  item
-    }
-
-    
+    } 
 }
 
-export function getListItem( actionType, name, item ) {
-    console.log("GETITEMS", name)
-    return (dispatch, getState) => {
+/**
+ * Update all item in the list
+ * Called when user change currency dropdown
+ * 
+ * @param actionType 
+ * @param currency 
+ * 
+ */
+export function convertToCurrency( actionType, currency, item ) {
 
-        var currency = getState().book[actionType.toLowerCase()].item.currency;
+    return (dispatch) => {
+        var convertedPrice = Promise.resolve(currencyConvertorApi( item.currency.en, item.unit_price, currency.en ));
 
-        var tmp = {
-            quantity: 1,
-            type: item.type,
-            discount: 0.00,
-            currency: currency.en || item.currency.en,
-            unit_price: currencyCovertorApi( item.currency.en, item.price, currency.en ),
-            total: currencyCovertorApi( item.currency.en, item.price, currency.en ),
-            _id: item._id,
-            tmp: item
-        }
-        
-        dispatch(setListItem(actionType, name, tmp))
+        convertedPrice.then( (value) => {
+            item.total = parseFloat((value * item.quantity).toFixed(2));
+            item.unit_price = value;
+            item.base_currency = currency.en;
+            
+        })
+        .then(() => {
+            dispatch(createState(actionType, 'list_items', item))
+        })
+        .catch(function (error) {
+            // handle error
+            dispatch(requestFailed(actionType, "error_500"));
+        })   
     }
-}
-
-// Convert each item into the selected currency
-export function convertToCurrency(actionType, currency) {
-
-    return (dispatch, getState) => {
-
-        var listItems = getState().book[actionType.toLowerCase()].list_items;
-        
-        for(var i = 0; i < listItems.length; i++){
-            var item = listItems[i]
-            item.total = currencyCovertorApi(item.base_currency, item.total, currency.en);
-            item.unit_price = currencyCovertorApi( item.currency.en, item.unit_price, currency.en );
-            item.base_currency =  currency.en;
-        }
-
-        dispatch(createState(actionType, "list_items", listItems))
-    }
-
 }
 
 export function addRemoveQuantity ( actionType, id, move ){
@@ -139,7 +194,19 @@ export function discountPrice ( actionType, id, fieldName, value ){
     return  {
         type: `DISCOUNT`,
         subtype: actionType,
+        isError: false,
         _id: id,
+        payload: {fieldName, value},
+    }
+}
+
+export function editItem ( actionType, item, fieldName, value ){
+    
+    return  {
+        type: `EDIT_SINGLE_ITEM`,
+        subtype: actionType,
+        isError: false,
+        item: item,
         payload: {fieldName, value},
     }
 }
@@ -148,12 +215,24 @@ export function removeItem ( actionType, item ){
     return  {
       type: `REMOVE_ITEM`,
       subtype: actionType,
+      isError: false,
       payload: item,
     }
 }
 
-// Add CURRENCY CONVERTOR API
-export function currencyCovertorApi(from, price, to) {
-    // var result = parseFloat((price * 1.35).toFixed(2));
-    return price;
+/**
+ * 
+ * @param  from 
+ * @param  price 
+ * @param  to 
+ */
+async function currencyConvertorApi(from, price, to){
+
+    // Set real time currency convertor
+    axios.defaults.withCredentials = false;
+    let json = await axios.get('https://reqres.in/api/users');
+
+    var result = parseFloat( (price + 0.05 ).toFixed(2) ) 
+
+    return result;
 }

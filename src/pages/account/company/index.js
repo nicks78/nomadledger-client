@@ -128,12 +128,11 @@ class Company extends Component {
                       field="company_vat"
                       handleAction={(event) => { this.props.handleFormEdit(event, reducer) }}
                   />
+                  <br />
                   <Typography variant="subtitle2">
                         {locale.form.title.label_tax}
                     </Typography>
                     <Divider className={ classes.divider }/>
-
-                    
 
                     {
                         showEdit ? 

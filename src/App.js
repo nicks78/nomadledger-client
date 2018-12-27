@@ -68,8 +68,8 @@ const theme = createMuiTheme({
       fontSize: '0.9rem'
     },
     subtitle2: {
-      fontWeight: 600,
-      color: 'rgb(128, 128, 128)',
+      fontWeight: 500,
+      color: 'rgb(72, 72, 72)',
       fontSize: '0.9rem'
     },
     caption: {
@@ -83,8 +83,8 @@ const theme = createMuiTheme({
     },
     overline: {
       fontSize: '0.85rem',
-      fontWeight: 600,
-      color: 'rgb(128, 128, 128)',
+      fontWeight: 700,
+      color: 'rgb(72, 72, 72)',
       lineHeight: 1.6
     },
     fontWeightMedium: 700,

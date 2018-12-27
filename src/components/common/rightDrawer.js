@@ -46,7 +46,7 @@ const RightDrawer = (props) => {
             <div className={ classes.drawer }>
             <div className={ classes.titleWrap }>
                 <div className={ classes.span }>
-                    <Typography color="textPrimary" variant="overline">{title}</Typography>
+                    <Typography  variant="overline">{title}</Typography>
                 </div>
                 
                 <div>

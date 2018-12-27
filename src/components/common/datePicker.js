@@ -64,12 +64,15 @@ class DatePickers extends React.Component {
 
                 <Grid container spacing={24}>
 
-                    <Grid item xs={1}>
+                    <Grid item xs={2}>
                         <span className={ classes.span }><DateRangeIcon className={ classes.icon } onClick={this.handleShow} /></span>
                     </Grid>
 
-                    <Grid item xs={11}>
-                        <Typography variant="subtitle2">{label} :<span style={{float: 'right', clear: 'both', color: 'rgba(0, 0, 0, 0.87)'}}>{value || date[locale].placeholder }</span></Typography>
+                    <Grid item xs={10}>
+                        <Typography variant="subtitle2">{label} :
+                            <span style={{float: 'right', clear: 'both', color: 'rgba(0, 0, 0, 0.87)'}}>
+                            {value || date[locale].placeholder }</span>
+                        </Typography>
                     </Grid>
 
                 </Grid>
@@ -92,15 +95,15 @@ class DatePickers extends React.Component {
 
 const styles = theme => ({
     icon: {
-        color: 'rgb(148, 148, 148)', 
         cursor: 'pointer', 
-        fontSize: '20px',
+        fontSize: '20px !important',
+        color: theme.palette.secondary.main,
         
     },
     span: {
         fontSize: 14,
         '& :hover ': {
-            color: theme.palette.primary.main
+            color: theme.palette.secondary.dark
         }
     },
     textField: {

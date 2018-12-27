@@ -1,7 +1,11 @@
 //src/pages/bookkeeping/baseBookReducer.js
 
 import {removeFromArray} from '../../utils/help_function'
-import { removeDuplicateAndAddQuantity, discountPrice, manageQuantity} from './common/_helper'
+import { 
+removeDuplicateAndAddQuantity, 
+discountPrice, 
+manageQuantity,
+editObjectInArray   } from './common/_helper'
 
 const initialState = {
     tmp_state : {},
@@ -74,6 +78,12 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 list_items: discountPrice(state.list_items, action),
+            }
+        case `EDIT_SINGLE_ITEM`:
+
+            return {
+                ...state,
+                list_items: editObjectInArray(state.list_items, action.item, action.payload.fieldName, action.payload.value),
             }
 
         case `REMOVE_ITEM`:

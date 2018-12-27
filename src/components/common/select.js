@@ -8,9 +8,12 @@ const styles = theme => ({
     textField: {
         width: '100%',
         marginTop: '0px',
+        '& svg': {
+            color: theme.palette.primary.main
+        }
     },
     menu: {
-        width: 'auto'
+        width: 'auto',
     }
 })
 /**

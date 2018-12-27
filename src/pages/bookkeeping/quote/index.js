@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import {connect} from 'react-redux'
 import { getBookList } from '../actions'
 import { getTotal } from '../../../redux/actions'
+import { cvtNumToUserPref } from '../../../utils/help_function'
 import { withStyles, Button, Hidden ,Table, TableHead, TableBody, Checkbox, Paper, TableCell, TableRow,} from '@material-ui/core';
 import {ApxTableToolBar, Spinner, ApxAlert} from '../../../components/common'
 // import {RichEditor} from '../../components/common'
@@ -111,19 +112,31 @@ class Quote extends Component {
                                 onChange={this.onSelectAllClick}
                                 />
                             </TableCell>
+                            <TableCell>Référence</TableCell>
+                            <TableCell>Client</TableCell>
+                            <TableCell>Device</TableCell>
+                            <TableCell>Total HT</TableCell>
+                            <TableCell>TVA</TableCell>
+                            <TableCell>Total</TableCell>
 
                         </TableRow>
                         </TableHead>
 
                         <TableBody>
                             {
-                                listQuote.map(( expense, index) => {
-                                    const isSelected = this.isSelected(expense._id);
+                                listQuote.map(( quote, index) => {
+                                    const isSelected = this.isSelected(quote._id);
+                                    console.log(quote)
                                     return  <TableRow key={index} selected={isSelected}>
-                                                <TableCell padding="checkbox" onClick={ event => { this.onSelectedField(event, expense._id) } } >
+                                                <TableCell padding="checkbox" onClick={ event => { this.onSelectedField(event, quote._id) } } >
                                                     <Checkbox checked={isSelected} />
                                                 </TableCell>
-
+                                                <TableCell>{quote.ref}</TableCell>
+                                                <TableCell>{quote.contact_id}</TableCell>
+                                                <TableCell>{quote.currency.en}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(quote.total_ht)}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(quote.vat.amount)}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(quote.total)}</TableCell>
                                             </TableRow>
                                 })
                             }

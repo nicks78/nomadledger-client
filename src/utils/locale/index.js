@@ -82,6 +82,10 @@ const Locale = {
                 service: "Vos services",
                 product: {
                     load_more_product: "Voir plus de produit"
+                },
+                quote: {
+                    items: "Selectionner un service/produit",
+                    info_comp: "Informations complementaires"
                 }
             },
             text: {
@@ -158,7 +162,9 @@ const Locale = {
                     add_vat: "Taux TVA",
 
                     expired_at: "Valide jusqu'au",
-                    created_at: "Créer le"
+                    created_at: "Créer le",
+
+                    textarea_quote: "Taper une déscription de votre devis"
                     
                 },
                 helperText: {
@@ -198,6 +204,8 @@ const Locale = {
                 category: "Catégorie",
                 service_name: "Nom du service",
                 product_name: "Nom du produit",
+                service: "SERVICE",
+                product: "PRODUIT",
                 total: "Total",
                 vat: "TVA",
                 quantity: "Quantité",
@@ -217,6 +225,10 @@ const Locale = {
                 incl: "inclus",
                 subtotal :  "Total HT",
                 total_ttc: "Total TTC",
+                unit_price: "Prix unitaire",
+                discount: "Remise",
+                remove: "Supprimer",
+
 
 
             }
@@ -299,6 +311,10 @@ const Locale = {
                 service: "Your services",
                 product: {
                     load_more_product: "Load more product"
+                },
+                quote: {
+                    items: "Select a product or service",
+                    info_comp: "Work description"
                 }
             },
             text: {
@@ -375,7 +391,9 @@ const Locale = {
                     name_vat: "VAT name",
 
                     expired_at: "Expired at",
-                    created_at: "Create at"
+                    created_at: "Create at",
+
+                    textarea_quote: "Type a description of your work"
                 },
                 helperText: {
                     select_phone_code: "Please select country code",
@@ -415,6 +433,8 @@ const Locale = {
                 category: "Category",
                 service_name: "Service name",
                 product_name: "Product name",
+                service: "SERVICE",
+                product: "PRODUCT",
                 total: "Total",
                 vat: "VAT",
                 quantity: "Quantity",
@@ -431,8 +451,13 @@ const Locale = {
                 ref: "Reference",
                 name: "Name",
                 incl: "incl",
-                subtotal :  "Subtotal",
+                subtotal:  "Subtotal",
                 total_ttc: "Total incl VAT",
+                unit_price: "Unit price",
+                discount: "Discount",
+                remove: "Remove",
+
+                 
             }
         },
 }

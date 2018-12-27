@@ -40,13 +40,19 @@ export const convertToNumber = (num) => {
 export const cvtNumToUserPref = (num) => {
 
     var locale = localStorage.getItem('locale');
-    var stringNumber = num.toString()
-    var result = '';
+    var result = '0';
 
-    if(locale === 'fr'){
-        result = stringNumber.replace('.', ',')
-    }else{
-        result = stringNumber
+    // Set to number
+    num = parseFloat(num);
+
+    if(num !== undefined){
+        console.log(typeof num )
+        var numberToString = num.toFixed(2)
+        if(locale === 'fr'){
+            result = numberToString.replace('.', ',')
+        }else{
+            result = numberToString
+        }
     }
 
     return result.replace(/\B(?=(\d{3})+(?!\d))/g, " ");

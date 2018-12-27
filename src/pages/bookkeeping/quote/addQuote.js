@@ -2,15 +2,16 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
-import { createState , getListItem, convertToCurrency} from '../actions'
+import { createState , getListItem, convertToCurrency, createDocument} from '../actions'
 import { 
 Paper, 
 withStyles, 
 Grid, 
-Typography, 
+Typography,
+Button 
  } from '@material-ui/core';
 
-import { ApxSelect, ApxDatePicker} from '../../../components/common'
+import { ApxSelect, ApxDatePicker, ApxRichEditor, ApxAlert} from '../../../components/common'
 import {currency} from '../../../utils/static_data'
 import AutoComplete from '../../../lib/autoComplete'
 import ContactSection from '../common/contactSection';
@@ -24,9 +25,11 @@ class AddQuote extends React.Component {
         var value = event.target.value;
 
         if(name === "currency") {
-            this.props.convertToCurrency("QUOTE", value)
+            // Update each items with the correct currency rate
+            for (let i = 0; i < this.props.listItems.length; i++) {
+                this.props.convertToCurrency("QUOTE", value, this.props.listItems[i])
+            }
         }
-
         this.props.createState( "QUOTE", name, value)
     }
 
@@ -34,10 +37,13 @@ class AddQuote extends React.Component {
 
     render(){
 
-    const { locale, classes, newQuote, listItems, vat } = this.props;
+    const { locale, classes, newQuote, listItems, vat, message, isError } = this.props;
 
     return (
             <div className={ classes.root}>
+
+                { isError ? <ApxAlert message={message} type="danger"/> : null }
+
                 <Paper className={classes.paper}>
                     <Grid container spacing={24}>
 
@@ -80,6 +86,7 @@ class AddQuote extends React.Component {
                             handleAction={ this.handleDropDown }
                             locale={locale}
                         />
+                        
                         <ApxSelect 
                             arrayField={vat}
                             field="vat"
@@ -95,7 +102,17 @@ class AddQuote extends React.Component {
                 </Paper>
 
                 <Paper className={classes.paper}>
-                    <Typography variant="subtitle2">Items</Typography>
+                <Typography variant="overline">{ locale.page.quote.info_comp }</Typography>
+                <br />
+                <ApxRichEditor
+                    initText={ locale.form.field.textarea_quote }
+                    reducer="QUOTE"
+                    handleAction={ this.props.createState }
+                />
+                <br />
+                <Typography variant="overline">{ locale.page.quote.items }</Typography>
+                <br />
+
 
                     <Grid container spacing={24}>
                             <Grid item xs={6}>
@@ -107,6 +124,7 @@ class AddQuote extends React.Component {
                                     placeholder="Search a service"
                                     setSelectedObject={ this.props.getListItem }
                                 />
+                                
                             </Grid>
 
                             <Grid item xs={6}>
@@ -130,8 +148,10 @@ class AddQuote extends React.Component {
                         newData={newQuote}
                         reducer="QUOTE"
                     />
-<br />
-                    
+                    <br />
+                    <div className={classes.btnSave}>
+                        <Button variant="contained" color="secondary" onClick={ () => {this.props.createDocument("QUOTE")} }>{locale.button.save}</Button>
+                    </div>
                 </Paper>
             </div>
         )
@@ -145,8 +165,12 @@ const styles = theme => ({
     },
     paper: {
         padding: 24,
-        marginBottom: 24
+        marginBottom: 24,
+        overflow: 'hidden',
     },
+    btnSave: {
+        float: 'right'
+    }
 })
 
 const mapStateToProps = (state) => {
@@ -156,6 +180,7 @@ const mapStateToProps = (state) => {
         isError: state.library.quote.isError,
         locale: state.locale.locale,
         newQuote: state.library.quote.tmp_state,
+        message: state.library.quote.message,
         quote: state.library.quote.item,
         listItems: state.book.quote.list_items,
         vat: state.account.company.item ? state.account.company.item.vat : [],
@@ -164,4 +189,4 @@ const mapStateToProps = (state) => {
 
 const StyledAddQuote = withStyles(styles)(AddQuote)
 
-export default connect(mapStateToProps, { createState, getListItem, convertToCurrency })(StyledAddQuote);
+export default connect(mapStateToProps, { createState, getListItem, convertToCurrency, createDocument })(StyledAddQuote);

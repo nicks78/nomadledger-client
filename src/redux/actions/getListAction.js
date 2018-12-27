@@ -6,7 +6,6 @@ import { API_ENDPOINT, apiCall } from '../../utils/constant'
 import { requestData, requestFailed  } from './'
 
 
-
 // GET FULL LIST OF ITEM
 export function getItemList( actionType, query = "" ){
 
