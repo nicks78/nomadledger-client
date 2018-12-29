@@ -6,10 +6,9 @@ import {API_ENDPOINT} from '../../utils/constant'
 import { createItem, getItemList, getItem, createState, getTotal } from '../../redux/actions'
 import {connect} from 'react-redux'
 import { withStyles, Table, TableHead, TableBody, Checkbox, Paper, TableCell, TableRow,} from '@material-ui/core';
-import {ApxTableToolBar, Spinner, ApxAlert} from '../../components/common'
+import {ApxTableToolBar, ApxAlert} from '../../components/common'
 import AddExpense from './addExpense'
 import Pagination from '../../lib/pagination'
-
 
 class Expense extends Component {
 
@@ -83,9 +82,6 @@ class Expense extends Component {
     const {listExpenses, isFetching, isError,  locale, category, newExpense, createState, createItem, isCreating, classes } = this.props
     const { selected, rowCount, reducer } = this.state
 
-    if(isFetching){
-        return <Spinner />
-    }
     if(isError){
         return <ApxAlert message="Erreur message" />
     }
@@ -97,7 +93,7 @@ class Expense extends Component {
             <Paper>
                 <ApxTableToolBar
                         numSelected={selected.length}
-                        title={locale.table.title_contact}
+                        title={locale.table.title_expense}
                         selected={locale.table.selected}
                     />
                     <Table>
@@ -120,7 +116,7 @@ class Expense extends Component {
                         </TableHead>
 
                         <TableBody>
-                            {
+                            {   !isFetching ?
                                 listExpenses.map(( expense, index) => {
                                     const isSelected = this.isSelected(expense._id);
                                     return  <TableRow key={index} selected={isSelected}>
@@ -135,6 +131,7 @@ class Expense extends Component {
 
                                             </TableRow>
                                 })
+                                : null
                             }
                             
                         </TableBody>

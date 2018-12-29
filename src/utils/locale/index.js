@@ -70,7 +70,8 @@ const Locale = {
                 save: "Enregistrer",
                 edit: 'Editer',
                 update: "Mettre à jour",
-                upload: "téléverser"
+                upload: "téléverser",
+                add_quote: "Créer un devis"
             },
             page: {
                 contact: {
@@ -163,8 +164,12 @@ const Locale = {
 
                     expired_at: "Valide jusqu'au",
                     created_at: "Créer le",
+                    contact_id: "Société",
 
-                    textarea_quote: "Taper une déscription de votre devis"
+                    textarea_quote: "Taper une déscription de votre devis",
+                    search_service: "Taper votre recherche service",
+                    search_product: "Taper votre recherche produit",
+                    search_contact: "Taper votre recherche contact",
                     
                 },
                 helperText: {
@@ -196,6 +201,7 @@ const Locale = {
             table: {
                 title_service: "Service",
                 title_contact: "Contact",
+                title_expense: "Depense",
                 title_invoice: "Facture",
                 title_quote: "Devis",
                 title_payback: "Avoir",
@@ -228,9 +234,14 @@ const Locale = {
                 unit_price: "Prix unitaire",
                 discount: "Remise",
                 remove: "Supprimer",
-
-
-
+                draft: "Brouillon",
+                pending: 'En attente',
+                approved: 'Approuvé',
+                rejected: "Rejeté",
+                reference: "Référence",
+                client: "Client",
+                currency: "Devise",
+                status: "Statut"
             }
         },
     en: 
@@ -300,7 +311,8 @@ const Locale = {
                 save: "Save",
                 edit: 'Edit',
                 update: "Update",
-                upload: "Upload"
+                upload: "Upload",
+                add_quote: "Create quote"
             },
             page: {
                 contact: {
@@ -392,8 +404,12 @@ const Locale = {
 
                     expired_at: "Expired at",
                     created_at: "Create at",
+                    contact_id: "Company",
 
-                    textarea_quote: "Type a description of your work"
+                    textarea_quote: "Type a description of your work",
+                    search_service: "Type your seach service",
+                    search_product: "Type your seach produit",
+                    search_contact: "Type your seach contact",
                 },
                 helperText: {
                     select_phone_code: "Please select country code",
@@ -425,6 +441,7 @@ const Locale = {
                 title_service: "Service",
                 selected: "selected",
                 title_contact: "Contact",
+                title_expense: "Expense",
                 title_invoice: "Invoice",
                 title_quote: "Quote",
                 title_payback: "Payback",
@@ -456,6 +473,14 @@ const Locale = {
                 unit_price: "Unit price",
                 discount: "Discount",
                 remove: "Remove",
+                draft: "Draft",
+                pending: 'Pending',
+                approved: 'Approved',
+                rejected: "Rejected",
+                reference: "Reference",
+                client: "Client",
+                currency: "Currency",
+                status: "Status"
 
                  
             }

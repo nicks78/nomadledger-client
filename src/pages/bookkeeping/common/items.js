@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { addRemoveQuantity, removeItem, editItem, createState, discountPrice} from '../actions'
+import { addRemoveQuantity, removeItem, editItem, discountPrice} from '../itemActions'
 import { 
     IconButton, 
     withStyles,
@@ -20,6 +20,7 @@ import { ApxContenEditable } from '../../../components/common'
 class Items extends Component {
     
     
+    // Handle discount contentEditor
     getInput = (event, id) => {
         var fieldName = event.target.id
         var value = event.target.innerText
@@ -32,6 +33,7 @@ class Items extends Component {
         this.props.discountPrice( this.props.reducer, id, fieldName, convertToNumber(value)) 
     }
 
+    // Calcul all VAT / Total / Total HT
     totalHT = (listItems) => {
         var vat = this.props.newData.vat ? this.props.newData.vat.indice : 0
         var total = { vat : 0, ht: 0, ttc: 0 };
@@ -53,7 +55,6 @@ class Items extends Component {
 
     const { newData, listItems, reducer, classes, locale } = this.props
 
-    
     return (
         <Table className={classes.table}>
         <TableHead className={classes.tableHead}>
@@ -70,10 +71,9 @@ class Items extends Component {
         <TableBody>
             {   
             listItems.map(( item, index) => {
-                
                 return  <TableRow key={index} className={classes.tableRow}>
-                            <TableCell>{locale.table[item.type]}-{ item.tmp.ref}</TableCell>
-                            <TableCell className={ classes.TableCell }><ApxContenEditable value={ item.desc } id={item.item_id} actionInput={(event) => { this.props.editItem(reducer, item, 'desc' , event.target.innerText ) }} name="desc" /></TableCell>
+                            <TableCell>{locale.table[item.onModel]}-{ item.ref}</TableCell>
+                            <TableCell className={ classes.contentEditable }><ApxContenEditable value={ item.desc || "" } id={item.item_id._id} actionInput={(event) => { this.props.editItem(reducer, item, 'desc' , event.target.innerText ) }} name="desc" /></TableCell>
                             <TableCell>{ cvtNumToUserPref(item.unit_price)}</TableCell>
                             <TableCell style={{textAlign: "center"}}>
                             
@@ -127,10 +127,11 @@ const styles = theme => ({
     },
     tableRow: {
         height: 28,
-        
     },
-    TableCell: {
+    contentEditable: {
         maxWidth: '35px',
+    },
+    tableCell: {
         borderLeft:'1px solid rgba(224, 224, 224, 1)',
     },
     quantity: {
@@ -149,4 +150,4 @@ const mapStateToProps = (state) => {
 }
 const StyledItems = withStyles(styles)(Items)
 
-export default connect(mapStateToProps, {  addRemoveQuantity, removeItem, editItem, createState, discountPrice })(StyledItems);
+export default connect(mapStateToProps, {  addRemoveQuantity, removeItem, editItem, discountPrice })(StyledItems);

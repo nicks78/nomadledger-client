@@ -6,6 +6,7 @@ import "simplemde/dist/simplemde.min.css";
 
 
 class RichEditor extends React.Component {
+  
   state = {
     textValue: this.props.initText,
   }

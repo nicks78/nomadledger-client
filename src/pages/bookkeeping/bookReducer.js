@@ -4,11 +4,9 @@ import baseBookReducer from './baseBookReducer'
 
 
 class BaseState {
-    tmp_state = {};
-    item = null;
+    item = {list_items: []};
     receivedAt = null;
     progress = 0;
-    isCreating = false;
     isFetching = false;
     isError = false;
     message = '';

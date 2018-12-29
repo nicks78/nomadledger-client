@@ -8,15 +8,13 @@ manageQuantity,
 editObjectInArray   } from './common/_helper'
 
 const initialState = {
-    tmp_state : {},
-    item : null,
+    item : {list_items: []},
+    updated: false,
     receivedAt : null,
     progress : 0,
-    isCreating : false,
     isFetching : false,
     isError : false,
     message : '',
-    list_items: [],
     list : []
 }
 
@@ -28,68 +26,81 @@ const authReducer = (state = initialState, action) => {
             return  { 
                 ...state,
                 isFetching: action.isFetching,
-                isCreated: false,
-                isError: false
+                isError: action.isError,
+                updated: action.updated
             }
         case `FAILED`:
             return  { 
                 ...state,
                 isFetching: action.isFetching,
                 isError: action.isError,
-                isCreated: false,
+                receivedAt: action.receivedAt,
+                updated: action.updated,
                 message: action.message
             }
         case `RECEIVE`:
             return  { 
                 ...state, 
-                isFetching: false,
-                isCreated: true,
+                isFetching: action.isFetching,
+                updated: action.updated,
                 list: action.payload,
-                tmp_state: initialState.tmp_state,
+                receivedAt: action.receivedAt
             }
         case `GET`:
             return  { 
                 ...state,
-                isFetching: false,
-                isError: false,
-                item: action.item
+                isFetching: action.isFetching,
+                isError: action.isError,
+                item: action.item,
             }
-        case `STATE_ITEM`:
+        case `CREATED`:
             return  { 
-                ...state, 
-                isFetching: false,
-                isError: false,
-                list_items: removeDuplicateAndAddQuantity(state.list_items, action),
+                ...state,
+                isFetching: action.isFetching,
+                updated: action.updated,
+                isError: action.isError
             }
         case `STATE`:
             return {
                 ...state,
-                tmp_state: { ...state.tmp_state, [ action.payload.fieldName ] : action.payload.value },
                 item: { ...state.item, [ action.payload.fieldName ] : action.payload.value },
             }
-
+        case `STATE_ITEM`:
+            return  { 
+                ...state, 
+                isFetching: action.isFetching,
+                isError: action.isError,
+                item: {...state.item, list_items :  removeDuplicateAndAddQuantity(state.item.list_items || [], action)},
+            }
         case `UP_DOWN_QUANTITY`:
             return {
                 ...state,
-                list_items: manageQuantity(state.list_items, action),
+                item: { ...state.item, list_items : manageQuantity(state.item.list_items, action)},
             }
 
         case `DISCOUNT`:
             return {
                 ...state,
-                list_items: discountPrice(state.list_items, action),
+                item: { ...state.item, list_items : discountPrice(state.item.list_items, action)},
             }
         case `EDIT_SINGLE_ITEM`:
-
             return {
                 ...state,
-                list_items: editObjectInArray(state.list_items, action.item, action.payload.fieldName, action.payload.value),
+                item: { ...state.item, list_items : editObjectInArray(state.item.list_items, action.item, action.payload.fieldName, action.payload.value)},
             }
 
         case `REMOVE_ITEM`:
             return {
                 ...state,
                 list_items: removeFromArray( state.list_items, action.payload ),
+            }
+        case `RESET_STATE`:
+            return {
+                ...state,
+                item: initialState.item,
+                updated: initialState.updated,
+                isError : initialState.isError,
+                message : initialState.message,
             }
         default:
             return state;

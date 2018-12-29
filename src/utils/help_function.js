@@ -46,7 +46,6 @@ export const cvtNumToUserPref = (num) => {
     num = parseFloat(num);
 
     if(num !== undefined){
-        console.log(typeof num )
         var numberToString = num.toFixed(2)
         if(locale === 'fr'){
             result = numberToString.replace('.', ',')

@@ -9,7 +9,7 @@ import AutoComplete from '../../../lib/autoComplete'
 
 const ContactSection = (props) => {
 
-        const { locale, newQuote} = props;
+        const { locale, contact } = props;
 
         var infoContact = ["company_name", "firstname", "lastname", "email"];
 
@@ -17,9 +17,10 @@ const ContactSection = (props) => {
             <div>
                 <AutoComplete 
                     field="company_name"
+                    state="contact_id"
                     model="contact"
                     reducer="QUOTE"
-                    placeholder="Search a contact"
+                    placeholder={locale.form.field.search_contact}
                     setSelectedObject={ props.createState }
                 />
                 <br />
@@ -27,17 +28,17 @@ const ContactSection = (props) => {
                     infoContact.map((name, index) => {
                         return  <ApxtextIndexValue 
                                     key={index}
-                                    value={newQuote.company_name ? newQuote.company_name[name] : ''}
+                                    value={contact.contact_id ? contact.contact_id[name] : ''}
                                     label={locale.form.field[name]}
                                 />
                     })
                 }
                     <ApxtextIndexValue 
-                        value={newQuote.company_name ? newQuote.company_name.phone_code.value +" "+ newQuote.company_name.phone : ''}
+                        value={contact.contact_id ? contact.contact_id.phone_code.value +" "+ contact.contact_id.phone : ''}
                         label={locale.form.field.phone}
                     />
                     <ApxtextIndexValue 
-                        value={newQuote.company_name ? newQuote.company_name.addresses_street +" "+ newQuote.company_name.addresses_zip  + " " + newQuote.company_name.addresses_city + " " + newQuote.company_name.addresses_country[localStorage.getItem('locale')] : ''}
+                        value={contact.contact_id ? contact.contact_id.addresses_street +" "+ contact.contact_id.addresses_zip  + " " + contact.contact_id.addresses_city + " " + contact.contact_id.addresses_country[localStorage.getItem('locale')] : ''}
                         label={locale.form.field.addresses_street}
                     />
             </div>

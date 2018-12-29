@@ -88,7 +88,11 @@ const theme = createMuiTheme({
       lineHeight: 1.6
     },
     fontWeightMedium: 700,
-    
+  },
+  overrides: {
+    tableHead: {
+      fontSize: '4px'
+    },
   }
 });
 

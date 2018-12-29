@@ -10,11 +10,16 @@ const styles = theme => ({
         marginTop: theme.spacing.unit,
         marginBottom: theme.spacing.unit,
         backgroundColor: theme.palette.error.main,
-        padding: 15
+        padding: 10
     },
     text: {
         color: theme.palette.error.contrastText,
         textAlign: 'center'
+    },
+    icon: {
+        position: 'relative',
+        bottom: '-5px',
+        fontSize: '18px'
     }
 });
 
@@ -24,8 +29,7 @@ const Alert = (props) => {
 
     return (
         <Paper className={ classes.root }>
-            <Typography className={ classes.text }><ErrorIcon/></Typography>
-            <Typography className={ classes.text }>&nbsp;{ Locale[localStorage.getItem('locale')].message[props.message]}</Typography>
+            <Typography className={ classes.text }><ErrorIcon className={ classes.icon}/>&nbsp;{ Locale[localStorage.getItem('locale')].message[props.message]}</Typography>
         </Paper>
   );
 }

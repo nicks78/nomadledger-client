@@ -1,9 +1,8 @@
 //manager/src/pages/bookkeeping/common/_helper.js
 
-
 /**
  * 
- * @param array  List of object
+ * @param list  List of object
  * @param element Object 
  */
 export function discountPrice(list, element){
@@ -12,19 +11,24 @@ export function discountPrice(list, element){
         if(x.item_id === element._id) { 
             x.discount = parseFloat(element.payload.value)
             x.total = parseFloat(((x.unit_price * x.quantity) - x.discount).toFixed(2));
-            return x
-
-        
+            return x        
         } 
         return false
-    });
+    })
     list = Object.assign(obj, list);
     return list;
 }
 
+/**
+ * 
+ * @param list List of object
+ * @param element Object
+ */
 export function removeDuplicateAndAddQuantity(list, element) {
+
     var obj = list.filter((x) => {   
-        if(x.item_id === element.payload.item_id) { 
+
+        if( x.item_id._id === element.payload.item_id._id ) { 
             x.quantity = x.quantity +1; 
             x.total = parseFloat((x.unit_price * x.quantity).toFixed(2))
             return x
@@ -41,6 +45,11 @@ export function removeDuplicateAndAddQuantity(list, element) {
     return list
 }
 
+/**
+ * 
+ * @param list List of object
+ * @param element Object
+ */
 export function manageQuantity(list, action){
     var newData = list.map(obj => {
         if(obj.item_id === action.id){
@@ -60,6 +69,13 @@ export function manageQuantity(list, action){
     return newData
 }
 
+/**
+ * 
+ * @param list List of object
+ * @param element Object
+ * @param name field name in object
+ * @param value new value
+ */
 export function editObjectInArray (list, obj, name, value) {
 
     var newList = [];

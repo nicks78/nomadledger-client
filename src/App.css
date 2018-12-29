@@ -23,7 +23,7 @@ a svg {
 }
 a:hover {
   text-decoration: none;
-  color: #b53d00 !important;
+  /* color: #b53d00 !important; */
 }
 
 .link {

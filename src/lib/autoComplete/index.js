@@ -34,7 +34,8 @@ const styles = theme => ({
 
 /**
  * @String  model 
- * @String  field
+ * @String  field (database)
+ * @String  state (redux)
  * @String  reducer (name) 
  * @String  placeholder
  * 
@@ -82,7 +83,7 @@ class AutoComplete extends React.Component {
 
   // Set selected value to the store
   downshiftOnChange = (selected) => {
-      this.props.setSelectedObject(this.props.reducer, this.props.field, selected)
+      this.props.setSelectedObject(this.props.reducer, this.props.state, selected)
       this.setState({value: ""})
   }
 

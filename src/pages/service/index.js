@@ -47,7 +47,7 @@ class Service extends Component {
 
     render() {
     
-    const {listServices, isError,  locale, service, newService, createItem, createState, isCreating , progress, category, classes} = this.props
+    const {isFetching, listServices, isError,  locale, service, newService, createItem, createState, isCreating , progress, category, classes} = this.props
     const { showService, reducer } = this.state
   
 
@@ -88,7 +88,7 @@ class Service extends Component {
                         </TableHead>
 
                         <TableBody>
-                            {
+                            {   !isFetching ?
                                 listServices.map(( service, index) => {
                                     return  <TableRow key={index}>
                                                 <TableCell><Link to={{ pathname: `/${reducer.toLowerCase()}/view/${service._id.toLowerCase()}`, state: { reducer: reducer } }}><span  className="link">{service.name}</span></Link></TableCell>
@@ -97,6 +97,7 @@ class Service extends Component {
                                                 <Tooltip className={classes.customWidth} title={service.description}><TableCell>{service.description.slice(0,5)}...</TableCell></Tooltip>
                                             </TableRow>
                                 })
+                                : null
                             }
                             
                         </TableBody>
@@ -132,7 +133,7 @@ const mapStateToProps = (state) => {
         service: state.library.service.item,
         newService: state.library.service.tmp_state,
         total: state.library.service.total,
-        rowsPerPageOptions:state.library.service.rowsPerPageOptions,
+        rowsPerPageOptions: state.library.service.rowsPerPageOptions,
         category: state.account.company.item ?  state.account.company.item.category_name : []
     }
 }

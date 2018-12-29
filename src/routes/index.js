@@ -23,7 +23,9 @@ import Expense from '../pages/expense'
 import ShowExpense from '../pages/expense'
 import Task from '../pages/task'
 import Quote from '../pages/bookkeeping/quote'
-import AddQuote from '../pages/bookkeeping/quote/addQuote'
+import EditQuote from '../pages/bookkeeping/quote/edit'
+import CreateQuote from '../pages/bookkeeping/quote/create'
+import ViewQuote from '../pages/bookkeeping/quote/view'
 import Invoice from '../pages/bookkeeping/invoice'
 import Payback from '../pages/bookkeeping/payback'
 
@@ -74,8 +76,9 @@ class Routes extends React.Component {
                                 <PrivateRoute exact path="/task" component={Task}  auth={isLoggedIn}/>
 
                                 <PrivateRoute exact path="/bookkeeping/quote" component={Quote}  auth={isLoggedIn}/>
-                                <PrivateRoute path="/bookkeeping/quote/add" component={AddQuote}  auth={isLoggedIn}/>
-                                <PrivateRoute path="/bookkeeping/quote/view/:id" component={Quote}  auth={isLoggedIn}/>
+                                <PrivateRoute path="/bookkeeping/quote/add" component={CreateQuote}  auth={isLoggedIn}/>
+                                <PrivateRoute path="/bookkeeping/quote/edit/:id" component={EditQuote}  auth={isLoggedIn}/>
+                                <PrivateRoute path="/bookkeeping/quote/view/:id" component={ViewQuote}  auth={isLoggedIn}/>
 
 
                                 <PrivateRoute exact path="/bookkeeping/invoice" component={Invoice}  auth={isLoggedIn}/>

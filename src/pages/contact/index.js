@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom'
 import {Table, TableHead, TableBody, Checkbox, Paper, TableCell, TableRow, withStyles} from '@material-ui/core';
 import {connect} from 'react-redux'
 import { createItem, getItemList, getItem, createState, getTotal} from '../../redux/actions'
-import { Spinner, ApxAlert, ApxTableToolBar} from '../../components/common'
+import { ApxAlert, ApxTableToolBar} from '../../components/common'
 import AddContact from './addContact'
 import Pagination from '../../lib/pagination'
-
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const styles =  theme => ({
     container: {
@@ -88,11 +88,6 @@ class Contact extends Component {
     
     const {listContacts, isFetching, isError, locale, createItem, createState, newContact, isCreating, progress, message, classes, contactGroup} = this.props
     const { selected, rowCount, reducer } = this.state
-
-
-    if(isFetching){
-        return <Spinner />
-    }
    
     if(isError){
         return <ApxAlert message={locale.message[message]} reducer={ this.state.reducer }/>
@@ -128,7 +123,7 @@ class Contact extends Component {
                         </TableHead>
 
                         <TableBody>
-                            {
+                            {   !isFetching ?
                                 listContacts.map(( contact, index) => {
                                     const isSelected = this.isSelected(contact._id);
                                     return  <TableRow key={index} selected={isSelected}>
@@ -144,6 +139,7 @@ class Contact extends Component {
                                                 
                                             </TableRow>
                                 })
+                                : <TableRow><TableCell colSpan={9}><LinearProgress color="primary" /></TableCell></TableRow>
                             }
                             
                         </TableBody>

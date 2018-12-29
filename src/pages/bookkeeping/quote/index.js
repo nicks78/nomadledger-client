@@ -1,16 +1,14 @@
 //manager/src/pages/quote/index.js
 
 import React, { Component } from 'react'
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 import {connect} from 'react-redux'
-import { getBookList } from '../actions'
+import {  getBookList } from '../actions'
 import { getTotal } from '../../../redux/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import { withStyles, Button, Hidden ,Table, TableHead, TableBody, Checkbox, Paper, TableCell, TableRow,} from '@material-ui/core';
-import {ApxTableToolBar, Spinner, ApxAlert} from '../../../components/common'
-// import {RichEditor} from '../../components/common'
+import {ApxTableToolBar, ApxAlert, ApxTableActions} from '../../../components/common'
 import Pagination from '../../../lib/pagination'
-
 
 class Quote extends Component {
 
@@ -22,10 +20,11 @@ class Quote extends Component {
     }
 
     componentDidMount(){
-        if( this.props.receivedAt === null ){
+        if( this.props.receivedAt === null || this.props.updated ){
             this.props.getTotal(this.state.reducer);
             this.props.getBookList(this.state.reducer, "?limit=5&skip=0");
         }
+        
         this.setState({keyLocation: this.props.location.key})
     }
 
@@ -37,7 +36,7 @@ class Quote extends Component {
 
     onSelectAllClick = (event) => {
         if (event.target.checked) {
-            this.setState({ selected: this.props.listContacts.map(n => n._id) });
+            this.setState({ selected: this.props.listQuote.map(n => n._id) });
             return;
         }
         this.setState({ selected: [] });
@@ -80,26 +79,23 @@ class Quote extends Component {
     
     render() {
     
-    const {listQuote, isFetching, isError,  locale, classes} = this.props
+    const {listQuote, isFetching, isError,  locale, classes, message} = this.props
     const { selected, rowCount, reducer } = this.state
 
-    if(isFetching){
-        return <Spinner />
-    }
     if(isError){
-        return <ApxAlert message="Erreur message" />
+        return <ApxAlert message={message} />
     }
 
     return (
       <div className={classes.root}>
             <Hidden only={['xs', 'sm']}>
-                <Button component={Link} to="/bookkeeping/quote/add" variant="contained" color="secondary"  className={  classes.button }>Create quote</Button>
+                <Button component={Link} to="/bookkeeping/quote/add" variant="contained" color="secondary"  className={  classes.button }>{locale.button.add_quote}</Button>
             </Hidden>
             <Paper>
 
             <ApxTableToolBar
                         numSelected={selected.length}
-                        title={locale.table.title_contact}
+                        title={locale.table.title_quote}
                         selected={locale.table.selected}
                     />
                     <Table>
@@ -112,36 +108,47 @@ class Quote extends Component {
                                 onChange={this.onSelectAllClick}
                                 />
                             </TableCell>
-                            <TableCell>Référence</TableCell>
-                            <TableCell>Client</TableCell>
-                            <TableCell>Device</TableCell>
-                            <TableCell>Total HT</TableCell>
-                            <TableCell>TVA</TableCell>
-                            <TableCell>Total</TableCell>
+                            <TableCell>{locale.table.reference}</TableCell>
+                            <TableCell>{locale.table.client}</TableCell>
+                            <TableCell>{locale.table.currency}</TableCell>
+                            <TableCell>{locale.table.subtotal}</TableCell>
+                            <TableCell>{locale.table.vat}</TableCell>
+                            <TableCell>{locale.table.total}</TableCell>
+                            <TableCell>{locale.table.status}</TableCell>
+                            <TableCell>Actions</TableCell>
 
                         </TableRow>
                         </TableHead>
-
-                        <TableBody>
-                            {
+                        
+                        <TableBody className={classes.tableBody}>
+                            {   !isFetching ? 
                                 listQuote.map(( quote, index) => {
                                     const isSelected = this.isSelected(quote._id);
-                                    console.log(quote)
                                     return  <TableRow key={index} selected={isSelected}>
                                                 <TableCell padding="checkbox" onClick={ event => { this.onSelectedField(event, quote._id) } } >
                                                     <Checkbox checked={isSelected} />
                                                 </TableCell>
                                                 <TableCell>{quote.ref}</TableCell>
-                                                <TableCell>{quote.contact_id}</TableCell>
+                                                <TableCell><Link to={{ pathname: `/contact/view/${quote.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{quote.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell>{quote.currency.en}</TableCell>
                                                 <TableCell>{cvtNumToUserPref(quote.total_ht)}</TableCell>
                                                 <TableCell>{cvtNumToUserPref(quote.vat.amount)}</TableCell>
                                                 <TableCell>{cvtNumToUserPref(quote.total)}</TableCell>
+                                                <TableCell><span style={{color: quote.status.color }}>{ locale.table[quote.status.label] }</span></TableCell>
+                                                <ApxTableActions 
+                                                    actionDelete={false}
+                                                    actionEdit={`/bookkeeping/quote/edit/${quote._id}`}
+                                                    actionView={false}
+                                                    actionCheck={false}
+
+                                                />
                                             </TableRow>
                                 })
+                                : null                           
                             }
                             
                         </TableBody>
+
                     </Table>
                     <Pagination
                         total={this.props.total}
@@ -149,7 +156,7 @@ class Quote extends Component {
                         label={locale.table.label_rows_per_page}
                         label2={locale.table.of}
                         reducer={reducer}
-                        onGetItemList={ this.props.getItemList }
+                        onGetItemList={ this.props.getBookList }
                     />
             </Paper>
       </div>
@@ -164,22 +171,26 @@ const styles = theme => ({
     },
     button: {
         color: 'white !important',
-        marginRight: 10
+        marginRight: 10,
+        marginBottom: theme.margin.unit,
+        '& :hover': {
+            color: 'white !important', 
+        }
     },
-
 })
 
 const mapStateToProps = (state) => {
+
     return {
         isFetching: state.book.quote.isFetching,
-        isCreating: state.book.quote.isCreating,
+        updated: state.book.quote.updated,
         isError: state.book.quote.isError,
-        listQuote: state.book.quote.list,
+        message: state.book.quote.message,
         receivedAt: state.book.quote.receivedAt,
         locale: state.locale.locale,
-        newQuote: state.book.quote.tmp_state,
         total: state.library.quote.total,
-        quote: state.book.quote.item
+        listQuote: state.book.quote.list,
+        rowsPerPageOptions: state.library.quote.rowsPerPageOptions,
     }
 }
 
