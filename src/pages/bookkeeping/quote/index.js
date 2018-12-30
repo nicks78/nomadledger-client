@@ -5,36 +5,27 @@ import { Link } from "react-router-dom"
 import {connect} from 'react-redux'
 import {  getBookList } from '../actions'
 import { getTotal } from '../../../redux/actions'
-import { cvtNumToUserPref } from '../../../utils/help_function'
-import { withStyles, Button, Hidden ,Table, TableHead, TableBody, Checkbox, Paper, TableCell, TableRow,} from '@material-ui/core';
+import { withStyles, Button, Hidden,  Paper, Table, TableHead, TableBody, Checkbox, TableCell, TableRow } from '@material-ui/core';
 import {ApxTableToolBar, ApxAlert, ApxTableActions} from '../../../components/common'
 import Pagination from '../../../lib/pagination'
+import { cvtNumToUserPref } from '../../../utils/help_function'
+
 
 class Quote extends Component {
 
     state = {
-        showExpense: false,
+        showQuote: false,
         reducer: "QUOTE",
-        selected: [],
-        keyLocation: ''
+        status: '10',
+        selected: []
     }
 
     componentDidMount(){
-        if( this.props.receivedAt === null || this.props.updated ){
-            this.props.getTotal(this.state.reducer);
-            this.props.getBookList(this.state.reducer, "?limit=5&skip=0");
-        }
-        
-        this.setState({keyLocation: this.props.location.key})
+        this.props.getTotal(this.state.reducer, `?status=${this.state.status}`);
+        this.props.getBookList(this.state.reducer, `?limit=5&skip=0&status=${this.state.status}`);
     }
 
-    componentWillReceiveProps(nextProps){
-        if(nextProps.location.key !== this.state.keyLocation){
-            this.setState({ showExpense: false, keyLocation: nextProps.location.key })
-        }
-    }
-
-    onSelectAllClick = (event) => {
+    handleSelectAllClick = (event) => {
         if (event.target.checked) {
             this.setState({ selected: this.props.listQuote.map(n => n._id) });
             return;
@@ -42,7 +33,7 @@ class Quote extends Component {
         this.setState({ selected: [] });
     }
 
-    onSelectedField = (event, id) => {
+    handleSelectedField = (event, id) => {
         const { selected } = this.state;
         const selectedIndex = selected.indexOf(id);
         let newSelected = [];
@@ -73,14 +64,17 @@ class Quote extends Component {
 
     isSelected = id =>  this.state.selected.indexOf(id) !== -1;
 
-    handleOpenImage = () => {
-        
+    handleStatus = (value) => {
+        this.setState({status: value});
+        this.props.getTotal(this.state.reducer, `?status=${value || '10'}`);
+        this.props.getBookList(this.state.reducer, `?limit=5&skip=0&status=${value || '10'}`);
     };
     
     render() {
     
     const {listQuote, isFetching, isError,  locale, classes, message} = this.props
-    const { selected, rowCount, reducer } = this.state
+    const { selected, rowCount, reducer } = this.state;
+    const filter = [{label: "approved", code: '2'},{label: 'pending', code: '1'}, {label: "draft", code: '0'}, {label: 'paid', code: '4'}, {label: 'rejected', code: '3'},{label: "all", code: '10'}] 
 
     if(isError){
         return <ApxAlert message={message} />
@@ -89,14 +83,17 @@ class Quote extends Component {
     return (
       <div className={classes.root}>
             <Hidden only={['xs', 'sm']}>
-                <Button component={Link} to="/bookkeeping/quote/add" variant="contained" color="secondary"  className={  classes.button }>{locale.button.add_quote}</Button>
+                <Button component={Link} to="/bookkeeping/quote/create" variant="contained" color="secondary"  className={  classes.button }>{locale.button.add_quote}</Button>
             </Hidden>
             <Paper>
 
-            <ApxTableToolBar
+                <ApxTableToolBar
                         numSelected={selected.length}
                         title={locale.table.title_quote}
                         selected={locale.table.selected}
+                        menus={filter}
+                        locale={locale}
+                        onChangeQuery={ this.handleStatus }
                     />
                     <Table>
                     <TableHead className={classes.tableHead}>
@@ -104,8 +101,8 @@ class Quote extends Component {
                             <TableCell padding="checkbox">
                             <Checkbox
                                 indeterminate={selected.length > 0 && selected.length < rowCount}
-                                checked={selected.length === this.props.listQuote.length}
-                                onChange={this.onSelectAllClick}
+                                checked={selected.length === listQuote.length}
+                                onChange={this.handleSelectAllClick}
                                 />
                             </TableCell>
                             <TableCell>{locale.table.reference}</TableCell>
@@ -118,26 +115,26 @@ class Quote extends Component {
                             <TableCell>Actions</TableCell>
 
                         </TableRow>
-                        </TableHead>
+                    </TableHead>
                         
                         <TableBody className={classes.tableBody}>
                             {   !isFetching ? 
-                                listQuote.map(( quote, index) => {
-                                    const isSelected = this.isSelected(quote._id);
+                                listQuote.map(( item, index) => {
+                                    const isSelected = this.isSelected(item._id);
                                     return  <TableRow key={index} selected={isSelected}>
-                                                <TableCell padding="checkbox" onClick={ event => { this.onSelectedField(event, quote._id) } } >
+                                                <TableCell padding="checkbox" onClick={ event => { this.handleSelectedField(event, item._id) } } >
                                                     <Checkbox checked={isSelected} />
                                                 </TableCell>
-                                                <TableCell>{quote.ref}</TableCell>
-                                                <TableCell><Link to={{ pathname: `/contact/view/${quote.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{quote.contact_id.company_name}</span></Link></TableCell>
-                                                <TableCell>{quote.currency.en}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(quote.total_ht)}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(quote.vat.amount)}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(quote.total)}</TableCell>
-                                                <TableCell><span style={{color: quote.status.color }}>{ locale.table[quote.status.label] }</span></TableCell>
+                                                <TableCell>{item.ref}</TableCell>
+                                                <TableCell><Link className="link" to={{ pathname: `/contact/view/${item.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{item.contact_id.company_name}</span></Link></TableCell>
+                                                <TableCell>{item.currency.en}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(item.total_ht)}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(item.vat.amount)}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(item.total)}</TableCell>
+                                                <TableCell><span style={{color: item.status.color }}>{ locale.table[item.status.label] }</span></TableCell>
                                                 <ApxTableActions 
                                                     actionDelete={false}
-                                                    actionEdit={`/bookkeeping/quote/edit/${quote._id}`}
+                                                    actionEdit={`/bookkeeping/quote/edit/${item._id}`}
                                                     actionView={false}
                                                     actionCheck={false}
 
@@ -156,6 +153,7 @@ class Quote extends Component {
                         label={locale.table.label_rows_per_page}
                         label2={locale.table.of}
                         reducer={reducer}
+                        status={this.state.status}
                         onGetItemList={ this.props.getBookList }
                     />
             </Paper>
@@ -166,8 +164,8 @@ class Quote extends Component {
 
 const styles = theme => ({
 
-    root: {
-
+    tableHead: {
+        backgroundColor: 'rgb(238,238,238)'
     },
     button: {
         color: 'white !important',

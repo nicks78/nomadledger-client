@@ -37,7 +37,7 @@ const styles = theme => ({
 
 const EnhancedToolBar = (props) => {
 
-  const { numSelected, classes, selected, title } = props;
+  const { numSelected, classes, selected, title, menus, locale } = props;
 
   return (
     <Toolbar>
@@ -62,7 +62,11 @@ const EnhancedToolBar = (props) => {
         </Tooltip>
       ) : (
         <Tooltip title="Filter list">
-          <BtnMenu />
+          <BtnMenu 
+            menus={menus}
+            onChangeQuery={ props.onChangeQuery}
+            locale={locale}
+          />
         </Tooltip>
       )}
     </div>

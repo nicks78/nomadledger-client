@@ -37,14 +37,14 @@ export function getItemList( actionType, query = "" ){
 }
 
 // GET FULL LIST OF ITEM
-export function getTotal( actionType ){
+export function getTotal( actionType, query = "" ){
 
   return dispatch => {
 
       dispatch(requestData(actionType))
       axios.defaults.withCredentials = true;
 
-      axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/count`, {
+      axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/count${query}`, {
         method: 'GET',
         mode: 'cors'
       })

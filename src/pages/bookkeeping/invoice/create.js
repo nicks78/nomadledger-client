@@ -1,4 +1,4 @@
-//manager/src/pages/quote/CreateQuote.js
+//manager/src/pages/bookkeeping/invoice/create.js
 
 import React from 'react'
 import {connect} from 'react-redux'
@@ -9,7 +9,7 @@ import {  ApxAlert, Spinner} from '../../../components/common'
 import Form from '../common/form'
 
 
-class CreateQuote extends React.Component {
+class CreateInvoice extends React.Component {
 
     handleDropDown = (event) => {
         var name = event.target.name;
@@ -18,15 +18,15 @@ class CreateQuote extends React.Component {
         if(name === "currency") {
             // Update each items with the correct currency rate
             for (let i = 0; i < this.props.listItems.length; i++) {
-                this.props.convertToCurrency("QUOTE", value, this.props.listItems[i])
+                this.props.convertToCurrency("INVOICE", value, this.props.listItems[i])
             }
         }
-        this.props.createState( "QUOTE", name, value)
+        this.props.createState( "INVOICE", name, value)
     }
 
     render(){
 
-    const { isFetching, locale, classes, newQuote, listItems, vat, message, isError } = this.props;
+    const { isFetching, locale, classes, newInvoice, listItems, vat, message, isError } = this.props;
 
     if(isFetching){
         return <Spinner/>
@@ -36,10 +36,9 @@ class CreateQuote extends React.Component {
             <div className={ classes.root}>
 
                 { isError ? <ApxAlert message={message} /> : null }
-
                 <Form 
-                    formTitle="new_quote"
-                    data={newQuote}
+                    formTitle="new_invoice"
+                    data={newInvoice}
                     vat={vat}
                     list={listItems}
                     locale={locale}
@@ -47,10 +46,10 @@ class CreateQuote extends React.Component {
                     handleDropDown={ this.handleDropDown }
                     getListItem={this.props.getListItem}
                     createState={this.props.createState}
-                    reducer="QUOTE"
+                    reducer="INVOICE"
                     btnLabel={locale.button.save}
                     date_1="created_at"
-                    date_2="expired_at"
+                    date_2="due_at"
 
                 />
             </div>
@@ -67,16 +66,16 @@ const styles = theme => ({
 
 const mapStateToProps = (state) => {
     return {
-        isError: state.book.quote.isError,
-        isFetching: state.book.quote.isFetching,
+        isError: state.book.invoice.isError,
+        isFetching: state.book.invoice.isFetching,
         locale: state.locale.locale,
-        newQuote: state.book.quote.item || {},
-        message: state.book.quote.message,
-        listItems: state.book.quote.item.list_items,
+        newInvoice: state.book.invoice.item || {},
+        message: state.book.invoice.message,
+        listItems: state.book.invoice.item.list_items,
         vat: state.account.company.item ? state.account.company.item.vat : [],
     }
 }
 
-const StyledCreateQuote = withStyles(styles)(CreateQuote)
+const StyledCreateInvoice = withStyles(styles)(CreateInvoice)
 
-export default connect(mapStateToProps, { createState, getListItem, convertToCurrency, createDocument })(StyledCreateQuote);
+export default connect(mapStateToProps, { createState, getListItem, convertToCurrency, createDocument })(StyledCreateInvoice);

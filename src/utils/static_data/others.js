@@ -6,4 +6,10 @@ const status =  [
     { label: 'rejected', color: 'red', code: 3},
 ]
 
-export { status };
+const statusInv =  [
+    { label: 'draft', color: 'blue', code: 0 },
+    { label: 'pending', color: 'orange', code: 1  },
+    { label: 'paid', color: 'green', code:  2},
+]
+
+export { status, statusInv };

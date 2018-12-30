@@ -8,7 +8,6 @@ import { createItem, getItemList, getItem, createState, getTotal} from '../../re
 import { ApxAlert, ApxTableToolBar} from '../../components/common'
 import AddContact from './addContact'
 import Pagination from '../../lib/pagination'
-import LinearProgress from '@material-ui/core/LinearProgress';
 
 const styles =  theme => ({
     container: {
@@ -93,7 +92,6 @@ class Contact extends Component {
         return <ApxAlert message={locale.message[message]} reducer={ this.state.reducer }/>
     }
 
-
     return (
         <div className={classes.container}>
             <AddContact progress={progress} contactGroup={contactGroup} locale={ locale } createContact={ createItem } createContactState={  createState } newData={newContact} isCreating={ isCreating  }/>
@@ -139,7 +137,7 @@ class Contact extends Component {
                                                 
                                             </TableRow>
                                 })
-                                : <TableRow><TableCell colSpan={9}><LinearProgress color="primary" /></TableCell></TableRow>
+                                : null
                             }
                             
                         </TableBody>

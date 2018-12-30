@@ -1,7 +1,7 @@
 //manager/src/pages/bookkeeping/initActions.js
 
 import axios from 'axios';
-import {requestFailed, createState} from './actions'
+import { requestFailed } from './actions'
 
 /**
  * Called when add new item in store
@@ -11,7 +11,7 @@ import {requestFailed, createState} from './actions'
  */
 export function getListItem( actionType, name, item ) {
     return (dispatch, getState) => {
-console.log(item)
+
         var currency = getState().book[actionType.toLowerCase()].item.currency;
         var convertedPrice = Promise.resolve(currencyConvertorApi( item.currency.en, item.price, currency.en ));
 
@@ -31,7 +31,6 @@ console.log(item)
         })
         .catch(function (error) {
             // handle error
-            console.log("ERRORRRRR", error)
             dispatch(requestFailed(actionType, "error_500"));
         })        
     }
@@ -61,7 +60,7 @@ export function setListItem( actionType, name, item ) {
 export function convertToCurrency( actionType, currency, item ) {
 
     return (dispatch) => {
-        var convertedPrice = Promise.resolve(currencyConvertorApi( item.currency.en, item.unit_price, currency.en ));
+        var convertedPrice = Promise.resolve(currencyConvertorApi( item.item_id.currency.en, item.unit_price, currency.en ));
 
         convertedPrice.then( (value) => {
             item.total = parseFloat((value * item.quantity).toFixed(2));
@@ -70,7 +69,7 @@ export function convertToCurrency( actionType, currency, item ) {
             
         })
         .then(() => {
-            dispatch(createState(actionType, 'list_items', item))
+            dispatch(updateListItems(actionType,  item ))
         })
         .catch(function (error) {
             // handle error
@@ -79,6 +78,13 @@ export function convertToCurrency( actionType, currency, item ) {
     }
 }
 
+export function updateListItems( actionType, item ) {
+    return  {
+        type: `UPDATE_LIST_ITEM`,
+        subtype: actionType,
+        payload: item
+      }
+}
 
 
 
@@ -89,13 +95,11 @@ export function convertToCurrency( actionType, currency, item ) {
  * @param  to 
  */
 async function currencyConvertorApi(from, price, to){
-    console.log(price)
     // Set real time currency convertor
     axios.defaults.withCredentials = false;
-    // let json = await axios.get('https://reqres.in/api/users');
+    let json = await axios.get('https://reqres.in/api/users');
 
     var result = parseFloat( (price + 0.05 ).toFixed(2) ) 
-
     return result;
 }
 

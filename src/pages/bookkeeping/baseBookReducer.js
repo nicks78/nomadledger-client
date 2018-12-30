@@ -5,7 +5,8 @@ import {
 removeDuplicateAndAddQuantity, 
 discountPrice, 
 manageQuantity,
-editObjectInArray   } from './common/_helper'
+editObjectInArray,
+replaceObjectInArray   } from './common/_helper'
 
 const initialState = {
     item : {list_items: []},
@@ -72,6 +73,12 @@ const authReducer = (state = initialState, action) => {
                 isError: action.isError,
                 item: {...state.item, list_items :  removeDuplicateAndAddQuantity(state.item.list_items || [], action)},
             }
+        case `UPDATE_LIST_ITEM`:
+            return {
+                ...state,
+                item: { ...state.item, list_items: replaceObjectInArray(state.item.list_items, action.payload) },
+            }
+
         case `UP_DOWN_QUANTITY`:
             return {
                 ...state,

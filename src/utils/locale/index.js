@@ -71,7 +71,9 @@ const Locale = {
                 edit: 'Editer',
                 update: "Mettre à jour",
                 upload: "téléverser",
-                add_quote: "Créer un devis"
+                add_quote: "Créer un devis",
+                add_invoice: "Créer une facture",
+                add_payback: "Créer un avoir"
             },
             page: {
                 contact: {
@@ -103,6 +105,12 @@ const Locale = {
                     add_service: "Enregistrer un service",
                     add_expense: "Enregistrer une depense",
                     add_provider: "Enregistrer un prestataire",
+                    new_quote: "Créer un devis",
+                    new_invoice: "Créer une facture",
+                    new_payback: "Créer un avoir",
+                    edit_quote: "Edit le devis",
+                    edit_invoice: "Edit la facture",
+                    edit_payback: "Edit l'avoir",
                     label_contact: "Coordonnée contact",
                     label_company: "Informations compagnie",
                     label_product: "Informations produit",
@@ -164,6 +172,7 @@ const Locale = {
 
                     expired_at: "Valide jusqu'au",
                     created_at: "Créer le",
+                    due_at: "Dû le",
                     contact_id: "Société",
 
                     textarea_quote: "Taper une déscription de votre devis",
@@ -238,6 +247,8 @@ const Locale = {
                 pending: 'En attente',
                 approved: 'Approuvé',
                 rejected: "Rejeté",
+                paid: "Payée",
+                all: "Tous",
                 reference: "Référence",
                 client: "Client",
                 currency: "Devise",
@@ -312,7 +323,9 @@ const Locale = {
                 edit: 'Edit',
                 update: "Update",
                 upload: "Upload",
-                add_quote: "Create quote"
+                add_quote: "Create quote",
+                add_invoice: "Create invoice",
+                add_payback: "Create payback"
             },
             page: {
                 contact: {
@@ -343,6 +356,12 @@ const Locale = {
                     add_service: "Add service",
                     add_expense: "Add expense",
                     add_provider: "Add provider",
+                    new_quote: "Create a new quotation",
+                    new_invoice: "Create a new invoice",
+                    new_payback: "Create a new payback",
+                    edit_quote: "Edit quotation",
+                    edit_invoice: "Edit invoice",
+                    edit_payback: "Edit payback",
                     label_contact: "Customer profile",
                     label_company: "Company profile",
                     label_assets: "Photo / Documents",
@@ -404,6 +423,7 @@ const Locale = {
 
                     expired_at: "Expired at",
                     created_at: "Create at",
+                    due_at: "Due at",
                     contact_id: "Company",
 
                     textarea_quote: "Type a description of your work",
@@ -477,6 +497,8 @@ const Locale = {
                 pending: 'Pending',
                 approved: 'Approved',
                 rejected: "Rejected",
+                paid: "Paid",
+                all: "All",
                 reference: "Reference",
                 client: "Client",
                 currency: "Currency",

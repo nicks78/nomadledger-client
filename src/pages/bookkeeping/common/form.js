@@ -10,20 +10,21 @@ Button
  } from '@material-ui/core';
 
 import { ApxSelect, ApxDatePicker, ApxRichEditor, ApxRadioGroup } from '../../../components/common'
-import {currency, status} from '../../../utils/static_data'
+import {currency, status, statusInv} from '../../../utils/static_data'
 import AutoComplete from '../../../lib/autoComplete'
-import ContactSection from '../common/contactSection';
-import Items from '../common/items'
+import ContactSection from './contactSection';
+import Items from './items'
 
 
 
 
 const Form = (props) => {
 
-    const { data, list, reducer, locale, classes, vat, btnLabel } = props
+    const { data, list, reducer, locale, classes, vat, btnLabel, date_1, date_2, formTitle } = props
 
     return  <div>
                 <Paper className={classes.paper}>
+                <Typography variant="h2" className={classes.title}>{locale.form.title[formTitle]}&nbsp;{ data.ref || '' }</Typography>
                     <Grid container spacing={24}>
 
                         <Grid item xs={12} md={5}>
@@ -39,17 +40,17 @@ const Form = (props) => {
                             <Grid item xs={6}>
                                 <ApxDatePicker 
                                     handleDate={ props.handleDropDown }
-                                    label={ locale.form.field.created_at }
-                                    value={ data.created_at ? data.created_at.label : ""}  
-                                    field="created_at"
+                                    label={ locale.form.field[date_1] }
+                                    value={ data[date_1] ? data[date_1].label : ""}  
+                                    field={date_1}
                                 />
                             </Grid>
                             <Grid item xs={6}>
                                 <ApxDatePicker 
                                     handleDate={  props.handleDropDown }
-                                    label={ locale.form.field.expired_at }
-                                    value={ data.expired_at ? data.expired_at.label : ""}  
-                                    field="expired_at"
+                                    label={ locale.form.field[date_2] }
+                                    value={ data[date_2] ? data[date_2].label : ""}  
+                                    field={date_2}
                                 />
                             </Grid>
                         </Grid>
@@ -83,7 +84,7 @@ const Form = (props) => {
                                 <ApxRadioGroup 
                                     action={  props.handleDropDown }
                                     value={data.status ? data.status.label : 'draft'}
-                                    arrayObject={status}
+                                    arrayObject={ reducer === "QUOTE" ?  status : statusInv }
                                     locale={locale}
                                 />
                             </Grid>
@@ -151,6 +152,18 @@ const Form = (props) => {
 
 
 const styles = theme => ({
+    title: {
+        marginBottom: 24,
+        marginLeft: -24,
+        marginRight: -24,
+        paddingLeft: 24,
+        paddingRight: 24,
+        paddingTop: 12,
+        paddingBottom: 12,
+        marginTop: -24,
+        backgroundColor: theme.palette.primary.main,
+        color: 'white'
+    },
     paper: {
         padding: 24,
         marginBottom: 24,

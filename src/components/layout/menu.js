@@ -66,7 +66,7 @@ const Styles = theme => ({
 class MainMenu extends React.Component {
 
     state = {
-        open: false,
+        open: true,
     }
 
     handleClick = () => {

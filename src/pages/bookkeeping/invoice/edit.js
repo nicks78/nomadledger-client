@@ -1,4 +1,4 @@
-//manager/src/pages/quote/addQuote.js
+//manager/src/pages/quote/editInvoice.js
 
 import React from 'react'
 import {connect} from 'react-redux'
@@ -8,15 +8,15 @@ import { withStyles } from '@material-ui/core';
 import Form from '../common/form'
 import { ApxAlert, Spinner} from '../../../components/common'
 
-class EditQuote extends React.Component {
+class EditInvoice extends React.Component {
 
     componentWillUnmount(){
-        this.props.resetState("QUOTE")
+        this.props.resetState("INVOICE")
     }
 
     componentDidMount(){
         var id = this.props.match.params.id;
-        this.props.getDocument("QUOTE", id);
+        this.props.getDocument("INVOICE", id);
     }
     
     handleDropDown = (event) => {
@@ -26,19 +26,19 @@ class EditQuote extends React.Component {
         if(name === "currency") {
             // Update each items with the correct currency rate
             for (let i = 0; i < this.props.listItems.length; i++) {
-                this.props.convertToCurrency("QUOTE", value, this.props.listItems[i])
+                this.props.convertToCurrency("INVOICE", value, this.props.listItems[i])
             }
         }
-        this.props.createState( "QUOTE", name, value)
+        this.props.createState( "INVOICE", name, value)
     }
 
 
 
     render(){
 
-    const { isFetching, locale, classes, quote, listItems, vat, message, isError } = this.props;
+    const { isFetching, locale, classes, invoice, listItems, vat, message, isError } = this.props;
 
-    if(isFetching || quote === null ){
+    if(isFetching || invoice === null ){
         return <Spinner />
     }
 
@@ -47,8 +47,8 @@ class EditQuote extends React.Component {
 
                 { isError ? <ApxAlert message={message} type="danger"/> : null }
                 <Form 
-                    formTitle="edit_quote"
-                    data={quote}
+                    formTitle="edit_invoice"
+                    data={invoice}
                     vat={vat}
                     list={listItems}
                     locale={locale}
@@ -56,10 +56,10 @@ class EditQuote extends React.Component {
                     handleDropDown={ this.handleDropDown }
                     getListItem={this.props.getListItem}
                     createState={this.props.createState}
-                    reducer="QUOTE"
+                    reducer="INVOICE"
                     btnLabel={locale.button.update}
                     date_1="created_at"
-                    date_2="expired_at"
+                    date_2="due_at"
                 />
                 
             </div>
@@ -76,16 +76,16 @@ const styles = theme => ({
 
 const mapStateToProps = (state) => {
     return {
-        isFetching: state.book.quote.isFetching,
-        isError: state.book.quote.isError,
+        isFetching: state.book.invoice.isFetching,
+        isError: state.book.invoice.isError,
         locale: state.locale.locale,
-        message: state.book.quote.message,
-        quote: state.book.quote.item,
-        listItems: state.book.quote.item ? state.book.quote.item.list_items : [],
+        message: state.book.invoice.message,
+        invoice: state.book.invoice.item,
+        listItems: state.book.invoice.item ? state.book.invoice.item.list_items : [],
         vat: state.account.company.item ? state.account.company.item.vat : [],
     }
 }
 
-const StyledEditQuote = withStyles(styles)(EditQuote)
+const StyledEditInvoice = withStyles(styles)(EditInvoice)
 
-export default connect(mapStateToProps, { getListItem, convertToCurrency, updateDocument, getDocument, createState, resetState })(StyledEditQuote);
+export default connect(mapStateToProps, { getListItem, convertToCurrency, updateDocument, getDocument, createState, resetState })(StyledEditInvoice);

@@ -4,7 +4,7 @@ import React  from 'react'
 import {connect} from 'react-redux'
 import { withStyles } from '@material-ui/core';
 import {API_ENDPOINT} from '../../../utils/constant'
-import { Spinner, ApxAlert, ApxTable} from '../../../components/common'
+import { Spinner, ApxAlert} from '../../../components/common'
 import UploadImg from '../../../lib/uploadImg'
 import Paper from '@material-ui/core/Paper'
 import { getItem, resetState, createState, uploadFileToServer } from '../../../redux/actions'
@@ -17,7 +17,7 @@ import Divider from '@material-ui/core/Divider'
 import AppBar from '@material-ui/core/AppBar'
 import SwipeableViews from 'react-swipeable-views'
 import StatContact from './stat'
-import Invoice from '../../bookkeeping/invoice'
+import { TableQuote, TablePayback, TableInvoice } from '../../bookkeeping/common/table'
 
 
 const styles = theme => ({
@@ -118,8 +118,8 @@ class ShowContact extends React.Component {
                     classes={classes.tabsRoot}
                     fullWidth
                     >
-                <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={locale.invoice.name} />
                 <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={locale.quote.name} />
+                <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={locale.invoice.name} />
                 <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={locale.payback.name} />
               </Tabs>
             </AppBar>
@@ -128,9 +128,9 @@ class ShowContact extends React.Component {
                 index={this.state.value}
                 onChangeIndex={this.handleChangeIndex}
               >
-                <TabContainer><Invoice title={locale.invoice.name}/></TabContainer>
-                <TabContainer><ApxTable title={locale.quote.name}/></TabContainer>
-                <TabContainer><ApxTable title={locale.payback.name}/></TabContainer>
+                <TabContainer><TableQuote reducer="QUOTE" contactId={this.props.match.params.id}/></TabContainer>
+                <TabContainer><TableInvoice reducer="INVOICE" contactId={this.props.match.params.id}/></TabContainer>
+                <TabContainer><TablePayback reducer="PAYBACK" contactId={this.props.match.params.id}/></TabContainer>
               </SwipeableViews>
               </div>
             

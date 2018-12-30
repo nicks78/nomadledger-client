@@ -14,13 +14,13 @@ class BtnMenu extends React.Component {
     this.setState({ anchorEl: event.currentTarget });
   };
 
-  handleClose = () => {
+  handleClose = (event) => {
     this.setState({ anchorEl: null });
   };
 
   render() {
     const { anchorEl } = this.state;
-    const { fontSize } = this.props
+    const { fontSize, menus, locale } = this.props
 
     return (
       <div>
@@ -30,16 +30,18 @@ class BtnMenu extends React.Component {
           onClick={this.handleClick}
         >
           <FilterListIcon style={{ fontSize: fontSize || 24 }}/>
-        </IconButton>
+        </IconButton> 
         <Menu
           id="simple-menu"
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
-          <MenuItem onClick={this.handleClose}>Action-1</MenuItem>
-          <MenuItem onClick={this.handleClose}>Action-2</MenuItem>
-          <MenuItem onClick={this.handleClose}>Action-3</MenuItem>
+        {
+            menus.map(( menu, index) => {
+                return <MenuItem key={index} onClick={ () => this.props.onChangeQuery( menu.code ) }>{locale.table[menu.label]}</MenuItem>
+            })
+        }
         </Menu>
       </div>
     );

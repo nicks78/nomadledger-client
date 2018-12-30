@@ -1,6 +1,7 @@
 //manager/src/pages/bookkeeping/contactSection.js
 
 import React from 'react'
+import { Link } from "react-router-dom"
 import {connect} from 'react-redux'
 import { createState } from '../actions'
 import { ApxtextIndexValue } from '../../../components/common'
@@ -9,9 +10,9 @@ import AutoComplete from '../../../lib/autoComplete'
 
 const ContactSection = (props) => {
 
-        const { locale, contact } = props;
+        const { locale, contact, reducer } = props;
 
-        var infoContact = ["company_name", "firstname", "lastname", "email"];
+        var infoContact = [ "firstname", "lastname", "email"];
 
         return (
             <div>
@@ -19,11 +20,15 @@ const ContactSection = (props) => {
                     field="company_name"
                     state="contact_id"
                     model="contact"
-                    reducer="QUOTE"
+                    reducer={reducer}
                     placeholder={locale.form.field.search_contact}
                     setSelectedObject={ props.createState }
                 />
                 <br />
+                <ApxtextIndexValue 
+                    value={contact.contact_id ? <Link to={{ pathname: `/contact/view/${contact.contact_id._id}`, state: { reducer: "CONTACT" } }}>{contact.contact_id.company_name}</Link> : ''}
+                    label={locale.form.field.company_name}
+                />
                 {
                     infoContact.map((name, index) => {
                         return  <ApxtextIndexValue 
