@@ -17,7 +17,7 @@ class MyTable extends React.Component {
 
     componentDidMount(){
         this.props.getTotal(this.state.reducer, `?contact=${this.props.contactId}`);
-        this.props.getBookList(this.state.reducer, `?limit=1000&skip=0&contact=${this.props.contactId}`);
+        this.props.getBookList(this.state.reducer, `?limit=5&skip=0&contact=${this.props.contactId}`);
     }
 
     render(){
@@ -43,7 +43,7 @@ class MyTable extends React.Component {
                                             <TableCell>{item.ref}</TableCell>
                                             <TableCell>{cvtNumToUserPref(item.total_ht)} {item.currency.value}</TableCell>
                                             <TableCell>{cvtNumToUserPref(item.vat.amount)} {item.currency.value}</TableCell>
-                                            <TableCell><span style={{color: item.status.color }}>{ locale.table[item.status.label] }</span></TableCell>
+                                            <TableCell><span style={{color: item.status.color }}>{ item.status[localStorage.getItem('locale')] }</span></TableCell>
                                             <ApxTableActions 
                                                 actionDelete={false}
                                                 actionEdit={`/bookkeeping/${reducer.toLowerCase()}/edit/${item._id}`}
@@ -65,6 +65,7 @@ class MyTable extends React.Component {
                 label={locale.table.label_rows_per_page}
                 label2={locale.table.of}
                 reducer={reducer}
+                status=""
                 onGetItemList={ this.props.getBookList }
             />
             </div>

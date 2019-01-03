@@ -32,16 +32,16 @@ const styles = theme => ({
     fontSize: '0.85rem',
     transition: 'all .2s ease',
     '&:hover': {
-      color: '#008489',
+      color: theme.palette.primary.main,
       opacity: 1,
     },
     '&$tabSelected': {
-      color: '#008489',
+      color: theme.palette.primary.main,
       fontWeight: theme.typography.fontWeightMedium,
       
     },
     '&:focus': {
-      color: '#008489',
+      color: theme.palette.primary.main,
     },
   },
   tabSelected: {},

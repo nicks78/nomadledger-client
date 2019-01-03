@@ -23,12 +23,11 @@ const styles = theme => ({
       textTransform: 'capitalize'
   },
   addBtn: {
-      position: 'absolute',
-      bottom: 8,
-      right: 0,
-      cursor: 'pointer',
-
-      '&:hover': {
+        position: 'absolute',
+        bottom: 8,
+        right: 0,
+        cursor: 'pointer',
+        '&:hover': {
           color: theme.palette.secondary.main
       }
   },
@@ -92,7 +91,7 @@ class AddCategory extends Component {
                         margin="normal"
                     />
                 
-                <AddIcon className={ classes.addBtn} onClick={ this._pushToDoc }/>
+                <AddIcon  className={ classes.addBtn} onClick={ this._pushToDoc }/>
                 
                 
             </div>

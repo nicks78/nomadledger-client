@@ -56,7 +56,7 @@ class AddContactGroup extends Component {
 
   _pushToDoc = () => {
     var data = {
-        contact_group: { fr: this.state.value, en:  this.state.value}
+        contact_group: { fr: this.state.value, en:  this.state.value, code: Date.now().toString()}
     }
     this.setState({value: ''})
     this.props.pushToDocument(this.state.reducer, data, this.state.addApi )

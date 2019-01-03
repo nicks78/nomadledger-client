@@ -100,7 +100,7 @@ class Auth extends Component {
         <ApxBanner />
         
         <div style={ styles.section_1 }>
-            <Typography variant="headline" style={ styles.headline }>
+            <Typography variant="overline" style={ styles.headline }>
                     TEXT D"INFORMATION COMPLEMENTAIRES
             </Typography>
             <Typography component="p" style={ styles.paragraphe }>
@@ -118,7 +118,7 @@ class Auth extends Component {
             {
                 !isFetching ? 
                 <Paper style={ styles.form }>
-                    <Typography variant="headline">
+                    <Typography variant="overline">
                             Commencer gratuitement
                     </Typography>
                     <ApxForm 
@@ -138,7 +138,7 @@ class Auth extends Component {
 
 
         <div style={ styles.section_4 }>
-            <Typography variant="headline" style={ styles.headline }>
+            <Typography variant="overline" style={ styles.headline }>
                     PRICING
             </Typography>
             <Grid container spacing={16}>

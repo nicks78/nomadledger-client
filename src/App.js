@@ -10,15 +10,15 @@ import './App.css'
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light:  '#00C5CC', //  rgb(66, 133, 244),
-      main: '#008489', // 'rgb(51, 103, 214)',
-      dark: '#267C7F',// '#1E3D7F',
+      light:  '#009AFF', // '#00C5CC', //  rgb(66, 133, 244),
+      main: '#0077c5', // '#008489', // 'rgb(51, 103, 214)',
+      dark:  '#265C7F', // '#267C7F',// '#1E3D7F',
       contrastText: '#fff',
     },
     secondary: {
-      light: '#ff6666', //'#ff9d3f',
-      main:    '#ef4848', // '#ef6c00',
-      dark: '#bf4040',// '#b53d00',
+      light: '#38CC24', // '#ff6666', //'#ff9d3f',
+      main:  '#2ca01c', // '#ef4848', // '#ef6c00',
+      dark:  '#38CC24', // '#457F3D',  // '#bf4040',// '#b53d00',
       contrastText: '#fff',
     },
     green:  '#4CAF50',
@@ -57,7 +57,7 @@ const theme = createMuiTheme({
     },
     h2: {
       fontSize: '1.5rem',
-      colro: '#080808',
+      color: '#080808',
       fontWeight: 400
     },
     h3: {

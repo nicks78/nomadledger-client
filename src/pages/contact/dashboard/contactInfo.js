@@ -74,7 +74,7 @@ class ContactInfo extends Component {
     }   
 
     render() {
-        const {locale, contact, isUpdating, tmp_state, classes} = this.props
+        const {locale, contact, isUpdating, tmp_state, classes, contactGroup} = this.props
         const { showEdit } = this.state;
 
         
@@ -113,6 +113,16 @@ class ContactInfo extends Component {
                       {locale.form.title.label_contact_info}
             </Typography>
             <Divider className={ classes.divider }/>
+            <EditSelect 
+                arrayField={contactGroup}
+                field="contact_group"
+                helperText="select_contact_group"
+                handleAction={ this.handleFormEdit }
+                locale={locale}
+                showEdit={showEdit}
+                label={locale.form.field.contact_group }
+                value={  contact.contact_group && contact.contact_group[localStorage.getItem("locale")] }
+            />
             <EditInput 
                 label={ locale.form.field.firstname }
                 value={ tmp_state.firstname ||  contact.firstname }
@@ -153,7 +163,7 @@ class ContactInfo extends Component {
                 field="email"
                 handleAction={this.handleFormEdit}
             />
-            <br />
+            <br /><br />
             <Typography variant="subtitle2">
                       {locale.form.title.label_comp_address}
             </Typography>
@@ -190,11 +200,12 @@ class ContactInfo extends Component {
                     value={  contact.addresses_country && contact.addresses_country[localStorage.getItem("locale")] }
                 />
             
-            <br />
+            <br /><br />
             <Typography variant="subtitle2">
                       {locale.form.title.label_comp_info}
             </Typography>
             <Divider className={ classes.divider }/>
+            
             <EditSelect 
                     arrayField={company_type}
                     field="company_type"
@@ -229,7 +240,9 @@ class ContactInfo extends Component {
 const mapStateToProps = (state) => {
     return {
         isUpdating: state.library.contact.isUpdating,
-        tmp_state: state.library.contact.tmp_state
+        tmp_state: state.library.contact.tmp_state,
+        contactGroup: state.account.company.item ?  state.account.company.item.contact_group : []
+
     }
 }
   

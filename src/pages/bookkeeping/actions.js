@@ -111,7 +111,6 @@ export function updateDocument (actionType) {
         }) 
         .then( res => {
             dispatch( setCreatedUpdatedItem(actionType, res.item) )
-            history.push(`/bookkeeping/${ actionType.toLowerCase() }`)
         })
         .catch(function (error) {
           // handle error

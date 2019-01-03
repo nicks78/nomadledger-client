@@ -16,20 +16,20 @@ html {
 
 a {
   text-decoration: none;
-  color: #ef6c00 !important;
+  color: #009AFF !important;
 }
 a svg {
   color: inherit
 }
 a:hover {
   text-decoration: none;
-  /* color: #b53d00 !important; */
+  /* color: #38CC24 !important; */
 }
 
 .link {
   text-decoration: none;
   position: relative;
-  color: #ef6c00;
+  color: #009AFF;
   padding-bottom: 2px;
   cursor: pointer;
 }
@@ -40,7 +40,7 @@ a:hover {
   bottom: 0;
   left: 0;
   width: 0%;
-  border-bottom: 1px solid #b53d00;
+  border-bottom: 1px solid #38CC24;
   transition: 0.4s;
 }
 
@@ -57,9 +57,9 @@ a:hover {
   }
 }
 
-/* 
-  Font 
-*/
+/****************************************************
+        DATE PICKER
+*****************************************************/
 
 .DayPicker-wrapper {
     font-size: 14px;
@@ -68,12 +68,12 @@ a:hover {
 }
 
 .DayPicker-Day:hover {
-  background-color: #008489 !important;
+  background-color: #009AFF !important;
   color: white;
 }
 
 .DayPicker-Day--highlighted {
-  background-color: #008489;
+  background-color: #009AFF;
   color: white;
 }
 
@@ -83,18 +83,22 @@ a:hover {
   border-radius: 4px;
 }
 
+.DayPicker-Day--today {
+  color: #2ca01c
+}
+
 /****************************************************
         BUTTON
 *****************************************************/
 
 .icon-button{
-  color: #ef6c00;
+  color: #009AFF;
   cursor: pointer;
   width: 0.8em !important;
   transition: 1s ease
 }
 .icon-button:hover {
-  color: #b53d00;
+  color: #38CC24;
 }
 
 /****************************************************

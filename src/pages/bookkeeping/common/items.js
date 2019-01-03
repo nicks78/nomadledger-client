@@ -86,7 +86,7 @@ class Items extends Component {
                             </TableCell>
                             <TableCell><ApxContenEditable value={cvtNumToUserPref(item.discount)} id={item.item_id} actionInput={this.getInput} name="discount" /></TableCell>
                             <TableCell>{ cvtNumToUserPref(item.total) }</TableCell>
-                            <TableCell ><IconButton onClick={ () => { this.props.removeItem(reducer, item)}} ><DeleteIcon color="secondary"/></IconButton></TableCell>
+                            <TableCell ><IconButton onClick={ () => { this.props.removeItem(reducer, item)}} ><DeleteIcon style={{ color: 'red' }}/></IconButton></TableCell>
                         </TableRow>
 
             })

@@ -12,7 +12,7 @@ const styles = theme => ({
         // fontSize: '0.5rem !important'
     },
     editicon: {
-        color: '#008489',
+        color: theme.palette.primary.main,
         width: '0.8em !important',
         height: '0.8em !important',
     },

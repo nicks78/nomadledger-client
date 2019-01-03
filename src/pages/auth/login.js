@@ -73,7 +73,7 @@ class Login extends Component {
             <div style={styles.root}>
                 <div style={ styles.container }>
                 <Paper style={ styles.paper }>
-                        <Typography variant="headline" style={{ alignText: 'center'}}>
+                        <Typography variant="overline" style={{ alignText: 'center'}}>
                                 Connectez-vous
                         </Typography>
                         {   isError ? <p> {locale.message[message]}</p> : null }

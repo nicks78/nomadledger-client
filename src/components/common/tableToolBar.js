@@ -41,37 +41,41 @@ const EnhancedToolBar = (props) => {
 
   return (
     <Toolbar>
-    <div className={classes.title}>
-      {numSelected > 0 ? (
-        <Typography color="inherit" variant="subtitle2">
-          {numSelected} {selected}
-        </Typography>
-      ) : (
-        <Typography variant="subtitle2" id="tableTitle">
-          { title }
-        </Typography>
-      )}
-    </div>
-    <div className={classes.spacer} />
-    <div className={classes.actions}>
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton aria-label="Delete">
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <BtnMenu 
-            menus={menus}
-            onChangeQuery={ props.onChangeQuery}
-            locale={locale}
-          />
-        </Tooltip>
-      )}
-    </div>
+        <div className={classes.title}>
+          {numSelected > 0 ? (
+            <Typography color="inherit" variant="subtitle2">
+              {numSelected} {selected}
+            </Typography>
+          ) : (
+            <Typography variant="subtitle2" id="tableTitle">
+              { title }
+            </Typography>
+          )}
+        </div>
+        <div className={classes.spacer} />
+        <div className={classes.actions}>
+          {numSelected > 0 ? (
+            <Tooltip title="Delete">
+              <IconButton aria-label="Delete">
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <Tooltip title="Filter list">
+              { 
+                  menus ? 
+                    <BtnMenu 
+                      menus={menus}
+                      onChangeQuery={ props.onChangeQuery}
+                      locale={locale}
+                  />
+                : <p> </p>
+              }
+            </Tooltip>
+          )}
+        </div>
     
-  </Toolbar>
+      </Toolbar>
   )
 }
 

@@ -9,17 +9,19 @@ import { cvtNumToUserPref } from '../../../utils/help_function'
 import { withStyles, Button, Hidden ,Table, TableHead, TableBody, Checkbox, Paper, TableCell, TableRow,} from '@material-ui/core';
 import {ApxTableToolBar, ApxAlert, ApxTableActions} from '../../../components/common'
 import Pagination from '../../../lib/pagination'
+import {filter} from '../../../utils/static_data'
 
 class Invoice extends Component {
 
     state = {
         reducer: "INVOICE",
         selected: [],
+        status: ''
     }
 
     componentDidMount(){
         if( this.props.receivedAt === null || this.props.updated ){
-            this.props.getTotal(this.state.reducer);
+            this.props.getTotal(this.state.reducer );
             this.props.getBookList(this.state.reducer, "?limit=5&skip=0");
         }
     }
@@ -63,8 +65,10 @@ class Invoice extends Component {
 
     isSelected = id =>  this.state.selected.indexOf(id) !== -1;
 
-    handleOpenImage = () => {
-        
+    handleFilterRequest = (value) => {
+        this.setState({status: value.code});
+        this.props.getTotal(this.state.reducer, `?status=${value.code || '10'}`);
+        this.props.getBookList(this.state.reducer, `?limit=5&skip=0&status=${value.code || '10'}`);
     };
     
     render() {
@@ -87,7 +91,9 @@ class Invoice extends Component {
                 numSelected={selected.length}
                 title={locale.table.title_invoice}
                 selected={locale.table.selected}
-                menus={[{label: "Approuvé"}, {label: "Paid"}]}
+                locale={locale}
+                menus={filter}
+                onChangeQuery={ this.handleFilterRequest }
             />
                     <Table>
                     <TableHead className={classes.tableHead}>
@@ -125,7 +131,7 @@ class Invoice extends Component {
                                                 <TableCell>{cvtNumToUserPref(invoice.total_ht)}</TableCell>
                                                 <TableCell>{cvtNumToUserPref(invoice.vat.amount)}</TableCell>
                                                 <TableCell>{cvtNumToUserPref(invoice.total)}</TableCell>
-                                                <TableCell><span style={{color: invoice.status.color }}>{ locale.table[invoice.status.label] }</span></TableCell>
+                                                <TableCell><span style={{color: invoice.status.color }}>{ invoice.status[localStorage.getItem('locale')] }</span></TableCell>
                                                 <ApxTableActions 
                                                     actionDelete={false}
                                                     actionEdit={`/bookkeeping/invoice/edit/${invoice._id}`}

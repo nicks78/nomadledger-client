@@ -83,9 +83,8 @@ const Form = (props) => {
                             <Grid item xs={12}>
                                 <ApxRadioGroup 
                                     action={  props.handleDropDown }
-                                    value={data.status ? data.status.label : 'draft'}
+                                    value={data.status ? data.status.code : '0'}
                                     arrayObject={ reducer === "QUOTE" ?  status : statusInv }
-                                    locale={locale}
                                 />
                             </Grid>
                         </Grid>
@@ -94,9 +93,7 @@ const Form = (props) => {
                         </Grid>
 
                     </Grid>
-                </Paper>
-
-                <Paper className={classes.paper}>
+                    <br/>
                 <Typography variant="overline">{ locale.page.quote.info_comp }</Typography>
                 <br />
                 <ApxRichEditor
@@ -161,7 +158,8 @@ const styles = theme => ({
         paddingTop: 12,
         paddingBottom: 12,
         marginTop: -24,
-        backgroundColor: theme.palette.primary.main,
+        fontWeight: 600,
+        backgroundColor: theme.palette.primary.light,
         color: 'white'
     },
     paper: {

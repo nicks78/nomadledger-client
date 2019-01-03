@@ -145,6 +145,7 @@ class AddVat extends Component {
                         company.vat.map((vat, index) => {
                           return <ApxTag 
                                   key={index}
+                                  color="secondary"
                                   variant="outlined"
                                   actionTag={ () => { this.deleteCategory(vat._id) } }
                                   label={ vat[localStorage.getItem('locale')] + ' ('+ vat.value +")"}

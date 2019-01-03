@@ -9,6 +9,8 @@ import { withStyles, Button, Hidden,  Paper, Table, TableHead, TableBody, Checkb
 import {ApxTableToolBar, ApxAlert, ApxTableActions} from '../../../components/common'
 import Pagination from '../../../lib/pagination'
 import { cvtNumToUserPref } from '../../../utils/help_function'
+import {filter} from '../../../utils/static_data'
+
 
 
 class Quote extends Component {
@@ -16,13 +18,13 @@ class Quote extends Component {
     state = {
         showQuote: false,
         reducer: "QUOTE",
-        status: '10',
+        status: '',
         selected: []
     }
 
     componentDidMount(){
-        this.props.getTotal(this.state.reducer, `?status=${this.state.status}`);
-        this.props.getBookList(this.state.reducer, `?limit=5&skip=0&status=${this.state.status}`);
+        this.props.getTotal(this.state.reducer);
+        this.props.getBookList(this.state.reducer, `?limit=5&skip=0`);
     }
 
     handleSelectAllClick = (event) => {
@@ -64,17 +66,16 @@ class Quote extends Component {
 
     isSelected = id =>  this.state.selected.indexOf(id) !== -1;
 
-    handleStatus = (value) => {
-        this.setState({status: value});
-        this.props.getTotal(this.state.reducer, `?status=${value || '10'}`);
-        this.props.getBookList(this.state.reducer, `?limit=5&skip=0&status=${value || '10'}`);
+    handleFilterRequest = (value) => {
+        this.setState({status: value.code});
+        this.props.getTotal(this.state.reducer, `?status=${value.code}`);
+        this.props.getBookList(this.state.reducer, `?limit=5&skip=0&status=${value.code}`);
     };
     
     render() {
     
     const {listQuote, isFetching, isError,  locale, classes, message} = this.props
-    const { selected, rowCount, reducer } = this.state;
-    const filter = [{label: "approved", code: '2'},{label: 'pending', code: '1'}, {label: "draft", code: '0'}, {label: 'paid', code: '4'}, {label: 'rejected', code: '3'},{label: "all", code: '10'}] 
+    const { selected, rowCount, reducer } = this.state; 
 
     if(isError){
         return <ApxAlert message={message} />
@@ -93,7 +94,7 @@ class Quote extends Component {
                         selected={locale.table.selected}
                         menus={filter}
                         locale={locale}
-                        onChangeQuery={ this.handleStatus }
+                        onChangeQuery={ this.handleFilterRequest }
                     />
                     <Table>
                     <TableHead className={classes.tableHead}>
@@ -107,7 +108,6 @@ class Quote extends Component {
                             </TableCell>
                             <TableCell>{locale.table.reference}</TableCell>
                             <TableCell>{locale.table.client}</TableCell>
-                            <TableCell>{locale.table.currency}</TableCell>
                             <TableCell>{locale.table.subtotal}</TableCell>
                             <TableCell>{locale.table.vat}</TableCell>
                             <TableCell>{locale.table.total}</TableCell>
@@ -127,11 +127,10 @@ class Quote extends Component {
                                                 </TableCell>
                                                 <TableCell>{item.ref}</TableCell>
                                                 <TableCell><Link className="link" to={{ pathname: `/contact/view/${item.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{item.contact_id.company_name}</span></Link></TableCell>
-                                                <TableCell>{item.currency.en}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(item.total_ht)}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(item.vat.amount)}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(item.total)}</TableCell>
-                                                <TableCell><span style={{color: item.status.color }}>{ locale.table[item.status.label] }</span></TableCell>
+                                                <TableCell>{cvtNumToUserPref(item.total_ht)} {item.currency.value}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(item.vat.amount)} {item.currency.value}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(item.total)} {item.currency.value}</TableCell>
+                                                <TableCell><span style={{color: item.status.color }}>{ item.status[localStorage.getItem('locale')] }</span></TableCell>
                                                 <ApxTableActions 
                                                     actionDelete={false}
                                                     actionEdit={`/bookkeeping/quote/edit/${item._id}`}

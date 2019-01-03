@@ -9,7 +9,7 @@ const styles = theme => ({
         width: '100%',
         marginTop: '0px',
         '& svg': {
-            color: theme.palette.primary.main
+            color: theme.palette.secondary.main
         }
     },
     menu: {

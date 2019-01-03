@@ -18,9 +18,14 @@ class BtnMenu extends React.Component {
     this.setState({ anchorEl: null });
   };
 
+  handleAction = (menu) => {
+    this.setState({ anchorEl: null });
+    this.props.onChangeQuery( menu )
+  }
+
   render() {
     const { anchorEl } = this.state;
-    const { fontSize, menus, locale } = this.props
+    const { fontSize, menus } = this.props
 
     return (
       <div>
@@ -32,14 +37,14 @@ class BtnMenu extends React.Component {
           <FilterListIcon style={{ fontSize: fontSize || 24 }}/>
         </IconButton> 
         <Menu
-          id="simple-menu"
+          id={Date.now()}
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
         {
             menus.map(( menu, index) => {
-                return <MenuItem key={index} onClick={ () => this.props.onChangeQuery( menu.code ) }>{locale.table[menu.label]}</MenuItem>
+                return <MenuItem key={index} onClick={ () => this.handleAction( menu ) }>{menu[localStorage.getItem('locale')]}</MenuItem>
             })
         }
         </Menu>

@@ -8,7 +8,6 @@ import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 import Logo from '../../logo.png';
 import MainMenu from './menu'
@@ -16,7 +15,6 @@ import {ApxCopyright} from '../common'
 import Avatar from '@material-ui/core/Avatar';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-
 
 
 const drawerWidth = 240;
@@ -67,7 +65,8 @@ const styles = theme => ({
         flex: 1,
         marginLeft: '20px',
         fontSize: '20px',
-        fontWeight: "500"
+        fontWeight: "700",
+        color: theme.palette.secondary.main
     },
     content: {
         flexGrow: 1,
@@ -82,6 +81,19 @@ const styles = theme => ({
             width: '120%',
             transition: 'all 0.2s ease',
 
+        }
+    },
+    hamburger: {
+        color: theme.palette.secondary.main
+    },
+    lang: {
+        color: theme.palette.secondary.main,
+        marginLeft:  15,
+        cursor: 'pointer',
+        fontSize: 14,
+        '&:hover': {
+            color: theme.palette.secondary.dark,
+            fontWeight: 600
         }
     }
 })
@@ -121,15 +133,15 @@ class Layout extends React.Component {
                     onClick={this.handleDrawerToggle}
                     className={classes.navIconHide}
                     >
-                    <MenuIcon style={{ color: '#ef6c00' }}/>
+                    <MenuIcon className={ classes.hamburger }/>
                 </IconButton>
                 <Hidden smDown>
                     <Typography >
-                        <img src={Logo} alt="logo" height="40" width="auto" /> 
+                        <img src={Logo} alt="logo" height="50" width="auto" /> 
                     </Typography>
                 </Hidden>
                 
-                <Typography color="secondary" className={classes.title}>
+                <Typography className={classes.title}>
                 <Hidden smDown>APX DEV</Hidden>
                 </Typography>
 
@@ -159,7 +171,7 @@ class Layout extends React.Component {
                   <MenuItem onClick={this.props.logout}>Deconnexion</MenuItem>
                 </Menu>
                 </Typography>
-                    <Button color="secondary" onClick={ () => { this.props._onChangeLocale(locale.lang === 'fr' ? 'en' : 'fr') } }>{ locale.lang === 'fr' ? 'EN' : 'FR' }</Button>
+                    <Typography button variant="outlined" className={classes.lang} onClick={ () => { this.props._onChangeLocale(locale.lang === 'fr' ? 'en' : 'fr') } }>{ locale.lang === 'fr' ? 'EN' : 'FR' }</Typography>
                 </Toolbar>
             </AppBar>
             

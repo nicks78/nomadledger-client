@@ -188,6 +188,7 @@ const Locale = {
                     select_num_format: "Selectionner format des chiffres",
                     select_category: "Sélectionner une catégorie",
                     select_contact: "Sélectionner un client",
+                    select_contact_group: "Sélectionner un group"
                 }
             },
             message: {
@@ -437,7 +438,8 @@ const Locale = {
                     select_service_type: "Select service type",
                     select_num_format: "Select num format",
                     select_category: "Select a category",
-                    select_contact: "Select a client"
+                    select_contact: "Select a client",
+                    select_contact_group: "Select a group"
                 }
             },
             message: {

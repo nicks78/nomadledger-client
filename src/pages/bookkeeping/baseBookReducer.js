@@ -99,7 +99,7 @@ const authReducer = (state = initialState, action) => {
         case `REMOVE_ITEM`:
             return {
                 ...state,
-                list_items: removeFromArray( state.list_items, action.payload ),
+                item: { ...state.item, list_items : removeFromArray( state.item.list_items, action.payload ) },
             }
         case `RESET_STATE`:
             return {

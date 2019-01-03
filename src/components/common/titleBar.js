@@ -10,11 +10,11 @@ const styles = (theme) => ({
     banner: {
         padding: 15,
         borderRadius: 4,
-        border: '1px solid #008489'
+        border: `1px solid ${theme.palette.secondary.main}`
     },
     header: {
         textTransform: 'uppercase',
-        color: theme.palette.primary.main
+        color: theme.palette.secondary.main
     },
     checkicon: {
         color: theme.palette.green,

@@ -26,13 +26,14 @@ class Contact extends Component {
     state = {
         reducer: 'CONTACT',
         selected: [],
-        keyLocation: ''
+        keyLocation: '',
+        group: ''
     }
 
     componentDidMount(){
         if( this.props.receivedAt === null  ){
             this.props.getTotal(this.state.reducer)
-            this.props.getItemList(this.state.reducer, "?limit=5&skip=0")
+            this.props.getItemList(this.state.reducer, `?limit=5&skip=0`)
         }
         this.setState({keyLocation: this.props.location.key})
     }
@@ -81,11 +82,18 @@ class Contact extends Component {
         this.setState({ selected: newSelected });
     }
 
+    handleFilterRequest = (value) => {
+        this.setState({ group: value.code })
+        this.props.getTotal(this.state.reducer, `?group=${value.code}`)
+        this.props.getItemList(this.state.reducer, `?limit=5&skip=0&group=${value.code}`)
+    }
+
+
     isSelected = id =>  this.state.selected.indexOf(id) !== -1;
 
     render() {
     
-    const {listContacts, isFetching, isError, locale, createItem, createState, newContact, isCreating, progress, message, classes, contactGroup} = this.props
+    const {listContacts, isFetching, isError, locale, createItem, createState, newContact, isCreating, progress, message, classes, contactGroup, rowsPerPageOptions, total} = this.props
     const { selected, rowCount, reducer } = this.state
    
     if(isError){
@@ -95,11 +103,14 @@ class Contact extends Component {
     return (
         <div className={classes.container}>
             <AddContact progress={progress} contactGroup={contactGroup} locale={ locale } createContact={ createItem } createContactState={  createState } newData={newContact} isCreating={ isCreating  }/>
-            <Paper>
-                <ApxTableToolBar
+                <Paper>
+                    <ApxTableToolBar
                         numSelected={selected.length}
                         title={locale.table.title_contact}
                         selected={locale.table.selected}
+                        menus={ contactGroup  }
+                        locale={locale}
+                        onChangeQuery={ this.handleFilterRequest }
                     />
                     <Table>
                     <TableHead className={classes.tableHead}>
@@ -143,11 +154,12 @@ class Contact extends Component {
                         </TableBody>
                     </Table>
                     <Pagination
-                        total={this.props.total}
-                        rowsPerPageOptions={this.props.rowsPerPageOptions}
+                        total={total}
+                        rowsPerPageOptions={rowsPerPageOptions}
                         label={locale.table.label_rows_per_page}
                         label2={locale.table.of}
                         reducer={reducer}
+                        status={this.state.group}
                         onGetItemList={ this.props.getItemList }
                     />
                 
@@ -171,6 +183,7 @@ const mapStateToProps = (state) => {
         progress: state.library.contact.progress,
         message: state.library.contact.message,
         total: state.library.contact.total,
+        rowsPerPageOptions: state.library.contact.rowsPerPageOptions,
         contactGroup: state.account.company.item ?  state.account.company.item.contact_group : []
     }
 }

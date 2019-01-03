@@ -10,18 +10,18 @@ class StatContact extends Component {
         <Grid container spacing={24}>
         <Grid item xs={12} md={4}>
           <Paper style={{padding: 10, backgroundColor: '#26a69a'}} elevation={1}>
-              <Typography style={{ color: 'white'}} variant="body1" component="h3">
+              <Typography style={{ color: 'white'}} variant="body1">
                   Weeks sales
                 </Typography>
             <Grid container>
 
                 <Grid item xs={9}>
-                <Typography variant="display1" component="h3">
+                <Typography variant="h1">
                   
                 </Typography>
                 </Grid>
                 <Grid item xs={3}>
-                <Typography style={{float: 'right', color: 'white'}} variant="body1" component="h5">
+                <Typography style={{float: 'right', color: 'white'}} variant="body1">
                   900€
                 </Typography>
                 </Grid>
@@ -30,18 +30,18 @@ class StatContact extends Component {
         </Grid>
         <Grid item xs={12} md={4}>
           <Paper style={{padding: 10, backgroundColor: '#3B14CC'}} elevation={1}>
-              <Typography style={{ color: 'white'}} variant="body1" component="h3">
+              <Typography style={{ color: 'white'}} variant="body1">
                   Weeks sales
                 </Typography>
             <Grid container>
 
                 <Grid item xs={9}>
-                <Typography variant="display1" component="h3">
+                <Typography variant="h1">
                   
                 </Typography>
                 </Grid>
                 <Grid item xs={3}>
-                <Typography style={{float: 'right', color: 'white'}} variant="body1" component="h5">
+                <Typography style={{float: 'right', color: 'white'}} variant="body1">
                   900€
                 </Typography>
                 </Grid>
@@ -50,18 +50,18 @@ class StatContact extends Component {
         </Grid>
         <Grid item xs={12} md={4}>
           <Paper style={{padding: 10, backgroundColor: '#ec407a'}} elevation={1}>
-              <Typography style={{ color: 'white'}} variant="body1" component="h3">
+              <Typography style={{ color: 'white'}} variant="body1">
                   Weeks sales
                 </Typography>
             <Grid container>
 
                 <Grid item xs={9}>
-                <Typography variant="display1" component="h3">
+                <Typography variant="h1">
                   
                 </Typography>
                 </Grid>
                 <Grid item xs={3}>
-                <Typography style={{float: 'right', color: 'white'}} variant="body1" component="h5">
+                <Typography style={{float: 'right', color: 'white'}} variant="body1">
                   900€
                 </Typography>
                 </Grid>
