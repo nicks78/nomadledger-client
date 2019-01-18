@@ -26,7 +26,6 @@ const styles = {
         marginTop: '40%',
         padding: 24,
     }
-
 }
 
 class Login extends Component {

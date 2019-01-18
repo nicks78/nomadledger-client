@@ -6,8 +6,7 @@ import { withStyles, Paper, Typography, Grid, Divider } from '@material-ui/core'
 import { getAccount, createState } from './actions'
 import User from './user'
 import Company from './company'
-import Setting from './setting'
-import {Spinner} from '../../components/common'
+import {Spinner, ApxAlert} from '../../components/common'
 import AddCategory from './addCategory'
 import AddVat from './addVat'
 import AddContactGroup from './addContactGroup'
@@ -29,6 +28,11 @@ const styles = theme => ({
     top: '6px',
     right: '5px',
     color: 'rgba(0,0,0,.54)'
+  },
+  titleBar: {
+    padding: 15,
+    borderRadius: 4,
+    border: `1px solid ${theme.palette.secondary.main}`
   }
 })
 
@@ -61,10 +65,14 @@ class Account extends Component {
 
   render() {
 
-    const { classes, company, user, userIsFetching, companyIsFetching } = this.props
+    const { classes, company, user, userIsFetching, companyIsFetching, locale } = this.props
 
-    if( userIsFetching  || user === null || companyIsFetching  || company === null ){
+    if( userIsFetching  || companyIsFetching   ){
       return <Spinner />
+    }
+
+    if( user === null || company === null  ){
+      return <ApxAlert message="error_404" />
     }
     return (
       <div>
@@ -83,16 +91,16 @@ class Account extends Component {
                 <Grid item xs={12} md={8}>
                     <Grid container spacing={24}> 
                       <Grid item xs={12}>
-                        <Paper className={classes.paper} elevation={1}>
-                          <Setting handleFormEdit={ this.handleFormEdit }/>
-                        </Paper>
-                      </Grid>
-                      <Grid item xs={12}>
                           <Paper className={classes.paper} elevation={1}>
+
+                          <Typography variant="overline" className={classes.titleBar}>
+                              {locale.page.account.title_1}
+                          </Typography>
+                          <br />
                           <Grid container spacing={24}> 
                               <Grid item xs={12} md={6}>
                                 <Typography variant="subtitle2"  >
-                                      Gerer vos categorie de produit et services
+                                {locale.page.account.title_3}
                                 </Typography>
                                 <Divider className={ classes.divider }/>
                                 <AddCategory />
@@ -100,14 +108,14 @@ class Account extends Component {
                               <br />
                               <Grid item xs={12} md={6}>
                               <Typography variant="subtitle2"  >
-                                      Grouper vos contacts 
+                              {locale.page.account.title_2}
                                 </Typography>
                                 <Divider className={ classes.divider }/>
                                   <AddContactGroup />
                               </Grid>
                               <Grid item xs={12} md={6}>
                               <Typography variant="subtitle2"  >
-                                      Gerer vos TVA
+                                  {locale.page.account.title_4}
                                 </Typography>
                                 <Divider className={ classes.divider }/>
                                 <AddVat />

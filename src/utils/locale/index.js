@@ -89,7 +89,13 @@ const Locale = {
                 quote: {
                     items: "Selectionner un service/produit",
                     info_comp: "Informations complementaires"
-                }
+                },
+                account: {
+                    title_1: "Configuré mon App",
+                    title_2: "Mes groupes de contacts",
+                    title_3: "Mes catégories",
+                    title_4: "Mes TVA"
+                },
             },
             text: {
                 address: "Adresse",
@@ -105,12 +111,12 @@ const Locale = {
                     add_service: "Enregistrer un service",
                     add_expense: "Enregistrer une depense",
                     add_provider: "Enregistrer un prestataire",
-                    new_quote: "Créer un devis",
-                    new_invoice: "Créer une facture",
-                    new_payback: "Créer un avoir",
-                    edit_quote: "Edit le devis",
-                    edit_invoice: "Edit la facture",
-                    edit_payback: "Edit l'avoir",
+                    new_quote: "Créer Nouveau Devis",
+                    new_invoice: "Créer Nouvelle Facture",
+                    new_payback: "Créer Nouvelle Avoir",
+                    edit_quote: "Editer Devis",
+                    edit_invoice: "Editer Facture",
+                    edit_payback: "Editer Avoir",
                     label_contact: "Coordonnée contact",
                     label_company: "Informations compagnie",
                     label_product: "Informations produit",
@@ -176,9 +182,9 @@ const Locale = {
                     contact_id: "Société",
 
                     textarea_quote: "Taper une déscription de votre devis",
-                    search_service: "Taper votre recherche service",
-                    search_product: "Taper votre recherche produit",
-                    search_contact: "Taper votre recherche contact",
+                    search_service: "Rechercher un service",
+                    search_product: "Rechercher un produit",
+                    search_contact: "Rechercher un contact",
                     
                 },
                 helperText: {
@@ -202,11 +208,14 @@ const Locale = {
                 error_user_not_found: "user_not_found",
                 error_wrong_password: "Mot de passe incorrect",
                 error_500: "mauvaise requete",
-                error_400: "error 400",
+                error_400: "Champs marqué avec une * sont obligatoire",
+                error_404: "Not found",
                 error_wrong_token: "error wrong token",
                 error_no_token: "error no token",
+                error_file_not_allowed: "File type not allowed",
 
-                alert_password_not_match: "Mots de passe ne correspondent pas"
+                alert_password_not_match: "Mots de passe ne correspondent pas",
+                phone_required: "Mobile obligatoire",
             },
             table: {
                 title_service: "Service",
@@ -253,7 +262,10 @@ const Locale = {
                 reference: "Référence",
                 client: "Client",
                 currency: "Devise",
-                status: "Statut"
+                status: "Statut",
+                inv: "FAC",
+                qto: "DEV",
+                pya: "AVO",
             }
         },
     en: 
@@ -280,12 +292,12 @@ const Locale = {
                 url: "invoices"
             },
             quote:{
-                name: "Quotation",
-                url: "factures"
+                name: "Quotes",
+                url: "quotes"
             },
             payback:{
                 name: "Payback",
-                url: "factures"
+                url: "payback"
             },
             product:{
                 name: "Products",
@@ -341,7 +353,13 @@ const Locale = {
                 quote: {
                     items: "Select a product or service",
                     info_comp: "Work description"
-                }
+                },
+                account: {
+                    title_1: "Configure My App",
+                    title_2: "My contact group",
+                    title_3: "My categories",
+                    title_4: "My VAT"
+                },
             },
             text: {
                 address: "Address",
@@ -357,10 +375,10 @@ const Locale = {
                     add_service: "Add service",
                     add_expense: "Add expense",
                     add_provider: "Add provider",
-                    new_quote: "Create a new quotation",
-                    new_invoice: "Create a new invoice",
-                    new_payback: "Create a new payback",
-                    edit_quote: "Edit quotation",
+                    new_quote: "Create New Quotation",
+                    new_invoice: "Create New Invoice",
+                    new_payback: "Create New Payback",
+                    edit_quote: "Edit Quotation",
                     edit_invoice: "Edit invoice",
                     edit_payback: "Edit payback",
                     label_contact: "Customer profile",
@@ -428,9 +446,9 @@ const Locale = {
                     contact_id: "Company",
 
                     textarea_quote: "Type a description of your work",
-                    search_service: "Type your seach service",
-                    search_product: "Type your seach produit",
-                    search_contact: "Type your seach contact",
+                    search_service: "Type to search a service",
+                    search_product: "Type to search a produit",
+                    search_contact: "Type to search a contact",
                 },
                 helperText: {
                     select_phone_code: "Please select country code",
@@ -453,11 +471,14 @@ const Locale = {
                 error_user_not_found: "User not found",
                 error_wrong_password: "Wrong password",
                 error_500: "bad request",
-                error_400: "error 400",
+                error_400: "Fields marked with * are mandatory",
+                error_404: "Not found",
                 error_wrong_token: "error wrong token",
                 error_no_token: "error no token",
+                error_file_not_allowed: "File type not allowed",
 
-                alert_password_not_match: "Password not match"
+                alert_password_not_match: "Password not match",
+                phone_required: "Phone required",
             },
             table: {
                 title_service: "Service",
@@ -504,8 +525,10 @@ const Locale = {
                 reference: "Reference",
                 client: "Client",
                 currency: "Currency",
-                status: "Status"
-
+                status: "Status",
+                inv: "INV",
+                qto: "QTO",
+                pya: "PAY",
                  
             }
         },

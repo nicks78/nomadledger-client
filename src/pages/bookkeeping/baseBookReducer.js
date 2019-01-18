@@ -59,7 +59,8 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 isFetching: action.isFetching,
                 updated: action.updated,
-                isError: action.isError
+                isError: action.isError,
+                list: replaceObjectInArray(state.list, action.payload)
             }
         case `STATE`:
             return {
@@ -76,7 +77,7 @@ const authReducer = (state = initialState, action) => {
         case `UPDATE_LIST_ITEM`:
             return {
                 ...state,
-                item: { ...state.item, list_items: replaceObjectInArray(state.item.list_items, action.payload) },
+                item: { ...state.item, list_items: replaceObjectInArray(state.item.list_items, action.payload.item_id) },
             }
 
         case `UP_DOWN_QUANTITY`:

@@ -100,15 +100,20 @@ export function getLogout(){
         dispatch(resetState('SERVICE'))
         dispatch(resetState('EXPENSE'))
         dispatch(resetState('PRODUCT'))
-        dispatch(setLogout())
-        
-        // Redirect to login page
-        history.replace("/login");
+        dispatch(setLogout());
+        history.push('/')
       })
       .catch(function (error) {
             // Do something when error
-            var message = error.response ? error.response.data.message : 'error_500'
+            var message = error.response ? error.response.data.message : 'error_500';
+            // Empty redux state
+            dispatch(resetState('CONTACT'))
+            dispatch(resetState('SERVICE'))
+            dispatch(resetState('EXPENSE'))
+            dispatch(resetState('PRODUCT'))
+            dispatch(setLogout());
             dispatch(requestFailed(message));
+            history.push('/')
       })     
     }
 }

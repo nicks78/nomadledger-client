@@ -2,10 +2,10 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {Table, TableHead, TableBody, Checkbox, Paper, TableCell, TableRow, withStyles} from '@material-ui/core';
+import {Table, TableHead, TableBody, Checkbox, TableCell, TableRow, withStyles} from '@material-ui/core';
 import {connect} from 'react-redux'
 import { createItem, getItemList, getItem, createState, getTotal} from '../../redux/actions'
-import { ApxAlert, ApxTableToolBar} from '../../components/common'
+import { ApxAlert, ApxTableToolBar, ApxPaper} from '../../components/common'
 import AddContact from './addContact'
 import Pagination from '../../lib/pagination'
 
@@ -42,6 +42,10 @@ class Contact extends Component {
         if(nextProps.location.key !== this.state.keyLocation){
             this.setState({ showContact: false, keyLocation: nextProps.location.key })
         }
+    }
+
+    componentWillUnmount() {
+        // this.props.resetItem()
     }
 
     onSelectAllClick = (event) => {
@@ -95,15 +99,14 @@ class Contact extends Component {
     
     const {listContacts, isFetching, isError, locale, createItem, createState, newContact, isCreating, progress, message, classes, contactGroup, rowsPerPageOptions, total} = this.props
     const { selected, rowCount, reducer } = this.state
-   
-    if(isError){
-        return <ApxAlert message={locale.message[message]} reducer={ this.state.reducer }/>
-    }
+
 
     return (
         <div className={classes.container}>
             <AddContact progress={progress} contactGroup={contactGroup} locale={ locale } createContact={ createItem } createContactState={  createState } newData={newContact} isCreating={ isCreating  }/>
-                <Paper>
+                
+                { isError ?  <ApxAlert message={message} reducer={ this.state.reducer }/> : null }
+                <ApxPaper>
                     <ApxTableToolBar
                         numSelected={selected.length}
                         title={locale.table.title_contact}
@@ -115,13 +118,13 @@ class Contact extends Component {
                     <Table>
                     <TableHead className={classes.tableHead}>
                         <TableRow>
-                            <TableCell padding="checkbox">
+                            {/* <TableCell padding="checkbox">
                             <Checkbox
                                 indeterminate={selected.length > 0 && selected.length < rowCount}
                                 checked={selected.length === this.props.listContacts.length}
                                 onChange={this.onSelectAllClick}
                                 />
-                            </TableCell>
+                            </TableCell> */}
                             <TableCell>{ locale.table.company }</TableCell>
                             <TableCell>{ locale.table.group }</TableCell>
                             <TableCell>{locale.table.full_name}</TableCell>
@@ -136,11 +139,11 @@ class Contact extends Component {
                                 listContacts.map(( contact, index) => {
                                     const isSelected = this.isSelected(contact._id);
                                     return  <TableRow key={index} selected={isSelected}>
-                                                <TableCell padding="checkbox" onClick={ event => { this.onSelectedField(event, contact._id) } } >
+                                                {/* <TableCell padding="checkbox" onClick={ event => { this.onSelectedField(event, contact._id) } } >
                                                     <Checkbox checked={isSelected} />
-                                                </TableCell>
+                                                </TableCell> */}
                                                 
-                                                <TableCell><Link to={{ pathname: `/${reducer.toLowerCase()}/view/${contact._id.toLowerCase()}`, state: { reducer: reducer } }}><span  className="link">{contact.company_name}</span></Link></TableCell>
+                                                <TableCell><Link to={`/${reducer.toLowerCase()}/view/${contact._id.toLowerCase()}`}><span  className="link">{contact.company_name}</span></Link></TableCell>
                                                 <TableCell>{contact.contact_group[localStorage.getItem('locale') || 'fr']}</TableCell>
                                                 <TableCell>{ contact.firstname } {contact.lastname}</TableCell>
                                                 <TableCell><a href={`tel:${contact.phone_code.value}${contact.phone.replace('0', '')}`}><span  className="link">({contact.phone_code.value}) {contact.phone.replace('0', '')}</span></a></TableCell>
@@ -164,7 +167,7 @@ class Contact extends Component {
                     />
                 
                   
-            </Paper>    
+            </ApxPaper>    
         </div>
     )
   }

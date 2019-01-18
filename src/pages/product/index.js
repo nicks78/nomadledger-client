@@ -66,13 +66,10 @@ class Product extends Component {
 
     render() {
     
-    const {listProducts, isFetching, isError,  locale, newProduct, createState, createItem, isCreating, category, classes } = this.props
+    const {listProducts, isFetching, isError,  locale, newProduct, createState, createItem, isCreating, category, classes, message } = this.props
 
     if( isFetching ){
         return <Spinner />
-    }
-    if( isError ){
-        return <ApxAlert message="Erreur message" />
     }
 
 
@@ -81,7 +78,7 @@ class Product extends Component {
         <div style={styles.container}>
 
             <AddProduct category={category}locale={ locale } initData="" newData={newProduct} createItemState={ createState } createItem={ createItem } isCreating={ isCreating  }/>
-            
+            {isError ? <ApxAlert message={message} /> : null }
             <Grid container spacing={24}>
             {
                 listProducts.map((product, index) => {
@@ -111,6 +108,7 @@ const mapStateToProps = (state) => {
     return {
         isFetching: state.library.product.isFetching,
         isError: state.library.product.isError,
+        message: state.library.product.message,
         isCreating: state.library.product.isCreating,
         listProducts: state.library.product.list,
         receivedAt: state.library.product.receivedAt,

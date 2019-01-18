@@ -1,5 +1,6 @@
 //manager/src/pages/auth/index.js
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import { createStateUser, createUser, resetUser } from './actions'
 import Typography from '@material-ui/core/Typography';
@@ -114,7 +115,7 @@ class Auth extends Component {
         </div>
         
         <div style={ styles.section_3 }>
-        
+        <Link to="/login">Login</Link>
             {
                 !isFetching ? 
                 <Paper style={ styles.form }>

@@ -32,6 +32,8 @@ class DatePickers extends React.Component {
         // Set date object
         var obj = {
             date: new Date(date),
+            year: date.getFullYear(),
+            month: month,
             label: date.getDate() +'/'+ month +'/'+ date.getFullYear(),
             intl_format: date.getFullYear() +'/'+ month +'/'+ date.getDate(),
             timestamp: date.getTime()
@@ -85,6 +87,7 @@ class DatePickers extends React.Component {
                                 weekdaysShort={ date[locale].week_short}
                                 months={ date[locale].month}
                                 modifiers={modifiers}
+                                firstDayOfWeek={1}
                             />                         
                     : null 
                 }

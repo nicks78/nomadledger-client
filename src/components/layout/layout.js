@@ -66,13 +66,17 @@ const styles = theme => ({
         marginLeft: '20px',
         fontSize: '20px',
         fontWeight: "700",
-        color: theme.palette.secondary.main
+        color: theme.palette.grey.dark
     },
     content: {
         flexGrow: 1,
         overflowY: 'auto',
         backgroundColor: 'rgb(238,238,238)',// theme.palette.background.default,
         padding: theme.spacing.unit * 3,
+        [theme.breakpoints.down('sm')]: {
+            margin: 0,
+            padding: 0
+        },
     },
     avatar: {
         cursor: 'pointer',
@@ -142,7 +146,7 @@ class Layout extends React.Component {
                 </Hidden>
                 
                 <Typography className={classes.title}>
-                <Hidden smDown>APX DEV</Hidden>
+                <Hidden smDown>Apx BookKeeping Solutions</Hidden>
                 </Typography>
 
                 <Typography>
@@ -167,11 +171,11 @@ class Layout extends React.Component {
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <MenuItem component={Link}  to="/account" >My account</MenuItem>
+                  <MenuItem component={Link} onClick={this.handleClose}  to="/account" >My account</MenuItem>
                   <MenuItem onClick={this.props.logout}>Deconnexion</MenuItem>
                 </Menu>
                 </Typography>
-                    <Typography button variant="outlined" className={classes.lang} onClick={ () => { this.props._onChangeLocale(locale.lang === 'fr' ? 'en' : 'fr') } }>{ locale.lang === 'fr' ? 'EN' : 'FR' }</Typography>
+                    <Typography variant="overline" className={classes.lang} onClick={ () => { this.props._onChangeLocale(locale.lang === 'fr' ? 'en' : 'fr') } }>{ locale.lang === 'fr' ? 'EN' : 'FR' }</Typography>
                 </Toolbar>
             </AppBar>
             

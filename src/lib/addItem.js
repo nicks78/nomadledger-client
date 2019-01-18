@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { ApxExpanded, ApxUpload, ApxForm, ApxRightDrawer, Spinner, ApxButtonCircle } from '../components/common'
+import { ApxExpanded, ApxUpload, ApxForm, ApxRightDrawer, Spinner, ApxButtonCircle, ApxAlert } from '../components/common'
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Hidden from '@material-ui/core/Hidden';
 
@@ -78,7 +78,7 @@ class Add extends Component {
             file.blob = URL.createObjectURL(file) 
             imagesArray.push(file) 
         }else{
-            alert('FILE TYPE NOT AUTHORIZED !')
+            alert(this.props.locale.message.error_file_not_allowed)
         }
         return imagesArray
     }
@@ -127,13 +127,13 @@ class Add extends Component {
                     <Button variant="contained" color="secondary" className={ classes.btnSave } onClick={ this._handleCreateItem }>{ locale.button.save }</Button>
                 </div>
           );
-
         return (
             <div className={ classes.root}>
             <Hidden only={['xs', 'sm']}>
                 <Button variant="contained" color="secondary"  className={  classes.button } onClick={this.toggleDrawer('right', true)}>{ addBtnTitle }</Button>
             </Hidden>
             <ApxRightDrawer toggleDrawer={ this.toggleDrawer } side="right" open={ this.state.right} title={ headerText }>
+            
                     { 
                         isCreating ? 
                         <div className={ classes.loading }>

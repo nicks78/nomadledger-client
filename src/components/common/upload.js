@@ -24,13 +24,37 @@ const styles = theme => ({
     listItem: {
         width: '100%'
     }
-
 })
+
+// function handleFile (file) {
+//     if(file.type === 'image/png' || file.type === 'image/jpeg' ){ // Check file format 
+//         var imagesArray = this.props.newData.doc ?  this.props.newData.doc : [];
+//         file.blob = URL.createObjectURL(file) 
+//         imagesArray.push(file) 
+//     }else{
+//         alert(this.props.locale.message.error_file_not_allowed)
+//     }
+//     return imagesArray
+// }
+
+// function handleRemoveItem (...props, id, field, fieldName ) {
+//     console.log(props)
+//     var images = this.props.newData.doc;
+//     var newImages = [];
+//     for(var i = 0 ; i < images.length ; i++){
+//         if( images[i][field] !== id ){
+//             newImages.push(images[i]);
+//         }
+//     }
+//     this.props.createItemState( this.props.reducer, fieldName, newImages )
+// }
 
 const  Upload = (props) => {
 
     const {classes, images, limitUploadFile, removeItem, docType } = props;
-    const idInput =  Date.now().toString()
+    const idInput =  Date.now().toString();
+
+    
 
     return (
     

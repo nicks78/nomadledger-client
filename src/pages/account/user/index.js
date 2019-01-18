@@ -76,9 +76,15 @@ class User extends Component {
     const {  user, locale, classes, isFetching, isUploading, progress, isError, message } = this.props;
     const {showEdit, password, password_confirm, reducer} = this.state
 
-    if( isFetching  || user === null ){
+    if( isFetching  ){
       return <Spinner />
     }
+
+    if( user === null ){
+      return <ApxAlert message="error_404" />
+    }
+
+    
 
     return (
       <div>

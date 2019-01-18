@@ -48,6 +48,7 @@ const baseReducer = (state = new BaseState(), action) => {
                 message: action.message,
                 receivedAt: action.receivedAt, 
                 isError: action.isError,
+                isCreating: action.isCreating
             }
 
         case `RECEIVE`:

@@ -15,8 +15,8 @@ const AddContact = (props) => {
         label: locale.form.title.label_company,
         section_1: false,
         fields: [
-            { name: 'company_name',type:"text" },
-            { name: 'contact_group', type:"select", selections: contactGroup },
+            { name: 'company_name',type:"text", required: true },
+            { name: 'contact_group', type:"select", selections: contactGroup, required: true },
             { name: 'company_register',type:"text"},
             { name: 'company_vat', type:"number"},
             { name: 'addresses_street', type:"text" },
@@ -29,11 +29,11 @@ const AddContact = (props) => {
         title: locale.form.title.add_contact, 
         label: locale.form.title.label_contact,
         fields: [
-            { name: 'firstname',type:"text" },
-            { name: 'lastname',type:"text"},
-            { name: 'phone_code', type:"select", selections: phone_code, helperText: "select_phone_code" },
-            { name: 'phone', type:"text" },
-            { name: 'email', type:"email" }
+            { name: 'firstname',type:"text", required: true},
+            { name: 'lastname',type:"text", required: true },
+            { name: 'phone_code', type:"select", selections: phone_code, helperText: "select_phone_code", required: true},
+            { name: 'phone', type:"text", required: true},
+            { name: 'email', type:"email", required: true}
           ]
       }
     ]

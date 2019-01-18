@@ -4,8 +4,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { createItem, getItemList, getItem, createState, getTotal } from '../../redux/actions'
 import {connect} from 'react-redux'
-import { TableCell, TableRow, Paper, Table, TableHead, TableBody, withStyles, Tooltip} from '@material-ui/core';
-import { ApxAlert, ApxTableToolBar} from '../../components/common'
+import { TableCell, TableRow, Table, TableHead, TableBody, withStyles, Tooltip} from '@material-ui/core';
+import { ApxAlert, ApxTableToolBar, ApxPaper} from '../../components/common'
 import ShowService from './showService'
 import AddService from './addService'
 import {cvtNumToUserPref} from '../../utils/help_function'
@@ -27,22 +27,12 @@ class Service extends Component {
     state = {
         showService: false,
         reducer: 'SERVICE',
-        keyLocation: '',
         rowCount: 0,
     }
 
     componentDidMount(){
-        if( this.props.receivedAt === null ){
             this.props.getTotal(this.state.reducer)
             this.props.getItemList(this.state.reducer, "?limit=5&skip=0");
-        }
-        this.setState({keyLocation: this.props.location.key})
-    }
-
-    componentWillReceiveProps(nextProps){
-        if(nextProps.location.key !== this.state.keyLocation){
-            this.setState({ showService: false, keyLocation: nextProps.location.key })
-        }
     }
 
     render() {
@@ -68,7 +58,7 @@ class Service extends Component {
                 isCreating={isCreating} 
                 category={category}
             />
-            <Paper>
+            <ApxPaper>
             {
                 showService ?
                     <ShowService service={ service } />
@@ -91,7 +81,7 @@ class Service extends Component {
                             {   !isFetching ?
                                 listServices.map(( service, index) => {
                                     return  <TableRow key={index}>
-                                                <TableCell><Link to={{ pathname: `/${reducer.toLowerCase()}/view/${service._id.toLowerCase()}`, state: { reducer: reducer } }}><span  className="link">{service.name}</span></Link></TableCell>
+                                                <TableCell><Link to={{ pathname: `/${reducer.toLowerCase()}/view/${service._id.toLowerCase()}`, state: { reducer: reducer, service: service } }}><span  className="link">{service.name}</span></Link></TableCell>
                                                 <TableCell numeric>{cvtNumToUserPref(service.price)}</TableCell>
                                                 <TableCell>{service.category[localStorage.getItem('locale')]}</TableCell> 
                                                 <Tooltip className={classes.customWidth} title={service.description}><TableCell>{service.description.slice(0,5)}...</TableCell></Tooltip>
@@ -99,20 +89,20 @@ class Service extends Component {
                                 })
                                 : null
                             }
-                            
                         </TableBody>
                     </Table>
                     <Pagination
                         total={this.props.total}
                         rowsPerPageOptions={this.props.rowsPerPageOptions}
                         label={locale.table.label_rows_per_page}
+                        status=""
                         reducer={reducer}
                         label2={locale.table.of}
                         onGetItemList={ this.props.getItemList }
                     />
                     </div>
             }          
-            </Paper>
+            </ApxPaper>
         </div>
     )
   }
@@ -137,6 +127,7 @@ const mapStateToProps = (state) => {
         category: state.account.company.item ?  state.account.company.item.category_name : []
     }
 }
+
 
 const StyledService = withStyles(styles)(Service)
 

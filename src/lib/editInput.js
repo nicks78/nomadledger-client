@@ -33,7 +33,7 @@ const EditInput = (props) => {
                     value={value}
                     name={field}
                     onChange={ handleAction  }
-                    margin="normal"
+                    margin="dense"
                 />
     }
 

@@ -14,12 +14,12 @@ const AddProduct = (props) => {
         title: locale.form.title.add_product, 
         label: locale.form.title.label_product,
         fields: [
-          { name: 'name', type:"text" },
+          { name: 'name', type:"text", required: true },
           { name: 'buying_price', type:"number"},
           { name: 'price', type:"number"},
           { name: 'stock', type:"number"},
           { name: 'currency', type:"select", selections: currency, helperText: "select_currency" },
-          { name: 'category', type:"select", selections: category, helperText: "select_category" },
+          { name: 'category', type:"select", selections: category, helperText: "select_category", required: true  },
           { name: 'description', type:"longtext", multiline: true, rowsMax:"4" },
         ]
       }
@@ -27,6 +27,7 @@ const AddProduct = (props) => {
 
     return (
       <div>
+        
           <AddItem 
             formFields={fields} 
             locale={locale} 

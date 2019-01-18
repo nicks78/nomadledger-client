@@ -15,7 +15,7 @@ const styles = theme => ({
     textField: {
         width: '100%',
         marginTop: '0px',
-        float: 'left',
+        // float: 'left',
     },
 })
 
@@ -35,12 +35,14 @@ const Form = (props) => {
                                         value={ objData[cp.name] && objData[cp.name][localStorage.getItem('locale')]  } 
                                         handleAction={  formHandler } 
                                         locale={ locale }
+                                        required={ cp.required || false }
                                         helperText={ cp.helperText }/>
                                 </Grid>
                     }else if( cp.type === 'longtext' ){
                         return <Grid item xs={12} key={index}>
                                     <TextField
                                         id={cp.name}
+                                        required={ cp.required || false }
                                         multiline
                                         rows="4"
                                         name={cp.name}
@@ -48,7 +50,7 @@ const Form = (props) => {
                                         className={ classes.textField}
                                         value={objData[cp.name] || ''}
                                         onChange={ formHandler }
-                                        margin="normal"
+                                        margin="dense"
                                         />
                                 </Grid>
                     }else{
@@ -62,7 +64,7 @@ const Form = (props) => {
                                         className={ classes.textField}
                                         value={objData[cp.name] || ''}
                                         onChange={ formHandler }
-                                        margin="normal"
+                                        margin="dense"
                                     /></Grid>
                     }
                 })

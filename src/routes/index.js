@@ -48,6 +48,7 @@ class Routes extends React.Component {
         return (
             <Router basename="/" history={history}>
                     <React.Fragment>
+                    
                         <Switch>
                         <Route exact path="/" component={Auth} />
                         <Route path="/login" component={Login} />
@@ -78,7 +79,7 @@ class Routes extends React.Component {
                             </Switch>
                             </Layout>
                             : null
-                        }
+                        } 
                         <Route path="*" component={NotFound} />
                     </Switch>
                 </React.Fragment>

@@ -3,13 +3,13 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom"
 import {connect} from 'react-redux'
-import {  getBookList } from '../actions'
+import {  getBookList, updateField, createState } from '../actions'
 import { getTotal } from '../../../redux/actions'
 import { withStyles, Button, Hidden,  Paper, Table, TableHead, TableBody, Checkbox, TableCell, TableRow } from '@material-ui/core';
-import {ApxTableToolBar, ApxAlert, ApxTableActions} from '../../../components/common'
+import {ApxTableToolBar, ApxAlert, ApxTableActions, ApxSelect} from '../../../components/common'
 import Pagination from '../../../lib/pagination'
 import { cvtNumToUserPref } from '../../../utils/help_function'
-import {filter} from '../../../utils/static_data'
+import {filter, status} from '../../../utils/static_data'
 
 
 
@@ -70,11 +70,15 @@ class Quote extends Component {
         this.setState({status: value.code});
         this.props.getTotal(this.state.reducer, `?status=${value.code}`);
         this.props.getBookList(this.state.reducer, `?limit=5&skip=0&status=${value.code}`);
-    };
+    }
+
+    handleStatus = (event) => {
+        this.props.createState("QUOTE", event.target.name, event.target.value);
+    }
     
     render() {
     
-    const {listQuote, isFetching, isError,  locale, classes, message} = this.props
+    const {listQuote, isFetching, isError,  locale, classes, message, newQuote} = this.props
     const { selected, rowCount, reducer } = this.state; 
 
     if(isError){
@@ -84,7 +88,10 @@ class Quote extends Component {
     return (
       <div className={classes.root}>
             <Hidden only={['xs', 'sm']}>
-                <Button component={Link} to="/bookkeeping/quote/create" variant="contained" color="secondary"  className={  classes.button }>{locale.button.add_quote}</Button>
+                <Button component={Link} to="/bookkeeping/quote/create" variant="contained" color="secondary"  className={  classes.button }>
+                { newQuote.contact_id ? "Continue editing..." : locale.button.add_quote}
+                
+                </Button>
             </Hidden>
             <Paper>
 
@@ -121,16 +128,36 @@ class Quote extends Component {
                             {   !isFetching ? 
                                 listQuote.map(( item, index) => {
                                     const isSelected = this.isSelected(item._id);
+                                    console.log(item._id)
                                     return  <TableRow key={index} selected={isSelected}>
                                                 <TableCell padding="checkbox" onClick={ event => { this.handleSelectedField(event, item._id) } } >
                                                     <Checkbox checked={isSelected} />
                                                 </TableCell>
-                                                <TableCell>{item.ref}</TableCell>
+                                                <TableCell>{locale.table.qto}-{item.ref}</TableCell>
                                                 <TableCell><Link className="link" to={{ pathname: `/contact/view/${item.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{item.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell>{cvtNumToUserPref(item.total_ht)} {item.currency.value}</TableCell>
                                                 <TableCell>{cvtNumToUserPref(item.vat.amount)} {item.currency.value}</TableCell>
                                                 <TableCell>{cvtNumToUserPref(item.total)} {item.currency.value}</TableCell>
-                                                <TableCell><span style={{color: item.status.color }}>{ item.status[localStorage.getItem('locale')] }</span></TableCell>
+                                                <TableCell>
+
+                                                {
+                                                    true ? 
+                                                    <span style={{color: item.status.color }}>
+
+                                                    { item.status[localStorage.getItem('locale')] }</span>
+
+                                                    :   <ApxSelect 
+                                                            arrayField={status}
+                                                            field="status"
+                                                            value={item.status[localStorage.getItem('locale')]}
+                                                            
+                                                            handleAction={ (event) => { this.props.updateField("QUOTE", { status: event.target.value}, item._id) } }
+                                                            locale={locale}
+                                                        />
+                                                }    
+                                                
+                                                
+                                                </TableCell>
                                                 <ApxTableActions 
                                                     actionDelete={false}
                                                     actionEdit={`/bookkeeping/quote/edit/${item._id}`}
@@ -184,6 +211,7 @@ const mapStateToProps = (state) => {
         isError: state.book.quote.isError,
         message: state.book.quote.message,
         receivedAt: state.book.quote.receivedAt,
+        newQuote: state.book.quote.item || {},
         locale: state.locale.locale,
         total: state.library.quote.total,
         listQuote: state.book.quote.list,
@@ -193,4 +221,4 @@ const mapStateToProps = (state) => {
 
 const StyledQuote = withStyles(styles)(Quote)
 
-export default connect(mapStateToProps, {  getBookList, getTotal  })(StyledQuote);
+export default connect(mapStateToProps, {  getBookList, getTotal, updateField, createState  })(StyledQuote);

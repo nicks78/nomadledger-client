@@ -64,8 +64,9 @@ class ShowContact extends React.Component {
     }
 
     componentDidMount(){
+      console.log("YEAH", this.state.reducer)
         var id = this.props.match.params.id;
-        this.props.getItem(this.props.location.state.reducer, id)
+        this.props.getItem(this.state.reducer, id)
         this.setState({keyLocation: this.props.location.key})
     }
 
@@ -78,14 +79,19 @@ class ShowContact extends React.Component {
     }
 
     render(){
-      const { contact, isFetching, isError, locale, progress, isCreating, classes } = this.props
+      const { contact, isFetching, isError, locale, progress, isCreating, classes, message } = this.props
  
-      if(isFetching || contact === null){
+      if(isFetching){
         return <Spinner />
       }
-      if(isError){
-        return <ApxAlert message="Erreur message" reducer={ this.state.reducer }/>
+      if( contact === null){
+        return <ApxAlert message="error_404" />
       }
+      if(isError){
+        return <ApxAlert message={message} reducer={ this.state.reducer }/>
+      }
+
+      console.log("CONTACT", contact)
       return (
         <Paper className={ classes.root }>
         <Grid container spacing={8}>
@@ -98,7 +104,7 @@ class ShowContact extends React.Component {
                     progress={progress}
                     idModel={this.props.match.params.id}
                     isUploading={isCreating}
-                    image={<img src={`${API_ENDPOINT}image/view${ contact.logo.path || '/default/default_logo.png' }`} alt="logo" width="100%" height={null} />}
+                    image={<img src={`${API_ENDPOINT}image/view${ contact.logo ? contact.logo.path : '/default/default_logo.png' }`} alt="logo" width="100%" height={null} />}
                   />
 
               <Divider />
@@ -148,6 +154,7 @@ const mapStateToProps = (state) => {
   return {
       isFetching: state.library.contact.isFetching,
       isError: state.library.contact.isError,
+      message: state.library.contact.message,
       receivedAt: state.library.contact.receivedAt,
       locale: state.locale.locale,
       contact: state.library.contact.item,

@@ -27,7 +27,7 @@ const Form = (props) => {
                 <Typography variant="h2" className={classes.title}>{locale.form.title[formTitle]}&nbsp;{ data.ref || '' }</Typography>
                     <Grid container spacing={24}>
 
-                        <Grid item xs={12} md={5}>
+                        <Grid item xs={12} md={5} style={{border: '1px solid rgba(235,235,235,1)'}}>
                                 <ContactSection 
                                     locale={locale}
                                     contact={data}
@@ -158,7 +158,7 @@ const styles = theme => ({
         paddingTop: 12,
         paddingBottom: 12,
         marginTop: -24,
-        fontWeight: 600,
+        fontWeight: 500,
         backgroundColor: theme.palette.primary.light,
         color: 'white'
     },

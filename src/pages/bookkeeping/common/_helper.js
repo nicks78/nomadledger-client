@@ -97,9 +97,8 @@ export function editObjectInArray (list, obj, name, value) {
  */
 export function replaceObjectInArray (list, obj) {
     var newList = [];
-
     for (let i = 0; i < list.length; i++) {
-        if(list[i].item_id._id === obj.item_id._id){
+        if(list[i]._id === obj._id){
             list[i] = obj
         }
         newList.push(list[i])

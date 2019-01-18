@@ -2,7 +2,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { setAuthUser, getLogout } from '../pages/auth/actions'
 import { getAccount } from '../pages/account/actions'
-
+import {history} from '../routes/history'
 
 
 import thunk from 'redux-thunk';
@@ -31,7 +31,8 @@ if( parseInt(x, 10) ){
     store.dispatch(setAuthUser())
     
 }else{
-    store.dispatch(getLogout())
+    store.dispatch(getLogout());
+    history.push('/')
 }
 
 export default store;

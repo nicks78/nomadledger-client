@@ -52,7 +52,7 @@ const Phone = (props) => {
                             className: classes.menu,
                             },
                         }}
-                        margin="normal"
+                        margin="dense"
                         >
                         {phone_code.map((option, index) => (
                             
@@ -71,7 +71,7 @@ const Phone = (props) => {
                             value={value}
                             name={field}
                             onChange={ handleAction  }
-                            margin="normal"
+                            margin="dense"
                         />
                     </Grid>
                 </Grid>

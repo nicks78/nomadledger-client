@@ -120,6 +120,43 @@ export function updateDocument (actionType) {
     }
 }
 
+/**
+ * // UPDATE DOCUMENT
+ * @param  actionType 
+ * @param  data to be update
+ * @param  id of document
+ */
+export function updateField (actionType, data, id) {
+    
+    return dispatch => {
+
+        // Set withCredentials
+        axios.defaults.withCredentials = true;
+
+        axios.post(`${API_ENDPOINT}bookkeeping/${actionType.toLowerCase()}/update/field/${id}`,
+            { 
+                data,
+                mode: 'cors'
+            },   
+            { headers: {
+                    'Content-Type': 'application/json'
+            }
+        })
+        .then(function (response) { 
+            return response.data
+        }) 
+        .then( res => {
+            dispatch( setCreatedUpdatedItem(actionType, res.item) )
+        })
+        .catch(function (error) {
+            console.log(error)
+          // handle error
+          var message = error.response ? error.response.data.message : 'error_500'
+          dispatch(requestFailed(actionType, message));
+        })             
+    }
+}
+
 // Set created/updated item
 function setCreatedUpdatedItem( actionType, item ) {
     return {

@@ -64,13 +64,13 @@ class Company extends Component {
         <Grid container spacing={16}>
             <Grid item xs={12} md={3}>
                   <UploadImg 
-                    field="company_logo"
+                    field="logo_company"
                     _handleUploadFile={ this.props.uploadFileToServer }
                     reducer={this.state.reducer}
                     progress={progress}
-                    oldFile={company.company_logo}
+                    oldFile={company.logo_company}
                     isUploading={isUploading}
-                    image={ <img src={`${API_ENDPOINT}image/view${ company.company_logo.path || '/default/default_logo.png' }`} alt="logo" width="100%" height={null} />}
+                    image={ <img src={`${API_ENDPOINT}image/view${ company.logo_company.path || '/default/default_logo.png' }`} alt="logo" width="100%" height={null} />}
                   />
                
             </Grid>

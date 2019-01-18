@@ -6,8 +6,8 @@ import {connect} from 'react-redux'
 import {  getBookList } from '../actions'
 import { getTotal } from '../../../redux/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
-import { withStyles, Button, Hidden ,Table, TableHead, TableBody, Checkbox, Paper, TableCell, TableRow,} from '@material-ui/core';
-import {ApxTableToolBar, ApxAlert, ApxTableActions} from '../../../components/common'
+import { withStyles, Button, Hidden ,Table, TableHead, TableBody, Checkbox, TableCell, TableRow,} from '@material-ui/core';
+import {ApxTableToolBar, ApxAlert, ApxTableActions, ApxPaper} from '../../../components/common'
 import Pagination from '../../../lib/pagination'
 import {filter} from '../../../utils/static_data'
 
@@ -85,7 +85,7 @@ class Invoice extends Component {
             <Hidden only={['xs', 'sm']}>
                 <Button component={Link} to="/bookkeeping/invoice/create" variant="contained" color="secondary"  className={  classes.button }>{locale.button.add_invoice}</Button>
             </Hidden>
-            <Paper>
+            <ApxPaper>
 
             <ApxTableToolBar
                 numSelected={selected.length}
@@ -125,7 +125,7 @@ class Invoice extends Component {
                                                 <TableCell padding="checkbox" onClick={ event => { this.onSelectedField(event, invoice._id) } } >
                                                     <Checkbox checked={isSelected} />
                                                 </TableCell>
-                                                <TableCell>{invoice.ref}</TableCell>
+                                                <TableCell>{locale.table.inv}-{invoice.ref}</TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${invoice.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{invoice.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell>{invoice.currency.en}</TableCell>
                                                 <TableCell>{cvtNumToUserPref(invoice.total_ht)}</TableCell>
@@ -155,7 +155,7 @@ class Invoice extends Component {
                         reducer={reducer}
                         onGetItemList={ this.props.getBookList }
                     />
-            </Paper>
+            </ApxPaper>
       </div>
     )
   }

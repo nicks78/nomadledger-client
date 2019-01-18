@@ -26,7 +26,7 @@ const styles = theme => ({
  */
 const Select = (props) => {
 
-    const {classes, arrayField, field, helperText} = props
+    const {classes, arrayField, field, helperText, color, required} = props
 
     const selected = (event) => {
         
@@ -38,15 +38,16 @@ const Select = (props) => {
         }
         return props.handleAction(event)   
     }
- 
+
     return (
-      <div>
+      <div >
           <TextField
             id={field}
             select
             label={props.locale.form.field[field]}
             className={classes.textField}
             name={field}
+            required={ required || false }
             value={ props.value || ''}
             onChange={ (evt) => { selected(evt) } }
             SelectProps={{
@@ -55,11 +56,12 @@ const Select = (props) => {
                 },
               }}
             helperText={props.locale.form.helperText[helperText]}
-            margin="normal"
+            margin="dense"
             >
             {
                 arrayField.map((option, index) => (
                 
+            
                 <MenuItem key={index} value={ option[localStorage.getItem('locale')]}>
                     {option[props.locale.lang]} {option.value && '(' + option.value +')'}
                 </MenuItem>
