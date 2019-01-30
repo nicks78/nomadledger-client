@@ -10,7 +10,10 @@ import Hidden from '@material-ui/core/Hidden';
 const styles = theme => ({
     root: {
         flex: 1,
-        marginBottom: theme.margin.unit
+        marginBottom: theme.margin.unit,
+        [theme.breakpoints.down('sm')]: {
+            marginBottom: 0
+        },
     },
     formWindow: {
       minWidth: '100px',

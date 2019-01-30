@@ -80,6 +80,7 @@ const baseReducer = (state = new BaseState(), action) => {
                 total: state.total + 1,
                 progress: action.value,
                 tmp_state: {},
+                item: {},
                 list: [ ...state.list, action.item ]
             }
         case `UPDATE`:

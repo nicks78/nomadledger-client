@@ -4,9 +4,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { createItem, getItemList, getItem, createState, getTotal } from '../../redux/actions'
 import {connect} from 'react-redux'
-import { TableCell, TableRow, Table, TableHead, TableBody, withStyles, Tooltip} from '@material-ui/core';
-import { ApxAlert, ApxTableToolBar, ApxPaper} from '../../components/common'
-import ShowService from './showService'
+import { TableCell, TableRow, Table, TableHead, TableBody, withStyles, Tooltip, Paper} from '@material-ui/core';
+import { ApxAlert, ApxTableToolBar} from '../../components/common'
 import AddService from './addService'
 import {cvtNumToUserPref} from '../../utils/help_function'
 import Pagination from '../../lib/pagination'
@@ -18,14 +17,22 @@ const styles = theme =>  ({
     },
     customWidth: {
         maxWidth: 300,
-      },
+    },
+    paper: {
+        position: 'relative',
+        padding: 0,
+        overflow: "hidden",
+        [theme.breakpoints.down('sm')]: {
+            boxShadow: 'none',
+            borderRadius: 0
+        },
+    }
 })
 
 class Service extends Component {
 
 
     state = {
-        showService: false,
         reducer: 'SERVICE',
         rowCount: 0,
     }
@@ -37,15 +44,11 @@ class Service extends Component {
 
     render() {
     
-    const {isFetching, listServices, isError,  locale, service, newService, createItem, createState, isCreating , progress, category, classes} = this.props
-    const { showService, reducer } = this.state
-  
-
-    if(isError){
-        return <ApxAlert message="Erreur message" />
-    }
+    const {isFetching, listServices, isError,  locale, message, newService, createItem, createState, isCreating, progress, category, classes} = this.props
+    const {reducer } = this.state
 
 
+console.log(message)
     return (
         <div className={ classes.container }>
         
@@ -58,11 +61,10 @@ class Service extends Component {
                 isCreating={isCreating} 
                 category={category}
             />
-            <ApxPaper>
-            {
-                showService ?
-                    <ShowService service={ service } />
-                :   <div><ApxTableToolBar
+            { isError ? <ApxAlert message={message} /> : null }
+            <Paper className={classes.paper}>
+                
+                <ApxTableToolBar
                         numSelected={0}
                         title={locale.table.title_service}
                         selected={locale.page.selected}
@@ -99,10 +101,8 @@ class Service extends Component {
                         reducer={reducer}
                         label2={locale.table.of}
                         onGetItemList={ this.props.getItemList }
-                    />
-                    </div>
-            }          
-            </ApxPaper>
+                    />        
+            </Paper>
         </div>
     )
   }
@@ -116,6 +116,7 @@ const mapStateToProps = (state) => {
         isFetching: state.library.service.isFetching,
         isCreating: state.library.service.isCreating,
         isError: state.library.service.isError,
+        message: state.library.service.message,
         listServices: state.library.service.list,
         receivedAt: state.library.service.receivedAt,
         locale: state.locale.locale,

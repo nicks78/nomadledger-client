@@ -23,7 +23,7 @@ const Copyright = (props) => {
 
   return (
         <Typography variant="caption" className={ classes.root }>
-                &copy;Copyright 2018 by <span className={ classes.span } onClick={ () => { window.open('https://apx-dev.com', '_blank') }}>APX Development Limited</span>. All right reserved.
+                &copy;Copyright {new Date().getFullYear()} by <span className={ classes.span } onClick={ () => { window.open('https://apx-dev.com', '_blank') }}>APX Development Limited</span>. All right reserved.
         </Typography> 
   );
 }

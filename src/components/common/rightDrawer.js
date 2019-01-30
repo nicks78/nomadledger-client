@@ -47,6 +47,7 @@ const RightDrawer = (props) => {
             <div className={ classes.titleWrap }>
                 <div className={ classes.span }>
                     <Typography  variant="overline">{title}</Typography>
+                    <Typography  variant="caption">Champs obligatoire</Typography>
                 </div>
                 
                 <div>

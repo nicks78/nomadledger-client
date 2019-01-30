@@ -93,7 +93,7 @@ class Quote extends Component {
                 
                 </Button>
             </Hidden>
-            <Paper>
+            <Paper className={classes.paper}>
 
                 <ApxTableToolBar
                         numSelected={selected.length}
@@ -103,7 +103,7 @@ class Quote extends Component {
                         locale={locale}
                         onChangeQuery={ this.handleFilterRequest }
                     />
-                    <Table>
+                    <Table  padding="dense">
                     <TableHead className={classes.tableHead}>
                         <TableRow>
                             <TableCell padding="checkbox">
@@ -128,7 +128,6 @@ class Quote extends Component {
                             {   !isFetching ? 
                                 listQuote.map(( item, index) => {
                                     const isSelected = this.isSelected(item._id);
-                                    console.log(item._id)
                                     return  <TableRow key={index} selected={isSelected}>
                                                 <TableCell padding="checkbox" onClick={ event => { this.handleSelectedField(event, item._id) } } >
                                                     <Checkbox checked={isSelected} />
@@ -201,6 +200,15 @@ const styles = theme => ({
             color: 'white !important', 
         }
     },
+    paper: {
+        position: 'relative',
+        padding: 0,
+        overflow: "hidden",
+        [theme.breakpoints.down('sm')]: {
+            boxShadow: 'none',
+            borderRadius: 0
+        },
+    }
 })
 
 const mapStateToProps = (state) => {

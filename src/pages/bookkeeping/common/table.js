@@ -24,7 +24,7 @@ class MyTable extends React.Component {
     const { list, isFetching, locale, classes, reducer, rowsPerPageOptions, total } = this.props;
 
     return (<div>
-                <Table id={reducer} className={classes.table}>
+                <Table id={reducer} className={classes.table}  padding="dense">
                 <TableHead className={classes.tableHead}>
                     <TableRow>
                         <TableCell>{locale.table.reference}</TableCell>

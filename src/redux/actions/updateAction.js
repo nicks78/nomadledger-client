@@ -18,7 +18,7 @@ export const updateItem = ( actionType, id ) => {
         dispatch(requestUpdate(actionType));
 
         // Get current state
-        var state = getState().library[obj].tmp_state
+        var state = getState().library[obj].item
         state._id = id
 
         axios.post(`${API_ENDPOINT}${apiCall(actionType).endPoints.put}`,

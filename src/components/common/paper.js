@@ -4,9 +4,11 @@ import { withStyles, Paper } from '@material-ui/core';
 const styles = theme => ({
     root: {
         position: 'relative',
+        padding: 24,
         overflow: "hidden",
         [theme.breakpoints.down('sm')]: {
             boxShadow: 'none',
+            padding: 12,
             borderRadius: 0
         },
     },

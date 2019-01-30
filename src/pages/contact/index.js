@@ -2,10 +2,10 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {Table, TableHead, TableBody, Checkbox, TableCell, TableRow, withStyles} from '@material-ui/core';
+import {Table, TableHead, TableBody, Paper, TableCell, TableRow, withStyles} from '@material-ui/core';
 import {connect} from 'react-redux'
 import { createItem, getItemList, getItem, createState, getTotal} from '../../redux/actions'
-import { ApxAlert, ApxTableToolBar, ApxPaper} from '../../components/common'
+import { ApxAlert, ApxTableToolBar} from '../../components/common'
 import AddContact from './addContact'
 import Pagination from '../../lib/pagination'
 
@@ -14,6 +14,15 @@ const styles =  theme => ({
     },
     tableHead: {
         backgroundColor: "rgb(238,238,238)"
+    },
+    paper: {
+        position: 'relative',
+        padding: 0,
+        overflow: "hidden",
+        [theme.breakpoints.down('sm')]: {
+            boxShadow: 'none',
+            borderRadius: 0
+        },
     }
 })
 
@@ -106,7 +115,7 @@ class Contact extends Component {
             <AddContact progress={progress} contactGroup={contactGroup} locale={ locale } createContact={ createItem } createContactState={  createState } newData={newContact} isCreating={ isCreating  }/>
                 
                 { isError ?  <ApxAlert message={message} reducer={ this.state.reducer }/> : null }
-                <ApxPaper>
+                <Paper className={classes.paper}>
                     <ApxTableToolBar
                         numSelected={selected.length}
                         title={locale.table.title_contact}
@@ -167,7 +176,7 @@ class Contact extends Component {
                     />
                 
                   
-            </ApxPaper>    
+            </Paper>    
         </div>
     )
   }

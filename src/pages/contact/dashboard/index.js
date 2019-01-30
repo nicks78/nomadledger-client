@@ -4,7 +4,7 @@ import React  from 'react'
 import {connect} from 'react-redux'
 import { withStyles } from '@material-ui/core';
 import {API_ENDPOINT} from '../../../utils/constant'
-import { Spinner, ApxAlert} from '../../../components/common'
+import { Spinner, ApxAlert, ApxBackBtn} from '../../../components/common'
 import UploadImg from '../../../lib/uploadImg'
 import Paper from '@material-ui/core/Paper'
 import { getItem, resetState, createState, uploadFileToServer } from '../../../redux/actions'
@@ -64,7 +64,6 @@ class ShowContact extends React.Component {
     }
 
     componentDidMount(){
-      console.log("YEAH", this.state.reducer)
         var id = this.props.match.params.id;
         this.props.getItem(this.state.reducer, id)
         this.setState({keyLocation: this.props.location.key})
@@ -91,9 +90,9 @@ class ShowContact extends React.Component {
         return <ApxAlert message={message} reducer={ this.state.reducer }/>
       }
 
-      console.log("CONTACT", contact)
       return (
         <Paper className={ classes.root }>
+        <ApxBackBtn/>
         <Grid container spacing={8}>
 
             <Grid item xs={12} md={3}>

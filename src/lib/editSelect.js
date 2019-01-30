@@ -17,7 +17,7 @@ import { ApxSelect, ApxtextIndexValue } from '../components/common'
 const EditSelect = (props) => {
     
     const {arrayField, field, helperText, handleAction, locale, showEdit, label, value } = props
-
+console.log(value)
     if(showEdit){
         return  <ApxSelect 
                     arrayField={arrayField}

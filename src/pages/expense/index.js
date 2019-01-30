@@ -90,7 +90,7 @@ class Expense extends Component {
         <div className={ classes.container}>
             <AddExpense locale={ locale } category={category} newData={newExpense} createExpenseState={ createState } createExpense={ createItem } isCreating={isCreating}/>
             
-            <Paper>
+            <Paper className={classes.paper}>
                 <ApxTableToolBar
                         numSelected={selected.length}
                         title={locale.table.title_expense}
@@ -163,6 +163,15 @@ const styles =  theme => ({
     },
     img: {
         width: 40
+    },
+    paper: {
+        position: 'relative',
+        padding: 0,
+        overflow: "hidden",
+        [theme.breakpoints.down('sm')]: {
+            boxShadow: 'none',
+            borderRadius: 0
+        },
     }
 })
 

@@ -32,10 +32,10 @@ class AddService extends React.Component {
         label: locale.form.title.label_service,
         section_1: false,
         fields: [
-            { name: 'name', type:"text" },
-            { name: 'currency', type:"select", selections: currency, helperText: "select_currency" },
-            { name: 'price', type:"text"},
-            { name: 'category', type:"select", selections: category, helperText: "select_category" },
+            { name: 'name', type:"text", required: true },
+            { name: 'currency', type:"select", selections: currency, helperText: "select_currency" , required: true },
+            { name: 'price', type:"text", required: true },
+            { name: 'category', type:"select", selections: category, helperText: "select_category", required: true  },
             { name: 'description', type:"longtext", multiline: true, rowsMax:"4" },
           ]
       },

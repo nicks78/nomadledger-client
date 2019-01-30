@@ -6,8 +6,8 @@ import {connect} from 'react-redux'
 import {  getBookList } from '../actions'
 import { getTotal } from '../../../redux/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
-import { withStyles, Button, Hidden ,Table, TableHead, TableBody, Checkbox, TableCell, TableRow,} from '@material-ui/core';
-import {ApxTableToolBar, ApxAlert, ApxTableActions, ApxPaper} from '../../../components/common'
+import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, Checkbox, TableCell, TableRow,} from '@material-ui/core';
+import {ApxTableToolBar, ApxAlert, ApxTableActions} from '../../../components/common'
 import Pagination from '../../../lib/pagination'
 import {filter} from '../../../utils/static_data'
 
@@ -85,7 +85,7 @@ class Invoice extends Component {
             <Hidden only={['xs', 'sm']}>
                 <Button component={Link} to="/bookkeeping/invoice/create" variant="contained" color="secondary"  className={  classes.button }>{locale.button.add_invoice}</Button>
             </Hidden>
-            <ApxPaper>
+            <Paper className={classes.paper}>
 
             <ApxTableToolBar
                 numSelected={selected.length}
@@ -95,7 +95,7 @@ class Invoice extends Component {
                 menus={filter}
                 onChangeQuery={ this.handleFilterRequest }
             />
-                    <Table>
+                    <Table padding="dense">
                     <TableHead className={classes.tableHead}>
                         <TableRow>
                             <TableCell padding="checkbox">
@@ -128,9 +128,9 @@ class Invoice extends Component {
                                                 <TableCell>{locale.table.inv}-{invoice.ref}</TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${invoice.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{invoice.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell>{invoice.currency.en}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(invoice.total_ht)}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(invoice.vat.amount)}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(invoice.total)}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(invoice.total_ht)} {invoice.currency.value}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(invoice.vat.amount)} {invoice.currency.value}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(invoice.total)} {invoice.currency.value}</TableCell>
                                                 <TableCell><span style={{color: invoice.status.color }}>{ invoice.status[localStorage.getItem('locale')] }</span></TableCell>
                                                 <ApxTableActions 
                                                     actionDelete={false}
@@ -155,7 +155,7 @@ class Invoice extends Component {
                         reducer={reducer}
                         onGetItemList={ this.props.getBookList }
                     />
-            </ApxPaper>
+            </Paper>
       </div>
     )
   }
@@ -174,6 +174,15 @@ const styles = theme => ({
             color: 'white !important', 
         }
     },
+    paper: {
+        position: 'relative',
+        padding: 0,
+        overflow: "hidden",
+        [theme.breakpoints.down('sm')]: {
+            boxShadow: 'none',
+            borderRadius: 0
+        },
+    }
 })
 
 const mapStateToProps = (state) => {
