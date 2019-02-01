@@ -123,7 +123,7 @@ class Layout extends React.Component {
 
     render() {
 
-    const { classes, locale } = this.props;
+    const { classes, locale, user } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
@@ -154,7 +154,7 @@ class Layout extends React.Component {
                     component="span"
                     onClick={ this.handleMenu }
                     alt="Nicolas"
-                    src={`${API_ENDPOINT}image/view${ localStorage.getItem('avatar') ||  '/default/default_avatar.png' }`}
+                    src={`${API_ENDPOINT}image/view${ user.avatar.path||  '/default/default_avatar.png' }`}
                     className={ classes.avatar }
                 />
                 <Menu

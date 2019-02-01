@@ -110,7 +110,7 @@ class User extends Component {
                     image={ 
                       <Avatar
                         component="p"
-                        alt="Nicolas"
+                        alt={user.firstname}
                         src={`${API_ENDPOINT}image/view${ user.avatar.path || '/default/default_avatar.png' }`}
                         className={ classes.avatar }
                     />

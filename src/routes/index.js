@@ -43,7 +43,7 @@ class Routes extends React.Component {
 
     render(){
      
-        const { isLoggedIn, locale } = this.props
+        const { isLoggedIn, locale, authUser } = this.props
 
         return (
             <Router basename="/" history={history}>
@@ -53,8 +53,8 @@ class Routes extends React.Component {
                         <Route exact path="/" component={Auth} />
                         <Route path="/login" component={Login} />
                         
-                        { isLoggedIn ? 
-                            <Layout _onChangeLocale={this.handleChangeLocale} logout={this.props.getLogout} locale={locale}>
+                        { isLoggedIn && authUser !== null ? 
+                            <Layout _onChangeLocale={this.handleChangeLocale} user={authUser} logout={this.props.getLogout} locale={locale}>
                             <Switch>
                                 <PrivateRoute path="/home" component={ Home } auth={isLoggedIn}/>
                                 <PrivateRoute path="/account" component={Account}  auth={isLoggedIn}/>
@@ -89,9 +89,12 @@ class Routes extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log("STATE", state)
     return {
         locale: state.locale.locale,
-        isLoggedIn: state.auth.isLoggedIn   
+        isLoggedIn: state.auth.isLoggedIn,
+        authUser: state.account.user.item
+           
     }
 }
 
