@@ -1,6 +1,6 @@
 import React  from 'react'
 import { withStyles } from '@material-ui/core/styles';
-import {API_ENDPOINT} from '../../utils/constant'
+import {API_ENDPOINT} from '../../redux/constant'
 import { Link } from "react-router-dom";
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';

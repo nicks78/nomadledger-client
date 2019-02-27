@@ -1,7 +1,7 @@
 //manager/src/pages/product/index.js
 
 import React, { Component } from 'react'
-import { createItem, getItemList, getItem, createState, getTotal } from '../../redux/actions'
+import { createItem, getItemList, getItem, createState, getTotal } from '../../redux/library/actions'
 import {connect} from 'react-redux'
 import { withStyles, Grid, Button} from '@material-ui/core';
 import { Spinner, ApxAlert} from '../../components/common'
@@ -116,7 +116,8 @@ const mapStateToProps = (state) => {
         newProduct: state.library.product.tmp_state,
         product: state.library.product.item,
         category: state.account.company.item && state.account.company.item.category_name,
-        total: state.library.product.total
+        total: state.library.product.total,
+        
     }
 }
 

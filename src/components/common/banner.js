@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
     banner: {
-        backgroundImage: 'url(http://localhost:8080/img/background.jpg)',
+        backgroundImage: `url(http://localhost:8080/img/background.jpg)`,
         backgroundSize: 'cover',
         padding: '10%',
         textAlign: 'center'

@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { createItem, getItemList, getItem, createState, getTotal } from '../../redux/actions'
+import { createItem, getItemList, getItem, createState, getTotal , resetState} from '../../redux/library/actions'
 import {connect} from 'react-redux'
 import { TableCell, TableRow, Table, TableHead, TableBody, withStyles, Tooltip, Paper} from '@material-ui/core';
 import { ApxAlert, ApxTableToolBar} from '../../components/common'
@@ -35,6 +35,7 @@ class Service extends Component {
     state = {
         reducer: 'SERVICE',
         rowCount: 0,
+        keyLocation: '',
     }
 
     componentDidMount(){
@@ -42,13 +43,21 @@ class Service extends Component {
             this.props.getItemList(this.state.reducer, "?limit=5&skip=0");
     }
 
+    componentWillUnmount(){
+        this.props.resetState("SERVICE")
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.location.key !== this.state.keyLocation){
+            this.setState({ showContact: false, keyLocation: nextProps.location.key })
+        }
+      }
+
     render() {
     
     const {isFetching, listServices, isError,  locale, message, newService, createItem, createState, isCreating, progress, category, classes} = this.props
     const {reducer } = this.state
 
-
-console.log(message)
     return (
         <div className={ classes.container }>
         
@@ -83,7 +92,7 @@ console.log(message)
                             {   !isFetching ?
                                 listServices.map(( service, index) => {
                                     return  <TableRow key={index}>
-                                                <TableCell><Link to={{ pathname: `/${reducer.toLowerCase()}/view/${service._id.toLowerCase()}`, state: { reducer: reducer, service: service } }}><span  className="link">{service.name}</span></Link></TableCell>
+                                                <TableCell><Link to={ `/${reducer.toLowerCase()}/view/${service._id.toLowerCase()}`}><span  className="link">{service.name}</span></Link></TableCell>
                                                 <TableCell numeric>{cvtNumToUserPref(service.price)}</TableCell>
                                                 <TableCell>{service.category[localStorage.getItem('locale')]}</TableCell> 
                                                 <Tooltip className={classes.customWidth} title={service.description}><TableCell>{service.description.slice(0,5)}...</TableCell></Tooltip>
@@ -132,4 +141,4 @@ const mapStateToProps = (state) => {
 
 const StyledService = withStyles(styles)(Service)
 
-export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, getTotal  })(StyledService);
+export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, getTotal, resetState  })(StyledService);

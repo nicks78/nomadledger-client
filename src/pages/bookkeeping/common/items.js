@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { addRemoveQuantity, removeItem, editItem, discountPrice} from '../itemActions'
+import { addRemoveQuantity, removeItem, editItem, discountPrice} from '../../../redux/book/itemActions'
 import { 
     IconButton, 
     withStyles,

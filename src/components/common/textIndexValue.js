@@ -4,6 +4,8 @@ import React from 'react';
 import { withStyles } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 
+
+
 const styles = theme => ({
     root: {
         clear: 'both'
@@ -19,6 +21,14 @@ const styles = theme => ({
     }
 });
 
+
+/**
+ * 
+ * @param  value
+ * @param label
+ * @param html_tag
+ * @param href
+ */
 const TextIndexValue = (props) => {
 
   const { classes, value, href, html_tag, label } = props

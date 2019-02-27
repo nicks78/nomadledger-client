@@ -3,8 +3,8 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom"
 import {connect} from 'react-redux'
-import {  getBookList } from '../actions'
-import { getTotal } from '../../../redux/actions'
+import {  getBookList } from '../../../redux/book/actions'
+import { getTotal } from '../../../redux/library/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, Checkbox, TableCell, TableRow,} from '@material-ui/core';
 import {ApxTableToolBar, ApxAlert, ApxTableActions} from '../../../components/common'

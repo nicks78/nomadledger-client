@@ -26,7 +26,7 @@ const styles = theme => ({
  */
 const Select = (props) => {
 
-    const {classes, arrayField, field, helperText, color, required} = props
+    const {classes, arrayField, field, helperText, required} = props
 
     const selected = (event) => {
         

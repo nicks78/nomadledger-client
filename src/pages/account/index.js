@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { withStyles, Paper, Typography, Grid, Divider } from '@material-ui/core';
-import { getAccount, createState } from './actions'
+import { getAccount, createState } from '../../redux/account/actions'
 import User from './user'
 import Company from './company'
 import {Spinner, ApxAlert} from '../../components/common'

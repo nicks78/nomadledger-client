@@ -3,11 +3,11 @@
 import React  from 'react'
 import {connect} from 'react-redux'
 import { withStyles } from '@material-ui/core';
-import {API_ENDPOINT} from '../../../utils/constant'
+import {API_ENDPOINT} from '../../../redux/constant'
 import { Spinner, ApxAlert, ApxBackBtn} from '../../../components/common'
 import UploadImg from '../../../lib/uploadImg'
 import Paper from '@material-ui/core/Paper'
-import { getItem, resetState, createState, uploadFileToServer } from '../../../redux/actions'
+import { getItem, resetState, createState, uploadFileToServer } from '../../../redux/library/actions'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography';
 import Tabs from '@material-ui/core/Tabs'
@@ -66,7 +66,7 @@ class ShowContact extends React.Component {
     componentDidMount(){
         var id = this.props.match.params.id;
         this.props.getItem(this.state.reducer, id)
-        this.setState({keyLocation: this.props.location.key})
+        // this.setState({keyLocation: this.props.location.key})
     }
 
     componentWillUnmount(){

@@ -3,8 +3,8 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom"
 import {connect} from 'react-redux'
-import {  getBookList, updateField, createState } from '../actions'
-import { getTotal } from '../../../redux/actions'
+import {  getBookList, updateField, createState } from '../../../redux/book/actions'
+import { getTotal } from '../../../redux/library/actions'
 import { withStyles, Button, Hidden,  Paper, Table, TableHead, TableBody, Checkbox, TableCell, TableRow } from '@material-ui/core';
 import {ApxTableToolBar, ApxAlert, ApxTableActions, ApxSelect} from '../../../components/common'
 import Pagination from '../../../lib/pagination'

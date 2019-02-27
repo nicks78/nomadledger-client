@@ -4,6 +4,13 @@ import FilterListIcon from '@material-ui/icons/FilterListOutlined'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
+
+
+/**
+ * @menus array of object
+ * 
+ * 
+ */
 class BtnMenu extends React.Component {
 
   state = {

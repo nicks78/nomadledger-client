@@ -1,14 +1,14 @@
 //manager/src/pages/service/showService.js
 
-import React from 'react'
+import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { getItem, createState, updateItem, resetState } from '../../redux/actions'
-import { Paper, withStyles, Typography, TextField, Grid, Button} from '@material-ui/core';
+import { getItem, createState, updateItem, resetState } from '../../redux/library/actions'
+import { withStyles, Typography, TextField, Grid, Button} from '@material-ui/core';
 import {ApxAlert, Spinner, ApxPaper, ApxBackBtn} from '../../components/common'
 import EditSelect from '../../lib/editSelect'
 import {currency} from '../../utils/static_data'
 
-class ShowService extends React.Component {
+class ShowService extends Component {
 
     componentDidMount(){
       var id = this.props.match.params.id;
@@ -24,6 +24,7 @@ class ShowService extends React.Component {
     render() {
       const {classes, service, isFetching, locale, isError, message, category} = this.props
 
+
       if( isFetching ){
         return <Spinner/>
       }
@@ -33,21 +34,6 @@ class ShowService extends React.Component {
       if( isError ){
         return <ApxAlert message={message} />
       }
-
-      const fields = [
-        {
-          title: locale.form.title.add_service, 
-          label: locale.form.title.label_service,
-          section_1: false,
-          fields: [
-              { name: 'name', type:"text" },
-              { name: 'currency', type:"select", selections: currency, helperText: "select_currency" },
-              { name: 'price', type:"text"},
-              { name: 'category', type:"select", selections: category, helperText: "select_category" },
-              { name: 'description', type:"longtext", multiline: true, rowsMax:"4" },
-            ]
-        },
-      ]
 
       return (
         <ApxPaper>

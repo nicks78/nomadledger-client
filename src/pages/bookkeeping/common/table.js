@@ -1,7 +1,7 @@
 import React  from 'react'
 import {connect} from 'react-redux'
-import {  getBookList } from '../actions'
-import { getTotal } from '../../../redux/actions'
+import {  getBookList } from '../../../redux/book/actions'
+import { getTotal } from '../../../redux/library/actions'
 import { withStyles ,Table, TableHead, TableBody, TableCell, TableRow,} from '@material-ui/core';
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import { ApxTableActions} from '../../../components/common'

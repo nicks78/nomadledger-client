@@ -2,8 +2,8 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
-import { createState, createDocument} from '../actions'
-import { convertToCurrency, getListItem} from '../itemActions'
+import { createState, createDocument} from '../../../redux/book/actions'
+import { convertToCurrency, getListItem} from '../../../redux/book/itemActions'
 import { withStyles } from '@material-ui/core';
 import {  ApxAlert, Spinner} from '../../../components/common'
 import Form from '../common/form'

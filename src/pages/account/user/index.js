@@ -2,11 +2,11 @@
 
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {API_ENDPOINT} from '../../../utils/constant'
+import {API_ENDPOINT} from '../../../redux/constant'
 import { withStyles } from '@material-ui/core';
 import UploadImg from '../../../lib/uploadImg'
 import {Spinner, ApxTitleBar, ApxAlert} from '../../../components/common'
-import { uploadFileToServer , updateDocument, updatePassword} from '../actions'
+import { uploadFileToServer , updateDocument, updatePassword} from '../../../redux/account/actions'
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid'
 import EditInput from '../../../lib/editInput'

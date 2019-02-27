@@ -2,8 +2,8 @@ import React from 'react'
 import { Router, Route, Switch } from 'react-router-dom'
 import {history} from './history'
 import {connect} from 'react-redux'
-import { getLocale, initLocale } from '../utils/locale/actions'
-import { getLogout } from '../pages/auth/actions'
+import { getLocale, initLocale } from '../redux/locale/actions'
+import { getLogout } from '../redux/auth/actions'
 import PrivateRoute from './privateRoute'
 
 // Login
@@ -89,7 +89,7 @@ class Routes extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log("STATE", state)
+    
     return {
         locale: state.locale.locale,
         isLoggedIn: state.auth.isLoggedIn,

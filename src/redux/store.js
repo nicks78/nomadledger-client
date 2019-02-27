@@ -1,7 +1,7 @@
 // redux store 
 import { createStore, applyMiddleware, compose } from 'redux';
-import { setAuthUser, getLogout } from '../pages/auth/actions'
-import { getAccount } from '../pages/account/actions'
+import { setAuthUser, getLogout } from './auth/actions'
+import { getAccount } from './account/actions'
 import {history} from '../routes/history'
 
 

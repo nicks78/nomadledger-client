@@ -2,9 +2,9 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {Table, TableHead, TableBody, Paper, TableCell, TableRow, withStyles} from '@material-ui/core';
+import {Table, TableHead, TableBody, Paper, TableCell, TableRow, withStyles, } from '@material-ui/core';
 import {connect} from 'react-redux'
-import { createItem, getItemList, getItem, createState, getTotal} from '../../redux/actions'
+import { createItem, getItemList, getItem, createState, getTotal, resetState} from '../../redux/library/actions'
 import { ApxAlert, ApxTableToolBar} from '../../components/common'
 import AddContact from './addContact'
 import Pagination from '../../lib/pagination'
@@ -54,7 +54,7 @@ class Contact extends Component {
     }
 
     componentWillUnmount() {
-        // this.props.resetItem()
+        this.props.resetState("CONTACT")
     }
 
     onSelectAllClick = (event) => {
@@ -107,7 +107,7 @@ class Contact extends Component {
     render() {
     
     const {listContacts, isFetching, isError, locale, createItem, createState, newContact, isCreating, progress, message, classes, contactGroup, rowsPerPageOptions, total} = this.props
-    const { selected, rowCount, reducer } = this.state
+    const { selected, reducer } = this.state
 
 
     return (
@@ -202,4 +202,4 @@ const mapStateToProps = (state) => {
 
 const StyledContact = withStyles(styles)(Contact)
 
-export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, getTotal })(StyledContact);
+export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, getTotal, resetState })(StyledContact);

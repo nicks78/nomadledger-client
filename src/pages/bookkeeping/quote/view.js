@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { withStyles, Paper } from '@material-ui/core';
-import { getDocument} from '../actions'
+import { getDocument} from '../../../redux/book/actions'
 
 class View extends Component {
 

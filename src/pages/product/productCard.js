@@ -1,9 +1,12 @@
 //manager/src/pages/product/productCard.js
 import React from 'react'
-import {API_ENDPOINT} from '../../utils/constant'
+import {API_ENDPOINT} from '../../redux/constant'
+import {Link} from 'react-router-dom'
 import { withStyles, CardHeader, Card, IconButton, CardMedia, Avatar, } from "@material-ui/core";
-import MoreVertIcon from '@material-ui/icons/MoreVertOutlined'
+import VisibilityIcon from '@material-ui/icons/VisibilityOutlined'
 import {cvtNumToUserPref} from '../../utils/help_function'
+// import BtnMenu from '../../lib/btnMenu'
+
 
 const styles = theme =>  ({
     container: {
@@ -43,8 +46,8 @@ const ProductCard = (props) => {
                 </Avatar>
             }
             action={
-                <IconButton>
-                <MoreVertIcon />
+                <IconButton component={Link} to={`product/view/${product._id}`}>
+                    <VisibilityIcon />
                 </IconButton>
             }
             title={product.name}

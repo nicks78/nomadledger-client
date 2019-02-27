@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {  updateDocument, uploadFileToServer } from '../actions'
-import {API_ENDPOINT} from '../../../utils/constant'
+import {  updateDocument, uploadFileToServer } from '../../../redux/account/actions'
+import {API_ENDPOINT} from '../../../redux/constant'
 import { withStyles } from '@material-ui/core'
 import {company_type} from '../../../utils/static_data'
 import { ApxAlert, ApxButtonEdit, ApxDatePicker, ApxtextIndexValue } from '../../../components/common'

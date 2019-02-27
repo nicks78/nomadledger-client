@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { withStyles } from '@material-ui/core';
 import {country, phone_code, company_type} from '../../../utils/static_data'
-import { createState, updateItem } from '../../../redux/actions'
+import { createState, updateItem } from '../../../redux/library/actions'
 import {ApxButtonEdit} from '../../../components/common'
 import EditInput from '../../../lib/editInput'
 import EditSelect from '../../../lib/editSelect'

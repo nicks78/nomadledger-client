@@ -8,8 +8,6 @@ import CheckIcon from '@material-ui/icons/CheckOutlined'
 const styles = theme => ({
     icon: {
         float: 'right',
-        // backgroundColor: '#008489',
-        // fontSize: '0.5rem !important'
     },
     editicon: {
         color: theme.palette.primary.main,

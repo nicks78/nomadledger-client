@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { authUser } from './actions'
+import { authUser } from '../../redux/auth/actions'
 import Paper from '@material-ui/core/Paper';
 import {ApxForm, Spinner} from '../../components/common'
 import Typography from '@material-ui/core/Typography';

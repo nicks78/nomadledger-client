@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {API_ENDPOINT} from '../../utils/constant'
-import { createItem, getItemList, getItem, createState, getTotal } from '../../redux/actions'
+import {API_ENDPOINT} from '../../redux/constant'
+import { createItem, getItemList, getItem, createState, getTotal } from '../../redux/library/actions'
 import {connect} from 'react-redux'
 import { withStyles, Table, TableHead, TableBody, Checkbox, Paper, TableCell, TableRow,} from '@material-ui/core';
 import {ApxTableToolBar, ApxAlert} from '../../components/common'
