@@ -4,7 +4,7 @@ import { getItemList } from '../redux/library/actions'
 import {Grid} from '@material-ui/core'
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import {BarCharts} from '../components/common'
+import BarCharts from '../components/common/backBtn'
 
 class Home extends Component {
 

@@ -45,4 +45,4 @@ class Polar extends Component {
   }
 }
 
-export {Polar}
+export default Polar;

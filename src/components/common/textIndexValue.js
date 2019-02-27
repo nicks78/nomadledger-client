@@ -48,4 +48,4 @@ const TextIndexValue = (props) => {
 
 const ApxtextIndexValue =  withStyles(styles)(TextIndexValue)
 
-export { ApxtextIndexValue };
+export default ApxtextIndexValue ;

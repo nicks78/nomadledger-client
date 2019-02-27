@@ -5,7 +5,8 @@ import {connect} from 'react-redux'
 import { createState, createDocument} from '../../../redux/book/actions'
 import { convertToCurrency, getListItem} from '../../../redux/book/itemActions'
 import { withStyles } from '@material-ui/core';
-import {  ApxAlert, Spinner} from '../../../components/common'
+import ApxAlert from '../../../components/common/alert'
+import Spinner from '../../../components/common/spinner'
 import Form from '../common/form'
 
 

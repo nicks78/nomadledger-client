@@ -81,4 +81,4 @@ const EnhancedToolBar = (props) => {
 
 const ApxTableToolBar = withStyles(styles)(EnhancedToolBar);
 
-export { ApxTableToolBar };
+export default ApxTableToolBar ;

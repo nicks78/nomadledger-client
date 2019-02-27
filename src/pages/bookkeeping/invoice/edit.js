@@ -6,7 +6,8 @@ import { createState , updateDocument, getDocument, resetState} from '../../../r
 import { convertToCurrency, getListItem} from '../../../redux/book/itemActions'
 import { withStyles } from '@material-ui/core';
 import Form from '../common/form'
-import { ApxAlert, Spinner} from '../../../components/common'
+import ApxAlert from '../../../components/common/alert'
+import Spinner from '../../../components/common/spinner'
 
 class EditInvoice extends React.Component {
 

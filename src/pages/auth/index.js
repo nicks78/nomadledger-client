@@ -8,7 +8,9 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
-import {ApxForm, ApxBanner, Spinner} from '../../components/common'
+import ApxForm from '../../components/common/form'
+import ApxBanner from '../../components/common/banner'
+import Spinner from '../../components/common/spinner'
 
 
 

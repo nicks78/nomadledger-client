@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Locale from '../../utils/locale'
+import Locale from '../../redux/locale'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography';
 import ErrorIcon from '@material-ui/icons/Error'
@@ -36,4 +36,4 @@ const Alert = (props) => {
 
 const ApxAlert = withStyles(styles)(Alert)
 
-export {  ApxAlert };
+export default ApxAlert;

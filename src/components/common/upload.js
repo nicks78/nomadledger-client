@@ -99,4 +99,4 @@ const  Upload = (props) => {
 
 const ApxUpload = withStyles(styles)(Upload);
 
-export {ApxUpload};
+export default ApxUpload;

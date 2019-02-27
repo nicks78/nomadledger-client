@@ -31,4 +31,4 @@ const Copyright = (props) => {
 
 const ApxCopyright =  withStyles(styles)(Copyright)
 
-export { ApxCopyright };
+export default ApxCopyright;

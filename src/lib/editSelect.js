@@ -1,7 +1,8 @@
 //manager/src/lib/editSelect.js
 
 import React from 'react'
-import { ApxSelect, ApxtextIndexValue } from '../components/common'
+import ApxSelect  from '../components/common/select'
+import ApxtextIndexValue  from '../components/common/textIndexValue'
 
 
 /**

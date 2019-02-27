@@ -72,12 +72,12 @@ export function updateDocument(actionType){
  * @param actionType 
  * 
  */
-export function pushToDocument(actionType, data, apiRoute ){
+export function pushToDocument(actionType, data, endPoint ){
 
     return (dispatch) => {
         if(Object.keys(data).length > 0 ){
         
-            axios.post(`${API_ENDPOINT}${apiRoute}${actionType.toLowerCase()}`, {
+            axios.post(`${API_ENDPOINT}${endPoint}${actionType.toLowerCase()}`, {
                     data: data
             })
             .then(function (response) { 

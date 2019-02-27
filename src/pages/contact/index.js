@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom'
 import {Table, TableHead, TableBody, Paper, TableCell, TableRow, withStyles, } from '@material-ui/core';
 import {connect} from 'react-redux'
 import { createItem, getItemList, getItem, createState, getTotal, resetState} from '../../redux/library/actions'
-import { ApxAlert, ApxTableToolBar} from '../../components/common'
+import ApxTableToolBar from '../../components/common/tableToolBar'
+import ApxAlert from '../../components/common/alert'
 import AddContact from './addContact'
 import Pagination from '../../lib/pagination'
 

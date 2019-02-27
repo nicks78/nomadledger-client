@@ -15,7 +15,7 @@ import DeleteIcon from '@material-ui/icons/DeleteOutlined'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import { cvtNumToUserPref, checkNumFormatRegex, convertToNumber } from '../../../utils/help_function'
-import { ApxContenEditable } from '../../../components/common'
+import ApxContenEditable from '../../../components/common/contentEditable'
 
 class Items extends Component {
     

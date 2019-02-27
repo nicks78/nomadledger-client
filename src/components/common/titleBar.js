@@ -3,7 +3,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import {ApxButtonEdit} from './'
+import ApxButtonEdit from './buttonEdit'
 
 const styles = (theme) => ({
 
@@ -44,5 +44,5 @@ const titleBar = (props) => {
 
 const ApxTitleBar = withStyles(styles)(titleBar);
 
-export { ApxTitleBar };
+export default ApxTitleBar;
 

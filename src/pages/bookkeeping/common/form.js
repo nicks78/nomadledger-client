@@ -9,7 +9,10 @@ Typography,
 Button 
  } from '@material-ui/core';
 
-import { ApxSelect, ApxDatePicker, ApxRichEditor, ApxRadioGroup } from '../../../components/common'
+import ApxSelect  from '../../../components/common/select'
+import ApxDatePicker from '../../../components/common/datePicker'
+import ApxRichEditor from '../../../components/common/richEditor'
+import ApxRadioGroup from '../../../components/common/radioGroup'
 import {currency, status, statusInv} from '../../../utils/static_data'
 import AutoComplete from '../../../lib/autoComplete'
 import ContactSection from './contactSection';

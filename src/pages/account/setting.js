@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { withStyles, Typography, Divider } from '@material-ui/core';
 import { updateDocument, createState } from '../../redux/account/actions'
-import { ApxTitleBar } from '../../components/common'
+import ApxTitleBar from '../../components/common/titleBar'
 import {connect} from 'react-redux'
 import EditSelect from '../../lib/editSelect'
 

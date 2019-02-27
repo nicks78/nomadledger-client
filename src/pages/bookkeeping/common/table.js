@@ -4,7 +4,7 @@ import {  getBookList } from '../../../redux/book/actions'
 import { getTotal } from '../../../redux/library/actions'
 import { withStyles ,Table, TableHead, TableBody, TableCell, TableRow,} from '@material-ui/core';
 import { cvtNumToUserPref } from '../../../utils/help_function'
-import { ApxTableActions} from '../../../components/common'
+import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
 
 

@@ -40,37 +40,6 @@ export const updateItem = ( actionType, endPoint ) => {
     }
 }
 
-
-// CREATE NEW ITEM
-export const updateSingleField = ( actionType, endPoint, field, value ) => {
-
-    return (dispatch, getState) => {
-        
-        // Set action name
-        var model = actionType.toLowerCase()
-
-        // Get current state
-        var state = getState().library[model].item
-
-        axios.put(`${API_ENDPOINT}${model}/${endPoint}`,
-            {data: state},
-            { headers: {
-                    'Content-Type': 'application/json',
-            }
-        })
-        .then(function (response) { 
-            return response.data
-        }) 
-        .then( res => {
-            dispatch(setUpdateItem( actionType, res.item ))  
-        }) 
-        .catch(function (error) {
-            // handle error
-            var message = error.response ? error.response.data.message : 'error_500'
-            dispatch(requestFailed(actionType, message));
-        })    
-    }
-}
   
 function setUpdateItem(actionType, item){
     return {

@@ -24,4 +24,4 @@ const Buttons = (props) => {
 
 const ApxButtonCircle =  withStyles(styles)(Buttons)
 
-export { ApxButtonCircle };
+export default ApxButtonCircle

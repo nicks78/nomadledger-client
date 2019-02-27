@@ -4,7 +4,10 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { getItem, createState, updateItem, resetState } from '../../redux/library/actions'
 import { withStyles, Typography, TextField, Grid, Button} from '@material-ui/core';
-import {ApxAlert, Spinner, ApxPaper, ApxBackBtn} from '../../components/common'
+import ApxAlert from '../../components/common/alert'
+import Spinner from '../../components/common/spinner'
+import ApxPaper from '../../components/common/paper'
+import ApxBackBtn from '../../components/common/backBtn'
 import EditSelect from '../../lib/editSelect'
 import {currency} from '../../utils/static_data'
 

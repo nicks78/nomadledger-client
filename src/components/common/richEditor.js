@@ -53,4 +53,4 @@ const styles = theme => ({
 
 const ApxRichEditor =  withStyles(styles)(RichEditor)
 
-export { ApxRichEditor };
+export default ApxRichEditor;

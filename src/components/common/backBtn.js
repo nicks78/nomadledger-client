@@ -26,4 +26,4 @@ const styles = theme => ({
 
 const ApxBackBtn = withStyles(styles)(BackBtn);
 
-export {ApxBackBtn} 
+export default ApxBackBtn;

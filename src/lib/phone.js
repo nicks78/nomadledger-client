@@ -3,7 +3,7 @@
 import React from 'react'
 import { withStyles, Grid, TextField, MenuItem } from '@material-ui/core';
 import {phone_code} from '../utils/static_data'
-import {ApxtextIndexValue} from '../components/common'
+import ApxtextIndexValue from '../components/common/textIndexValue'
 
 const styles = theme => ({
     textField: {

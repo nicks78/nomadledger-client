@@ -37,4 +37,4 @@ const Banner = (props) => {
 
 const ApxBanner = withStyles(styles)(Banner);
 
-export { ApxBanner };
+export default ApxBanner ;

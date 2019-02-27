@@ -14,7 +14,13 @@ const Buttons = (props) => {
 
   return (
     <div>
-      <Button variant={props.variant} color={props.color} onClick={ props.action } className={classes.button}>
+      <Button 
+          variant={props.variant} 
+          color={props.color} 
+          onClick={ props.action } 
+          className={classes.button}
+          disabled={ props.disabled ? true :  false }
+      >
           {props.title}
       </Button>
     </div>
@@ -23,4 +29,4 @@ const Buttons = (props) => {
 
 const ApxButton =  withStyles(styles)(Buttons)
 
-export { ApxButton };
+export default ApxButton;

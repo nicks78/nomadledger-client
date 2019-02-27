@@ -62,4 +62,4 @@ const styles = theme => ({
 
 const ApxRadioGroup = withStyles(styles)(RadioGroups)
 
-export  { ApxRadioGroup }
+export default ApxRadioGroup;

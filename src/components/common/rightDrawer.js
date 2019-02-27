@@ -65,4 +65,4 @@ const RightDrawer = (props) => {
 
 const ApxRightDrawer = withStyles(styles)(RightDrawer)
 
-export {ApxRightDrawer};
+export default ApxRightDrawer;

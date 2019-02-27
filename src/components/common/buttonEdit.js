@@ -34,4 +34,4 @@ const ButtonEdit = (props) => {
 
 const ApxButtonEdit =  withStyles(styles)(ButtonEdit)
 
-export { ApxButtonEdit };
+export default ApxButtonEdit;

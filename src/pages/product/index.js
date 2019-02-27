@@ -1,10 +1,11 @@
 //manager/src/pages/product/index.js
 
 import React, { Component } from 'react'
-import { createItem, getItemList, getItem, createState, getTotal } from '../../redux/library/actions'
+import { createItem, getItemList, getItem, createState, getTotal, resetState } from '../../redux/library/actions'
 import {connect} from 'react-redux'
 import { withStyles, Grid, Button} from '@material-ui/core';
-import { Spinner, ApxAlert} from '../../components/common'
+import Spinner from '../../components/common/spinner'
+import ApxAlert from '../../components/common/alert'
 import AddProduct from './addProduct'
 import ProductCard from './productCard'
 
@@ -39,24 +40,17 @@ class Product extends Component {
 
 
     state = {
-        showProduct: false,
         reducer: 'PRODUCT',
-        limit: 6,
-        keyLocation: ''
+        limit: 6
     }
 
     componentDidMount(){
-        if( this.props.receivedAt === null ){
-            this.props.getTotal(this.state.reducer)
-            this.props.getItemList(this.state.reducer, `?limit=${this.state.limit}&skip=0`);
-        }
-        this.setState({keyLocation: this.props.location.key})
+        this.props.getTotal(this.state.reducer)
+        this.props.getItemList(this.state.reducer, `?limit=${this.state.limit}&skip=0`);
     }
 
-    componentWillReceiveProps(nextProps){
-        if(nextProps.location.key !== this.state.keyLocation){
-            this.setState({ showProduct: false, keyLocation: nextProps.location.key })
-        }
+    componentWillUnmount(){
+        this.props.resetState("PRODUCT");
     }
 
     hanldeLoadMore = () => {
@@ -123,4 +117,4 @@ const mapStateToProps = (state) => {
 
 const StyledProduct = withStyles(styles)(Product)
 
-export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, getTotal  })(StyledProduct);
+export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, getTotal, resetState  })(StyledProduct);

@@ -7,7 +7,9 @@ import {  getBookList } from '../../../redux/book/actions'
 import { getTotal } from '../../../redux/library/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, Checkbox, TableCell, TableRow,} from '@material-ui/core';
-import {ApxTableToolBar, ApxAlert, ApxTableActions} from '../../../components/common'
+import ApxTableToolBar from '../../../components/common/tableToolBar'
+import ApxAlert from '../../../components/common/alert'
+import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
 import {filter} from '../../../utils/static_data'
 

@@ -75,5 +75,5 @@ const Select = (props) => {
 
 const ApxSelect =  withStyles(styles)(Select)
 
-export { ApxSelect };
+export default ApxSelect;
 

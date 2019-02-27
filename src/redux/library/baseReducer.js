@@ -1,6 +1,5 @@
 //src/redux/library/baseReducer.js
 
-
 import {updateArrayOfObject} from '../../utils/help_function'
 
 
@@ -82,7 +81,7 @@ const baseReducer = (state = new BaseState(), action) => {
                 total: state.total + 1,
                 progress: action.value,
                 tmp_state: {},
-                // item: {},
+                item: null,
                 list: [ ...state.list, action.item ]
             }
         case `UPDATE`:

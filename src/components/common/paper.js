@@ -28,4 +28,4 @@ const Papers = (props) => {
 
 const ApxPaper = withStyles(styles)(Papers)
 
-export {  ApxPaper };
+export default  ApxPaper ;

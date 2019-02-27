@@ -31,4 +31,4 @@ const Tag = (props) => {
 
 const ApxTag =  withStyles(styles)(Tag)
 
-export { ApxTag };
+export default ApxTag ;

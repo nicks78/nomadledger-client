@@ -20,4 +20,4 @@ const ContenEditable = (props) => {
 
 const ApxContenEditable =  withStyles(styles)(ContenEditable)
 
-export { ApxContenEditable };
+export default ApxContenEditable;

@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { authUser } from '../../redux/auth/actions'
 import Paper from '@material-ui/core/Paper';
-import {ApxForm, Spinner} from '../../components/common'
+import ApxForm from '../../components/common/form'
+import Spinner from '../../components/common/spinner'
+
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 

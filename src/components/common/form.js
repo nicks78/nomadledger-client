@@ -2,7 +2,7 @@
 
 import React  from 'react'
 import TextField from '@material-ui/core/TextField';
-import { ApxSelect } from './'
+import ApxSelect from './select'
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -79,4 +79,4 @@ const Form = (props) => {
 
 const ApxForm = withStyles(styles)(Form);
 
-export {ApxForm};
+export default ApxForm;

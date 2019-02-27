@@ -50,4 +50,4 @@ class BarCharts extends Component {
   }
 }
 
-export {BarCharts}
+export default BarCharts

@@ -4,7 +4,7 @@ import React from 'react'
 import { Link } from "react-router-dom"
 import {connect} from 'react-redux'
 import { createState } from '../../../redux/book/actions'
-import { ApxtextIndexValue } from '../../../components/common'
+import ApxtextIndexValue from '../../../components/common/textIndexValue'
 import AutoComplete from '../../../lib/autoComplete'
 
 

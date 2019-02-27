@@ -116,4 +116,4 @@ const styles = theme => ({
 
 const ApxDatePicker =  withStyles(styles)(DatePickers)
 
-export { ApxDatePicker };
+export default ApxDatePicker;

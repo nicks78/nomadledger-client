@@ -37,4 +37,4 @@ const styles  = theme => ({
 
 const ApxTableActions = withStyles(styles)(TableActions)
 
-export { ApxTableActions }
+export default ApxTableActions;

@@ -1,5 +1,35 @@
 //manager/src/components/index.js
 
+
+
+// export { default as ApxButton } from './button'
+// export { default as Spinner } from './spinner'
+// export { default as ApxAlert } from './alert'
+// export { default as ApxExpanded} from './expanded'
+// export { default as ApxCopyright } from './copyright'
+// export { default as ApxUpload } from './upload'
+// export { default as ApxForm } from './form'
+// export { default as ApxRightDrawer } from './rightDrawer'
+// export { default as ApxBanner } from './banner'
+// export { default as ApxSelect } from './select'
+// export { default as BarCharts} from './barCharts'
+// export { default as ApxCharts } from './charts'
+// export { default as ApxPolard } from './polar'
+// export { default as ApxTitleBar} from './titleBar'
+// export { default as ApxButtonCircle } from './buttonCircle'
+// export { default as ApxDatePicker } from './datePicker'
+// export { default as ApxtextIndexValue } from './textIndexValue'
+// export { default as ApxButtonEdit } from './buttonEdit'
+// export { default as ApxTag } from './tag'
+// export { default as ApxTableToolBar } from './tableToolBar'
+// export { default as ApxRichEditor } from './richEditor'
+// export { default as ApxContenEditable } from './contentEditable'
+// export { default as ApxTableActions} from './tableActions'
+// export { default as ApxRadioGroup } from './radioGroup'
+// export { default as ApxPaper } from './paper'
+// export { default as ApxBackBtn } from './backBtn'
+
+
 export * from './button'
 export * from './spinner'
 export * from './alert'

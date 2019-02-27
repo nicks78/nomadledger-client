@@ -40,4 +40,4 @@ const Expanded = (props) => {
 
 const ApxExpanded =  withStyles(styles)(Expanded)
 
-export { ApxExpanded }
+export default ApxExpanded;

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles';
-import {ApxtextIndexValue} from '../components/common'
+import ApxtextIndexValue from '../components/common/textIndexValue'
 import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({

@@ -5,7 +5,8 @@ import {connect} from 'react-redux'
 import {pushToDocument, getAccount} from '../../redux/account/actions'
 import { withStyles, TextField } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddOutlined'
-import {ApxTag, Spinner} from '../../components/common'
+import ApxTag  from '../../components/common/tag'
+import Spinner from '../../components/common/spinner'
 
 
 const styles = theme => ({

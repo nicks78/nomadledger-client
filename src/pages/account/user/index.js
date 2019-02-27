@@ -5,7 +5,9 @@ import {connect} from 'react-redux'
 import {API_ENDPOINT} from '../../../redux/constant'
 import { withStyles } from '@material-ui/core';
 import UploadImg from '../../../lib/uploadImg'
-import {Spinner, ApxTitleBar, ApxAlert} from '../../../components/common'
+import ApxAlert from '../../../components/common/alert'
+import Spinner from '../../../components/common/spinner'
+import ApxTitleBar from '../../../components/common/titleBar'
 import { uploadFileToServer , updateDocument, updatePassword} from '../../../redux/account/actions'
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid'
