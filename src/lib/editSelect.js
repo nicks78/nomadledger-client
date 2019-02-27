@@ -16,8 +16,8 @@ import { ApxSelect, ApxtextIndexValue } from '../components/common'
  */
 const EditSelect = (props) => {
     
-    const {arrayField, field, helperText, handleAction, locale, showEdit, label, value } = props
-console.log(value)
+    const {arrayField, field, helperText, handleAction, locale, showEdit, label, value, variant } = props
+
     if(showEdit){
         return  <ApxSelect 
                     arrayField={arrayField}
@@ -26,6 +26,7 @@ console.log(value)
                     helperText={helperText}
                     handleAction={ handleAction }
                     locale={locale}
+                    variant={variant}
                 />
     }
 

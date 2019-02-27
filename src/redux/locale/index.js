@@ -73,7 +73,8 @@ const Locale = {
                 upload: "téléverser",
                 add_quote: "Créer un devis",
                 add_invoice: "Créer une facture",
-                add_payback: "Créer un avoir"
+                add_payback: "Créer un avoir",
+                loading: "Chargement..."
             },
             page: {
                 contact: {
@@ -160,6 +161,7 @@ const Locale = {
 
                     contact_group: "Groupe",
                     contact_drop: "Client",
+                    marg: "Marge",
 
                     name: "Nom",
                     description: "Déscription",
@@ -339,7 +341,8 @@ const Locale = {
                 upload: "Upload",
                 add_quote: "Create quote",
                 add_invoice: "Create invoice",
-                add_payback: "Create payback"
+                add_payback: "Create payback",
+                loading: "Loading..."
             },
             page: {
                 contact: {
@@ -421,7 +424,8 @@ const Locale = {
                     company: "Company",
                     register: "Register number",
                     vat: 'VAT',
-
+                    marg: "Marge",
+                    
                     contact_group: "Group",
                     contact_drop: "Client",
 

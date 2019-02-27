@@ -3,11 +3,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {API_ENDPOINT} from '../../redux/constant'
-import { getItem, resetState } from '../../redux/library/actions'
-import { withStyles, Typography, Grid} from '@material-ui/core';
-
+import { getItem, resetState, updateItem } from '../../redux/library/actions'
+import { withStyles, Typography, Grid, TextField} from '@material-ui/core';
+import {ExpandLessOutlined, ExpandMoreOutlined} from '@material-ui/icons'
 import {ApxAlert, Spinner, ApxPaper, ApxBackBtn} from '../../components/common'
-
+import EditSelect from '../../lib/editSelect';
 
 class ShowProduct extends React.Component {
 
@@ -16,9 +16,13 @@ class ShowProduct extends React.Component {
       this.props.getItem("PRODUCT", id)
   }
 
+  componentWillUnmount(){
+    this.props.resetState("PRODUCT")
+  }
+
   render() {
 
-    const {classes, product, isFetching, locale, isError, message} = this.props
+    const {classes, product, isFetching, locale, isError, message, categories} = this.props
     if( isFetching ){
       return <Spinner/>
     }
@@ -29,6 +33,7 @@ class ShowProduct extends React.Component {
         <ApxPaper>
           <ApxBackBtn/>
           {isError ? <ApxAlert message={message} /> : null }
+          <Typography variant="h1">{ product.name}</Typography><br />
             <Grid container spacing={24}>
                 <Grid item xs={12} sm={7} md={7}>
                       <div className={classes.mainImgWrap}>
@@ -45,18 +50,73 @@ class ShowProduct extends React.Component {
                     }
                     </div>
                 </Grid>
-                <Grid item  xs={12} sm={5} md={5} style={{ paddingLeft: 24}}>
-                    <Typography variant="h1">{ product.name}</Typography><br />
-                    <Typography variant="h3">{locale.form.field.selling_price} :<span className={classes.span}>{ product.price} {product.currency.value}</span></Typography><br />
-                    <Typography variant="h3">{locale.form.field.buying_price} : <span className={classes.span}>{ product.buying_price} {product.currency.value}</span></Typography><br />
-                    <Typography variant="h3">{locale.form.field.category} : <span className={classes.span}>{ product.category[localStorage.getItem('locale')]}</span></Typography><br />
-                    <Typography variant="h3">{locale.form.field.stock} : <span className={classes.span}>{ product.stock}</span></Typography><br />
+                <Grid item  xs={12} sm={5} md={5}>
+                <EditSelect  
+                        arrayField={categories}
+                        field="category"
+                        handleAction={ this.props.updateItem("PRODUCT", "") }
+                        locale={locale}
+                        showEdit={true}
+                        variant="outlined"
+                        label={locale.form.field.category }
+                        value={  product.category && product.category[localStorage.getItem("locale")] }
+                    />
+                    <TextField variant="outlined" 
+                                label={locale.form.field.name} 
+                                fullWidth
+                                className={classes.margin} 
+                                margin="dense" 
+                                value={ product.name} 
+                                onChange={ () => {this.props.updateItem("PRODUCT", "")} } />
+                    <TextField  variant="outlined" 
+                                label={locale.form.field.buying_price +' ('+ product.currency.value +')' } 
+                                fullWidth
+                                className={classes.margin} margin="dense" 
+                                value={ product.buying_price} 
+                                onChange={ () => {this.props.updateItem("PRODUCT", "")} } 
+                                />   
+                    <TextField variant="outlined" 
+                                label={locale.form.field.selling_price +' ('+ product.currency.value +')' } 
+                                fullWidth
+                                className={classes.margin} 
+                                margin="dense" 
+                                value={ product.price} 
+                                onChange={ () => {this.props.updateItem("PRODUCT", "")} } 
+                                />
+                    <TextField variant="outlined" 
+                                label={locale.form.field.marg +' ('+ product.currency.value +')' } 
+                                fullWidth
+                                className={classes.margin} 
+                                margin="dense" 
+                                disabled
+                                value={ product.price - product.buying_price } 
+                                onChange={ () => {this.props.updateItem("PRODUCT", "")} } 
+                      />
+
+                    <div className={classes.stockWrap}>
+                          <p className={classes.span}>
+                            <ExpandLessOutlined onClick={ () => { this.props.updateItem("PRODUCT", `remove/add/stock/up`)} } /><br />
+                            <span>{ product.stock}</span><br />
+                            <ExpandMoreOutlined onClick={ () => { this.props.updateItem("PRODUCT", `remove/add/stock/down`)} }/>
+                            </p>  
+                            
+
+                    </div>
                 </Grid>
             </Grid>
-            <br />
+
             <Grid container spacing={24}>
                 <Grid item xs={12} sm={7} md={7}>
-                  <Typography variant="body1">{ product.description}</Typography>
+                      <TextField variant="outlined" 
+                                label={locale.form.field.description } 
+                                fullWidth
+                                multiline
+                                rows={6}
+                                className={classes.margin} 
+                                margin="normal"
+                                value={ product.description } 
+                                onChange={ () => {this.props.updateItem()} } 
+                      />
                 </Grid>
             </Grid>
             
@@ -95,7 +155,15 @@ const styles = theme => ({
     margin: '0px 5px 0px 5px',
   },
   span: {
+    textAlign: 'center',
     float: 'right'
+  },
+  margin: {
+    marginBottom: 12
+  },
+
+  stockWrap: {
+
   }
 })
 
@@ -105,13 +173,14 @@ const mapStateToProps = (state) => {
       isFetching: state.library.product.isFetching,
       isError: state.library.product.isError,
       message: state.library.product.message,
-      product: state.library.product.item
+      product: state.library.product.item,
+      categories: state.account.company.item ?  state.account.company.item.category_name : []
       
   }
 }
 
 const StyledShowProduct = withStyles(styles)(ShowProduct)
 
-export default connect(mapStateToProps, { getItem , resetState })(StyledShowProduct);
+export default connect(mapStateToProps, { getItem , resetState, updateItem })(StyledShowProduct);
 
 

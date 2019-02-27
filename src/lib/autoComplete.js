@@ -159,8 +159,8 @@ class AutoComplete extends React.Component {
 const mapStateToProps = (state) => {
 
   return {
-      isFetching: state.autocomplete.isFetching,
-      suggestions: state.autocomplete.list
+      isFetching: state.search.isFetching,
+      suggestions: state.search.list
   }
 }
 

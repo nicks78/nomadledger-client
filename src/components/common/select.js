@@ -26,7 +26,7 @@ const styles = theme => ({
  */
 const Select = (props) => {
 
-    const {classes, arrayField, field, helperText, required} = props
+    const {classes, arrayField, field, helperText, required, variant} = props
 
     const selected = (event) => {
         
@@ -57,6 +57,7 @@ const Select = (props) => {
               }}
             helperText={props.locale.form.helperText[helperText]}
             margin="dense"
+            variant={variant || 'standard'}
             >
             {
                 arrayField.map((option, index) => (

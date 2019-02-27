@@ -146,7 +146,7 @@ class Layout extends React.Component {
                 </Hidden>
                 
                 <Typography className={classes.title}>
-                <Hidden smDown>Apx BookKeeping Solutions</Hidden>
+                <Hidden smDown>BookKeeping Solutions</Hidden>
                 </Typography>
 
                 <Typography>

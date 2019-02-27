@@ -22,7 +22,7 @@ class ShowService extends Component {
 
 
     render() {
-      const {classes, service, isFetching, locale, isError, message, category} = this.props
+      const {classes, service, isFetching, locale, isError, message, category, isUpdating} = this.props
 
 
       if( isFetching ){
@@ -30,9 +30,6 @@ class ShowService extends Component {
       }
       if( service === null ){
         return <ApxAlert message="error_404" />
-      }
-      if( isError ){
-        return <ApxAlert message={message} />
       }
 
       return (
@@ -42,7 +39,7 @@ class ShowService extends Component {
               { service.name}
             </Typography>
             <br />
-
+            {isError ? <ApxAlert message={message} /> : null }
             <Grid container spacing={24}>
               <Grid item xs={12} md={6}>
                   <TextField 
@@ -86,7 +83,13 @@ class ShowService extends Component {
             </Grid>
            
             <br />
-            <Button variant="contained" color="secondary" className={ classes.btnSave } onClick={ () => { this.props.updateItem("SERVICE", service._id)} }>{ locale.button.update }</Button>
+            <Button 
+                variant="contained" 
+                color="secondary" 
+                disable={isUpdating ? true : false }
+                className={ classes.btnSave } 
+                onClick={ () => { this.props.updateItem("SERVICE", `update`)} }>
+                { !isUpdating ?  locale.button.update : locale.button.loading }</Button>
         </ApxPaper>
       )
     }
@@ -105,6 +108,7 @@ const styles = theme => ({
 const mapStateToProps = (state) => {
   return {
       isFetching: state.library.service.isFetching,
+      isUpdating: state.library.service.isUpdating,
       isError: state.library.service.isError,
       message: state.library.service.message,
       service: state.library.service.item,
