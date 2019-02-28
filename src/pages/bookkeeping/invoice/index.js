@@ -22,10 +22,8 @@ class Invoice extends Component {
     }
 
     componentDidMount(){
-        if( this.props.receivedAt === null || this.props.updated ){
-            this.props.getTotal(this.state.reducer );
-            this.props.getBookList(this.state.reducer, "?limit=5&skip=0");
-        }
+        this.props.getTotal(this.state.reducer );
+        this.props.getBookList(this.state.reducer, "?limit=5&skip=0");
     }
 
     onSelectAllClick = (event) => {
@@ -75,7 +73,7 @@ class Invoice extends Component {
     
     render() {
     
-    const {listInvoice, isFetching, isError,  locale, classes, message} = this.props
+    const {listInvoice, isFetching, isError,  locale, classes, message, newInvoice} = this.props
     const { selected, rowCount, reducer } = this.state
 
     if(isError){
@@ -85,7 +83,11 @@ class Invoice extends Component {
     return (
       <div className={classes.root}>
             <Hidden only={['xs', 'sm']}>
-                <Button component={Link} to="/bookkeeping/invoice/create" variant="contained" color="secondary"  className={  classes.button }>{locale.button.add_invoice}</Button>
+                <Button component={Link} to="/bookkeeping/invoice/create" 
+                        variant="contained" color="secondary"  
+                        className={  classes.button }>
+                        { newInvoice.contact_id ? locale.button.continue_edit : locale.button.add_invoice}
+                </Button>
             </Hidden>
             <Paper className={classes.paper}>
 
@@ -195,6 +197,7 @@ const mapStateToProps = (state) => {
         isError: state.book.invoice.isError,
         message: state.book.invoice.message,
         receivedAt: state.book.invoice.receivedAt,
+        newInvoice: state.book.invoice.item || {},
         locale: state.locale.locale,
         total: state.library.invoice.total,
         listInvoice: state.book.invoice.list,

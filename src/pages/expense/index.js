@@ -2,12 +2,13 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {API_ENDPOINT} from '../../redux/constant'
+import {DEFAULT_IMG} from '../../redux/constant'
 import { createItem, getItemList, getItem, createState, getTotal } from '../../redux/library/actions'
 import {connect} from 'react-redux'
 import { withStyles, Table, TableHead, TableBody, Checkbox, Paper, TableCell, TableRow,} from '@material-ui/core';
 import ApxTableToolBar from '../../components/common/tableToolBar'
 import ApxAlert from '../../components/common/alert'
+import Spinner from '../../components/common/spinner'
 import AddExpense from './addExpense'
 import Pagination from '../../lib/pagination'
 
@@ -15,24 +16,13 @@ class Expense extends Component {
 
 
     state = {
-        showExpense: false,
         reducer: "EXPENSE",
-        selected: [],
-        keyLocation: ''
+        selected: []
     }
 
     componentDidMount(){
-        if( this.props.receivedAt === null ){
-            this.props.getTotal(this.state.reducer);
-            this.props.getItemList(this.state.reducer, "?limit=5&skip=0");
-        }
-        this.setState({keyLocation: this.props.location.key})
-    }
-
-    componentWillReceiveProps(nextProps){
-        if(nextProps.location.key !== this.state.keyLocation){
-            this.setState({ showExpense: false, keyLocation: nextProps.location.key })
-        }
+        this.props.getTotal(this.state.reducer);
+        this.props.getItemList(this.state.reducer, "?limit=5&skip=0");
     }
 
     onSelectAllClick = (event) => {
@@ -80,17 +70,18 @@ class Expense extends Component {
     
     render() {
     
-    const {listExpenses, isFetching, isError,  locale, category, newExpense, createState, createItem, isCreating, classes } = this.props
+    const {listExpenses, isFetching, isError,  locale, category, newExpense, createState, createItem, isCreating, classes, message } = this.props
     const { selected, rowCount, reducer } = this.state
 
-    if(isError){
-        return <ApxAlert message="Erreur message" />
+    if(isFetching){
+        return <Spinner />
     }
+    
 
     return (
         <div className={ classes.container}>
             <AddExpense locale={ locale } category={category} newData={newExpense} createExpenseState={ createState } createExpense={ createItem } isCreating={isCreating}/>
-            
+            { isError ?  <ApxAlert message={message} /> : null }
             <Paper className={classes.paper}>
                 <ApxTableToolBar
                         numSelected={selected.length}
@@ -124,11 +115,13 @@ class Expense extends Component {
                                                 <TableCell padding="checkbox" onClick={ event => { this.onSelectedField(event, expense._id) } } >
                                                     <Checkbox checked={isSelected} />
                                                 </TableCell>
-                                                <TableCell><a href={`${API_ENDPOINT}image/view${ expense.receipt ? expense.receipt.path : '/default/default_logo.png' }`}  target="_blank"><img alt={ expense.receipt.org_name } className={classes.img} src={`${API_ENDPOINT}image/view${ expense.receipt ? expense.receipt.path : '/default/default_logo.png' }`} /></a></TableCell>
-                                                <TableCell><Link to={{ pathname: `/${reducer.toLowerCase()}/view/${expense._id.toLowerCase()}`, state: { reducer: reducer } }}><span  className="link">{expense.name}</span></Link></TableCell>
+                                                <TableCell><a href={`${ expense.receipt ? expense.receipt.full_path : DEFAULT_IMG }`}  target="_blank">
+                                                            <img alt={ expense.receipt.org_name } className={classes.img} src={`${ expense.receipt ? expense.receipt.full_path : DEFAULT_IMG }`} />
+                                                            </a></TableCell>
+                                                <TableCell><Link to={`/${reducer.toLowerCase()}/view/${expense._id.toLowerCase()}`}><span  className="link">{expense.name}</span></Link></TableCell>
                                                 <TableCell>{ expense.category[localStorage.getItem('locale')] }</TableCell>
                                                 <TableCell>{ expense.price } { expense.currency.value }</TableCell>
-                                                <TableCell>{ expense.createAt.month }</TableCell>
+                                                <TableCell>{ expense.receipt_date.label }</TableCell>
 
                                             </TableRow>
                                 })
@@ -181,7 +174,8 @@ const mapStateToProps = (state) => {
         isFetching: state.library.expense.isFetching,
         isCreating: state.library.expense.isCreating,
         isError: state.library.expense.isError,
-        listExpenses: state.library.expense.list,
+        message: state.library.expense.message,
+        listExpenses: state.library.expense.list || [],
         receivedAt: state.library.expense.receivedAt,
         locale: state.locale.locale,
         newExpense: state.library.expense.tmp_state,

@@ -37,11 +37,12 @@ const Phone = (props) => {
     }
 
     if(showEdit){
-        return  <Grid container spacing={0}>
+        return  <Grid container spacing={8}>
                     <Grid item xs={4}>
                     <TextField
                         id={fieldCode}
                         select
+                        variant="filled"
                         label={props.locale.form.field.phone_code}
                         className={classes.textField}
                         name={fieldCode}
@@ -67,6 +68,7 @@ const Phone = (props) => {
                         <TextField 
                             id={field}
                             label={label}
+                            variant="filled"
                             className={classes.textField}
                             value={value}
                             name={field}

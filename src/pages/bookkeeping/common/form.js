@@ -6,31 +6,33 @@ Paper,
 withStyles, 
 Grid, 
 Typography,
-Button 
+Button,
+TextField,
+InputAdornment 
  } from '@material-ui/core';
 
 import ApxSelect  from '../../../components/common/select'
-import ApxDatePicker from '../../../components/common/datePicker'
 import ApxRichEditor from '../../../components/common/richEditor'
 import ApxRadioGroup from '../../../components/common/radioGroup'
-import {currency, status, statusInv} from '../../../utils/static_data'
+import {currency, status} from '../../../utils/static_data'
 import AutoComplete from '../../../lib/autoComplete'
 import ContactSection from './contactSection';
 import Items from './items'
+import DatePickers from '../../../lib/dayPicker'
 
 
 
 
 const Form = (props) => {
 
-    const { data, list, reducer, locale, classes, vat, btnLabel, date_1, date_2, formTitle } = props
+    const { data, list, reducer, locale, classes, vat, btnLabel, date_1, date_2, formTitle, isUpdating } = props
 
     return  <div>
                 <Paper className={classes.paper}>
                 <Typography variant="h2" className={classes.title}>{locale.form.title[formTitle]}&nbsp;{ data.ref || '' }</Typography>
                     <Grid container spacing={24}>
 
-                        <Grid item xs={12} md={5} style={{border: '1px solid rgba(235,235,235,1)'}}>
+                        <Grid item xs={12} md={5} style={{border: '1px solid rgba(235,235,235,1)', marginTop: '20px', borderRadius: 4}}>
                                 <ContactSection 
                                     locale={locale}
                                     contact={data}
@@ -41,20 +43,42 @@ const Form = (props) => {
 
                         <Grid container spacing={24}>
                             <Grid item xs={6}>
-                                <ApxDatePicker 
-                                    handleDate={ props.handleDropDown }
-                                    label={ locale.form.field[date_1] }
-                                    value={ data[date_1] ? data[date_1].label : ""}  
-                                    field={date_1}
-                                />
+                                <TextField
+                                        label={ locale.form.field[date_1] }
+                                        id={date_1}
+                                        disabled
+                                        margin="dense"
+                                        style={{width: '100%'}}
+                                        value={ data[date_1] ? data[date_1].label : ""}
+                                        variant="filled"
+                                        InputProps={{
+                                            startAdornment: <InputAdornment position="start">
+                                                <DatePickers 
+                                                        handleDate={ props.handleDropDown }
+                                                        field={date_1}
+                                                    /> 
+                                            </InputAdornment>,
+                                        }}
+                                    />
                             </Grid>
                             <Grid item xs={6}>
-                                <ApxDatePicker 
-                                    handleDate={  props.handleDropDown }
-                                    label={ locale.form.field[date_2] }
-                                    value={ data[date_2] ? data[date_2].label : ""}  
-                                    field={date_2}
-                                />
+                                <TextField
+                                        label={ locale.form.field[date_2] }
+                                        id={date_2}
+                                        disabled
+                                        margin="dense"
+                                        style={{width: '100%'}}
+                                        value={ data[date_2] ? data[date_2].label : ""}
+                                        variant="filled"
+                                        InputProps={{
+                                            startAdornment: <InputAdornment position="start">
+                                                <DatePickers 
+                                                        handleDate={ props.handleDropDown }
+                                                        field={date_2}
+                                                    /> 
+                                            </InputAdornment>,
+                                        }}
+                                    />
                             </Grid>
                         </Grid>
 
@@ -87,7 +111,7 @@ const Form = (props) => {
                                 <ApxRadioGroup 
                                     action={  props.handleDropDown }
                                     value={data.status ? data.status.code : '0'}
-                                    arrayObject={ reducer === "QUOTE" ?  status : statusInv }
+                                    arrayObject={ status[reducer]  }
                                 />
                             </Grid>
                         </Grid>
@@ -144,7 +168,13 @@ const Form = (props) => {
                     />
                     <br />
                     <div className={classes.btnSave}>
-                        <Button variant="contained" color="secondary" onClick={ () => { props.handleSubmit(reducer)} }>{btnLabel}</Button>
+                        <Button 
+                            variant="contained" 
+                            color="secondary" 
+                            disabled={ isUpdating ? true : false }
+                            onClick={ () => { props.handleSubmit(reducer)} }>
+                            { isUpdating ? locale.button.loading : btnLabel}
+                        </Button>
                     </div>
                 </Paper>
             </div>

@@ -10,6 +10,8 @@ import ApxAlert from '../../../components/common/alert'
 import UploadImg from '../../../lib/uploadImg'
 import Paper from '@material-ui/core/Paper'
 import { getItem, resetState, createState, uploadFileToServer } from '../../../redux/library/actions'
+import { getBookTotal } from '../../../redux/book/actions'
+
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography';
 import Tabs from '@material-ui/core/Tabs'
@@ -61,14 +63,15 @@ class ShowContact extends React.Component {
 
     state = {
       value: 0,
-      reducer: 'CONTACT',
-      showEdit: false
+      reducer: 'CONTACT'
     }
 
     componentDidMount(){
         var id = this.props.match.params.id;
-        this.props.getItem(this.state.reducer, id)
-        // this.setState({keyLocation: this.props.location.key})
+        this.props.getItem(this.state.reducer, id);
+        this.props.getBookTotal("QUOTE", `total/${id}`);
+        this.props.getBookTotal("INVOICE", `total/${id}`);
+        this.props.getBookTotal("PAYBACK", `total/${id}`);
     }
 
     componentWillUnmount(){
@@ -80,7 +83,18 @@ class ShowContact extends React.Component {
     }
 
     render(){
-      const { contact, isFetching, isError, locale, progress, isCreating, classes, message } = this.props
+      const { contact, 
+              isFetching, 
+              isError, 
+              locale, 
+              progress, 
+              isUploading, 
+              classes, 
+              message, 
+              total_quote , 
+              total_invoice, 
+              currency,
+              total_payback} = this.props
  
       if(isFetching){
         return <Spinner />
@@ -104,7 +118,7 @@ class ShowContact extends React.Component {
                     reducer={this.state.reducer}
                     progress={progress}
                     idModel={this.props.match.params.id}
-                    isUploading={isCreating}
+                    isUploading={isUploading}
                     image={<img src={`${API_ENDPOINT}image/view${ contact.logo ? contact.logo.path : '/default/default_logo.png' }`} alt="logo" width="100%" height={null} />}
                   />
 
@@ -116,7 +130,13 @@ class ShowContact extends React.Component {
             <Grid item xs={12} md={9}>
             
             <div className={ classes.contactWrapper}>
-                <StatContact />
+                <StatContact 
+                  total_quote={total_quote}
+                  total_invoice={total_invoice}
+                  total_payback={total_payback}
+                  currency={currency}
+                  locale={locale}
+                />
             </div>
             <div style={{ marginLeft: 16}}>
             <AppBar position="static" style={{backgroundColor: '#fff', color: '#000'}}>
@@ -161,10 +181,14 @@ const mapStateToProps = (state) => {
       contact: state.library.contact.item,
       newContact: state.library.contact.tmp_state,
       progress: state.library.contact.progress,
-      isCreating: state.library.contact.isCreating
+      isUploading: state.library.contact.isUploading,
+      total_quote: state.book.quote.total,
+      total_invoice: state.book.invoice.total,
+      total_payback: state.book.payback.total,
+      currency: state.account.company.item.currency.value || "ERR"
   }
 }
 
 const StyledShowContact = withStyles(styles)(ShowContact)
 
-export default connect( mapStateToProps, { getItem, resetState, createState , uploadFileToServer})(StyledShowContact);
+export default connect( mapStateToProps, { getItem, resetState, createState , uploadFileToServer, getBookTotal})(StyledShowContact);

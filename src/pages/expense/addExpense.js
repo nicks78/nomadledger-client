@@ -13,10 +13,13 @@ const AddExpense = (props) => {
         title: locale.form.title.add_expense, 
         label: locale.form.title.label_expense,
         fields: [
-            { name: 'name', type:"text" },
-            { name: 'category', type:"select", selections: category, helperText: "select_category" },
-            { name: 'currency', type:"select", selections: currency, helperText: "select_currency" },
-            { name: 'price', type:"number" },
+            { name: 'receipt_date', type:"date"},
+            { name: 'name', type:"text", required: true },
+            { name: 'category', type:"select", selections: category, helperText: "select_category", required: true },
+            { name: 'currency', type:"select", selections: currency, helperText: "select_currency", required: true },
+            { name: 'price', type:"number", required: true},
+            
+            { name: 'description', type:"longtext", multiline: true, rowsMax:"4" },
           ]
       }
     ]

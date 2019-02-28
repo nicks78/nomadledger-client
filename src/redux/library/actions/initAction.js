@@ -29,6 +29,15 @@ export const requestCreation = (actionType) => {
     }
 }
 
+export const requestUpload = (actionType) => {
+    return {
+        type: `REQUEST_UPLOAD`,
+        subtype: actionType,
+        isUploading: true,
+        isError: false
+    }
+}
+
 
 export const requestFailed = (actionType, message = 'error_505') =>  {
     return {
@@ -53,6 +62,7 @@ export const progress = (actionType, value) =>  {
     return {
         type: `PROGRESS`,
         subtype: actionType,
+        isUploading: true,
         value
     }
 }

@@ -50,7 +50,7 @@ class AutoComplete extends React.Component {
     const { InputProps, classes, ...other } = inputProps;
     return (
         <TextField
-            
+            label={InputProps.placeholder}
             InputProps={{
               classes: {
                 root: classes.inputRoot,

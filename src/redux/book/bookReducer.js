@@ -5,9 +5,11 @@ import baseBookReducer from './baseBookReducer'
 
 class BaseState {
     item = {list_items: []};
+    total = 0;
     receivedAt = null;
     progress = 0;
     isFetching = false;
+    isUpdating = false;
     isError = false;
     message = '';
     list_items =[];

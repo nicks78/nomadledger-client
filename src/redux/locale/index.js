@@ -74,7 +74,8 @@ const Locale = {
                 add_quote: "Créer un devis",
                 add_invoice: "Créer une facture",
                 add_payback: "Créer un avoir",
-                loading: "Chargement..."
+                loading: "Chargement...",
+                continue_edit: "En cours..."
             },
             page: {
                 contact: {
@@ -125,6 +126,7 @@ const Locale = {
                     label_expense: "Informations depense",
                     label_provider: "Informations prestataire",
                     label_assets: "Photo / Documents",  
+                    label_currency_fav: "Votre devise",
                     label_comp_info: "Compagnie information",
                     label_contact_info: "Contact information",
                     label_comp_address: "Compagnie adresse", 
@@ -158,6 +160,7 @@ const Locale = {
                     addresses_city: "Ville", 
                     addresses_country: "Pays", 
                     num_format: "Format des chiffres",
+                    receipt_date: "Date du reçu",
 
                     contact_group: "Groupe",
                     contact_drop: "Client",
@@ -342,7 +345,8 @@ const Locale = {
                 add_quote: "Create quote",
                 add_invoice: "Create invoice",
                 add_payback: "Create payback",
-                loading: "Loading..."
+                loading: "Loading...",
+                continue_edit: "Continue editing..."
             },
             page: {
                 contact: {
@@ -395,6 +399,7 @@ const Locale = {
                     label_comp_info: "Compagnie information",
                     label_contact_info: "Contact information",
                     label_comp_address: "Compagnie adresse", 
+                    label_currency_fav: "Favorite currency",
                     label_other: "Others",
                     label_tax: "Tax year",
                     label_start_tax: "Start",
@@ -439,6 +444,7 @@ const Locale = {
                     stock: "In stock",
                     notes: "Sales informations",
                     receipt: "Receipt",
+                    receipt_date: "Receipt date",
 
                     add_category: "Add category",
                     add_group: "Add a group",

@@ -39,7 +39,7 @@ function receiveDocuments( actionType, items ) {
     return {
         type: `RECEIVE`,
         subtype: actionType,
-        updated: false,
+        isUpdating: false,
         receivedAt: Date.now(),
         isFetching: false,
         isError: false,
@@ -73,7 +73,7 @@ export function createDocument (actionType) {
             return response.data
         }) 
         .then( res => {
-            dispatch( setCreatedUpdatedItem(actionType, res.item) )
+            dispatch(resetState(actionType));
             history.push(`/bookkeeping/${ actionType.toLowerCase() }`)
         })
         .catch(function (error) {
@@ -93,11 +93,11 @@ export function updateDocument (actionType) {
 
         let data = getState().book[actionType.toLowerCase()].item;
 
-        dispatch(requestData(actionType));
+        dispatch(requestUpdate(actionType));
         // Set withCredentials
         axios.defaults.withCredentials = true;
 
-        axios.post(`${API_ENDPOINT}bookkeeping/${actionType.toLowerCase()}/update`,
+        axios.put(`${API_ENDPOINT}bookkeeping/${actionType.toLowerCase()}/update`,
             { 
                 data,
                 mode: 'cors'
@@ -110,7 +110,7 @@ export function updateDocument (actionType) {
             return response.data
         }) 
         .then( res => {
-            dispatch( setCreatedUpdatedItem(actionType, res.item) )
+            dispatch( setDocument(actionType, res.item) )
         })
         .catch(function (error) {
           // handle error
@@ -146,7 +146,7 @@ export function updateField (actionType, data, id) {
             return response.data
         }) 
         .then( res => {
-            dispatch( setCreatedUpdatedItem(actionType, res.item) )
+            dispatch( setDocument(actionType, res.item) )
         })
         .catch(function (error) {
             console.log(error)
@@ -157,25 +157,21 @@ export function updateField (actionType, data, id) {
     }
 }
 
-// Set created/updated item
-function setCreatedUpdatedItem( actionType, item ) {
-    return {
-        type: `CREATED`,
-        subtype: actionType,
-        isFetching: false,
-        updated: true,
-        isError: false,
-        payload: item
-    }
-}
-
-
 export function requestData( actionType ) {
     return {
         type: `REQUEST`,
         subtype: actionType,
-        updated: false,
+        isUpdating: false,
         isFetching: true,
+        isError: false
+    }
+}
+
+export function requestUpdate( actionType ) {
+    return {
+        type: `UPDATING`,
+        subtype: actionType,
+        isUpdating: true,
         isError: false
     }
 }
@@ -185,7 +181,7 @@ export function requestFailed( actionType, message ) {
     return {
         type: `FAILED`,
         subtype: actionType,
-        updated: false,
+        isUpdating: false,
         isFetching: false,
         isError: true,
         receivedAt: null,
@@ -246,5 +242,43 @@ export function resetState ( actionType ){
     return {
       type: `RESET_STATE`,
       subtype: actionType,
+    }
+}
+
+
+/**
+ * // GET SINGLE DOCUMENT
+ * @param  actionType 
+ * @param  id 
+ */
+export function getBookTotal( actionType, endPoint ){
+
+    return dispatch => {
+
+        dispatch(requestData(actionType))
+
+        axios.get(`${API_ENDPOINT}bookkeeping/${actionType.toLowerCase()}/${endPoint}`, {
+          method: 'GET',
+          mode: 'cors'
+        })
+        .then(function (response) { 
+            return response.data
+        }) 
+        .then( res => {
+            dispatch(setTotal(actionType, res.total ))  
+        })
+        .catch(function (error) {
+          // handle error
+          var message = error.response ? error.response.data.message : 'error_500'
+          dispatch(requestFailed(actionType, message));
+        })             
+    }
+}
+
+export function setTotal ( actionType, total ){
+    return {
+      type: `SET_TOTAL`,
+      subtype: actionType,
+      total
     }
 }

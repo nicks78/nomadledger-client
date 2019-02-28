@@ -119,6 +119,7 @@ class Items extends Component {
 const styles = theme => ({
     table: {
         minWidth: 700,
+        boderRadius: 4,
         border: '1px solid rgb(238,238,238)',
         
     },

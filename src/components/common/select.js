@@ -7,7 +7,8 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = theme => ({
     textField: {
         width: '100%',
-        marginTop: '0px',
+        marginTop: '7px',
+        marginBottom: '3px',
         '& svg': {
             color: theme.palette.secondary.main
         }
@@ -40,7 +41,6 @@ const Select = (props) => {
     }
 
     return (
-      <div >
           <TextField
             id={field}
             select
@@ -57,7 +57,7 @@ const Select = (props) => {
               }}
             helperText={props.locale.form.helperText[helperText]}
             margin="dense"
-            variant={variant || 'standard'}
+            variant={variant || "filled"}
             >
             {
                 arrayField.map((option, index) => (
@@ -69,7 +69,6 @@ const Select = (props) => {
             ))
             }
             </TextField>
-      </div>
     )
 }
 

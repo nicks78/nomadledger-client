@@ -13,20 +13,24 @@ import {currency} from '../../utils/static_data'
 
 class ShowService extends Component {
 
+    state = {
+      reducer: "SERVICE"
+    }
+
     componentDidMount(){
       var id = this.props.match.params.id;
-      this.props.getItem("SERVICE", id)
+      this.props.getItem(this.state.reducer, id)
     }
 
     componentWillUnmount(){
-      this.props.resetState("SERVICE")
+      this.props.resetState(this.state.reducer)
     }
 
 
 
     render() {
       const {classes, service, isFetching, locale, isError, message, category, isUpdating} = this.props
-
+      const {reducer} = this.state
 
       if( isFetching ){
         return <Spinner/>
@@ -47,51 +51,68 @@ class ShowService extends Component {
               <Grid item xs={12} md={6}>
                   <TextField 
                     id="name"
+                    variant="filled" 
                     type="text"
+                    margin="dense"
                     label={locale.form.field.name}
                     value={service.name}
                     fullWidth
-                    onChange={ (e) => { this.props.createState("SERVICE", "name", e.target.value) } }
+                    onChange={ (e) => { this.props.createState(reducer, "name", e.target.value) } }
                   />
                   <br />
                   <TextField 
                     id="price"
+                    variant="filled" 
                     type="number"
+                    margin="dense"
                     fullWidth
                     label={locale.form.field.price}
                     value={service.price}
-                    onChange={ (e) => { this.props.createState("SERVICE", "price", e.target.value) } }
+                    onChange={ (e) => { this.props.createState(reducer, "price", e.target.value) } }
                   />
               </Grid>
 
               <Grid item xs={12} md={6}>
                 <EditSelect 
                     showEdit={true}
+                    variant="filled" 
                     arrayField={category}
                     field="category"
                     value={service.category[localStorage.getItem('locale')]}
-                    handleAction={ (e) => { this.props.createState("SERVICE", "category", e.target.value) } }
+                    handleAction={ (e) => { this.props.createState(reducer, "category", e.target.value) } }
                     locale={locale}
                   />
                   <EditSelect 
                     showEdit={true}
+                    variant="filled" 
                     arrayField={currency}
                     field="currency"
                     value={service.currency[localStorage.getItem('locale')]}
-                    handleAction={ (e) => { this.props.createState("SERVICE", "currency", e.target.value) } }
+                    handleAction={ (e) => { this.props.createState(reducer, "currency", e.target.value) } }
                     locale={locale}
                   />
 
               </Grid>
             </Grid>
+
+            <TextField variant="filled"
+                      label={locale.form.field.description } 
+                      fullWidth
+                      multiline
+                      rows={6}
+                      className={classes.margin} 
+                      margin="normal"
+                      value={ service.description } 
+                      onChange={ (e) => {this.props.createState(reducer, "description",  e.target.value)} }
+            />
            
             <br />
             <Button 
                 variant="contained" 
                 color="secondary" 
-                disable={isUpdating ? true : false }
+                disabled={ isUpdating }
                 className={ classes.btnSave } 
-                onClick={ () => { this.props.updateItem("SERVICE", `update`)} }>
+                onClick={ () => { this.props.updateItem(reducer, `update`)} }>
                 { !isUpdating ?  locale.button.update : locale.button.loading }</Button>
         </ApxPaper>
       )

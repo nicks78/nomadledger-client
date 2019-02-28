@@ -32,6 +32,7 @@ const EditInput = (props) => {
                     className={classes.textField}
                     value={value}
                     name={field}
+                    variant="filled"
                     onChange={ handleAction  }
                     margin="dense"
                 />

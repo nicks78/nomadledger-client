@@ -48,7 +48,7 @@ const AddContact = (props) => {
             addBtnTitle={ locale.button.add_contact } 
             headerText={ locale.form.title.add_contact }
             limitUploadFile={1}
-            isCreating={ props.isCreating }
+            isUploading={ props.isUploading }
             progress={ props.progress }
             reducer="CONTACT"
             createItem={ props.createContact }

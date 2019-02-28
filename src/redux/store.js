@@ -18,7 +18,7 @@ const logger = (store) => (next) => (action) => {
 const store = createStore(reducers,
     compose(
     applyMiddleware(logger, thunk),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 ));
 
 // Check if user is loggedIn

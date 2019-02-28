@@ -1,9 +1,31 @@
+//src/lib/dayPicker.js
+
 import React from 'react';
-import { withStyles, Grid, Typography } from '@material-ui/core';
-import {date} from '../../utils/static_data'
+import { withStyles } from '@material-ui/core';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
-import DateRangeIcon from '@material-ui/icons/DateRangeOutlined'
+import DateRangeIcon from '@material-ui/icons/DateRange'
+
+
+const date = { 
+    fr: {
+        month : ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+        week_long: ['Dimanche','Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+        week_short: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+        placeholder: 'JJ/MM/AAAA'
+    },
+    en: {
+        month : ["January", "February","March","April","May","June", "July","August","September", "October","November", "December"],
+        week_long: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        week_short: ["Sun", "Mon","Tue","Wed","Thu","Fri","Sat"],
+        placeholder: 'DD/MM/YYYY'
+    }
+
+}
+
+
+
+
  
 /**
  * @param value 
@@ -52,7 +74,7 @@ class DatePickers extends React.Component {
 
    
     render() {
-    const { classes, value, label } = this.props
+    const { classes } = this.props
     const { selectedDay} = this.state
     var locale = localStorage.getItem('locale');
 
@@ -63,30 +85,17 @@ class DatePickers extends React.Component {
 
       return (
             <div className={classes.root}>
-
-                <Grid container spacing={24}>
-
-                    <Grid item xs={2}>
-                        <span className={ classes.span }><DateRangeIcon className={ classes.icon } onClick={this.handleShow} /></span>
-                    </Grid>
-
-                    <Grid item xs={10}>
-                        <Typography variant="subtitle2">{label} :
-                            <span style={{float: 'right', clear: 'both', color: 'rgba(0, 0, 0, 0.87)'}}>
-                            {value || date[locale].placeholder }</span>
-                        </Typography>
-                    </Grid>
-
-                </Grid>
-                    
+                <DateRangeIcon className={ classes.icon } onClick={this.handleShow} />
                 {   this.state.show ? 
                             <DayPicker 
+                                id={this.props.field}
                                 onDayClick={  this.handleDayChange }
                                 weekdaysLong={ date[locale].week_long}
                                 selectedDay={selectedDay}
                                 weekdaysShort={ date[locale].week_short}
                                 months={ date[locale].month}
                                 modifiers={modifiers}
+                                modifiersStyles={{ position: 'absolute' }}
                                 firstDayOfWeek={1}
                             />                         
                     : null 
@@ -97,7 +106,12 @@ class DatePickers extends React.Component {
 }
 
 const styles = theme => ({
+    root: {
+        // padding: 12,
+        
+    },
     icon: {
+        paddingTop: 20,
         cursor: 'pointer', 
         fontSize: '20px !important',
         color: theme.palette.secondary.main,
@@ -110,10 +124,9 @@ const styles = theme => ({
         }
     },
     textField: {
-        width: '100%'
+        // width: '100%'
     },
 })
 
-const ApxDatePicker =  withStyles(styles)(DatePickers)
 
-export default ApxDatePicker;
+export default  withStyles(styles)(DatePickers);

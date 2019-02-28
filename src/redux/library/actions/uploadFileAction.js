@@ -3,7 +3,7 @@
 
 import axios from 'axios';
 import { API_ENDPOINT } from '../../constant'
-import { requestCreation, requestFailed, progress  } from './'
+import { requestUpload, requestFailed, progress  } from './'
 
 
 // UPLOAD IMAGE/DOCS TO SERVER
@@ -28,7 +28,7 @@ export const uploadFileToServer = ( actionType, file, id, field, oldFile ) => {
         var url_path = actionType.toLowerCase() + '/upload?id=' +id+ '&field=' + field +'&oldfile='+ oldfile
 
         // // Set loading time
-        dispatch(requestCreation(actionType));
+        dispatch(requestUpload(actionType));
 
         const formData = new FormData();
 
@@ -50,11 +50,7 @@ export const uploadFileToServer = ( actionType, file, id, field, oldFile ) => {
             return response.data
         }) 
         .then( res => {
-              if(res.success){
-                dispatch(setUploaded( actionType, res.payload ))  
-              }else{
-                dispatch(requestFailed(actionType))
-              }
+            dispatch(setUploaded( actionType, res.payload ))  
         })
         .catch(function (error) {
             // handle error
@@ -68,7 +64,7 @@ function setUploaded(actionType, item){
     return {
         type: `UPLOAD`,
         subtype: actionType,
-        isCreating: false,
+        isUploading: false,
         item: item
     }
 }

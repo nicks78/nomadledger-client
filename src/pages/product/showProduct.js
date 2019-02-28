@@ -2,6 +2,7 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
+import {DEFAULT_IMG} from '../../redux/constant'
 import { convertToNumber, cvtNumToUserPref, cvtToLocale } from '../../utils/help_function'
 import { getItem, resetState, updateItem, createState, removeImageFromArray } from '../../redux/library/actions'
 import { withStyles, Typography, Grid, TextField} from '@material-ui/core';
@@ -16,18 +17,24 @@ import EditSelect from '../../lib/editSelect';
 
 class ShowProduct extends React.Component {
 
+    state = {
+      reducer: "PRODUCT"
+    }
+
   componentDidMount(){
       var id = this.props.match.params.id;
-      this.props.getItem("PRODUCT", id)
+      this.props.getItem(this.props.reducer, id)
   }
 
   componentWillUnmount(){
-    this.props.resetState("PRODUCT")
+    this.props.resetState(this.props.reducer)
   }
 
   render() {
 
-    const {classes, product, isFetching, locale, isError, message, categories, isUpdating} = this.props
+    const {classes, product, isFetching, locale, isError, message, categories, isUpdating} = this.props;
+    const {reducer} = this.state;
+    
     if( isFetching ){
       return <Spinner/>
     }
@@ -44,14 +51,14 @@ class ShowProduct extends React.Component {
             <Grid container spacing={24}>
                 <Grid item xs={12} sm={7} md={7}>
                       <div className={classes.mainImgWrap}>
-                        <img src={ `${product.img[0] ? product.img[0].full_path : 'http://localhost:8080/img/default_logo.png'}`} className={classes.img} width="auto" alt={product.name} />
+                        <img src={ `${product.img[0] ? product.img[0].full_path : DEFAULT_IMG }`} className={classes.img} width="auto" alt={product.name} />
                       </div>
 
                     <div className={classes.thumbnailWrap} >
                     {
                       product.img.map((x, index) => {
                           return <div key={index} className={ classes.thumbnail }>
-                                    <CloseIcon  onClick={() => { this.props.removeImageFromArray("PRODUCT", `remove${x.path}/${x._id}/${product._id}`) }}/>
+                                    <CloseIcon  onClick={() => { this.props.removeImageFromArray(reducer, `remove${x.path}/${x._id}/${product._id}`) }}/>
                                     <img src={x.full_path} className={classes.img} width="100" alt={x.org_name} />
                                 </div>
                       })
@@ -59,18 +66,18 @@ class ShowProduct extends React.Component {
                     </div>
                 </Grid>
                 <Grid item  xs={12} sm={5} md={5}>
-                <TextField variant="outlined" 
+                <TextField variant="filled"
                                 label={locale.form.field.name} 
                                 fullWidth
                                 className={classes.margin} 
                                 margin="dense" 
                                 value={ product.name} 
-                                onChange={ (e) => {this.props.createState("PRODUCT", "name",  e.target.value)} }/>
+                                onChange={ (e) => {this.props.createState(reducer, "name",  e.target.value)} }/>
                 <div className={classes.margin} >
                     <EditSelect  
                         arrayField={categories || []}
                         field="category"
-                        handleAction={ (e) => {this.props.createState("PRODUCT", "category",  e.target.value)} }
+                        handleAction={ (e) => {this.props.createState(reducer, "category",  e.target.value)} }
                         locale={locale}
                         showEdit={true}
                         variant="outlined"
@@ -82,7 +89,7 @@ class ShowProduct extends React.Component {
                       <EditSelect  
                         arrayField={currency || []}
                         field="currency"
-                        handleAction={ (e) => {this.props.createState("PRODUCT", "currency",  e.target.value)} }
+                        handleAction={ (e) => {this.props.createState(reducer, "currency",  e.target.value)} }
                         locale={locale}
                         showEdit={true}
                         variant="outlined"
@@ -92,43 +99,43 @@ class ShowProduct extends React.Component {
                     </div>
                     
 
-                    <TextField  variant="outlined" 
+                    <TextField  variant="filled"
                                 label={locale.form.field.buying_price +' ('+ product.currency.value +')' } 
                                 fullWidth
                                 className={classes.margin} margin="dense" 
                                 value={ cvtToLocale(product.buying_price) } 
-                                onChange={ (e) => {this.props.createState("PRODUCT", "buying_price",  e.target.value)} }
+                                onChange={ (e) => {this.props.createState(reducer, "buying_price",  e.target.value)} }
                                 />   
-                    <TextField variant="outlined" 
+                    <TextField variant="filled"
                                 label={locale.form.field.selling_price +' ('+ product.currency.value +')' } 
                                 fullWidth
                                 className={classes.margin} 
                                 margin="dense" 
                                 value={ cvtToLocale(product.price)} 
-                                onChange={ (e) => {this.props.createState("PRODUCT", "price",  e.target.value)} }
+                                onChange={ (e) => {this.props.createState(reducer, "price",  e.target.value)} }
                                 />
-                    <TextField variant="outlined" 
+                    <TextField variant="filled"
                                 label={locale.form.field.marg +' ('+ product.currency.value +')' } 
                                 fullWidth
                                 className={classes.margin} 
                                 margin="dense" 
                                 disabled
                                 value={ cvtNumToUserPref(convertToNumber(product.price) - convertToNumber(product.buying_price)) } 
-                                onChange={ (e) => {this.props.createState("PRODUCT", "marg",  e.target.value)} }
+                                onChange={ (e) => {this.props.createState(reducer, "marg",  e.target.value)} }
                       />
-                    <TextField  variant="outlined" 
+                    <TextField  variant="filled"
                                 label={locale.form.field.stock } 
                                 fullWidth
                                 type="number"
                                 className={classes.margin} 
                                 margin="dense" 
                                 value={ product.stock } 
-                                onChange={ (e) => {this.props.createState("PRODUCT", "stock",  e.target.value)} }
+                                onChange={ (e) => {this.props.createState(reducer, "stock",  e.target.value)} }
                                 />   
                 </Grid>
             </Grid>
 
-            <TextField variant="outlined" 
+            <TextField variant="filled"
                       label={locale.form.field.description } 
                       fullWidth
                       multiline
@@ -136,7 +143,7 @@ class ShowProduct extends React.Component {
                       className={classes.margin} 
                       margin="normal"
                       value={ product.description } 
-                      onChange={ (e) => {this.props.createState("PRODUCT", "description",  e.target.value)} }
+                      onChange={ (e) => {this.props.createState(reducer, "description",  e.target.value)} }
             />
           <div className={classes.btnWrap}>
             <ApxButton 
@@ -144,7 +151,7 @@ class ShowProduct extends React.Component {
               variant="contained"
               disabled={ isUpdating }
               title={ isUpdating ? locale.button.loading :  locale.button.update}
-              action={ () => { this.props.updateItem("PRODUCT", `update`) } }
+              action={ () => { this.props.updateItem(reducer, `update`) } }
             />
           </div>
             
@@ -166,6 +173,7 @@ const styles = theme => ({
     maxWidth: '100%',
     height: '100%',
     maxHeight: '400px',
+    minHeight: '350px',
     display:'block',
     margin:'auto'
   },

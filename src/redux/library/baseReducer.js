@@ -11,6 +11,7 @@ class BaseState {
     progress = 0;
     isCreating = false;
     isFetching = false;
+    isUploading = false;
     isError = false;
     message = '';
     total = 0;
@@ -34,6 +35,12 @@ const baseReducer = (state = new BaseState(), action) => {
             return  { 
                 ...state,
                 isCreating: action.isCreating,
+                isError: action.isError
+            }
+        case `REQUEST_UPLOAD`:
+            return  { 
+                ...state,
+                isUploading: action.isUploading,
                 isError: action.isError
             }
         case `REQUEST_UPDATE`:
@@ -98,6 +105,7 @@ const baseReducer = (state = new BaseState(), action) => {
             return {
                 ...state,
                 progress: action.value,
+                isUploading: action.isUploading
             }
 
         case `RESET`: 
@@ -107,7 +115,7 @@ const baseReducer = (state = new BaseState(), action) => {
             return {
                 ...state,
                 item: action.item,
-                isCreating: action.isCreating,
+                isUploading: action.isUploading,
                 progress: 0,
             }
         case `TOTAL`:

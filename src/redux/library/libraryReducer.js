@@ -11,6 +11,7 @@ class BaseState {
     receivedAt = null;
     isCreating = false;
     isFetching = false;
+    isUploading = false;
     isError = false;
     list = [];
     total = 0;

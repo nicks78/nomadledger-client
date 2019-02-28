@@ -3,19 +3,17 @@
 import React  from 'react'
 import TextField from '@material-ui/core/TextField';
 import ApxSelect from './select'
-import Grid from '@material-ui/core/Grid';
-import { withStyles } from '@material-ui/core/styles';
+import {Grid, InputAdornment, withStyles} from '@material-ui/core';
+import DatePickers from '../../lib/dayPicker'
 
 
 const styles = theme => ({
     root: {
         flex: 1,
-        marginBottom: theme.margin.unit
+        // marginBottom: theme.margin.unit
     },
     textField: {
         width: '100%',
-        marginTop: '0px',
-        // float: 'left',
     },
 })
 
@@ -50,8 +48,32 @@ const Form = (props) => {
                                         className={ classes.textField}
                                         value={objData[cp.name] || ''}
                                         onChange={ formHandler }
+                                        variant="filled"
                                         margin="dense"
                                         />
+                                </Grid>
+                    }else if(cp.type === 'date'){
+                        return  <Grid item xs={12} key={index}>
+                                    <TextField
+                                        label={locale.form.field[cp.name]}
+                                        id={cp.name}
+                                        disabled
+                                        style={{width: '100%'}}
+                                        value={  objData[cp.name] ? objData[cp.name].label : ''}
+                                        className={classes.test}
+                                        variant="filled"
+                                        margin="dense"
+                                        InputProps={{
+                                            startAdornment: <InputAdornment position="start">
+                                                <DatePickers 
+                                                        handleDate={ formHandler }
+                                                        field={cp.name}
+                                                    /> 
+                                            </InputAdornment>,
+                                        }}
+                                    />
+
+
                                 </Grid>
                     }else{
                         return <Grid item xs={xs} sm={md} key={index}>
@@ -64,6 +86,7 @@ const Form = (props) => {
                                         className={ classes.textField}
                                         value={objData[cp.name] || ''}
                                         onChange={ formHandler }
+                                        variant="filled"
                                         margin="dense"
                                     /></Grid>
                     }

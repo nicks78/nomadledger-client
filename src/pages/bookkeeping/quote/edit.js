@@ -37,7 +37,7 @@ class EditQuote extends React.Component {
 
     render(){
 
-    const { isFetching, locale, classes, quote, listItems, vat, message, isError } = this.props;
+    const { isFetching, locale, classes, quote, listItems, vat, message, isError, isUpdating } = this.props;
 
     if(isFetching || quote === null ){
         return <Spinner />
@@ -58,6 +58,7 @@ class EditQuote extends React.Component {
                     getListItem={this.props.getListItem}
                     createState={this.props.createState}
                     reducer="QUOTE"
+                    isUpdating={isUpdating}
                     btnLabel={locale.button.update}
                     date_1="created_at"
                     date_2="expired_at"
@@ -78,6 +79,7 @@ const styles = theme => ({
 const mapStateToProps = (state) => {
     return {
         isFetching: state.book.quote.isFetching,
+        isUpdating: state.book.quote.isUpdating,
         isError: state.book.quote.isError,
         locale: state.locale.locale,
         message: state.book.quote.message,

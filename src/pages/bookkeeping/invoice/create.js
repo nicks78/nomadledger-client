@@ -2,8 +2,8 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
-import { createState, createDocument} from '../../../redux/book/actions'
-import { convertToCurrency, getListItem} from '../../../redux/book/itemActions'
+import { createState, createDocument, resetState} from '../../../redux/book/actions'
+import { convertToCurrency, getListItem } from '../../../redux/book/itemActions'
 import { withStyles } from '@material-ui/core';
 import ApxAlert from '../../../components/common/alert'
 import Spinner from '../../../components/common/spinner'
@@ -12,6 +12,14 @@ import Form from '../common/form'
 
 class CreateInvoice extends React.Component {
 
+    state = {
+        reducer: "INVOICE"
+    }
+
+    // componentWillUnmount(){
+    //     this.props.resetState(this.state.reducer);
+    // }
+
     handleDropDown = (event) => {
         var name = event.target.name;
         var value = event.target.value;
@@ -19,15 +27,16 @@ class CreateInvoice extends React.Component {
         if(name === "currency") {
             // Update each items with the correct currency rate
             for (let i = 0; i < this.props.listItems.length; i++) {
-                this.props.convertToCurrency("INVOICE", value, this.props.listItems[i])
+                this.props.convertToCurrency(this.state.reducer, value, this.props.listItems[i])
             }
         }
-        this.props.createState( "INVOICE", name, value)
+        this.props.createState( this.state.reducer, name, value)
     }
 
     render(){
 
     const { isFetching, locale, classes, newInvoice, listItems, vat, message, isError } = this.props;
+    const {reducer} = this.state;
 
     if(isFetching){
         return <Spinner/>
@@ -47,7 +56,7 @@ class CreateInvoice extends React.Component {
                     handleDropDown={ this.handleDropDown }
                     getListItem={this.props.getListItem}
                     createState={this.props.createState}
-                    reducer="INVOICE"
+                    reducer={reducer}
                     btnLabel={locale.button.save}
                     date_1="created_at"
                     date_2="due_at"
@@ -79,4 +88,4 @@ const mapStateToProps = (state) => {
 
 const StyledCreateInvoice = withStyles(styles)(CreateInvoice)
 
-export default connect(mapStateToProps, { createState, getListItem, convertToCurrency, createDocument })(StyledCreateInvoice);
+export default connect(mapStateToProps, { createState, getListItem, convertToCurrency, createDocument, resetState })(StyledCreateInvoice);

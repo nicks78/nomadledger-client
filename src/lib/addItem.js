@@ -105,11 +105,10 @@ class Add extends Component {
     _handleCreateItem = ()  => {
         this.props.createItem(this.props.reducer, this.props.newData)
     }
-    
 
     render() {
 
-        const { locale, newData, classes, formFields, addBtnTitle, headerText, limitUploadFile, isCreating, progress } = this.props
+        const { locale, newData, classes, formFields, addBtnTitle, headerText, limitUploadFile, isUploading, progress } = this.props
     
         const formDrawer = (
                 <div className={ classes.formWindow}>
@@ -143,7 +142,7 @@ class Add extends Component {
             <ApxRightDrawer toggleDrawer={ this.toggleDrawer } side="right" open={ this.state.right} title={ headerText }>
             
                     { 
-                        isCreating ? 
+                        isUploading ? 
                         <div className={ classes.loading }>
                             <Spinner /><br />
                             <p>{progress} %</p>

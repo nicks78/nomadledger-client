@@ -1,6 +1,6 @@
 //manager/src/pages/product/productCard.js
 import React from 'react'
-import {API_ENDPOINT} from '../../redux/constant'
+import {DEFAULT_IMG} from '../../redux/constant'
 import {Link} from 'react-router-dom'
 import { withStyles, CardHeader, Card, IconButton, CardMedia, Avatar, } from "@material-ui/core";
 import VisibilityIcon from '@material-ui/icons/VisibilityOutlined'
@@ -14,8 +14,6 @@ const styles = theme =>  ({
         cursor: 'pointer'
     },
     media: {
-        // height: 0,
-        // paddingTop: '46.25%', // 16:9
         height: 140,
       },
     sidebar: {
@@ -53,8 +51,8 @@ const ProductCard = (props) => {
             />
             <CardMedia
                 className={classes.media}
-                image={`${API_ENDPOINT}image/view${ product.img[0] ? product.img[0].path : '/default/default_logo.png' }`}
-                title="Paella dish"
+                image={`${ product.img[0] ? product.img[0].full_path : DEFAULT_IMG}`}
+                title={product.img[0] ? product.img[0].org_name : "default"}
                 />
         </Card>
     )

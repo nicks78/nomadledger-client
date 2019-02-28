@@ -92,7 +92,7 @@ class Quote extends Component {
       <div className={classes.root}>
             <Hidden only={['xs', 'sm']}>
                 <Button component={Link} to="/bookkeeping/quote/create" variant="contained" color="secondary"  className={  classes.button }>
-                { newQuote.contact_id ? "Continue editing..." : locale.button.add_quote}
+                { newQuote.contact_id ? locale.button.continue_edit : locale.button.add_quote}
                 
                 </Button>
             </Hidden>
@@ -143,17 +143,17 @@ class Quote extends Component {
                                                 <TableCell>
 
                                                 {
-                                                    true ? 
+                                                    false ? 
                                                     <span style={{color: item.status.color }}>
 
                                                     { item.status[localStorage.getItem('locale')] }</span>
 
                                                     :   <ApxSelect 
-                                                            arrayField={status}
+                                                            arrayField={status[reducer]}
                                                             field="status"
                                                             value={item.status[localStorage.getItem('locale')]}
                                                             
-                                                            handleAction={ (event) => { this.props.updateField("QUOTE", { status: event.target.value}, item._id) } }
+                                                            handleAction={ (event) => { this.props.updateField(reducer, { status: event.target.value}, item._id) } }
                                                             locale={locale}
                                                         />
                                                 }    

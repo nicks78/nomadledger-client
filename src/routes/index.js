@@ -20,7 +20,7 @@ import ShowProduct from '../pages/product/showProduct'
 import Service from '../pages/service'
 import ShowService from '../pages/service/showService'
 import Expense from '../pages/expense'
-import ShowExpense from '../pages/expense'
+import ShowExpense from '../pages/expense/showExpense'
 import Task from '../pages/task'
 
 

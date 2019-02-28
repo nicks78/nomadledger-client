@@ -65,6 +65,7 @@ const theme = createMuiTheme({
       colro: '#080808'
     },
     subtitle1: {
+      fontWeight: 600,
       fontSize: '0.9rem'
     },
     subtitle2: {

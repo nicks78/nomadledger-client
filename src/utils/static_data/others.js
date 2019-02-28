@@ -1,18 +1,24 @@
 
-const status =  [
-    { en: 'Draft', fr: 'Brouillon', color: 'blue', code: '0' },
-    { en: 'Pending', fr: 'En attente',  color: 'orange', code: '1'  },
-    { en: 'Approved', fr: 'Approuvé',  color: 'green', code:  '2'},
-    { en: 'Rejected', fr: 'Rejeté',  color: 'red', code: '3'},
-]
-
-const statusInv =  [
-    { en: 'Draft', fr: 'Brouillon', color: 'blue', code: '0' },
-    { en: 'Pending', fr: 'En attente',  color: 'orange', code: '1'  },
-    { en: 'Paid', fr: 'Payée',  color: 'green', code: '4'},
-    { en: 'Dispute', fr: 'Litige',  color: 'red', code: '5'},
-]
-
+const status =  {
+    QUOTE: [
+        { en: 'Draft', fr: 'Brouillon', color: 'blue', code: '0' },
+        { en: 'Pending', fr: 'En attente',  color: 'orange', code: '1'  },
+        { en: 'Approved', fr: 'Approuvé',  color: 'green', code:  '2'},
+        { en: 'Rejected', fr: 'Rejeté',  color: 'red', code: '3'},
+    ],
+    INVOICE: [
+        { en: 'Draft', fr: 'Brouillon', color: 'blue', code: '0' },
+        { en: 'Pending', fr: 'En attente',  color: 'orange', code: '1'  },
+        { en: 'Paid', fr: 'Payée',  color: 'green', code: '4'},
+        { en: 'Dispute', fr: 'Litige',  color: 'red', code: '5'},
+    ],
+    PAYBACK: [
+        { en: 'Draft', fr: 'Brouillon', color: 'blue', code: '0' },
+        { en: 'Pending', fr: 'En attente',  color: 'orange', code: '1'  },
+        { en: 'Paid', fr: 'Payée',  color: 'green', code: '4'},
+        { en: 'Dispute', fr: 'Litige',  color: 'red', code: '5'},
+    ]
+}
 const filter = [
     { en: 'Draft', fr: 'Brouillon', color: 'blue', code: '0' },
     { en: 'Pending', fr: 'En attente',  color: 'orange', code: '1'  },
@@ -24,4 +30,4 @@ const filter = [
     
 ]
 
-export { status, statusInv, filter };
+export { status, filter };

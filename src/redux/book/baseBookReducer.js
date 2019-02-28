@@ -9,7 +9,8 @@ replaceObjectInArray } from '../../utils/help_function'
 
 const initialState = {
     item : {list_items: []},
-    updated: false,
+    total: 0,
+    isUpdating: false,
     receivedAt : null,
     progress : 0,
     isFetching : false,
@@ -27,7 +28,13 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 isFetching: action.isFetching,
                 isError: action.isError,
-                updated: action.updated
+                isUpdating: action.isUpdating
+            }
+        case `UPDATING`:
+            return  { 
+                ...state,
+                isError: action.isError,
+                isUpdating: action.isUpdating
             }
         case `FAILED`:
             return  { 
@@ -35,14 +42,14 @@ const authReducer = (state = initialState, action) => {
                 isFetching: action.isFetching,
                 isError: action.isError,
                 receivedAt: action.receivedAt,
-                updated: action.updated,
+                isUpdating: action.isUpdating,
                 message: action.message
             }
         case `RECEIVE`:
             return  { 
                 ...state, 
                 isFetching: action.isFetching,
-                updated: action.updated,
+                isUpdating: action.isUpdating,
                 list: action.payload,
                 receivedAt: action.receivedAt
             }
@@ -52,14 +59,6 @@ const authReducer = (state = initialState, action) => {
                 isFetching: action.isFetching,
                 isError: action.isError,
                 item: action.item,
-            }
-        case `CREATED`:
-            return  { 
-                ...state,
-                isFetching: action.isFetching,
-                updated: action.updated,
-                isError: action.isError,
-                list: replaceObjectInArray(state.list, action.payload)
             }
         case `STATE`:
             return {
@@ -101,14 +100,13 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 item: { ...state.item, list_items : removeFromArray( state.item.list_items, action.payload ) },
             }
-        case `RESET_STATE`:
+        case `SET_TOTAL`:
             return {
                 ...state,
-                item: initialState.item,
-                updated: initialState.updated,
-                isError : initialState.isError,
-                message : initialState.message,
+                total: action.total,
             }
+        case `RESET_STATE`:
+            return initialState
         default:
             return state;
     }

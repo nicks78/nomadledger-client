@@ -10,7 +10,7 @@ export function getAutocompleteList(query, field, model){
         // Set withCredentials
         axios.defaults.withCredentials = true;
         var stock = '';
-        if(model === 'contact'){
+        if(model === 'contact' || model === 'service'){
             stock = '&stock=0'
         }
         axios.get(`${API_ENDPOINT}bookkeeping/${model}/autocomplete?query=${query}&field=${field}${stock}`, {

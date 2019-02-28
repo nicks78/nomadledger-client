@@ -47,8 +47,7 @@ class ContactInfo extends Component {
 
     state = {
         value: 0,
-        showEdit: false,
-        contact: {}
+        showEdit: false
     }
 
     // Store change data reducer
@@ -70,7 +69,7 @@ class ContactInfo extends Component {
         this.setState({showEdit: false});
 
         // Save the data to database
-        this.props.updateItem("CONTACT", this.props.id)
+        this.props.updateItem("CONTACT", `update`)
     }   
 
     render() {
@@ -86,10 +85,10 @@ class ContactInfo extends Component {
                 
                 {   !isUpdating ?
                     <ApxButtonEdit 
-                    style={{top: '-5px', right: '-12px'}}
-                    updateDocument={this.updateDocument}
-                    openEdit={this.openEdit} 
-                    showEdit={showEdit}
+                        style={{top: '-5px', right: '-12px'}}
+                        updateDocument={this.updateDocument}
+                        openEdit={this.openEdit} 
+                        showEdit={showEdit}
                   />
                     : <CircularProgress className={ classes.circular }color="secondary" />
                 }
@@ -109,7 +108,7 @@ class ContactInfo extends Component {
                 />
             }
             <br />
-            <Typography variant="subtitle2">
+            <Typography variant="subtitle1">
                       {locale.form.title.label_contact_info}
             </Typography>
             <Divider className={ classes.divider }/>
@@ -164,7 +163,7 @@ class ContactInfo extends Component {
                 handleAction={this.handleFormEdit}
             />
             <br /><br />
-            <Typography variant="subtitle2">
+            <Typography variant="subtitle1">
                       {locale.form.title.label_comp_address}
             </Typography>
             <Divider className={ classes.divider }/>
@@ -201,7 +200,7 @@ class ContactInfo extends Component {
                 />
             
             <br /><br />
-            <Typography variant="subtitle2">
+            <Typography variant="subtitle1">
                       {locale.form.title.label_comp_info}
             </Typography>
             <Divider className={ classes.divider }/>
