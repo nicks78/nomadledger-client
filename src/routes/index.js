@@ -43,7 +43,7 @@ class Routes extends React.Component {
 
     render(){
      
-        const { isLoggedIn, locale, authUser } = this.props
+        const { isLoggedIn, locale, authUser, company } = this.props
 
         return (
             <Router basename="/" history={history}>
@@ -52,9 +52,9 @@ class Routes extends React.Component {
                         <Switch>
                         <Route exact path="/" component={Auth} />
                         <Route path="/login" component={Login} />
-                        
-                        { isLoggedIn && authUser !== null ? 
-                            <Layout _onChangeLocale={this.handleChangeLocale} user={authUser} logout={this.props.getLogout} locale={locale}>
+                        {
+                            isLoggedIn && authUser !== null  ? 
+                            <Layout company={company} _onChangeLocale={this.handleChangeLocale} user={authUser} logout={this.props.getLogout} locale={locale}>
                             <Switch>
                                 <PrivateRoute path="/home" component={ Home } auth={isLoggedIn}/>
                                 <PrivateRoute path="/account" component={Account}  auth={isLoggedIn}/>
@@ -78,8 +78,9 @@ class Routes extends React.Component {
                                 <PrivateRoute path="*" component={NotFound}  auth={isLoggedIn}/>
                             </Switch>
                             </Layout>
-                            : null
-                        } 
+                            : null 
+                        }
+                          
                         <Route path="*" component={NotFound} />
                     </Switch>
                 </React.Fragment>
@@ -89,11 +90,12 @@ class Routes extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    
     return {
         locale: state.locale.locale,
         isLoggedIn: state.auth.isLoggedIn,
-        authUser: state.account.user.item
+        isFetching: state.account.user.isFetching,
+        authUser: state.account.user.item,
+        company: state.account.company.item || {}
            
     }
 }

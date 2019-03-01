@@ -6,7 +6,6 @@ const initialState = {
     isFetching: false,
     isLoggedIn: false,
     isError: false,
-    user: null,
     message: '',
     state_user: {}
 }
@@ -40,7 +39,7 @@ const authReducer = (state = initialState, action) => {
                 isCreated: true,
                 state_user: initialState.state_user,
             }
-        case `GET_AUTH`:
+        case `USER_AUTH`:
             return  { 
                 ...state,
                 isFetching: false,

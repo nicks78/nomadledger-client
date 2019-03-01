@@ -25,29 +25,33 @@ const Styles = theme => ({
     root: {
         width: '100%',
         maxWidth: 360,
-        backgroundColor: 'rgb(250,250,250)',
+        backgroundColor: 'rgb(58, 58, 58)', //'rgb(250,250,250)',
         fontSize: '10%!important'
     },
     active: {
-        backgroundColor: 'rgba(0, 0, 0, 0.08)',
+        backgroundColor: theme.palette.secondary.main,
         '& span': {
-            color: theme.palette.secondary.main + '!important',
+            color: 'white', //theme.palette.secondary.main + '!important',
             fontWeight: 'bold'
         },
         '& svg': {
-            color: theme.palette.secondary.main + '!important'
-        }
+            color: 'white', //theme.palette.secondary.main + '!important'
+        },
+       
     },
     listText: {
        '& span': {
-           color: theme.palette.grey.main
+           color: 'white', //theme.palette.grey.main
        },
        '& svg': {
-        color: theme.palette.grey.main
+        color: 'white',//theme.palette.grey.main
+        },
+        '& :focus': {
+            backgroundColor: theme.palette.secondary.main,
         }
     },
     icon: {
-        color: theme.palette.grey.main
+        color: 'white', // theme.palette.grey.main
     },
     header: { 
         padding: '24px', 
@@ -57,7 +61,7 @@ const Styles = theme => ({
     },
     nested: {
         '& span': {
-           color: theme.palette.grey.dark
+           color: 'white',// theme.palette.grey.dark
        },
     },
 
@@ -84,15 +88,15 @@ class MainMenu extends React.Component {
                     <p style={{marginBottom: '0px', color: 'white', fontWeight: '600'}}>APX DEV</p>
                 </div>
             </Hidden>
-            <List component="nav" disablePadding>
-                <ListItem button component={NavLink}  to="/home" activeClassName={classes.active}>
+            <List component="nav" disablePadding className={classes.listText}>
+                <ListItem button component={NavLink} className={classes.listText} to="/home" activeClassName={classes.active}>
                     <ListItemIcon >
                         <HomeIcon />
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.home.name } />
                 </ListItem>
 
-                <ListItem button component={NavLink}  to="/contact" activeClassName={classes.active}>
+                <ListItem button component={NavLink} className={classes.listText}  to="/contact" activeClassName={classes.active}>
                     <ListItemIcon>
                         <GroupIcon  />
                     </ListItemIcon>
@@ -108,32 +112,32 @@ class MainMenu extends React.Component {
                 </ListItem>
                     <Collapse in={ this.state.open} timeout="auto" unmountOnExit>
                         <List >
-                            <ListItem button component={NavLink} className={ classes.nested } to="/bookkeeping/quote" activeClassName={classes.active}>
+                            <ListItem button component={NavLink} className={classes.listText}  to="/bookkeeping/quote" activeClassName={classes.active}>
                                 <ListItemText inset  primary={ locale.quote.name }/>
                             </ListItem>
-                            <ListItem button component={NavLink} className={ classes.nested } to="/bookkeeping/invoice" activeClassName={classes.active}>
+                            <ListItem button component={NavLink} className={classes.listText}  to="/bookkeeping/invoice" activeClassName={classes.active}>
                                 <ListItemText inset  primary={ locale.invoice.name }/>
                             </ListItem>
-                            <ListItem button component={NavLink} className={ classes.nested } to="/bookkeeping/payback" activeClassName={classes.active}>
+                            <ListItem button component={NavLink} className={classes.listText}  to="/bookkeeping/payback" activeClassName={classes.active}>
                                 <ListItemText inset  primary={ locale.payback.name }/>
                             </ListItem>
                         </List>
                     </Collapse>
              
-                <ListItem button component={NavLink}  to="/service" activeClassName={classes.active}>
+                <ListItem button component={NavLink} className={classes.listText}  to="/service" activeClassName={classes.active}>
                     <ListItemIcon>
                         <HeadsetMicIcon  />
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.service.name } />
                 </ListItem>
-                <ListItem button component={NavLink}  to="/product" activeClassName={classes.active}>
+                <ListItem button component={NavLink} className={classes.listText}  to="/product" activeClassName={classes.active}>
                     <ListItemIcon>
                         <StoreIcon  />
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.product.name } />
                 </ListItem>
                 
-                <ListItem button component={NavLink}  to="/expense" activeClassName={classes.active}>
+                <ListItem button component={NavLink} className={classes.listText}  to="/expense" activeClassName={classes.active}>
                     <ListItemIcon>
                         <ReceiptIcon  />
                     </ListItemIcon>
@@ -141,7 +145,7 @@ class MainMenu extends React.Component {
                 </ListItem>
 
                 
-                <ListItem button component={NavLink}  to="/task" activeClassName={classes.active}>
+                <ListItem button component={NavLink} className={classes.listText}  to="/task" activeClassName={classes.active}>
                     <ListItemIcon>
                         <ListAltIcon  />
                     </ListItemIcon>
@@ -149,8 +153,8 @@ class MainMenu extends React.Component {
                 </ListItem>
             </List>
             <Divider style={{borderColor: 'white'}}/>
-            <List component="nav">
-                <ListItem button component={NavLink}  to="/archive" activeClassName={classes.active}>
+            <List component="nav"> 
+                <ListItem button component={NavLink} className={classes.listText}  to="/archive" activeClassName={classes.active}>
                     <ListItemText primary={ locale.archive.name } />
                 </ListItem>
             </List>

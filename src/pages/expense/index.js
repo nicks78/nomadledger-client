@@ -70,17 +70,24 @@ class Expense extends Component {
     
     render() {
     
-    const {listExpenses, isFetching, isError,  locale, category, newExpense, createState, createItem, isCreating, classes, message } = this.props
+    const {listExpenses, isFetching, isError,  locale, category, newExpense, createState, createItem, isCreating, classes, message, currency } = this.props
     const { selected, rowCount, reducer } = this.state
 
     if(isFetching){
         return <Spinner />
     }
     
-
     return (
         <div className={ classes.container}>
-            <AddExpense locale={ locale } category={category} newData={newExpense} createExpenseState={ createState } createExpense={ createItem } isCreating={isCreating}/>
+            <AddExpense 
+                locale={ locale } 
+                category={category} 
+                newData={newExpense} 
+                createExpenseState={ createState } 
+                createExpense={ createItem } 
+                isCreating={isCreating}
+                currency={currency}
+            />
             { isError ?  <ApxAlert message={message} /> : null }
             <Paper className={classes.paper}>
                 <ApxTableToolBar
@@ -181,7 +188,8 @@ const mapStateToProps = (state) => {
         newExpense: state.library.expense.tmp_state,
         total: state.library.expense.total,
         expense: state.library.expense.item,
-        category: state.account.company.item ?  state.account.company.item.category_name : []
+        category: state.account.company.item ?  state.account.company.item.category_name : [],
+        currency: state.helper.items.currency
     }
 }
 

@@ -81,13 +81,14 @@ class Add extends Component {
     }
 
     handleFile (file) {
-        if(file.type === 'image/png' || file.type === 'image/jpeg' ){ // Check file format 
-            var imagesArray = this.props.newData.doc ?  this.props.newData.doc : [];
-            file.blob = URL.createObjectURL(file) 
-            imagesArray.push(file) 
-        }else{
-            alert(this.props.locale.message.error_file_not_allowed)
-        }
+        var imagesArray = this.props.newData.doc ?  this.props.newData.doc : [];
+        if(file)
+            if(file.type === 'image/png' || file.type === 'image/jpeg' ){ // Check file format 
+                file.blob = URL.createObjectURL(file) 
+                imagesArray.push(file) 
+            }else{
+                alert(this.props.locale.message.error_file_not_allowed)
+            }
         return imagesArray
     }
 
@@ -131,13 +132,13 @@ class Add extends Component {
                         }
                     </div>
                     </form>
-                    <Button variant="contained" color="secondary" className={ classes.btnSave } onClick={ this._handleCreateItem }>{ locale.button.save }</Button>
+                    <Button variant="contained" color="primary" className={ classes.btnSave } onClick={ this._handleCreateItem }>{ locale.button.save }</Button>
                 </div>
           );
         return (
             <div className={ classes.root}>
             <Hidden only={['xs', 'sm']}>
-                <Button variant="contained" color="secondary"  className={  classes.button } onClick={this.toggleDrawer('right', true)}>{ addBtnTitle }</Button>
+                <Button variant="contained" color="primary"  className={  classes.button } onClick={this.toggleDrawer('right', true)}>{ addBtnTitle }</Button>
             </Hidden>
             <ApxRightDrawer toggleDrawer={ this.toggleDrawer } side="right" open={ this.state.right} title={ headerText }>
             
@@ -146,7 +147,7 @@ class Add extends Component {
                         <div className={ classes.loading }>
                             <Spinner /><br />
                             <p>{progress} %</p>
-                            <LinearProgress color="secondary" variant="determinate" value={ progress  } />
+                            <LinearProgress color="primary" variant="determinate" value={ progress  } />
                         </div> 
                         : formDrawer 
                     }
@@ -156,7 +157,7 @@ class Add extends Component {
                     handleAction={this.toggleDrawer}
                     open={true}
                     variant="contained"
-                    color="secondary"
+                    color="primary"
                     side="right"
                 />
             </Hidden>

@@ -35,7 +35,7 @@ class CreateInvoice extends React.Component {
 
     render(){
 
-    const { isFetching, locale, classes, newInvoice, listItems, vat, message, isError } = this.props;
+    const { isFetching, locale, classes, newInvoice, listItems, vat, message, isError, currency, status } = this.props;
     const {reducer} = this.state;
 
     if(isFetching){
@@ -51,6 +51,8 @@ class CreateInvoice extends React.Component {
                     data={newInvoice}
                     vat={vat}
                     list={listItems}
+                    currency={currency}
+                    status={status}
                     locale={locale}
                     handleSubmit={this.props.createDocument}
                     handleDropDown={ this.handleDropDown }
@@ -83,6 +85,8 @@ const mapStateToProps = (state) => {
         message: state.book.invoice.message,
         listItems: state.book.invoice.item.list_items,
         vat: state.account.company.item ? state.account.company.item.vat : [],
+        status: state.helper.items.status_invoice,
+        currency: state.helper.items.currency
     }
 }
 

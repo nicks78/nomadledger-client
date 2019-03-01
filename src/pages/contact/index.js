@@ -107,13 +107,21 @@ class Contact extends Component {
 
     render() {
     
-    const {listContacts, isFetching, isError, locale, createItem, createState, newContact, isCreating, progress, message, classes, contactGroup, rowsPerPageOptions, total} = this.props
+    const {listContacts, isFetching, isError, locale, createItem, createState, newContact, isCreating, progress, message, classes, contactGroup, rowsPerPageOptions, total, country, phone_code} = this.props
     const { selected, reducer } = this.state
 
 
     return (
         <div className={classes.container}>
-            <AddContact progress={progress} contactGroup={contactGroup} locale={ locale } createContact={ createItem } createContactState={  createState } newData={newContact} isCreating={ isCreating  }/>
+            <AddContact progress={progress} 
+                        country={country}
+                        phone_code={phone_code}
+                        contactGroup={contactGroup} 
+                        locale={ locale } 
+                        createContact={ createItem } 
+                        createContactState={  createState } 
+                        newData={newContact} 
+                        isCreating={ isCreating  }/>
                 
                 { isError ?  <ApxAlert message={message} reducer={ this.state.reducer }/> : null }
                 <Paper className={classes.paper}>
@@ -197,7 +205,9 @@ const mapStateToProps = (state) => {
         message: state.library.contact.message,
         total: state.library.contact.total,
         rowsPerPageOptions: state.library.contact.rowsPerPageOptions,
-        contactGroup: state.account.company.item ?  state.account.company.item.contact_group : []
+        contactGroup: state.account.company.item ?  state.account.company.item.contact_group : [],
+        phone_code: state.helper.items.phone_code,
+        country: state.helper.items.country,
     }
 }
 

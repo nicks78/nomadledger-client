@@ -2,12 +2,10 @@
 
 import React from 'react'
 import AddItem from '../../lib/addItem'
-import {currency} from '../../utils/static_data'
-
 
 const AddProduct = (props) => {
 
-    const {locale, category} = props
+    const {locale, category, currency} = props
 
     const fields = [
       {
@@ -15,8 +13,8 @@ const AddProduct = (props) => {
         label: locale.form.title.label_product,
         fields: [
           { name: 'name', type:"text", required: true },
-          { name: 'buying_price', type:"number"},
-          { name: 'price', type:"number"},
+          { name: 'buying_price', type:"text"},
+          { name: 'price', type:"text"},
           { name: 'stock', type:"number"},
           { name: 'currency', type:"select", selections: currency, helperText: "select_currency" },
           { name: 'category', type:"select", selections: category, helperText: "select_category", required: true  },

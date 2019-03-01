@@ -149,7 +149,6 @@ export function updateField (actionType, data, id) {
             dispatch( setDocument(actionType, res.item) )
         })
         .catch(function (error) {
-            console.log(error)
           // handle error
           var message = error.response ? error.response.data.message : 'error_500'
           dispatch(requestFailed(actionType, message));

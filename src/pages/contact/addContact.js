@@ -2,12 +2,11 @@
 
 import React  from 'react'
 import AddItem from '../../lib/addItem'
-import {phone_code, country} from '../../utils/static_data'
 
 
 const AddContact = (props) => {    
 
-    const {locale, contactGroup} = props
+    const {locale, contactGroup, phone_code, country} = props
 
     const fields = [
       {

@@ -15,7 +15,7 @@ const ContactSection = (props) => {
         var infoContact = [ "firstname", "lastname", "email"];
 
         return (
-            <div>
+            <div style={{padding: 10,}}>
                 <AutoComplete 
                     field="company_name"
                     state="contact_id"
@@ -46,6 +46,7 @@ const ContactSection = (props) => {
                         value={contact.contact_id ? contact.contact_id.addresses_street +" "+ contact.contact_id.addresses_zip  + " " + contact.contact_id.addresses_city + " " + contact.contact_id.addresses_country[localStorage.getItem('locale')] : ''}
                         label={locale.form.field.addresses_street}
                     />
+                    <br />
             </div>
         )
 }

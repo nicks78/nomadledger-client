@@ -1,8 +1,8 @@
 //manager/src/lib/phone.js
 
 import React from 'react'
+import {connect} from 'react-redux'
 import { withStyles, Grid, TextField, MenuItem } from '@material-ui/core';
-import {phone_code} from '../utils/static_data'
 import ApxtextIndexValue from '../components/common/textIndexValue'
 
 const styles = theme => ({
@@ -23,7 +23,7 @@ const styles = theme => ({
  */
 const Phone = (props) => {
     
-    const { field, fieldCode, handleAction, showEdit, label, valueCode, value , classes, reducer }= props
+    const { field, fieldCode, handleAction, showEdit, label, valueCode, value , classes, reducer, phone_code }= props
 
     const selected = (event) => {
         
@@ -95,4 +95,13 @@ const Phone = (props) => {
     }
 }
 
-export default withStyles(styles)(Phone);
+const mapStateToProps = (state) => {
+
+    return {
+        phone_code: state.helper.items.phone_code || [],
+    }
+  }
+  
+const StyledPhone = withStyles(styles)(Phone)
+  
+export default connect(mapStateToProps)(StyledPhone);

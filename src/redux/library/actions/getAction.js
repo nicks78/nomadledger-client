@@ -1,7 +1,7 @@
 //src/redux/library/actions/getAction.js
 
 import axios from 'axios';
-import { API_ENDPOINT, apiCall } from '../../constant'
+import { API_ENDPOINT } from '../../constant'
 import { requestData, requestFailed  } from './'
 
 
@@ -12,7 +12,7 @@ export function getItem( actionType, id ){
 
     dispatch(requestData(actionType))
   
-    axios.get(`${API_ENDPOINT}${apiCall(actionType).endPoints.get_one}/${id}`, {
+    axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/single-row/${id}`, {
       method: 'GET',
       mode: 'cors',
     })
@@ -20,11 +20,7 @@ export function getItem( actionType, id ){
         return response.data
     }) 
     .then( res => {
-        if(res.success){
-          dispatch(setItem(actionType, res.payload ))  
-        }else{
-          dispatch(requestFailed(actionType))
-        }
+        dispatch(setItem(actionType, res.payload ))  
     })
     .catch(function (error) {
       // handle error

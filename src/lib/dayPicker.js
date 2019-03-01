@@ -111,7 +111,7 @@ const styles = theme => ({
         
     },
     icon: {
-        paddingTop: 20,
+        paddingTop: 5,
         cursor: 'pointer', 
         fontSize: '20px !important',
         color: theme.palette.secondary.main,

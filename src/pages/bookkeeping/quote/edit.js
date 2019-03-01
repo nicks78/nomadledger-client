@@ -37,7 +37,7 @@ class EditQuote extends React.Component {
 
     render(){
 
-    const { isFetching, locale, classes, quote, listItems, vat, message, isError, isUpdating } = this.props;
+    const { isFetching, locale, classes, quote, listItems, vat, message, isError, isUpdating, currency, status } = this.props;
 
     if(isFetching || quote === null ){
         return <Spinner />
@@ -53,6 +53,8 @@ class EditQuote extends React.Component {
                     vat={vat}
                     list={listItems}
                     locale={locale}
+                    currency={currency}
+                    status={status}
                     handleSubmit={this.props.updateDocument}
                     handleDropDown={ this.handleDropDown }
                     getListItem={this.props.getListItem}
@@ -86,6 +88,8 @@ const mapStateToProps = (state) => {
         quote: state.book.quote.item,
         listItems: state.book.quote.item ? state.book.quote.item.list_items : [],
         vat: state.account.company.item ? state.account.company.item.vat : [],
+        status: state.helper.items.status_quote,
+        currency: state.helper.items.currency
     }
 }
 

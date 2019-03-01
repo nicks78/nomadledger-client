@@ -5,13 +5,11 @@ import {connect} from 'react-redux'
 import {  updateDocument, uploadFileToServer } from '../../../redux/account/actions'
 import {API_ENDPOINT} from '../../../redux/constant'
 import { withStyles, TextField, InputAdornment } from '@material-ui/core'
-import {company_type} from '../../../utils/static_data'
 import ApxAlert from '../../../components/common/alert'
 import ApxButtonEdit from '../../../components/common/buttonEdit'
 import DatePickers from '../../../lib/dayPicker'
 import ApxtextIndexValue from '../../../components/common/textIndexValue'
 import UploadImg from '../../../lib/uploadImg'
-import {country, currency} from '../../../utils/static_data'
 import EditInput from '../../../lib/editInput'
 import EditSelect from '../../../lib/editSelect'
 import Typography from '@material-ui/core/Typography';
@@ -56,7 +54,7 @@ class Company extends Component {
   }
 
   render() {
-    const {company, progress, isUploading, locale, classes, isError, message} = this.props;
+    const {company, progress, isUploading, locale, classes, isError, message, company_type, country, currency} = this.props;
     const {showEdit, reducer} = this.state;
 
     const address = ["addresses_street", "addresses_zip", "addresses_city"]
@@ -254,7 +252,10 @@ const mapStateToProps = (state) => {
         isUploading: state.account.company.isUploading,
         locale: state.locale.locale,
         company: state.account.company.item, 
-        progress: state.account.company.progress
+        progress: state.account.company.progress,
+        company_type: state.helper.items.company_type,
+        country: state.helper.items.country,
+        currency: state.helper.items.currency,
     }
 }
 

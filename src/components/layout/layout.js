@@ -1,6 +1,6 @@
 import React  from 'react'
 import { withStyles } from '@material-ui/core/styles';
-import {API_ENDPOINT} from '../../redux/constant'
+import {DEFAULT_AVATAR, DEFAULT_IMG} from '../../redux/constant'
 import { Link } from "react-router-dom";
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -9,13 +9,12 @@ import AppBar from '@material-ui/core/AppBar';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Logo from '../../logo.png';
 import MainMenu from './menu'
 import ApxCopyright from '../common/copyright'
 import Avatar from '@material-ui/core/Avatar';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-
+// import Spinner from '../common/spinner'
 
 const drawerWidth = 240;
 
@@ -35,7 +34,7 @@ const styles = theme => ({
     drawerPaper: {
         position: 'relative',
         height: '100vh',
-        backgroundColor: 'rgb(250,250,250)',
+        backgroundColor: 'rgb(58,58,58)',
         width: drawerWidth,
         marginTop: '0px',
         [theme.breakpoints.up('md')]: {
@@ -71,7 +70,7 @@ const styles = theme => ({
     content: {
         flexGrow: 1,
         overflowY: 'auto',
-        backgroundColor: 'rgb(238,238,238)',// theme.palette.background.default,
+        backgroundColor: 'rgb(238,238,238)',
         padding: theme.spacing.unit * 3,
         [theme.breakpoints.down('sm')]: {
             margin: 0,
@@ -99,6 +98,11 @@ const styles = theme => ({
             color: theme.palette.secondary.dark,
             fontWeight: 600
         }
+    },
+    img: {
+        maxHeight:"50px",
+        maxWidth:"100px",
+        width:"auto"
     }
 })
 
@@ -123,7 +127,7 @@ class Layout extends React.Component {
 
     render() {
 
-    const { classes, locale, user } = this.props;
+    const { classes, locale, user, company } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
@@ -141,12 +145,12 @@ class Layout extends React.Component {
                 </IconButton>
                 <Hidden smDown>
                     <Typography >
-                        <img src={Logo} alt="logo" height="50" width="auto" /> 
+                        <img src={company.logo_company.full_path || DEFAULT_IMG } alt="logo" className={classes.img} /> 
                     </Typography>
                 </Hidden>
                 
                 <Typography className={classes.title}>
-                <Hidden smDown>BookKeeping Solutions</Hidden>
+                <Hidden smDown>{company.company_name.toUpperCase()}</Hidden>
                 </Typography>
 
                 <Typography>
@@ -154,7 +158,7 @@ class Layout extends React.Component {
                     component="span"
                     onClick={ this.handleMenu }
                     alt="Nicolas"
-                    src={`${API_ENDPOINT}image/view${ user.avatar.path||  '/default/default_avatar.png' }`}
+                    src={`${ user.avatar.full_path||  DEFAULT_AVATAR }`}
                     className={ classes.avatar }
                 />
                 <Menu

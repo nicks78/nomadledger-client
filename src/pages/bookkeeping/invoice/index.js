@@ -11,7 +11,6 @@ import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxAlert from '../../../components/common/alert'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
-import {filter} from '../../../utils/static_data'
 
 class Invoice extends Component {
 
@@ -73,7 +72,7 @@ class Invoice extends Component {
     
     render() {
     
-    const {listInvoice, isFetching, isError,  locale, classes, message, newInvoice} = this.props
+    const {listInvoice, isFetching, isError,  locale, classes, message, newInvoice, filter, status} = this.props
     const { selected, rowCount, reducer } = this.state
 
     if(isError){
@@ -84,7 +83,7 @@ class Invoice extends Component {
       <div className={classes.root}>
             <Hidden only={['xs', 'sm']}>
                 <Button component={Link} to="/bookkeeping/invoice/create" 
-                        variant="contained" color="secondary"  
+                        variant="contained" color="primary"  
                         className={  classes.button }>
                         { newInvoice.contact_id ? locale.button.continue_edit : locale.button.add_invoice}
                 </Button>
@@ -202,6 +201,8 @@ const mapStateToProps = (state) => {
         total: state.library.invoice.total,
         listInvoice: state.book.invoice.list,
         rowsPerPageOptions: state.library.invoice.rowsPerPageOptions,
+        filter: state.helper.items.filter,
+        status: state.helper.items.status_invoice,
     }
 }
 

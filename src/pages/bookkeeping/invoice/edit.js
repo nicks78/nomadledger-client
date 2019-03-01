@@ -37,7 +37,7 @@ class EditInvoice extends React.Component {
 
     render(){
 
-    const { isFetching, locale, classes, invoice, listItems, vat, message, isError } = this.props;
+    const { isFetching, locale, classes, invoice, listItems, vat, message, isError, currency, status } = this.props;
 
     if(isFetching || invoice === null ){
         return <Spinner />
@@ -53,6 +53,8 @@ class EditInvoice extends React.Component {
                     vat={vat}
                     list={listItems}
                     locale={locale}
+                    currency={currency}
+                    status={status}
                     handleSubmit={this.props.updateDocument}
                     handleDropDown={ this.handleDropDown }
                     getListItem={this.props.getListItem}
@@ -84,6 +86,8 @@ const mapStateToProps = (state) => {
         invoice: state.book.invoice.item,
         listItems: state.book.invoice.item ? state.book.invoice.item.list_items : [],
         vat: state.account.company.item ? state.account.company.item.vat : [],
+        status: state.helper.items.status_invoice,
+        currency: state.helper.items.currency
     }
 }
 

@@ -2,11 +2,10 @@
 
 import React from 'react'
 import AddItem from '../../lib/addItem'
-import {currency} from '../../utils/static_data'
 
 const AddExpense = (props) => {
 
-    const {locale, category} = props
+    const {locale, category, currency} = props
 
     const fields = [
       {
@@ -17,7 +16,7 @@ const AddExpense = (props) => {
             { name: 'name', type:"text", required: true },
             { name: 'category', type:"select", selections: category, helperText: "select_category", required: true },
             { name: 'currency', type:"select", selections: currency, helperText: "select_currency", required: true },
-            { name: 'price', type:"number", required: true},
+            { name: 'price', type:"text", required: true},
             
             { name: 'description', type:"longtext", multiline: true, rowsMax:"4" },
           ]

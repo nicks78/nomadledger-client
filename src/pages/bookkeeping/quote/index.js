@@ -12,8 +12,6 @@ import ApxAlert from '../../../components/common/alert'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
 import { cvtNumToUserPref } from '../../../utils/help_function'
-import {filter, status} from '../../../utils/static_data'
-
 
 
 class Quote extends Component {
@@ -81,7 +79,7 @@ class Quote extends Component {
     
     render() {
     
-    const {listQuote, isFetching, isError,  locale, classes, message, newQuote} = this.props
+    const {listQuote, isFetching, isError,  locale, classes, message, newQuote, filter, status} = this.props
     const { selected, rowCount, reducer } = this.state; 
 
     if(isError){
@@ -91,7 +89,7 @@ class Quote extends Component {
     return (
       <div className={classes.root}>
             <Hidden only={['xs', 'sm']}>
-                <Button component={Link} to="/bookkeeping/quote/create" variant="contained" color="secondary"  className={  classes.button }>
+                <Button component={Link} to="/bookkeeping/quote/create" variant="contained" color="primary"  className={  classes.button }>
                 { newQuote.contact_id ? locale.button.continue_edit : locale.button.add_quote}
                 
                 </Button>
@@ -149,7 +147,7 @@ class Quote extends Component {
                                                     { item.status[localStorage.getItem('locale')] }</span>
 
                                                     :   <ApxSelect 
-                                                            arrayField={status[reducer]}
+                                                            arrayField={status}
                                                             field="status"
                                                             value={item.status[localStorage.getItem('locale')]}
                                                             
@@ -227,6 +225,8 @@ const mapStateToProps = (state) => {
         total: state.library.quote.total,
         listQuote: state.book.quote.list,
         rowsPerPageOptions: state.library.quote.rowsPerPageOptions,
+        filter: state.helper.items.filter,
+        status: state.helper.items.status_quote,
     }
 }
 

@@ -7,7 +7,6 @@ import { convertToNumber, cvtNumToUserPref, cvtToLocale } from '../../utils/help
 import { getItem, resetState, updateItem, createState, removeImageFromArray } from '../../redux/library/actions'
 import { withStyles, Typography, Grid, TextField} from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/CloseOutlined'
-import {currency} from '../../utils/static_data'
 import ApxBackBtn from '../../components/common/backBtn'
 import ApxButton from '../../components/common/button'
 import Spinner from '../../components/common/spinner'
@@ -23,16 +22,16 @@ class ShowProduct extends React.Component {
 
   componentDidMount(){
       var id = this.props.match.params.id;
-      this.props.getItem(this.props.reducer, id)
+      this.props.getItem(this.state.reducer, id)
   }
 
   componentWillUnmount(){
-    this.props.resetState(this.props.reducer)
+    this.props.resetState(this.state.reducer)
   }
 
   render() {
 
-    const {classes, product, isFetching, locale, isError, message, categories, isUpdating} = this.props;
+    const {classes, product, isFetching, locale, isError, message, categories, isUpdating, currency} = this.props;
     const {reducer} = this.state;
     
     if( isFetching ){
@@ -147,7 +146,7 @@ class ShowProduct extends React.Component {
             />
           <div className={classes.btnWrap}>
             <ApxButton 
-              color="secondary"
+              color="primary"
               variant="contained"
               disabled={ isUpdating }
               title={ isUpdating ? locale.button.loading :  locale.button.update}
@@ -212,7 +211,9 @@ const mapStateToProps = (state) => {
       isError: state.library.product.isError,
       message: state.library.product.message,
       product: state.library.product.item,
-      categories: state.account.company.item ?  state.account.company.item.category_name : []
+      categories: state.account.company.item ?  state.account.company.item.category_name : [],
+      currency: state.helper.items.currency
+
       
   }
 }

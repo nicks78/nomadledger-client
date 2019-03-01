@@ -56,7 +56,7 @@ class Service extends Component {
 
     render() {
     
-    const {isFetching, listServices, isError,  locale, message, newService, createItem, createState, isCreating, progress, category, classes} = this.props
+    const {isFetching, listServices, isError,  locale, message, newService, createItem, createState, isCreating, progress, category, classes, currency} = this.props
     const {reducer } = this.state
 
     return (
@@ -66,6 +66,7 @@ class Service extends Component {
                 locale={ locale } 
                 newData={newService} 
                 progress={progress}
+                currency={currency}
                 createServiceState={  createState } 
                 createService={ createItem  } 
                 isCreating={isCreating} 
@@ -83,7 +84,7 @@ class Service extends Component {
                     <TableHead className={classes.tableHead}>
                         <TableRow>
                             <TableCell>{locale.table.service_name}</TableCell>
-                            <TableCell numeric>{locale.table.price}</TableCell>
+                            <TableCell align="right">{locale.table.price}</TableCell>
                             <TableCell>{locale.table.category}</TableCell>
                             <TableCell>{locale.table.description}</TableCell>
                         </TableRow>
@@ -94,7 +95,7 @@ class Service extends Component {
                                 listServices.map(( service, index) => {
                                     return  <TableRow key={index}>
                                                 <TableCell><Link to={ `/${reducer.toLowerCase()}/view/${service._id.toLowerCase()}`}><span  className="link">{service.name}</span></Link></TableCell>
-                                                <TableCell numeric>{cvtNumToUserPref(service.price)}</TableCell>
+                                                <TableCell align="right">{cvtNumToUserPref(service.price)}</TableCell>
                                                 <TableCell>{service.category[localStorage.getItem('locale')]}</TableCell> 
                                                 <Tooltip className={classes.customWidth} title={service.description}><TableCell>{service.description.slice(0,5)}...</TableCell></Tooltip>
                                             </TableRow>
@@ -135,7 +136,9 @@ const mapStateToProps = (state) => {
         newService: state.library.service.tmp_state,
         total: state.library.service.total,
         rowsPerPageOptions: state.library.service.rowsPerPageOptions,
-        category: state.account.company.item ?  state.account.company.item.category_name : []
+        category: state.account.company.item ?  state.account.company.item.category_name : [],
+        currency: state.helper.items.currency,
+
     }
 }
 

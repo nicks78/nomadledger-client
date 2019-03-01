@@ -10,7 +10,7 @@ import authReducer from './auth/authReducer'
 import accountReducer from './account/accountReducer'
 import bookReducer from './book/bookReducer'
 import searchReducer from './search/searchReducer'
-
+import helperReducer from './helper/helperReducer'
 
 
 
@@ -21,5 +21,6 @@ export default combineReducers({
     auth: authReducer,
     account: accountReducer,
     book: bookReducer,
-    search: searchReducer
+    search: searchReducer,
+    helper: helperReducer
 })

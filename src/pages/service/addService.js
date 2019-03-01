@@ -2,8 +2,6 @@
 
 import React from 'react'
 import AddItem from '../../lib/addItem'
-import {currency} from '../../utils/static_data'
-
 
 class AddService extends React.Component {
 
@@ -24,7 +22,7 @@ class AddService extends React.Component {
   }
 
   render(){
-    const {locale, newData, category} = this.props
+    const {locale, newData, category, currency} = this.props
 
     const fields = [
       {

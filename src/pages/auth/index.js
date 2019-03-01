@@ -2,7 +2,8 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import { createStateUser, createUser, resetUser } from '../../redux/auth/actions'
+import { createStateUser, createUser } from '../../redux/auth/createActions'
+import { resetUser } from '../../redux/auth/actions'
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';

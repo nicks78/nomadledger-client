@@ -15,10 +15,10 @@ const styles = theme => ({
         fontSize: '16px'
     },
     expand: {
-        backgroundColor: theme.palette.primary.main
+        backgroundColor: theme.palette.secondary.light,
     },
     detail: {
-        
+        padding: 8
     }
 
 })

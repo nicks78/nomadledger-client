@@ -9,7 +9,7 @@ import Spinner from '../../components/common/spinner'
 import ApxPaper from '../../components/common/paper'
 import ApxBackBtn from '../../components/common/backBtn'
 import EditSelect from '../../lib/editSelect'
-import {currency} from '../../utils/static_data'
+
 
 class ShowService extends Component {
 
@@ -29,7 +29,7 @@ class ShowService extends Component {
 
 
     render() {
-      const {classes, service, isFetching, locale, isError, message, category, isUpdating} = this.props
+      const {classes, service, isFetching, locale, isError, message, category, isUpdating, currency} = this.props
       const {reducer} = this.state
 
       if( isFetching ){
@@ -63,7 +63,6 @@ class ShowService extends Component {
                   <TextField 
                     id="price"
                     variant="filled" 
-                    type="number"
                     margin="dense"
                     fullWidth
                     label={locale.form.field.price}
@@ -109,7 +108,7 @@ class ShowService extends Component {
             <br />
             <Button 
                 variant="contained" 
-                color="secondary" 
+                color="primary" 
                 disabled={ isUpdating }
                 className={ classes.btnSave } 
                 onClick={ () => { this.props.updateItem(reducer, `update`)} }>
@@ -137,7 +136,8 @@ const mapStateToProps = (state) => {
       message: state.library.service.message,
       service: state.library.service.item,
       locale: state.locale.locale,
-      category: state.account.company.item ?  state.account.company.item.category_name : []
+      category: state.account.company.item ?  state.account.company.item.category_name : [],
+      currency: state.helper.items.currency
 
   }
 }

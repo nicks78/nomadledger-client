@@ -84,7 +84,7 @@ export function pushToDocument(actionType, data, endPoint ){
                 return response.data
             }) 
             .then( res => {
-                    dispatch(setAccount( actionType, res.payload ))  
+                dispatch(setAccount( actionType, res.payload ))  
             })
             .catch(function (error) {
                 // handle error
@@ -140,11 +140,7 @@ export const uploadFileToServer = ( actionType, file, id, field, oldFile ) => {
           return response.data
       }) 
       .then( res => {
-            if(res.success){
-              dispatch(setAccount( actionType, res.payload ))  
-            }else{
-              dispatch(requestFailed(actionType))
-            }
+            dispatch(setAccount( actionType, res.payload ))  
       })
       .catch(function (error) {
           // handle error

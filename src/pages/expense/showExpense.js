@@ -10,7 +10,6 @@ import Spinner from '../../components/common/spinner'
 import ApxPaper from '../../components/common/paper'
 import ApxBackBtn from '../../components/common/backBtn'
 import EditSelect from '../../lib/editSelect'
-import {currency} from '../../utils/static_data'
 import DatePickers from '../../lib/dayPicker'
 
 class ShowExpense extends Component {
@@ -31,7 +30,7 @@ class ShowExpense extends Component {
 
 
     render() {
-      const {classes, expense, isFetching, locale, isError, message, category, isUpdating, progress} = this.props
+      const {classes, expense, isFetching, locale, isError, message, category, isUpdating, progress, currency} = this.props
       const {reducer} = this.state
 
 
@@ -105,7 +104,6 @@ class ShowExpense extends Component {
                   <TextField 
                     id="price"
                     variant="filled" 
-                    type="number"
                     margin="dense"
                     fullWidth
                     label={locale.form.field.price}
@@ -138,7 +136,7 @@ class ShowExpense extends Component {
             <br />
             <Button 
                 variant="contained" 
-                color="secondary" 
+                color="primary" 
                 disabled={ isUpdating }
                 className={ classes.btnSave } 
                 onClick={ () => { this.props.updateItem(reducer, `update`)} }>
@@ -167,7 +165,8 @@ const mapStateToProps = (state) => {
       message: state.library.expense.message,
       expense: state.library.expense.item,
       locale: state.locale.locale,
-      category: state.account.company.item ?  state.account.company.item.category_name : []
+      category: state.account.company.item ?  state.account.company.item.category_name : [],
+      currency: state.helper.items.currency
 
   }
 }

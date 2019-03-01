@@ -2,7 +2,7 @@
 
 
 import axios from 'axios';
-import { API_ENDPOINT, apiCall } from '../../constant'
+import { API_ENDPOINT } from '../../constant'
 import { requestData, requestFailed  } from './'
 
 
@@ -14,7 +14,7 @@ export function getItemList( actionType, query = "" ){
         dispatch(requestData(actionType))
         axios.defaults.withCredentials = true;
 
-        axios.get(`${API_ENDPOINT}${apiCall(actionType).endPoints.get}${query}`, {
+        axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/list${query}`, {
           method: 'GET',
           mode: 'cors'
         })
@@ -22,11 +22,7 @@ export function getItemList( actionType, query = "" ){
             return response.data
         }) 
         .then( res => {
-          if(res.success){
-                dispatch(receiveItems(actionType, res.payload ))  
-              }else{
-                dispatch(requestFailed(actionType))
-              }
+            dispatch(receiveItems(actionType, res.payload ))  
         })
         .catch(function (error) {
           // handle error

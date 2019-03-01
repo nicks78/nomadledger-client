@@ -1,6 +1,7 @@
 // redux store 
 import { createStore, applyMiddleware, compose } from 'redux';
 import { setAuthUser, getLogout } from './auth/actions'
+import {getHelpers} from './helper/actions'
 import { getAccount } from './account/actions'
 import {history} from '../routes/history'
 
@@ -20,6 +21,8 @@ const store = createStore(reducers,
     applyMiddleware(logger, thunk),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 ));
+
+store.dispatch(getHelpers());
 
 // Check if user is loggedIn
 var x =   document.cookie.replace('auth=', '')

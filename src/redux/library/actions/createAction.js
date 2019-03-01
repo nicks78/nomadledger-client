@@ -2,7 +2,7 @@
 
 
 import axios from 'axios';
-import { API_ENDPOINT, apiCall } from '../../constant'
+import { API_ENDPOINT } from '../../constant'
 import { requestCreation, requestFailed, progress  } from './'
 
 
@@ -12,10 +12,10 @@ export const createItem = ( actionType ) => {
     return (dispatch, getState) => {
         
         // Set action name
-        var obj = actionType.toLowerCase()
+        var type = actionType.toLowerCase()
 
         // Get current state
-        var state = getState().library[obj].tmp_state
+        var state = getState().library[type].tmp_state
 
         // // Set loading time
         dispatch(requestCreation(actionType));
@@ -29,7 +29,7 @@ export const createItem = ( actionType ) => {
         // Set input 
         formData.append('state', JSON.stringify(state));
 
-        axios.post(`${API_ENDPOINT}${apiCall(actionType).endPoints.post}`,
+        axios.post(`${API_ENDPOINT}${type}/create`,
             formData,   
             { 
               headers: {
@@ -44,11 +44,7 @@ export const createItem = ( actionType ) => {
             return response.data
         }) 
         .then( res => {
-              if(res.success){
-                dispatch(setCreateItem( actionType, res.item ))  
-              }else{
-                dispatch(requestFailed(actionType))
-              }
+            dispatch(setCreateItem( actionType, res.item ))  
         })
         .catch(function (error) {
             dispatch(progress(actionType, 100))

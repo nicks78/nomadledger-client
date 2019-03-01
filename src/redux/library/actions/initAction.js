@@ -46,6 +46,7 @@ export const requestFailed = (actionType, message = 'error_505') =>  {
         message: message,
         isFetching: false,
         isCreating: false, 
+        isUpdating: false,
         receivedAt: null,
         isError: true
     }

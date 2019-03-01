@@ -4,7 +4,7 @@ import { authUser } from '../../redux/auth/actions'
 import Paper from '@material-ui/core/Paper';
 import ApxForm from '../../components/common/form'
 import Spinner from '../../components/common/spinner'
-
+import ApxAlert from '../../components/common/alert'
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
@@ -72,7 +72,9 @@ class Login extends Component {
 
         return (
             <div style={styles.root}>
+            {isError ? <ApxAlert message={message} />: null }
                 <div style={ styles.container }>
+                
                 <Paper style={ styles.paper }>
                         <Typography variant="overline" style={{ alignText: 'center'}}>
                                 Connectez-vous
@@ -100,6 +102,7 @@ const mapStateToProps = (state) => {
 
     return {
         message: state.auth.message,
+        isError: state.auth.isError,
         isFetching: state.auth.isFetching,
         locale: state.locale.locale,
     }

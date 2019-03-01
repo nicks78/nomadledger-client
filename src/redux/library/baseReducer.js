@@ -55,6 +55,7 @@ const baseReducer = (state = new BaseState(), action) => {
                 isFetching: action.isFetching,
                 message: action.message,
                 receivedAt: action.receivedAt, 
+                isUpdating: action.isUpdating,
                 isError: action.isError,
                 isCreating: action.isCreating
             }

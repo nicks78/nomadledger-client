@@ -14,7 +14,6 @@ InputAdornment
 import ApxSelect  from '../../../components/common/select'
 import ApxRichEditor from '../../../components/common/richEditor'
 import ApxRadioGroup from '../../../components/common/radioGroup'
-import {currency, status} from '../../../utils/static_data'
 import AutoComplete from '../../../lib/autoComplete'
 import ContactSection from './contactSection';
 import Items from './items'
@@ -25,21 +24,24 @@ import DatePickers from '../../../lib/dayPicker'
 
 const Form = (props) => {
 
-    const { data, list, reducer, locale, classes, vat, btnLabel, date_1, date_2, formTitle, isUpdating } = props
+    const { data, list, reducer, locale, classes, vat, btnLabel, date_1, date_2, formTitle, isUpdating, currency, status } = props
 
     return  <div>
                 <Paper className={classes.paper}>
                 <Typography variant="h2" className={classes.title}>{locale.form.title[formTitle]}&nbsp;{ data.ref || '' }</Typography>
                     <Grid container spacing={24}>
 
-                        <Grid item xs={12} md={5} style={{border: '1px solid rgba(235,235,235,1)', marginTop: '20px', borderRadius: 4}}>
+                        <Grid item xs={12} sm={6} md={6}>
+                            <div style={{border: '1px solid rgb(238,238,238)', borderRadius: 1, marginTop: 8}}>
                                 <ContactSection 
                                     locale={locale}
                                     contact={data}
                                     reducer={reducer}
                                 />
+                            </div>
+                                
                         </Grid>
-                        <Grid item xs={12} md={7}>
+                        <Grid item xs={12} sm={6} md={6}>
 
                         <Grid container spacing={24}>
                             <Grid item xs={6}>
@@ -82,7 +84,7 @@ const Form = (props) => {
                             </Grid>
                         </Grid>
 
-                        <br />
+                        
                         <Grid container spacing={24}>
                             <Grid item xs={12} md={6}>
                                 <ApxSelect 
@@ -111,7 +113,7 @@ const Form = (props) => {
                                 <ApxRadioGroup 
                                     action={  props.handleDropDown }
                                     value={data.status ? data.status.code : '0'}
-                                    arrayObject={ status[reducer]  }
+                                    arrayObject={ status  }
                                 />
                             </Grid>
                         </Grid>
@@ -170,7 +172,7 @@ const Form = (props) => {
                     <div className={classes.btnSave}>
                         <Button 
                             variant="contained" 
-                            color="secondary" 
+                            color="primary" 
                             disabled={ isUpdating ? true : false }
                             onClick={ () => { props.handleSubmit(reducer)} }>
                             { isUpdating ? locale.button.loading : btnLabel}

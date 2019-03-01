@@ -19,7 +19,6 @@ const RadioGroups = (props) => {
         var value = event.target.value
         var name = event.target.name
         for (let i = 0; i < arrayObject.length; i++) {
-            
             if(arrayObject[i].code === value ){
                 var newevent = { target: { value : arrayObject[i], name: name } }
                 action(newevent);

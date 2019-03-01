@@ -27,7 +27,7 @@ class CreateQuote extends React.Component {
 
     render(){
 
-    const { isFetching, locale, classes, newQuote, listItems, vat, message, isError } = this.props;
+    const { isFetching, locale, classes, newQuote, listItems, vat, message, isError, currency, status } = this.props;
 
     if(isFetching){
         return <Spinner/>
@@ -44,6 +44,8 @@ class CreateQuote extends React.Component {
                     vat={vat}
                     list={listItems}
                     locale={locale}
+                    currency={currency}
+                    status={status}
                     handleSubmit={this.props.createDocument}
                     handleDropDown={ this.handleDropDown }
                     getListItem={this.props.getListItem}
@@ -75,6 +77,8 @@ const mapStateToProps = (state) => {
         message: state.book.quote.message,
         listItems: state.book.quote.item.list_items,
         vat: state.account.company.item ? state.account.company.item.vat : [],
+        status: state.helper.items.status_quote,
+        currency: state.helper.items.currency
     }
 }
 

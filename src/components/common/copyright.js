@@ -8,10 +8,11 @@ const styles = theme => ({
       position: 'absolute', 
       bottom: 60, 
       padding: '20px',
+      color: 'rgb(238,238,238)',
       fontSize: '9px !important'
   },
   span: {
-      color: 'blue', 
+      color: 'grey', 
       cursor: 'pointer'
   }
 });

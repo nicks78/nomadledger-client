@@ -60,7 +60,7 @@ class Product extends Component {
 
     render() {
     
-    const {listProducts, isFetching, isError,  locale, newProduct, createState, createItem, isCreating, category, classes, message } = this.props
+    const {listProducts, isFetching, isError,total,  locale, newProduct, createState, createItem, isCreating, category, classes, message, currency } = this.props
 
     if( isFetching ){
         return <Spinner />
@@ -71,7 +71,14 @@ class Product extends Component {
     return (
         <div style={styles.container}>
 
-            <AddProduct category={category}locale={ locale } initData="" newData={newProduct} createItemState={ createState } createItem={ createItem } isCreating={ isCreating  }/>
+            <AddProduct 
+                category={category}
+                locale={ locale } 
+                currency={currency}
+                newData={newProduct} 
+                createItemState={ createState } 
+                createItem={ createItem } 
+                isCreating={ isCreating  }/>
             {isError ? <ApxAlert message={message} /> : null }
             <Grid container spacing={24}>
             {
@@ -83,12 +90,16 @@ class Product extends Component {
                 
             }
             </Grid>
+            {
+                total > 10 ?
+                <div className={ classes.loadMore }>
+                    <Button variant="outlined" color="secondary" className={classes.button} onClick={ this.hanldeLoadMore }>
+                        {locale.page.product.load_more_product}
+                    </Button>
+                </div>
+                : null 
+            }
             
-            <div className={ classes.loadMore }>
-                <Button variant="outlined" color="secondary" className={classes.button} onClick={ this.hanldeLoadMore }>
-                    {locale.page.product.load_more_product}
-                </Button>
-            </div>
             
         </div>
     )
@@ -111,6 +122,7 @@ const mapStateToProps = (state) => {
         product: state.library.product.item,
         category: state.account.company.item && state.account.company.item.category_name,
         total: state.library.product.total,
+        currency: state.helper.items.currency,
         
     }
 }
