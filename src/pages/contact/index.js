@@ -36,22 +36,12 @@ class Contact extends Component {
     state = {
         reducer: 'CONTACT',
         selected: [],
-        keyLocation: '',
         group: ''
     }
 
     componentDidMount(){
-        if( this.props.receivedAt === null  ){
-            this.props.getTotal(this.state.reducer)
-            this.props.getItemList(this.state.reducer, `?limit=5&skip=0`)
-        }
-        this.setState({keyLocation: this.props.location.key})
-    }
-
-    componentWillReceiveProps(nextProps){
-        if(nextProps.location.key !== this.state.keyLocation){
-            this.setState({ showContact: false, keyLocation: nextProps.location.key })
-        }
+        this.props.getTotal(this.state.reducer)
+        this.props.getItemList(this.state.reducer, `list?limit=5&skip=0`)
     }
 
     componentWillUnmount() {

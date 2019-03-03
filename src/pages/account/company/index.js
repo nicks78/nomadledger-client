@@ -32,7 +32,7 @@ const styles = theme => ({
     color: theme.palette.green
   },
   input: {
-    width: '80%'
+    width: '91.5%'
   }
 })
 
@@ -88,11 +88,12 @@ class Company extends Component {
                     label={ locale.form.field.company_name }
                     onChange={ (event) => { this.props.handleFormEdit(event, reducer) }} 
                     name="company_name"
+                    fullWidth
                     variant="filled"
                     className={ classes.input }
                 />  : company.company_name }
               </Typography>
-
+              <br />
               <Grid container spacing={8}>
 
                   <Grid item xs={12} md={5}>
@@ -129,7 +130,7 @@ class Company extends Component {
                       field="company_vat"
                       handleAction={(event) => { this.props.handleFormEdit(event, reducer) }}
                   />
-                  <br />
+                  <br /><br />
                   <Typography variant="subtitle1">
                         {locale.form.title.label_tax}
                     </Typography>
@@ -180,22 +181,14 @@ class Company extends Component {
                      {
                         showEdit ? 
                             <TextField
-                              label={locale.form.title.label_end_tax}
+                                label={locale.form.title.label_end_tax + " (auto)"}
                                 id="end_date"
                                 disabled
                                 margin="dense"
                                 style={{width: '100%'}}
                                 value={company.end_date.label} 
                                 variant="filled"
-                                InputProps={{
-                                    startAdornment: <InputAdornment position="start">
-                                        <DatePickers 
-                                                handleDate={ (event) => { this.props.handleFormEdit(event, reducer) }}
-                                                field="end_date"
-                                            /> 
-                                    </InputAdornment>,
-                                }}
-                                    />
+                            />
                         : 
                         <ApxtextIndexValue 
                             value={company.end_date.label} 

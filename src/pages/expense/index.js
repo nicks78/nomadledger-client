@@ -22,7 +22,7 @@ class Expense extends Component {
 
     componentDidMount(){
         this.props.getTotal(this.state.reducer);
-        this.props.getItemList(this.state.reducer, "?limit=5&skip=0");
+        this.props.getItemList(this.state.reducer, "list?limit=5&skip=0");
     }
 
     onSelectAllClick = (event) => {
@@ -128,7 +128,7 @@ class Expense extends Component {
                                                 <TableCell><Link to={`/${reducer.toLowerCase()}/view/${expense._id.toLowerCase()}`}><span  className="link">{expense.name}</span></Link></TableCell>
                                                 <TableCell>{ expense.category[localStorage.getItem('locale')] }</TableCell>
                                                 <TableCell>{ expense.price } { expense.currency.value }</TableCell>
-                                                <TableCell>{ expense.receipt_date.label }</TableCell>
+                                                <TableCell>{ new Date(expense.receipt_date.date).toLocaleDateString(localStorage.getItem('locale')) }</TableCell>
 
                                             </TableRow>
                                 })

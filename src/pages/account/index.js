@@ -33,7 +33,8 @@ const styles = theme => ({
   titleBar: {
     padding: 15,
     borderRadius: 4,
-    border: `1px solid ${theme.palette.secondary.main}`
+    backgroundColor: 'rgb(238,238,238)',
+    border: `1px solid ${theme.palette.secondary.light}`
   }
 })
 

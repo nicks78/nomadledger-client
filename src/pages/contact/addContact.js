@@ -17,7 +17,7 @@ const AddContact = (props) => {
             { name: 'company_name',type:"text", required: true },
             { name: 'contact_group', type:"select", selections: contactGroup, required: true },
             { name: 'company_register',type:"text"},
-            { name: 'company_vat', type:"number"},
+            { name: 'company_vat', type:"text"},
             { name: 'addresses_street', type:"text" },
             { name: 'addresses_zip', type:"text" },
             { name: 'addresses_city', type:"text" },

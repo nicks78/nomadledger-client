@@ -180,7 +180,7 @@ export const updatePassword = ( password ) => {
             dispatch(requestFailed('USER', message));
         })  
     }
-  }
+}
 
 
 export function createState ( actionType, fieldName, value ){

@@ -19,7 +19,7 @@ const logger = (store) => (next) => (action) => {
 const store = createStore(reducers,
     compose(
     applyMiddleware(logger, thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
 ));
 
 store.dispatch(getHelpers());

@@ -145,12 +145,12 @@ class Layout extends React.Component {
                 </IconButton>
                 <Hidden smDown>
                     <Typography >
-                        <img src={company.logo_company.full_path || DEFAULT_IMG } alt="logo" className={classes.img} /> 
+                        <img src={company.logo_company ? company.logo_company.full_path : DEFAULT_IMG } alt="logo" className={classes.img} /> 
                     </Typography>
                 </Hidden>
                 
                 <Typography className={classes.title}>
-                <Hidden smDown>{company.company_name.toUpperCase()}</Hidden>
+                <Hidden smDown>{company.company_name ? company.company_name.toUpperCase() : "BOOKKEPING SOLUTIONS"}</Hidden>
                 </Typography>
 
                 <Typography>

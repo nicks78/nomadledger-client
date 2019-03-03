@@ -4,29 +4,27 @@ import Chart from 'chart.js';
 Chart.defaults.global.responsive = true;
 
 var chartData = {
-	labels: ["January", "February", "March", "April", "May", "June", "July"],
+	labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 	datasets: [
 		{
-			label: "My First dataset",
-			fillColor: "rgba(220,220,220,0.2)",
-			strokeColor: "rgba(220,220,220,1)",
-			pointColor: "rgba(220,220,220,1)",
-			pointStrokeColor: "#fff",
-			pointHighlightFill: "#fff",
-			pointHighlightStroke: "rgba(220,220,220,1)",
-			data: [65, 59, 80, 81, 56, 55, 40]
+			label: "CA HT",
+			fillColor: "green",
+			data: [65, 59, 80, 81, 56, 55, 40, 23, 89, 38, 32,13],
 		},
 		{
-			label: "My Second dataset",
-			fillColor: "rgba(151,187,205,0.2)",
-			strokeColor: "rgba(151,187,205,1)",
-			pointColor: "rgba(151,187,205,1)",
-			pointStrokeColor: "#fff",
-			pointHighlightFill: "#fff",
-			pointHighlightStroke: "rgba(151,187,205,1)",
-			data: [28, 48, 40, 19, 86, 27, 90]
+			label: "EXPENSES",
+			fillColor: "red",
+			data: [28, 48, 40, 19, 86, 27, 90, 90,24, 65, 37, 66]
 		}
-	]
+	],
+	options: {
+		legend: {
+				display: true,
+				labels: {
+						fontColor: 'rgb(255, 99, 132)'
+				}
+		}
+	}
 };
 class BarCharts extends Component {
 

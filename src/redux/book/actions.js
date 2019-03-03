@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { API_ENDPOINT } from '../constant'
 import {history} from '../../routes/history'
-
+import {updateArrayOfObject} from '../../utils/help_function'
 
 /**
  * // GET FULL LIST OF DOCUMENT
@@ -128,10 +128,11 @@ export function updateDocument (actionType) {
  */
 export function updateField (actionType, data, id) {
     
-    return dispatch => {
+    return (dispatch, getState) => {
 
         // Set withCredentials
         axios.defaults.withCredentials = true;
+        var list = getState().library[actionType.toLowerCase()].list;
 
         axios.post(`${API_ENDPOINT}bookkeeping/${actionType.toLowerCase()}/update/field/${id}`,
             { 
@@ -146,7 +147,8 @@ export function updateField (actionType, data, id) {
             return response.data
         }) 
         .then( res => {
-            dispatch( setDocument(actionType, res.item) )
+            var newList = updateArrayOfObject(list, res.item);
+            dispatch(receiveDocuments(actionType, newList )) 
         })
         .catch(function (error) {
           // handle error

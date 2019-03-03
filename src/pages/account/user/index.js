@@ -189,7 +189,7 @@ class User extends Component {
                           margin="normal"
                       />
                         <br />
-                      <Button color="secondary" variant="contained" onClick={ this._updatePassword }>Save new password</Button>
+                      <Button color="primary" variant="contained" onClick={ this._updatePassword }>Save new password</Button>
                   
                   </form>    
                 </Grid>

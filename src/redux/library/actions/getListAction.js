@@ -7,14 +7,14 @@ import { requestData, requestFailed  } from './'
 
 
 // GET FULL LIST OF ITEM
-export function getItemList( actionType, query = "" ){
+export function getItemList( actionType, endPoint ){
 
     return dispatch => {
 
         dispatch(requestData(actionType))
         axios.defaults.withCredentials = true;
 
-        axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/list${query}`, {
+        axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${endPoint}`, {
           method: 'GET',
           mode: 'cors'
         })

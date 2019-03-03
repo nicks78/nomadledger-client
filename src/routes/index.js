@@ -11,7 +11,7 @@ import Auth from '../pages/auth'
 import Login from '../pages/auth/login'
 
 // Pages
-import Home from '../pages/home'
+import Home from '../pages/dashboard/home'
 import Contact from '../pages/contact'
 import ShowContact from '../pages/contact/dashboard'
 import Account from '../pages/account'
@@ -22,6 +22,7 @@ import ShowService from '../pages/service/showService'
 import Expense from '../pages/expense'
 import ShowExpense from '../pages/expense/showExpense'
 import Task from '../pages/task'
+
 
 
 // Book

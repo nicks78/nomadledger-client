@@ -119,7 +119,7 @@ class Quote extends Component {
                             <TableCell>{locale.table.subtotal}</TableCell>
                             <TableCell>{locale.table.vat}</TableCell>
                             <TableCell>{locale.table.total}</TableCell>
-                            <TableCell>{locale.table.status}</TableCell>
+                            <TableCell align="center">{locale.table.status}</TableCell>
                             <TableCell>Actions</TableCell>
 
                         </TableRow>
@@ -150,7 +150,7 @@ class Quote extends Component {
                                                             arrayField={status}
                                                             field="status"
                                                             value={item.status[localStorage.getItem('locale')]}
-                                                            
+                                                            variant="standard"
                                                             handleAction={ (event) => { this.props.updateField(reducer, { status: event.target.value}, item._id) } }
                                                             locale={locale}
                                                         />

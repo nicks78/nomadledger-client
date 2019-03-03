@@ -79,7 +79,7 @@ class ShowProduct extends React.Component {
                         handleAction={ (e) => {this.props.createState(reducer, "category",  e.target.value)} }
                         locale={locale}
                         showEdit={true}
-                        variant="outlined"
+                        variant="filled"
                         label={locale.form.field.category }
                         value={  product.category && product.category[localStorage.getItem("locale")] }
                     />
@@ -91,7 +91,7 @@ class ShowProduct extends React.Component {
                         handleAction={ (e) => {this.props.createState(reducer, "currency",  e.target.value)} }
                         locale={locale}
                         showEdit={true}
-                        variant="outlined"
+                        variant="filled"
                         label={locale.form.field.currency }
                         value={  product.currency && product.currency[localStorage.getItem("locale")] }
                     />

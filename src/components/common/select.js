@@ -9,6 +9,9 @@ const styles = theme => ({
         width: '100%',
         marginTop: '7px',
         marginBottom: '3px',
+        '& span': {
+            color: theme.palette.secondary.main
+        },
         '& svg': {
             color: theme.palette.secondary.main
         }
@@ -46,6 +49,7 @@ const Select = (props) => {
             select
             label={props.locale.form.field[field]}
             className={classes.textField}
+            
             name={field}
             required={ required || false }
             value={ props.value || ''}

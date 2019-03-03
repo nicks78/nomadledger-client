@@ -20,7 +20,7 @@ export default class Pagination extends Component {
         var skip =  page * this.state.limit;
         this.setState({page});
 
-        this.props.onGetItemList(this.props.reducer, `?limit=${ this.state.limit }&skip=${ skip }&status=${this.props.status}`);
+        this.props.onGetItemList(this.props.reducer, `list?limit=${ this.state.limit }&skip=${ skip }&status=${this.props.status}`);
     }
 
     handleChangeRowsPerPage = (event) => {
@@ -29,7 +29,7 @@ export default class Pagination extends Component {
             limit: num,
             page: 0
         })
-        this.props.onGetItemList(this.props.reducer, `?limit=${num }&skip=0&status=${this.props.status}`);
+        this.props.onGetItemList(this.props.reducer, `list?limit=${num }&skip=0&status=${this.props.status}`);
     }
 
 

@@ -46,7 +46,7 @@ class Product extends Component {
 
     componentDidMount(){
         this.props.getTotal(this.state.reducer)
-        this.props.getItemList(this.state.reducer, `?limit=${this.state.limit}&skip=0`);
+        this.props.getItemList(this.state.reducer, `list?limit=${this.state.limit}&skip=0`);
     }
 
     componentWillUnmount(){
@@ -54,7 +54,7 @@ class Product extends Component {
     }
 
     hanldeLoadMore = () => {
-        this.props.getItemList(this.state.reducer, `?limit=${this.state.limit + 6 }&skip=0`);
+        this.props.getItemList(this.state.reducer, `list?limit=${this.state.limit + 6 }&skip=0`);
         this.setState({ limit: this.state.limit + 6 });
     }
 
