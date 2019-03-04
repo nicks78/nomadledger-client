@@ -282,7 +282,8 @@ const Locale = {
                 inv: "FAC",
                 qto: "DEV",
                 pya: "AVO",
-            }
+            },
+            days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
         },
     en: 
         {
@@ -559,8 +560,9 @@ const Locale = {
                 inv: "INV",
                 qto: "QTO",
                 pya: "PAY",
-                 
-            }
+            },
+            days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            months: [""]
         },
 }
 

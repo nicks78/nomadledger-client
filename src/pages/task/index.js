@@ -20,6 +20,7 @@ class Task extends Component {
   render() {
 
     const { classes , createItem, createState, isCreating, locale, newTask, listTask} = this.props;
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   
     return (
       <div className={classes.root}>
@@ -39,13 +40,16 @@ class Task extends Component {
               return  <React.Fragment key={index}>
                             <p className={classes.title}> 
                               <span className={classes.span}></span>
-                              <span style={{marginTop: 10}}>{new Date(label.date.date).toLocaleDateString(localStorage.getItem('locale'))}</span>
+                              <span className={classes.spanDate}>{new Date(label.date.date).toLocaleDateString(localStorage.getItem('locale'), options)}</span>
                             </p>
 
                             {
                               label.tasks.map((task, index) => {
                                   return  <Paper key={index} className={classes.paper}>
-                                              <Typography variant="overline">{task.subject}</Typography>
+                                              <Typography variant="subtitle1" className={classes.subtitle}>{task.subject}</Typography>
+                                              <Typography variant="body1">
+                                                {task.short_desc}
+                                              </Typography>
                                           </Paper>
                               })
                             }
@@ -90,6 +94,13 @@ const styles = theme => ({
       borderRadius: '50%',
       display: 'inline-block',
       textAlign: 'center'
+    },
+    spanDate: {
+      marginTop: 10,
+      textTransform: "capitalize"
+    },
+    subtitle: {
+      textTransform: "capitalize"
     }
     
 })
