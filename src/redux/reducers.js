@@ -11,7 +11,7 @@ import accountReducer from './account/accountReducer'
 import bookReducer from './book/bookReducer'
 import searchReducer from './search/searchReducer'
 import helperReducer from './helper/helperReducer'
-
+import taskReducer from './task/taskReducer'
 
 
 
@@ -22,5 +22,6 @@ export default combineReducers({
     account: accountReducer,
     book: bookReducer,
     search: searchReducer,
-    helper: helperReducer
+    helper: helperReducer,
+    task: taskReducer
 })
