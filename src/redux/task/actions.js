@@ -8,7 +8,7 @@ export function getAllTask(endPoint){
 
     return dispatch => {
   
-    //   dispatch(requestUser());
+    //   dispatch(requestTask());
       
       axios.get(`${API_ENDPOINT}task/${endPoint}`)
         .then(function (response) { 
@@ -57,7 +57,7 @@ export const createTask = () => {
             return response.data
         }) 
         .then( res => {
-            dispatch(setCreatedItem(  res.item ))  
+            dispatch(getAllTask( `grouped-task` ))
         })
         .catch(function (error) {
             // dispatch(progress( 100))
@@ -65,6 +65,36 @@ export const createTask = () => {
             var message = error.response ? error.response.data.message : 'error_500'
             dispatch(requestFailed( message));
         })  
+    }
+}
+
+// CREATE NEW ITEM
+export const updateTask = (  ) => {
+
+    return (dispatch, getState) => {
+
+        dispatch(requestTask());
+
+        // Get current state
+        var state = getState().task.item;
+
+        axios.put(`${API_ENDPOINT}task/update`,
+            {data: state},
+            { headers: {
+                    'Content-Type': 'application/json',
+            }
+        })
+        .then(function (response) { 
+            return response.data
+        }) 
+        .then( res => {
+            dispatch(getAllTask( `grouped-task` ))  
+        }) 
+        .catch(function (error) {
+            // handle error
+            var message = error.response ? error.response.data.message : 'error_500'
+            dispatch(requestFailed( message));
+        })    
     }
 }
 
@@ -76,6 +106,15 @@ export function setCreatedItem(item) {
     }
 }
 
+export function requestTask(){
+    return {
+        type: "REQUEST_TASK",
+        isFetching: true,
+        isError: false,
+        message: "",
+    }
+}
+
 export function receiveTask(items){
     return {
         type: "RECEIVE_TASK",
@@ -83,6 +122,17 @@ export function receiveTask(items){
         payload: items
     }
 }
+
+export function setTask(item){
+    return {
+        type: "GET_TASK",
+        isFetching: false,
+        isError: false,
+        message: "",
+        payload: item
+    }
+}
+
 
 export function requestFailed(message){
     return {

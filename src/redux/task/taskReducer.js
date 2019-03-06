@@ -19,8 +19,8 @@ const taskReducer = (state = initialState, action) => {
             return  { 
                 ...state,
                 isFetching: action.isFetching,
-                isCreating: action.isCreating,
-                isError: action.isError
+                isError: action.isError,
+                message: action.message
             }
         case `FAILED_TASK`:
             return  { 
@@ -34,7 +34,16 @@ const taskReducer = (state = initialState, action) => {
             return  { 
                 ...state, 
                 isFetching: action.isFetching,
+                item: null,
                 list: action.payload
+            }
+        case `GET_TASK`:
+            return  { 
+                ...state, 
+                isFetching: action.isFetching,
+                isError: action.isError,
+                message: action.message,
+                item: action.payload
             }
         case `STATE_TASK`:
             return  { 
@@ -60,10 +69,40 @@ const taskReducer = (state = initialState, action) => {
 export default taskReducer;
 
 function addTaskToList(array, item){
+    var newItem = {};
+    var c = true;
     for (let i = 0; i < array.length; i++) {
         if(array[i].date.date ===  item.due_date.date){
             array[i].tasks.push(item);
+            c = false;
         }
+    }
+
+    if(c === true){
+        newItem = {
+            _id: {
+                year: item.due_date.year,
+                dayOfMonth: item.due_date.dayOfMonth,
+                month: item.due_date.month,
+            },
+            tasks: [
+                {
+                    subject: item.subject,
+                    short_desc: item.short_desc,
+                    label: item.due_date.label,
+                    status: item.status,
+                    _id: item._id,
+                    due_date: item.due_date
+                }
+            ],
+            date: { 
+                label: item.due_date.label,
+                due_date: item.due_date,
+                timestamp: item.due_date.timestamp,
+                date: item.due_date.date
+            } 
+        }
+            array.push(newItem);
     }
     return array;
 }

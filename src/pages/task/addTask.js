@@ -5,7 +5,7 @@ import AddItem from '../../lib/addItem'
 
 const AddTask = (props) => {
 
-    const {locale} = props
+    const {locale, status} = props
 
     const fields = [
       {
@@ -13,7 +13,8 @@ const AddTask = (props) => {
         label: locale.form.title.label_task,
         fields: [
             { name: 'due_date', type:"date"},
-            { name: 'subject', type:"text" },            
+            { name: 'subject', type:"text" },
+            { name: 'status', type:"select", selections: status, helperText: "select_status" },            
             { name: 'short_desc', type:"longtext", multiline: true, rowsMax:"4" }
           ]
       }
@@ -27,7 +28,7 @@ const AddTask = (props) => {
             newData={props.newData} 
             addBtnTitle={ locale.button.add_task } 
             headerText={ locale.form.title.add_task }
-            limitUploadFile={1}
+            limitUploadFile={0}
             reducer="TASK"
             isCreating={ props.isCreating }
             createItem={ props.createTask }

@@ -71,6 +71,7 @@ const Locale = {
                 save: "Enregistrer",
                 edit: 'Editer',
                 update: "Mettre à jour",
+                updating: "En cours...",
                 upload: "téléverser",
                 add_quote: "Créer un devis",
                 add_invoice: "Créer une facture",
@@ -180,6 +181,7 @@ const Locale = {
                     receipt: "Reçu",
                     due_date: "Date due",
                     subject: "Sujet",
+                    status: "Statut",
                     short_desc: "A faire...",
 
                     notes: "Information interne",
@@ -353,6 +355,7 @@ const Locale = {
                 save: "Save",
                 edit: 'Edit',
                 update: "Update",
+                updating: "Updating...",
                 upload: "Upload",
                 add_quote: "Create quote",
                 add_invoice: "Create invoice",
@@ -462,6 +465,7 @@ const Locale = {
                     due_date: "Due date",
                     subject: "Subject",
                     short_desc: "To do...",
+                    status: "Status",
 
                     add_category: "Add category",
                     add_group: "Add a group",

@@ -34,8 +34,9 @@ const Select = (props) => {
 
     const selected = (event) => {
         
-        var value = event.target.value
+        var value = event.target.value;
         for(var i =0; i < arrayField.length ; i++){
+
             if(value === arrayField[i]['fr'] || value === arrayField[i]['en']){
                 event.target.value =  arrayField[i]
             }
