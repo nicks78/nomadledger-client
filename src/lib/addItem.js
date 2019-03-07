@@ -109,7 +109,7 @@ class Add extends Component {
 
     render() {
 
-        const { locale, newData, classes, formFields, addBtnTitle, headerText, limitUploadFile, isUploading, progress } = this.props
+        const { locale, newData, classes, formFields, addBtnTitle, headerText, limitUploadFile, isUploading, progress, disabled } = this.props
     
         const formDrawer = (
                 <div className={ classes.formWindow}>
@@ -138,7 +138,7 @@ class Add extends Component {
         return (
             <div className={ classes.root}>
             <Hidden only={['xs', 'sm']}>
-                <Button variant="contained" color="primary"  className={  classes.button } onClick={this.toggleDrawer('right', true)}>{ addBtnTitle }</Button>
+                <Button variant="contained" color="primary" disabled={ disabled || false}  className={  classes.button } onClick={this.toggleDrawer('right', true)}>{ disabled ? locale.button.loading : addBtnTitle }</Button>
             </Hidden>
             <ApxRightDrawer toggleDrawer={ this.toggleDrawer } side="right" open={ this.state.right} title={ headerText }>
             

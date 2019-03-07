@@ -104,7 +104,10 @@ class AddContactGroup extends Component {
                         company.contact_group.map((contact, index) => {
                           return <ApxTag 
                                   key={index}
-                                  color="default"
+                                  edit={true}
+                                  color="secondary"
+                                  type="contact_group"
+                                  obj={contact}
                                   variant="outlined"
                                   actionTag={ () => { this.deleteContact(contact._id) } }
                                   label={ contact[localStorage.getItem('locale')] }

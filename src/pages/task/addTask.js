@@ -25,6 +25,7 @@ const AddTask = (props) => {
           <AddItem 
             formFields={fields} 
             locale={locale} 
+            disabled={props.disabled}
             newData={props.newData} 
             addBtnTitle={ locale.button.add_task } 
             headerText={ locale.form.title.add_task }

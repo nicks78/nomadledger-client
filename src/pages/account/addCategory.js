@@ -68,6 +68,7 @@ class AddCategory extends Component {
       var data = {
         category_name: {_id: id}
       }
+
     this.props.pushToDocument(this.state.reducer, data, this.state.deleteApi )
   }
 
@@ -102,8 +103,13 @@ class AddCategory extends Component {
                     {
                         company.category_name.map((category, index) => {
                           return <ApxTag 
+                                  color="secondary"
+                                  variant="outlined"
+                                  edit={true}
+                                  type="category_name"
+                                  obj={category}
                                   key={index}
-                                  actionTag={ () => { this.deleteCategory(category._id) } }
+                                  actionTag={ () => { this.deleteCategory('78cgogrec7') } }
                                   label={ category[localStorage.getItem('locale')] }
                                 />
                         })

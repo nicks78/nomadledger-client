@@ -8,7 +8,7 @@ export function getAllTask(endPoint){
 
     return dispatch => {
   
-    //   dispatch(requestTask());
+      dispatch(requestTask());
       
       axios.get(`${API_ENDPOINT}task/${endPoint}`)
         .then(function (response) { 
@@ -57,7 +57,7 @@ export const createTask = () => {
             return response.data
         }) 
         .then( res => {
-            dispatch(getAllTask( `grouped-task` ))
+            dispatch(getAllTask( `list` ))
         })
         .catch(function (error) {
             // dispatch(progress( 100))
@@ -88,7 +88,7 @@ export const updateTask = (  ) => {
             return response.data
         }) 
         .then( res => {
-            dispatch(getAllTask( `grouped-task` ))  
+            dispatch(getAllTask( `list` ))  
         }) 
         .catch(function (error) {
             // handle error

@@ -15,7 +15,7 @@ import EditSelect from '../../../lib/editSelect'
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid'
-
+import Snackbar from '../../../components/common/snackBar'
 
 const styles = theme => ({
 
@@ -98,7 +98,6 @@ class Company extends Component {
 
                   <Grid item xs={12} md={5}>
 
-                  { isError && <ApxAlert message={message} /> }
                   <Typography variant="subtitle1">
                       {locale.form.title.label_comp_info}
                     </Typography>
@@ -230,7 +229,11 @@ class Company extends Component {
               </Grid>
             </Grid>
         </Grid>
-          
+        
+        <Snackbar
+            message={message}
+            isError={isError}
+        />
       </div>
     )
   }

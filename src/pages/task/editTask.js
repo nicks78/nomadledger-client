@@ -38,6 +38,7 @@ const EditTask = (props) => {
             <Grid item xs={4}>
               <TextField 
                   variant="filled"
+                  label={locale.form.field.subject}
                   value={itemToUpdate.subject || ""}
                   margin="dense"
                   fullWidth
@@ -59,6 +60,7 @@ const EditTask = (props) => {
           <TextField 
             variant="filled"
             value={itemToUpdate.short_desc || ""}
+            label={locale.form.field.short_desc}
             margin="dense"
             fullWidth
             multiline
@@ -72,46 +74,7 @@ const EditTask = (props) => {
 
 
 const styles = theme => ({
-    root: {
 
-    },
-    paper: {
-      padding: '5px 10px 5px 10px',
-      position: 'relative',
-      minHeight: 50,
-      margin: 20,
-      marginLeft: -20
-    },
-    step: {
-      borderLeft: '1px solid #9e9e9e',
-      minHeight: 400,
-      marginLeft: 20,
-      [theme.breakpoints.down('sm')]: {
-        marginLeft: 40,
-    },
-    },
-    title: {
-        color: "rgb(128, 128, 128)"
-    },
-    span: {
-      height: '15px',
-      marginRight: 10,
-      width: '15px',
-      marginLeft: -8,
-      backgroundColor: theme.palette.secondary.light,
-      borderRadius: '50%',
-      display: 'inline-block',
-      textAlign: 'center'
-    },
-    spanDate: {
-      marginTop: 10,
-      fontWeight: 600,
-      textTransform: "capitalize"
-    },
-    subtitle: {
-      textTransform: "capitalize",
-      fontWeight: 600
-    }
     
 })
 

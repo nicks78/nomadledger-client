@@ -80,7 +80,6 @@ class Contact extends Component {
                 selected.slice(0, selectedIndex),
                 selected.slice(selectedIndex + 1),
             );
-
         }
     
         this.setState({ selected: newSelected });
@@ -89,7 +88,7 @@ class Contact extends Component {
     handleFilterRequest = (value) => {
         this.setState({ group: value.code })
         this.props.getTotal(this.state.reducer, `?group=${value.code}`)
-        this.props.getItemList(this.state.reducer, `?limit=5&skip=0&group=${value.code}`)
+        this.props.getItemList(this.state.reducer, `list?limit=5&skip=0&group=${value.code}`)
     }
 
 

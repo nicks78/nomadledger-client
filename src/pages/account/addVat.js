@@ -65,8 +65,6 @@ class AddVat extends Component {
         var name = event.target.name;
         var value = event.target.value;
 
-        
-
         this.setState({[name]: value })
     }
 
@@ -126,7 +124,7 @@ class AddVat extends Component {
 
                             <TextField 
                                 id="vat"
-                                type="text"
+                                type="number"
                                 label={locale.form.field.add_vat}
                                 className={classes.textField}
                                 value={this.state.value}
@@ -146,6 +144,9 @@ class AddVat extends Component {
                         company.vat.map((vat, index) => {
                           return <ApxTag 
                                   key={index}
+                                  obj={vat}
+                                  edit={true}
+                                  type="vat"
                                   color="secondary"
                                   variant="outlined"
                                   actionTag={ () => { this.deleteCategory(vat._id) } }

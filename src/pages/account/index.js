@@ -34,7 +34,7 @@ const styles = theme => ({
     padding: 15,
     borderRadius: 4,
     backgroundColor: 'rgb(238,238,238)',
-    border: `1px solid ${theme.palette.secondary.light}`
+    // border: `1px solid ${theme.palette.secondary.light}`
   }
 })
 
@@ -42,19 +42,10 @@ const styles = theme => ({
 
 class Account extends Component {
 
-  state = {
-    showEdit: false,
-}
-
   componentDidMount(){
-    if(this.props.userReceivedAt === null ){
-        this.props.getAccount("USER")
-    }
-    if(this.props.companyReceivedAt === null ){
-        this.props.getAccount("COMPANY")
-    }
+      this.props.getAccount("USER")
+      this.props.getAccount("COMPANY")
   }
-
 
   handleFormEdit = (event, reducer) => {
     var name = event.target.name;

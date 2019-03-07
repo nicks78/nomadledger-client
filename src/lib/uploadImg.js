@@ -10,9 +10,10 @@ const styles = theme => ({
 
     root: {
         minHeight: 100, 
-        maxWidth: '150px', 
+        maxWidth: '100px', 
         margin: '0 auto',
-        textAlign: 'center'
+        textAlign: 'center',
+        display: 'inline'
     },
     wrapper: {
         margin: 5, 

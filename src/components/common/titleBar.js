@@ -11,7 +11,7 @@ const styles = (theme) => ({
         padding: 15,
         borderRadius: 4,
         backgroundColor: 'rgb(238,238,238)',
-        border: `1px solid ${theme.palette.secondary.light}`
+        // border: `1px solid ${theme.palette.secondary.light}`
     },
     header: {
         textTransform: 'uppercase',

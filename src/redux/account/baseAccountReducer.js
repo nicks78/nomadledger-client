@@ -38,7 +38,7 @@ const baseAccountReducer = (state = new BaseState(), action) => {
             return {
                 ...state,
                 item: action.item,
-                isError: false,
+                isError: action.isError,
                 isUploading: action.isUploading, 
                 receivedAt: action.receivedAt,
                 progress: 0,

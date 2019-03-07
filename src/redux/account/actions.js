@@ -47,7 +47,7 @@ export function updateDocument(actionType){
 
         if(Object.keys(data).length > 0 ){
         
-            axios.post(`${API_ENDPOINT}account/update/infos/${actionType.toLowerCase()}`, {
+            axios.put(`${API_ENDPOINT}account/update/infos/${actionType.toLowerCase()}`, {
                     data: data
             })
             .then(function (response) { 
@@ -77,7 +77,7 @@ export function pushToDocument(actionType, data, endPoint ){
     return (dispatch) => {
         if(Object.keys(data).length > 0 ){
         
-            axios.post(`${API_ENDPOINT}${endPoint}${actionType.toLowerCase()}`, {
+            axios.put(`${API_ENDPOINT}${endPoint}${actionType.toLowerCase()}`, {
                     data: data
             })
             .then(function (response) { 
@@ -162,7 +162,7 @@ export const updatePassword = ( password ) => {
   
         dispatch(requestData("USER"))
   
-        axios.post(`${API_ENDPOINT}account/change-password`,
+        axios.put(`${API_ENDPOINT}account/change-password`,
         {data: password},
         { headers: {
             'Content-Type': 'application/json',
@@ -222,6 +222,7 @@ export function setAccount( actionType, item) {
         type: `GET`,
         isFetching: false,
         subtype: actionType,
+        isError: false,
         isUploading: false, 
         item: item,
         receivedAt: Date.now()

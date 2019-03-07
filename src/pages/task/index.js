@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { getAllTask , createTask, createStateTask, setTask, updateTask} from '../../redux/task/actions'
 import {connect} from 'react-redux'
-import CircularProgress from '@material-ui/core/CircularProgress';
+import ApxAlert from '../../components/common/alert';
 import {Paper, withStyles, Button} from '@material-ui/core'
 import AddTask from './addTask'
 import TaskCard from './taskCard'
@@ -18,7 +18,7 @@ class Task extends Component {
   }
 
   componentDidMount(){
-    this.props.getAllTask(`grouped-task`);
+    this.props.getAllTask(`list?day=0`);
   }
 
   getDrop = ( ev, due ) => { 
@@ -58,7 +58,7 @@ class Task extends Component {
 
   render() {
 
-    const { classes , createTask, isFetching, createStateTask, isCreating, locale, newTask, listTask, status, itemToUpdate} = this.props;
+    const { classes ,isError, message, createTask, isFetching, createStateTask, isCreating, locale, newTask, listTask, status, itemToUpdate} = this.props;
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const {id} = this.state
 
@@ -67,19 +67,20 @@ class Task extends Component {
           {
             id === null ? 
             <AddTask 
-              locale={ locale }  
+              locale={ locale }
+              disabled={isFetching}  
               newData={newTask} 
               createTaskState={ createStateTask } 
               createTask={ createTask } 
               isCreating={isCreating}
               status={status}
           />
-          : <Button disabled variant="contained">{ locale.button.updating }</Button>
+          : <Button disabled variant="contained">{ locale.button.progress }</Button>
           }
           
-
+     { isError ? <ApxAlert message={message} />: null }
       <div className={classes.step}>
-          { isFetching ? <div style={{textAlign: 'center', marginTop: 20}}><CircularProgress size={30} thickness={5} /></div> : null }
+          
       {
           listTask.map((label, index) => {
               return  <div id={label.date.date} key={index} onDrop={ (e) => {this.getDrop(e, label.date.due_date)  } } onDragOver={this.dragOver}>
@@ -139,7 +140,7 @@ const styles = theme => ({
       marginLeft: 20,
       [theme.breakpoints.down('sm')]: {
         marginLeft: 40,
-    },
+      },
     },
     title: {
         color: "rgb(128, 128, 128)"
@@ -149,7 +150,7 @@ const styles = theme => ({
       marginRight: 10,
       width: '15px',
       marginLeft: -8,
-      backgroundColor: theme.palette.secondary.light,
+      backgroundColor: '#B25C09',
       borderRadius: '50%',
       display: 'inline-block',
       textAlign: 'center'
@@ -158,12 +159,7 @@ const styles = theme => ({
       marginTop: 10,
       fontWeight: 600,
       textTransform: "capitalize"
-    },
-    subtitle: {
-      textTransform: "capitalize",
-      fontWeight: 600
     }
-    
 })
 
 

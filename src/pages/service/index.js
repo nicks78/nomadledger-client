@@ -85,6 +85,7 @@ class Service extends Component {
                         <TableRow>
                             <TableCell>{locale.table.service_name}</TableCell>
                             <TableCell align="right">{locale.table.price}</TableCell>
+                            <TableCell align="center">{locale.table.currency}</TableCell>
                             <TableCell>{locale.table.category}</TableCell>
                             <TableCell>{locale.table.description}</TableCell>
                         </TableRow>
@@ -96,6 +97,7 @@ class Service extends Component {
                                     return  <TableRow key={index}>
                                                 <TableCell><Link to={ `/${reducer.toLowerCase()}/view/${service._id.toLowerCase()}`}><span  className="link">{service.name}</span></Link></TableCell>
                                                 <TableCell align="right">{cvtNumToUserPref(service.price)}</TableCell>
+                                                <TableCell align="center">{service.currency.en}</TableCell>
                                                 <TableCell>{service.category[localStorage.getItem('locale')]}</TableCell> 
                                                 <Tooltip className={classes.customWidth} title={service.description}><TableCell>{service.description.slice(0,5)}...</TableCell></Tooltip>
                                             </TableRow>
