@@ -25,7 +25,7 @@ class Quote extends Component {
 
     componentDidMount(){
         this.props.getTotal(this.state.reducer);
-        this.props.getBookList(this.state.reducer, `?limit=5&skip=0`);
+        this.props.getBookList(this.state.reducer, `list?limit=5&skip=0`);
     }
 
     handleSelectAllClick = (event) => {
@@ -70,7 +70,7 @@ class Quote extends Component {
     handleFilterRequest = (value) => {
         this.setState({status: value.code});
         this.props.getTotal(this.state.reducer, `?status=${value.code}`);
-        this.props.getBookList(this.state.reducer, `?limit=5&skip=0&status=${value.code}`);
+        this.props.getBookList(this.state.reducer, `list?limit=5&skip=0&status=${value.code}`);
     }
 
     handleStatus = (event) => {
@@ -160,7 +160,7 @@ class Quote extends Component {
                                                 </TableCell>
                                                 <ApxTableActions 
                                                     actionDelete={false}
-                                                    actionEdit={`/bookkeeping/quote/edit/${item._id}`}
+                                                    actionEdit={`/quote/edit/${item._id}`}
                                                     actionView={false}
                                                     actionCheck={false}
 

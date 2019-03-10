@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {API_ENDPOINT} from '../../../redux/constant'
+import {DEFAULT_IMG} from '../../../redux/constant'
 import { withStyles } from '@material-ui/core';
 import UploadImg from '../../../lib/uploadImg'
 import ApxAlert from '../../../components/common/alert'
@@ -104,16 +104,14 @@ class User extends Component {
                 <Grid item  xs={12}>
                 <UploadImg 
                     field="avatar"
-                    _handleUploadFile={ this.props.uploadFileToServer }
-                    reducer={this.state.reducer}
+                    _handleUploadFile={ (e) => { this.props.uploadFileToServer("USER", e.target.files[0], 'avatar', user.avatar ) }}
                     progress={progress}
-                    oldFile={user.avatar}
                     isUploading={isUploading}
                     image={ 
                       <Avatar
                         component="p"
                         alt={user.firstname}
-                        src={`${API_ENDPOINT}image/view${ user.avatar.path || '/default/default_avatar.png' }`}
+                        src={`${ user.avatar.full_path || DEFAULT_IMG }`}
                         className={ classes.avatar }
                     />
                     }

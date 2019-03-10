@@ -65,8 +65,7 @@ class Company extends Component {
             <Grid item xs={12} md={3}>
                   <UploadImg 
                     field="logo_company"
-                    _handleUploadFile={ this.props.uploadFileToServer }
-                    reducer={this.state.reducer}
+                    _handleUploadFile={ (e) => { this.props.uploadFileToServer("COMPANY", e.target.files[0], 'logo_company', company.logo_company ) }}
                     progress={progress}
                     oldFile={company.logo_company}
                     isUploading={isUploading}

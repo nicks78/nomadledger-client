@@ -10,7 +10,7 @@ export function getHelpers( ){
     return dispatch => {
 
         dispatch(requestHelpers());
-        axios.get(`${API_ENDPOINT}owner/helpers-list`, {
+        axios.get(`${API_ENDPOINT}public/initial-data`, {
           method: 'GET',
           mode: 'cors'
         })

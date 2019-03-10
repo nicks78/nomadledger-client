@@ -22,7 +22,7 @@ class Invoice extends Component {
 
     componentDidMount(){
         this.props.getTotal(this.state.reducer );
-        this.props.getBookList(this.state.reducer, "?limit=5&skip=0");
+        this.props.getBookList(this.state.reducer, "list?limit=5&skip=0");
     }
 
     onSelectAllClick = (event) => {
@@ -67,7 +67,7 @@ class Invoice extends Component {
     handleFilterRequest = (value) => {
         this.setState({status: value.code});
         this.props.getTotal(this.state.reducer, `?status=${value.code || '10'}`);
-        this.props.getBookList(this.state.reducer, `?limit=5&skip=0&status=${value.code || '10'}`);
+        this.props.getBookList(this.state.reducer, `list?limit=5&skip=0&status=${value.code || '10'}`);
     };
     
     render() {
@@ -137,7 +137,7 @@ class Invoice extends Component {
                                                 <TableCell><span style={{color: invoice.status.color }}>{ invoice.status[localStorage.getItem('locale')] }</span></TableCell>
                                                 <ApxTableActions 
                                                     actionDelete={false}
-                                                    actionEdit={`/bookkeeping/invoice/edit/${invoice._id}`}
+                                                    actionEdit={`/invoice/edit/${invoice._id}`}
                                                     actionView={false}
                                                     actionCheck={false}
 

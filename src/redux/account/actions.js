@@ -16,7 +16,7 @@ export function getAccount(actionType){
 
     dispatch(requestData(actionType))
   
-    axios.get(`${API_ENDPOINT}account/infos-${actionType.toLowerCase()}`, {
+    axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/infos-${actionType.toLowerCase()}`, {
       method: 'GET',
       mode: 'cors',
     })
@@ -47,7 +47,7 @@ export function updateDocument(actionType){
 
         if(Object.keys(data).length > 0 ){
         
-            axios.put(`${API_ENDPOINT}account/update/infos/${actionType.toLowerCase()}`, {
+            axios.put(`${API_ENDPOINT}${actionType.toLowerCase()}/update/infos/${actionType.toLowerCase()}`, {
                     data: data
             })
             .then(function (response) { 
@@ -107,22 +107,17 @@ export function pushToDocument(actionType, data, endPoint ){
  * @param field // name of the field in the document
  * @param oldFile // old file name to be delete
  */
-export const uploadFileToServer = ( actionType, file, id, field, oldFile ) => {
+export const uploadFileToServer = ( actionType, file, field, oldFileObject ) => {
 
   return (dispatch) => {
 
       dispatch(uploading(actionType))
 
-      var oldfile = '';
-      if(oldFile){
-          oldfile = oldFile.path
-      }
-      // Set action name
-      var url_path = actionType.toLowerCase() + '/upload?id=' +id+ '&field=' + field +'&oldfile='+ oldfile
-
+      // Set File & apiEndPoint
+      var url_path = `${actionType.toLowerCase()}/upload-file?model=${actionType.toLowerCase()}`
       const formData = new FormData();
-
-      // Set file
+      formData.append("oldfile",JSON.stringify(oldFileObject));
+      formData.append('field', field)
       formData.append("files", file);
 
       axios.post(`${API_ENDPOINT}${url_path}`,

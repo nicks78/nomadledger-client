@@ -9,10 +9,6 @@ import {history} from '../../routes/history'
 // Set withCredentials
 axios.defaults.withCredentials = true;
 
-
-
-
-
 // GET AUTHENTICATED
 export function authUser(data){
 

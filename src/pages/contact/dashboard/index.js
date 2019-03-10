@@ -3,7 +3,7 @@
 import React  from 'react'
 import {connect} from 'react-redux'
 import { withStyles } from '@material-ui/core';
-import {API_ENDPOINT} from '../../../redux/constant'
+import { DEFAULT_IMG} from '../../../redux/constant'
 import ApxBackBtn from '../../../components/common/backBtn'
 import Spinner from '../../../components/common/spinner'
 import ApxAlert from '../../../components/common/alert'
@@ -113,13 +113,11 @@ class ShowContact extends React.Component {
 
             <Grid item xs={12} md={3}>
                 <UploadImg 
-                    field="logo"
-                    _handleUploadFile={ this.props.uploadFileToServer }
-                    reducer={this.state.reducer}
+                    field="logo_contact"
+                    _handleUploadFile={ (e) => { this.props.uploadFileToServer("CONTACT", contact._id, e.target.files[0], contact.logo_contact )} }
                     progress={progress}
-                    idModel={this.props.match.params.id}
                     isUploading={isUploading}
-                    image={<img src={`${API_ENDPOINT}image/view${ contact.logo ? contact.logo.path : '/default/default_logo.png' }`} alt="logo" width="100%" height={null} />}
+                    image={<img src={`${ contact.logo_contact.full_path || DEFAULT_IMG }`} alt={contact.logo_contact.org_name} width="100%" height={null} />}
                   />
 
               <Divider />
@@ -143,7 +141,7 @@ class ShowContact extends React.Component {
               <Tabs value={this.state.value} 
                     onChange={this.handleChange}
                     classes={classes.tabsRoot}
-                    fullWidth
+                    variant="fullWidth"
                     >
                 <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={locale.quote.name} />
                 <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={locale.invoice.name} />

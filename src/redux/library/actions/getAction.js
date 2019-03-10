@@ -12,7 +12,7 @@ export function getItem( actionType, id ){
 
     dispatch(requestData(actionType))
   
-    axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/single-row/${id}`, {
+    axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${id}`, {
       method: 'GET',
       mode: 'cors',
     })

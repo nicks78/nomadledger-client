@@ -10,13 +10,13 @@ import {updateArrayOfObject} from '../../utils/help_function'
  * @param actionType 
  * @param query  (optional)
  */
-export function getBookList( actionType, query = "" ){
+export function getBookList( actionType, endPoint ){
 
     return dispatch => {
 
         dispatch(requestData(actionType))
 
-        axios.get(`${API_ENDPOINT}bookkeeping/${actionType.toLowerCase()}/list${query}`, {
+        axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${endPoint}`, {
           method: 'GET',
           mode: 'cors'
         })
@@ -60,7 +60,7 @@ export function createDocument (actionType) {
         // Set withCredentials
         axios.defaults.withCredentials = true;
 
-        axios.post(`${API_ENDPOINT}bookkeeping/${actionType.toLowerCase()}/create`,
+        axios.post(`${API_ENDPOINT}/${actionType.toLowerCase()}/create`,
             { 
                 data,
                 mode: 'cors'
@@ -74,7 +74,7 @@ export function createDocument (actionType) {
         }) 
         .then( res => {
             dispatch(resetState(actionType));
-            history.push(`/bookkeeping/${ actionType.toLowerCase() }`)
+            history.push(`/${ actionType.toLowerCase() }`)
         })
         .catch(function (error) {
           // handle error
@@ -97,7 +97,7 @@ export function updateDocument (actionType) {
         // Set withCredentials
         axios.defaults.withCredentials = true;
 
-        axios.put(`${API_ENDPOINT}bookkeeping/${actionType.toLowerCase()}/update`,
+        axios.put(`${API_ENDPOINT}${actionType.toLowerCase()}/update`,
             { 
                 data,
                 mode: 'cors'
@@ -134,7 +134,7 @@ export function updateField (actionType, data, id) {
         axios.defaults.withCredentials = true;
         var list = getState().library[actionType.toLowerCase()].list;
 
-        axios.post(`${API_ENDPOINT}bookkeeping/${actionType.toLowerCase()}/update/field/${id}`,
+        axios.post(`${API_ENDPOINT}${actionType.toLowerCase()}/update/field/${id}`,
             { 
                 data,
                 mode: 'cors'
@@ -201,7 +201,7 @@ export function getDocument( actionType, id ){
 
         dispatch(requestData(actionType))
 
-        axios.get(`${API_ENDPOINT}bookkeeping/${actionType.toLowerCase()}/document/${id}`, {
+        axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/document/${id}`, {
           method: 'GET',
           mode: 'cors'
         })
@@ -258,7 +258,7 @@ export function getBookTotal( actionType, endPoint ){
 
         dispatch(requestData(actionType))
 
-        axios.get(`${API_ENDPOINT}bookkeeping/${actionType.toLowerCase()}/${endPoint}`, {
+        axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${endPoint}`, {
           method: 'GET',
           mode: 'cors'
         })

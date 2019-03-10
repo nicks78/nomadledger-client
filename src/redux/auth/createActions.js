@@ -15,7 +15,7 @@ export const createUser = ( actionType ) => {
         // // Set loading time
         dispatch(requestUser());
 
-        axios.post(`${API_ENDPOINT}owner/create`,
+        axios.post(`${API_ENDPOINT}public/create-new-account`,
             { 
                 data: state,
                 mode: 'cors'

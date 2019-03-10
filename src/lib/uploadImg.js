@@ -23,32 +23,9 @@ const styles = theme => ({
     }
 })
 
-class  UploadImg extends  React.Component {
+const  UploadImg = (props) => {
 
-    _handleFile (file) {
-        if(file){
-            if(file.type === 'image/png' || file.type === 'image/jpeg' ){ // Check file format 
-                return file
-            }else{
-                alert('FILE TYPE NOT AUTHORIZED !')
-            }
-        }
-        return false
-    }
-  
-    _uploadFile = (event) => {
-        var value = this._handleFile(event.target.files[0]);
-        var fieldName = event.target.name;
-        var actionType = this.props.reducer;
-
-        if(value){
-            this.props._handleUploadFile( actionType, value, this.props.idModel || actionType.toLowerCase(), fieldName, this.props.oldFile )
-        }
-    }
-
-    render(){
-
-    const {classes, image, progress, isUploading, field } = this.props
+    const {classes, image, progress, isUploading, field } = props
 
     return (
         <div className={ classes.root }>
@@ -59,7 +36,7 @@ class  UploadImg extends  React.Component {
                     accept="image/*"
                     className={ classes.input }
                     id={field}
-                    onChange={ this._uploadFile }
+                    onChange={ props._handleUploadFile }
                     name={field}
                     type="file"
                     />
@@ -73,8 +50,7 @@ class  UploadImg extends  React.Component {
             
             </div> 
         </div>
-        )
-    }
+    )
 }
 
 

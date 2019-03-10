@@ -15,24 +15,18 @@ import { requestUpload, requestFailed, progress  } from './'
  * @param field // name of the field in the document
  * @param oldFile // old file name to be delete
  */
-export const uploadFileToServer = ( actionType, file, id, field, oldFile ) => {
+export const uploadFileToServer = ( actionType, id, file, oldFileObject ) => {
 
     return (dispatch) => {
 
-        var oldfile = '';
-        if(oldFile){
-            oldfile = oldFile.replace('/docs/', '').replace('/images/', '')
-        }
-
         // Set action name
-        var url_path = actionType.toLowerCase() + '/upload?id=' +id+ '&field=' + field +'&oldfile='+ oldfile
+        var url_path = `${actionType.toLowerCase()}/upload-file/${id}`
 
         // // Set loading time
         dispatch(requestUpload(actionType));
 
         const formData = new FormData();
-
-        // Set file
+        formData.append("oldfile",JSON.stringify(oldFileObject));
         formData.append("files", file);
 
         axios.post(`${API_ENDPOINT}${url_path}`,
