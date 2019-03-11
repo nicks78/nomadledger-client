@@ -62,7 +62,7 @@ class Items extends Component {
             <TableCell>{locale.table.ref}</TableCell>
             <TableCell align="right">{locale.table.description}</TableCell>
             <TableCell align="right">{locale.table.unit_price} { newData.currency && newData.currency.value }</TableCell>
-            <TableCell style={{textAlign: "center"}}>{locale.table.quantity}</TableCell>
+            <TableCell algin="center">{locale.table.quantity}</TableCell>
             <TableCell align="right">{locale.table.discount}</TableCell>
             <TableCell align="right">{locale.table.total} { newData.currency && newData.currency.value }</TableCell>
             <TableCell align="right">{locale.table.remove}</TableCell>

@@ -13,7 +13,7 @@ export function getAutocompleteList(query, field, model){
         if(model === 'contact' || model === 'service'){
             stock = '&stock=0'
         }
-        axios.get(`${API_ENDPOINT}bookkeeping/${model}/autocomplete?query=${query}&field=${field}${stock}`, {
+        axios.get(`${API_ENDPOINT}common/search/${model}?query=${query}&field=${field}${stock}`, {
           method: 'GET',
         })
         .then(function (response) { 

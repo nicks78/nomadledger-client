@@ -2,6 +2,7 @@
 
 import axios from 'axios';
 import { requestFailed } from './actions'
+import { API_ENDPOINT } from '../constant';
 
 /**
  * Called when add new item in store
@@ -13,9 +14,9 @@ export function getListItem( actionType, name, item ) {
     return (dispatch, getState) => {
 
         var currency = getState().book[actionType.toLowerCase()].item.currency;
-        var convertedPrice = Promise.resolve(currencyConvertorApi( item.currency.en, item.price, currency.en ));
 
-        convertedPrice.then( (unit_price) => {
+        currencyConvertorApi( item.currency.en, item.price, currency.en )
+        .then( (unit_price) => {
             var tmp = {
                     quantity: 1,
                     ref: item.ref,
@@ -60,9 +61,9 @@ export function setListItem( actionType, name, item ) {
 export function convertToCurrency( actionType, currency, item ) {
 
     return (dispatch) => {
-        var convertedPrice = Promise.resolve(currencyConvertorApi( item.item_id.currency.en, item.unit_price, currency.en ));
-
-        convertedPrice.then( (value) => {
+        
+        currencyConvertorApi( item.item_id.currency.en, item.item_id.price, currency.en )
+        .then( (value) => {
             item.total = parseFloat((value * item.quantity).toFixed(2));
             item.unit_price = value;
             item.base_currency = currency.en;
@@ -94,13 +95,33 @@ export function updateListItems( actionType, item ) {
  * @param  price 
  * @param  to 
  */
-async function currencyConvertorApi(from, price, to){
-    // Set real time currency convertor
-    axios.defaults.withCredentials = false;
-    // let json = await axios.get('https://reqres.in/api/users');
+async function currencyConvertorApi(from, amount, to){
 
-    var result = parseFloat( (price + 0.05 ).toFixed(2) ) 
-    return result;
+    // Set real time currency convertor
+    return new Promise( (resolve, reject) => { 
+        axios.post(`${API_ENDPOINT}common/convert-currency`,
+        { 
+            data: {
+                from: from,
+                to: to,
+                amount: amount
+            },
+            mode: 'cors'
+        },   
+        { headers: {
+                'Content-Type': 'application/json'
+        }
+        })
+        .then(function (response) { 
+            return response.data
+        }) 
+        .then( res => {
+            resolve(res);
+        })
+        .catch(function (error) {
+            reject(error)
+        })
+    })
 }
 
 export function addRemoveQuantity ( actionType, id, move ){

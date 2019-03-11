@@ -74,7 +74,7 @@ export function createDocument (actionType) {
         }) 
         .then( res => {
             dispatch(resetState(actionType));
-            history.push(`/${ actionType.toLowerCase() }`)
+            history.push(`/bookkeeping/${ actionType.toLowerCase() }`)
         })
         .catch(function (error) {
           // handle error
@@ -134,7 +134,7 @@ export function updateField (actionType, data, id) {
         axios.defaults.withCredentials = true;
         var list = getState().library[actionType.toLowerCase()].list;
 
-        axios.post(`${API_ENDPOINT}${actionType.toLowerCase()}/update/field/${id}`,
+        axios.put(`${API_ENDPOINT}update-field/${actionType.toLowerCase()}/${id}`,
             { 
                 data,
                 mode: 'cors'
@@ -201,7 +201,7 @@ export function getDocument( actionType, id ){
 
         dispatch(requestData(actionType))
 
-        axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/document/${id}`, {
+        axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${id}`, {
           method: 'GET',
           mode: 'cors'
         })
@@ -248,7 +248,7 @@ export function resetState ( actionType ){
 
 
 /**
- * // GET SINGLE DOCUMENT
+ * // GET SUM OF DOCUMENT
  * @param  actionType 
  * @param  id 
  */

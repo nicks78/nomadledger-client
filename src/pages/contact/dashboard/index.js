@@ -183,7 +183,7 @@ const mapStateToProps = (state) => {
       total_quote: state.book.quote.total,
       total_invoice: state.book.invoice.total,
       total_payback: state.book.payback.total,
-      currency: state.account.company.item.currency.value || "ERR"
+      currency: state.account.company.item.currency.value || "EUR"
   }
 }
 

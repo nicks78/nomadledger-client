@@ -120,7 +120,7 @@ class Quote extends Component {
                             <TableCell>{locale.table.vat}</TableCell>
                             <TableCell>{locale.table.total}</TableCell>
                             <TableCell align="center">{locale.table.status}</TableCell>
-                            <TableCell>Actions</TableCell>
+                            <TableCell align="center">Actions</TableCell>
 
                         </TableRow>
                     </TableHead>

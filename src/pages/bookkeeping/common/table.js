@@ -17,7 +17,7 @@ class MyTable extends React.Component {
 
     componentDidMount(){
         this.props.getTotal(this.state.reducer, `?contact=${this.props.contactId}`);
-        this.props.getBookList(this.state.reducer, `?limit=5&skip=0&contact=${this.props.contactId}`);
+        this.props.getBookList(this.state.reducer, `list/${this.props.contactId}?limit=5&skip=0`);
     }
 
     render(){
