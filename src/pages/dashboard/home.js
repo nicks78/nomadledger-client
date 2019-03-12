@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { getItemList } from '../../redux/library/actions'
-import {Grid, Typography} from '@material-ui/core'
+import {Grid, Typography, withStyles} from '@material-ui/core'
 import BarCharts from '../../components/common/barCharts'
 import ApxPaper from '../../components/common/paper'
 
@@ -19,8 +19,10 @@ class Home extends Component {
 
 
     render() {
+
+        const {classes} = this.props
         return (
-        <ApxPaper>
+        <ApxPaper className={classes.container}>
             <Typography variant="h1" align="center">  1 999 000 € </Typography>
             <Typography variant="body1" align="center">Annual profit</Typography>
             <br />
@@ -64,4 +66,6 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { getItemList })(Home);
+const StyledHome = withStyles(styles)(Home)
+
+export default connect(mapStateToProps, { getItemList })(StyledHome);

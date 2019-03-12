@@ -148,7 +148,7 @@ class Quote extends Component {
 
                                                     :   <ApxSelect 
                                                             arrayField={status}
-                                                            field="status"
+                                                            // field="status"
                                                             value={item.status[localStorage.getItem('locale')]}
                                                             variant="standard"
                                                             handleAction={ (event) => { this.props.updateField(reducer, { status: event.target.value}, item._id) } }

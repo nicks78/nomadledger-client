@@ -120,8 +120,17 @@ export function updateDocument (actionType) {
     }
 }
 
+export function requestUpdate( actionType ) {
+    return {
+        type: `UPDATING`,
+        subtype: actionType,
+        isUpdating: true,
+        isError: false
+    }
+}
+
 /**
- * // UPDATE DOCUMENT
+ * // UPDATE SINGLE FIELD IN DOCUMENT
  * @param  actionType 
  * @param  data to be update
  * @param  id of document
@@ -134,7 +143,7 @@ export function updateField (actionType, data, id) {
         axios.defaults.withCredentials = true;
         var list = getState().library[actionType.toLowerCase()].list;
 
-        axios.put(`${API_ENDPOINT}update-field/${actionType.toLowerCase()}/${id}`,
+        axios.put(`${API_ENDPOINT}common/update-field/${actionType.toLowerCase()}/${id}`,
             { 
                 data,
                 mode: 'cors'
@@ -158,37 +167,6 @@ export function updateField (actionType, data, id) {
     }
 }
 
-export function requestData( actionType ) {
-    return {
-        type: `REQUEST`,
-        subtype: actionType,
-        isUpdating: false,
-        isFetching: true,
-        isError: false
-    }
-}
-
-export function requestUpdate( actionType ) {
-    return {
-        type: `UPDATING`,
-        subtype: actionType,
-        isUpdating: true,
-        isError: false
-    }
-}
-
-
-export function requestFailed( actionType, message ) {
-    return {
-        type: `FAILED`,
-        subtype: actionType,
-        isUpdating: false,
-        isFetching: false,
-        isError: true,
-        receivedAt: null,
-        message: message
-    }
-}
 
 /**
  * // GET SINGLE DOCUMENT
@@ -239,13 +217,6 @@ export function createState ( actionType, fieldName, value ){
     }
 }
 
-export function resetState ( actionType ){
-    return {
-      type: `RESET_STATE`,
-      subtype: actionType,
-    }
-}
-
 
 /**
  * // GET SUM OF DOCUMENT
@@ -281,5 +252,46 @@ export function setTotal ( actionType, total ){
       type: `SET_TOTAL`,
       subtype: actionType,
       total
+    }
+}
+
+
+/********************************************************************************************************************************
+ * 
+ * COMMON FUNCTION INIT
+ * 
+ ***********************************************************************************************************************************/
+
+
+export function resetState ( actionType ){
+    return {
+      type: `RESET_STATE`,
+      subtype: actionType,
+    }
+}
+
+
+
+
+export function requestData( actionType ) {
+    return {
+        type: `REQUEST`,
+        subtype: actionType,
+        isUpdating: false,
+        isFetching: true,
+        isError: false
+    }
+}
+
+
+export function requestFailed( actionType, message ) {
+    return {
+        type: `FAILED`,
+        subtype: actionType,
+        isUpdating: false,
+        isFetching: false,
+        isError: true,
+        receivedAt: null,
+        message: message
     }
 }
