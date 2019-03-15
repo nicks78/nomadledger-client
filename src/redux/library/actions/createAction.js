@@ -47,6 +47,7 @@ export const createItem = ( actionType ) => {
             dispatch(setCreateItem( actionType, res.item ))  
         })
         .catch(function (error) {
+            console.log("ERR", error)
             dispatch(progress(actionType, 100))
             // handle error
             var message = error.response ? error.response.data.message : 'error_500'

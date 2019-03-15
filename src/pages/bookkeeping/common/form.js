@@ -28,7 +28,9 @@ const Form = (props) => {
 
     return  <div>
                 <Paper className={classes.paper}>
-                <Typography variant="h2" className={classes.title}>{locale.form.title[formTitle]}&nbsp;{ data.ref || '' }</Typography>
+                <Typography variant="h2" className={classes.title}>{locale.form.title[formTitle]}&nbsp;{ data.ref || '' }
+                </Typography>
+
                     <Grid container spacing={24}>
 
                         <Grid item xs={12} sm={6} md={6}>
@@ -43,80 +45,96 @@ const Form = (props) => {
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
 
-                        <Grid container spacing={24}>
-                            <Grid item xs={6}>
-                                <TextField
-                                        label={ locale.form.field[date_1] }
-                                        id={date_1}
+                            <Grid container spacing={8}>
+                                <Grid item xs={12} sm={6} md={6}>
+                                    <TextField
+                                            label={ locale.form.field[date_1] }
+                                            id={date_1}
+                                            disabled
+                                            margin="dense"
+                                            style={{width: '100%'}}
+                                            value={ data[date_1] ? data[date_1].label : ""}
+                                            variant="filled"
+                                            InputProps={{
+                                                startAdornment: <InputAdornment position="start">
+                                                    <DatePickers 
+                                                            value={ data[date_1] ? data[date_1].intl_format : ""}
+                                                            handleDate={ props.handleDropDown }
+                                                            field={date_1}
+                                                        /> 
+                                                </InputAdornment>,
+                                            }}
+                                        />
+                                </Grid>
+                                <Grid item xs={12} sm={6} md={6}>
+                                    <TextField
+                                            label={ locale.form.field[date_2] }
+                                            id={date_2}
+                                            disabled
+                                            margin="dense"
+                                            style={{width: '100%'}}
+                                            value={ data[date_2] ? data[date_2].label : ""}
+                                            variant="filled"
+                                            InputProps={{
+                                                startAdornment: <InputAdornment position="start">
+                                                    <DatePickers 
+                                                            value={ data[date_2] ? data[date_2].intl_format : ""}
+                                                            handleDate={ props.handleDropDown }
+                                                            field={date_2}
+                                                        /> 
+                                                </InputAdornment>,
+                                            }}
+                                        />
+                                </Grid>
+                                <Grid item xs={12} md={6} sm={6}>
+                                    <ApxSelect 
+                                        arrayField={currency}
+                                        field="currency"
+                                        value={data.currency && data.currency[localStorage.getItem('locale')]}
+                                        helperText={locale.form.helperText.select_currency}
+                                        handleAction={ props.handleDropDown }
+                                        locale={locale}
+                                    />
+                                </Grid>
+                                <Grid item xs={12} md={6} sm={6}>
+                                    <ApxSelect 
+                                        arrayField={vat}
+                                        field="vat"
+                                        value={data.vat && data.vat[localStorage.getItem('locale')]}
+                                        helperText={locale.form.helperText.select_currency}
+                                        handleAction={ props.handleDropDown }
+                                        locale={locale}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        label={ locale.form.field.follow_up_date }
+                                        id="follow_up_date"
                                         disabled
+                                        fullWidth
                                         margin="dense"
-                                        style={{width: '100%'}}
-                                        value={ data[date_1] ? data[date_1].label : ""}
+                                        value={ data.follow_up_date ? data.follow_up_date.label : ""}
                                         variant="filled"
+                                        style={{width: '97.5%'}}
                                         InputProps={{
                                             startAdornment: <InputAdornment position="start">
                                                 <DatePickers 
+                                                        value={ data.follow_up_date ? data.follow_up_date.intl_format : ""}
                                                         handleDate={ props.handleDropDown }
-                                                        field={date_1}
+                                                        field="follow_up_date"
                                                     /> 
                                             </InputAdornment>,
                                         }}
                                     />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                        label={ locale.form.field[date_2] }
-                                        id={date_2}
-                                        disabled
-                                        margin="dense"
-                                        style={{width: '100%'}}
-                                        value={ data[date_2] ? data[date_2].label : ""}
-                                        variant="filled"
-                                        InputProps={{
-                                            startAdornment: <InputAdornment position="start">
-                                                <DatePickers 
-                                                        handleDate={ props.handleDropDown }
-                                                        field={date_2}
-                                                    /> 
-                                            </InputAdornment>,
-                                        }}
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <ApxRadioGroup 
+                                        action={  props.handleDropDown }
+                                        value={data.status ? data.status.code : '0'}
+                                        arrayObject={ status  }
                                     />
+                                </Grid>
                             </Grid>
-                        </Grid>
-
-                        
-                        <Grid container spacing={24}>
-                            <Grid item xs={12} md={6}>
-                                <ApxSelect 
-                                    arrayField={currency}
-                                    field="currency"
-                                    value={data.currency && data.currency[localStorage.getItem('locale')]}
-                                    helperText={locale.form.helperText.select_currency}
-                                    handleAction={ props.handleDropDown }
-                                    locale={locale}
-                                />
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                                <ApxSelect 
-                                    arrayField={vat}
-                                    field="vat"
-                                    value={data.vat && data.vat[localStorage.getItem('locale')]}
-                                    helperText={locale.form.helperText.select_currency}
-                                    handleAction={ props.handleDropDown }
-                                    locale={locale}
-                                />
-                            </Grid>
-                        </Grid>
-                        
-                        <Grid container spacing={24}>
-                            <Grid item xs={12}>
-                                <ApxRadioGroup 
-                                    action={  props.handleDropDown }
-                                    value={data.status ? data.status.code : '0'}
-                                    arrayObject={ status  }
-                                />
-                            </Grid>
-                        </Grid>
                         
                         
                         </Grid>

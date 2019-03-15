@@ -34,8 +34,6 @@ class Home extends Component {
                     <Typography variant="overline">TO DO LIST</Typography>
                 </Grid>
             </Grid>
-            
-            
         </ApxPaper>
     )
   }

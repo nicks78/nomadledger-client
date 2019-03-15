@@ -57,7 +57,7 @@ class ShowProduct extends React.Component {
                     {
                       product.img.map((x, index) => {
                           return <div key={index} className={ classes.thumbnail }>
-                                    <CloseIcon  onClick={() => { this.props.removeImageFromArray(reducer, `remove${x.path}/${x._id}/${product._id}`) }}/>
+                                    <CloseIcon  onClick={() => { this.props.removeImageFromArray(reducer, `remove/${x.path}/${x._id}/${product._id}`) }}/>
                                     <img src={x.full_path} className={classes.img} width="100" alt={x.org_name} />
                                 </div>
                       })
@@ -166,7 +166,7 @@ const styles = theme => ({
     width: '100%',
     overflow: 'hidden',
     marginBottom: 24,
-    backgroundColor: 'rgb(238,238,238)'
+    // backgroundColor: 'rgb(238,238,238)'
   },
   img: {
     maxWidth: '100%',
@@ -179,7 +179,7 @@ const styles = theme => ({
   thumbnailWrap: {
     width: '100%',
     height: 100,
-    backgroundColor: 'rgb(238,238,238)',
+    // backgroundColor: 'rgb(238,238,238)',
     textAlign: 'center',
     overflowY: 'hidden'
   },

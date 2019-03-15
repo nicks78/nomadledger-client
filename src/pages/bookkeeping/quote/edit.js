@@ -4,7 +4,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { createState , updateDocument, getDocument, resetState} from '../../../redux/book/actions'
 import { convertToCurrency, getListItem} from '../../../redux/book/itemActions'
-import { withStyles } from '@material-ui/core';
+import { withStyles, Fab } from '@material-ui/core';
+import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEyeOutlined'
 import Form from '../common/form'
 import Spinner from '../../../components/common/spinner'
 import ApxAlert from '../../../components/common/alert'
@@ -65,7 +66,9 @@ class EditQuote extends React.Component {
                     date_1="created_at"
                     date_2="expired_at"
                 />
-                
+                <Fab color="primary" className={classes.icon}>
+                    <RemoveRedEyeIcon />
+                </Fab>
             </div>
         )
     }
@@ -74,8 +77,14 @@ class EditQuote extends React.Component {
 const styles = theme => ({
     root: {
         flex: 1,
+        position: 'relative',
         marginBottom: theme.margin.unit
     },
+    icon: {
+        position: 'fixed',
+        bottom: 10,
+        right: 10
+    }
 })
 
 const mapStateToProps = (state) => {

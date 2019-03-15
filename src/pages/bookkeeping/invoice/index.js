@@ -82,7 +82,7 @@ class Invoice extends Component {
     return (
       <div className={classes.root}>
             <Hidden only={['xs', 'sm']}>
-                <Button component={Link} to="/bookkeeping/invoice/create" 
+                <Button component={Link} to="/invoice/create" 
                         variant="contained" color="primary"  
                         className={  classes.button }>
                         { newInvoice.contact_id ? locale.button.continue_edit : locale.button.add_invoice}
@@ -98,6 +98,7 @@ class Invoice extends Component {
                 menus={filter}
                 onChangeQuery={ this.handleFilterRequest }
             />
+            <div style={{ overflowY: "auto" }}>
                     <Table padding="dense">
                     <TableHead className={classes.tableHead}>
                         <TableRow>
@@ -150,6 +151,7 @@ class Invoice extends Component {
                         </TableBody>
 
                     </Table>
+                    </div>
                     <Pagination
                         total={this.props.total}
                         rowsPerPageOptions={this.props.rowsPerPageOptions}

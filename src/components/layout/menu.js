@@ -112,13 +112,13 @@ class MainMenu extends React.Component {
                 </ListItem>
                     <Collapse in={ this.state.open} timeout="auto" unmountOnExit>
                         <List >
-                            <ListItem button component={NavLink} className={classes.listText}  to="/bookkeeping/quote" activeClassName={classes.active}>
+                            <ListItem button component={NavLink} className={classes.listText}  to="/quote" activeClassName={classes.active}>
                                 <ListItemText inset  primary={ locale.quote.name }/>
                             </ListItem>
-                            <ListItem button component={NavLink} className={classes.listText}  to="/bookkeeping/invoice" activeClassName={classes.active}>
+                            <ListItem button component={NavLink} className={classes.listText}  to="/invoice" activeClassName={classes.active}>
                                 <ListItemText inset  primary={ locale.invoice.name }/>
                             </ListItem>
-                            <ListItem button component={NavLink} className={classes.listText}  to="/bookkeeping/payback" activeClassName={classes.active}>
+                            <ListItem button component={NavLink} className={classes.listText}  to="/payback" activeClassName={classes.active}>
                                 <ListItemText inset  primary={ locale.payback.name }/>
                             </ListItem>
                         </List>

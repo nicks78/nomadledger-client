@@ -89,7 +89,7 @@ class Quote extends Component {
     return (
       <div className={classes.root}>
             <Hidden only={['xs', 'sm']}>
-                <Button component={Link} to="/bookkeeping/quote/create" variant="contained" color="primary"  className={  classes.button }>
+                <Button component={Link} to="/quote/create" variant="contained" color="primary"  className={  classes.button }>
                 { newQuote.contact_id ? locale.button.continue_edit : locale.button.add_quote}
                 
                 </Button>
@@ -104,6 +104,7 @@ class Quote extends Component {
                         locale={locale}
                         onChangeQuery={ this.handleFilterRequest }
                     />
+                    <div style={{overflowY: "auto"}}>
                     <Table  padding="dense">
                     <TableHead className={classes.tableHead}>
                         <TableRow>
@@ -173,6 +174,7 @@ class Quote extends Component {
                         </TableBody>
 
                     </Table>
+                    </div>
                     <Pagination
                         total={this.props.total}
                         rowsPerPageOptions={this.props.rowsPerPageOptions}

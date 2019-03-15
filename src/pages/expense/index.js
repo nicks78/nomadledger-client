@@ -95,6 +95,7 @@ class Expense extends Component {
                         title={locale.table.title_expense}
                         selected={locale.table.selected}
                     />
+                    <div style={{overflowY: "auto"}}>
                     <Table>
                     <TableHead className={classes.tableHead}>
                         <TableRow>
@@ -137,6 +138,7 @@ class Expense extends Component {
                             
                         </TableBody>
                     </Table>
+                    </div>
                     <Pagination
                         total={this.props.total}
                         rowsPerPageOptions={this.props.rowsPerPageOptions}
@@ -146,7 +148,7 @@ class Expense extends Component {
                         onGetItemList={ this.props.getItemList }
                     />
                 
-
+                
             </Paper>    
                   
             

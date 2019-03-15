@@ -74,7 +74,7 @@ export function createDocument (actionType) {
         }) 
         .then( res => {
             dispatch(resetState(actionType));
-            history.push(`/bookkeeping/${ actionType.toLowerCase() }`)
+            history.push(`/${ actionType.toLowerCase() }`)
         })
         .catch(function (error) {
           // handle error
@@ -205,6 +205,7 @@ export function setDocument( actionType, item ) {
         subtype: actionType,
         isFetching: false,
         isError: false,
+        isUpdating: false,
         item: item
     }
 }

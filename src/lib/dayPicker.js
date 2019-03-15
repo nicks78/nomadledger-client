@@ -42,6 +42,12 @@ class DatePickers extends React.Component {
 
       }
     }
+
+    componentDidMount(){
+        if(this.props.value){
+            this.setState({ selectedDay: new Date(this.props.value) })
+        }
+    }
    
     handleDayChange = (date) => {
         this.setState({
@@ -83,7 +89,6 @@ class DatePickers extends React.Component {
         highlighted: new Date(selectedDay),
     }
 
-
       return (
             <div className={classes.root}>
                 <DateRangeIcon className={ classes.icon } onClick={this.handleShow} />
@@ -95,6 +100,7 @@ class DatePickers extends React.Component {
                                 selectedDay={selectedDay}
                                 weekdaysShort={ date[locale].week_short}
                                 months={ date[locale].month}
+                                month={new Date(selectedDay.getFullYear(), selectedDay.getMonth())}
                                 modifiers={modifiers}
                                 modifiersStyles={{ position: 'absolute' }}
                                 firstDayOfWeek={1}

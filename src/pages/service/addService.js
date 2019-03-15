@@ -22,7 +22,7 @@ class AddService extends React.Component {
   }
 
   render(){
-    const {locale, newData, category, currency} = this.props
+    const {locale, newData, category, currency, service_type} = this.props
 
     const fields = [
       {
@@ -33,6 +33,7 @@ class AddService extends React.Component {
             { name: 'name', type:"text", required: true },
             { name: 'currency', type:"select", selections: currency, helperText: "select_currency" , required: true },
             { name: 'price', type:"text", required: true },
+            { name: 'service_type', type:"select", selections: service_type, helperText: "select_service_type", required: true },
             { name: 'category', type:"select", selections: category, helperText: "select_category", required: true  },
             { name: 'description', type:"longtext", multiline: true, rowsMax:"4" },
           ]

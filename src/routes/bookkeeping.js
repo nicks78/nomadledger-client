@@ -23,19 +23,19 @@ const BookkeepingRoute = (props) => {
 
     return (
         <div>
-            <PrivateRoute exact path="/bookkeeping/quote" component={Quote}  auth={isLoggedIn}/>
-            <PrivateRoute path="/bookkeeping/quote/create" component={CreateQuote}  auth={isLoggedIn}/>
-            <PrivateRoute path="/bookkeeping/quote/edit/:id" component={EditQuote}  auth={isLoggedIn}/>
-            <PrivateRoute path="/bookkeeping/quote/view/:id" component={ViewQuote}  auth={isLoggedIn}/>
+            <PrivateRoute exact path="/quote" component={Quote}  auth={isLoggedIn}/>
+            <PrivateRoute path="/quote/create" component={CreateQuote}  auth={isLoggedIn}/>
+            <PrivateRoute path="/quote/edit/:id" component={EditQuote}  auth={isLoggedIn}/>
+            <PrivateRoute path="/quote/view/:id" component={ViewQuote}  auth={isLoggedIn}/>
 
 
-            <PrivateRoute exact path="/bookkeeping/invoice" component={Invoice}  auth={isLoggedIn}/>
-            <PrivateRoute path="/bookkeeping/invoice/create" component={CreateInvoice}  auth={isLoggedIn}/>
-            <PrivateRoute path="/bookkeeping/invoice/edit/:id" component={EditInvoice}  auth={isLoggedIn}/>
+            <PrivateRoute exact path="/invoice" component={Invoice}  auth={isLoggedIn}/>
+            <PrivateRoute path="/invoice/create" component={CreateInvoice}  auth={isLoggedIn}/>
+            <PrivateRoute path="/invoice/edit/:id" component={EditInvoice}  auth={isLoggedIn}/>
 
 
 
-            <PrivateRoute exact path="/bookkeeping/payback" component={Payback}  auth={isLoggedIn}/>
+            <PrivateRoute exact path="/payback" component={Payback}  auth={isLoggedIn}/>
 
         </div>
     )

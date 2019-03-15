@@ -106,6 +106,8 @@ class ShowContact extends React.Component {
         return <ApxAlert message={message} reducer={ this.state.reducer }/>
       }
 
+      console.log("CONTACT", contact)
+
       return (
         <Paper className={ classes.root }>
         <ApxBackBtn/>

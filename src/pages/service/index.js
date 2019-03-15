@@ -56,7 +56,7 @@ class Service extends Component {
 
     render() {
     
-    const {isFetching, listServices, isError,  locale, message, newService, createItem, createState, isCreating, progress, category, classes, currency} = this.props
+    const {isFetching, listServices, isError,  locale, message, newService, createItem, createState, isCreating, progress, category, classes, currency, service_type} = this.props
     const {reducer } = this.state
 
     return (
@@ -71,6 +71,7 @@ class Service extends Component {
                 createService={ createItem  } 
                 isCreating={isCreating} 
                 category={category}
+                service_type={service_type}
             />
             { isError ? <ApxAlert message={message} /> : null }
             <Paper className={classes.paper}>
@@ -80,11 +81,13 @@ class Service extends Component {
                         title={locale.table.title_service}
                         selected={locale.page.selected}
                     />
+                    <div style={{overflowY: "auto"}}>
                     <Table>
                     <TableHead className={classes.tableHead}>
                         <TableRow>
                             <TableCell>{locale.table.service_name}</TableCell>
                             <TableCell align="right">{locale.table.price}</TableCell>
+                            <TableCell align="right">{locale.table.type}</TableCell>
                             <TableCell align="center">{locale.table.currency}</TableCell>
                             <TableCell>{locale.table.category}</TableCell>
                             <TableCell>{locale.table.description}</TableCell>
@@ -97,6 +100,7 @@ class Service extends Component {
                                     return  <TableRow key={index}>
                                                 <TableCell><Link to={ `/${reducer.toLowerCase()}/view/${service._id.toLowerCase()}`}><span  className="link">{service.name}</span></Link></TableCell>
                                                 <TableCell align="right">{cvtNumToUserPref(service.price)}</TableCell>
+                                                <TableCell align="right">{ service.service_type[localStorage.getItem('locale')] }</TableCell>
                                                 <TableCell align="center">{service.currency.en}</TableCell>
                                                 <TableCell>{service.category[localStorage.getItem('locale')]}</TableCell> 
                                                 <Tooltip className={classes.customWidth} title={service.description}><TableCell>{service.description.slice(0,5)}...</TableCell></Tooltip>
@@ -106,6 +110,7 @@ class Service extends Component {
                             }
                         </TableBody>
                     </Table>
+                    </div>
                     <Pagination
                         total={this.props.total}
                         rowsPerPageOptions={this.props.rowsPerPageOptions}
@@ -140,6 +145,7 @@ const mapStateToProps = (state) => {
         rowsPerPageOptions: state.library.service.rowsPerPageOptions,
         category: state.account.company.item ?  state.account.company.item.category_name : [],
         currency: state.helper.items.currency,
+        service_type: state.helper.items.service_type,
 
     }
 }

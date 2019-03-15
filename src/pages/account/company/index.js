@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {  updateDocument, uploadFileToServer } from '../../../redux/account/actions'
-import {API_ENDPOINT} from '../../../redux/constant'
+import { DEFAULT_IMG} from '../../../redux/constant'
 import { withStyles, TextField, InputAdornment } from '@material-ui/core'
 import ApxButtonEdit from '../../../components/common/buttonEdit'
 import DatePickers from '../../../lib/dayPicker'
@@ -68,7 +68,7 @@ class Company extends Component {
                     progress={progress}
                     oldFile={company.logo_company}
                     isUploading={isUploading}
-                    image={ <img src={`${API_ENDPOINT}image/view${ company.logo_company.path || '/default/default_logo.png' }`} alt="logo" width="100%" height={null} />}
+                    image={ <img src={`${ company.logo_company.full_path || DEFAULT_IMG }`} alt="logo" width="100%" height={null} />}
                   />
                
             </Grid>

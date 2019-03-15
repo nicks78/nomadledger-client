@@ -26,7 +26,7 @@ export const uploadFileToServer = ( actionType, id, file, oldFileObject ) => {
         dispatch(requestUpload(actionType));
 
         const formData = new FormData();
-        formData.append("oldfile",JSON.stringify(oldFileObject));
+        formData.append("oldfile",oldFileObject.path);
         formData.append("files", file);
 
         axios.post(`${API_ENDPOINT}${url_path}`,

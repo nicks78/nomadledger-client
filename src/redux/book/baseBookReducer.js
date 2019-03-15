@@ -57,6 +57,7 @@ const authReducer = (state = initialState, action) => {
             return  { 
                 ...state,
                 isFetching: action.isFetching,
+                isUpdating: action.isUpdating,
                 isError: action.isError,
                 item: action.item,
             }

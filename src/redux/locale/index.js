@@ -172,6 +172,9 @@ const Locale = {
                     contact_drop: "Client",
                     marg: "Marge",
 
+                    service_type: "Type de service",
+                    follow_up_date: "Date de suivi",
+
                     name: "Nom",
                     description: "Déscription",
                     category: "Catégorie",
@@ -210,7 +213,8 @@ const Locale = {
                     select_num_format: "Selectionner format des chiffres",
                     select_category: "Sélectionner une catégorie",
                     select_contact: "Sélectionner un client",
-                    select_contact_group: "Sélectionner un group"
+                    select_contact_group: "Sélectionner un group",
+                    select_service_type: "Sélectionner un type"
                 }
             },
             message: {
@@ -287,6 +291,7 @@ const Locale = {
                 inv: "FAC",
                 qto: "DEV",
                 pya: "AVO",
+                type: "Type",
             },
             days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
         },
@@ -472,6 +477,9 @@ const Locale = {
                     short_desc: "To do...",
                     status: "Status",
 
+                    service_type: "Service type",
+                    follow_up_date: "Follow up date",
+
                     add_category: "Add category",
                     add_group: "Add a group",
                     add_vat: "Value VAT",
@@ -494,7 +502,8 @@ const Locale = {
                     select_num_format: "Select num format",
                     select_category: "Select a category",
                     select_contact: "Select a client",
-                    select_contact_group: "Select a group"
+                    select_contact_group: "Select a group",
+                    select_service_type: "Select a type"
                 }
             },
             message: {
@@ -570,6 +579,7 @@ const Locale = {
                 inv: "INV",
                 qto: "QTO",
                 pya: "PAY",
+                type: "Type",
             },
             days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
             months: [""]

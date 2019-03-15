@@ -66,6 +66,7 @@ const Form = (props) => {
                                         InputProps={{
                                             startAdornment: <InputAdornment position="start">
                                                 <DatePickers 
+                                                        value={ objData[cp.name] ? objData[cp.name].label : '' }
                                                         handleDate={ formHandler }
                                                         field={cp.name}
                                                     /> 

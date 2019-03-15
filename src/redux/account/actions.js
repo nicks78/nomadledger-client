@@ -116,7 +116,7 @@ export const uploadFileToServer = ( actionType, file, field, oldFileObject ) => 
       // Set File & apiEndPoint
       var url_path = `${actionType.toLowerCase()}/upload-file?model=${actionType.toLowerCase()}`
       const formData = new FormData();
-      formData.append("oldfile",JSON.stringify(oldFileObject));
+      formData.append("oldfile", oldFileObject.path );
       formData.append('field', field)
       formData.append("files", file);
 

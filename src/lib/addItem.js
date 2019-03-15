@@ -126,7 +126,12 @@ class Add extends Component {
                         <div className={  classes.card }>
                         { limitUploadFile > 0 ? 
                             <ApxExpanded heading={locale.form.title.label_assets}>
-                                    <ApxUpload onChange={ (event) => { this.handleChange(event) } } docType="all" removeItem={this.handleRemoveItem} images={ newData.doc || [] } title={ locale.button.upload } limitUploadFile={limitUploadFile}/>
+                                    <ApxUpload  onChange={ (event) => { this.handleChange(event) } } 
+                                                docType="all" 
+                                                removeItem={this.handleRemoveItem} 
+                                                images={ newData.doc || [] } 
+                                                title={ locale.button.upload } 
+                                                limitUploadFile={limitUploadFile}/>
                             </ApxExpanded> 
                             : null 
                         }

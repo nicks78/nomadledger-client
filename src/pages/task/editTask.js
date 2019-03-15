@@ -28,6 +28,7 @@ const EditTask = (props) => {
                   InputProps={{
                       startAdornment: <InputAdornment position="start">
                           <DayPickers 
+                                  value={ itemToUpdate.due_date ? itemToUpdate.due_date.intl_format : ""}
                                   handleDate={ (e) =>  props.onCreateStateTask(null, "due_date", e.target.value) }
                                   field="due_date"
                               /> 

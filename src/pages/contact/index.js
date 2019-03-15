@@ -122,6 +122,7 @@ class Contact extends Component {
                         locale={locale}
                         onChangeQuery={ this.handleFilterRequest }
                     />
+                    <div style={{ overflowY: "auto" }}>
                     <Table>
                     <TableHead className={classes.tableHead}>
                         <TableRow>
@@ -163,6 +164,7 @@ class Contact extends Component {
                             
                         </TableBody>
                     </Table>
+                    </div>
                     <Pagination
                         total={total}
                         rowsPerPageOptions={rowsPerPageOptions}
