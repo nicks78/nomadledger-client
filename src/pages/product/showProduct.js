@@ -2,10 +2,10 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
-import {DEFAULT_IMG} from '../../redux/constant'
+import {DEFAULT_IMG, DEFAULT_UPLOAD} from '../../redux/constant'
 import { convertToNumber, cvtNumToUserPref, cvtToLocale } from '../../utils/help_function'
-import { getItem, resetState, updateItem, createState, removeImageFromArray } from '../../redux/library/actions'
-import { withStyles, Typography, Grid, TextField} from '@material-ui/core';
+import { getItem, resetState, updateItem, createState, removeImageFromArray, uploadProductFileToServer } from '../../redux/library/actions'
+import { withStyles, Typography, Grid, TextField, IconButton, Fab} from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/CloseOutlined'
 import ApxBackBtn from '../../components/common/backBtn'
 import ApxButton from '../../components/common/button'
@@ -13,11 +13,19 @@ import Spinner from '../../components/common/spinner'
 import ApxPaper from '../../components/common/paper'
 import ApxAlert from '../../components/common/alert'
 import EditSelect from '../../lib/editSelect';
+import CameraAltIcon from '@material-ui/icons/CameraAltOutlined'
+import EditIcon from '@material-ui/icons/EditOutlined'
+import CheckIcon from '@material-ui/icons/CheckOutlined'
+
+
+
 
 class ShowProduct extends React.Component {
 
     state = {
-      reducer: "PRODUCT"
+      reducer: "PRODUCT",
+      showEdit: false,
+      main_img: 0,
     }
 
   componentDidMount(){
@@ -29,10 +37,18 @@ class ShowProduct extends React.Component {
     this.props.resetState(this.state.reducer)
   }
 
+  handleEdit = () => {
+    if(this.state.showEdit){
+      this.props.updateItem(this.state.reducer, `update`)
+    }
+    this.setState({showEdit: !this.state.showEdit});
+  }
+
+
   render() {
 
     const {classes, product, isFetching, locale, isError, message, categories, isUpdating, currency} = this.props;
-    const {reducer} = this.state;
+    const {reducer, main_img, showEdit} = this.state;
     
     if( isFetching ){
       return <Spinner/>
@@ -44,116 +60,174 @@ class ShowProduct extends React.Component {
   
       return (
         <ApxPaper>
+          
           <ApxBackBtn/>
-          {isError ? <ApxAlert message={message} /> : null }
-          <Typography variant="h1">{ product.name}</Typography><br />
-            <Grid container spacing={24}>
-                <Grid item xs={12} sm={7} md={7}>
-                      <div className={classes.mainImgWrap}>
-                        <img src={ `${product.img[0] ? product.img[0].full_path : DEFAULT_IMG }`} className={classes.img} width="auto" alt={product.name} />
-                      </div>
-
-                    <div className={classes.thumbnailWrap} >
-                    {
+          { isError ? <ApxAlert message={message} /> : null }
+          <Grid container spacing={24}>
+              <Grid item xs={12} sm={3} md={3} className={classes.thumbnail}>
+                  {
                       product.img.map((x, index) => {
-                          return <div key={index} className={ classes.thumbnail }>
-                                    <CloseIcon  onClick={() => { this.props.removeImageFromArray(reducer, `remove/${x.path}/${x._id}/${product._id}`) }}/>
-                                    <img src={x.full_path} className={classes.img} width="100" alt={x.org_name} />
+                          return <div key={index} className={classes.thumbnailImg}>
+                                    <IconButton onClick={() => { this.props.removeImageFromArray(reducer, `remove/${x.path}/${x._id}/${product._id}`) }}
+                                               style={{position: 'absolute', top: 0, right: 0, color:'red'}} 
+                                               >
+                                      <CloseIcon  />
+                                    </IconButton>
+                                    <img onClick={ () => { this.setState({ main_img: index }) } }  src={x.full_path} className={classes.img} width="150" alt={x.org_name} />
                                 </div>
                       })
                     }
-                    </div>
-                </Grid>
-                <Grid item  xs={12} sm={5} md={5}>
-                <TextField variant="filled"
-                                label={locale.form.field.name} 
-                                fullWidth
-                                className={classes.margin} 
-                                margin="dense" 
-                                value={ product.name} 
-                                onChange={ (e) => {this.props.createState(reducer, "name",  e.target.value)} }/>
-                <div className={classes.margin} >
-                    <EditSelect  
-                        arrayField={categories || []}
-                        field="category"
-                        handleAction={ (e) => {this.props.createState(reducer, "category",  e.target.value)} }
-                        locale={locale}
-                        showEdit={true}
-                        variant="filled"
-                        label={locale.form.field.category }
-                        value={  product.category && product.category[localStorage.getItem("locale")] }
-                    />
-                    </div>
-                    <div className={classes.margin} >
-                      <EditSelect  
-                        arrayField={currency || []}
-                        field="currency"
-                        handleAction={ (e) => {this.props.createState(reducer, "currency",  e.target.value)} }
-                        locale={locale}
-                        showEdit={true}
-                        variant="filled"
-                        label={locale.form.field.currency }
-                        value={  product.currency && product.currency[localStorage.getItem("locale")] }
-                    />
+              </Grid>
+              <Grid item xs={12} sm={6} md={6}>
+                    <div className={classes.mainImgWrap}>
+                        <img src={ `${product.img[main_img] ? product.img[main_img].full_path : DEFAULT_IMG }`} className={classes.img}   alt={product.name} />  
+
+                        <div className={classes.button}>
+                            <input
+                                accept="all"
+                                className={classes.input}
+                                id="upload"
+                                name="img"
+                                onChange={ (e) => {  this.props.uploadProductFileToServer("PRODUCT", e.target.files[0]) } }
+                                type="file"
+                            />
+                            <label htmlFor="upload">
+                              <IconButton component="p" >
+                                <CameraAltIcon />
+                              </IconButton>    
+                            </label>
+                        </div>           
                     </div>
                     
+              </Grid>
+              <Grid item xs={12} sm={3} md={3}>
+                  <Typography variant="h1">{ product.name}
+                    <IconButton style={{float: 'right', marginTop: -10}} onClick={ this.handleEdit }>
+                      { !showEdit ? <EditIcon style={{ color: 'blue' }} />  
+                        : <CheckIcon style={{ color: 'green' }} /> }
+                    </IconButton>
+                  </Typography><br />
+                  <Typography variant="h3">{ locale.form.field.marg}
+                      <span style={{ float: 'right' }}>
+                        {cvtNumToUserPref( product.price - product.buying_price)}&nbsp;
+                        { product.currency.value }
+                      </span>
+                  </Typography>
+                  <br />
+                  <Typography variant="subtitle1">{ locale.form.field.buying_price}
+                      <span style={{ float: 'right' }}>
+                        {cvtNumToUserPref(product.buying_price)}&nbsp;
+                        { product.currency.value }
+                      </span>
+                  </Typography>
+                  <Typography variant="subtitle1">{ locale.form.field.selling_price}
+                      <span style={{ float: 'right' }}>
+                        {cvtNumToUserPref(product.price)}&nbsp;
+                        { product.currency.value }
+                      </span>
+                  </Typography>
+                  <Typography variant="subtitle1">{ locale.form.field.stock}
+                      <span style={{ float: 'right' }}>
+                        {product.stock}
+                      </span>
+                  </Typography>
+                  <Typography variant="subtitle1">{ locale.form.field.category}
+                      <span style={{ float: 'right' }}>
+                        {product.category[localStorage.getItem("locale")]}
+                      </span>
+                  </Typography><br />
+                  <Typography variant="caption">
+                    { locale.form.field.description} :
+                  </Typography>
+                  <Typography variant="subtitle1">{product.description}</Typography>
+              </Grid>
+          </Grid>
+          { 
+            showEdit ? 
+            <Grid container spacing={8}>
+                      
+                      <Grid item xs={12} sm={4} md={4}>
+                      <TextField variant="filled"
+                          label={locale.form.field.name} 
+                          fullWidth
+                          className={classes.margin} 
+                          margin="dense" 
+                          value={ product.name} 
+                          onChange={ (e) => {this.props.createState(reducer, "name",  e.target.value)} }/>
+                      </Grid>
+                      <Grid item xs={12} sm={4} md={4}>
+                        <EditSelect  
+                            arrayField={categories || []}
+                            field="category"
+                            handleAction={ (e) => {this.props.createState(reducer, "category",  e.target.value)} }
+                            locale={locale}
+                            showEdit={true}
+                            variant="filled"
+                            label={locale.form.field.category }
+                            value={  product.category && product.category[localStorage.getItem("locale")] }
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={4} md={4}>
+                      <EditSelect  
+                          arrayField={currency || []}
+                          field="currency"
+                          handleAction={ (e) => {this.props.createState(reducer, "currency",  e.target.value)} }
+                          locale={locale}
+                          showEdit={true}
+                          variant="filled"
+                          label={locale.form.field.currency }
+                          value={  product.currency && product.currency[localStorage.getItem("locale")] }
+                      />
+                      </Grid>
+                      <Grid item xs={12} sm={4} md={4}>
 
-                    <TextField  variant="filled"
+                            <TextField  variant="filled"
                                 label={locale.form.field.buying_price +' ('+ product.currency.value +')' } 
                                 fullWidth
                                 className={classes.margin} margin="dense" 
                                 value={ cvtToLocale(product.buying_price) } 
                                 onChange={ (e) => {this.props.createState(reducer, "buying_price",  e.target.value)} }
                                 />   
-                    <TextField variant="filled"
-                                label={locale.form.field.selling_price +' ('+ product.currency.value +')' } 
-                                fullWidth
-                                className={classes.margin} 
-                                margin="dense" 
-                                value={ cvtToLocale(product.price)} 
-                                onChange={ (e) => {this.props.createState(reducer, "price",  e.target.value)} }
-                                />
-                    <TextField variant="filled"
-                                label={locale.form.field.marg +' ('+ product.currency.value +')' } 
-                                fullWidth
-                                className={classes.margin} 
-                                margin="dense" 
-                                disabled
-                                value={ cvtNumToUserPref(convertToNumber(product.price) - convertToNumber(product.buying_price)) } 
-                                onChange={ (e) => {this.props.createState(reducer, "marg",  e.target.value)} }
-                      />
-                    <TextField  variant="filled"
-                                label={locale.form.field.stock } 
-                                fullWidth
-                                type="number"
-                                className={classes.margin} 
-                                margin="dense" 
-                                value={ product.stock } 
-                                onChange={ (e) => {this.props.createState(reducer, "stock",  e.target.value)} }
-                                />   
-                </Grid>
-            </Grid>
+                      </Grid>
 
-            <TextField variant="filled"
-                      label={locale.form.field.description } 
-                      fullWidth
-                      multiline
-                      rows={6}
-                      className={classes.margin} 
-                      margin="normal"
-                      value={ product.description } 
-                      onChange={ (e) => {this.props.createState(reducer, "description",  e.target.value)} }
-            />
-          <div className={classes.btnWrap}>
-            <ApxButton 
-              color="primary"
-              variant="contained"
-              disabled={ isUpdating }
-              title={ isUpdating ? locale.button.loading :  locale.button.update}
-              action={ () => { this.props.updateItem(reducer, `update`) } }
-            />
-          </div>
-            
+                      <Grid item xs={12} sm={4} md={4}>
+                      <TextField variant="filled"
+                            label={locale.form.field.selling_price +' ('+ product.currency.value +')' } 
+                            fullWidth
+                            className={classes.margin} 
+                            margin="dense" 
+                            value={ cvtToLocale(product.price)} 
+                            onChange={ (e) => {this.props.createState(reducer, "price",  e.target.value)} }
+                            />
+                      </Grid>
+                      <Grid item xs={12} sm={4} md={4}>
+                        <TextField  variant="filled"
+                          label={locale.form.field.stock } 
+                          fullWidth
+                          type="number"
+                          className={classes.margin} 
+                          margin="dense" 
+                          value={ product.stock } 
+                          onChange={ (e) => {this.props.createState(reducer, "stock",  e.target.value)} }
+                                  />  
+                      </Grid>
+                      <Grid item xs={12}>
+                              <TextField variant="filled"
+                                label={locale.form.field.description } 
+                                fullWidth
+                                multiline
+                                rows={6}
+                                className={classes.margin} 
+                                margin="normal"
+                                value={ product.description } 
+                                onChange={ (e) => {this.props.createState(reducer, "description",  e.target.value)} }
+                      />
+                      </Grid>
+            </Grid>
+                      
+
+            : null 
+          }
 
         </ApxPaper>
       )
@@ -163,43 +237,26 @@ class ShowProduct extends React.Component {
 
 const styles = theme => ({
   mainImgWrap: {
-    width: '100%',
-    overflow: 'hidden',
-    marginBottom: 24,
-    // backgroundColor: 'rgb(238,238,238)'
+    textAlign: "center",
+    position: 'relative',
+    height:'100%',
+  },
+  thumbnail: {
+    textAlign: 'center',
+  },
+  thumbnailImg: {
+    position: 'relative',
+    border: '1px solid rgb(238,238,238)',
+    marginBottom: 5,
+    
   },
   img: {
     maxWidth: '100%',
-    height: '100%',
     maxHeight: '400px',
-    minHeight: '350px',
-    display:'block',
-    margin:'auto'
+    cursor: 'pointer',
   },
-  thumbnailWrap: {
-    width: '100%',
-    height: 100,
-    // backgroundColor: 'rgb(238,238,238)',
-    textAlign: 'center',
-    overflowY: 'hidden'
-  },
-  thumbnail: {
-    display:'inline-block',
-    position: 'relative',
-    backgroundColor: 'red',
-    maxHeight: 100,
-    margin: '0px 5px 0px 5px',
-  },
-  span: {
-    textAlign: 'center',
-    float: 'right'
-  },
-  margin: {
-    marginBottom: 12
-  },
-
-  btnWrap: {
-    float: 'right'
+  input: {
+    display: "none"
   }
 })
 
@@ -211,7 +268,7 @@ const mapStateToProps = (state) => {
       isError: state.library.product.isError,
       message: state.library.product.message,
       product: state.library.product.item,
-      categories: state.account.company.item ?  state.account.company.item.category_name : [],
+      categories: state.account.company.item.category_name || [],
       currency: state.helper.items.currency
 
       
@@ -220,6 +277,6 @@ const mapStateToProps = (state) => {
 
 const StyledShowProduct = withStyles(styles)(ShowProduct)
 
-export default connect(mapStateToProps, { getItem , resetState, updateItem, createState, removeImageFromArray })(StyledShowProduct);
+export default connect(mapStateToProps, { getItem , resetState, updateItem, createState, removeImageFromArray, uploadProductFileToServer })(StyledShowProduct);
 
 
