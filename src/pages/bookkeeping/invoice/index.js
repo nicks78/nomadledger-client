@@ -6,17 +6,18 @@ import {connect} from 'react-redux'
 import {  getBookList } from '../../../redux/book/actions'
 import { getTotal } from '../../../redux/library/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
-import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, Checkbox, TableCell, TableRow,} from '@material-ui/core';
+import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, TableCell, TableRow,} from '@material-ui/core';
 import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxAlert from '../../../components/common/alert'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
+import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEyeOutlined'
+
 
 class Invoice extends Component {
 
     state = {
         reducer: "INVOICE",
-        selected: [],
         status: ''
     }
 
@@ -24,45 +25,6 @@ class Invoice extends Component {
         this.props.getTotal(this.state.reducer );
         this.props.getBookList(this.state.reducer, "list?limit=5&skip=0");
     }
-
-    onSelectAllClick = (event) => {
-        if (event.target.checked) {
-            this.setState({ selected: this.props.listInvoice.map(n => n._id) });
-            return;
-        }
-        this.setState({ selected: [] });
-    }
-
-    onSelectedField = (event, id) => {
-        const { selected } = this.state;
-        const selectedIndex = selected.indexOf(id);
-        let newSelected = [];
-    
-        if (selectedIndex === -1) {
-
-            newSelected = newSelected.concat(selected, id);
-
-        } else if (selectedIndex === 0) {
-
-            newSelected = newSelected.concat(selected.slice(1));
-
-        } else if (selectedIndex === selected.length - 1) {
-
-            newSelected = newSelected.concat(selected.slice(0, -1));
-
-        } else if (selectedIndex > 0) {
-
-            newSelected = newSelected.concat(
-                selected.slice(0, selectedIndex),
-                selected.slice(selectedIndex + 1),
-            );
-
-        }
-    
-        this.setState({ selected: newSelected });
-    }
-
-    isSelected = id =>  this.state.selected.indexOf(id) !== -1;
 
     handleFilterRequest = (value) => {
         this.setState({status: value.code});
@@ -73,7 +35,7 @@ class Invoice extends Component {
     render() {
     
     const {listInvoice, isFetching, isError,  locale, classes, message, newInvoice, filter, status} = this.props
-    const { selected, rowCount, reducer } = this.state
+    const { rowCount, reducer } = this.state
 
     if(isError){
         return <ApxAlert message={message} />
@@ -91,7 +53,6 @@ class Invoice extends Component {
             <Paper className={classes.paper}>
 
             <ApxTableToolBar
-                numSelected={selected.length}
                 title={locale.table.title_invoice}
                 selected={locale.table.selected}
                 locale={locale}
@@ -102,13 +63,7 @@ class Invoice extends Component {
                     <Table padding="dense">
                     <TableHead className={classes.tableHead}>
                         <TableRow>
-                            <TableCell padding="checkbox">
-                            <Checkbox
-                                indeterminate={selected.length > 0 && selected.length < rowCount}
-                                checked={selected.length === this.props.listInvoice.length}
-                                onChange={this.onSelectAllClick}
-                                />
-                            </TableCell>
+                            <TableCell>{locale.table.preview}</TableCell>
                             <TableCell>{locale.table.reference}</TableCell>
                             <TableCell>{locale.table.client}</TableCell>
                             <TableCell>{locale.table.currency}</TableCell>
@@ -124,10 +79,9 @@ class Invoice extends Component {
                         <TableBody className={classes.tableBody}>
                             {   !isFetching ? 
                                 listInvoice.map(( invoice, index) => {
-                                    const isSelected = this.isSelected(invoice._id);
-                                    return  <TableRow key={index} selected={isSelected}>
-                                                <TableCell padding="checkbox" onClick={ event => { this.onSelectedField(event, invoice._id) } } >
-                                                    <Checkbox checked={isSelected} />
+                                    return  <TableRow key={index}>
+                                                <TableCell>
+                                                    <RemoveRedEyeIcon style={{ cursor:"pointer" }}  onClick={ () => {this.props.downloadPdf(reducer, invoice._id)} } />
                                                 </TableCell>
                                                 <TableCell>{locale.table.inv}-{invoice.ref}</TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${invoice.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{invoice.contact_id.company_name}</span></Link></TableCell>

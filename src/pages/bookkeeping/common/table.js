@@ -31,7 +31,7 @@ class MyTable extends React.Component {
                         <TableCell>{locale.table.subtotal}</TableCell>
                         <TableCell>{locale.table.vat}</TableCell>
                         <TableCell>{locale.table.status}</TableCell>
-                        <TableCell>Actions</TableCell>
+                        <TableCell align="center">Actions</TableCell>
 
                     </TableRow>
                 </TableHead>

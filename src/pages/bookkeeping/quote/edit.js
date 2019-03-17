@@ -2,7 +2,7 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
-import { createState , updateDocument, getDocument, resetState} from '../../../redux/book/actions'
+import { createState , updateDocument, getDocument, resetState, downloadPdf} from '../../../redux/book/actions'
 import { convertToCurrency, getListItem} from '../../../redux/book/itemActions'
 import { withStyles, Fab } from '@material-ui/core';
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEyeOutlined'
@@ -66,8 +66,8 @@ class EditQuote extends React.Component {
                     date_1="created_at"
                     date_2="expired_at"
                 />
-                <Fab color="primary" className={classes.icon}>
-                    <RemoveRedEyeIcon />
+                <Fab size="medium" color="primary" className={classes.icon}>
+                    <RemoveRedEyeIcon onClick={ () => {this.props.downloadPdf("QUOTE", quote._id)} } />
                 </Fab>
             </div>
         )
@@ -104,4 +104,4 @@ const mapStateToProps = (state) => {
 
 const StyledEditQuote = withStyles(styles)(EditQuote)
 
-export default connect(mapStateToProps, { getListItem, convertToCurrency, updateDocument, getDocument, createState, resetState })(StyledEditQuote);
+export default connect(mapStateToProps, { getListItem, convertToCurrency, updateDocument, getDocument, createState, resetState, downloadPdf })(StyledEditQuote);

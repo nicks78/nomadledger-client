@@ -47,7 +47,7 @@ const EnhancedToolBar = (props) => {
               {numSelected} {selected}
             </Typography>
           ) : (
-            <Typography variant="subtitle2" id="tableTitle">
+            <Typography variant="subtitle1" id="tableTitle">
               { title }
             </Typography>
           )}

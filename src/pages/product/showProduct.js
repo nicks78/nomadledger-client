@@ -2,13 +2,12 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
-import {DEFAULT_IMG, DEFAULT_UPLOAD} from '../../redux/constant'
-import { convertToNumber, cvtNumToUserPref, cvtToLocale } from '../../utils/help_function'
+import {DEFAULT_IMG} from '../../redux/constant'
+import { cvtNumToUserPref, cvtToLocale } from '../../utils/help_function'
 import { getItem, resetState, updateItem, createState, removeImageFromArray, uploadProductFileToServer } from '../../redux/library/actions'
-import { withStyles, Typography, Grid, TextField, IconButton, Fab} from '@material-ui/core';
+import { withStyles, Typography, Grid, TextField, IconButton} from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/CloseOutlined'
 import ApxBackBtn from '../../components/common/backBtn'
-import ApxButton from '../../components/common/button'
 import Spinner from '../../components/common/spinner'
 import ApxPaper from '../../components/common/paper'
 import ApxAlert from '../../components/common/alert'
@@ -44,10 +43,9 @@ class ShowProduct extends React.Component {
     this.setState({showEdit: !this.state.showEdit});
   }
 
-
   render() {
 
-    const {classes, product, isFetching, locale, isError, message, categories, isUpdating, currency} = this.props;
+    const {classes, product, isFetching, locale, isError, message, categories, currency} = this.props;
     const {reducer, main_img, showEdit} = this.state;
     
     if( isFetching ){
@@ -57,7 +55,7 @@ class ShowProduct extends React.Component {
     if( product === null  ){
       return <ApxAlert message="error_404" />
     }
-  
+    
       return (
         <ApxPaper>
           
@@ -67,6 +65,7 @@ class ShowProduct extends React.Component {
               <Grid item xs={12} sm={3} md={3} className={classes.thumbnail}>
                   {
                       product.img.map((x, index) => {
+                        
                           return <div key={index} className={classes.thumbnailImg}>
                                     <IconButton onClick={() => { this.props.removeImageFromArray(reducer, `remove/${x.path}/${x._id}/${product._id}`) }}
                                                style={{position: 'absolute', top: 0, right: 0, color:'red'}} 
@@ -88,7 +87,7 @@ class ShowProduct extends React.Component {
                                 className={classes.input}
                                 id="upload"
                                 name="img"
-                                onChange={ (e) => {  this.props.uploadProductFileToServer("PRODUCT", e.target.files[0]) } }
+                                onChange={ (e) => { e.target.files.length > 0 && this.props.uploadProductFileToServer("PRODUCT", e.target.files[0]) } }
                                 type="file"
                             />
                             <label htmlFor="upload">
@@ -268,7 +267,7 @@ const mapStateToProps = (state) => {
       isError: state.library.product.isError,
       message: state.library.product.message,
       product: state.library.product.item,
-      categories: state.account.company.item.category_name || [],
+      categories: state.account.company.item ? state.account.company.item.category_name : [],
       currency: state.helper.items.currency
 
       

@@ -257,6 +257,34 @@ export function setTotal ( actionType, total ){
 }
 
 
+/**
+ * // GET SINGLE DOCUMENT
+ * @param  actionType 
+ * @param  id 
+ */
+export function downloadPdf( actionType, id ){
+
+    return dispatch => {
+
+        axios.get(`${API_ENDPOINT}common/create-pdf/${id}?model=${actionType.toLowerCase()}`, {
+          method: 'GET',
+          mode: 'cors'
+        })
+        .then(function (response) { 
+            return response.data
+        }) 
+        .then( res => {
+            window.open(res, "_blank");
+        })
+        .catch(function (error) {
+          // handle error
+          var message = error.response ? error.response.data.message : 'error_500'
+          dispatch(requestFailed(actionType, message));
+        })             
+    }
+}
+
+
 /********************************************************************************************************************************
  * 
  * COMMON FUNCTION INIT
@@ -270,8 +298,6 @@ export function resetState ( actionType ){
       subtype: actionType,
     }
 }
-
-
 
 
 export function requestData( actionType ) {

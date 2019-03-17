@@ -114,13 +114,17 @@ class ShowContact extends React.Component {
         <Grid container spacing={8}>
 
             <Grid item xs={12} md={3}>
-                <UploadImg 
+                <div style={{textAlign:'center'}}>
+                  <UploadImg 
                     field="logo_contact"
                     _handleUploadFile={ (e) => { this.props.uploadFileToServer("CONTACT", contact._id, e.target.files[0], contact.logo_contact )} }
                     progress={progress}
                     isUploading={isUploading}
-                    image={<img src={`${ contact.logo_contact.full_path || DEFAULT_IMG }`} alt={contact.logo_contact.org_name} width="100%" height={null} />}
+                    image={<img src={`${ contact.logo_contact.full_path || DEFAULT_IMG }`} alt={contact.logo_contact.org_name} 
+                    
+                    style={{ maxWidth: '100%', maxHeight: '200px'}} />}
                   />
+                </div>
 
               <Divider />
               

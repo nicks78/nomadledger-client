@@ -291,6 +291,7 @@ const Locale = {
                 qto: "DEV",
                 pya: "AVO",
                 type: "Type",
+                preview: "Aperçu"
             },
             days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
         },
@@ -578,6 +579,7 @@ const Locale = {
                 qto: "QTO",
                 pya: "PAY",
                 type: "Type",
+                preview: "Preview"
             },
             days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
             months: [""]

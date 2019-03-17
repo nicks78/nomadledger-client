@@ -40,7 +40,7 @@ export function getTotal( actionType, query = "" ){
       dispatch(requestData(actionType))
       axios.defaults.withCredentials = true;
 
-      axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/count${query}`, {
+      axios.get(`${API_ENDPOINT}common/count/${actionType.toLowerCase()}${query}`, {
         method: 'GET',
         mode: 'cors'
       })

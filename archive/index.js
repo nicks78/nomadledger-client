@@ -3,16 +3,15 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom"
 import {connect} from 'react-redux'
-import {  getBookList, updateField, createState, downloadPdf } from '../../../redux/book/actions'
+import {  getBookList, updateField, createState } from '../../../redux/book/actions'
 import { getTotal } from '../../../redux/library/actions'
-import { withStyles, Button, Hidden,  Paper, Table, TableHead, TableBody, TableCell, TableRow } from '@material-ui/core';
+import { withStyles, Button, Hidden,  Paper, Table, TableHead, TableBody, Checkbox, TableCell, TableRow } from '@material-ui/core';
 import ApxSelect from '../../../components/common/select'
 import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxAlert from '../../../components/common/alert'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
 import { cvtNumToUserPref } from '../../../utils/help_function'
-import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEyeOutlined'
 
 
 class Quote extends Component {
@@ -20,13 +19,53 @@ class Quote extends Component {
     state = {
         showQuote: false,
         reducer: "QUOTE",
-        status: ''
+        status: '',
+        selected: []
     }
 
     componentDidMount(){
         this.props.getTotal(this.state.reducer);
         this.props.getBookList(this.state.reducer, `list?limit=5&skip=0`);
     }
+
+    handleSelectAllClick = (event) => {
+        if (event.target.checked) {
+            this.setState({ selected: this.props.listQuote.map(n => n._id) });
+            return;
+        }
+        this.setState({ selected: [] });
+    }
+
+    handleSelectedField = (event, id) => {
+        const { selected } = this.state;
+        const selectedIndex = selected.indexOf(id);
+        let newSelected = [];
+    
+        if (selectedIndex === -1) {
+
+            newSelected = newSelected.concat(selected, id);
+
+        } else if (selectedIndex === 0) {
+
+            newSelected = newSelected.concat(selected.slice(1));
+
+        } else if (selectedIndex === selected.length - 1) {
+
+            newSelected = newSelected.concat(selected.slice(0, -1));
+
+        } else if (selectedIndex > 0) {
+
+            newSelected = newSelected.concat(
+                selected.slice(0, selectedIndex),
+                selected.slice(selectedIndex + 1),
+            );
+
+        }
+    
+        this.setState({ selected: newSelected });
+    }
+
+    isSelected = id =>  this.state.selected.indexOf(id) !== -1;
 
     handleFilterRequest = (value) => {
         this.setState({status: value.code});
@@ -41,7 +80,7 @@ class Quote extends Component {
     render() {
     
     const {listQuote, isFetching, isError,  locale, classes, message, newQuote, filter, status} = this.props
-    const { rowCount, reducer } = this.state; 
+    const { selected, rowCount, reducer } = this.state; 
 
     if(isError){
         return <ApxAlert message={message} />
@@ -58,6 +97,7 @@ class Quote extends Component {
             <Paper className={classes.paper}>
 
                 <ApxTableToolBar
+                        numSelected={selected.length}
                         title={locale.table.title_quote}
                         selected={locale.table.selected}
                         menus={filter}
@@ -68,7 +108,13 @@ class Quote extends Component {
                     <Table  padding="dense">
                     <TableHead className={classes.tableHead}>
                         <TableRow>
-                            <TableCell>{locale.table.preview}</TableCell>
+                            <TableCell padding="checkbox">
+                            <Checkbox
+                                indeterminate={selected.length > 0 && selected.length < rowCount}
+                                checked={selected.length === listQuote.length}
+                                onChange={this.handleSelectAllClick}
+                                />
+                            </TableCell>
                             <TableCell>{locale.table.reference}</TableCell>
                             <TableCell>{locale.table.client}</TableCell>
                             <TableCell>{locale.table.subtotal}</TableCell>
@@ -83,9 +129,10 @@ class Quote extends Component {
                         <TableBody className={classes.tableBody}>
                             {   !isFetching ? 
                                 listQuote.map(( item, index) => {
-                                    return  <TableRow key={index}>
-                                                <TableCell>
-                                                    <RemoveRedEyeIcon style={{ cursor:"pointer" }}  onClick={ () => {this.props.downloadPdf(reducer, item._id)} } />
+                                    const isSelected = this.isSelected(item._id);
+                                    return  <TableRow key={index} selected={isSelected}>
+                                                <TableCell padding="checkbox" onClick={ event => { this.handleSelectedField(event, item._id) } } >
+                                                    <Checkbox checked={isSelected} />
                                                 </TableCell>
                                                 <TableCell>{locale.table.qto}-{item.ref}</TableCell>
                                                 <TableCell><Link className="link" to={{ pathname: `/contact/view/${item.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{item.contact_id.company_name}</span></Link></TableCell>
@@ -187,4 +234,4 @@ const mapStateToProps = (state) => {
 
 const StyledQuote = withStyles(styles)(Quote)
 
-export default connect(mapStateToProps, {  getBookList, getTotal, updateField, createState,downloadPdf })(StyledQuote);
+export default connect(mapStateToProps, {  getBookList, getTotal, updateField, createState  })(StyledQuote);

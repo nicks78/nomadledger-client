@@ -179,7 +179,7 @@ class Layout extends React.Component {
                   <MenuItem onClick={this.props.logout}>Deconnexion</MenuItem>
                 </Menu>
                 </Typography>
-                    <Typography variant="overline" className={classes.lang} onClick={ () => { this.props._onChangeLocale(locale.lang === 'fr' ? 'en' : 'fr') } }>{ locale.lang === 'fr' ? 'EN' : 'FR' }</Typography>
+                    <Typography variant="overline" className={classes.lang} onClick={ () => { this.props._onChangeLocale(locale.lang === 'fr' ? 'en' : 'fr') } }>{ locale.lang !== 'fr' ? 'EN' : 'FR' }</Typography>
                 </Toolbar>
             </AppBar>
             

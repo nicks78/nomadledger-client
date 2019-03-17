@@ -41,7 +41,6 @@ const styles = theme => ({
 })
 
 
-
 class ContactInfo extends Component {
 
     state = {
@@ -75,8 +74,6 @@ class ContactInfo extends Component {
         const {locale, contact, isUpdating, tmp_state, classes, contactGroup, country, phone_code, company_type} = this.props
         const { showEdit } = this.state;
 
-        
-       
 
         return ( 
             <div className={ classes.root }>
