@@ -68,7 +68,7 @@ class Company extends Component {
                     progress={progress}
                     oldFile={company.logo_company}
                     isUploading={isUploading}
-                    image={ <img src={`${ company.logo_company.full_path || DEFAULT_IMG }`} alt="logo" width="100%" height={null} />}
+                    image={ <img src={`${ company.logo_company.full_path || DEFAULT_IMG }`} alt="logo" width="80%" height={null} />}
                   />
                
             </Grid>
@@ -83,7 +83,7 @@ class Company extends Component {
               { showEdit ? 
                 <TextField
                     value={ company.company_name || ""}
-                    label={ locale.form.field.company_name }
+                    label={ locale.wording.company_name }
                     onChange={ (event) => { this.props.handleFormEdit(event, reducer) }} 
                     name="company_name"
                     fullWidth
@@ -97,7 +97,7 @@ class Company extends Component {
                   <Grid item xs={12} md={5}>
 
                   <Typography variant="subtitle1">
-                      {locale.form.title.label_comp_info}
+                      {locale.subheading.label_comp_info}
                     </Typography>
                   <Divider className={ classes.divider }/>
                   
@@ -108,11 +108,11 @@ class Company extends Component {
                         handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
                         locale={locale}
                         showEdit={showEdit}
-                        label={locale.form.field.company_type}
+                        label={locale.wording.company_type}
                         value={ company.company_type[localStorage.getItem("locale")]}
                     />
                   <EditInput 
-                      label={ locale.form.field.company_register }
+                      label={ locale.wording.company_register }
                       value={ company.company_register}
                       showEdit={showEdit}
                       locale={locale}
@@ -120,7 +120,7 @@ class Company extends Component {
                       handleAction={(event) => { this.props.handleFormEdit(event, reducer) }}
                   />
                   <EditInput 
-                      label={ locale.form.field.company_vat }
+                      label={ locale.wording.company_vat }
                       value={ company.company_vat}
                       showEdit={showEdit}
                       locale={locale}
@@ -129,7 +129,7 @@ class Company extends Component {
                   />
                   <br /><br />
                   <Typography variant="subtitle1">
-                        {locale.form.title.label_tax}
+                        {locale.subheading.label_tax}
                     </Typography>
                     <Divider className={ classes.divider }/>
                     {
@@ -141,19 +141,19 @@ class Company extends Component {
                           handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
                           locale={locale}
                           showEdit={showEdit}
-                          label={locale.form.title.label_currency_fav }
+                          label={locale.subheading.label_currency_fav }
                           value={ company.currency[localStorage.getItem("locale")]}
                       />
                       : 
                       <ApxtextIndexValue 
                             value={company.currency[localStorage.getItem('locale')]} 
-                            label={locale.form.title.label_currency_fav}
+                            label={locale.subheading.label_currency_fav}
                         /> 
                     }
                     {
                         showEdit ? 
                             <TextField
-                              label={locale.form.title.label_start_tax}
+                              label={locale.wording.start_date}
                               id="start_date"
                               disabled
                               margin="dense"
@@ -172,13 +172,13 @@ class Company extends Component {
                         : 
                         <ApxtextIndexValue 
                             value={company.start_date.label} 
-                            label={locale.form.title.label_start_tax}
+                            label={locale.wording.start_date}
                         /> 
                     }
                      {
                         showEdit ? 
                             <TextField
-                                label={locale.form.title.label_end_tax + " (auto)"}
+                                label={locale.wording.end_date + " (auto)"}
                                 id="end_date"
                                 disabled
                                 margin="dense"
@@ -189,21 +189,21 @@ class Company extends Component {
                         : 
                         <ApxtextIndexValue 
                             value={company.end_date.label} 
-                            label={locale.form.title.label_end_tax}
+                            label={locale.wording.end_date}
                         /> 
                     }
                 </Grid>
                 <Grid item xs={12} md={1}></Grid>
                 <Grid item xs={12} md={5}>
                 <Typography variant="subtitle1">
-                        {locale.form.title.label_comp_address}
+                        {locale.subheading.label_comp_address}
                   </Typography>
                   <Divider className={ classes.divider }/>
                   {
                     address.map(( name, index) => {
                       return <EditInput 
                                 key={index}
-                                label={ locale.form.field[name] }
+                                label={ locale.wording[name] }
                                 value={ company[name]}
                                 showEdit={showEdit}
                                 locale={locale}
@@ -219,7 +219,7 @@ class Company extends Component {
                     handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
                     locale={locale}
                     showEdit={showEdit}
-                    label={locale.form.field.addresses_country }
+                    label={locale.wording.addresses_country }
                     value={ company.addresses_country[localStorage.getItem("locale")]}
                 />
                   </Grid>
@@ -229,6 +229,7 @@ class Company extends Component {
         </Grid>
         
         <Snackbar
+            locale={locale}
             message={message}
             isError={isError}
         />

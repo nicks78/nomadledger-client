@@ -57,8 +57,8 @@ class Login extends Component {
         
     const {isError, locale, message, isFetching} = this.props
     const formLogin = {
-            title: locale.form.title.add_contact, 
-            label: locale.form.title.label_company,
+            title: locale.subheading.add_contact, 
+            label: locale.subheading.label_company,
             fields: [
                   { name: 'login_email', type:"email", required: true },
                   { name: 'login_password', type:"password", required: true},
@@ -77,7 +77,7 @@ class Login extends Component {
                 
                 <Paper style={ styles.paper }>
                         <Typography variant="overline" style={{ alignText: 'center'}}>
-                                Connectez-vous
+                          { locale.wording.login}
                         </Typography>
                         {   isError ? <p> {locale.message[message]}</p> : null }
                         <ApxForm 
@@ -88,7 +88,7 @@ class Login extends Component {
                             md={12} 
                             objData={ this.state }/>
 
-                        <Button variant="contained" color="secondary"  style={  styles.button } onClick={ this.logggedIn }>{ locale.button.register }</Button>
+                        <Button variant="contained" color="secondary"  style={  styles.button } onClick={ this.logggedIn }>{ locale.wording.login }</Button>
                 </Paper>
 
             </div>

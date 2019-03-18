@@ -62,7 +62,7 @@ class EditQuote extends React.Component {
                     createState={this.props.createState}
                     reducer="QUOTE"
                     isUpdating={isUpdating}
-                    btnLabel={locale.button.update}
+                    btnLabel={locale.wording.update}
                     date_1="created_at"
                     date_2="expired_at"
                 />

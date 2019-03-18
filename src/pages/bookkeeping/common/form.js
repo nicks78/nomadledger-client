@@ -28,7 +28,7 @@ const Form = (props) => {
 
     return  <div>
                 <Paper className={classes.paper}>
-                <Typography variant="h2" className={classes.title}>{locale.form.title[formTitle]}&nbsp;{ data.ref || '' }
+                <Typography variant="h2" className={classes.title}>{locale.subheading[formTitle]}&nbsp;{ data.ref || '' }
                 </Typography>
 
                     <Grid container spacing={24}>
@@ -48,7 +48,7 @@ const Form = (props) => {
                             <Grid container spacing={8}>
                                 <Grid item xs={12} sm={6} md={6}>
                                     <TextField
-                                            label={ locale.form.field[date_1] }
+                                            label={ locale.wording[date_1] }
                                             id={date_1}
                                             disabled
                                             margin="dense"
@@ -68,7 +68,7 @@ const Form = (props) => {
                                 </Grid>
                                 <Grid item xs={12} sm={6} md={6}>
                                     <TextField
-                                            label={ locale.form.field[date_2] }
+                                            label={ locale.wording[date_2] }
                                             id={date_2}
                                             disabled
                                             margin="dense"
@@ -91,7 +91,7 @@ const Form = (props) => {
                                         arrayField={currency}
                                         field="currency"
                                         value={data.currency && data.currency[localStorage.getItem('locale')]}
-                                        helperText={locale.form.helperText.select_currency}
+                                        helperText={locale.helperText.select_currency}
                                         handleAction={ props.handleDropDown }
                                         locale={locale}
                                     />
@@ -101,21 +101,21 @@ const Form = (props) => {
                                         arrayField={vat}
                                         field="vat"
                                         value={data.vat && data.vat[localStorage.getItem('locale')]}
-                                        helperText={locale.form.helperText.select_currency}
+                                        helperText={locale.helperText.select_currency}
                                         handleAction={ props.handleDropDown }
                                         locale={locale}
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
-                                        label={ locale.form.field.follow_up_date }
+                                        label={ locale.wording.follow_up_date }
                                         id="follow_up_date"
                                         disabled
                                         fullWidth
                                         margin="dense"
                                         value={ data.follow_up_date ? data.follow_up_date.label : ""}
                                         variant="filled"
-                                        style={{width: '97.5%'}}
+                                        style={{width: '98%'}}
                                         InputProps={{
                                             startAdornment: <InputAdornment position="start">
                                                 <DatePickers 
@@ -141,15 +141,15 @@ const Form = (props) => {
 
                     </Grid>
                     <br/>
-                <Typography variant="overline">{ locale.page.quote.info_comp }</Typography>
+                <Typography variant="overline">{ locale.subheading.info_comp }</Typography>
                 <br />
                 <ApxRichEditor
-                    initText={ data.infos || locale.form.field.textarea_quote }
+                    initText={ data.infos || locale.wording.textarea_quote }
                     reducer={reducer}
                     handleAction={  props.createState }
                 />
                 <br />
-                <Typography variant="overline">{ locale.page.quote.items }</Typography>
+                <Typography variant="overline">{ locale.subheading.items }</Typography>
                 <br />
 
                     <Grid container spacing={24}>
@@ -160,7 +160,7 @@ const Form = (props) => {
                                     state="name"
                                     model="service"
                                     reducer={reducer}
-                                    placeholder={locale.form.field.search_service}
+                                    placeholder={locale.wording.search_service}
                                     setSelectedObject={  props.getListItem }
                                 />
                                 
@@ -173,7 +173,7 @@ const Form = (props) => {
                                     state="name"
                                     model="product"
                                     reducer={reducer}
-                                    placeholder={locale.form.field.search_product}
+                                    placeholder={locale.wording.search_product}
                                     setSelectedObject={  props.getListItem }
                                 />
                             </Grid>
@@ -193,7 +193,7 @@ const Form = (props) => {
                             color="primary" 
                             disabled={ isUpdating ? true : false }
                             onClick={ () => { props.handleSubmit(reducer)} }>
-                            { isUpdating ? locale.button.loading : btnLabel}
+                            { isUpdating ? locale.wording.loading : btnLabel}
                         </Button>
                     </div>
                 </Paper>

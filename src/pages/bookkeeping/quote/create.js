@@ -39,7 +39,7 @@ class CreateQuote extends React.Component {
                 { isError ? <ApxAlert message={message} /> : null }
 
                 <Form 
-                    formTitle="new_quote"
+                    formTitle="add_quote"
                     data={newQuote}
                     vat={vat}
                     list={listItems}
@@ -51,7 +51,7 @@ class CreateQuote extends React.Component {
                     getListItem={this.props.getListItem}
                     createState={this.props.createState}
                     reducer="QUOTE"
-                    btnLabel={locale.button.save}
+                    btnLabel={locale.wording.save}
                     date_1="created_at"
                     date_2="expired_at"
 

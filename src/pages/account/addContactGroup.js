@@ -85,7 +85,7 @@ class AddContactGroup extends Component {
             <div className={ classes.addContactGroup}>
                     <TextField 
                         id="contact_group"
-                        label={locale.form.field.add_group}
+                        label={locale.wording.add_group}
                         className={classes.textField}
                         value={this.state.value}
                         name="contact_group"

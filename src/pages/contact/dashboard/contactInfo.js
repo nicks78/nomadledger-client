@@ -97,7 +97,7 @@ class ContactInfo extends Component {
                 : 
                 <Input
                     defaultValue={contact.company_name}
-                    placeholder={ locale.form.field.company }
+                    placeholder={ locale.wording.company }
                     onChange={this.handleFormEdit}
                     name="company_name"
                     style={{width: '80%'}} 
@@ -105,7 +105,7 @@ class ContactInfo extends Component {
             }
             <br />
             <Typography variant="subtitle1">
-                      {locale.form.title.label_contact_info}
+                      {locale.subheading.label_contact_info}
             </Typography>
             <Divider className={ classes.divider }/>
             <EditSelect 
@@ -115,18 +115,18 @@ class ContactInfo extends Component {
                 handleAction={ this.handleFormEdit }
                 locale={locale}
                 showEdit={showEdit}
-                label={locale.form.field.contact_group }
+                label={locale.wording.contact_group }
                 value={  contact.contact_group && contact.contact_group[localStorage.getItem("locale")] }
             />
             <EditInput 
-                label={ locale.form.field.firstname }
+                label={ locale.wording.firstname }
                 value={ tmp_state.firstname ||  contact.firstname }
                 showEdit={showEdit}
                 field="firstname"
                 handleAction={this.handleFormEdit}
             />
             <EditInput 
-                label={ locale.form.field.lastname }
+                label={ locale.wording.lastname }
                 value={tmp_state.lastname ||  contact.lastname }
                 showEdit={showEdit}
                 field="lastname"
@@ -139,11 +139,11 @@ class ContactInfo extends Component {
                 handleAction={ this.handleFormEdit }
                 locale={locale}
                 showEdit={showEdit}
-                label={locale.form.field.phone_code }
+                label={locale.wording.phone_code }
                 value={  contact.phone_code && contact.phone_code[localStorage.getItem("locale")] }
             />
             <EditInput 
-                label={locale.form.field.phone}
+                label={locale.wording.phone}
                 value={tmp_state.phone || contact.phone}
                 showEdit={showEdit}
                 field="phone"
@@ -152,7 +152,7 @@ class ContactInfo extends Component {
             <EditInput 
                 html_tag="a"
                 href={`mailto:${contact.email}`}
-                label={locale.form.field.email}
+                label={locale.wording.email}
                 value={tmp_state.email || contact.email}
                 showEdit={showEdit}
                 field="email"
@@ -160,25 +160,25 @@ class ContactInfo extends Component {
             />
             <br /><br />
             <Typography variant="subtitle1">
-                      {locale.form.title.label_comp_address}
+                      {locale.subheading.label_comp_address}
             </Typography>
             <Divider className={ classes.divider }/>
             <EditInput 
-                label={locale.form.field.addresses_street}
+                label={locale.wording.addresses_street}
                 value={tmp_state.addresses_street || contact.addresses_street}
                 showEdit={showEdit}
                 field="addresses_street"
                 handleAction={this.handleFormEdit}
             />
             <EditInput 
-                label={locale.form.field.addresses_zip}
+                label={locale.wording.addresses_zip}
                 value={tmp_state.addresses_zip || contact.addresses_zip}
                 showEdit={showEdit}
                 field="addresses_zip"
                 handleAction={this.handleFormEdit}
             />
             <EditInput 
-                label={locale.form.field.addresses_city}
+                label={locale.wording.addresses_city}
                 value={ tmp_state.addresses_city || contact.addresses_city}
                 showEdit={showEdit}
                 field="addresses_city"
@@ -191,13 +191,13 @@ class ContactInfo extends Component {
                     handleAction={ this.handleFormEdit }
                     locale={locale}
                     showEdit={showEdit}
-                    label={locale.form.field.addresses_country }
+                    label={locale.wording.addresses_country }
                     value={  contact.addresses_country && contact.addresses_country[localStorage.getItem("locale")] }
                 />
             
             <br /><br />
             <Typography variant="subtitle1">
-                      {locale.form.title.label_comp_info}
+                      {locale.subheading.label_comp_info}
             </Typography>
             <Divider className={ classes.divider }/>
             
@@ -208,18 +208,18 @@ class ContactInfo extends Component {
                     handleAction={ this.handleFormEdit }
                     locale={locale}
                     showEdit={showEdit}
-                    label={locale.form.field.company_type }
+                    label={locale.wording.company_type }
                     value={  contact.company_type && contact.company_type[localStorage.getItem("locale")] }
                 />
             <EditInput 
-                label={locale.form.field.company_register}
+                label={locale.wording.company_register}
                 value={ tmp_state.company_register || contact.company_register}
                 showEdit={showEdit}
                 field="company_register"
                 handleAction={this.handleFormEdit}
             />
             <EditInput 
-                label={locale.form.field.company_vat}
+                label={locale.wording.company_vat}
                 value={ tmp_state.company_vat || contact.company_vat}
                 showEdit={showEdit}
                 field="company_vat"

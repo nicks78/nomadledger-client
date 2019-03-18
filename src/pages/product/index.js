@@ -94,7 +94,7 @@ class Product extends Component {
                 total > 10 ?
                 <div className={ classes.loadMore }>
                     <Button variant="outlined" color="secondary" className={classes.button} onClick={ this.hanldeLoadMore }>
-                        {locale.page.product.load_more_product}
+                        {locale.wording.load_more_product}
                     </Button>
                 </div>
                 : null 

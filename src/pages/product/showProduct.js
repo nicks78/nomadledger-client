@@ -106,37 +106,37 @@ class ShowProduct extends React.Component {
                         : <CheckIcon style={{ color: 'green' }} /> }
                     </IconButton>
                   </Typography><br />
-                  <Typography variant="h3">{ locale.form.field.marg}
+                  <Typography variant="h3">{ locale.wording.marg}
                       <span style={{ float: 'right' }}>
                         {cvtNumToUserPref( product.price - product.buying_price)}&nbsp;
                         { product.currency.value }
                       </span>
                   </Typography>
                   <br />
-                  <Typography variant="subtitle1">{ locale.form.field.buying_price}
+                  <Typography variant="subtitle1">{ locale.wording.buying_price}
                       <span style={{ float: 'right' }}>
                         {cvtNumToUserPref(product.buying_price)}&nbsp;
                         { product.currency.value }
                       </span>
                   </Typography>
-                  <Typography variant="subtitle1">{ locale.form.field.selling_price}
+                  <Typography variant="subtitle1">{ locale.wording.selling_price}
                       <span style={{ float: 'right' }}>
                         {cvtNumToUserPref(product.price)}&nbsp;
                         { product.currency.value }
                       </span>
                   </Typography>
-                  <Typography variant="subtitle1">{ locale.form.field.stock}
+                  <Typography variant="subtitle1">{ locale.wording.stock}
                       <span style={{ float: 'right' }}>
                         {product.stock}
                       </span>
                   </Typography>
-                  <Typography variant="subtitle1">{ locale.form.field.category}
+                  <Typography variant="subtitle1">{ locale.wording.category}
                       <span style={{ float: 'right' }}>
                         {product.category[localStorage.getItem("locale")]}
                       </span>
                   </Typography><br />
                   <Typography variant="caption">
-                    { locale.form.field.description} :
+                    { locale.wording.description} :
                   </Typography>
                   <Typography variant="subtitle1">{product.description}</Typography>
               </Grid>
@@ -147,7 +147,7 @@ class ShowProduct extends React.Component {
                       
                       <Grid item xs={12} sm={4} md={4}>
                       <TextField variant="filled"
-                          label={locale.form.field.name} 
+                          label={locale.wording.name} 
                           fullWidth
                           className={classes.margin} 
                           margin="dense" 
@@ -162,7 +162,7 @@ class ShowProduct extends React.Component {
                             locale={locale}
                             showEdit={true}
                             variant="filled"
-                            label={locale.form.field.category }
+                            label={locale.wording.category }
                             value={  product.category && product.category[localStorage.getItem("locale")] }
                         />
                       </Grid>
@@ -174,14 +174,14 @@ class ShowProduct extends React.Component {
                           locale={locale}
                           showEdit={true}
                           variant="filled"
-                          label={locale.form.field.currency }
+                          label={locale.wording.currency }
                           value={  product.currency && product.currency[localStorage.getItem("locale")] }
                       />
                       </Grid>
                       <Grid item xs={12} sm={4} md={4}>
 
                             <TextField  variant="filled"
-                                label={locale.form.field.buying_price +' ('+ product.currency.value +')' } 
+                                label={locale.wording.buying_price +' ('+ product.currency.value +')' } 
                                 fullWidth
                                 className={classes.margin} margin="dense" 
                                 value={ cvtToLocale(product.buying_price) } 
@@ -191,7 +191,7 @@ class ShowProduct extends React.Component {
 
                       <Grid item xs={12} sm={4} md={4}>
                       <TextField variant="filled"
-                            label={locale.form.field.selling_price +' ('+ product.currency.value +')' } 
+                            label={locale.wording.selling_price +' ('+ product.currency.value +')' } 
                             fullWidth
                             className={classes.margin} 
                             margin="dense" 
@@ -201,7 +201,7 @@ class ShowProduct extends React.Component {
                       </Grid>
                       <Grid item xs={12} sm={4} md={4}>
                         <TextField  variant="filled"
-                          label={locale.form.field.stock } 
+                          label={locale.wording.stock } 
                           fullWidth
                           type="number"
                           className={classes.margin} 
@@ -212,7 +212,7 @@ class ShowProduct extends React.Component {
                       </Grid>
                       <Grid item xs={12}>
                               <TextField variant="filled"
-                                label={locale.form.field.description } 
+                                label={locale.wording.description } 
                                 fullWidth
                                 multiline
                                 rows={6}

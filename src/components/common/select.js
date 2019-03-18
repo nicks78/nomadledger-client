@@ -48,7 +48,7 @@ const Select = (props) => {
           <TextField
             id={field}
             select
-            label={props.locale.form.field[field]}
+            label={props.locale.wording[field]}
             className={classes.textField}
             
             name={field}
@@ -60,7 +60,7 @@ const Select = (props) => {
                   className: classes.menu,
                 },
               }}
-            helperText={props.locale.form.helperText[helperText]}
+            helperText={props.locale.helperText[helperText]}
             margin="dense"
             variant={variant || "filled"}
             >

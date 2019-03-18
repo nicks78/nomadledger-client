@@ -44,7 +44,7 @@ const Form = (props) => {
                                         multiline
                                         rows="4"
                                         name={cp.name}
-                                        label={locale.form.field[cp.name]}
+                                        label={locale.wording[cp.name]}
                                         className={ classes.textField}
                                         value={objData[cp.name] || ''}
                                         onChange={ formHandler }
@@ -55,7 +55,7 @@ const Form = (props) => {
                     }else if(cp.type === 'date'){
                         return  <Grid item xs={12} key={index}>
                                     <TextField
-                                        label={locale.form.field[cp.name]}
+                                        label={locale.wording[cp.name]}
                                         id={cp.name}
                                         disabled
                                         style={{width: '100%'}}
@@ -83,7 +83,7 @@ const Form = (props) => {
                                         required={ cp.required || false }
                                         type={cp.type}
                                         name={cp.name}
-                                        label={locale.form.field[cp.name]}
+                                        label={locale.wording[cp.name]}
                                         className={ classes.textField}
                                         value={objData[cp.name] || ''}
                                         onChange={ formHandler }

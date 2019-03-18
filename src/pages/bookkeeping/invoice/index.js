@@ -47,14 +47,14 @@ class Invoice extends Component {
                 <Button component={Link} to="/invoice/create" 
                         variant="contained" color="primary"  
                         className={  classes.button }>
-                        { newInvoice.contact_id ? locale.button.continue_edit : locale.button.add_invoice}
+                        { newInvoice.contact_id ? locale.wording.progress : locale.wording.create}
                 </Button>
             </Hidden>
             <Paper className={classes.paper}>
 
             <ApxTableToolBar
-                title={locale.table.title_invoice}
-                selected={locale.table.selected}
+                title={locale.wording.invoice}
+                selected={locale.wording.selected}
                 locale={locale}
                 menus={filter}
                 onChangeQuery={ this.handleFilterRequest }
@@ -63,14 +63,14 @@ class Invoice extends Component {
                     <Table padding="dense">
                     <TableHead className={classes.tableHead}>
                         <TableRow>
-                            <TableCell>{locale.table.preview}</TableCell>
-                            <TableCell>{locale.table.reference}</TableCell>
-                            <TableCell>{locale.table.client}</TableCell>
-                            <TableCell>{locale.table.currency}</TableCell>
-                            <TableCell>{locale.table.subtotal}</TableCell>
-                            <TableCell>{locale.table.vat}</TableCell>
-                            <TableCell>{locale.table.total}</TableCell>
-                            <TableCell>{locale.table.status}</TableCell>
+                            <TableCell>{locale.wording.preview}</TableCell>
+                            <TableCell>{locale.wording.reference}</TableCell>
+                            <TableCell>{locale.wording.client}</TableCell>
+                            <TableCell>{locale.wording.currency}</TableCell>
+                            <TableCell>{locale.wording.subtotal}</TableCell>
+                            <TableCell>{locale.wording.vat}</TableCell>
+                            <TableCell>{locale.wording.total}</TableCell>
+                            <TableCell>{locale.wording.status}</TableCell>
                             <TableCell>Actions</TableCell>
 
                         </TableRow>
@@ -83,7 +83,7 @@ class Invoice extends Component {
                                                 <TableCell>
                                                     <RemoveRedEyeIcon style={{ cursor:"pointer" }}  onClick={ () => {this.props.downloadPdf(reducer, invoice._id)} } />
                                                 </TableCell>
-                                                <TableCell>{locale.table.inv}-{invoice.ref}</TableCell>
+                                                <TableCell>{locale.wording.inv}-{invoice.ref}</TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${invoice.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{invoice.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell>{invoice.currency.en}</TableCell>
                                                 <TableCell>{cvtNumToUserPref(invoice.total_ht)} {invoice.currency.value}</TableCell>
@@ -109,8 +109,8 @@ class Invoice extends Component {
                     <Pagination
                         total={this.props.total}
                         rowsPerPageOptions={this.props.rowsPerPageOptions}
-                        label={locale.table.label_rows_per_page}
-                        label2={locale.table.of}
+                        label={locale.wording.label_rows_per_page}
+                        label2={locale.wording.of}
                         reducer={reducer}
                         onGetItemList={ this.props.getBookList }
                     />

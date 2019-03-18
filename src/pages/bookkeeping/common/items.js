@@ -59,23 +59,23 @@ class Items extends Component {
         <Table className={classes.table}>
         <TableHead className={classes.tableHead}>
         <TableRow>
-            <TableCell>{locale.table.ref}</TableCell>
-            <TableCell align="right">{locale.table.description}</TableCell>
-            <TableCell align="right">{locale.table.unit_price} { newData.currency && newData.currency.value }</TableCell>
-            <TableCell algin="center">{locale.table.quantity}</TableCell>
-            <TableCell align="right">{locale.table.discount}</TableCell>
-            <TableCell align="right">{locale.table.total} { newData.currency && newData.currency.value }</TableCell>
-            <TableCell align="right">{locale.table.remove}</TableCell>
+            <TableCell>{locale.wording.ref}</TableCell>
+            <TableCell>{locale.wording.description}</TableCell>
+            <TableCell>{locale.wording.unit_price} { newData.currency && newData.currency.value }</TableCell>
+            <TableCell>{locale.wording.quantity}</TableCell>
+            <TableCell>{locale.wording.discount}</TableCell>
+            <TableCell>{locale.wording.total} { newData.currency && newData.currency.value }</TableCell>
+            <TableCell>{locale.wording.remove}</TableCell>
         </TableRow>
         </TableHead>
         <TableBody>
             {   
             listItems.map(( item, index) => {
                 return  <TableRow key={index} className={classes.tableRow}>
-                            <TableCell>{locale.table[item.onModel]}-{ item.ref}</TableCell>
+                            <TableCell>{locale.wording[item.onModel]}-{ item.ref}</TableCell>
                             <TableCell className={ classes.contentEditable }><ApxContenEditable value={ item.desc || "" } id={item.item_id._id} actionInput={(event) => { this.props.editItem(reducer, item, 'desc' , event.target.innerText ) }} name="desc" /></TableCell>
                             <TableCell>{ cvtNumToUserPref(item.unit_price)}</TableCell>
-                            <TableCell style={{textAlign: "center"}}>
+                            <TableCell>
                             
                             <div className={ classes.quantity }>
                                 <ArrowDropDownIcon className={ classes.btnArrow} onClick={ () => { this.props.addRemoveQuantity(reducer, item.item_id, "down")}} />
@@ -97,16 +97,16 @@ class Items extends Component {
         <TableRow>
                 <TableCell rowSpan={3}></TableCell>
                 <TableCell colSpan={3} rowSpan={3}></TableCell>
-                <TableCell className={ classes.TableCell } colSpan={2}><b>{locale.table.subtotal}</b></TableCell>
+                <TableCell className={ classes.TableCell } colSpan={2}><b>{locale.wording.subtotal}</b></TableCell>
                 <TableCell align="right"><b>{ cvtNumToUserPref(this.totalHT(listItems).ht) } { newData.currency && newData.currency.value }</b></TableCell>
             </TableRow>
             <TableRow>
-                <TableCell><b>{locale.table.vat}</b></TableCell>
+                <TableCell><b>{locale.wording.vat}</b></TableCell>
                 <TableCell align="right"><b>{ newData.vat ? newData.vat.value : "0%" }</b> </TableCell>
                 <TableCell align="right"><b>{ this.totalHT(listItems).vat } { newData.currency && newData.currency.value }</b></TableCell>
             </TableRow>
             <TableRow>
-                <TableCell colSpan={2}><b>{ locale.table.total_ttc }</b></TableCell>
+                <TableCell colSpan={2}><b>{ locale.wording.total_ttc }</b></TableCell>
                 <TableCell align="right"><b>{ this.totalHT(listItems).ttc } { newData.currency && newData.currency.value }</b></TableCell>
             </TableRow>
         </TableBody>

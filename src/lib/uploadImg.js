@@ -10,10 +10,8 @@ const styles = theme => ({
 
     root: {
         minHeight: 100, 
-        maxWidth: '100px', 
         margin: '0 auto',
         textAlign: 'center',
-        display: 'inline'
     },
     wrapper: {
         margin: 5, 
@@ -30,7 +28,9 @@ const  UploadImg = (props) => {
     return (
         <div className={ classes.root }>
                     {image}
-                    { isUploading ? <LinearProgress color="secondary" variant="determinate" value={ progress  } /> : null }
+            
+            { isUploading ? <LinearProgress color="secondary" variant="determinate" value={ progress  } /> : null }
+            
             <div className={ classes.wrapper }>
                 <input
                     accept="image/*"

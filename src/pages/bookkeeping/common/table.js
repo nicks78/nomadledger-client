@@ -10,14 +10,9 @@ import Pagination from '../../../lib/pagination'
 
 class MyTable extends React.Component {
 
-    state = {
-        showQuote: false,
-        reducer: this.props.reducer,
-    }
-
     componentDidMount(){
-        this.props.getTotal(this.state.reducer, `?contact=${this.props.contactId}`);
-        this.props.getBookList(this.state.reducer, `list/${this.props.contactId}?limit=5&skip=0`);
+        this.props.getTotal(this.props.reducer, `?contact=${this.props.contactId}`);
+        this.props.getBookList(this.props.reducer, `list/${this.props.contactId}?limit=5&skip=0`);
     }
 
     render(){
@@ -27,10 +22,10 @@ class MyTable extends React.Component {
                 <Table id={reducer} className={classes.table}  padding="dense">
                 <TableHead className={classes.tableHead}>
                     <TableRow>
-                        <TableCell>{locale.table.reference}</TableCell>
-                        <TableCell>{locale.table.subtotal}</TableCell>
-                        <TableCell>{locale.table.vat}</TableCell>
-                        <TableCell>{locale.table.status}</TableCell>
+                        <TableCell>{locale.wording.reference}</TableCell>
+                        <TableCell>{locale.wording.subtotal}</TableCell>
+                        <TableCell>{locale.wording.vat}</TableCell>
+                        <TableCell>{locale.wording.status}</TableCell>
                         <TableCell align="center">Actions</TableCell>
 
                     </TableRow>
@@ -40,7 +35,7 @@ class MyTable extends React.Component {
                         {   !isFetching ? 
                             list.map(( item, index) => {
                                 return  <TableRow key={index}>
-                                            <TableCell>{item.ref}</TableCell>
+                                            <TableCell>{ locale.wording[reducer.toLowerCase()].toUpperCase() }-{item.ref}</TableCell>
                                             <TableCell>{cvtNumToUserPref(item.total_ht)} {item.currency.value}</TableCell>
                                             <TableCell>{cvtNumToUserPref(item.vat.amount)} {item.currency.value}</TableCell>
                                             <TableCell><span style={{color: item.status.color }}>{ item.status[localStorage.getItem('locale')] }</span></TableCell>
@@ -62,8 +57,8 @@ class MyTable extends React.Component {
                 <Pagination
                 total={total}
                 rowsPerPageOptions={rowsPerPageOptions}
-                label={locale.table.label_rows_per_page}
-                label2={locale.table.of}
+                label={locale.wording.label_rows_per_page}
+                label2={locale.wording.of}
                 reducer={reducer}
                 status=""
                 onGetItemList={ this.props.getBookList }

@@ -91,7 +91,7 @@ class User extends Component {
     return (
       <div>
           <ApxTitleBar 
-            text={locale.page.header_01 }
+            text={locale.subheading.info_profile }
             showEdit={showEdit}
             openAction={ this.openEdit }
             editAction={ this.updateDocument }
@@ -120,7 +120,7 @@ class User extends Component {
 
                 <Grid item xs={12}>
                       <EditInput 
-                          label={ locale.form.field.firstname }
+                          label={ locale.wording.firstname }
                           value={  user.firstname }
                           showEdit={showEdit}
                           locale={locale}
@@ -128,7 +128,7 @@ class User extends Component {
                           handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
                       />
                       <EditInput 
-                          label={ locale.form.field.lastname }
+                          label={ locale.wording.lastname }
                           value={ user.lastname }
                           showEdit={showEdit}
                           locale={locale}
@@ -142,8 +142,8 @@ class User extends Component {
                         field="phone"
                         handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
                         helperText="select_phone_code"
-                        labelCode={locale.form.field.phone_code }
-                        label={ locale.form.field.phone }
+                        labelCode={locale.wording.phone_code }
+                        label={ locale.wording.phone }
                         valueCode={user.phone_code}
                         value={user.phone}
                         reducer="USER"
@@ -152,7 +152,7 @@ class User extends Component {
                       <EditInput 
                           html_tag="a"
                           href={`mailto:${user.email}`}
-                          label={ locale.form.field.email }
+                          label={ locale.wording.email }
                           value={ user.email }
                           showEdit={showEdit}
                           locale={locale}
@@ -169,7 +169,7 @@ class User extends Component {
                   <form className={classes.container} autoComplete="off">
                     <TextField 
                           id="password"
-                          label={locale.form.field.password}
+                          label={locale.wording.password}
                           className={classes.textField}
                           value={password}
                           name="password"
@@ -179,7 +179,7 @@ class User extends Component {
                       <br />
                       <TextField 
                           id="password_confirm"
-                          label={locale.form.field.password_confirm}
+                          label={locale.wording.password_confirm}
                           className={classes.textField}
                           value={password_confirm}
                           name="password_confirm"

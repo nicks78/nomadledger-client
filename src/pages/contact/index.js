@@ -116,8 +116,8 @@ class Contact extends Component {
                 <Paper className={classes.paper}>
                     <ApxTableToolBar
                         numSelected={selected.length}
-                        title={locale.table.title_contact}
-                        selected={locale.table.selected}
+                        title={locale.wording.contact}
+                        selected={locale.wording.selected}
                         menus={ contactGroup  }
                         locale={locale}
                         onChangeQuery={ this.handleFilterRequest }
@@ -133,11 +133,11 @@ class Contact extends Component {
                                 onChange={this.onSelectAllClick}
                                 />
                             </TableCell> */}
-                            <TableCell>{ locale.table.company }</TableCell>
-                            <TableCell>{ locale.table.group }</TableCell>
-                            <TableCell>{locale.table.full_name}</TableCell>
-                            <TableCell>{locale.table.phone}</TableCell>
-                            <TableCell>{locale.table.email}</TableCell>
+                            <TableCell>{ locale.wording.company }</TableCell>
+                            <TableCell>{ locale.wording.group }</TableCell>
+                            <TableCell>{locale.wording.full_name}</TableCell>
+                            <TableCell>{locale.wording.phone}</TableCell>
+                            <TableCell>{locale.wording.email}</TableCell>
                             
                         </TableRow>
                         </TableHead>
@@ -168,8 +168,8 @@ class Contact extends Component {
                     <Pagination
                         total={total}
                         rowsPerPageOptions={rowsPerPageOptions}
-                        label={locale.table.label_rows_per_page}
-                        label2={locale.table.of}
+                        label={locale.wording.label_rows_per_page}
+                        label2={locale.wording.of}
                         reducer={reducer}
                         status={this.state.group}
                         onGetItemList={ this.props.getItemList }

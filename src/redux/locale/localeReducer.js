@@ -2,9 +2,9 @@
 
 import { GET_LOCALE } from '../../redux/actionsTypes'
 
-import Locale from './index'
+import { fr } from './index'
 const initialState = {
-    locale: Locale.fr
+    locale: fr
 }
 
 export default (state = initialState, action) => {

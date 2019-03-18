@@ -43,7 +43,7 @@ const Phone = (props) => {
                         id={fieldCode}
                         select
                         variant="filled"
-                        label={props.locale.form.field.phone_code}
+                        label={props.locale.wording.phone_code}
                         className={classes.textField}
                         name={fieldCode}
                         value={ valueCode[localStorage.getItem("locale")] || ''}

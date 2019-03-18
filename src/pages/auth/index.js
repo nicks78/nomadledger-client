@@ -86,8 +86,8 @@ class Auth extends Component {
     const { locale, newUser, isFetching, isError, message, isCreated } = this.props
 
     const form = {
-          title: locale.form.title.add_contact, 
-          label: locale.form.title.label_company,
+          title: locale.wording.create, 
+          label: locale.subheading.label_company,
           fields: [
                 { name: 'company_name', type:"text", required: true },
                 { name: 'email', type:"email", required: true },
@@ -133,7 +133,7 @@ class Auth extends Component {
                         md={12} 
                         objData={ newUser }/>
 
-                    <Button variant="contained" color="secondary"  style={  styles.button } onClick={ this.onSubmit }>{ locale.button.register }</Button>
+                    <Button variant="contained" color="secondary"  style={  styles.button } onClick={ this.onSubmit }>{ locale.wording.register }</Button>
                 </Paper>
             : <Spinner />
             }

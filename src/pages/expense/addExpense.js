@@ -9,8 +9,8 @@ const AddExpense = (props) => {
 
     const fields = [
       {
-        title: locale.form.title.add_expense, 
-        label: locale.form.title.label_expense,
+        title: locale.subheading.add_expense, 
+        label: locale.subheading.label_expense,
         fields: [
             { name: 'receipt_date', type:"date"},
             { name: 'name', type:"text", required: true },
@@ -29,8 +29,8 @@ const AddExpense = (props) => {
             formFields={fields} 
             locale={locale} 
             newData={props.newData} 
-            addBtnTitle={ locale.button.add_expense } 
-            headerText={ locale.form.title.add_expense }
+            addBtnTitle={ locale.wording.create } 
+            headerText={ locale.subheading.add_expense }
             limitUploadFile={1}
             reducer="EXPENSE"
             isCreating={ props.isCreating }

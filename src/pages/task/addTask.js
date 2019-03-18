@@ -9,8 +9,8 @@ const AddTask = (props) => {
 
     const fields = [
       {
-        title: locale.form.title.add_task, 
-        label: locale.form.title.label_task,
+        title: locale.subheading.add_task, 
+        label: locale.subheading.label_task,
         fields: [
             { name: 'due_date', type:"date"},
             { name: 'subject', type:"text" },
@@ -27,8 +27,8 @@ const AddTask = (props) => {
             locale={locale} 
             disabled={props.disabled}
             newData={props.newData} 
-            addBtnTitle={ locale.button.add_task } 
-            headerText={ locale.form.title.add_task }
+            addBtnTitle={ locale.wording.create } 
+            headerText={ locale.subheading.add_task }
             limitUploadFile={0}
             reducer="TASK"
             isCreating={ props.isCreating }

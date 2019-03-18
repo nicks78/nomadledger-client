@@ -17,7 +17,7 @@ const EditTask = (props) => {
           
             <Grid item xs={4}>
             <TextField
-                  label={locale.form.field.due_date}
+                  label={locale.wording.due_date}
                   id="due_date"
                   disabled
                   style={{width: '100%'}}
@@ -39,7 +39,7 @@ const EditTask = (props) => {
             <Grid item xs={4}>
               <TextField 
                   variant="filled"
-                  label={locale.form.field.subject}
+                  label={locale.wording.subject}
                   value={itemToUpdate.subject || ""}
                   margin="dense"
                   fullWidth
@@ -61,7 +61,7 @@ const EditTask = (props) => {
           <TextField 
             variant="filled"
             value={itemToUpdate.short_desc || ""}
-            label={locale.form.field.short_desc}
+            label={locale.wording.short_desc}
             margin="dense"
             fullWidth
             multiline

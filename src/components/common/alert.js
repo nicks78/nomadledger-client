@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Locale from '../../redux/locale'
+import {en, fr} from '../../redux/locale'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography';
 import ErrorIcon from '@material-ui/icons/Error'
@@ -25,11 +25,13 @@ const styles = theme => ({
 
 const Alert = (props) => {
 
-    const {classes} = props  
+    const {classes} = props ;
+
+    var locale = localStorage.getItem('locale') === 'fr' ? fr : en;
 
     return (
         <Paper className={ classes.root }>
-            <Typography className={ classes.text }><ErrorIcon className={ classes.icon}/>&nbsp;{ Locale[localStorage.getItem('locale')].message[props.message]}</Typography>
+            <Typography className={ classes.text }><ErrorIcon className={ classes.icon}/>&nbsp;{ locale.message[props.message]}</Typography>
         </Paper>
   );
 }

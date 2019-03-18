@@ -26,8 +26,8 @@ class AddService extends React.Component {
 
     const fields = [
       {
-        title: locale.form.title.add_service, 
-        label: locale.form.title.label_service,
+        title: locale.subheading.add_service, 
+        label: locale.subheading.label_service,
         section_1: false,
         fields: [
             { name: 'name', type:"text", required: true },
@@ -45,8 +45,8 @@ class AddService extends React.Component {
             formFields={fields} 
             locale={locale} 
             newData={newData} 
-            addBtnTitle={ locale.button.add_service } 
-            headerText={ locale.form.title.add_service }
+            addBtnTitle={ locale.wording.create } 
+            headerText={ locale.subheading.add_service }
             limitUploadFile={0}
             isCreating={ this.props.isCreating }
             progress={ this.props.progress }

@@ -64,13 +64,21 @@ const Locale = {
                 add_service: "Ajouter un service",
                 add_expense: "Ajouter une depense",
                 add_provider: "Ajouter un prestataire",
+                add_task: "Ajouter une tache",
                 register: "S'enregistrer",
                 login: "Se connecter",
                 return_list: "Retour à la liste",
                 save: "Enregistrer",
                 edit: 'Editer',
                 update: "Mettre à jour",
-                upload: "téléverser"
+                updating: "Mise à jour...",
+                progress: "En cours...",
+                upload: "téléverser",
+                add_quote: "Créer un devis",
+                add_invoice: "Créer une facture",
+                add_payback: "Créer un avoir",
+                loading: "Chargement...",
+                continue_edit: "En cours..."
             },
             page: {
                 contact: {
@@ -82,7 +90,17 @@ const Locale = {
                 service: "Vos services",
                 product: {
                     load_more_product: "Voir plus de produit"
-                }
+                },
+                quote: {
+                    items: "Selectionner un service/produit",
+                    info_comp: "Informations complementaires"
+                },
+                account: {
+                    title_1: "Configuré mon App",
+                    title_2: "Mes groupes de contacts",
+                    title_3: "Mes catégories",
+                    title_4: "Mes TVA"
+                },
             },
             text: {
                 address: "Adresse",
@@ -97,21 +115,32 @@ const Locale = {
                     add_product: "Enregistrer un nouveau produit",
                     add_service: "Enregistrer un service",
                     add_expense: "Enregistrer une depense",
+                    add_task: "Ajouter une tache",
                     add_provider: "Enregistrer un prestataire",
+                    new_quote: "Créer Nouveau Devis",
+                    new_invoice: "Créer Nouvelle Facture",
+                    new_payback: "Créer Nouvelle Avoir",
+                    edit_quote: "Editer Devis",
+                    edit_invoice: "Editer Facture",
+                    edit_payback: "Editer Avoir",
+                    edit_tag: "Editer mon tag",
                     label_contact: "Coordonnée contact",
                     label_company: "Informations compagnie",
                     label_product: "Informations produit",
                     label_service: "Informations service",
                     label_expense: "Informations depense",
+                    label_task: "Informations task",
                     label_provider: "Informations prestataire",
                     label_assets: "Photo / Documents",  
+                    label_currency_fav: "Votre devise",
                     label_comp_info: "Compagnie information",
                     label_contact_info: "Contact information",
                     label_comp_address: "Compagnie adresse", 
                     label_other: "Autres",
                     label_tax: "Année fiscale",
                     label_start_tax: "Debut",
-                    label_end_tax: "Fin",              
+                    label_end_tax: "Fin",
+
                 },
                 field: {
                     password: 'Mot de passe',
@@ -137,9 +166,14 @@ const Locale = {
                     addresses_city: "Ville", 
                     addresses_country: "Pays", 
                     num_format: "Format des chiffres",
+                    receipt_date: "Date du reçu",
 
                     contact_group: "Groupe",
                     contact_drop: "Client",
+                    marg: "Marge",
+
+                    service_type: "Type de service",
+                    follow_up_date: "Date de suivi",
 
                     name: "Nom",
                     description: "Déscription",
@@ -150,6 +184,10 @@ const Locale = {
                     currency: "Devise",
                     stock: "En stock",
                     receipt: "Reçu",
+                    due_date: "Date due",
+                    subject: "Sujet",
+                    status: "Statut",
+                    short_desc: "A faire...",
 
                     notes: "Information interne",
 
@@ -158,7 +196,14 @@ const Locale = {
                     add_vat: "Taux TVA",
 
                     expired_at: "Valide jusqu'au",
-                    created_at: "Créer le"
+                    created_at: "Créer le",
+                    due_at: "Dû le",
+                    contact_id: "Société",
+
+                    textarea_quote: "Taper une déscription de votre devis",
+                    search_service: "Rechercher un service",
+                    search_product: "Rechercher un produit",
+                    search_contact: "Rechercher un contact",
                     
                 },
                 helperText: {
@@ -168,6 +213,7 @@ const Locale = {
                     select_num_format: "Selectionner format des chiffres",
                     select_category: "Sélectionner une catégorie",
                     select_contact: "Sélectionner un client",
+                    select_contact_group: "Sélectionner un group",
                 }
             },
             message: {
@@ -181,15 +227,24 @@ const Locale = {
                 error_user_not_found: "user_not_found",
                 error_wrong_password: "Mot de passe incorrect",
                 error_500: "mauvaise requete",
-                error_400: "error 400",
+                error_400: "Champs marqué avec une * sont obligatoire",
+                error_404: "Not found",
+                error_403_delete: "Suppression interdite",
+                error_422: "Doit être un chiffre (49.48 or 49,48)",
+                error_422_email_format: "Mauvais format d'email",
+                error_membership_end: "Périod d'essai est finis",
+                error_409: "Email déja existant",
                 error_wrong_token: "error wrong token",
                 error_no_token: "error no token",
+                error_file_not_allowed: "File type not allowed",
 
-                alert_password_not_match: "Mots de passe ne correspondent pas"
+                alert_password_not_match: "Mots de passe ne correspondent pas",
+                phone_required: "Mobile obligatoire",
             },
             table: {
                 title_service: "Service",
                 title_contact: "Contact",
+                title_expense: "Depense",
                 title_invoice: "Facture",
                 title_quote: "Devis",
                 title_payback: "Avoir",
@@ -198,6 +253,8 @@ const Locale = {
                 category: "Catégorie",
                 service_name: "Nom du service",
                 product_name: "Nom du produit",
+                service: "SERVICE",
+                product: "PRODUIT",
                 total: "Total",
                 vat: "TVA",
                 quantity: "Quantité",
@@ -212,10 +269,31 @@ const Locale = {
                 receipt: "Reçu",
                 expense_name: "Nom",
                 date: "Date",
-                name: "Nom"
-
-
-            }
+                name: "Nom",
+                ref: "Référence",
+                incl: "inclus",
+                subtotal :  "Total HT",
+                total_ttc: "Total TTC",
+                unit_price: "Prix unitaire",
+                discount: "Remise",
+                remove: "Supprimer",
+                draft: "Brouillon",
+                pending: 'En attente',
+                approved: 'Approuvé',
+                rejected: "Rejeté",
+                paid: "Payée",
+                all: "Tous",
+                reference: "Référence",
+                client: "Client",
+                currency: "Devise",
+                status: "Statut",
+                inv: "FAC",
+                qto: "DEV",
+                pya: "AVO",
+                type: "Type",
+                preview: "Aperçu"
+            },
+            days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
         },
     en: 
         {
@@ -241,12 +319,12 @@ const Locale = {
                 url: "invoices"
             },
             quote:{
-                name: "Quotation",
-                url: "factures"
+                name: "Quotes",
+                url: "quotes"
             },
             payback:{
                 name: "Payback",
-                url: "factures"
+                url: "payback"
             },
             product:{
                 name: "Products",
@@ -278,13 +356,21 @@ const Locale = {
                 add_service: "Add service",
                 add_expense: "Add expense",
                 add_provider: "Add provider",
+                add_task: "Add task",
                 register: "Sign Up",
                 login: 'Sign In',
                 return_list: "Back to list",
                 save: "Save",
                 edit: 'Edit',
                 update: "Update",
-                upload: "Upload"
+                updating: "Updating...",
+                progress: "In progress...",
+                upload: "Upload",
+                add_quote: "Create quote",
+                add_invoice: "Create invoice",
+                add_payback: "Create payback",
+                loading: "Loading...",
+                continue_edit: "Continue editing..."
             },
             page: {
                 contact: {
@@ -295,7 +381,17 @@ const Locale = {
                 service: "Your services",
                 product: {
                     load_more_product: "Load more product"
-                }
+                },
+                quote: {
+                    items: "Select a product or service",
+                    info_comp: "Work description"
+                },
+                account: {
+                    title_1: "Configure My App",
+                    title_2: "My contact group",
+                    title_3: "My categories",
+                    title_4: "My VAT"
+                },
             },
             text: {
                 address: "Address",
@@ -310,7 +406,15 @@ const Locale = {
                     add_product: "Add a new produit",
                     add_service: "Add service",
                     add_expense: "Add expense",
+                    add_task: "Add task",
                     add_provider: "Add provider",
+                    new_quote: "Create New Quotation",
+                    new_invoice: "Create New Invoice",
+                    new_payback: "Create New Payback",
+                    edit_quote: "Edit Quotation",
+                    edit_invoice: "Edit invoice",
+                    edit_payback: "Edit payback",
+                    edit_tag: "Update my tag",
                     label_contact: "Customer profile",
                     label_company: "Company profile",
                     label_assets: "Photo / Documents",
@@ -321,10 +425,11 @@ const Locale = {
                     label_comp_info: "Compagnie information",
                     label_contact_info: "Contact information",
                     label_comp_address: "Compagnie adresse", 
+                    label_currency_fav: "Favorite currency",
                     label_other: "Others",
                     label_tax: "Tax year",
                     label_start_tax: "Start",
-                    label_end_tax: "End",
+                    label_end_tax: "End"
                 },
                 field: {
                     password: 'Password',
@@ -350,7 +455,8 @@ const Locale = {
                     company: "Company",
                     register: "Register number",
                     vat: 'VAT',
-
+                    marg: "Marge",
+                    
                     contact_group: "Group",
                     contact_drop: "Client",
 
@@ -364,6 +470,15 @@ const Locale = {
                     stock: "In stock",
                     notes: "Sales informations",
                     receipt: "Receipt",
+                    receipt_date: "Receipt date",
+
+                    due_date: "Due date",
+                    subject: "Subject",
+                    short_desc: "To do...",
+                    status: "Status",
+
+                    service_type: "Service type",
+                    follow_up_date: "Follow up date",
 
                     add_category: "Add category",
                     add_group: "Add a group",
@@ -371,7 +486,14 @@ const Locale = {
                     name_vat: "VAT name",
 
                     expired_at: "Expired at",
-                    created_at: "Create at"
+                    created_at: "Create at",
+                    due_at: "Due at",
+                    contact_id: "Company",
+
+                    textarea_quote: "Type a description of your work",
+                    search_service: "Type to search a service",
+                    search_product: "Type to search a produit",
+                    search_contact: "Type to search a contact",
                 },
                 helperText: {
                     select_phone_code: "Please select country code",
@@ -379,7 +501,8 @@ const Locale = {
                     select_service_type: "Select service type",
                     select_num_format: "Select num format",
                     select_category: "Select a category",
-                    select_contact: "Select a client"
+                    select_contact: "Select a client",
+                    select_contact_group: "Select a group"
                 }
             },
             message: {
@@ -393,16 +516,24 @@ const Locale = {
                 error_user_not_found: "User not found",
                 error_wrong_password: "Wrong password",
                 error_500: "bad request",
-                error_400: "error 400",
+                error_400: "Fields marked with * are mandatory",
+                error_404: "Not found",
+                error_422: "Must be a number (49.48 or 49,48)",
+                error_409: "Duplicate email",
+                error_403_delete: "Not authorized to delete this element",
+                error_422_email_format: "Wrong email format",
                 error_wrong_token: "error wrong token",
                 error_no_token: "error no token",
-
-                alert_password_not_match: "Password not match"
+                error_file_not_allowed: "File type not allowed",
+                error_membership_end: "Trial period is over !",
+                alert_password_not_match: "Password not match",
+                phone_required: "Phone required",
             },
             table: {
                 title_service: "Service",
                 selected: "selected",
                 title_contact: "Contact",
+                title_expense: "Expense",
                 title_invoice: "Invoice",
                 title_quote: "Quote",
                 title_payback: "Payback",
@@ -411,6 +542,8 @@ const Locale = {
                 category: "Category",
                 service_name: "Service name",
                 product_name: "Product name",
+                service: "SERVICE",
+                product: "PRODUCT",
                 total: "Total",
                 vat: "VAT",
                 quantity: "Quantity",
@@ -426,10 +559,30 @@ const Locale = {
                 expense_name: "Name",
                 ref: "Reference",
                 name: "Name",
-                
-
-
-            }
+                incl: "incl",
+                subtotal:  "Subtotal",
+                total_ttc: "Total incl VAT",
+                unit_price: "Unit price",
+                discount: "Discount",
+                remove: "Remove",
+                draft: "Draft",
+                pending: 'Pending',
+                approved: 'Approved',
+                rejected: "Rejected",
+                paid: "Paid",
+                all: "All",
+                reference: "Reference",
+                client: "Client",
+                currency: "Currency",
+                status: "Status",
+                inv: "INV",
+                qto: "QTO",
+                pya: "PAY",
+                type: "Type",
+                preview: "Preview"
+            },
+            days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            months: [""]
         },
 }
 

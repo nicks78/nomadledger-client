@@ -18,7 +18,7 @@ class StatContact extends Component {
         <Grid item xs={12} md={4}>
           <Paper style={{padding: 10, backgroundColor: 'rgba(38, 166, 154, 0.74)'}} elevation={1}>
                 <Typography className={classes.typoTitle} variant="body1">
-                  {locale.quote.name} ({locale.table.subtotal})
+                  {locale.wording.quote} ({locale.wording.subtotal})
                 </Typography>
             <Grid container>
 
@@ -37,7 +37,7 @@ class StatContact extends Component {
         <Grid item xs={12} md={4}>
           <Paper style={{padding: 10, backgroundColor: 'rgba(59, 20, 204, 0.74)'}} elevation={1}>
               <Typography className={classes.typoTitle} variant="body1">
-                {locale.invoice.name} 
+                {locale.wording.invoice} 
                 </Typography>
             <Grid container>
 
@@ -57,7 +57,7 @@ class StatContact extends Component {
         <Grid item xs={12} md={4}>
           <Paper style={{padding: 10, backgroundColor: 'rgba(236, 64, 122, 0.74)'}} elevation={1}>
               <Typography className={classes.typoTitle} variant="body1">
-                {locale.payback.name} 
+                {locale.wording.payback} 
                 </Typography>
             <Grid container>
 

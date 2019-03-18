@@ -114,7 +114,7 @@ class AddVat extends Component {
                     <div className={ classes.addVat}>
                         <TextField 
                                 id="vatname"
-                                label={locale.form.field.name}
+                                label={locale.wording.name}
                                 className={classes.textField}
                                 value={this.state.name}
                                 name="name"
@@ -125,7 +125,7 @@ class AddVat extends Component {
                             <TextField 
                                 id="vat"
                                 type="number"
-                                label={locale.form.field.add_vat}
+                                label={locale.wording.add_vat}
                                 className={classes.textField}
                                 value={this.state.value}
                                 name="value"

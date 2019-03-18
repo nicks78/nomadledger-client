@@ -5,12 +5,14 @@ import axios from 'axios'
 import { API_ENDPOINT } from '../constant'
 
 
-import Locale from './index'
+import {fr, en } from './index'
 
 export function getLocale( locale ){
     return dispatch => {
 
-        dispatch(setLocale(Locale[locale])) 
+        var localeObject = locale === 'fr' ? fr : en
+
+        dispatch(setLocale(localeObject)) 
 
         localStorage.setItem('locale', locale)
 
@@ -29,8 +31,9 @@ export function getLocale( locale ){
 
 export function initLocale( locale ){
     return dispatch => {
-
-        dispatch(setLocale(Locale[locale])) 
+        
+        var localeObject = locale === 'fr' ? fr : en
+        dispatch(setLocale(localeObject)) 
 
         localStorage.setItem('locale', locale)
     }

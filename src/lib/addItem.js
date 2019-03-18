@@ -125,27 +125,27 @@ class Add extends Component {
                         }
                         <div className={  classes.card }>
                         { limitUploadFile > 0 ? 
-                            <ApxExpanded heading={locale.form.title.label_assets}>
+                            <ApxExpanded heading={locale.subheading.label_assets}>
                                     <ApxUpload  onChange={ (event) => { this.handleChange(event) } } 
                                                 docType="all" 
                                                 removeItem={this.handleRemoveItem} 
                                                 images={ newData.doc || [] } 
-                                                title={ locale.button.upload } 
+                                                title={ locale.wording.upload } 
                                                 limitUploadFile={limitUploadFile}/>
                             </ApxExpanded> 
                             : null 
                         }
                     </div>
                     </form>
-                    <Button variant="contained" color="primary" className={ classes.btnSave } onClick={ this._handleCreateItem }>{ locale.button.save }</Button>
+                    <Button variant="contained" color="primary" className={ classes.btnSave } onClick={ this._handleCreateItem }>{ locale.wording.save }</Button>
                 </div>
           );
         return (
             <div className={ classes.root}>
             <Hidden only={['xs', 'sm']}>
-                <Button variant="contained" color="primary" disabled={ disabled || false}  className={  classes.button } onClick={this.toggleDrawer('right', true)}>{ disabled ? locale.button.loading : addBtnTitle }</Button>
+                <Button variant="contained" color="primary" disabled={ disabled || false}  className={  classes.button } onClick={this.toggleDrawer('right', true)}>{ disabled ? locale.wording.loading : addBtnTitle }</Button>
             </Hidden>
-            <ApxRightDrawer toggleDrawer={ this.toggleDrawer } side="right" open={ this.state.right} title={ headerText }>
+            <ApxRightDrawer toggleDrawer={ this.toggleDrawer } side="right" open={ this.state.right} title={ headerText } requiredText={locale.message.error_400}>
             
                     { 
                         isUploading ? 

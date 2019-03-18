@@ -1,6 +1,5 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import Locale from '../../redux/locale'
 import Snackbar from '@material-ui/core/Snackbar';
 
 
@@ -15,7 +14,7 @@ const styles = theme => ({
 
 const SnackBar = (props) => {
 
-    const {classes, message, isError} = props  
+    const {classes, message, isError, locale} = props  
 
     return (
         <Snackbar
@@ -29,7 +28,7 @@ const SnackBar = (props) => {
           ContentProps={{
             'aria-describedby': 'message-id',
           }}
-          message={<span id="message-id">{Locale[localStorage.getItem('locale')].message[message]}</span>}
+          message={<span id="message-id">{locale.message[message]}</span>}
         />
   );
 }

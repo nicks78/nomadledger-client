@@ -60,7 +60,7 @@ class EditInvoice extends React.Component {
                     getListItem={this.props.getListItem}
                     createState={this.props.createState}
                     reducer="INVOICE"
-                    btnLabel={locale.button.update}
+                    btnLabel={locale.wording.update}
                     date_1="created_at"
                     date_2="due_at"
                 />

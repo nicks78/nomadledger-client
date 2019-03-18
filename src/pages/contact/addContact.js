@@ -10,8 +10,8 @@ const AddContact = (props) => {
 
     const fields = [
       {
-        title: locale.form.title.add_contact, 
-        label: locale.form.title.label_company,
+        title: locale.subheading.add_contact, 
+        label: locale.subheading.label_company,
         section_1: false,
         fields: [
             { name: 'company_name',type:"text", required: true },
@@ -25,8 +25,8 @@ const AddContact = (props) => {
           ]
       },
       {
-        title: locale.form.title.add_contact, 
-        label: locale.form.title.label_contact,
+        title: locale.subheading.add_contact, 
+        label: locale.subheading.label_contact,
         fields: [
             { name: 'firstname',type:"text", required: true},
             { name: 'lastname',type:"text", required: true },
@@ -44,8 +44,8 @@ const AddContact = (props) => {
             formFields={fields} 
             locale={locale} 
             newData={props.newData} 
-            addBtnTitle={ locale.button.add_contact } 
-            headerText={ locale.form.title.add_contact }
+            addBtnTitle={ locale.wording.create } 
+            headerText={ locale.subheading.add_contact }
             limitUploadFile={1}
             isUploading={ props.isUploading }
             progress={ props.progress }

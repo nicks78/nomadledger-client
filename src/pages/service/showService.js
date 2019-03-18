@@ -54,7 +54,7 @@ class ShowService extends Component {
                     variant="filled" 
                     type="text"
                     margin="dense"
-                    label={locale.form.field.name}
+                    label={locale.wording.name}
                     value={service.name}
                     fullWidth
                     onChange={ (e) => { this.props.createState(reducer, "name", e.target.value) } }
@@ -65,7 +65,7 @@ class ShowService extends Component {
                     variant="filled" 
                     margin="dense"
                     fullWidth
-                    label={locale.form.field.price}
+                    label={locale.wording.price}
                     value={service.price}
                     onChange={ (e) => { this.props.createState(reducer, "price", e.target.value) } }
                   />
@@ -95,7 +95,7 @@ class ShowService extends Component {
             </Grid>
 
             <TextField variant="filled"
-                      label={locale.form.field.description } 
+                      label={locale.wording.description } 
                       fullWidth
                       multiline
                       rows={6}
@@ -112,7 +112,7 @@ class ShowService extends Component {
                 disabled={ isUpdating }
                 className={ classes.btnSave } 
                 onClick={ () => { this.props.updateItem(reducer, `update`)} }>
-                { !isUpdating ?  locale.button.update : locale.button.loading }</Button>
+                { !isUpdating ?  locale.wording.update : locale.wording.loading }</Button>
         </ApxPaper>
       )
     }

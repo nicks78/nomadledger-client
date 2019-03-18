@@ -11,6 +11,7 @@ import ApxPaper from '../../components/common/paper'
 import ApxBackBtn from '../../components/common/backBtn'
 import EditSelect from '../../lib/editSelect'
 import DatePickers from '../../lib/dayPicker'
+import { DEFAULT_IMG } from '../../redux/constant';
 
 class ShowExpense extends Component {
 
@@ -44,7 +45,7 @@ class ShowExpense extends Component {
       return (
         <ApxPaper>
           <ApxBackBtn/>
-            
+            <br />
             <UploadImg 
                 field="receipt"
                 _handleUploadFile={ this.props.uploadFileToServer }
@@ -53,7 +54,7 @@ class ShowExpense extends Component {
                 idModel={expense._id}
                 oldFile={expense.receipt.path}
                 isUploading={ false }
-                image={ <img src={`${ expense.receipt.full_path || 'http://localhost:8080/img/default_logo.png' }`} alt="logo" width="100%" height={null} />}
+                image={ <img src={`${ expense.receipt.full_path || DEFAULT_IMG }`} alt="logo" width="300" height={null} />}
               />
             {isError ? <ApxAlert message={message} /> : null }
             <TextField 
@@ -61,7 +62,7 @@ class ShowExpense extends Component {
                     variant="filled" 
                     type="text"
                     margin="dense"
-                    label={locale.form.field.name}
+                    label={locale.wording.name}
                     value={expense.name}
                     fullWidth
                     onChange={ (e) => { this.props.createState(reducer, "name", e.target.value) } }
@@ -71,7 +72,7 @@ class ShowExpense extends Component {
               <Grid item xs={12} md={6}>
                  
                   <TextField
-                      label={locale.form.field.receipt_date}
+                      label={locale.wording.receipt_date}
                       id="receipt_date"
                       disabled
                       margin="dense"
@@ -106,7 +107,7 @@ class ShowExpense extends Component {
                     variant="filled" 
                     margin="dense"
                     fullWidth
-                    label={locale.form.field.price}
+                    label={locale.wording.price}
                     value={expense.price}
                     onChange={ (e) => { this.props.createState(reducer, "price", e.target.value) } }
                   />
@@ -124,7 +125,7 @@ class ShowExpense extends Component {
               </Grid>
             </Grid>
             <TextField variant="filled"
-                label={locale.form.field.description } 
+                label={locale.wording.description } 
                 fullWidth
                 multiline
                 rows={6}
@@ -140,7 +141,7 @@ class ShowExpense extends Component {
                 disabled={ isUpdating }
                 className={ classes.btnSave } 
                 onClick={ () => { this.props.updateItem(reducer, `update`)} }>
-                { !isUpdating ?  locale.button.update : locale.button.loading }</Button>
+                { !isUpdating ?  locale.wording.update : locale.wording.loading }</Button>
         </ApxPaper>
       )
     }

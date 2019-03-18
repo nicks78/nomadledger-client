@@ -27,7 +27,7 @@ class Expense extends Component {
 
     onSelectAllClick = (event) => {
         if (event.target.checked) {
-            this.setState({ selected: this.props.listContacts.map(n => n._id) });
+            this.setState({ selected: this.props.listExpenses.map(n => n._id) });
             return;
         }
         this.setState({ selected: [] });
@@ -92,8 +92,8 @@ class Expense extends Component {
             <Paper className={classes.paper}>
                 <ApxTableToolBar
                         numSelected={selected.length}
-                        title={locale.table.title_expense}
-                        selected={locale.table.selected}
+                        title={locale.wording.expense}
+                        selected={locale.wording.selected}
                     />
                     <div style={{overflowY: "auto"}}>
                     <Table>
@@ -106,11 +106,11 @@ class Expense extends Component {
                                 onChange={this.onSelectAllClick}
                                 />
                             </TableCell>
-                            <TableCell>{ locale.table.receipt }</TableCell>
-                            <TableCell>{ locale.table.name }</TableCell>
-                            <TableCell>{ locale.table.category }</TableCell>
-                            <TableCell>{ locale.table.price }</TableCell>
-                            <TableCell>{ locale.table.date }</TableCell>
+                            <TableCell>{ locale.wording.receipt }</TableCell>
+                            <TableCell>{ locale.wording.name }</TableCell>
+                            <TableCell>{ locale.wording.category }</TableCell>
+                            <TableCell>{ locale.wording.price }</TableCell>
+                            <TableCell>{ locale.wording.date }</TableCell>
                             
                         </TableRow>
                         </TableHead>
@@ -142,8 +142,8 @@ class Expense extends Component {
                     <Pagination
                         total={this.props.total}
                         rowsPerPageOptions={this.props.rowsPerPageOptions}
-                        label={locale.table.label_rows_per_page}
-                        label2={locale.table.of}
+                        label={locale.wording.label_rows_per_page}
+                        label2={locale.wording.of}
                         reducer={reducer}
                         onGetItemList={ this.props.getItemList }
                     />

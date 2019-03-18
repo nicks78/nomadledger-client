@@ -75,7 +75,7 @@ class Task extends Component {
               isCreating={isCreating}
               status={status}
           />
-          : <Button disabled variant="contained">{ locale.button.progress }</Button>
+          : <Button disabled variant="contained">{ locale.wording.progress }</Button>
           }
           
      { isError ? <ApxAlert message={message} />: null }

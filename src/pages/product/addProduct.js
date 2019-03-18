@@ -9,8 +9,8 @@ const AddProduct = (props) => {
 
     const fields = [
       {
-        title: locale.form.title.add_product, 
-        label: locale.form.title.label_product,
+        title: locale.subheading.add_product, 
+        label: locale.subheading.label_product,
         fields: [
           { name: 'name', type:"text", required: true },
           { name: 'buying_price', type:"text"},
@@ -30,8 +30,8 @@ const AddProduct = (props) => {
             formFields={fields} 
             locale={locale} 
             newData={props.newData} 
-            addBtnTitle={ locale.button.add_product } 
-            headerText={ locale.form.title.add_product }
+            addBtnTitle={ locale.wording.create } 
+            headerText={ locale.subheading.add_product }
             limitUploadFile={3}
             isCreating={ props.isCreating }
             reducer="PRODUCT"

@@ -51,15 +51,15 @@ class Quote extends Component {
       <div className={classes.root}>
             <Hidden only={['xs', 'sm']}>
                 <Button component={Link} to="/quote/create" variant="contained" color="primary"  className={  classes.button }>
-                { newQuote.contact_id ? locale.button.continue_edit : locale.button.add_quote}
+                { newQuote.contact_id ? locale.wording.progress : locale.wording.create}
                 
                 </Button>
             </Hidden>
             <Paper className={classes.paper}>
 
                 <ApxTableToolBar
-                        title={locale.table.title_quote}
-                        selected={locale.table.selected}
+                        title={locale.wording.title_quote}
+                        selected={locale.wording.selected}
                         menus={filter}
                         locale={locale}
                         onChangeQuery={ this.handleFilterRequest }
@@ -68,13 +68,13 @@ class Quote extends Component {
                     <Table  padding="dense">
                     <TableHead className={classes.tableHead}>
                         <TableRow>
-                            <TableCell>{locale.table.preview}</TableCell>
-                            <TableCell>{locale.table.reference}</TableCell>
-                            <TableCell>{locale.table.client}</TableCell>
-                            <TableCell>{locale.table.subtotal}</TableCell>
-                            <TableCell>{locale.table.vat}</TableCell>
-                            <TableCell>{locale.table.total}</TableCell>
-                            <TableCell align="center">{locale.table.status}</TableCell>
+                            <TableCell>{locale.wording.preview}</TableCell>
+                            <TableCell>{locale.wording.reference}</TableCell>
+                            <TableCell>{locale.wording.client}</TableCell>
+                            <TableCell>{locale.wording.subtotal}</TableCell>
+                            <TableCell>{locale.wording.vat}</TableCell>
+                            <TableCell>{locale.wording.total}</TableCell>
+                            <TableCell align="center">{locale.wording.status}</TableCell>
                             <TableCell align="center">Actions</TableCell>
 
                         </TableRow>
@@ -87,7 +87,7 @@ class Quote extends Component {
                                                 <TableCell>
                                                     <RemoveRedEyeIcon style={{ cursor:"pointer" }}  onClick={ () => {this.props.downloadPdf(reducer, item._id)} } />
                                                 </TableCell>
-                                                <TableCell>{locale.table.qto}-{item.ref}</TableCell>
+                                                <TableCell>{locale.wording.qto}-{item.ref}</TableCell>
                                                 <TableCell><Link className="link" to={{ pathname: `/contact/view/${item.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{item.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell>{cvtNumToUserPref(item.total_ht)} {item.currency.value}</TableCell>
                                                 <TableCell>{cvtNumToUserPref(item.vat.amount)} {item.currency.value}</TableCell>
@@ -131,8 +131,8 @@ class Quote extends Component {
                     <Pagination
                         total={this.props.total}
                         rowsPerPageOptions={this.props.rowsPerPageOptions}
-                        label={locale.table.label_rows_per_page}
-                        label2={locale.table.of}
+                        label={locale.wording.label_rows_per_page}
+                        label2={locale.wording.of}
                         reducer={reducer}
                         status={this.state.status}
                         onGetItemList={ this.props.getBookList }

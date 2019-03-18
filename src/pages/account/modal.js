@@ -97,7 +97,7 @@ class SimpleModal extends React.Component {
         >
 
           <div  className={classes.paper}>
-          <Typography variant="subtitle1" align="center">{ locale.form.title.edit_tag }</Typography>
+          <Typography variant="subtitle1" align="center">{ locale.subheading.edit_tag }</Typography>
             <TextField 
                 value={ name }
                 onChange={(e) => { this.handleForm(e.target.name, e.target.value) }}
@@ -124,7 +124,7 @@ class SimpleModal extends React.Component {
               : null 
             }
 
-            <Button variant="contained" color="primary" className={classes.btn} onClick={ this.updateElement }>{locale.button.save}</Button>
+            <Button variant="contained" color="primary" className={classes.btn} onClick={ this.updateElement }>{locale.wording.save}</Button>
           </div>
         </Modal>
       </React.Fragment>

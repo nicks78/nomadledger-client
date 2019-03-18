@@ -86,7 +86,7 @@ class AddCategory extends Component {
             <div className={ classes.addCategory}>
                 <TextField 
                         id="category_name"
-                        label={locale.form.field.category}
+                        label={locale.wording.category}
                         className={classes.textField}
                         value={this.state.value}
                         name="category_name"

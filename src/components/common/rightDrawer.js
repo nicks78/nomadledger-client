@@ -39,7 +39,7 @@ const styles = theme => ({
  */
 const RightDrawer = (props) => {
 
-    const { classes, toggleDrawer, side, open, title } = props
+    const { classes, toggleDrawer, side, open, title, requiredText } = props
 
     return (
         <Drawer anchor={side} open={ open } onClose={ toggleDrawer(side, false) }>
@@ -47,7 +47,7 @@ const RightDrawer = (props) => {
             <div className={ classes.titleWrap }>
                 <div className={ classes.span }>
                     <Typography  variant="overline">{title}</Typography>
-                    <Typography  variant="caption">Champs obligatoire</Typography>
+                    <Typography  variant="caption">{ requiredText }</Typography>
                 </div>
                 
                 <div>

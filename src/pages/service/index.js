@@ -78,19 +78,19 @@ class Service extends Component {
                 
                 <ApxTableToolBar
                         numSelected={0}
-                        title={locale.table.title_service}
-                        selected={locale.page.selected}
+                        title={locale.wording.service}
+                        selected={locale.wording.selected}
                     />
                     <div style={{overflowY: "auto"}}>
                     <Table>
                     <TableHead className={classes.tableHead}>
                         <TableRow>
-                            <TableCell>{locale.table.service_name}</TableCell>
-                            <TableCell align="right">{locale.table.price}</TableCell>
-                            <TableCell align="right">{locale.table.type}</TableCell>
-                            <TableCell align="center">{locale.table.currency}</TableCell>
-                            <TableCell>{locale.table.category}</TableCell>
-                            <TableCell>{locale.table.description}</TableCell>
+                            <TableCell>{locale.wording.service_name}</TableCell>
+                            <TableCell align="right">{locale.wording.price}</TableCell>
+                            <TableCell align="right">{locale.wording.type}</TableCell>
+                            <TableCell align="center">{locale.wording.currency}</TableCell>
+                            <TableCell>{locale.wording.category}</TableCell>
+                            <TableCell>{locale.wording.description}</TableCell>
                         </TableRow>
                         </TableHead>
 
@@ -114,10 +114,10 @@ class Service extends Component {
                     <Pagination
                         total={this.props.total}
                         rowsPerPageOptions={this.props.rowsPerPageOptions}
-                        label={locale.table.label_rows_per_page}
+                        label={locale.wording.label_rows_per_page}
                         status=""
                         reducer={reducer}
-                        label2={locale.table.of}
+                        label2={locale.wording.of}
                         onGetItemList={ this.props.getItemList }
                     />        
             </Paper>
