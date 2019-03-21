@@ -199,6 +199,43 @@ export function getDocument( actionType, id ){
     }
 }
 
+/**
+ * // GET SINGLE DOCUMENT
+ * @param  actionType 
+ * @param  id 
+ */
+export function convertQuoteToInvoice( actionType, id ){
+
+    return dispatch => {
+
+        dispatch(requestData(actionType))
+
+        axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${id}`, {
+          method: 'GET',
+          mode: 'cors'
+        })
+        .then(function (response) { 
+            return response.data
+        }) 
+        .then( res => {
+            var item = {
+                list_items: res.payload.list_items,
+                infos:  res.payload.infos,
+                terms: res.payload.terms,
+                vat: res.payload.vat,
+                currency: res.payload.currency,
+                contact_id: res.payload.contact_id
+            }
+            dispatch(setDocument("INVOICE", item ))  
+        })
+        .catch(function (error) {
+          // handle error
+          var message = error.response ? error.response.data.message : 'error_500'
+          dispatch(requestFailed(actionType, message));
+        })             
+    }
+}
+
 // Receive all documents list ( invoice || quote || payback )
 export function setDocument( actionType, item ) {
 

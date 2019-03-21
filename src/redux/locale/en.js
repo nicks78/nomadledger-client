@@ -187,7 +187,7 @@ const en = {
         approved: 'Approved',
         rejected: "Rejected",
         paid: "Paid",
-
+        invoicer: "Invoiced",
         all: "All",
         reference: "Reference",
         client: "Client",

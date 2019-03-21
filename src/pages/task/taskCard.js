@@ -8,7 +8,7 @@ const TaskCard = (props) => {
     const {task, id, classes} = props
     return (
       <div>
-          <span className={classes.subtitle}>{task.subject} - <span style={{fontSize: 11, color: 'rgb(238,238,238)'}}>{ new Date(task.due_date.date).toLocaleDateString('fr') }</span></span>
+          <span className={classes.subtitle}>{task.subject} - <span style={{fontSize: 11, color: 'rgb(185,185,185)'}}>{ new Date(task.due_date.date).toLocaleDateString('fr') }</span></span>
             { 
                 id !== task._id &&
                 <EditIcon onClick={ () => { props.onEdit(task) }} style={{float: 'right', color: 'blue', fontSize: 18, cursor: "pointer", marginTop: 5}} />
@@ -17,7 +17,7 @@ const TaskCard = (props) => {
             <br />
             {
                 id !== task._id ?
-                    <span style={{ backgroundColor: task.status.color,borderRadius: 4, color: "white", padding: "1px 3px 1px 3px", position: "absolute", bottom: 5, right: 5, fontSize: 11}}>{task.status.fr}</span>
+                    <span className={ classes.status } style={{ backgroundColor: task.status.color,}}>{task.status.fr}</span>
                 : null 
             }
       </div>
@@ -28,8 +28,18 @@ const styles = theme => ({
     subtitle: {
       textTransform: "capitalize",
       fontWeight: 600
+    },
+    status: {
+        borderRadius: 4, 
+        color: "white", 
+        padding: "1px 3px 1px 3px", 
+        position: "absolute", 
+        bottom: 5, 
+        right: 5, 
+        fontSize: 11, 
+        minWidth: 60, 
+        textAlign: 'center'
     }
-    
 })
 
 

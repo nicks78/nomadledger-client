@@ -193,7 +193,7 @@ const fr =  {
         approved: 'Approuvé',
         rejected: "Rejeté",
         paid: "Payée",
-
+        invoicer: "Facturer",
         all: "Tous",
         reference: "Référence",
         client: "Client",

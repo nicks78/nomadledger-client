@@ -30,7 +30,7 @@ const BookkeepingRoute = (props) => {
 
 
             <PrivateRoute exact path="/invoice" component={Invoice}  auth={isLoggedIn}/>
-            <PrivateRoute path="/invoice/create" component={CreateInvoice}  auth={isLoggedIn}/>
+            <PrivateRoute path="/invoice/create/:id?" component={CreateInvoice}  auth={isLoggedIn}/>
             <PrivateRoute path="/invoice/edit/:id" component={EditInvoice}  auth={isLoggedIn}/>
 
 

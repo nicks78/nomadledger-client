@@ -30,7 +30,7 @@ const styles  = theme => ({
     },
     iconButton: {
         cursor: 'pointer',
-        fontSize: '14px',
+        fontSize: '18px',
         marginRight: '10px',
     }
 })

@@ -2,8 +2,9 @@
 
 import React, { Component } from 'react'
 import { Link } from "react-router-dom"
+import {DEFAULT_URL} from "../../../redux/constant"
 import {connect} from 'react-redux'
-import {  getBookList } from '../../../redux/book/actions'
+import {  getBookList, updateField, createState, downloadPdf } from '../../../redux/book/actions'
 import { getTotal } from '../../../redux/library/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, TableCell, TableRow,} from '@material-ui/core';
@@ -11,7 +12,7 @@ import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxAlert from '../../../components/common/alert'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
-import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEyeOutlined'
+import ApxSelect from '../../../components/common/select'
 
 
 class Invoice extends Component {
@@ -30,12 +31,16 @@ class Invoice extends Component {
         this.setState({status: value.code});
         this.props.getTotal(this.state.reducer, `?status=${value.code || '10'}`);
         this.props.getBookList(this.state.reducer, `list?limit=5&skip=0&status=${value.code || '10'}`);
-    };
+    }
+
+    handleStatus = (event) => {
+        this.props.createState(this.state.reducer, event.target.name, event.target.value);
+    }
     
     render() {
     
     const {listInvoice, isFetching, isError,  locale, classes, message, newInvoice, filter, status} = this.props
-    const { rowCount, reducer } = this.state
+    const { reducer } = this.state
 
     if(isError){
         return <ApxAlert message={message} />
@@ -63,7 +68,6 @@ class Invoice extends Component {
                     <Table padding="dense">
                     <TableHead className={classes.tableHead}>
                         <TableRow>
-                            <TableCell>{locale.wording.preview}</TableCell>
                             <TableCell>{locale.wording.reference}</TableCell>
                             <TableCell>{locale.wording.client}</TableCell>
                             <TableCell>{locale.wording.currency}</TableCell>
@@ -71,7 +75,8 @@ class Invoice extends Component {
                             <TableCell>{locale.wording.vat}</TableCell>
                             <TableCell>{locale.wording.total}</TableCell>
                             <TableCell>{locale.wording.status}</TableCell>
-                            <TableCell>Actions</TableCell>
+                            <TableCell>PDF</TableCell>
+                            <TableCell align="center">Actions</TableCell>
 
                         </TableRow>
                         </TableHead>
@@ -80,16 +85,29 @@ class Invoice extends Component {
                             {   !isFetching ? 
                                 listInvoice.map(( invoice, index) => {
                                     return  <TableRow key={index}>
-                                                <TableCell>
-                                                    <RemoveRedEyeIcon style={{ cursor:"pointer" }}  onClick={ () => {this.props.downloadPdf(reducer, invoice._id)} } />
-                                                </TableCell>
                                                 <TableCell>{locale.wording.inv}-{invoice.ref}</TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${invoice.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{invoice.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell>{invoice.currency.en}</TableCell>
                                                 <TableCell>{cvtNumToUserPref(invoice.total_ht)} {invoice.currency.value}</TableCell>
                                                 <TableCell>{cvtNumToUserPref(invoice.vat.amount)} {invoice.currency.value}</TableCell>
                                                 <TableCell>{cvtNumToUserPref(invoice.total)} {invoice.currency.value}</TableCell>
-                                                <TableCell><span style={{color: invoice.status.color }}>{ invoice.status[localStorage.getItem('locale')] }</span></TableCell>
+                                                <TableCell>
+                                                    {
+                                                        false ? 
+                                                        <span style={{color: invoice.status.color }}>
+
+                                                        { invoice.status[localStorage.getItem('locale')] }</span>
+
+                                                        :   <ApxSelect 
+                                                                arrayField={status}
+                                                                value={invoice.status[localStorage.getItem('locale')]}
+                                                                variant="standard"
+                                                                handleAction={ (event) => { this.props.updateField(reducer, { status: event.target.value}, invoice._id) } }
+                                                                locale={locale}
+                                                            />
+                                                    }    
+                                                </TableCell>
+                                                <TableCell><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, invoice._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
                                                 <ApxTableActions 
                                                     actionDelete={false}
                                                     actionEdit={`/invoice/edit/${invoice._id}`}
@@ -164,4 +182,4 @@ const mapStateToProps = (state) => {
 
 const StyledInvoice = withStyles(styles)(Invoice)
 
-export default connect(mapStateToProps, {  getBookList, getTotal  })(StyledInvoice);
+export default connect(mapStateToProps, {  getBookList, getTotal, updateField, createState, downloadPdf  })(StyledInvoice);

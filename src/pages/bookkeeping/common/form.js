@@ -28,7 +28,8 @@ const Form = (props) => {
 
     return  <div>
                 <Paper className={classes.paper}>
-                <Typography variant="h2" className={classes.title}>{locale.subheading[formTitle]}&nbsp;{ data.ref || '' }
+                <Typography variant="h2" className={classes.title}>
+                    {locale.subheading[formTitle]}
                 </Typography>
 
                     <Grid container spacing={24}>

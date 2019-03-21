@@ -41,7 +41,7 @@ class MyTable extends React.Component {
                                             <TableCell><span style={{color: item.status.color }}>{ item.status[localStorage.getItem('locale')] }</span></TableCell>
                                             <ApxTableActions 
                                                 actionDelete={false}
-                                                actionEdit={`/bookkeeping/${reducer.toLowerCase()}/edit/${item._id}`}
+                                                actionEdit={`/${reducer.toLowerCase()}/edit/${item._id}`}
                                                 actionView={false}
                                                 actionCheck={false}
 
