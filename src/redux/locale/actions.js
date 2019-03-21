@@ -16,7 +16,7 @@ export function getLocale( locale ){
 
         localStorage.setItem('locale', locale)
 
-        axios.get(`${API_ENDPOINT}account/update/locale/${locale}`, {
+        axios.get(`${API_ENDPOINT}company/update/locale/${locale}`, {
             method: 'GET',
             mode: 'cors',
         })

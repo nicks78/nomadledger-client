@@ -71,7 +71,6 @@ const fr =  {
         add_quote: "Créer Nouveau Devis",
         add_invoice: "Créer une Nouvelle Facture",
         add_payback: "Créer Nouvelle Avoir",
-        textarea_quote: "Taper une déscription de votre devis",
         edit_quote: "Editer Devis",
         edit_invoice: "Editer Facture",
         edit_payback: "Editer Avoir",
@@ -222,6 +221,8 @@ const fr =  {
         select_category: "Sélectionner une catégorie",
         select_contact: "Sélectionner un client",
         select_contact_group: "Sélectionner un groupe",
+        textarea_quote: "Taper une déscription de votre devis",
+        textarea_terms: "Taper un court texte de conditions générale",
     },
     message: {
         success_create: "Felicitation !",

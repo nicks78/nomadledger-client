@@ -97,6 +97,8 @@ export function updateDocument (actionType) {
         // Set withCredentials
         axios.defaults.withCredentials = true;
 
+        console.log("DATA", data)
+
         axios.put(`${API_ENDPOINT}${actionType.toLowerCase()}/update`,
             { 
                 data,

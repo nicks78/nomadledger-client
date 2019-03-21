@@ -66,7 +66,6 @@ const en = {
         add_quote: "Create a new quote",
         add_invoice: "Create a new invoice",
         add_payback: "Create a new payback",
-        textarea_quote: "Type a description",
         edit_quote: "Edit your quote",
         edit_invoice: "Edit your invoice",
         edit_payback: "Edit your payback",
@@ -216,6 +215,8 @@ const en = {
         select_category: "Select a category",
         select_contact: "Select a client",
         select_contact_group: "Select a group",
+        textarea_quote: "Type a description",
+        textarea_terms: "Type a short terms & conditions",
     },
     message: {
         success_create: "Congratulation !",

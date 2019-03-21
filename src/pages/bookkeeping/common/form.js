@@ -111,11 +111,10 @@ const Form = (props) => {
                                         label={ locale.wording.follow_up_date }
                                         id="follow_up_date"
                                         disabled
-                                        fullWidth
                                         margin="dense"
                                         value={ data.follow_up_date ? data.follow_up_date.label : ""}
                                         variant="filled"
-                                        style={{width: '98%'}}
+                                        style={{width: '100%'}}
                                         InputProps={{
                                             startAdornment: <InputAdornment position="start">
                                                 <DatePickers 
@@ -143,12 +142,12 @@ const Form = (props) => {
                     <br/>
                 <Typography variant="overline">{ locale.subheading.info_comp }</Typography>
                 <br />
-                <ApxRichEditor
-                    initText={ data.infos || locale.wording.textarea_quote }
+                <ApxRichEditor 
                     reducer={reducer}
-                    handleAction={  props.createState }
-                />
-                <br />
+                    field="infos"
+                    initText={ data.infos || locale.helperText.textarea_quote }
+                    handleAction={ props.createState }
+                /><br />
                 <Typography variant="overline">{ locale.subheading.items }</Typography>
                 <br />
 
@@ -187,6 +186,19 @@ const Form = (props) => {
                         reducer={reducer}
                     />
                     <br />
+                    <TextField
+                        label={ locale.helperText.textarea_terms }
+                        id="terms"
+                        style={{ backgroundColor: 'rgba(255,0,0,0.14)', fontWeight: 600}}
+                        rows={2}
+                        fullWidth
+                        multiline
+                        margin="dense"
+                        value={ data.terms }
+                        onChange={ (e) => { props.createState( reducer, "terms", e.target.value ) } }
+                        variant="filled"
+                    />
+                    <br /><br />
                     <div className={classes.btnSave}>
                         <Button 
                             variant="contained" 

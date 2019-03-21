@@ -1,54 +1,65 @@
 //manager/src/components/common/richEditor.js
 import React from "react";
 import { withStyles } from '@material-ui/core';
-import SimpleMDEReact from "react-simplemde-editor/lib";
 import "simplemde/dist/simplemde.min.css";
+import RichTextEditor from 'react-rte';
 
+const toolbarConfig = {
+  display: ['INLINE_STYLE_BUTTONS', 'BLOCK_TYPE_BUTTONS', 'BLOCK_TYPE_DROPDOWN', 'LINK_BUTTONS'],
+  INLINE_STYLE_BUTTONS: [
+    {label: 'Bold', style: 'BOLD', className: 'custom-css-class'},
+    {label: 'Italic', style: 'ITALIC'},
+    {label: 'Underline', style: 'UNDERLINE'},
+  ],
+  BLOCK_TYPE_DROPDOWN: [
+    {label: 'Normal', style: 'unstyled'},
+    {label: 'Heading Large', style: 'header-two'},
+    {label: 'Heading Medium', style: 'header-three'}
+  ],
+  BLOCK_TYPE_BUTTONS: [
+    {label: 'UL', style: 'unordered-list-item'},
+    {label: 'OL', style: 'ordered-list-item'}
+  ]
+};
 
 class RichEditor extends React.Component {
-  
-  state = {
-    textValue: this.props.initText,
+
+  constructor(props) {
+    super(props);
+    this.state ={
+      value: RichTextEditor.createValueFromString(this.props.initText, "html")
+    }  
   }
 
-  handleChange = value => {
-    this.setState({
-      textValue: value
-    });
-    // Set to redux state
-    this.props.handleAction(this.props.reducer, "infos", value)
-  }
-
-  getInsance = () => {
-
-  }
+  onChange = (value) => {
+    this.setState({value});
+    this.props.handleAction(this.props.reducer, this.props.field, value.toString('html'))
+    
+  };
 
   render() {
 
-    const { classes } = this.props
+    const { classes } = this.props;
+
 
     return (
       <div className="container container-naow">
-        <SimpleMDEReact
-            className={classes.root}
-            options={{ 
-                toolbar: ["bold", "italic", "heading", "|", "unordered-list", "ordered-list", "table", "|", "quote", "link",  "|", "preview"],
-                spellChecker: false,
-	              status: false,
-            }}
-            label=""
-            value={this.state.textValue}
-            onChange={this.handleChange}
-        />
+      <RichTextEditor
+        editorClassName={classes.editor}
+        value={this.state.value}
+        onChange={this.onChange}
+        toolbarConfig={toolbarConfig}
+      />
+
       </div>
     );
   }
 }
 
 const styles = theme => ({
-    root: {
-      
-    }
+  editor: {
+    minHeight: 150
+  }
 })
 
 const ApxRichEditor =  withStyles(styles)(RichEditor)
