@@ -12,13 +12,17 @@ import ApxAlert from '../../../components/common/alert'
 
 class EditQuote extends React.Component {
 
+    state =  {
+        reducer: "QUOTE"
+    }
+
     componentWillUnmount(){
-        this.props.resetState("QUOTE")
+        this.props.resetState(this.state.reducer)
     }
 
     componentDidMount(){
         var id = this.props.match.params.id;
-        this.props.getDocument("QUOTE", id);
+        this.props.getDocument(this.state.reducer, id);
     }
     
     handleDropDown = (event) => {
@@ -28,10 +32,10 @@ class EditQuote extends React.Component {
         if(name === "currency") {
             // Update each items with the correct currency rate
             for (let i = 0; i < this.props.listItems.length; i++) {
-                this.props.convertToCurrency("QUOTE", value, this.props.listItems[i])
+                this.props.convertToCurrency(this.state.reducer, value, this.props.listItems[i])
             }
         }
-        this.props.createState( "QUOTE", name, value)
+        this.props.createState( this.state.reducer, name, value)
     }
 
 
@@ -60,7 +64,7 @@ class EditQuote extends React.Component {
                     handleDropDown={ this.handleDropDown }
                     getListItem={this.props.getListItem}
                     createState={this.props.createState}
-                    reducer="QUOTE"
+                    reducer={this.state.reducer}
                     isUpdating={isUpdating}
                     btnLabel={locale.wording.update}
                     date_1="created_at"

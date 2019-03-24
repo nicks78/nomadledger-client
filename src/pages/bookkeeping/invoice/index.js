@@ -84,13 +84,14 @@ class Invoice extends Component {
                         <TableBody className={classes.tableBody}>
                             {   !isFetching ? 
                                 listInvoice.map(( invoice, index) => {
+                                    let total = invoice.subtotal * invoice.vat.indice / 100
                                     return  <TableRow key={index}>
                                                 <TableCell>{locale.wording.inv}-{invoice.ref}</TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${invoice.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{invoice.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell>{invoice.currency.en}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(invoice.total_ht)} {invoice.currency.value}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(invoice.vat.amount)} {invoice.currency.value}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(invoice.total)} {invoice.currency.value}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(invoice.subtotal)} {invoice.currency.value}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(invoice.vat.indice) + "%"}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(total  )} {invoice.currency.value}</TableCell>
                                                 <TableCell>
                                                     {
                                                         false ? 

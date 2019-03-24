@@ -1,7 +1,6 @@
 //manager/src/components/common/richEditor.js
 import React from "react";
 import { withStyles } from '@material-ui/core';
-import "simplemde/dist/simplemde.min.css";
 import RichTextEditor from 'react-rte';
 
 const toolbarConfig = {

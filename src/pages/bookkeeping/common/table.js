@@ -36,8 +36,8 @@ class MyTable extends React.Component {
                             list.map(( item, index) => {
                                 return  <TableRow key={index}>
                                             <TableCell>{ locale.wording[reducer.toLowerCase()].toUpperCase() }-{item.ref}</TableCell>
-                                            <TableCell>{cvtNumToUserPref(item.total_ht)} {item.currency.value}</TableCell>
-                                            <TableCell>{cvtNumToUserPref(item.vat.amount)} {item.currency.value}</TableCell>
+                                            <TableCell>{cvtNumToUserPref(item.subtotal)} {item.currency.value}</TableCell>
+                                            <TableCell>{cvtNumToUserPref(item.vat.indice) + "%"}</TableCell>
                                             <TableCell><span style={{color: item.status.color }}>{ item.status[localStorage.getItem('locale')] }</span></TableCell>
                                             <ApxTableActions 
                                                 actionDelete={false}

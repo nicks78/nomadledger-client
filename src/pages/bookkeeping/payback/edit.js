@@ -9,10 +9,10 @@ import Form from '../common/form'
 import ApxAlert from '../../../components/common/alert'
 import Spinner from '../../../components/common/spinner'
 
-class EditInvoice extends React.Component {
+class EditPayback extends React.Component {
 
-    state =  {
-        reducer: "INVOICE"
+    state = {
+        reducer: "PAYBACK"
     }
 
     componentWillUnmount(){
@@ -41,9 +41,9 @@ class EditInvoice extends React.Component {
 
     render(){
 
-    const { isFetching, locale, classes, invoice, listItems, vat, message, isError, currency, status } = this.props;
+    const { isFetching, locale, classes, payback, listItems, vat, message, isError, currency, status } = this.props;
 
-    if(isFetching || invoice === null ){
+    if(isFetching || payback === null ){
         return <Spinner />
     }
 
@@ -52,8 +52,8 @@ class EditInvoice extends React.Component {
 
                 { isError ? <ApxAlert message={message} type="danger"/> : null }
                 <Form 
-                    formTitle="edit_invoice"
-                    data={invoice}
+                    formTitle="edit_payback"
+                    data={payback}
                     vat={vat}
                     list={listItems}
                     locale={locale}
@@ -83,18 +83,18 @@ const styles = theme => ({
 
 const mapStateToProps = (state) => {
     return {
-        isFetching: state.book.invoice.isFetching,
-        isError: state.book.invoice.isError,
+        isFetching: state.book.payback.isFetching,
+        isError: state.book.payback.isError,
         locale: state.locale.locale,
-        message: state.book.invoice.message,
-        invoice: state.book.invoice.item,
-        listItems: state.book.invoice.item ? state.book.invoice.item.list_items : [],
+        message: state.book.payback.message,
+        payback: state.book.payback.item,
+        listItems: state.book.payback.item ? state.book.payback.item.list_items : [],
         vat: state.account.company.item ? state.account.company.item.vat : [],
-        status: state.helper.items.status_invoice,
+        status: state.helper.items.status_payback,
         currency: state.helper.items.currency
     }
 }
 
-const StyledEditInvoice = withStyles(styles)(EditInvoice)
+const StyledEditPayback = withStyles(styles)(EditPayback)
 
-export default connect(mapStateToProps, { getListItem, convertToCurrency, updateDocument, getDocument, createState, resetState })(StyledEditInvoice);
+export default connect(mapStateToProps, { getListItem, convertToCurrency, updateDocument, getDocument, createState, resetState })(StyledEditPayback);

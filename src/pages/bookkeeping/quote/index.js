@@ -84,12 +84,13 @@ class Quote extends Component {
                         <TableBody className={classes.tableBody}>
                             {   !isFetching ? 
                                 listQuote.map(( item, index) => {
+                                    let total = item.subtotal * item.vat.indice / 100
                                     return  <TableRow key={index}>
                                                 <TableCell>{locale.wording.qto}-{item.ref}</TableCell>
                                                 <TableCell><Link className="link" to={{ pathname: `/contact/view/${item.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{item.contact_id.company_name}</span></Link></TableCell>
-                                                <TableCell>{cvtNumToUserPref(item.total_ht)} {item.currency.value}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(item.vat.amount)} {item.currency.value}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(item.total)} {item.currency.value}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(item.subtotal)} {item.currency.value}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(item.vat.indice) + "%"}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(total  )} {item.currency.value}</TableCell>
                                                 <TableCell>
 
                                                 {
