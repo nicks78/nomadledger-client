@@ -14,7 +14,9 @@ import CreateInvoice from '../pages/bookkeeping/invoice/create'
 import EditInvoice from '../pages/bookkeeping/invoice/edit'
 
 
-import Payback from '../pages/bookkeeping/payback'
+import Refund from '../pages/bookkeeping/refund'
+import CreateRefund from '../pages/bookkeeping/refund/create'
+import EditRefund from '../pages/bookkeeping/refund/edit'
 
 
 const BookkeepingRoute = (props) => {
@@ -35,7 +37,9 @@ const BookkeepingRoute = (props) => {
 
 
 
-            <PrivateRoute exact path="/payback" component={Payback}  auth={isLoggedIn}/>
+            <PrivateRoute exact path="/refund" component={Refund}  auth={isLoggedIn}/>
+            <PrivateRoute path="/refund/create" component={CreateRefund}  auth={isLoggedIn}/>
+            <PrivateRoute path="/refund/edit/:id" component={EditRefund}  auth={isLoggedIn}/>
 
         </div>
     )

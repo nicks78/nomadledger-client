@@ -10,17 +10,20 @@ export default class Pagination extends Component {
         this.state = {
             selected: [],
             skip: 0, 
-            limit: 5,
+            limit: 10,
             page: 0,
             numSelected: 0,
             rowCount: 0,
         }
     }
+
+    // Handle next or prev pages
     handleChangePage = (event, page) => {
         var skip =  page * this.state.limit;
         this.setState({page});
 
-        this.props.onGetItemList(this.props.reducer, `list?limit=${ this.state.limit }&skip=${ skip }&status=${this.props.status}`);
+        this.props.onGetItemList(this.props.reducer, `list?limit=${ this.state.limit }&skip=${ skip }&${this.props.filterName}=${this.props.value}`);
+
     }
 
     handleChangeRowsPerPage = (event) => {
@@ -29,7 +32,7 @@ export default class Pagination extends Component {
             limit: num,
             page: 0
         })
-        this.props.onGetItemList(this.props.reducer, `list?limit=${num }&skip=0&status=${this.props.status}`);
+        this.props.onGetItemList(this.props.reducer, `list?limit=${num }&skip=0&${this.props.filterName}=${this.props.value}`);
     }
 
 

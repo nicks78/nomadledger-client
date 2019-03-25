@@ -14,24 +14,23 @@ import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 
-
 class Quote extends Component {
 
     state = {
         showQuote: false,
         reducer: "QUOTE",
-        status: ''
+        status: 'none'
     }
 
     componentDidMount(){
         this.props.getTotal(this.state.reducer);
-        this.props.getBookList(this.state.reducer, `list?limit=5&skip=0`);
+        this.props.getBookList(this.state.reducer, `list?limit=10&skip=0`);
     }
 
     handleFilterRequest = (value) => {
         this.setState({status: value.code});
         this.props.getTotal(this.state.reducer, `?status=${value.code}`);
-        this.props.getBookList(this.state.reducer, `list?limit=5&skip=0&status=${value.code}`);
+        this.props.getBookList(this.state.reducer, `list?limit=10&skip=0&status=${value.code}`);
     }
 
     handleStatus = (event) => {
@@ -40,7 +39,7 @@ class Quote extends Component {
     
     render() {
     
-    const {listQuote, isFetching, isError,  locale, classes, message, newQuote, filter, status} = this.props
+    const {listQuote, isFetching, isError,  locale, classes, message, newQuote, status} = this.props
     const { reducer } = this.state; 
 
     if(isError){
@@ -58,10 +57,10 @@ class Quote extends Component {
             <Paper className={classes.paper}>
 
                 <ApxTableToolBar
-                        title={locale.wording.title_quote}
+                        title={locale.wording.quote}
                         selected={locale.wording.selected}
-                        menus={filter}
                         locale={locale}
+                        menus={ [...status, {fr: "Tous", en: "All", code: "none"}]  }
                         onChangeQuery={ this.handleFilterRequest }
                     />
                     <div style={{overflowY: "auto"}}>
@@ -74,7 +73,7 @@ class Quote extends Component {
                             <TableCell>{locale.wording.vat}</TableCell>
                             <TableCell>{locale.wording.total}</TableCell>
                             <TableCell>{locale.wording.status}</TableCell>
-                            <TableCell>{locale.wording.invoicer}</TableCell>
+                            <TableCell align="center">{locale.wording.invoicer}</TableCell>
                             <TableCell>PDF</TableCell>
                             <TableCell align="center">Actions</TableCell>
 
@@ -84,17 +83,17 @@ class Quote extends Component {
                         <TableBody className={classes.tableBody}>
                             {   !isFetching ? 
                                 listQuote.map(( item, index) => {
-                                    let total = item.subtotal * item.vat.indice / 100
+                                    let vat = item.subtotal * item.vat.indice / 100
                                     return  <TableRow key={index}>
                                                 <TableCell>{locale.wording.qto}-{item.ref}</TableCell>
                                                 <TableCell><Link className="link" to={{ pathname: `/contact/view/${item.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{item.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell>{cvtNumToUserPref(item.subtotal)} {item.currency.value}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(item.vat.indice) + "%"}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(total  )} {item.currency.value}</TableCell>
+                                                <TableCell>{cvtNumToUserPref( vat ) + " "+item.currency.value }</TableCell>
+                                                <TableCell>{cvtNumToUserPref( item.subtotal + vat  )} {item.currency.value}</TableCell>
                                                 <TableCell>
 
                                                 {
-                                                    false ? 
+                                                    item.status.code === "2" ||   item.status.code === "3" ? 
                                                     <span style={{color: item.status.color }}>
 
                                                     { item.status[localStorage.getItem('locale')] }</span>
@@ -110,15 +109,18 @@ class Quote extends Component {
                                                 
                                                 
                                                 </TableCell>
-                                                <TableCell><Link to={`/invoice/create/${item._id}`}><img alt="convert-to-invoice" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link></TableCell>
+                                                <TableCell align="center"><Link to={`/invoice/create/${item._id}`}><img alt="convert-to-invoice" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link></TableCell>
                                                 <TableCell><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, item._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
+                                                
+        
                                                 <ApxTableActions 
-                                                    actionDelete={false}
-                                                    actionEdit={`/quote/edit/${item._id}`}
+                                                    actionDelete={item.status.code === "3" ? true : false}
+                                                    actionEdit={ item.status.code === "0" || item.status.code === "1" ? `/quote/edit/${item._id}` : false }
                                                     actionView={false}
-                                                    actionCheck={false}
-
+                                                    actionCheck={item.status.code === "2" ? true : false }
                                                 />
+
+                                                
                                             </TableRow>
                                 })
                                 : null                           
@@ -134,7 +136,8 @@ class Quote extends Component {
                         label={locale.wording.label_rows_per_page}
                         label2={locale.wording.of}
                         reducer={reducer}
-                        status={this.state.status}
+                        value={this.state.status}
+                        filterName="status"
                         onGetItemList={ this.props.getBookList }
                     />
             </Paper>
@@ -168,7 +171,7 @@ const styles = theme => ({
 })
 
 const mapStateToProps = (state) => {
-
+    
     return {
         isFetching: state.book.quote.isFetching,
         updated: state.book.quote.updated,
@@ -180,8 +183,7 @@ const mapStateToProps = (state) => {
         total: state.library.quote.total,
         listQuote: state.book.quote.list,
         rowsPerPageOptions: state.library.quote.rowsPerPageOptions,
-        filter: state.helper.items.filter,
-        status: state.helper.items.status_quote,
+        status: state.helper.items.status_quote 
     }
 }
 

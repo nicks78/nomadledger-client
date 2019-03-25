@@ -23,7 +23,7 @@ const fr =  {
         name: "Devis",
         url: "factures"
     },
-    payback:{
+    refund:{
         name: "Avoirs",
         url: "factures"
     },
@@ -36,7 +36,7 @@ const fr =  {
         url: "factures"
     },
     expense:{
-        name: "Depense",
+        name: "Dépenses",
         url: "factures"
     },
     vat:{
@@ -70,10 +70,10 @@ const fr =  {
         add_task: "Ajouter une tache",
         add_quote: "Créer Nouveau Devis",
         add_invoice: "Créer une Nouvelle Facture",
-        add_payback: "Créer Nouvelle Avoir",
+        add_refund: "Créer Nouvelle Avoir",
         edit_quote: "Editer Devis",
         edit_invoice: "Editer Facture",
-        edit_payback: "Editer Avoir",
+        edit_refund: "Editer Avoir",
         edit_tag: "Editer mon tag",
         label_contact: "Coordonnée contact",
         label_company: "Informations compagnie",
@@ -164,7 +164,7 @@ const fr =  {
         expense: "Depense",
         invoice: "Facture",
         quote: "Devis",
-        payback: "Avoir",
+        refund: "Avoir",
         description: "Déscription",
 
         service_name: "Nom du service",
@@ -211,7 +211,8 @@ const fr =  {
         address: "Adresse",
         represented_by: "Représente par",
         selected: "Sélectionner",
-        markdown: "Simple editeur de text pour vos devis"
+        markdown: "Simple editeur de text pour vos devis",
+        save_password: "Changer mon mot de passe"
     },
     helperText: {
         select_phone_code: "Sélectionner le code téléphone",

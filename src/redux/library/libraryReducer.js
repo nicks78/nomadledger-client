@@ -30,7 +30,7 @@ class InitialState {
     stat      = new BaseState();
     quote     = new BaseState();
     invoice   = new BaseState();
-    payback   = new BaseState();
+    refund   = new BaseState();
 }
   
 export default (state = new InitialState(), action) => {
@@ -76,10 +76,10 @@ export default (state = new InitialState(), action) => {
           ...state,
           invoice: baseReducer(state.invoice, action)
         }
-      case 'PAYBACK': 
+      case 'REFUND': 
         return {
           ...state,
-          payback: baseReducer(state.payback, action)
+          refund: baseReducer(state.refund, action)
         }
       default: return state;
     }

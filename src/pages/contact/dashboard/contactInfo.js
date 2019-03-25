@@ -163,6 +163,7 @@ class ContactInfo extends Component {
                       {locale.subheading.label_comp_address}
             </Typography>
             <Divider className={ classes.divider }/>
+            
             <EditInput 
                 label={locale.wording.addresses_street}
                 value={tmp_state.addresses_street || contact.addresses_street}

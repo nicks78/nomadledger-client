@@ -22,9 +22,9 @@ const en = {
         name: "Quotes",
         url: "factures"
     },
-    payback:{
-        name: "Payback",
-        url: "factures"
+    refund:{
+        name: "Refunds",
+        url: "refund"
     },
     product:{
         name: "Products",
@@ -65,10 +65,10 @@ const en = {
         add_task: "Add new task",
         add_quote: "Create a new quote",
         add_invoice: "Create a new invoice",
-        add_payback: "Create a new payback",
+        add_refund: "Create a new refund invoice",
         edit_quote: "Edit your quote",
         edit_invoice: "Edit your invoice",
-        edit_payback: "Edit your payback",
+        edit_refund: "Edit your refund invoice",
         edit_tag: "Edit your tag",
         label_contact: "Contact informations",
         label_company: "Company informations",
@@ -157,7 +157,7 @@ const en = {
         expense: "Expense",
         invoice: "Invoice",
         quote: "Quote",
-        payback: "Payback",
+        refund: "Refund",
         description: "Description",
 
         service_name: "Service name",
@@ -187,7 +187,7 @@ const en = {
         approved: 'Approved',
         rejected: "Rejected",
         paid: "Paid",
-        invoicer: "Invoiced",
+        invoicer: "Cvt to invoice",
         all: "All",
         reference: "Reference",
         client: "Client",
@@ -195,7 +195,7 @@ const en = {
         status: "Status",
         inv: "INVOICE",
         qto: "QUOTE",
-        pya: "PAYBACK",
+        pya: "REFUND",
         type: "Type",
         preview: "Preview",
         register: "Register",
@@ -205,7 +205,8 @@ const en = {
         address: "Address",
         represented_by: "Represented by",
         selected: "Select",
-        markdown: "Simple text editor for your quote"
+        markdown: "Simple text editor for your quote",
+        save_password: "Save new password"
     },
     helperText: {
         select_phone_code: "Select phone code",

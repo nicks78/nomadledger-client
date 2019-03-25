@@ -1,4 +1,4 @@
-//src/pages/bookkeeping/payback/index.js
+//src/pages/bookkeeping/refund/index.js
 
 import React, { Component } from 'react'
 import { Link } from "react-router-dom"
@@ -15,22 +15,22 @@ import Pagination from '../../../lib/pagination'
 import ApxSelect from '../../../components/common/select'
 
 
-class Payback extends Component {
+class Refund extends Component {
 
     state = {
-        reducer: "PAYBACK",
-        status: ''
+        reducer: "REFUND",
+        status: 'none'
     }
 
     componentDidMount(){
         this.props.getTotal(this.state.reducer );
-        this.props.getBookList(this.state.reducer, "list?limit=5&skip=0");
+        this.props.getBookList(this.state.reducer, "list?limit=10&skip=0");
     }
 
     handleFilterRequest = (value) => {
         this.setState({status: value.code});
         this.props.getTotal(this.state.reducer, `?status=${value.code || '10'}`);
-        this.props.getBookList(this.state.reducer, `list?limit=5&skip=0&status=${value.code || '10'}`);
+        this.props.getBookList(this.state.reducer, `list?limit=10&skip=0&status=${value.code || '10'}`);
     }
 
     handleStatus = (event) => {
@@ -39,7 +39,7 @@ class Payback extends Component {
     
     render() {
     
-    const {listPayback, isFetching, isError,  locale, classes, message, newPayback, filter, status} = this.props
+    const {listRefund, isFetching, isError,  locale, classes, message, newRefund, status} = this.props
     const { reducer } = this.state
 
     if(isError){
@@ -49,19 +49,19 @@ class Payback extends Component {
     return (
       <div className={classes.root}>
             <Hidden only={['xs', 'sm']}>
-                <Button component={Link} to="/payback/create" 
+                <Button component={Link} to="/refund/create" 
                         variant="contained" color="primary"  
                         className={  classes.button }>
-                        { newPayback.contact_id ? locale.wording.progress : locale.wording.create}
+                        { newRefund.contact_id ? locale.wording.progress : locale.wording.create}
                 </Button>
             </Hidden>
             <Paper className={classes.paper}>
 
             <ApxTableToolBar
-                title={locale.wording.payback}
+                title={locale.wording.refund}
                 selected={locale.wording.selected}
                 locale={locale}
-                menus={filter}
+                menus={ [...status, {fr: "Tous", en: "All", code: "none"}]  }
                 onChangeQuery={ this.handleFilterRequest }
             />
             <div style={{ overflowY: "auto" }}>
@@ -83,35 +83,35 @@ class Payback extends Component {
                         
                         <TableBody className={classes.tableBody}>
                             {   !isFetching ? 
-                                listPayback.map(( payback, index) => {
-                                    let total = payback.subtotal * payback.vat.indice / 100
+                                listRefund.map(( refund, index) => {
+                                    let total = refund.subtotal * refund.vat.indice / 100
                                     return  <TableRow key={index}>
-                                                <TableCell>{locale.wording.inv}-{payback.ref}</TableCell>
-                                                <TableCell><Link to={{ pathname: `/contact/view/${payback.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{payback.contact_id.company_name}</span></Link></TableCell>
-                                                <TableCell>{payback.currency.en}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(payback.subtotal)} {payback.currency.value}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(payback.vat.indice) + "%"}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(total  )} {payback.currency.value}</TableCell>
+                                                <TableCell>{locale.wording.pya}-{refund.ref}</TableCell>
+                                                <TableCell><Link to={{ pathname: `/contact/view/${refund.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{refund.contact_id.company_name}</span></Link></TableCell>
+                                                <TableCell>{refund.currency.en}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(refund.subtotal)} {refund.currency.value}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(refund.vat.indice) + "%"}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(total  )} {refund.currency.value}</TableCell>
                                                 <TableCell>
                                                     {
                                                         false ? 
-                                                        <span style={{color: payback.status.color }}>
+                                                        <span style={{color: refund.status.color }}>
 
-                                                        { payback.status[localStorage.getItem('locale')] }</span>
+                                                        { refund.status[localStorage.getItem('locale')] }</span>
 
                                                         :   <ApxSelect 
                                                                 arrayField={status}
-                                                                value={payback.status[localStorage.getItem('locale')]}
+                                                                value={refund.status[localStorage.getItem('locale')]}
                                                                 variant="standard"
-                                                                handleAction={ (event) => { this.props.updateField(reducer, { status: event.target.value}, payback._id) } }
+                                                                handleAction={ (event) => { this.props.updateField(reducer, { status: event.target.value}, refund._id) } }
                                                                 locale={locale}
                                                             />
                                                     }    
                                                 </TableCell>
-                                                <TableCell><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, payback._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
+                                                <TableCell><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, refund._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
                                                 <ApxTableActions 
                                                     actionDelete={false}
-                                                    actionEdit={`/payback/edit/${payback._id}`}
+                                                    actionEdit={`/refund/edit/${refund._id}`}
                                                     actionView={false}
                                                     actionCheck={false}
 
@@ -131,6 +131,8 @@ class Payback extends Component {
                         label={locale.wording.label_rows_per_page}
                         label2={locale.wording.of}
                         reducer={reducer}
+                        value={this.state.status}
+                        filterName="status"
                         onGetItemList={ this.props.getBookList }
                     />
             </Paper>
@@ -166,21 +168,20 @@ const styles = theme => ({
 const mapStateToProps = (state) => {
 
     return {
-        isFetching: state.book.payback.isFetching,
-        updated: state.book.payback.updated,
-        isError: state.book.payback.isError,
-        message: state.book.payback.message,
-        receivedAt: state.book.payback.receivedAt,
-        newPayback: state.book.payback.item || {},
+        isFetching: state.book.refund.isFetching,
+        updated: state.book.refund.updated,
+        isError: state.book.refund.isError,
+        message: state.book.refund.message,
+        receivedAt: state.book.refund.receivedAt,
+        newRefund: state.book.refund.item || {},
         locale: state.locale.locale,
-        total: state.library.payback.total,
-        listPayback: state.book.payback.list,
-        rowsPerPageOptions: state.library.payback.rowsPerPageOptions,
-        filter: state.helper.items.filter,
-        status: state.helper.items.status_payback,
+        total: state.library.refund.total,
+        listRefund: state.book.refund.list,
+        rowsPerPageOptions: state.library.refund.rowsPerPageOptions,
+        status: state.helper.items.status_refund,
     }
 }
 
-const StyledPayback = withStyles(styles)(Payback)
+const StyledRefund = withStyles(styles)(Refund)
 
-export default connect(mapStateToProps, {  getBookList, getTotal, updateField, createState, downloadPdf  })(StyledPayback);
+export default connect(mapStateToProps, {  getBookList, getTotal, updateField, createState, downloadPdf  })(StyledRefund);

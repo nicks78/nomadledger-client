@@ -172,6 +172,7 @@ class User extends Component {
                           label={locale.wording.password}
                           className={classes.textField}
                           value={password}
+                          fullWidth
                           name="password"
                           onChange={ this.handlePassword  }
                           margin="normal"
@@ -182,12 +183,13 @@ class User extends Component {
                           label={locale.wording.password_confirm}
                           className={classes.textField}
                           value={password_confirm}
+                          fullWidth
                           name="password_confirm"
                           onChange={ this.handlePassword  }
                           margin="normal"
                       />
                         <br />
-                      <Button color="primary" variant="contained" onClick={ this._updatePassword }>Save new password</Button>
+                      <Button color="primary" variant="contained" onClick={ this._updatePassword }>{ locale.wording.save_password }</Button>
                   
                   </form>    
                 </Grid>

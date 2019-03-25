@@ -19,18 +19,18 @@ class Invoice extends Component {
 
     state = {
         reducer: "INVOICE",
-        status: ''
+        status: 'none'
     }
 
     componentDidMount(){
         this.props.getTotal(this.state.reducer );
-        this.props.getBookList(this.state.reducer, "list?limit=5&skip=0");
+        this.props.getBookList(this.state.reducer, "list?limit=10&skip=0");
     }
 
     handleFilterRequest = (value) => {
         this.setState({status: value.code});
-        this.props.getTotal(this.state.reducer, `?status=${value.code || '10'}`);
-        this.props.getBookList(this.state.reducer, `list?limit=5&skip=0&status=${value.code || '10'}`);
+        this.props.getTotal(this.state.reducer, `?status=${value.code}`);
+        this.props.getBookList(this.state.reducer, `list?limit=10&skip=0&status=${value.code}`);
     }
 
     handleStatus = (event) => {
@@ -39,7 +39,7 @@ class Invoice extends Component {
     
     render() {
     
-    const {listInvoice, isFetching, isError,  locale, classes, message, newInvoice, filter, status} = this.props
+    const {listInvoice, isFetching, isError,  locale, classes, message, newInvoice, status} = this.props
     const { reducer } = this.state
 
     if(isError){
@@ -61,7 +61,7 @@ class Invoice extends Component {
                 title={locale.wording.invoice}
                 selected={locale.wording.selected}
                 locale={locale}
-                menus={filter}
+                menus={ [...status, {fr: "Tous", en: "All", code: "none"}]  }
                 onChangeQuery={ this.handleFilterRequest }
             />
             <div style={{ overflowY: "auto" }}>
@@ -84,17 +84,17 @@ class Invoice extends Component {
                         <TableBody className={classes.tableBody}>
                             {   !isFetching ? 
                                 listInvoice.map(( invoice, index) => {
-                                    let total = invoice.subtotal * invoice.vat.indice / 100
+                                    let vat = invoice.subtotal * invoice.vat.indice / 100
                                     return  <TableRow key={index}>
                                                 <TableCell>{locale.wording.inv}-{invoice.ref}</TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${invoice.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{invoice.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell>{invoice.currency.en}</TableCell>
                                                 <TableCell>{cvtNumToUserPref(invoice.subtotal)} {invoice.currency.value}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(invoice.vat.indice) + "%"}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(total  )} {invoice.currency.value}</TableCell>
+                                                <TableCell>{cvtNumToUserPref(vat ) + " "+ invoice.currency.value }</TableCell>
+                                                <TableCell>{cvtNumToUserPref(vat + invoice.subtotal  )} {invoice.currency.value}</TableCell>
                                                 <TableCell>
                                                     {
-                                                        false ? 
+                                                        invoice.status.code === "4" ||   invoice.status.code === "5"  || invoice.status.code === "6"  ? 
                                                         <span style={{color: invoice.status.color }}>
 
                                                         { invoice.status[localStorage.getItem('locale')] }</span>
@@ -109,12 +109,11 @@ class Invoice extends Component {
                                                     }    
                                                 </TableCell>
                                                 <TableCell><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, invoice._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
-                                                <ApxTableActions 
-                                                    actionDelete={false}
-                                                    actionEdit={`/invoice/edit/${invoice._id}`}
+                                                 <ApxTableActions 
+                                                    actionDelete={invoice.status.code === "5" || invoice.status.code === "6" || invoice.status.code === "3" ? true : false}
+                                                    actionEdit={ invoice.status.code === "0" || invoice.status.code === "1" ? `/invoice/edit/${invoice._id}` : false }
                                                     actionView={false}
-                                                    actionCheck={false}
-
+                                                    actionCheck={invoice.status.code === "4" ? true : false }
                                                 />
                                             </TableRow>
                                 })
@@ -131,6 +130,8 @@ class Invoice extends Component {
                         label={locale.wording.label_rows_per_page}
                         label2={locale.wording.of}
                         reducer={reducer}
+                        value={this.state.status}
+                        filterName="status"
                         onGetItemList={ this.props.getBookList }
                     />
             </Paper>
@@ -176,7 +177,6 @@ const mapStateToProps = (state) => {
         total: state.library.invoice.total,
         listInvoice: state.book.invoice.list,
         rowsPerPageOptions: state.library.invoice.rowsPerPageOptions,
-        filter: state.helper.items.filter,
         status: state.helper.items.status_invoice,
     }
 }

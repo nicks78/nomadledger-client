@@ -101,6 +101,11 @@ const baseReducer = (state = new BaseState(), action) => {
                 item: action.item,
                 list: updateArrayOfObject(state.list, action.item)
             }
+        case `UPDATE_LIST`:
+            return {
+                ...state,
+                list:  state.list.filter( (element) => { return element._id !== action.id })
+            }
             
         case `PROGRESS`:
             return {

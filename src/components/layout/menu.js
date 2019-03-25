@@ -118,8 +118,8 @@ class MainMenu extends React.Component {
                             <ListItem button component={NavLink} className={classes.listText}  to="/invoice" activeClassName={classes.active}>
                                 <ListItemText inset  primary={ locale.invoice.name }/>
                             </ListItem>
-                            <ListItem button component={NavLink} className={classes.listText}  to="/payback" activeClassName={classes.active}>
-                                <ListItemText inset  primary={ locale.payback.name }/>
+                            <ListItem button component={NavLink} className={classes.listText}  to="/refund" activeClassName={classes.active}>
+                                <ListItemText inset  primary={ locale.refund.name }/>
                             </ListItem>
                         </List>
                     </Collapse>

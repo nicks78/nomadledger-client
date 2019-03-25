@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { createItem, getItemList, getItem, createState, getTotal , resetState} from '../../redux/library/actions'
+import { createItem, getItemList, getItem, createState, getTotal , resetState, deleteElement} from '../../redux/library/actions'
 import {connect} from 'react-redux'
 import { TableCell, TableRow, Table, TableHead, TableBody, withStyles, Tooltip, Paper} from '@material-ui/core';
 import ApxAlert from '../../components/common/alert'
@@ -10,6 +10,8 @@ import ApxTableToolBar from '../../components/common/tableToolBar'
 import AddService from './addService'
 import {cvtNumToUserPref} from '../../utils/help_function'
 import Pagination from '../../lib/pagination'
+import DeleteIcon from '@material-ui/icons/DeleteOutlined'
+
 
 // STYLES
 const styles = theme =>  ({
@@ -36,23 +38,23 @@ class Service extends Component {
     state = {
         reducer: 'SERVICE',
         rowCount: 0,
-        keyLocation: '',
+        category: 'none',
     }
 
     componentDidMount(){
             this.props.getTotal(this.state.reducer)
-            this.props.getItemList(this.state.reducer, "list?limit=5&skip=0");
+            this.props.getItemList(this.state.reducer, "list?limit=10&skip=0");
     }
 
     componentWillUnmount(){
         this.props.resetState("SERVICE")
     }
 
-    componentWillReceiveProps(nextProps){
-        if(nextProps.location.key !== this.state.keyLocation){
-            this.setState({ showContact: false, keyLocation: nextProps.location.key })
-        }
-      }
+    handleFilterRequest = (value) => {
+        this.setState({category: value._id});
+        this.props.getTotal(this.state.reducer, `?category=${value._id}`);
+        this.props.getItemList(this.state.reducer, `list?limit=10&skip=0&category=${value._id}`);
+    }
 
     render() {
     
@@ -78,8 +80,10 @@ class Service extends Component {
                 
                 <ApxTableToolBar
                         numSelected={0}
+                        menus={[...category, {fr: "Tous", en: "All", _id: "none"}]}
                         title={locale.wording.service}
                         selected={locale.wording.selected}
+                        onChangeQuery={ this.handleFilterRequest }
                     />
                     <div style={{overflowY: "auto"}}>
                     <Table>
@@ -91,6 +95,7 @@ class Service extends Component {
                             <TableCell align="center">{locale.wording.currency}</TableCell>
                             <TableCell>{locale.wording.category}</TableCell>
                             <TableCell>{locale.wording.description}</TableCell>
+                            <TableCell align="center">Actions</TableCell>
                         </TableRow>
                         </TableHead>
 
@@ -102,8 +107,9 @@ class Service extends Component {
                                                 <TableCell align="right">{cvtNumToUserPref(service.price)}</TableCell>
                                                 <TableCell align="right">{ service.service_type[localStorage.getItem('locale')] }</TableCell>
                                                 <TableCell align="center">{service.currency.en}</TableCell>
-                                                <TableCell>{service.category[localStorage.getItem('locale')]}</TableCell> 
+                                                <TableCell style={{textTransform: 'capitalize'}}>{service.category[localStorage.getItem('locale')]}</TableCell> 
                                                 <Tooltip className={classes.customWidth} title={service.description}><TableCell>{service.description.slice(0,5)}...</TableCell></Tooltip>
+                                                <TableCell align="center" onClick={() => { this.props.deleteElement( reducer, `delete/${service._id}`) } }><DeleteIcon style={{color: 'red', cursor: 'pointer', fontSize: 18}}  /></TableCell>
                                             </TableRow>
                                 })
                                 : null
@@ -115,7 +121,8 @@ class Service extends Component {
                         total={this.props.total}
                         rowsPerPageOptions={this.props.rowsPerPageOptions}
                         label={locale.wording.label_rows_per_page}
-                        status=""
+                        value={this.state.category}
+                        filterName="category"
                         reducer={reducer}
                         label2={locale.wording.of}
                         onGetItemList={ this.props.getItemList }
@@ -153,4 +160,4 @@ const mapStateToProps = (state) => {
 
 const StyledService = withStyles(styles)(Service)
 
-export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, getTotal, resetState  })(StyledService);
+export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, getTotal, resetState, deleteElement  })(StyledService);

@@ -21,7 +21,7 @@ import Divider from '@material-ui/core/Divider'
 import AppBar from '@material-ui/core/AppBar'
 import SwipeableViews from 'react-swipeable-views'
 import StatContact from './stat'
-import { TableQuote, TablePayback, TableInvoice } from '../../bookkeeping/common/table'
+import { TableQuote, TableRefund, TableInvoice } from '../../bookkeeping/common/table'
 
 
 const styles = theme => ({
@@ -94,7 +94,7 @@ class ShowContact extends React.Component {
               total_quote , 
               total_invoice, 
               currency,
-              total_payback} = this.props
+              total_refund} = this.props
  
       if(isFetching){
         return <Spinner />
@@ -120,7 +120,7 @@ class ShowContact extends React.Component {
                     isUploading={isUploading}
                     image={<img src={`${ contact.logo_contact.full_path || DEFAULT_IMG }`} alt={contact.logo_contact.org_name} 
                     
-                    style={{ maxWidth: '100%', maxHeight: '200px'}} />}
+                    style={{ maxWidth: '100%', maxHeight: '100px'}} />}
                   />
                 </div>
 
@@ -135,7 +135,7 @@ class ShowContact extends React.Component {
                 <StatContact 
                   total_quote={total_quote}
                   total_invoice={total_invoice}
-                  total_payback={total_payback}
+                  total_refund={total_refund}
                   currency={currency}
                   locale={locale}
                 />
@@ -149,7 +149,7 @@ class ShowContact extends React.Component {
                     >
                 <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={locale.quote.name} />
                 <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={locale.invoice.name} />
-                <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={locale.payback.name} />
+                <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={locale.refund.name} />
               </Tabs>
             </AppBar>
               <SwipeableViews
@@ -159,14 +159,12 @@ class ShowContact extends React.Component {
               >
                 <TabContainer><TableQuote reducer="QUOTE" contactId={this.props.match.params.id}/></TabContainer>
                 <TabContainer><TableInvoice reducer="INVOICE" contactId={this.props.match.params.id}/></TabContainer>
-                <TabContainer><TablePayback reducer="PAYBACK" contactId={this.props.match.params.id}/></TabContainer>
+                <TabContainer><TableRefund reducer="REFUND" contactId={this.props.match.params.id}/></TabContainer>
               </SwipeableViews>
               </div>
             
             </Grid>
         </Grid>
-              
-              
         </Paper>
       )
     }
@@ -186,8 +184,8 @@ const mapStateToProps = (state) => {
       isUploading: state.library.contact.isUploading,
       total_quote: state.book.quote.total,
       total_invoice: state.book.invoice.total,
-      total_payback: state.book.payback.total,
-      currency: state.account.company.item.currency.value || "EUR"
+      total_refund: state.book.refund.total,
+      currency: state.account.company.item ? state.account.company.item.currency.value : []
   }
 }
 

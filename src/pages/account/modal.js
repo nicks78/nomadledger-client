@@ -1,4 +1,4 @@
-//src/lib/modal.js
+//src/pages/account/modal.js
 
 import React from 'react';
 import {connect} from "react-redux"
@@ -13,12 +13,15 @@ import { checkNumFormatRegex } from '../../utils/help_function'
 
 const styles = theme => ({
   paper: {
-    position: 'absolute',
+    // position: 'absolute',
     width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
     outline: 'none',
+    margin: '0 auto',
+    marginTop: '10%',
+    overflow: "hidden"
   },
   btn: {
       float: 'right'

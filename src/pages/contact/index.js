@@ -36,68 +36,29 @@ class Contact extends Component {
     state = {
         reducer: 'CONTACT',
         selected: [],
-        group: ''
+        group: 'none'
     }
 
     componentDidMount(){
         this.props.getTotal(this.state.reducer)
-        this.props.getItemList(this.state.reducer, `list?limit=5&skip=0`)
+        this.props.getItemList(this.state.reducer, `list?limit=10&skip=0`)
     }
 
     componentWillUnmount() {
         this.props.resetState("CONTACT")
     }
 
-    onSelectAllClick = (event) => {
-        if (event.target.checked) {
-            this.setState({ selected: this.props.listContacts.map(n => n._id) });
-            return;
-        }
-        this.setState({ selected: [] });
-    }
-
-
-    onSelectedField = (event, id) => {
-        const { selected } = this.state;
-        const selectedIndex = selected.indexOf(id);
-        let newSelected = [];
-    
-        if (selectedIndex === -1) {
-
-            newSelected = newSelected.concat(selected, id);
-
-        } else if (selectedIndex === 0) {
-
-            newSelected = newSelected.concat(selected.slice(1));
-
-        } else if (selectedIndex === selected.length - 1) {
-
-            newSelected = newSelected.concat(selected.slice(0, -1));
-
-        } else if (selectedIndex > 0) {
-
-            newSelected = newSelected.concat(
-                selected.slice(0, selectedIndex),
-                selected.slice(selectedIndex + 1),
-            );
-        }
-    
-        this.setState({ selected: newSelected });
-    }
-
     handleFilterRequest = (value) => {
         this.setState({ group: value.code })
         this.props.getTotal(this.state.reducer, `?group=${value.code}`)
-        this.props.getItemList(this.state.reducer, `list?limit=5&skip=0&group=${value.code}`)
+        this.props.getItemList(this.state.reducer, `list?limit=10&skip=0&group=${value.code}`)
     }
 
-
-    isSelected = id =>  this.state.selected.indexOf(id) !== -1;
 
     render() {
     
     const {listContacts, isFetching, isError, locale, createItem, createState, newContact, isCreating, progress, message, classes, contactGroup, rowsPerPageOptions, total, country, phone_code} = this.props
-    const { selected, reducer } = this.state
+    const { reducer } = this.state
 
 
     return (
@@ -115,10 +76,10 @@ class Contact extends Component {
                 { isError ?  <ApxAlert message={message} reducer={ this.state.reducer }/> : null }
                 <Paper className={classes.paper}>
                     <ApxTableToolBar
-                        numSelected={selected.length}
+                        numSelected={0}
                         title={locale.wording.contact}
                         selected={locale.wording.selected}
-                        menus={ contactGroup  }
+                        menus={ [...contactGroup, {fr: "Tous", en: "All", code: "none"}]   }
                         locale={locale}
                         onChangeQuery={ this.handleFilterRequest }
                     />
@@ -126,13 +87,6 @@ class Contact extends Component {
                     <Table>
                     <TableHead className={classes.tableHead}>
                         <TableRow>
-                            {/* <TableCell padding="checkbox">
-                            <Checkbox
-                                indeterminate={selected.length > 0 && selected.length < rowCount}
-                                checked={selected.length === this.props.listContacts.length}
-                                onChange={this.onSelectAllClick}
-                                />
-                            </TableCell> */}
                             <TableCell>{ locale.wording.company }</TableCell>
                             <TableCell>{ locale.wording.group }</TableCell>
                             <TableCell>{locale.wording.full_name}</TableCell>
@@ -145,15 +99,11 @@ class Contact extends Component {
                         <TableBody>
                             {   !isFetching ?
                                 listContacts.map(( contact, index) => {
-                                    const isSelected = this.isSelected(contact._id);
-                                    return  <TableRow key={index} selected={isSelected}>
-                                                {/* <TableCell padding="checkbox" onClick={ event => { this.onSelectedField(event, contact._id) } } >
-                                                    <Checkbox checked={isSelected} />
-                                                </TableCell> */}
+                                    return  <TableRow key={index}>
                                                 
                                                 <TableCell><Link to={`/${reducer.toLowerCase()}/view/${contact._id.toLowerCase()}`}><span  className="link">{contact.company_name}</span></Link></TableCell>
-                                                <TableCell>{contact.contact_group[localStorage.getItem('locale') || 'fr']}</TableCell>
-                                                <TableCell>{ contact.firstname } {contact.lastname}</TableCell>
+                                                <TableCell style={{textTransform: "capitalize"}}>{contact.contact_group[localStorage.getItem('locale') || 'fr']}</TableCell>
+                                                <TableCell style={{textTransform: "capitalize"}}>{ contact.firstname } {contact.lastname}</TableCell>
                                                 <TableCell><a href={`tel:${contact.phone_code.value}${contact.phone.replace('0', '')}`}><span  className="link">({contact.phone_code.value}) {contact.phone.replace('0', '')}</span></a></TableCell>
                                                 <TableCell><a href={`mailto:${contact.email}`}><span className="link">{contact.email}</span></a></TableCell>
                                                 
@@ -171,7 +121,8 @@ class Contact extends Component {
                         label={locale.wording.label_rows_per_page}
                         label2={locale.wording.of}
                         reducer={reducer}
-                        status={this.state.group}
+                        value={this.state.group}
+                        filterName="status"
                         onGetItemList={ this.props.getItemList }
                     />
                 

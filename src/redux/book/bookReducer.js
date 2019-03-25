@@ -20,7 +20,7 @@ class BaseState {
 class InitialState {
     quote = new BaseState();
     invoice = new BaseState();
-    payback = new BaseState();
+    refund = new BaseState();
 }
   
 export default (state = new InitialState(), action) => {
@@ -36,10 +36,10 @@ export default (state = new InitialState(), action) => {
                 ...state,
                 invoice:  baseBookReducer(state.invoice, action)
             }
-        case 'PAYBACK': 
+        case 'REFUND': 
             return {
                 ...state,
-                payback:  baseBookReducer(state.payback, action)
+                refund:  baseBookReducer(state.refund, action)
             }
       default: return state;
     }

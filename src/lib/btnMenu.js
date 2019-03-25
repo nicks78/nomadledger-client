@@ -48,10 +48,15 @@ class BtnMenu extends React.Component {
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
+          style={{maxHeight: 400}}
         >
         {
             menus.map(( menu, index) => {
-                return <MenuItem key={index} onClick={ () => this.handleAction( menu ) }>{menu[localStorage.getItem('locale')]}</MenuItem>
+                return <MenuItem 
+                        key={index} 
+                        style={{textTransform: 'capitalize'}}
+                        onClick={ () => this.handleAction( menu ) }>{menu[localStorage.getItem('locale')]}
+                      </MenuItem>
             })
         }
         </Menu>

@@ -4,9 +4,9 @@ import React  from 'react'
 import { Link } from "react-router-dom";
 import { withStyles, TableCell } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/EditOutlined'
-import DeleteIcon from '@material-ui/icons/DeleteOutlined'
 import CheckIcon from '@material-ui/icons/CheckOutlined'
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEyeOutlined'
+import HighlightOff from '@material-ui/icons/HighlightOffOutlined'
 
 const TableActions = (props) => {
 
@@ -14,8 +14,8 @@ const TableActions = (props) => {
 
     return  <TableCell className={classes.root}>
                 { actionEdit ? <Link to={actionEdit}><EditIcon  className={classes.iconButton}  style={{ color: '#0077c5' }}/></Link> : null }
-                { actionDelete ?<Link to="/bookkeeping/quote/add"><DeleteIcon className={classes.iconButton} style={{ color: 'red' }} /></Link>: null }
-                { actionCheck ? <Link to="/bookkeeping/quote/add"><CheckIcon className={classes.iconButton} style={{ color: 'green' }}/> </Link>: null }
+                { actionDelete ? <HighlightOff className={classes.icon} style={{ color: 'red' }} />: null }
+                { actionCheck ? <CheckIcon className={classes.icon} style={{ color: 'green' }}/>: null }
                 { actionView ? <Link to={actionView}><RemoveRedEyeIcon className={classes.iconButton} style={{ color: 'green' }} /> </Link>: null }
                 
             </TableCell>
@@ -25,11 +25,15 @@ const styles  = theme => ({
     root: {
         textAlign: 'center',
         '& :hover': {
-            opacity: 0.7
+            // opacity: 0.7
         }
     },
     iconButton: {
         cursor: 'pointer',
+        fontSize: '18px',
+        marginRight: '10px',
+    },
+    icon: {
         fontSize: '18px',
         marginRight: '10px',
     }

@@ -189,7 +189,7 @@ export function editObjectInArray (list, obj, name, value) {
  * @param list List of object
  * @param element Object
  */
-export function replaceObjectInArray (list, obj) {
+export function replaceObjectInArray(list, obj) {
     var newList = [];
     for (let i = 0; i < list.length; i++) {
         if(list[i]._id === obj._id){

@@ -1,6 +1,7 @@
 import React  from 'react'
 import {connect} from 'react-redux'
-import {  getBookList } from '../../../redux/book/actions'
+import {DEFAULT_URL} from '../../../redux/constant'
+import {  getBookList, downloadPdf } from '../../../redux/book/actions'
 import { getTotal } from '../../../redux/library/actions'
 import { withStyles ,Table, TableHead, TableBody, TableCell, TableRow,} from '@material-ui/core';
 import { cvtNumToUserPref } from '../../../utils/help_function'
@@ -12,7 +13,7 @@ class MyTable extends React.Component {
 
     componentDidMount(){
         this.props.getTotal(this.props.reducer, `?contact=${this.props.contactId}`);
-        this.props.getBookList(this.props.reducer, `list/${this.props.contactId}?limit=5&skip=0`);
+        this.props.getBookList(this.props.reducer, `list/${this.props.contactId}?limit=10&skip=0`);
     }
 
     render(){
@@ -26,6 +27,7 @@ class MyTable extends React.Component {
                         <TableCell>{locale.wording.subtotal}</TableCell>
                         <TableCell>{locale.wording.vat}</TableCell>
                         <TableCell>{locale.wording.status}</TableCell>
+                        <TableCell>PDF</TableCell>
                         <TableCell align="center">Actions</TableCell>
 
                     </TableRow>
@@ -39,12 +41,12 @@ class MyTable extends React.Component {
                                             <TableCell>{cvtNumToUserPref(item.subtotal)} {item.currency.value}</TableCell>
                                             <TableCell>{cvtNumToUserPref(item.vat.indice) + "%"}</TableCell>
                                             <TableCell><span style={{color: item.status.color }}>{ item.status[localStorage.getItem('locale')] }</span></TableCell>
+                                            <TableCell><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, item._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
                                             <ApxTableActions 
-                                                actionDelete={false}
-                                                actionEdit={`/${reducer.toLowerCase()}/edit/${item._id}`}
+                                                actionDelete={item.status.code === "5" || item.status.code === "6" || item.status.code === "3" ? true : false}
+                                                actionEdit={ item.status.code === "0" || item.status.code === "1" ? `/${reducer.toLowerCase()}/edit/${item._id}` : false }
                                                 actionView={false}
-                                                actionCheck={false}
-
+                                                actionCheck={item.status.code === "4" || item.status.code === "2" ? true : false }
                                             />
                                         </TableRow>
                             })
@@ -107,23 +109,23 @@ const mapStateToPropsInvoice = (state) => {
 
 const mapStateToPropsPayback = (state) => {  
     return {
-        isFetching: state.book.payback.isFetching,
-        updated: state.book.payback.updated,
-        isError: state.book.payback.isError,
-        message: state.book.payback.message,
-        receivedAt: state.book.payback.receivedAt,
+        isFetching: state.book.refund.isFetching,
+        updated: state.book.refund.updated,
+        isError: state.book.refund.isError,
+        message: state.book.refund.message,
+        receivedAt: state.book.refund.receivedAt,
         locale: state.locale.locale,
-        total: state.library.payback.total,
-        list: state.book.payback.list,
-        rowsPerPageOptions: state.library.payback.rowsPerPageOptions,
+        total: state.library.refund.total,
+        list: state.book.refund.list,
+        rowsPerPageOptions: state.library.refund.rowsPerPageOptions,
     }
 }
 
 const StyledMyTable = withStyles(styles)(MyTable);
 
 
-const TableQuote = connect(mapStateToPropsQuote, {  getBookList, getTotal  }) (StyledMyTable);
-const TableInvoice = connect(mapStateToPropsInvoice, {  getBookList, getTotal  }) (StyledMyTable);
-const TablePayback = connect(mapStateToPropsPayback, {  getBookList, getTotal  }) (StyledMyTable);
+const TableQuote = connect(mapStateToPropsQuote, {  getBookList, getTotal, downloadPdf  }) (StyledMyTable);
+const TableInvoice = connect(mapStateToPropsInvoice, {  getBookList, getTotal, downloadPdf  }) (StyledMyTable);
+const TableRefund = connect(mapStateToPropsPayback, {  getBookList, getTotal, downloadPdf  }) (StyledMyTable);
 
-export { TableQuote, TablePayback, TableInvoice }
+export { TableQuote, TableRefund, TableInvoice }

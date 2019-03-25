@@ -9,10 +9,10 @@ import Form from '../common/form'
 import ApxAlert from '../../../components/common/alert'
 import Spinner from '../../../components/common/spinner'
 
-class EditPayback extends React.Component {
+class EditRefund extends React.Component {
 
     state = {
-        reducer: "PAYBACK"
+        reducer: "REFUND"
     }
 
     componentWillUnmount(){
@@ -41,9 +41,9 @@ class EditPayback extends React.Component {
 
     render(){
 
-    const { isFetching, locale, classes, payback, listItems, vat, message, isError, currency, status } = this.props;
+    const { isFetching, locale, classes, refund, listItems, vat, message, isError, currency, status } = this.props;
 
-    if(isFetching || payback === null ){
+    if(isFetching || refund === null ){
         return <Spinner />
     }
 
@@ -52,8 +52,8 @@ class EditPayback extends React.Component {
 
                 { isError ? <ApxAlert message={message} type="danger"/> : null }
                 <Form 
-                    formTitle="edit_payback"
-                    data={payback}
+                    formTitle="edit_refund"
+                    data={refund}
                     vat={vat}
                     list={listItems}
                     locale={locale}
@@ -83,18 +83,18 @@ const styles = theme => ({
 
 const mapStateToProps = (state) => {
     return {
-        isFetching: state.book.payback.isFetching,
-        isError: state.book.payback.isError,
+        isFetching: state.book.refund.isFetching,
+        isError: state.book.refund.isError,
         locale: state.locale.locale,
-        message: state.book.payback.message,
-        payback: state.book.payback.item,
-        listItems: state.book.payback.item ? state.book.payback.item.list_items : [],
+        message: state.book.refund.message,
+        refund: state.book.refund.item,
+        listItems: state.book.refund.item ? state.book.refund.item.list_items : [],
         vat: state.account.company.item ? state.account.company.item.vat : [],
-        status: state.helper.items.status_payback,
+        status: state.helper.items.status_refund,
         currency: state.helper.items.currency
     }
 }
 
-const StyledEditPayback = withStyles(styles)(EditPayback)
+const StyledEditRefund = withStyles(styles)(EditRefund)
 
-export default connect(mapStateToProps, { getListItem, convertToCurrency, updateDocument, getDocument, createState, resetState })(StyledEditPayback);
+export default connect(mapStateToProps, { getListItem, convertToCurrency, updateDocument, getDocument, createState, resetState })(StyledEditRefund);
