@@ -9,8 +9,8 @@ import Spinner from '../../../components/common/spinner'
 import ApxAlert from '../../../components/common/alert'
 import UploadImg from '../../../lib/uploadImg'
 import Paper from '@material-ui/core/Paper'
-import { getItem, resetState, createState, uploadFileToServer } from '../../../redux/library/actions'
-import { getBookTotal } from '../../../redux/book/actions'
+import { getItem, createState, uploadFileToServer } from '../../../redux/library/actions'
+import { getBookTotal, resetState } from '../../../redux/book/actions'
 
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography';
@@ -75,7 +75,9 @@ class ShowContact extends React.Component {
     }
 
     componentWillUnmount(){
-        this.props.resetState();
+        this.props.resetState("QUOTE");
+        this.props.resetState("INVOICE");
+        this.props.resetState("PAYBACK");
     }
 
     handleChange = (event, value) => {
@@ -184,7 +186,7 @@ const mapStateToProps = (state) => {
       isUploading: state.library.contact.isUploading,
       total_quote: state.book.quote.total,
       total_invoice: state.book.invoice.total,
-      total_refund: state.book.refund.total,
+      total_refund: state.book.refund.total || 0,
       currency: state.account.company.item ? state.account.company.item.currency.value : []
   }
 }

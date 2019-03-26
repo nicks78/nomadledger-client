@@ -11,7 +11,7 @@ class StatContact extends Component {
 
   render() {
 
-    const {total_quote, total_invoice, total_payback, currency, classes, locale} = this.props;
+    const {total_quote, total_invoice, total_refund, currency, classes, locale} = this.props;
 
     return (
         <Grid container spacing={24}>
@@ -23,9 +23,9 @@ class StatContact extends Component {
             <Grid container>
 
                 <Grid item xs={9}>
-                <Typography variant="subtitle1">
-                </Typography>
+                <Typography variant="subtitle1"></Typography>
                 </Grid>
+
                 <Grid item xs={3}>
                 <Typography className={ classes.typoValue } variant="body1">
                   {cvtNumToUserPref(total_quote)} {currency}
@@ -42,13 +42,12 @@ class StatContact extends Component {
             <Grid container>
 
                 <Grid item xs={9}>
-                <Typography variant="h1">
-                  
-                </Typography>
+                <Typography variant="subtitle1"></Typography>
                 </Grid>
+
                 <Grid item xs={3}>
                 <Typography className={ classes.typoValue } variant="body1">
-                  {total_invoice} {currency}
+                  { cvtNumToUserPref(total_invoice)} {currency}
                 </Typography>
                 </Grid>
             </Grid>
@@ -57,18 +56,17 @@ class StatContact extends Component {
         <Grid item xs={12} md={4}>
           <Paper style={{padding: 10, backgroundColor: 'rgba(236, 64, 122, 0.74)'}} elevation={1}>
               <Typography className={classes.typoTitle} variant="body1">
-                {locale.wording.payback} 
+                {locale.wording.refund} 
                 </Typography>
-            <Grid container>
+              <Grid container>
 
                 <Grid item xs={9}>
-                <Typography variant="h1">
-                  
-                </Typography>
+                <Typography variant="subtitle1"></Typography>
                 </Grid>
+
                 <Grid item xs={3}>
                 <Typography className={ classes.typoValue } variant="body1">
-                  {total_payback} {currency}
+                  { cvtNumToUserPref(total_refund)} {currency}
                 </Typography>
                 </Grid>
             </Grid>

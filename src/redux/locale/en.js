@@ -235,6 +235,7 @@ const en = {
         error_403_delete: "This element cannot be deleted - Element related to other element",
         error_422: "Every number must be in international format '27.87' or french format '44,17'",
         error_422_email_format: "Email must have normalise format (ex: email@exemple.com)",
+        error_422_contact: "Error, please try again or contact our service support",
         error_membership_end: "Your membership just end, you can renew with or ask us for all your data (can take up to 8 business day)",
         error_409: "This email already in our database",
         error_wrong_token: "Error authentication, please try again or contact or service support",
