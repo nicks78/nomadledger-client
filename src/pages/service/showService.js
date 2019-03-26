@@ -29,7 +29,7 @@ class ShowService extends Component {
 
 
     render() {
-      const {classes, service, isFetching, locale, isError, message, category, isUpdating, currency} = this.props
+      const {classes, service, isFetching, locale, isError, message, category, isUpdating, currency, service_type} = this.props
       const {reducer} = this.state
 
       if( isFetching ){
@@ -47,9 +47,9 @@ class ShowService extends Component {
             </Typography>
             <br />
             {isError ? <ApxAlert message={message} /> : null }
-            <Grid container spacing={24}>
-              <Grid item xs={12} md={6}>
-                  <TextField 
+            <Grid container spacing={8}>
+              <Grid item xs={12}>
+              <TextField 
                     id="name"
                     variant="filled" 
                     type="text"
@@ -58,6 +58,17 @@ class ShowService extends Component {
                     value={service.name}
                     fullWidth
                     onChange={ (e) => { this.props.createState(reducer, "name", e.target.value) } }
+                  />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                  <EditSelect 
+                    showEdit={true}
+                    variant="filled" 
+                    arrayField={currency}
+                    field="currency"
+                    value={service.currency[localStorage.getItem('locale')]}
+                    handleAction={ (e) => { this.props.createState(reducer, "currency", e.target.value) } }
+                    locale={locale}
                   />
                   <br />
                   <TextField 
@@ -84,12 +95,13 @@ class ShowService extends Component {
                   <EditSelect 
                     showEdit={true}
                     variant="filled" 
-                    arrayField={currency}
-                    field="currency"
-                    value={service.currency[localStorage.getItem('locale')]}
-                    handleAction={ (e) => { this.props.createState(reducer, "currency", e.target.value) } }
+                    arrayField={service_type}
+                    field="service_type"
+                    value={service.service_type[localStorage.getItem('locale')]}
+                    handleAction={ (e) => { this.props.createState(reducer, "service_type", e.target.value) } }
                     locale={locale}
                   />
+                  
 
               </Grid>
             </Grid>
@@ -137,7 +149,8 @@ const mapStateToProps = (state) => {
       service: state.library.service.item,
       locale: state.locale.locale,
       category: state.account.company.item ?  state.account.company.item.category_name : [],
-      currency: state.helper.items.currency
+      currency: state.helper.items.currency,
+      service_type: state.helper.items.service_type
 
   }
 }

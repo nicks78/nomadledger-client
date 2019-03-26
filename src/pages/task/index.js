@@ -132,14 +132,18 @@ const styles = theme => ({
       position: 'relative',
       minHeight: 50,
       margin: 20,
-      marginLeft: -20
+      marginLeft: -20,
+      [theme.breakpoints.down('sm')]: {
+        margin: 0,
+        marginLeft: -20,
+      },
     },
     step: {
       borderLeft: '1px solid #9e9e9e',
-      minHeight: 400,
+      // minHeight: 400,
       marginLeft: 20,
       [theme.breakpoints.down('sm')]: {
-        marginLeft: 40,
+        marginLeft: 20,
       },
     },
     title: {
@@ -150,7 +154,7 @@ const styles = theme => ({
       marginRight: 10,
       width: '15px',
       marginLeft: -8,
-      backgroundColor: '#B25C09',
+      backgroundColor: 'rgb(239, 108, 0)',
       borderRadius: '50%',
       display: 'inline-block',
       textAlign: 'center'

@@ -48,13 +48,13 @@ class ShowExpense extends Component {
             <br />
             <UploadImg 
                 field="receipt"
-                _handleUploadFile={ this.props.uploadFileToServer }
+                _handleUploadFile={ (e) => { this.props.uploadFileToServer(reducer, expense._id,  e.target.files[0], expense.receipt ) }}
                 reducer={this.state.reducer}
                 progress={progress}
                 idModel={expense._id}
                 oldFile={expense.receipt.path}
                 isUploading={ false }
-                image={ <img src={`${ expense.receipt.full_path || DEFAULT_IMG }`} alt="logo" width="300" height={null} />}
+                image={ <img src={`${ expense.receipt.full_path || DEFAULT_IMG }`} alt="logo" height="150" />}
               />
             {isError ? <ApxAlert message={message} /> : null }
             <TextField 

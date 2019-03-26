@@ -102,7 +102,7 @@ class Expense extends Component {
                                 listExpenses.map(( expense, index) => {
                                     return  <TableRow key={index}>
                                                 <TableCell><a href={`${ expense.receipt ? expense.receipt.full_path : DEFAULT_IMG }`}  target="_blank">
-                                                            <img alt={ expense.receipt.org_name } className={classes.img} src={`${ expense.receipt ? expense.receipt.full_path : DEFAULT_IMG }`} />
+                                                            <img alt={ expense.receipt.org_name } height="30" className={classes.img} src={`${ expense.receipt ? expense.receipt.full_path : DEFAULT_IMG }`} />
                                                             </a></TableCell>
                                                 <TableCell><Link to={`/${reducer.toLowerCase()}/view/${expense._id.toLowerCase()}`}><span  className="link">{expense.name}</span></Link></TableCell>
                                                 <TableCell style={{textTransform: 'capitalize'}}>{ expense.category[localStorage.getItem('locale')] }</TableCell>

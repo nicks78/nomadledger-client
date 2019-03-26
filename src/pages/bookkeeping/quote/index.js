@@ -46,6 +46,8 @@ class Quote extends Component {
         return <ApxAlert message={message} />
     }
 
+    console.log(this.props.total)
+
     return (
       <div className={classes.root}>
             <Hidden only={['xs', 'sm']}>
