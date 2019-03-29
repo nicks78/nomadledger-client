@@ -111,8 +111,7 @@ const en = {
         email: "Email",
         company: "Company",
         vat: 'VAT',
-        start_date: "Start date",
-        end_date: "End date",
+        capital : "Capital",
         addresses_street: "Address", 
         addresses_zip: "Zip code", 
         addresses_city: "City", 
@@ -145,6 +144,9 @@ const en = {
         add_group: "Add group",
         add_vat: "VAT rate",
 
+        fiscal_month: "Fiscal month",
+        fiscal_day: "Fiscal day",
+        fiscal_date: "Start fiscal",
         expired_at: "Expired at",
         created_at: "Created at",
         due_at: "Due at",
@@ -245,7 +247,7 @@ const en = {
         alert_password_not_match: "Password not match, please verify !",
         phone_required: "Your mobile phone is required",
     },
-    days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 }
 
 export {en}

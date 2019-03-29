@@ -93,10 +93,10 @@ class Account extends Component {
                           <Grid container spacing={24}> 
                               <Grid item xs={12} md={6}>
                                 <Typography variant="subtitle2"  >
-                                {locale.subheading.my_categories}
-                                </Typography>
-                                <Divider className={ classes.divider }/>
-                                <AddCategory />
+                                    {locale.subheading.my_vat}
+                                  </Typography>
+                                  <Divider className={ classes.divider }/>
+                                  <AddVat />
                               </Grid>
                               <br />
                               <Grid item xs={12} md={6}>
@@ -106,12 +106,14 @@ class Account extends Component {
                                 <Divider className={ classes.divider }/>
                                   <AddContactGroup />
                               </Grid>
-                              <Grid item xs={12} md={6}>
-                              <Typography variant="subtitle2"  >
-                                  {locale.subheading.my_vat}
+                              <Grid item xs={12}>
+                              
+
+                                <Typography variant="subtitle2"  >
+                                {locale.subheading.my_categories}
                                 </Typography>
                                 <Divider className={ classes.divider }/>
-                                <AddVat />
+                                <AddCategory />
                               </Grid>
                           </Grid>
                                 

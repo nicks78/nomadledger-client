@@ -4,9 +4,8 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {  updateDocument, uploadFileToServer } from '../../../redux/account/actions'
 import { DEFAULT_IMG} from '../../../redux/constant'
-import { withStyles, TextField, InputAdornment } from '@material-ui/core'
+import { withStyles, TextField } from '@material-ui/core'
 import ApxButtonEdit from '../../../components/common/buttonEdit'
-import DatePickers from '../../../lib/dayPicker'
 import ApxtextIndexValue from '../../../components/common/textIndexValue'
 import UploadImg from '../../../lib/uploadImg'
 import EditInput from '../../../lib/editInput'
@@ -15,6 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid'
 import Snackbar from '../../../components/common/snackBar'
+import ApxSelect from '../../../components/common/select'
+import { cvtNumToUserPref } from '../../../utils/help_function'
 
 const styles = theme => ({
 
@@ -35,6 +36,13 @@ const styles = theme => ({
   }
 })
 
+function o () { 
+  var array = []; 
+  for(var i = 1; i < 32 ; i++) { 
+     array.push({ fr: i, en: i, _id: i }) 
+  } 
+  return array
+}
 
 class Company extends Component {
 
@@ -53,7 +61,7 @@ class Company extends Component {
   }
 
   render() {
-    const {company, progress, isUploading, locale, classes, isError, message, company_type, country, currency} = this.props;
+    const {company, progress, isUploading, locale, classes, isError, message, company_type, country, currency, months} = this.props;
     const {showEdit, reducer} = this.state;
 
     const address = ["addresses_street", "addresses_zip", "addresses_city"]
@@ -150,46 +158,49 @@ class Company extends Component {
                             label={locale.subheading.label_currency_fav}
                         /> 
                     }
-                    {
-                        showEdit ? 
-                            <TextField
-                              label={locale.wording.start_date}
-                              id="start_date"
-                              disabled
-                              margin="dense"
-                              style={{width: '100%'}}
-                              value={company.start_date.label} 
-                              variant="filled"
-                              InputProps={{
-                                  startAdornment: <InputAdornment position="start">
-                                      <DatePickers 
-                                              handleDate={ (event) => { this.props.handleFormEdit(event, reducer) }}
-                                              field="start_date"
-                                          /> 
-                                  </InputAdornment>,
-                              }}
-                          />
-                        : 
-                        <ApxtextIndexValue 
-                            value={company.start_date.label} 
-                            label={locale.wording.start_date}
+                     {
+                      showEdit ?
+                        <EditInput 
+                          label={ locale.wording.capital }
+                          value={ company.capital}
+                          showEdit={showEdit}
+                          locale={locale}
+                          field="capital"
+                          handleAction={(event) => { this.props.handleFormEdit(event, reducer) }}
+                      />
+                      : 
+                      <ApxtextIndexValue 
+                            value={ cvtNumToUserPref(company.capital)} 
+                            label={locale.wording.capital}
                         /> 
                     }
-                     {
+
+                    
+
+                    {
                         showEdit ? 
-                            <TextField
-                                label={locale.wording.end_date + " (auto)"}
-                                id="end_date"
-                                disabled
-                                margin="dense"
-                                style={{width: '100%'}}
-                                value={company.end_date.label} 
-                                variant="filled"
+                        
+                        <React.Fragment>
+                             <ApxSelect 
+                                arrayField={months}
+                                field="fiscal_month"
+                                value={company.fiscal_month[localStorage.getItem('locale')] }
+                                locale={locale}
+                                handleAction={ (ev) => { this.props.handleFormEdit(ev, reducer) } }
                             />
+                            <ApxSelect 
+                                arrayField={ o() }
+                                field="fiscal_day"
+                                value={company.fiscal_day[localStorage.getItem('locale')] }
+                                locale={locale}
+                                handleAction={ (ev) => { this.props.handleFormEdit(ev, reducer) } }
+                            />
+
+                        </React.Fragment>
                         : 
                         <ApxtextIndexValue 
-                            value={company.end_date.label} 
-                            label={locale.wording.end_date}
+                            value={ company.fiscal_day[localStorage.getItem('locale')] +" "+ company.fiscal_month[localStorage.getItem('locale')] } 
+                            label={locale.wording.fiscal_date}
                         /> 
                     }
                 </Grid>
@@ -249,6 +260,7 @@ const mapStateToProps = (state) => {
         company: state.account.company.item, 
         progress: state.account.company.progress,
         company_type: state.helper.items.company_type,
+        months: state.helper.items.months,
         country: state.helper.items.country,
         currency: state.helper.items.currency,
     }

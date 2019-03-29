@@ -12,7 +12,7 @@ import bookReducer from './book/bookReducer'
 import searchReducer from './search/searchReducer'
 import helperReducer from './helper/helperReducer'
 import taskReducer from './task/taskReducer'
-
+import statReducer from './stat/statReducer'
 
 
 export default combineReducers({
@@ -23,5 +23,6 @@ export default combineReducers({
     book: bookReducer,
     search: searchReducer,
     helper: helperReducer,
-    task: taskReducer
+    task: taskReducer,
+    stat: statReducer
 })

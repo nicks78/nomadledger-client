@@ -117,8 +117,7 @@ const fr =  {
         email: "Couriel",
         company: "Société",
         vat: 'TVA',
-        start_date: "Date de dédut",
-        end_date: "Jusqu'au",
+        capital : "Capital",
         addresses_street: "Adresse", 
         addresses_zip: "Code postal", 
         addresses_city: "Ville", 
@@ -151,6 +150,9 @@ const fr =  {
         add_group: "Ajouter un groupe",
         add_vat: "Taux TVA",
 
+        fiscal_month: "Mois fiscale",
+        fiscal_day: "Jour fiscale",
+        fiscal_date: "Début fiscale",
         expired_at: "Valide jusqu'au",
         created_at: "Créer le",
         due_at: "Dû le",
@@ -251,7 +253,7 @@ const fr =  {
         alert_password_not_match: "Mots de passe ne correspondent pas",
         phone_required: "Mobile obligatoire",
     },
-    days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+    days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
 };
 
 export {fr};

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { getItemList } from '../../redux/library/actions'
+import { getData } from '../../redux/stat/actions'
 import {Grid, Typography, withStyles} from '@material-ui/core'
 import BarCharts from '../../components/common/barCharts'
 import ApxPaper from '../../components/common/paper'
@@ -14,7 +14,7 @@ class Home extends Component {
     }
 
     componentDidMount(){
-        // this.props.getItemList(this.state.reducer)
+        this.props.getData( "currencyStat", "" )
     }
 
 
@@ -28,7 +28,12 @@ class Home extends Component {
             <br />
             <Grid container spacing={24}>
                 <Grid item xs={8}>
-                    <BarCharts />
+                {
+                    this.props.currencyStat ? 
+                    <BarCharts chartData={this.props.currencyStat} />
+                    : null
+                }
+                    
                 </Grid>
                 <Grid item xs={4}>
                     <Typography variant="overline">TO DO LIST</Typography>
@@ -58,12 +63,12 @@ const styles = {
 const mapStateToProps = (state) => {
 
     return {
-        isFetching: state.library.stat.isFetching,
-        item: state.library.stat.item
+        isFetching: state.stat.isFetching,
+        currencyStat: state.stat.currencyStat || null
     }
 }
 
 
 const StyledHome = withStyles(styles)(Home)
 
-export default connect(mapStateToProps, { getItemList })(StyledHome);
+export default connect(mapStateToProps, { getData })(StyledHome);
