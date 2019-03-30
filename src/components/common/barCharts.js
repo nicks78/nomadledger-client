@@ -4,6 +4,7 @@ import Chart from 'chart.js';
 Chart.defaults.global.responsive = true;
 
 
+
 class BarCharts extends Component {
 
     state = {
