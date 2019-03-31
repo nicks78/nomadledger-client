@@ -91,7 +91,7 @@ class ShowProduct extends React.Component {
                                 type="file"
                             />
                             <label htmlFor="upload">
-                              <IconButton component="p" >
+                              <IconButton component="p" color="primary">
                                 <CameraAltIcon />
                               </IconButton>    
                             </label>
@@ -101,8 +101,8 @@ class ShowProduct extends React.Component {
               </Grid>
               <Grid item xs={12} sm={3} md={3}>
                   <Typography variant="h1">{ product.name}
-                    <IconButton style={{float: 'right', marginTop: -10}} onClick={ this.handleEdit }>
-                      { !showEdit ? <EditIcon style={{ color: 'blue' }} />  
+                    <IconButton style={{float: 'right', marginTop: -10}} color="primary" onClick={ this.handleEdit }>
+                      { !showEdit ? <EditIcon />  
                         : <CheckIcon style={{ color: 'green' }} /> }
                     </IconButton>
                   </Typography><br />
@@ -239,13 +239,15 @@ const styles = theme => ({
     textAlign: "center",
     position: 'relative',
     height:'100%',
+    backgroundColor: theme.palette.lightGrey,
+    borderRadius: 4
   },
   thumbnail: {
     textAlign: 'center',
   },
   thumbnailImg: {
     position: 'relative',
-    border: '1px solid rgb(238,238,238)',
+    border: '1px solid' + theme.palette.lightGrey,
     marginBottom: 5,
     
   },

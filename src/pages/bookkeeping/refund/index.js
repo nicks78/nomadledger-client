@@ -94,7 +94,7 @@ class Refund extends Component {
                                                 <TableCell>{cvtNumToUserPref(total  )} {refund.currency.value}</TableCell>
                                                 <TableCell>
                                                     {
-                                                        false ? 
+                                                        refund.status.code === "11" || refund.status.code === "8" ? 
                                                         <span style={{color: refund.status.color }}>
 
                                                         { refund.status[localStorage.getItem('locale')] }</span>
@@ -110,10 +110,11 @@ class Refund extends Component {
                                                 </TableCell>
                                                 <TableCell><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, refund._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
                                                 <ApxTableActions 
-                                                    actionDelete={false}
-                                                    actionEdit={`/refund/edit/${refund._id}`}
+                                                    actionDelete={refund.status.code === "9" ? true : false}
+                                                    actionEdit={refund.status.code === "1" || refund.status.code === "2" || refund.status.code === "3" ? `/refund/edit/${refund._id}` : false }
                                                     actionView={false}
-                                                    actionCheck={false}
+                                                    actionCheck={refund.status.code === "8" ? true : false}
+                                                    actionArchive={refund.status.code === "11" ? true : false }
 
                                                 />
                                             </TableRow>

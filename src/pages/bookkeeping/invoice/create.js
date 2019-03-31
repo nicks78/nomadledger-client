@@ -2,7 +2,7 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
-import { createState, createDocument, resetState, convertQuoteToInvoice} from '../../../redux/book/actions'
+import { createState, createDocument, resetState, convertToOtherDocument} from '../../../redux/book/actions'
 import { convertToCurrency, getListItem } from '../../../redux/book/itemActions'
 import { withStyles } from '@material-ui/core';
 import ApxAlert from '../../../components/common/alert'
@@ -19,7 +19,7 @@ class CreateInvoice extends React.Component {
     componentDidMount(){
         var id = this.props.match.params.id;
         if(id){
-            this.props.convertQuoteToInvoice("QUOTE", id)
+            this.props.convertToOtherDocument("QUOTE", id, "INVOICE")
         }
     }
 
@@ -99,4 +99,4 @@ const mapStateToProps = (state) => {
 
 const StyledCreateInvoice = withStyles(styles)(CreateInvoice)
 
-export default connect(mapStateToProps, { createState, getListItem, convertToCurrency, createDocument, resetState, convertQuoteToInvoice })(StyledCreateInvoice);
+export default connect(mapStateToProps, { createState, getListItem, convertToCurrency, createDocument, resetState, convertToOtherDocument })(StyledCreateInvoice);

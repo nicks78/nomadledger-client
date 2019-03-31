@@ -14,6 +14,7 @@ import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 
+
 class Quote extends Component {
 
     state = {
@@ -46,8 +47,6 @@ class Quote extends Component {
         return <ApxAlert message={message} />
     }
 
-    console.log(this.props.total)
-
     return (
       <div className={classes.root}>
             <Hidden only={['xs', 'sm']}>
@@ -77,7 +76,7 @@ class Quote extends Component {
                             <TableCell>{locale.wording.status}</TableCell>
                             <TableCell align="center">{locale.wording.invoicer}</TableCell>
                             <TableCell>PDF</TableCell>
-                            <TableCell align="center">Actions</TableCell>
+                            <TableCell align="center">Actions</TableCell>                           
 
                         </TableRow>
                     </TableHead>
@@ -95,7 +94,7 @@ class Quote extends Component {
                                                 <TableCell>
 
                                                 {
-                                                    item.status.code === "2" ||   item.status.code === "3" ? 
+                                                    item.status.code === "6" ||   item.status.code === "10" ||   item.status.code === "11"  ? 
                                                     <span style={{color: item.status.color }}>
 
                                                     { item.status[localStorage.getItem('locale')] }</span>
@@ -116,13 +115,12 @@ class Quote extends Component {
                                                 
         
                                                 <ApxTableActions 
-                                                    actionDelete={item.status.code === "3" ? true : false}
-                                                    actionEdit={ item.status.code === "0" || item.status.code === "1" ? `/quote/edit/${item._id}` : false }
+                                                    actionDelete={item.status.code === "10" ? true : false}
+                                                    actionEdit={ item.status.code === "1" || item.status.code === "2" ? `/quote/edit/${item._id}` : false }
                                                     actionView={false}
-                                                    actionCheck={item.status.code === "2" ? true : false }
+                                                    actionCheck={item.status.code === "6" ? true : false }
+                                                    actionArchive={item.status.code === '11' ? true : false }
                                                 />
-
-                                                
                                             </TableRow>
                                 })
                                 : null                           

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link}  from 'react-router-dom'
 import {connect} from 'react-redux'
 import { authUser } from '../../redux/auth/actions'
 import Paper from '@material-ui/core/Paper';
@@ -89,6 +90,9 @@ class Login extends Component {
                             objData={ this.state }/>
 
                         <Button variant="contained" color="secondary"  style={  styles.button } onClick={ this.logggedIn }>{ locale.wording.login }</Button>
+
+                        <br />
+                        <Link to="/forgot-password" >Forgot password ?</Link>
                 </Paper>
 
             </div>

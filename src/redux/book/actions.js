@@ -204,11 +204,12 @@ export function getDocument( actionType, id ){
  * @param  actionType 
  * @param  id 
  */
-export function convertQuoteToInvoice( actionType, id ){
+export function convertToOtherDocument( actionType, id, newType ){
 
-    return dispatch => {
+    return (dispatch, getState) => {
 
-        dispatch(requestData(actionType))
+        dispatch(requestData(actionType));
+        const locale = getState().locale.locale
 
         axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${id}`, {
           method: 'GET',
@@ -224,9 +225,12 @@ export function convertQuoteToInvoice( actionType, id ){
                 terms: res.payload.terms,
                 vat: res.payload.vat,
                 currency: res.payload.currency,
-                contact_id: res.payload.contact_id
+                contact_id: res.payload.contact_id,
+                [actionType.toLowerCase() + "_id"]: res.payload._id,
+                onRef: locale.wording[actionType.toLowerCase()] +"-"+res.payload.ref
             }
-            dispatch(setDocument("INVOICE", item ))  
+
+            dispatch(setDocument(newType, item ))  
         })
         .catch(function (error) {
           // handle error

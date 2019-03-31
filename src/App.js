@@ -27,6 +27,8 @@ const theme = createMuiTheme({
       main: 'rgb(128, 128, 128)',
       dark: '#080808',
     },
+    lightGrey: 'rgb(238,238,238)',
+    darkGrey: "rgb(58,58,58)",
     blue: {
       light: 'rgb(66, 133, 244)',
       main: 'rgb(51, 103, 214)'
@@ -51,17 +53,17 @@ const theme = createMuiTheme({
     htmlFontSize: 17,
     fontFamily: "'Open Sans', sans-serif",
     h1:{
-      fontSize: '2rem',
+      fontSize: '1.8rem',
       fontWeight: 700,
       colro: '#080808'
     },
     h2: {
-      fontSize: '1.5rem',
+      fontSize: '1.3rem',
       color: '#080808',
       fontWeight: 400
     },
     h3: {
-      fontSize: '1.2rem',
+      fontSize: '1.1rem',
       colro: '#080808'
     },
     subtitle1: {

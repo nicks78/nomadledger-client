@@ -9,11 +9,11 @@ class Home extends Component {
 
     state = {
         showContact: false,
-        reducer: 'STAT',
-        keyLocation: ''
+        reducer: 'STAT'
     }
 
     componentDidMount(){
+        console.log("YEAH")
         this.props.getData( "currencyStat", "" )
     }
 

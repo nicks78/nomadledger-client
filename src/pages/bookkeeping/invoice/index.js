@@ -70,11 +70,11 @@ class Invoice extends Component {
                         <TableRow>
                             <TableCell>{locale.wording.reference}</TableCell>
                             <TableCell>{locale.wording.client}</TableCell>
-                            <TableCell>{locale.wording.currency}</TableCell>
                             <TableCell>{locale.wording.subtotal}</TableCell>
                             <TableCell>{locale.wording.vat}</TableCell>
                             <TableCell>{locale.wording.total}</TableCell>
                             <TableCell>{locale.wording.status}</TableCell>
+                            <TableCell align="center">{locale.wording.repay}</TableCell>
                             <TableCell>PDF</TableCell>
                             <TableCell align="center">Actions</TableCell>
 
@@ -88,13 +88,15 @@ class Invoice extends Component {
                                     return  <TableRow key={index}>
                                                 <TableCell>{locale.wording.inv}-{invoice.ref}</TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${invoice.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{invoice.contact_id.company_name}</span></Link></TableCell>
-                                                <TableCell>{invoice.currency.en}</TableCell>
                                                 <TableCell>{cvtNumToUserPref(invoice.subtotal)} {invoice.currency.value}</TableCell>
                                                 <TableCell>{cvtNumToUserPref(vat ) + " "+ invoice.currency.value }</TableCell>
                                                 <TableCell>{cvtNumToUserPref(vat + invoice.subtotal  )} {invoice.currency.value}</TableCell>
                                                 <TableCell>
                                                     {
-                                                        invoice.status.code === "4" ||   invoice.status.code === "5"  || invoice.status.code === "6"  ? 
+                                                        invoice.status.code === "7" ||   
+                                                        invoice.status.code === "9"  || 
+                                                        invoice.status.code === "11"  ? 
+
                                                         <span style={{color: invoice.status.color }}>
 
                                                         { invoice.status[localStorage.getItem('locale')] }</span>
@@ -108,12 +110,14 @@ class Invoice extends Component {
                                                             />
                                                     }    
                                                 </TableCell>
+                                                <TableCell align="center"><Link to={`/refund/create/${invoice._id}`}><img alt="convert-to-refund" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link></TableCell>                                                
                                                 <TableCell><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, invoice._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
                                                  <ApxTableActions 
-                                                    actionDelete={invoice.status.code === "5" || invoice.status.code === "6" || invoice.status.code === "3" ? true : false}
-                                                    actionEdit={ invoice.status.code === "0" || invoice.status.code === "1" ? `/invoice/edit/${invoice._id}` : false }
+                                                    actionDelete={ invoice.status.code === "9" ? true : false}
+                                                    actionEdit={ invoice.status.code === "1" || invoice.status.code === "2" || invoice.status.code === "3" ? `/invoice/edit/${invoice._id}` : false }
                                                     actionView={false}
-                                                    actionCheck={invoice.status.code === "4" ? true : false }
+                                                    actionCheck={invoice.status.code === "7" ? true : false }
+                                                    actionArchive={invoice.status.code === "11" ? true : false }
                                                 />
                                             </TableRow>
                                 })

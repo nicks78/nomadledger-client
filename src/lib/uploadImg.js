@@ -42,7 +42,7 @@ const  UploadImg = (props) => {
                     />
                 
                 <label htmlFor={field}>
-                <IconButton variant="contained" component="p" >
+                <IconButton color="primary" component="p" >
                     <CameraAltIcon />
                 </IconButton>
                 

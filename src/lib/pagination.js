@@ -14,6 +14,7 @@ export default class Pagination extends Component {
             page: 0,
             numSelected: 0,
             rowCount: 0,
+            // contactId: 
         }
     }
 
@@ -21,18 +22,20 @@ export default class Pagination extends Component {
     handleChangePage = (event, page) => {
         var skip =  page * this.state.limit;
         this.setState({page});
+        var contactId = this.props.contactId ? "/"+ this.props.contactId : ""
 
-        this.props.onGetItemList(this.props.reducer, `list?limit=${ this.state.limit }&skip=${ skip }&${this.props.filterName}=${this.props.value}`);
+        this.props.onGetItemList(this.props.reducer, `list${contactId}?limit=${ this.state.limit }&skip=${ skip }&${this.props.filterName}=${this.props.value}`);
 
     }
 
     handleChangeRowsPerPage = (event) => {
         var num = event.target.value
+        var contactId = this.props.contactId ? "/"+ this.props.contactId : ""
         this.setState({
             limit: num,
             page: 0
         })
-        this.props.onGetItemList(this.props.reducer, `list?limit=${num }&skip=0&${this.props.filterName}=${this.props.value}`);
+        this.props.onGetItemList(this.props.reducer, `list${contactId}?limit=${num }&skip=0&${this.props.filterName}=${this.props.value}`);
     }
 
 

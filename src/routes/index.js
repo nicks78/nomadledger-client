@@ -9,6 +9,8 @@ import PrivateRoute from './privateRoute'
 // Login
 import Auth from '../pages/auth'
 import Login from '../pages/auth/login'
+import ForgotPassword from '../pages/auth/forgotPassword'
+
 
 // Pages
 import Home from '../pages/dashboard/home'
@@ -53,6 +55,7 @@ class Routes extends React.Component {
                         <Switch>
                         <Route exact path="/" component={Auth} />
                         <Route path="/login" component={Login} />
+                        <Route path="/forgot-password" component={ForgotPassword} />
                         {
                             isLoggedIn && authUser !== null  ? 
                             <Layout company={company} _onChangeLocale={this.handleChangeLocale} user={authUser} logout={this.props.getLogout} locale={locale}>

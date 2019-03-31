@@ -65,6 +65,7 @@ class EditRefund extends React.Component {
                     createState={this.props.createState}
                     reducer={this.state.reducer}
                     btnLabel={locale.wording.update}
+                    refund={true}
                     date_1="created_at"
                     date_2="due_at"
                 />

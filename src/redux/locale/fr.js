@@ -124,6 +124,7 @@ const fr =  {
         addresses_country: "Pays", 
         num_format: "Format des chiffres",
         receipt_date: "Date du reçu",
+        repay: "Rembourser",
 
         contact_group: "Groupe",
         contact_drop: "Client",
@@ -181,6 +182,7 @@ const fr =  {
         phone: "Téléphone",
 
         of: "à",
+        on: "sur",
         group: "Groupe",
         date: "Date",
         ref: "Référence",
@@ -225,7 +227,7 @@ const fr =  {
         select_contact: "Sélectionner un client",
         select_contact_group: "Sélectionner un groupe",
         textarea_quote: "Taper une déscription de votre devis",
-        textarea_terms: "Taper un court texte de conditions générale",
+        textarea_terms: "Taper un court texte de conditions générale"
     },
     message: {
         success_create: "Felicitation !",

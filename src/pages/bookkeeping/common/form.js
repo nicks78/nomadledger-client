@@ -29,7 +29,13 @@ const Form = (props) => {
     return  <div>
                 <Paper className={classes.paper}>
                 <Typography variant="h2" className={classes.title}>
-                    {locale.subheading[formTitle]}
+                    {locale.subheading[formTitle] }
+                    {
+                        data.onRef ?
+                        <span style={{fontWeight: 700}}> { locale.wording.on }  { data.onRef}</span>
+                        : null 
+                    } 
+                    
                 </Typography>
 
                     <Grid container spacing={24}>
@@ -47,11 +53,12 @@ const Form = (props) => {
                         <Grid item xs={12} sm={6} md={6}>
 
                             <Grid container spacing={8}>
-                                <Grid item xs={12} sm={6} md={6}>
+                                <Grid item xs={12} sm={props.refund ? 12 : 6} md={props.refund ? 12 : 6}>
                                     <TextField
                                             label={ locale.wording[date_1] }
                                             id={date_1}
                                             disabled
+                                            required
                                             margin="dense"
                                             style={{width: '100%'}}
                                             value={ data[date_1] ? data[date_1].label : ""}
@@ -67,30 +74,37 @@ const Form = (props) => {
                                             }}
                                         />
                                 </Grid>
-                                <Grid item xs={12} sm={6} md={6}>
-                                    <TextField
-                                            label={ locale.wording[date_2] }
-                                            id={date_2}
-                                            disabled
-                                            margin="dense"
-                                            style={{width: '100%'}}
-                                            value={ data[date_2] ? data[date_2].label : ""}
-                                            variant="filled"
-                                            InputProps={{
-                                                startAdornment: <InputAdornment position="start">
-                                                    <DatePickers 
-                                                            value={ data[date_2] ? data[date_2].intl_format : ""}
-                                                            handleDate={ props.handleDropDown }
-                                                            field={date_2}
-                                                        /> 
-                                                </InputAdornment>,
-                                            }}
-                                        />
-                                </Grid>
+                                {
+                                    !props.refund ?
+                                    <Grid item xs={12} sm={6} md={6}>
+                                        <TextField
+                                                label={ locale.wording[date_2] }
+                                                id={date_2}
+                                                disabled
+                                                required
+                                                margin="dense"
+                                                style={{width: '100%'}}
+                                                value={ data[date_2] ? data[date_2].label : ""}
+                                                variant="filled"
+                                                InputProps={{
+                                                    startAdornment: <InputAdornment position="start">
+                                                        <DatePickers 
+                                                                value={ data[date_2] ? data[date_2].intl_format : ""}
+                                                                handleDate={ props.handleDropDown }
+                                                                field={date_2}
+                                                            /> 
+                                                    </InputAdornment>,
+                                                }}
+                                            />
+                                    </Grid>
+                                    : null  
+                                }
+
                                 <Grid item xs={12} md={6} sm={6}>
                                     <ApxSelect 
                                         arrayField={currency}
                                         field="currency"
+                                        required={true}
                                         value={data.currency && data.currency[localStorage.getItem('locale')]}
                                         helperText={locale.helperText.select_currency}
                                         handleAction={ props.handleDropDown }
@@ -101,6 +115,7 @@ const Form = (props) => {
                                     <ApxSelect 
                                         arrayField={vat}
                                         field="vat"
+                                        required={true}
                                         value={data.vat && data.vat[localStorage.getItem('locale')]}
                                         helperText={locale.helperText.select_currency}
                                         handleAction={ props.handleDropDown }

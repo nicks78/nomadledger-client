@@ -34,7 +34,7 @@ const styles = theme => ({
     drawerPaper: {
         position: 'relative',
         height: '100vh',
-        backgroundColor: 'rgb(58,58,58)',
+        backgroundColor: theme.palette.darkGrey,
         width: drawerWidth,
         marginTop: '0px',
         [theme.breakpoints.up('md')]: {
@@ -52,7 +52,7 @@ const styles = theme => ({
     appBar: {
         position: 'absolute',
         marginLeft: drawerWidth,
-        background: 'rgb(250,250,250)',
+        background: "white",
         boxShadow: 'none',
         border: '1px solid transparent',
         borderBottomColor: 'rgba(0, 0, 0, 0.12)',
@@ -70,7 +70,7 @@ const styles = theme => ({
     content: {
         flexGrow: 1,
         overflowY: 'auto',
-        backgroundColor: 'rgb(238,238,238)',
+        backgroundColor: theme.palette.lightGrey,
         padding: theme.spacing.unit * 3,
         [theme.breakpoints.down('sm')]: {
             margin: 0,

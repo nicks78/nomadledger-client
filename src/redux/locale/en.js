@@ -118,6 +118,7 @@ const en = {
         addresses_country: "Country", 
         num_format: "Number format",
         receipt_date: "Receipt date",
+        repay: "Repay",
 
         contact_group: "Group",
         contact_drop: "Client",
@@ -174,6 +175,7 @@ const en = {
         phone: "Phone",
 
         of: "To",
+        on: "on",
         group: "Group",
         expense_name: "Name",
         date: "Date",

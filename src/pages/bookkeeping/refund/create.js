@@ -2,7 +2,7 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
-import { createState, createDocument, resetState} from '../../../redux/book/actions'
+import { createState, createDocument, resetState, convertToOtherDocument} from '../../../redux/book/actions'
 import { convertToCurrency, getListItem } from '../../../redux/book/itemActions'
 import { withStyles } from '@material-ui/core';
 import ApxAlert from '../../../components/common/alert'
@@ -17,7 +17,10 @@ class CreateRefund extends React.Component {
     }
 
     componentDidMount(){
-        
+        var id = this.props.match.params.id;
+        if(id){
+            this.props.convertToOtherDocument("INVOICE", id, "REFUND")
+        }
     }
 
     // componentWillUnmount(){
@@ -63,6 +66,7 @@ class CreateRefund extends React.Component {
                     getListItem={this.props.getListItem}
                     createState={this.props.createState}
                     reducer={reducer}
+                    refund={true}
                     btnLabel={locale.wording.save}
                     date_1="created_at"
                     date_2="due_at"
@@ -96,4 +100,4 @@ const mapStateToProps = (state) => {
 
 const StyledCreateRefund = withStyles(styles)(CreateRefund)
 
-export default connect(mapStateToProps, { createState, getListItem, convertToCurrency, createDocument, resetState })(StyledCreateRefund);
+export default connect(mapStateToProps, { createState, getListItem, convertToCurrency, createDocument, resetState, convertToOtherDocument })(StyledCreateRefund);

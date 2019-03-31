@@ -30,10 +30,6 @@ const styles = theme => ({
       height: '100%',
       clear: 'both'
     },
-    drawer: {
-        backgroundColor: theme.palette.grey.light,
-        height: '100%'
-    },
     button: {
         color: 'white',
         marginRight: 10
