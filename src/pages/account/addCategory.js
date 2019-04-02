@@ -89,6 +89,7 @@ class AddCategory extends Component {
                         label={locale.wording.category}
                         className={classes.textField}
                         value={this.state.value}
+                        onKeyPress={(e) => { e.key === "Enter" && this._pushToDoc() }}
                         name="category_name"
                         onChange={this._handleFormEdit}
                         margin="normal"
@@ -109,7 +110,7 @@ class AddCategory extends Component {
                                   type="category_name"
                                   obj={category}
                                   key={index}
-                                  actionTag={ () => { this.deleteCategory('78cgogrec7') } }
+                                  actionTag={ () => { this.deleteCategory(category._id) } }
                                   label={ category[localStorage.getItem('locale')] }
                                 />
                         })

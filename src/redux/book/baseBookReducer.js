@@ -76,7 +76,7 @@ const authReducer = (state = initialState, action) => {
         case `UPDATE_LIST_ITEM`:
             return {
                 ...state,
-                item: { ...state.item, list_items: replaceObjectInArray(state.item.list_items, action.payload.item_id) },
+                item: { ...state.item, list_items: replaceObjectInArray(state.item.list_items, action.payload) },
             }
 
         case `UP_DOWN_QUANTITY`:

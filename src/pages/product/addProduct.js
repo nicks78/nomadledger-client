@@ -13,10 +13,10 @@ const AddProduct = (props) => {
         label: locale.subheading.label_product,
         fields: [
           { name: 'name', type:"text", required: true },
-          { name: 'buying_price', type:"text"},
-          { name: 'price', type:"text"},
+          { name: 'buying_price', type:"text", required: true},
+          { name: 'selling_price', type:"text", required: true},
           { name: 'stock', type:"number"},
-          { name: 'currency', type:"select", selections: currency, helperText: "select_currency" },
+          { name: 'currency', type:"select", selections: currency, helperText: "select_currency", required: true},
           { name: 'category', type:"select", selections: category, helperText: "select_category", required: true  },
           { name: 'description', type:"longtext", multiline: true, rowsMax:"4" },
         ]

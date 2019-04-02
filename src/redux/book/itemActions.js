@@ -14,8 +14,9 @@ export function getListItem( actionType, name, item ) {
     return (dispatch, getState) => {
 
         var currency = getState().book[actionType.toLowerCase()].item.currency;
-
-        currencyConvertorApi( item.currency.en, item.price, currency.en )
+        var price = item.onModel === "product" ? item.selling_price : item.price;
+console.log("getList")
+        currencyConvertorApi( item.currency.en, price, currency.en )
         .then( (unit_price) => {
             var tmp = {
                     quantity: 1,
@@ -26,7 +27,8 @@ export function getListItem( actionType, name, item ) {
                     currency: currency.en || item.currency.en,
                     unit_price: unit_price,
                     total: unit_price,
-                    item_id: item
+                    item_id: item._id
+                    // item_id: item
                 }
             dispatch(setListItem(actionType, name, tmp))
         })
@@ -61,13 +63,12 @@ export function setListItem( actionType, name, item ) {
 export function convertToCurrency( actionType, currency, item ) {
 
     return (dispatch) => {
-        
-        currencyConvertorApi( item.item_id.currency.en, item.item_id.price, currency.en )
+        currencyConvertorApi( item.currency, item.total, currency.en )
         .then( (value) => {
             item.total = parseFloat((value * item.quantity).toFixed(2));
             item.unit_price = value;
-            item.base_currency = currency.en;
-            
+            item.base_currency = item.currency;
+            item.currency = currency.en
         })
         .then(() => {
             dispatch(updateListItems(actionType,  item ))
@@ -90,12 +91,17 @@ export function updateListItems( actionType, item ) {
 
 
 /**
- * 
+ * Call API and convert each amount
  * @param  from 
  * @param  price 
  * @param  to 
  */
 async function currencyConvertorApi(from, amount, to){
+
+
+    console.log("from", from)
+    console.log("to", to)
+    console.log("amount", amount)
 
     // Set real time currency convertor
     return new Promise( (resolve, reject) => { 

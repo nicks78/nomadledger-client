@@ -162,7 +162,7 @@ class Company extends Component {
                       showEdit ?
                         <EditInput 
                           label={ locale.wording.capital }
-                          value={ company.capital}
+                          value={ company.capital }
                           showEdit={showEdit}
                           locale={locale}
                           field="capital"
@@ -170,8 +170,8 @@ class Company extends Component {
                       />
                       : 
                       <ApxtextIndexValue 
-                            value={ cvtNumToUserPref(company.capital)} 
-                            label={locale.wording.capital}
+                            value={ cvtNumToUserPref(company.capital || 0)} 
+                            label={locale.wording.capital }
                         /> 
                     }
 

@@ -114,15 +114,13 @@ export function discountPrice(list, element){
 }
 
 /**
- * 
+ * Check for duplicate product/service in list_item
  * @param list List of object
  * @param element Object
  */
 export function removeDuplicateAndAddQuantity(list, element) {
-
     var obj = list.filter((x) => {   
-
-        if( x.item_id._id === element.payload.item_id._id ) { 
+        if( x.item_id === element.payload.item_id ) { 
             x.quantity = x.quantity +1; 
             x.total = parseFloat((x.unit_price * x.quantity).toFixed(2))
             return x
@@ -190,9 +188,12 @@ export function editObjectInArray (list, obj, name, value) {
  * @param element Object
  */
 export function replaceObjectInArray(list, obj) {
+   console.log("LIST", list)
+   console.log("OBJ", obj)
+
     var newList = [];
     for (let i = 0; i < list.length; i++) {
-        if(list[i]._id === obj._id){
+        if(list[i]._id !== obj._id){
             list[i] = obj
         }
         newList.push(list[i])

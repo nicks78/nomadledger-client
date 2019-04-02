@@ -62,6 +62,7 @@ class ShowExpense extends Component {
                     variant="filled" 
                     type="text"
                     margin="dense"
+                    required
                     label={locale.wording.name}
                     value={expense.name}
                     fullWidth
@@ -75,6 +76,7 @@ class ShowExpense extends Component {
                       label={locale.wording.receipt_date}
                       id="receipt_date"
                       disabled
+                      required
                       margin="dense"
                       style={{width: '100%'}}
                       value={expense.receipt_date.label} 
@@ -95,6 +97,7 @@ class ShowExpense extends Component {
                     variant="filled" 
                     arrayField={category}
                     field="category"
+                    required={true}
                     value={expense.category[localStorage.getItem('locale')]}
                     handleAction={ (e) => { this.props.createState(reducer, "category", e.target.value) } }
                     locale={locale}
@@ -107,6 +110,7 @@ class ShowExpense extends Component {
                     variant="filled" 
                     margin="dense"
                     fullWidth
+                    required
                     label={locale.wording.price}
                     value={expense.price}
                     onChange={ (e) => { this.props.createState(reducer, "price", e.target.value) } }
@@ -115,6 +119,7 @@ class ShowExpense extends Component {
                     showEdit={true}
                     variant="filled" 
                     arrayField={currency}
+                    required={true}
                     field="currency"
                     value={expense.currency[localStorage.getItem('locale')]}
                     handleAction={ (e) => { this.props.createState(reducer, "currency", e.target.value) } }

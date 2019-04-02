@@ -73,7 +73,7 @@ class Items extends Component {
             listItems.map(( item, index) => {
                 return  <TableRow key={index} className={classes.tableRow}>
                             <TableCell>{locale.wording[item.onModel]}-{ item.ref}</TableCell>
-                            <TableCell className={ classes.contentEditable }><ApxContenEditable value={ item.desc || "" } id={item.item_id._id} actionInput={(event) => { this.props.editItem(reducer, item, 'desc' , event.target.innerText ) }} name="desc" /></TableCell>
+                            <TableCell className={ classes.contentEditable }><ApxContenEditable value={ item.desc || "" } id={item.item_id} actionInput={(event) => { this.props.editItem(reducer, item, 'desc' , event.target.innerText ) }} name="desc" /></TableCell>
                             <TableCell>{ cvtNumToUserPref(item.unit_price)}</TableCell>
                             <TableCell>
                             
@@ -144,7 +144,6 @@ const styles = theme => ({
 })
 
 const mapStateToProps = (state) => {
-
     return {
         locale: state.locale.locale 
     }

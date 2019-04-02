@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+//src/components/common/barCharts.js
 
+import React, { Component } from 'react'
+import {cvtNumToUserPref} from '../../utils/help_function'
 import Chart from 'chart.js';
 Chart.defaults.global.responsive = true;
-
 
 
 class BarCharts extends Component {
@@ -13,9 +14,21 @@ class BarCharts extends Component {
 
     componentDidMount(){
 				var ctx = document.getElementById("BarChart").getContext("2d");
-				console.log("DATA", this.props.chartData)
         this.setState({
-            ctx: new Chart(ctx).Bar(this.props.chartData)
+            ctx: new Chart(ctx, {
+              type: "bar",
+              data: this.props.chartData, 
+              options: {
+                tooltips: {
+                  callbacks: {
+                    label: function(tooltipItem, data) {
+                      var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
+                      return datasetLabel + ' : ' + cvtNumToUserPref(tooltipItem.yLabel) + ' €';
+                    }
+                  }
+                }
+              }
+            })
         })
     }
 
@@ -29,3 +42,4 @@ class BarCharts extends Component {
 }
 
 export default BarCharts
+

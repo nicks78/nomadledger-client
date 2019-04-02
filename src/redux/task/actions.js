@@ -69,7 +69,7 @@ export const createTask = () => {
 }
 
 // CREATE NEW ITEM
-export const updateTask = (  ) => {
+export const updateTask = () => {
 
     return (dispatch, getState) => {
 

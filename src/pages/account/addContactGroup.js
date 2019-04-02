@@ -88,6 +88,7 @@ class AddContactGroup extends Component {
                         label={locale.wording.add_group}
                         className={classes.textField}
                         value={this.state.value}
+                        onKeyPress={(e) => { e.key === "Enter" && this._pushToDoc() }}
                         name="contact_group"
                         onChange={this._handleFormEdit}
                         margin="normal"

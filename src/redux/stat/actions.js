@@ -37,6 +37,8 @@ function setData(data, fieldName) {
 
 function requestFailed(message) {
     return {
-
+        type: "FAILED_STAT",
+        message,
+        isError: true,
     }
 }

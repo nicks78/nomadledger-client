@@ -108,7 +108,7 @@ class ShowProduct extends React.Component {
                   </Typography><br />
                   <Typography variant="h3">{ locale.wording.marg}
                       <span style={{ float: 'right' }}>
-                        {cvtNumToUserPref( product.price - product.buying_price)}&nbsp;
+                        {cvtNumToUserPref( product.selling_price - product.buying_price)}&nbsp;
                         { product.currency.value }
                       </span>
                   </Typography>
@@ -121,7 +121,7 @@ class ShowProduct extends React.Component {
                   </Typography>
                   <Typography variant="subtitle1">{ locale.wording.selling_price}
                       <span style={{ float: 'right' }}>
-                        {cvtNumToUserPref(product.price)}&nbsp;
+                        {cvtNumToUserPref(product.selling_price)}&nbsp;
                         { product.currency.value }
                       </span>
                   </Typography>
@@ -141,16 +141,19 @@ class ShowProduct extends React.Component {
                   <Typography variant="subtitle1">{product.description}</Typography>
               </Grid>
           </Grid>
+          <br />
           { 
             showEdit ? 
+            <div>
+             
             <Grid container spacing={8}>
-                      
                       <Grid item xs={12} sm={4} md={4}>
                       <TextField variant="filled"
                           label={locale.wording.name} 
                           fullWidth
                           className={classes.margin} 
                           margin="dense" 
+                          required
                           value={ product.name} 
                           onChange={ (e) => {this.props.createState(reducer, "name",  e.target.value)} }/>
                       </Grid>
@@ -161,6 +164,7 @@ class ShowProduct extends React.Component {
                             handleAction={ (e) => {this.props.createState(reducer, "category",  e.target.value)} }
                             locale={locale}
                             showEdit={true}
+                            required={true}
                             variant="filled"
                             label={locale.wording.category }
                             value={  product.category && product.category[localStorage.getItem("locale")] }
@@ -172,6 +176,7 @@ class ShowProduct extends React.Component {
                           field="currency"
                           handleAction={ (e) => {this.props.createState(reducer, "currency",  e.target.value)} }
                           locale={locale}
+                          required={true}
                           showEdit={true}
                           variant="filled"
                           label={locale.wording.currency }
@@ -183,6 +188,7 @@ class ShowProduct extends React.Component {
                             <TextField  variant="filled"
                                 label={locale.wording.buying_price +' ('+ product.currency.value +')' } 
                                 fullWidth
+                                required
                                 className={classes.margin} margin="dense" 
                                 value={ cvtToLocale(product.buying_price) } 
                                 onChange={ (e) => {this.props.createState(reducer, "buying_price",  e.target.value)} }
@@ -193,9 +199,10 @@ class ShowProduct extends React.Component {
                       <TextField variant="filled"
                             label={locale.wording.selling_price +' ('+ product.currency.value +')' } 
                             fullWidth
+                            required
                             className={classes.margin} 
                             margin="dense" 
-                            value={ cvtToLocale(product.price)} 
+                            value={ cvtToLocale(product.selling_price)} 
                             onChange={ (e) => {this.props.createState(reducer, "price",  e.target.value)} }
                             />
                       </Grid>
@@ -223,8 +230,7 @@ class ShowProduct extends React.Component {
                       />
                       </Grid>
             </Grid>
-                      
-
+            </div>
             : null 
           }
 

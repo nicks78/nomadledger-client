@@ -170,7 +170,7 @@ const Form = (props) => {
                     <Grid container spacing={24}>
                             <Grid item xs={6}>
                                 <AutoComplete
-                                    disabled={ data.currency && data.contact_id && data.vat ? false : true }
+                                    // disabled={ data.currency && data.contact_id && data.vat ? false : true }
                                     field="name"
                                     state="name"
                                     model="service"
@@ -183,7 +183,7 @@ const Form = (props) => {
 
                             <Grid item xs={6}>
                                 <AutoComplete 
-                                    disabled={ data.currency && data.contact_id && data.vat ? false : true }
+                                    // disabled={ data.currency && data.contact_id && data.vat ? false : true }
                                     field="name"
                                     state="name"
                                     model="product"

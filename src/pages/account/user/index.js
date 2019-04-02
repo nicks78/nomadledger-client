@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {DEFAULT_IMG} from '../../../redux/constant'
-import { withStyles } from '@material-ui/core';
+import { withStyles, Typography } from '@material-ui/core';
 import UploadImg from '../../../lib/uploadImg'
 import ApxAlert from '../../../components/common/alert'
 import Spinner from '../../../components/common/spinner'
@@ -78,13 +78,10 @@ class User extends Component {
     const {  user, locale, classes, isFetching, isUploading, progress, isError, message } = this.props;
     const {showEdit, password, password_confirm, reducer} = this.state
 
-    if( isFetching  ){
-      return <Spinner />
-    }
-
-    if( user === null ){
-      return <ApxAlert message="error_404" />
-    }
+    
+    // if( user === null ){
+    //   return <ApxAlert message="error_404" />
+    // }
 
     
 
@@ -159,39 +156,42 @@ class User extends Component {
                           field="email"
                           handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
                       />
+<br /><br />
 
+                      <Typography variant="subtitle1" className={classes.heading}>{ locale.wording.save_password }</Typography>
+                      <div><Divider/></div>
+                      <Grid container>
+                        <Grid item xs={12}>
+                        <TextField 
+                                      id="password"
+                                      label={locale.wording.password}
+                                      className={classes.textField}
+                                      value={password}
+                                      fullWidth
+                                      name="password"
+                                      onChange={ this.handlePassword  }
+                                      margin="normal"
+                                  />
+                        </Grid>
 
-                    <div className={classes.divider} >
-                      <Divider />
-                    </div>
-
-
-                  <form className={classes.container} autoComplete="off">
-                    <TextField 
-                          id="password"
-                          label={locale.wording.password}
-                          className={classes.textField}
-                          value={password}
-                          fullWidth
-                          name="password"
-                          onChange={ this.handlePassword  }
-                          margin="normal"
-                      />
-                      <br />
-                      <TextField 
-                          id="password_confirm"
-                          label={locale.wording.password_confirm}
-                          className={classes.textField}
-                          value={password_confirm}
-                          fullWidth
-                          name="password_confirm"
-                          onChange={ this.handlePassword  }
-                          margin="normal"
-                      />
+                        <Grid item xs={12}>
+                            <TextField 
+                                id="password_confirm"
+                                label={locale.wording.password_confirm}
+                                className={classes.textField}
+                                value={password_confirm}
+                                fullWidth
+                                name="password_confirm"
+                                onChange={ this.handlePassword  }
+                                margin="normal"
+                                  />
+                        </Grid>
                         <br />
-                      <Button color="primary" variant="contained" onClick={ this._updatePassword }>{ locale.wording.save_password }</Button>
-                  
-                  </form>    
+                      <Button color="primary" 
+                              variant="contained" onClick={ this._updatePassword }>{ isFetching ? locale.wording.loading :  locale.wording.save }</Button>    
+
+                      </Grid>
+    
                 </Grid>
           </Grid>
           </div>

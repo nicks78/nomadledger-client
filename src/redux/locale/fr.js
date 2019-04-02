@@ -87,6 +87,7 @@ const fr =  {
         label_comp_info: "Informations compagnie",
         label_contact_info: "Informations contact",
         label_comp_address: "Compagnie adresse", 
+        label_annual_profit: "Profit annuelle"
     },
     wording: {
         create: "Créer",
@@ -254,6 +255,7 @@ const fr =  {
 
         alert_password_not_match: "Mots de passe ne correspondent pas",
         phone_required: "Mobile obligatoire",
+        required: "Tous les champs marqué d'une * sont obligatoires"
     },
     days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
 };

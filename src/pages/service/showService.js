@@ -66,6 +66,7 @@ class ShowService extends Component {
                     variant="filled" 
                     arrayField={currency}
                     field="currency"
+                    required={true}
                     value={service.currency[localStorage.getItem('locale')]}
                     handleAction={ (e) => { this.props.createState(reducer, "currency", e.target.value) } }
                     locale={locale}
@@ -76,6 +77,7 @@ class ShowService extends Component {
                     variant="filled" 
                     margin="dense"
                     fullWidth
+                    required
                     label={locale.wording.price}
                     value={service.price}
                     onChange={ (e) => { this.props.createState(reducer, "price", e.target.value) } }
@@ -88,12 +90,14 @@ class ShowService extends Component {
                     variant="filled" 
                     arrayField={category}
                     field="category"
+                    required={true}
                     value={service.category[localStorage.getItem('locale')]}
                     handleAction={ (e) => { this.props.createState(reducer, "category", e.target.value) } }
                     locale={locale}
                   />
                   <EditSelect 
                     showEdit={true}
+                    required={true}
                     variant="filled" 
                     arrayField={service_type}
                     field="service_type"

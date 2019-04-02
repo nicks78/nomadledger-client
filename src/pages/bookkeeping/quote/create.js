@@ -16,6 +16,7 @@ class CreateQuote extends React.Component {
         var name = event.target.name;
         var value = event.target.value;
 
+        console.log("LIST", this.props.listItems)
         if(name === "currency") {
             // Update each items with the correct currency rate
             for (let i = 0; i < this.props.listItems.length; i++) {
@@ -28,7 +29,6 @@ class CreateQuote extends React.Component {
     render(){
 
     const { isFetching, locale, classes, newQuote, listItems, vat, message, isError, currency, status } = this.props;
-
     if(isFetching){
         return <Spinner/>
     }

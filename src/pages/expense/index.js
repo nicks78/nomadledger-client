@@ -11,7 +11,7 @@ import ApxTableToolBar from '../../components/common/tableToolBar'
 import AddExpense from './addExpense'
 import Pagination from '../../lib/pagination'
 import DeleteIcon from '@material-ui/icons/DeleteOutlined'
-
+import { cvtNumToUserPref } from '../../utils/help_function'
 
 // STYLES
 const styles = theme =>  ({
@@ -106,7 +106,7 @@ class Expense extends Component {
                                                             </a></TableCell>
                                                 <TableCell><Link to={`/${reducer.toLowerCase()}/view/${expense._id.toLowerCase()}`}><span  className="link">{expense.name}</span></Link></TableCell>
                                                 <TableCell style={{textTransform: 'capitalize'}}>{ expense.category[localStorage.getItem('locale')] }</TableCell>
-                                                <TableCell>{ expense.price } { expense.currency.value }</TableCell>
+                                                <TableCell>{ cvtNumToUserPref(expense.price) } { expense.currency.value }</TableCell>
                                                 <TableCell>{ new Date(expense.receipt_date.date).toLocaleDateString(localStorage.getItem('locale')) }</TableCell>
                                                 <TableCell align="center" onClick={() => { this.props.deleteElement( reducer, `delete/${expense._id}`) } }><DeleteIcon style={{color: 'red', cursor: 'pointer', fontSize: 18}}  /></TableCell>
                                             </TableRow>

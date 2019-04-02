@@ -81,6 +81,7 @@ const en = {
         label_comp_info: "Company informations",
         label_contact_info: "Contact informations",
         label_comp_address: "Company address", 
+        label_annual_profit: "Annual profit"
     },
     wording: {
         create: "Create",
@@ -234,7 +235,7 @@ const en = {
         error_user_not_found: "User cannot be found !",
         error_wrong_password: "Incorrect password",
         error_500: "Error request, please try again or contact our service support",
-        error_400: "Fields with * are mandatory",
+        error_400: "All fields mark with a * are required",
         error_404: "Element not found, please try again or contact our service support",
         error_403_delete: "This element cannot be deleted - Element related to other element",
         error_422: "Every number must be in international format '27.87' or french format '44,17'",
@@ -248,6 +249,7 @@ const en = {
 
         alert_password_not_match: "Password not match, please verify !",
         phone_required: "Your mobile phone is required",
+
     },
     days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 }

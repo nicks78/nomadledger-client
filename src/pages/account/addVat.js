@@ -129,6 +129,7 @@ class AddVat extends Component {
                                 className={classes.textField}
                                 value={this.state.value}
                                 name="value"
+                                onKeyPress={(e) => { e.key === "Enter" && this._pushToDoc() }}
                                 onChange={this._handleFormEdit}
                                 margin="normal"
                             />

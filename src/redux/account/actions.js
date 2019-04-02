@@ -157,7 +157,7 @@ export const updatePassword = ( password ) => {
   
         dispatch(requestData("USER"))
   
-        axios.put(`${API_ENDPOINT}account/change-password`,
+        axios.put(`${API_ENDPOINT}user/change-password`,
         {data: password},
         { headers: {
             'Content-Type': 'application/json',
