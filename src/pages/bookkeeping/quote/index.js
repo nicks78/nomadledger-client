@@ -88,9 +88,9 @@ class Quote extends Component {
                                     return  <TableRow key={index}>
                                                 <TableCell>{locale.wording.qto}-{item.ref}</TableCell>
                                                 <TableCell><Link className="link" to={{ pathname: `/contact/view/${item.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{item.contact_id.company_name}</span></Link></TableCell>
-                                                <TableCell>{cvtNumToUserPref(item.subtotal)} {item.currency.value}</TableCell>
-                                                <TableCell>{cvtNumToUserPref( vat ) + " "+item.currency.value }</TableCell>
-                                                <TableCell>{cvtNumToUserPref( item.subtotal + vat  )} {item.currency.value}</TableCell>
+                                                <TableCell className={classes.price}>{cvtNumToUserPref(item.subtotal)} {item.currency.value}</TableCell>
+                                                <TableCell className={classes.price}>{cvtNumToUserPref( vat ) + " "+item.currency.value }</TableCell>
+                                                <TableCell className={classes.price}>{cvtNumToUserPref( item.subtotal + vat  )} {item.currency.value}</TableCell>
                                                 <TableCell>
 
                                                 {
@@ -167,6 +167,9 @@ const styles = theme => ({
             boxShadow: 'none',
             borderRadius: 0
         },
+    },
+    price: {
+        whiteSpace: 'nowrap'
     }
 })
 

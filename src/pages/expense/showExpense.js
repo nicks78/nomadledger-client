@@ -46,7 +46,8 @@ class ShowExpense extends Component {
         <ApxPaper>
           <ApxBackBtn/>
             <br />
-            <UploadImg 
+            {/* <div style={{ backgroundColor: "rgba(239, 108, 0, 0.10)", paddingTop: 48 }}> */}
+              <UploadImg 
                 field="receipt"
                 _handleUploadFile={ (e) => { this.props.uploadFileToServer(reducer, expense._id,  e.target.files[0], expense.receipt ) }}
                 reducer={this.state.reducer}
@@ -54,8 +55,10 @@ class ShowExpense extends Component {
                 idModel={expense._id}
                 oldFile={expense.receipt.path}
                 isUploading={ false }
-                image={ <img src={`${ expense.receipt.full_path || DEFAULT_IMG }`} alt="logo" height="150" />}
+                image={ <img src={`${ expense.receipt.full_path || DEFAULT_IMG }`} alt="logo" height="150" style={{ maxHeight: 250 }} />}
               />
+            {/* </div> */}
+            
             {isError ? <ApxAlert message={message} /> : null }
             <TextField 
                     id="name"

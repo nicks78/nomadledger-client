@@ -2,6 +2,7 @@
 
 import axios from 'axios';
 import { API_ENDPOINT } from '../constant'
+import { initLocale } from '../locale/actions'
 
 
 
@@ -24,6 +25,10 @@ export function getAccount(actionType){
         return response.data
     }) 
     .then( res => {
+        if(actionType === "COMPANY"){
+            dispatch(initLocale(res.payload.locale || "fr"))
+        }
+
         dispatch(setAccount( actionType, res.payload ))  
     })
     .catch(function (error) {

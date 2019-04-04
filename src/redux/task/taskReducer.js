@@ -35,7 +35,7 @@ const taskReducer = (state = initialState, action) => {
                 ...state, 
                 isFetching: action.isFetching,
                 item: null,
-                list: action.payload
+                [action.fieldName]: action.payload
             }
         case `GET_TASK`:
             return  { 
@@ -61,6 +61,8 @@ const taskReducer = (state = initialState, action) => {
                 ...state,
                 list: addTaskToList(state.list, action.payload)
             }
+        case `RESET_TASK`:
+            return initialState
         default:
             return state;
     }

@@ -26,7 +26,6 @@ const statReducer = (state = initialState, action) => {
                 message: action.message
             }
         case `GET_DATA`:
-        console.log("REDUCER")
             return  { 
                 ...state, 
                 isFetching: false,

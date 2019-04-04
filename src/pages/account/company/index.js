@@ -36,14 +36,6 @@ const styles = theme => ({
   }
 })
 
-function o () { 
-  var array = []; 
-  for(var i = 1; i < 32 ; i++) { 
-     array.push({ fr: i, en: i, _id: i }) 
-  } 
-  return array
-}
-
 class Company extends Component {
 
   state = {
@@ -188,13 +180,13 @@ class Company extends Component {
                                 locale={locale}
                                 handleAction={ (ev) => { this.props.handleFormEdit(ev, reducer) } }
                             />
-                            <ApxSelect 
+                            {/* <ApxSelect 
                                 arrayField={ o() }
                                 field="fiscal_day"
                                 value={company.fiscal_day[localStorage.getItem('locale')] }
                                 locale={locale}
                                 handleAction={ (ev) => { this.props.handleFormEdit(ev, reducer) } }
-                            />
+                            /> */}
 
                         </React.Fragment>
                         : 

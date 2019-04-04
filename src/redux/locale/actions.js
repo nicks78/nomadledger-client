@@ -24,6 +24,7 @@ export function getLocale( locale ){
             return true
         }) 
         .catch((error) => {
+            console.log(error)
             return false
         })
     }
@@ -32,7 +33,7 @@ export function getLocale( locale ){
 export function initLocale( locale ){
     return dispatch => {
         
-        var localeObject = locale === 'fr' ? fr : en
+        var localeObject = locale === 'fr' ? fr : en;
         dispatch(setLocale(localeObject)) 
 
         localStorage.setItem('locale', locale)

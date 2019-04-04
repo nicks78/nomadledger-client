@@ -26,10 +26,28 @@ class BarCharts extends Component {
                       return datasetLabel + ' : ' + cvtNumToUserPref(tooltipItem.yLabel) + ' €';
                     }
                   }
-                }
+                },
+                legend: {
+                  display: true,
+                  labels: {
+                      fontColor: '#303030'
+                  }
+              }
               }
             })
         })
+    }
+
+    componentWillReceiveProps(nextProps){
+      var ctx = this.state.ctx;
+      if(ctx.chart){
+        ctx.chart.config.data = nextProps.chartData
+        ctx.update()
+        this.setState({
+          ctx: ctx
+        })
+      }
+        
     }
 
   render() {

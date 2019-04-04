@@ -89,9 +89,9 @@ class Refund extends Component {
                                                 <TableCell>{locale.wording.pya}-{refund.ref}</TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${refund.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{refund.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell>{refund.currency.en}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(refund.subtotal)} {refund.currency.value}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(refund.vat.indice) + "%"}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(total  )} {refund.currency.value}</TableCell>
+                                                <TableCell className={classes.price}>{cvtNumToUserPref(refund.subtotal)} {refund.currency.value}</TableCell>
+                                                <TableCell className={classes.price}>{cvtNumToUserPref(refund.vat.indice) + "%"}</TableCell>
+                                                <TableCell className={classes.price}>{cvtNumToUserPref(total  )} {refund.currency.value}</TableCell>
                                                 <TableCell>
                                                     {
                                                         refund.status.code === "11" || refund.status.code === "8" ? 
@@ -163,6 +163,9 @@ const styles = theme => ({
             boxShadow: 'none',
             borderRadius: 0
         },
+    },
+    price: {
+        whiteSpace: 'nowrap'
     }
 })
 

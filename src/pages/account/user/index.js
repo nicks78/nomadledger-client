@@ -6,7 +6,6 @@ import {DEFAULT_IMG} from '../../../redux/constant'
 import { withStyles, Typography } from '@material-ui/core';
 import UploadImg from '../../../lib/uploadImg'
 import ApxAlert from '../../../components/common/alert'
-import Spinner from '../../../components/common/spinner'
 import ApxTitleBar from '../../../components/common/titleBar'
 import { uploadFileToServer , updateDocument, updatePassword} from '../../../redux/account/actions'
 import Avatar from '@material-ui/core/Avatar';
@@ -77,12 +76,6 @@ class User extends Component {
   render() {
     const {  user, locale, classes, isFetching, isUploading, progress, isError, message } = this.props;
     const {showEdit, password, password_confirm, reducer} = this.state
-
-    
-    // if( user === null ){
-    //   return <ApxAlert message="error_404" />
-    // }
-
     
 
     return (

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+import { resetTask} from '../../redux/task/actions'
 import { getData } from '../../redux/stat/actions'
 import { getAllTask } from '../../redux/task/actions'
 import {Grid, Typography, withStyles } from '@material-ui/core'
@@ -7,6 +8,7 @@ import BarCharts from '../../components/common/barCharts'
 import PieCharts from '../../components/common/pie'
 import ApxPaper from '../../components/common/paper'
 import {cvtNumToUserPref} from '../../utils/help_function'
+import Spinner from '../../components/common/spinner'
 
 
 class Home extends Component {
@@ -19,7 +21,11 @@ class Home extends Component {
     componentDidMount(){
         this.props.getData( "mainStat", "" );
         this.props.getData( "pieQuote", "compare/quote/success-onhold-rejected" );
-        this.props.getAllTask("daily")
+        this.props.getAllTask("daily", "dailyTask");
+    }
+
+    componentWillUnmount(){
+        this.props.resetTask()
     }
 
     render() {
@@ -27,56 +33,67 @@ class Home extends Component {
         const {classes, tasks, isFetching, pieQuote, mainStat, locale, currency} = this.props
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
+        if(isFetching){
+            return <Spinner />
+        }
+
         return (
-        <ApxPaper className={classes.container}>
-            <Typography variant="h1" align="center">  { cvtNumToUserPref( mainStat ? mainStat.profit : 0) }  { currency.value } </Typography>
-            <Typography variant="caption" align="center" style={{ marginTop: 5 }}>{locale.subheading.label_annual_profit} - { mainStat && mainStat.fiscal_year  }</Typography>
-            <br />
-            <Grid container spacing={24}>
-                <Grid  item xs={12} sm={8} md={8} >
-                <div style={{ backgroundColor: "aliceblue", padding: 10 }}>
+        <ApxPaper>
+            <Typography variant="h1" align="center">  { cvtNumToUserPref( mainStat ? mainStat.turnover : 0) }  { currency.value } </Typography>
+            <Typography variant="caption" align="center" style={{ marginTop: 5, paddingBottom: 24 }}>{locale.subheading.label_annual_turnover} - { mainStat && mainStat.fiscal_year  }</Typography>
+            
+            <Grid container spacing={0} className={ classes.charts }>
+                <Grid  item xs={12} sm={8} md={8}>
                     {
-                    this.props.mainStat ? 
-                        <BarCharts chartData={ mainStat } />
-                    : null
-                }
-                </div>
-                
-                    
+                        this.props.mainStat ? 
+                            <BarCharts chartData={ mainStat } />
+                        : null
+                    }
                 </Grid>
-                <Grid item xs={12} sm={4} md={4}>
-                    <Typography variant="overline" className={ classes.devis }>{locale.wording.quote}&nbsp;-&nbsp;
-                        
-                        <span>{ tasks.date ? new Date(tasks.date.date).toLocaleDateString("fr", options) : null }</span>
+                <Grid item xs={12} sm={4} md={4} >
+                    <Typography variant="body1" align="center" className={ classes.devis }>
+                        { locale.wording.conversions } &nbsp;({ locale.wording.quote })
                     </Typography>
-                    <div>
+
+                   <div style={{ marginTop: "10%" }}>
+                    {
+                        pieQuote ?
+                            <PieCharts 
+                                chartData={ this.props.pieQuote }
+                                locale={locale}
+                            />
+                        : null 
+                    }
+                    </div>                  
+                </Grid>
+            </Grid>
+            
+            <Grid container spacing={0}>
+
+            <Grid item xs={12}>
+            <Typography variant="caption" style={{ padding: 12, backgroundColor: 'grey', color: "white" }}>{locale.subheading.label_daily_task}&nbsp;
+                    <span style={{textTransform: "capitalize"}}>{ tasks.date ? new Date(tasks.date.date).toLocaleDateString("fr", options) : null }</span>
+                </Typography>
+                <div style={{height: "100%", maxHeight: 350, overflow: 'auto'}}>
                     {
                         tasks.tasks && 
                         tasks.tasks.map((task, index) => {
-                            return <p key={index}>{task.subject}</p>
+                            return   <div className={classes.task} key={index}>
+                            <span className={ classes.status } style={{ backgroundColor: task.status.color,}}>{task.status.fr}</span>
+                                        <Typography variant="body1" className={classes.taskTitle} >
+                                            {task.subject}
+                                            
+                                        </Typography>
+                                        <Typography variant="body2">
+                                                { task.short_desc }
+                                        </Typography>
+                                        
+                                    </div>
                         })
                     }
 
                     </div>
-                    
-                </Grid>
             </Grid>
-            <Grid container spacing={24}>
-            
-                    <Grid item xs={12} sm={4} md={4}>
-                        
-                    {
-                            pieQuote ?
-                                <PieCharts 
-                                    chartData={ this.props.pieQuote }
-                                    locale={locale}
-                                />
-                            : null 
-                        }
-                    </Grid>
-                    <Grid item xs={12} sm={8} md={8}>
-                    
-                    </Grid>
             </Grid>
             
             
@@ -87,22 +104,36 @@ class Home extends Component {
 
 
 const styles = theme => ({
-    container: {
-    },
-    sidebar: {
-        height: '100vh',
-        boxShadow: '2px 0 10px -5px black',
-        zIndex: 3
-    },
-    content: {
-        backgroundColor: 'rgb(240, 240, 240)',
-        zIndex: 1,
+
+    charts: {
+        backgroundColor: "aliceblue", 
+        padding: 10,
     },
     devis: {
-        marginLeft: -24,
-        padding: 12,
-        backgroundColor: theme.palette.lightGrey
-    }
+        padding: 12
+    },
+    task: {
+        clear: "both",
+        overflow: 'hidden',
+        padding: "12px",
+        backgroundColor: theme.palette.lightSecondary,
+        borderBottom: `1px solid rgba(58,58,58,.22)`
+    },
+    taskTitle: {
+        margin: 0,
+        textTransform: "capitalize"
+    },
+    status: {
+        borderRadius: 4, 
+        color: "white", 
+        padding: "1px 3px 1px 3px", 
+        float: "right",
+        bottom: 5, 
+        right: 5, 
+        fontSize: 11, 
+        minWidth: 60, 
+        textAlign: 'center'
+    },
 })
 
 
@@ -113,12 +144,12 @@ const mapStateToProps = (state) => {
         isFetching: state.stat.isFetching,
         mainStat: state.stat.mainStat || null,
         pieQuote: state.stat.pieQuote || null,
-        tasks: state.task.list || {},
-        currency: state.account.company.item.currency || ""
+        tasks: state.task.dailyTask || {},
+        currency: state.account.company.item ? state.account.company.item.currency : {}
     }
 }
 
 
 const StyledHome = withStyles(styles)(Home)
 
-export default connect(mapStateToProps, { getData, getAllTask })(StyledHome);
+export default connect(mapStateToProps, { getData, getAllTask, resetTask })(StyledHome);

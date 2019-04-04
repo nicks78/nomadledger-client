@@ -44,7 +44,7 @@ const fr =  {
         url: "factures"
     },
     task:{
-        name: "Tache",
+        name: "Tâches",
         url: "tache"
     },
     archive:{
@@ -74,7 +74,7 @@ const fr =  {
         edit_quote: "Editer Devis",
         edit_invoice: "Editer Facture",
         edit_refund: "Editer Avoir",
-        edit_tag: "Editer mon tag",
+        edit_tag: "Editer mon étiquette",
         label_contact: "Coordonnée contact",
         label_company: "Informations compagnie",
         label_product: "Informations produit",
@@ -87,7 +87,8 @@ const fr =  {
         label_comp_info: "Informations compagnie",
         label_contact_info: "Informations contact",
         label_comp_address: "Compagnie adresse", 
-        label_annual_profit: "Profit annuelle"
+        label_annual_turnover: "Chiffre d'affaire annuelle",
+        label_daily_task: "Tache(s) du "
     },
     wording: {
         create: "Créer",
@@ -118,6 +119,7 @@ const fr =  {
         email: "Couriel",
         company: "Société",
         vat: 'TVA',
+        rate: "Taux",
         capital : "Capital",
         addresses_street: "Adresse", 
         addresses_zip: "Code postal", 
@@ -126,6 +128,7 @@ const fr =  {
         num_format: "Format des chiffres",
         receipt_date: "Date du reçu",
         repay: "Rembourser",
+        transaction_number: "Référence du virement",
 
         contact_group: "Groupe",
         contact_drop: "Client",
@@ -217,7 +220,11 @@ const fr =  {
         represented_by: "Représente par",
         selected: "Sélectionner",
         markdown: "Simple editeur de text pour vos devis",
-        save_password: "Changer mon mot de passe"
+        save_password: "Changer mon mot de passe",
+        conversions: "Conversions",
+        last_modify: "Mise à jour le ",
+        tag_name_en: "Nom de l'étiquette (Anglais)",
+        tag_name_fr: "Nom de l'étiquette (Français)"
     },
     helperText: {
         select_phone_code: "Sélectionner le code téléphone",

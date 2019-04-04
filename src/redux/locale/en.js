@@ -81,7 +81,8 @@ const en = {
         label_comp_info: "Company informations",
         label_contact_info: "Contact informations",
         label_comp_address: "Company address", 
-        label_annual_profit: "Annual profit"
+        label_annual_turnover: "Annual turnover",
+        label_daily_task: "TODO"
     },
     wording: {
         create: "Create",
@@ -112,6 +113,7 @@ const en = {
         email: "Email",
         company: "Company",
         vat: 'VAT',
+        rate: "Rate",
         capital : "Capital",
         addresses_street: "Address", 
         addresses_zip: "Zip code", 
@@ -120,6 +122,7 @@ const en = {
         num_format: "Number format",
         receipt_date: "Receipt date",
         repay: "Repay",
+        transaction_number: "Transaction Number",
 
         contact_group: "Group",
         contact_drop: "Client",
@@ -211,7 +214,11 @@ const en = {
         represented_by: "Represented by",
         selected: "Select",
         markdown: "Simple text editor for your quote",
-        save_password: "Save new password"
+        save_password: "Save new password",
+        conversions: "Conversions",
+        last_modified: "Last modified ",
+        tag_name_en: "Tag name (English)",
+        tag_name_fr: "Tag name (French)"
     },
     helperText: {
         select_phone_code: "Select phone code",

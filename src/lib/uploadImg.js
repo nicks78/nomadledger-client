@@ -14,7 +14,7 @@ const styles = theme => ({
         textAlign: 'center',
     },
     wrapper: {
-        margin: 5, 
+        // margin: 5, 
     },
     input: {
         display: 'none'

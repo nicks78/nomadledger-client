@@ -5,7 +5,7 @@ import AddItem from '../../lib/addItem'
 
 const AddExpense = (props) => {
 
-    const {locale, category, currency} = props
+    const {locale, category, currency, vat} = props
 
     const fields = [
       {
@@ -16,6 +16,7 @@ const AddExpense = (props) => {
             { name: 'name', type:"text", required: true },
             { name: 'category', type:"select", selections: category, helperText: "select_category", required: true },
             { name: 'currency', type:"select", selections: currency, helperText: "select_currency", required: true },
+            { name: 'vat', type:"select", selections: vat, helperText: "select_vat", required: true },
             { name: 'price', type:"text", required: true},
             
             { name: 'description', type:"longtext", multiline: true, rowsMax:"4" },

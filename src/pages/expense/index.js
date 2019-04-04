@@ -58,7 +58,7 @@ class Expense extends Component {
 
     render() {
     
-    const {isFetching, listExpenses, isError,  locale, message, newExpense, createItem, createState, isCreating, progress, category, classes, currency} = this.props
+    const {isFetching, listExpenses, isError,  locale, message, newExpense, createItem, createState, isCreating, progress, category, classes, currency, vat} = this.props
     const {reducer } = this.state
 
     return (
@@ -72,6 +72,7 @@ class Expense extends Component {
                 createExpenseState={ createState } 
                 createExpense={ createItem } 
                 isCreating={isCreating}
+                vat={vat}
                 currency={currency}
             />
             { isError ? <ApxAlert message={message} /> : null }
@@ -150,7 +151,8 @@ const mapStateToProps = (state) => {
         total: state.library.expense.total,
         rowsPerPageOptions: state.library.expense.rowsPerPageOptions,
         category: state.account.company.item ?  state.account.company.item.category_name : [],
-        currency: state.helper.items.currency
+        currency: state.helper.items.currency,
+        vat: state.account.company.item ?  state.account.company.item.vat : [],
 
     }
 }

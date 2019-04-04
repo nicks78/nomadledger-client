@@ -48,6 +48,15 @@ const Form = (props) => {
                                     reducer={reducer}
                                 />
                             </div>
+                            <TextField
+                                    label={ locale.wording.transaction_number }
+                                    id="transaction_number"
+                                    margin="dense"
+                                    onChange={ (e) => { props.createState( reducer, "transaction_number", e.target.value ) } }
+                                    style={{width: '100%'}}
+                                    value={ data.transaction_number ||  ""}
+                                    variant="filled"
+                                />
                                 
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>

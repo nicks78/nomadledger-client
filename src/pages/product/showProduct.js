@@ -62,28 +62,19 @@ class ShowProduct extends React.Component {
           <ApxBackBtn/>
           { isError ? <ApxAlert message={message} /> : null }
           <Grid container spacing={24}>
-              <Grid item xs={12} sm={3} md={3} className={classes.thumbnail}>
-                  {
-                      product.img.map((x, index) => {
-                        
-                          return <div key={index} className={classes.thumbnailImg}>
-                                    <IconButton onClick={() => { this.props.removeImageFromArray(reducer, `remove/${x.path}/${x._id}/${product._id}`) }}
-                                               style={{position: 'absolute', top: 0, right: 0, color:'red'}} 
-                                               >
-                                      <CloseIcon  />
-                                    </IconButton>
-                                    <img onClick={ () => { this.setState({ main_img: index }) } }  src={x.full_path} className={classes.img} width="150" alt={x.org_name} />
-                                </div>
-                      })
-                    }
-              </Grid>
-              <Grid item xs={12} sm={6} md={6}>
+              <Grid item xs={12} sm={9} md={9} className={classes.thumbnail}>
+                  
                     <div className={classes.mainImgWrap}>
-                        <img src={ `${product.img[main_img] ? product.img[main_img].full_path : DEFAULT_IMG }`} className={classes.img}   alt={product.name} />  
+                        <img  src={ `${product.img[main_img] ? product.img[main_img].full_path : DEFAULT_IMG }`} 
+                              className={classes.img}   
+                              alt={product.name} 
+                              style={{ marginTop: 48 }}
+                              />  
 
                         <div className={classes.button}>
                             <input
                                 accept="all"
+                                disabled={ product.img.length >= 3 ? true : false }
                                 className={classes.input}
                                 id="upload"
                                 name="img"
@@ -91,7 +82,7 @@ class ShowProduct extends React.Component {
                                 type="file"
                             />
                             <label htmlFor="upload">
-                              <IconButton component="p" color="primary">
+                              <IconButton component="p" color="primary" disabled={product.img.length >= 3 ? true : false }>
                                 <CameraAltIcon />
                               </IconButton>    
                             </label>
@@ -134,11 +125,8 @@ class ShowProduct extends React.Component {
                       <span style={{ float: 'right' }}>
                         {product.category[localStorage.getItem("locale")]}
                       </span>
-                  </Typography><br />
-                  <Typography variant="caption">
-                    { locale.wording.description} :
                   </Typography>
-                  <Typography variant="subtitle1">{product.description}</Typography>
+                 
               </Grid>
           </Grid>
           <br />
@@ -231,8 +219,34 @@ class ShowProduct extends React.Component {
                       </Grid>
             </Grid>
             </div>
-            : null 
+            : <Grid container >
+
+                  {
+                      product.img.map((x, index) => {
+                        
+                          return <Grid item xs={12} sm={6} md={4} key={index} className={classes.thumbnailImg}>
+                                    <IconButton onClick={() => { this.props.removeImageFromArray(reducer, `remove/${x.path}/${x._id}/${product._id}`) }}
+                                               style={{position: 'absolute', top: 0, right: 0, color:'red'}} 
+                                               >
+                                      <CloseIcon  />
+                                    </IconButton>
+                                    <img 
+                                      onClick={ () => { this.setState({ main_img: index }) } }  
+                                      src={x.full_path} className={classes.img} 
+                                      width="150" 
+                                      alt={x.org_name} />
+                                </Grid>
+                      })
+                    }
+              </Grid>
           }
+          <br />
+          <div>
+            <Typography variant="caption">
+              { locale.wording.description} :
+            </Typography>
+            <Typography variant="body2">{product.description}</Typography>
+          </div>
 
         </ApxPaper>
       )
@@ -245,21 +259,26 @@ const styles = theme => ({
     textAlign: "center",
     position: 'relative',
     height:'100%',
-    backgroundColor: theme.palette.lightGrey,
+    backgroundColor: theme.palette.lightSecondary,
     borderRadius: 4
   },
   thumbnail: {
     textAlign: 'center',
   },
   thumbnailImg: {
-    position: 'relative',
-    border: '1px solid' + theme.palette.lightGrey,
-    marginBottom: 5,
+    position: "relative",
+    padding: 5,
+    margin: '0 auto',
+    // border: `1px solid ${theme.palette.lightGrey}`,
+    backgroundColor: theme.palette.lightSecondary,
+    display: 'flex',
+    justifyContent: "center",
+    alignItems: "center",
     
   },
   img: {
     maxWidth: '100%',
-    maxHeight: '400px',
+    maxHeight: '250px',
     cursor: 'pointer',
   },
   input: {

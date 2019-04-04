@@ -18,7 +18,7 @@ class Task extends Component {
   }
 
   componentDidMount(){
-    this.props.getAllTask(`list?day=0`);
+    this.props.getAllTask(`list?day=0`, "taskList");
   }
 
   getDrop = ( ev, due ) => { 
@@ -91,7 +91,7 @@ class Task extends Component {
                           
                             {
                               label.tasks.map((task, index) => {
-                                  return  <Paper id={task._id} key={index} className={classes.paper} draggable={true} onDragStart={ (e) => { this.drag(e, task) }}>
+                                  return  <Paper id={task._id} key={index} className={classes.paper} draggable={ id === null ? true : false } onDragStart={ (e) => { this.drag(e, task) }}>
                                                 {
                                                     id === task._id ?
                                                       <EditTask 
@@ -154,7 +154,7 @@ const styles = theme => ({
       marginRight: 10,
       width: '15px',
       marginLeft: -8,
-      backgroundColor: 'rgb(239, 108, 0)',
+      backgroundColor: '#2ca01c',
       borderRadius: '50%',
       display: 'inline-block',
       textAlign: 'center'
@@ -168,12 +168,13 @@ const styles = theme => ({
 
 
 const mapStateToProps = (state) => {
+  
   return {
       isFetching: state.task.isFetching,
       isCreating: state.task.isCreating,
       isError: state.task.isError,
       message: state.task.message,
-      listTask: state.task.list || [],
+      listTask: state.task.taskList || [],
       itemToUpdate: state.task.item,
       locale: state.locale.locale,
       newTask: state.task.item || {},

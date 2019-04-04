@@ -4,7 +4,7 @@ import axios from 'axios';
 import { API_ENDPOINT } from '../constant'
 
 // GET AUTHENTICATED
-export function getAllTask(endPoint){
+export function getAllTask(endPoint, fieldName){
 
     return dispatch => {
   
@@ -15,7 +15,7 @@ export function getAllTask(endPoint){
             return response.data
         }) 
         .then( res => {
-            dispatch(receiveTask(res.payload))
+            dispatch(receiveTask(res.payload, fieldName))
         }) 
         .catch(function (error) {
             // handle error
@@ -57,7 +57,7 @@ export const createTask = () => {
             return response.data
         }) 
         .then( res => {
-            dispatch(getAllTask( `list` ))
+            dispatch(getAllTask( `list`, "taskList" ))
         })
         .catch(function (error) {
             // dispatch(progress( 100))
@@ -88,7 +88,7 @@ export const updateTask = () => {
             return response.data
         }) 
         .then( res => {
-            dispatch(getAllTask( `list` ))  
+            dispatch(getAllTask( `list`, "taskList" ))  
         }) 
         .catch(function (error) {
             // handle error
@@ -115,11 +115,12 @@ export function requestTask(){
     }
 }
 
-export function receiveTask(items){
+export function receiveTask(items, fieldName){
     return {
         type: "RECEIVE_TASK",
         isFetching: false,
-        payload: items
+        payload: items,
+        fieldName
     }
 }
 
@@ -147,5 +148,11 @@ export function createStateTask ( e, fieldName, value ){
     return {
       type: `STATE_TASK`,
       payload: {fieldName, value}
+    }
+}
+
+export function resetTask (){
+    return {
+      type: `RESET_TASK`
     }
 }

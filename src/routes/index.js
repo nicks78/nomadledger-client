@@ -35,9 +35,8 @@ import Layout from '../components/layout/layout'
 class Routes extends React.Component {
 
     componentDidMount(){
-        this.props.initLocale('fr')
+        this.props.initLocale(this.props.company.locale || "fr")
     }
-
 
     handleChangeLocale = (locale) => {
         this.props.getLocale(locale)

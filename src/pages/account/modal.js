@@ -27,7 +27,7 @@ const styles = theme => ({
       float: 'right'
   },
   icon: {
-    fontSize: 18,
+    fontSize: 15,
     cursor: 'pointer'
   }
 });
@@ -37,12 +37,14 @@ class SimpleModal extends React.Component {
     open: false,
     id: "",
     value: '',
-    name: ''
+    fr: '',
+    en: ""
   }
 
   componentDidMount() {
     this.setState({
-      name: this.props.obj[localStorage.getItem('locale')],
+      fr: this.props.obj.fr,
+      en: this.props.obj.en,
       value: this.props.obj.indice,
       id: this.props.obj._id
     })
@@ -57,7 +59,8 @@ class SimpleModal extends React.Component {
       open: false,
       id: "",
       value: '',
-      name: ''
+      fr: '',
+      en: ""
     })
   };
 
@@ -70,15 +73,16 @@ class SimpleModal extends React.Component {
       open: false,
       id: "",
       value: '',
-      name: ''
+      fr: '',
+      en: ""
     })
     if( this.props.type === 'vat' ){
         var num = checkNumFormatRegex( this.state.value || 0 ) 
     }
     var data = {
         _id: this.state.id,
-        fr: this.state.name,
-        en: this.state.name,
+        fr: this.state.fr,
+        en: this.state.en,
         value: this.state.value + " %",
         indice: num || 0
     }
@@ -87,7 +91,7 @@ class SimpleModal extends React.Component {
 
   render() {
     const { classes , obj, type, locale } = this.props;
-    const {name, value } = this.state
+    const {fr, en, value } = this.state
 
     return (
       <React.Fragment>
@@ -102,10 +106,20 @@ class SimpleModal extends React.Component {
           <div  className={classes.paper}>
           <Typography variant="subtitle1" align="center">{ locale.subheading.edit_tag }</Typography>
             <TextField 
-                value={ name }
+                value={ en || "" }
                 onChange={(e) => { this.handleForm(e.target.name, e.target.value) }}
-                label="tag"
-                name="name"
+                label={ locale.wording.tag_name_en }
+                name="en"
+                fullWidth
+                margin="dense"
+                variant="filled"
+
+            />
+             <TextField 
+                value={ fr || "" }
+                onChange={(e) => { this.handleForm(e.target.name, e.target.value) }}
+                label={locale.wording.tag_name_fr}
+                name="fr"
                 fullWidth
                 margin="dense"
                 variant="filled"
@@ -116,7 +130,7 @@ class SimpleModal extends React.Component {
                 <TextField 
                   value={ value }
                   onChange={(e) => { this.handleForm(e.target.name, e.target.value) }}
-                  label="tag"
+                  label={locale.wording.rate}
                   name="value"
                   type="number"
                   fullWidth

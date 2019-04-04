@@ -79,7 +79,7 @@ class ShowService extends Component {
                     fullWidth
                     required
                     label={locale.wording.price}
-                    value={service.price}
+                    value={  service.price }
                     onChange={ (e) => { this.props.createState(reducer, "price", e.target.value) } }
                   />
               </Grid>

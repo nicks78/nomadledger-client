@@ -88,9 +88,9 @@ class Invoice extends Component {
                                     return  <TableRow key={index}>
                                                 <TableCell>{locale.wording.inv}-{invoice.ref}</TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${invoice.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{invoice.contact_id.company_name}</span></Link></TableCell>
-                                                <TableCell>{cvtNumToUserPref(invoice.subtotal)} {invoice.currency.value}</TableCell>
-                                                <TableCell>{cvtNumToUserPref(vat ) + " "+ invoice.currency.value }</TableCell>
-                                                <TableCell>{cvtNumToUserPref(vat + invoice.subtotal  )} {invoice.currency.value}</TableCell>
+                                                <TableCell className={classes.price}>{cvtNumToUserPref(invoice.subtotal)} {invoice.currency.value}</TableCell>
+                                                <TableCell className={classes.price}>{cvtNumToUserPref(vat ) + " "+ invoice.currency.value }</TableCell>
+                                                <TableCell className={classes.price}>{cvtNumToUserPref(vat + invoice.subtotal  )} {invoice.currency.value}</TableCell>
                                                 <TableCell>
                                                     {
                                                         invoice.status.code === "7" ||   
@@ -165,6 +165,9 @@ const styles = theme => ({
             boxShadow: 'none',
             borderRadius: 0
         },
+    },
+    price: {
+        whiteSpace: 'nowrap'
     }
 })
 

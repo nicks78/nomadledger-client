@@ -10,15 +10,15 @@ import './App.css'
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light:  '#009AFF', // '#00C5CC', //  rgb(66, 133, 244),
-      main: '#0077c5', // '#008489', // 'rgb(51, 103, 214)',
-      dark:  '#265C7F', // '#267C7F',// '#1E3D7F',
+      // light:  '#009AFF', 
+      main: '#00aff2', // '#0077c5', 
+      // dark:  '#265C7F', 
       contrastText: '#fff',
     },
     secondary: {
       // light: '#38CC24', // '#ff6666', //'#ff9d3f',
-      main:  '#2ca01c', // '#ef4848', // '#ef6c00',
-      // dark:  '#38CC24', // '#457F3D',  // '#bf4040',// '#b53d00',
+      main: 'rgb(239, 108, 0)', //'#2ca01c',  
+      // dark:  '#38CC24', 
       contrastText: '#fff',
     },
     green:  '#4CAF50',
@@ -29,6 +29,7 @@ const theme = createMuiTheme({
     },
     lightGrey: 'rgb(238,238,238)',
     darkGrey: "rgb(58,58,58)",
+    lightSecondary: "rgba(239, 108, 0, 0.05)",
     blue: {
       light: 'rgb(66, 133, 244)',
       main: 'rgb(51, 103, 214)'
@@ -83,6 +84,11 @@ const theme = createMuiTheme({
     body1: {
       fontSize: '0.85rem',
       color: '#303030'
+    },
+    body2: {
+      fontWeight: 500,
+      color: 'rgb(72, 72, 72)',
+      fontSize: '0.9rem'
     },
     overline: {
       fontSize: '0.85rem',
