@@ -4,19 +4,51 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import { createStateUser, createUser } from '../../redux/auth/createActions'
 import { resetUser } from '../../redux/auth/actions'
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
+import {Typography, withStyles, Paper, Grid, Button} from '@material-ui/core';
 
 import ApxForm from '../../components/common/form'
-import ApxBanner from '../../components/common/banner'
 import Spinner from '../../components/common/spinner'
 
 
 
 
-const styles = {
+const styles = theme => ({
+    appBar: {
+        padding: 10,
+        backgroundColor: theme.palette.secondary.main,
+        overflow: "hidden"
+    },
+    jumbotron: {
+        height: 500,
+        backgroundColor: '#303030'
+    },
+    jumbotron_1: {
+        float: 'left',
+        width: '35%',
+        position: "relative",
+    },
+    companyName: {
+        color: "white",
+        width: '100%'
+    },
+    img_01: {
+        backgroundImage: "url(http://localhost:8080/img/background_1.jpg)",
+        backgroundSize: 'cover',
+        height: 350,
+        width: "120%",
+        zIndex: 9
+    },
+    img:{
+        display: "inline-block",
+        margin: "0 auto",
+        verticalAlign: "middle"
+    },
+    jumbotron_2: {
+        backgroundImage: 'url(http://localhost:8080/img/background_2.jpg)',
+        backgroundSize: 'cover',
+        height: 500,
+        marginLeft: '30%',
+    },
     container: {
         marginBottom: 100
     },
@@ -56,7 +88,7 @@ const styles = {
         backgroundColor: 'rgba(0,0,0,0.7)',
         padding: '4%'  
     }
-}
+})
 
 class Auth extends Component {
 
@@ -83,7 +115,7 @@ class Auth extends Component {
 
     render() {
     
-    const { locale, newUser, isFetching, isError, message, isCreated } = this.props
+    const { classes, locale, newUser, isFetching, isError, message, isCreated } = this.props
 
     const form = {
           title: locale.wording.create, 
@@ -97,17 +129,50 @@ class Auth extends Component {
 
     
     return (
-      <div style={ styles.container}>
+      <div className={ classes.container}>
 
-      
+      <div className={classes.appBar} >
+            <Button 
+                variant="contained" 
+                color="primary"
+                component={Link}
+                to="/login"
+                style={{
+                    float: "right",
+                    marginRight: 20,
+                    color: "white"
+                }}
+                >
+                Login
+            </Button>
+      </div>
 
-        <ApxBanner />
+      <div className={classes.jumbotron}>
+            <div className={classes.jumbotron_1}>
+
+            <div>
+                 
+                <Typography className={classes.companyName} variant="h3">
+                    <img src="http://localhost:8080/img/logo.png" alt="logo" height="80" width="auto"  className={classes.img}/>
+                    <span>NOMAD LEDGER</span>
+                </Typography>
+            </div>
+
+                <div className={ classes.img_01 }>
+                </div>
+               
+            </div>
+            <div className={classes.jumbotron_2}>
+
+            </div>
+    </div>
+
         
-        <div style={ styles.section_1 }>
-            <Typography variant="overline" style={ styles.headline }>
+        <div className={ classes.section_1 }>
+            <Typography variant="overline" className={ classes.headline }>
                     TEXT D"INFORMATION COMPLEMENTAIRES
             </Typography>
-            <Typography component="p" style={ styles.paragraphe }>
+            <Typography component="p" className={ classes.paragraphe }>
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis ex voluptates numquam exercitationem libero ducimus omnis iusto sit veritatis, magnam doloribus adipisci ullam autem qui et alias! Dolor, quo saepe! Nobis ex voluptates numquam exercitationem libero ducimus omnis iusto sit veritatis, magnam doloribus adipisci ullam autem qui et alias! Dolor, quo saepe! Nobis ex voluptates numquam exercitationem libero ducimus omnis iusto sit veritatis, magnam doloribus adipisci ullam autem qui et alias! Dolor, quo saepe!
             </Typography>
         </div>
@@ -117,11 +182,11 @@ class Auth extends Component {
         {   isCreated ? <p>{locale.message[message]}</p> : null }
         </div>
         
-        <div style={ styles.section_3 }>
+        <div className={ classes.section_3 }>
         <Link to="/login">Login</Link>
             {
                 !isFetching ? 
-                <Paper style={ styles.form }>
+                <Paper className={ classes.form }>
                     <Typography variant="overline">
                             Commencer gratuitement
                     </Typography>
@@ -133,7 +198,7 @@ class Auth extends Component {
                         md={12} 
                         objData={ newUser }/>
 
-                    <Button variant="contained" color="secondary"  style={  styles.button } onClick={ this.onSubmit }>{ locale.wording.register }</Button>
+                    <Button variant="contained" color="secondary"  className={  classes.button } onClick={ this.onSubmit }>{ locale.wording.register }</Button>
                 </Paper>
             : <Spinner />
             }
@@ -141,24 +206,24 @@ class Auth extends Component {
 
 
 
-        <div style={ styles.section_4 }>
-            <Typography variant="overline" style={ styles.headline }>
+        <div className={ classes.section_4 }>
+            <Typography variant="overline" className={ classes.headline }>
                     PRICING
             </Typography>
             <Grid container spacing={16}>
 
                 <Grid item xs={12} md={4}>
-                    <Paper style={ styles.paper }>
+                    <Paper className={ classes.paper }>
                         <p>test</p>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <Paper style={ styles.paper }>
+                    <Paper className={ classes.paper }>
                         <p>test</p>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <Paper style={ styles.paper }>
+                    <Paper className={ classes.paper }>
                         <p>test</p>
                     </Paper>
                 </Grid>
@@ -184,5 +249,7 @@ const mapStateToProps = (state) => {
 }
 
 
+const StyledAuth = withStyles(styles)(Auth)
 
-export default connect(mapStateToProps, {createStateUser, createUser, resetUser})(Auth);
+
+export default connect(mapStateToProps, {createStateUser, createUser, resetUser})(StyledAuth);

@@ -70,8 +70,8 @@ class ShowContact extends React.Component {
         var id = this.props.match.params.id;
         this.props.getItem(this.state.reducer, id);
         this.props.getBookTotal("QUOTE", `total/${id}?status=6`);
-        this.props.getBookTotal("INVOICE", `total/${id}?status=6`);
-        this.props.getBookTotal("REFUND", `total/${id}?status=6`);
+        this.props.getBookTotal("INVOICE", `total/${id}?status=7`);
+        this.props.getBookTotal("REFUND", `total/${id}?status=8`);
     }
 
     componentWillUnmount(){

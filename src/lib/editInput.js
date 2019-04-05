@@ -23,12 +23,13 @@ const styles = theme => ({
  */
 const EditInput = (props) => {
     
-    const { field, handleAction, showEdit, label, value , classes} = props
+    const { field, handleAction, showEdit, label, value , classes, required} = props
 
     if(showEdit){
         return <TextField 
                     id={field}
                     label={label}
+                    required={required}
                     className={classes.textField}
                     value={value}
                     name={field}

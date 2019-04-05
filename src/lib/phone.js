@@ -38,7 +38,7 @@ const Phone = (props) => {
 
     if(showEdit){
         return  <Grid container spacing={8}>
-                    <Grid item xs={4}>
+                    <Grid item xs={5}>
                     <TextField
                         id={fieldCode}
                         select
@@ -64,7 +64,7 @@ const Phone = (props) => {
                         </TextField>
                     
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={7}>
                         <TextField 
                             id={field}
                             label={label}

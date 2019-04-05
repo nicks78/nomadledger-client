@@ -147,6 +147,7 @@ class User extends Component {
                           showEdit={showEdit}
                           locale={locale}
                           field="email"
+                          required={true}
                           handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
                       />
 <br /><br />

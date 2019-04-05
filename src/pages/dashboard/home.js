@@ -74,7 +74,7 @@ class Home extends Component {
             <Typography variant="caption" style={{ padding: 12, backgroundColor: 'grey', color: "white" }}>{locale.subheading.label_daily_task}&nbsp;
                     <span style={{textTransform: "capitalize"}}>{ tasks.date ? new Date(tasks.date.date).toLocaleDateString("fr", options) : null }</span>
                 </Typography>
-                <div style={{height: "100%", maxHeight: 350, overflow: 'auto'}}>
+                <div>
                     {
                         tasks.tasks && 
                         tasks.tasks.map((task, index) => {
