@@ -3,6 +3,7 @@
 const fr =  {
     
     lang: "fr",
+    company_name: "NomadLedger",
     home:{
         name: "Accueil",
         url: "accueil"
@@ -88,7 +89,11 @@ const fr =  {
         label_contact_info: "Informations contact",
         label_comp_address: "Compagnie adresse", 
         label_annual_turnover: "Chiffre d'affaire annuelle",
-        label_daily_task: "Tache(s) du "
+        label_daily_task: "Tache(s) du ",
+        label_forgot_pwd: "Nous enverrons un lien de récupération à",
+        link_forgot_pwd: "Mot de passe oublié ?",
+        label_reset_pwd: "Modifier votre mot de passe",
+        label_login: "Connectez vous à"
     },
     wording: {
         create: "Créer",
@@ -215,6 +220,8 @@ const fr =  {
         register: "S'enregistrer",
         sign_up: "S'enregistrer",
         login: "Se connecter",
+        reset_pwd: "Reinitialisé mon mot de passe",
+        send_link: "Envoyer le lien de récupération",
         return_list: "Retour à la liste",
         address: "Adresse",
         represented_by: "Représente par",
@@ -240,7 +247,10 @@ const fr =  {
     message: {
         success_create: "Felicitation !",
         success_update: "Mise à jour avec succès",
+        success_uploaded: "Fichier(s) téléchargé",
         success_sent: "Email envoyée",
+        success_delete: "Element supprimé",
+        success_updated_pw: "Votre mot de passe a été mise à jour",
 
         error_create: "Erreur donnée non créer",
         error_update: "Erreur donnée non mise ajour",
@@ -259,12 +269,21 @@ const fr =  {
         error_wrong_token: "Error d'authentification, veuillez recommencer ou contacter notre service client",
         error_no_token: "Error d'authentification, veuillez recommencer ou contacter notre service client",
         error_file_not_allowed: "Ce type de fichier n'est pas authorisé",
+        error_pw_not_match: "Mot de passe non identique",
+        error_pw_min_8: "Votre mot de passe doit faire au minimum 8 charactère",
 
         alert_password_not_match: "Mots de passe ne correspondent pas",
         phone_required: "Mobile obligatoire",
-        required: "Tous les champs marqué d'une * sont obligatoires"
+        required: "Tous les champs marqué d'une * sont obligatoires",
+        request_reset_pw: "Veuillez consulter votre email et suivre les instructions"
     },
-    days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
+    days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+    home_page: {
+        title_01: "The Digital Book of Ledger",
+        paragraphe_01: `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis ex voluptates numquam exercitationem 
+        libero ducimus omnis iusto sit veritatis, magnam doloribus adipisci ullam autem qui et alias! Dolor, quo saepe! Nobis ex 
+        voluptates numquam exercitationem libero ducimus omnis iusto sit veritatis.`
+    }
 };
 
 export {fr};

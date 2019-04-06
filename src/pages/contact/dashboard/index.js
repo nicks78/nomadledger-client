@@ -87,12 +87,10 @@ class ShowContact extends React.Component {
     render(){
       const { contact, 
               isFetching, 
-              isError, 
               locale, 
               progress, 
               isUploading, 
               classes, 
-              message, 
               total_quote , 
               total_invoice, 
               currency,
@@ -103,9 +101,6 @@ class ShowContact extends React.Component {
       }
       if( contact === null){
         return <ApxAlert message="error_404" />
-      }
-      if(isError){
-        return <ApxAlert message={message} reducer={ this.state.reducer }/>
       }
 
       return (
@@ -176,8 +171,6 @@ const mapStateToProps = (state) => {
 
   return {
       isFetching: state.library.contact.isFetching,
-      isError: state.library.contact.isError,
-      message: state.library.contact.message,
       receivedAt: state.library.contact.receivedAt,
       locale: state.locale.locale,
       contact: state.library.contact.item,

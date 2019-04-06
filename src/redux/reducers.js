@@ -13,7 +13,7 @@ import searchReducer from './search/searchReducer'
 import helperReducer from './helper/helperReducer'
 import taskReducer from './task/taskReducer'
 import statReducer from './stat/statReducer'
-
+import notificationReducer from './notification/notificationReducer'
 
 export default combineReducers({
     locale: localeReducer,
@@ -24,5 +24,6 @@ export default combineReducers({
     search: searchReducer,
     helper: helperReducer,
     task: taskReducer,
-    stat: statReducer
+    stat: statReducer,
+    notification: notificationReducer
 })

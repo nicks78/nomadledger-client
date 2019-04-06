@@ -1,51 +1,73 @@
 import React, { Component } from 'react'
+import {DEFAULT_URL} from '../../redux/constant'
 import {Link}  from 'react-router-dom'
 import {connect} from 'react-redux'
 import { authUser } from '../../redux/auth/actions'
-import Paper from '@material-ui/core/Paper';
+import {withStyles, Paper, Typography, Button} from '@material-ui/core'
 import ApxForm from '../../components/common/form'
 import Spinner from '../../components/common/spinner'
-import ApxAlert from '../../components/common/alert'
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 
 
-
-const styles = {
-    root: {
-        height: '100vh',
-    },
+const styles = theme => ({
     container: {
         display: 'flex',
-        
-        width: '50%',
-        margin: '0 auto',
         alignItems: "center",
         justifyContent: "center",
-        
     },
 
     paper: {
-        marginTop: '40%',
+        width: '40%',
+        margin: '0 auto',
         padding: 24,
+        overflow: 'hidden',
+        [theme.breakpoints.down('sm')]: {
+            padding: 12,
+            width: '100%',
+            boxShadow: 'none',
+            borderRadius: 0,
+
+        }
+    },
+    button: {
+        float: "right"
+    },
+    link: {
+        clear: "right",
+        marginTop: 15,
+        float: 'right',
+        '& span': {
+            fontSize: "16 !important",
+        }
     }
-}
+})
 
 class Login extends Component {
     state = {
-        login_email: 'nicolas@apx-dev.com',
-        login_password: '0000'
+        login_email: 'contact@apx-dev.com',
+        login_password: '',
+        height: window.innerHeight
     }
 
-    handleLogin = name => event => {
-        var fieldName = name;
-        var value = event.target.value
+    componentDidMount(){
+        window.addEventListener("resize", this.changeHeight )
+    }
+
+    changeHeight = () => {
+        this.setState({
+            height: window.innerHeight
+        })
+    }
+
+    handleLogin = (e) => {
+        var fieldName = e.target.name;
+        var value = e.target.value
 
         this.setState({[fieldName]: value })
     }
 
 
-    logggedIn = () => {
+    onSubmitForm = (e) => {
+        e.preventDefault();
         var data = {
             email: this.state.login_email,
             password: this.state.login_password
@@ -56,7 +78,7 @@ class Login extends Component {
     render() {
 
         
-    const {isError, locale, message, isFetching} = this.props
+    const {isError, locale, message, isFetching, classes } = this.props
     const formLogin = {
             title: locale.subheading.add_contact, 
             label: locale.subheading.label_company,
@@ -72,15 +94,23 @@ class Login extends Component {
 
 
         return (
-            <div style={styles.root}>
-            {isError ? <ApxAlert message={message} />: null }
-                <div style={ styles.container }>
+            <div >
+
+                <div className={ classes.container } style={{ height: this.state.height }}>
                 
-                <Paper style={ styles.paper }>
-                        <Typography variant="overline" style={{ alignText: 'center'}}>
-                          { locale.wording.login}
+
+                <Paper className={ classes.paper }>
+                <div>
+                    <Typography className={classes.companyName} variant="h1" align="center">
+                        <Link to="/"><img src={`${DEFAULT_URL}img/logo.png`} alt="logo" height="80" width="auto" /></Link><br />
+                        <span>{locale.company_name}</span>
+                    </Typography><br /> 
+                </div>
+                        <Typography variant="caption">
+                          { locale.subheading.label_login}&nbsp;{locale.company_name}
                         </Typography>
                         {   isError ? <p> {locale.message[message]}</p> : null }
+                        <form onSubmit={ this.onSubmitForm }>
                         <ApxForm 
                             formField={formLogin.fields} 
                             formHandler={ this.handleLogin } 
@@ -88,11 +118,18 @@ class Login extends Component {
                             xs={12} 
                             md={12} 
                             objData={ this.state }/>
-
-                        <Button variant="contained" color="secondary"  style={  styles.button } onClick={ this.logggedIn }>{ locale.wording.login }</Button>
-
+                        <br /> 
+                        <Button 
+                            variant="contained" 
+                            color="primary"  
+                            type="submit"
+                            className={  classes.button } 
+                            >
+                            { locale.wording.login }
+                        </Button>
+                        </form>
                         <br />
-                        <Link to="/forgot-password" >Forgot password ?</Link>
+                        <Link className={classes.link} to="/forgot-password" >{locale.subheading.link_forgot_pwd}</Link>
                 </Paper>
 
             </div>
@@ -112,6 +149,6 @@ const mapStateToProps = (state) => {
     }
 }
 
+const StyledLogin = withStyles(styles)(Login)
 
-
-export default connect(mapStateToProps, { authUser })(Login);
+export default connect(mapStateToProps, { authUser })(StyledLogin);

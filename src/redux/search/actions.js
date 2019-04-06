@@ -2,6 +2,8 @@
 
 import axios from 'axios';
 import { API_ENDPOINT } from '../constant'
+import {setNotification} from '../notification/actions'
+
 
 export function getAutocompleteList(query, field, model){
 
@@ -25,6 +27,7 @@ export function getAutocompleteList(query, field, model){
         .catch(function (error) {
           // handle error
           var message = error.response ? error.response.data.message : 'error_500'
+          dispatch(setNotification(message, "error"))
           dispatch(requestFailed( message));
         })             
     }

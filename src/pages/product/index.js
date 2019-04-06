@@ -5,7 +5,6 @@ import { createItem, getItemList, getItem, createState, getTotal, resetState } f
 import {connect} from 'react-redux'
 import { withStyles, Grid, Button} from '@material-ui/core';
 import Spinner from '../../components/common/spinner'
-import ApxAlert from '../../components/common/alert'
 import AddProduct from './addProduct'
 import ProductCard from './productCard'
 
@@ -60,7 +59,7 @@ class Product extends Component {
 
     render() {
     
-    const {listProducts, isFetching, isError,total,  locale, newProduct, createState, createItem, isCreating, category, classes, message, currency } = this.props
+    const {listProducts, isFetching,total,  locale, newProduct, createState, createItem, isCreating, category, classes, currency } = this.props
 
     if( isFetching ){
         return <Spinner />
@@ -79,7 +78,7 @@ class Product extends Component {
                 createItemState={ createState } 
                 createItem={ createItem } 
                 isCreating={ isCreating  }/>
-            {isError ? <ApxAlert message={message} /> : null }
+
             <Grid container spacing={24}>
             {
                 listProducts.map((product, index) => {
@@ -112,8 +111,6 @@ class Product extends Component {
 const mapStateToProps = (state) => {
     return {
         isFetching: state.library.product.isFetching,
-        isError: state.library.product.isError,
-        message: state.library.product.message,
         isCreating: state.library.product.isCreating,
         listProducts: state.library.product.list,
         receivedAt: state.library.product.receivedAt,

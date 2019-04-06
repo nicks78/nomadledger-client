@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import { createItem, getItemList, getItem, createState, getTotal , resetState, deleteElement} from '../../redux/library/actions'
 import {connect} from 'react-redux'
 import { TableCell, TableRow, Table, TableHead, TableBody, withStyles, Tooltip, Paper} from '@material-ui/core';
-import ApxAlert from '../../components/common/alert'
 import ApxTableToolBar from '../../components/common/tableToolBar'
 import AddService from './addService'
 import {cvtNumToUserPref} from '../../utils/help_function'
@@ -58,7 +57,7 @@ class Service extends Component {
 
     render() {
     
-    const {isFetching, listServices, isError,  locale, message, newService, createItem, createState, isCreating, progress, category, classes, currency, service_type} = this.props
+    const {isFetching, listServices,  locale, newService, createItem, createState, isCreating, progress, category, classes, currency, service_type} = this.props
     const {reducer } = this.state
 
     return (
@@ -75,7 +74,6 @@ class Service extends Component {
                 category={category}
                 service_type={service_type}
             />
-            { isError ? <ApxAlert message={message} /> : null }
             <Paper className={classes.paper}>
                 
                 <ApxTableToolBar
@@ -140,8 +138,6 @@ const mapStateToProps = (state) => {
     return {
         isFetching: state.library.service.isFetching,
         isCreating: state.library.service.isCreating,
-        isError: state.library.service.isError,
-        message: state.library.service.message,
         listServices: state.library.service.list,
         receivedAt: state.library.service.receivedAt,
         locale: state.locale.locale,

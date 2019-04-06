@@ -9,7 +9,6 @@ import { getTotal } from '../../../redux/library/actions'
 import { withStyles, Button, Hidden,  Paper, Table, TableHead, TableBody, TableCell, TableRow } from '@material-ui/core';
 import ApxSelect from '../../../components/common/select'
 import ApxTableToolBar from '../../../components/common/tableToolBar'
-import ApxAlert from '../../../components/common/alert'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
 import { cvtNumToUserPref } from '../../../utils/help_function'
@@ -40,12 +39,8 @@ class Quote extends Component {
     
     render() {
     
-    const {listQuote, isFetching, isError,  locale, classes, message, newQuote, status} = this.props
+    const {listQuote, isFetching,  locale, classes, newQuote, status} = this.props
     const { reducer } = this.state; 
-
-    if(isError){
-        return <ApxAlert message={message} />
-    }
 
     return (
       <div className={classes.root}>
@@ -178,9 +173,6 @@ const mapStateToProps = (state) => {
     return {
         isFetching: state.book.quote.isFetching,
         updated: state.book.quote.updated,
-        isError: state.book.quote.isError,
-        message: state.book.quote.message,
-        receivedAt: state.book.quote.receivedAt,
         newQuote: state.book.quote.item || {},
         locale: state.locale.locale,
         total: state.library.quote.total,

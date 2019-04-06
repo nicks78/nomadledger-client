@@ -4,6 +4,7 @@
 import axios from 'axios';
 import { API_ENDPOINT } from '../../constant'
 import { requestData, requestFailed  } from './'
+import {setNotification} from '../../notification/actions'
 
 
 // GET FULL LIST OF ITEM
@@ -27,6 +28,7 @@ export function getItemList( actionType, endPoint ){
         .catch(function (error) {
           // handle error
           var message = error.response ? error.response.data.message : 'error_500'
+          dispatch(setNotification(message, "error"))
           dispatch(requestFailed(actionType, message));
         })             
     }
@@ -53,6 +55,7 @@ export function getTotal( actionType, query = "" ){
       .catch(function (error) {
         // handle error
         var message = error.response ? error.response.data.message : 'error_500'
+        dispatch(setNotification(message, "error"))
         dispatch(requestFailed(actionType, message));
       })             
   }

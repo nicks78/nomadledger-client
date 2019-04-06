@@ -2,6 +2,9 @@
 
 import axios from 'axios';
 import { API_ENDPOINT } from '../constant'
+import {setNotification} from '../notification/actions'
+
+
 
 // GET AUTHENTICATED
 export function getAllTask(endPoint, fieldName){
@@ -19,7 +22,8 @@ export function getAllTask(endPoint, fieldName){
         }) 
         .catch(function (error) {
             // handle error
-            var message = error.response ? error.response.data.message : 'error_500'
+            var message = error.response ? error.response.data.message : 'error_500';
+            dispatch(setNotification(message, "error"))
             dispatch(requestFailed(message));
         })          
     }
@@ -60,9 +64,9 @@ export const createTask = () => {
             dispatch(getAllTask( `list`, "taskList" ))
         })
         .catch(function (error) {
-            // dispatch(progress( 100))
             // handle error
-            var message = error.response ? error.response.data.message : 'error_500'
+            var message = error.response ? error.response.data.message : 'error_500';
+            dispatch(setNotification(message, "error"))
             dispatch(requestFailed( message));
         })  
     }
@@ -88,11 +92,13 @@ export const updateTask = () => {
             return response.data
         }) 
         .then( res => {
+            dispatch(setNotification("success_update", "success"))
             dispatch(getAllTask( `list`, "taskList" ))  
         }) 
         .catch(function (error) {
             // handle error
             var message = error.response ? error.response.data.message : 'error_500'
+            dispatch(setNotification(message, "error"))
             dispatch(requestFailed( message));
         })    
     }

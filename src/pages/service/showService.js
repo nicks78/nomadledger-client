@@ -29,7 +29,7 @@ class ShowService extends Component {
 
 
     render() {
-      const {classes, service, isFetching, locale, isError, message, category, isUpdating, currency, service_type} = this.props
+      const {classes, service, isFetching, locale, category, isUpdating, currency, service_type} = this.props
       const {reducer} = this.state
 
       if( isFetching ){
@@ -46,7 +46,7 @@ class ShowService extends Component {
               { service.name}
             </Typography>
             <br />
-            {isError ? <ApxAlert message={message} /> : null }
+           
             <Grid container spacing={8}>
               <Grid item xs={12}>
               <TextField 
@@ -148,8 +148,6 @@ const mapStateToProps = (state) => {
   return {
       isFetching: state.library.service.isFetching,
       isUpdating: state.library.service.isUpdating,
-      isError: state.library.service.isError,
-      message: state.library.service.message,
       service: state.library.service.item,
       locale: state.locale.locale,
       category: state.account.company.item ?  state.account.company.item.category_name : [],

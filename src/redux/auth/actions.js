@@ -5,6 +5,7 @@ import { API_ENDPOINT } from '../constant'
 import { resetState } from '../library/actions/initAction'
 import {getAccount} from '../account/actions'
 import {history} from '../../routes/history'
+import {setNotification} from '../notification/actions'
 
 // Set withCredentials
 axios.defaults.withCredentials = true;
@@ -43,6 +44,7 @@ export function authUser(data){
         .catch(function (error) {
             // handle error
             var message = error.response ? error.response.data.message : 'error_500'
+            dispatch(setNotification(message, "error"))
             dispatch(requestFailed(message));
         })          
     }
@@ -118,5 +120,79 @@ export function getLogout(){
             dispatch(requestFailed(message));
             history.push('/')
       })     
+    }
+}
+
+
+// Recover my password
+export function recoverPassword(email){
+    return dispatch => {
+
+        dispatch(requestUser())
+
+        axios.post(`${API_ENDPOINT}auth/forgot-password`,
+        { 
+            email: email,
+            mode: 'cors',
+        },   
+        { headers: {
+            'Content-Type': 'application/json',
+        }
+        })
+        .then(function (response) { 
+            return response.data
+        }) 
+        .then( res => {
+            dispatch(setNotification("request_reset_pw", "success"));
+            dispatch(resetUser())
+            // Redirect to home page
+            history.push('/')
+            
+        }) 
+        .catch(function (error) {
+            // handle error
+            var message = error.response ? error.response.data.message : 'error_500'
+            dispatch(setNotification(message, "error"))
+            dispatch(requestFailed(message));
+        })
+    }
+}
+
+// Recover my password
+export function resetPassword(token, password){
+    return dispatch => {
+
+        dispatch(requestUser())
+
+        var data = {
+            token: token,
+            password: password
+        }
+
+        axios.post(`${API_ENDPOINT}public/reset-password`,
+        { 
+            data: data,
+            mode: 'cors',
+        },   
+        { headers: {
+            'Content-Type': 'application/json',
+        }
+        })
+        .then(function (response) { 
+            return response.data
+        }) 
+        .then( res => {
+            dispatch(setNotification(res.message, "success"))
+            dispatch(resetUser())
+            // Redirect to home page
+            history.push('/login')
+            
+        }) 
+        .catch(function (error) {
+            // handle error
+            var message = error.response ? error.response.data.message : 'error_500'
+            dispatch(setNotification(message, "error"))
+            dispatch(requestFailed(message));
+        })
     }
 }

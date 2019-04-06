@@ -25,33 +25,33 @@ const Styles = theme => ({
     root: {
         width: '100%',
         maxWidth: 360,
-        backgroundColor: 'rgb(58, 58, 58)', //'rgb(250,250,250)',
+        backgroundColor: theme.palette.darkGrey,
         fontSize: '10%!important'
     },
     active: {
         backgroundColor: theme.palette.secondary.main,
         '& span': {
-            color: 'white', //theme.palette.secondary.main + '!important',
+            color: 'white',
             fontWeight: 'bold'
         },
         '& svg': {
-            color: 'white', //theme.palette.secondary.main + '!important'
+            color: 'white', 
         },
        
     },
     listText: {
        '& span': {
-           color: 'white', //theme.palette.grey.main
+           color: 'white', 
        },
        '& svg': {
-        color: 'white',//theme.palette.grey.main
+        color: 'white',
         },
         '& :focus': {
             backgroundColor: theme.palette.secondary.main,
         }
     },
     icon: {
-        color: 'white', // theme.palette.grey.main
+        color: 'white', 
     },
     header: { 
         padding: '24px', 
@@ -61,7 +61,7 @@ const Styles = theme => ({
     },
     nested: {
         '& span': {
-           color: 'white',// theme.palette.grey.dark
+           color: 'white',
        },
     },
 

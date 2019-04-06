@@ -6,7 +6,6 @@ import { createState, createDocument} from '../../../redux/book/actions'
 import { convertToCurrency, getListItem} from '../../../redux/book/itemActions'
 import { withStyles } from '@material-ui/core';
 import Spinner from '../../../components/common/spinner'
-import ApxAlert from '../../../components/common/alert'
 import Form from '../common/form'
 
 
@@ -28,15 +27,14 @@ class CreateQuote extends React.Component {
 
     render(){
 
-    const { isFetching, locale, classes, newQuote, listItems, vat, message, isError, currency, status } = this.props;
+    const { isFetching, locale, classes, newQuote, listItems, vat, currency, status } = this.props;
+
     if(isFetching){
         return <Spinner/>
     }
 
     return (
             <div className={ classes.root}>
-
-                { isError ? <ApxAlert message={message} /> : null }
 
                 <Form 
                     formTitle="add_quote"
@@ -70,11 +68,9 @@ const styles = theme => ({
 
 const mapStateToProps = (state) => {
     return {
-        isError: state.book.quote.isError,
         isFetching: state.book.quote.isFetching,
         locale: state.locale.locale,
         newQuote: state.book.quote.item || {},
-        message: state.book.quote.message,
         listItems: state.book.quote.item.list_items,
         vat: state.account.company.item ? state.account.company.item.vat : [],
         status: state.helper.items.status_quote,

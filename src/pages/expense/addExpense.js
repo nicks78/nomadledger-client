@@ -17,8 +17,8 @@ const AddExpense = (props) => {
             { name: 'category', type:"select", selections: category, helperText: "select_category", required: true },
             { name: 'currency', type:"select", selections: currency, helperText: "select_currency", required: true },
             { name: 'vat', type:"select", selections: vat, helperText: "select_vat", required: true },
+            { name: 'quantity', type:"number", required: true},
             { name: 'price', type:"text", required: true},
-            
             { name: 'description', type:"longtext", multiline: true, rowsMax:"4" },
           ]
       }

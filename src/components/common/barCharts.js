@@ -13,7 +13,7 @@ class BarCharts extends Component {
     }
 
     componentDidMount(){
-				var ctx = document.getElementById("BarChart").getContext("2d");
+				var ctx = document.getElementById(this.props.id).getContext("2d");
         this.setState({
             ctx: new Chart(ctx, {
               type: "bar",
@@ -53,7 +53,7 @@ class BarCharts extends Component {
   render() {
     return (
       <div  style={{ position: "relative" }}>
-          <canvas id="BarChart"></canvas>
+          <canvas id={this.props.id}></canvas>
       </div>
     )
   }

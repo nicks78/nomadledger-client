@@ -6,7 +6,6 @@ import {DEFAULT_IMG} from '../../redux/constant'
 import { createItem, getItemList, getItem, createState, getTotal , resetState, deleteElement} from '../../redux/library/actions'
 import {connect} from 'react-redux'
 import { TableCell, TableRow, Table, TableHead, TableBody, withStyles, Paper} from '@material-ui/core';
-import ApxAlert from '../../components/common/alert'
 import ApxTableToolBar from '../../components/common/tableToolBar'
 import AddExpense from './addExpense'
 import Pagination from '../../lib/pagination'
@@ -58,7 +57,7 @@ class Expense extends Component {
 
     render() {
     
-    const {isFetching, listExpenses, isError,  locale, message, newExpense, createItem, createState, isCreating, progress, category, classes, currency, vat} = this.props
+    const {isFetching, listExpenses, locale, newExpense, createItem, createState, isCreating, progress, category, classes, currency, vat} = this.props
     const {reducer } = this.state
 
     return (
@@ -75,7 +74,6 @@ class Expense extends Component {
                 vat={vat}
                 currency={currency}
             />
-            { isError ? <ApxAlert message={message} /> : null }
             <Paper className={classes.paper}>
                 
                 <ApxTableToolBar
@@ -140,8 +138,6 @@ const mapStateToProps = (state) => {
     return {
         isFetching: state.library.expense.isFetching,
         isCreating: state.library.expense.isCreating,
-        isError: state.library.expense.isError,
-        message: state.library.expense.message,
         listExpenses: state.library.expense.list,
         receivedAt: state.library.expense.receivedAt,
         locale: state.locale.locale,

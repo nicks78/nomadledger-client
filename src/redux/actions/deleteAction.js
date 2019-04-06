@@ -4,9 +4,10 @@
 import axios from 'axios';
 import { API_ENDPOINT, apiCall } from '../../utils/constant'
 import { requestFailed  } from './'
+import {setNotification} from '../notification/actions'
 
 
-// CREATE NEW ITEM
+// DELETE ITEM
 export const deleteItem = ( actionType, id ) => {
 
     return dispatch => {
@@ -20,11 +21,13 @@ export const deleteItem = ( actionType, id ) => {
             return response.data
         }) 
         .then( res => {
+            dispatch(setNotification("success_delete", "success"))
             dispatch(setDeletedItem( actionType, res.deteledId ))  
         }) 
         .catch(function (error) {
             // handle error
             var message = error.response ? error.response.data.message : 'error_500'
+            dispatch(setNotification(message, "error"))
             dispatch(requestFailed(actionType, message));
         })    
     }

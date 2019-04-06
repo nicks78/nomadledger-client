@@ -1,11 +1,13 @@
 //manager/src/pages/auth/index.js
 import React, { Component } from 'react'
+import {DEFAULT_URL} from '../../redux/constant'
+import {initLocale} from '../../redux/locale/actions'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import { createStateUser, createUser } from '../../redux/auth/createActions'
 import { resetUser } from '../../redux/auth/actions'
 import {Typography, withStyles, Paper, Grid, Button} from '@material-ui/core';
-
+import CheckIcon from '@material-ui/icons/CheckOutlined'
 import ApxForm from '../../components/common/form'
 import Spinner from '../../components/common/spinner'
 
@@ -20,73 +22,123 @@ const styles = theme => ({
     },
     jumbotron: {
         height: 500,
-        backgroundColor: '#303030'
+        backgroundColor: 'rgb(44,47,50)',
+        overflow: "hidden",
+        [theme.breakpoints.down('sm')]: {
+            height: 250
+        }
+        
     },
     jumbotron_1: {
         float: 'left',
         width: '35%',
-        position: "relative",
+        [theme.breakpoints.down('sm')]: {
+            width: '100%',
+            height: '100%' 
+        }
     },
     companyName: {
         color: "white",
-        width: '100%'
+        width: '100%',
+        [theme.breakpoints.down('sm')]: {
+            display: "none" 
+        }
+    },
+    textIntro: {
+        [theme.breakpoints.down('sm')]: {
+            display: "none" 
+        }
     },
     img_01: {
-        backgroundImage: "url(http://localhost:8080/img/background_1.jpg)",
+        backgroundImage: `url(${DEFAULT_URL}img/background_1.jpg)`,
         backgroundSize: 'cover',
-        height: 350,
+        backgroundPosition: "top",
+        backgroundRepeat: "no-repeat",
+        paddingTop: 80,
+        paddingBottom: 100,
         width: "120%",
-        zIndex: 9
+        [theme.breakpoints.down('sm')]: {
+            paddingTop: 0,
+            paddingBottom: 0,
+            width: "100%", 
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+        }
     },
-    img:{
+    logo:{
         display: "inline-block",
         margin: "0 auto",
         verticalAlign: "middle"
     },
+    logoMobile:{
+        [theme.breakpoints.up('sm')]: {
+            display: 'none' 
+        }
+    },
     jumbotron_2: {
-        backgroundImage: 'url(http://localhost:8080/img/background_2.jpg)',
+        backgroundImage: `url(${DEFAULT_URL}img/background_2.jpg)`,
         backgroundSize: 'cover',
-        height: 500,
+        backgroundRepeat: "no-repeat",
+        height: "100%",
+        backgroundPosition: "top",
         marginLeft: '30%',
+        [theme.breakpoints.down('sm')]: {
+            display: 'none' 
+        }
+    },
+    title: {
+        color: "white", 
+        marginBottom: 12,
     },
     container: {
         marginBottom: 100
     },
     headline: {
         color: '#ef6c00',
-        textAlign: 'center'
-    },
-    paragraphe: {
-        width: '70%',
-        margin: '0 auto',
-        marginTop: '4%',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginBottom: 24
     },
     section_1: {
-        padding: '4% 4% 0% 4%'
-    },
-    section_2: {
-        display: 'flex',
-        justifyContent: 'space-around',
-        padding: '4%',
+        padding: "48px 0px 48px 0px"
     },
     section_3: {
         display: 'flex',
         justifyContent: 'center',
-        padding: '4%',
-        margin: '0 auto'
+        padding: 24,
+        margin: '0 auto',
+        marginBottom: 14,
+        [theme.breakpoints.down('sm')]: {
+            padding: 0,
+            boxShadow: 'none',
+            borderRadius: 0,
+            
+        }
     },
     form: {
-        padding: '2%',
-        width: '50%'
+       padding: 24,
+       [theme.breakpoints.down('sm')]: {
+            padding: 12,
+            boxShadow: 'none',
+            borderRadius: 0,
+
+        }
     },
     button: {
         color: 'white',
         float: 'right',
     },
     section_4: {
-        backgroundColor: 'rgba(0,0,0,0.7)',
-        padding: '4%'  
+        backgroundColor: theme.palette.darkGrey,
+        padding: 24  
+    },
+
+    paper: {
+        height: 200,
+        padding: 24,
+        marginBottom: 24,
+        borderRadius: "20% 0% 20% 0%",
     }
 })
 
@@ -108,7 +160,8 @@ class Auth extends Component {
         this.props.createStateUser( fieldName, value )
     }
 
-    onSubmit = () => {
+    onSubmitForm = (e) => {
+        e.preventDefault();
         this.props.createUser()
     }
 
@@ -127,11 +180,12 @@ class Auth extends Component {
             ]
     }
 
-    
+    var loc = localStorage.getItem("locale");
     return (
       <div className={ classes.container}>
 
       <div className={classes.appBar} >
+            <Button style={{ float: 'right', paddingLeft: 0, paddingRight: 5 }} onClick={ () => { this.props.initLocale( loc === "fr" ? "en" : "fr" )} }>{localStorage.getItem("locale")}</Button>
             <Button 
                 variant="contained" 
                 color="primary"
@@ -139,92 +193,119 @@ class Auth extends Component {
                 to="/login"
                 style={{
                     float: "right",
-                    marginRight: 20,
+                    marginRight: 5,
                     color: "white"
                 }}
                 >
-                Login
+                {locale.wording.login}
             </Button>
+            
       </div>
 
       <div className={classes.jumbotron}>
             <div className={classes.jumbotron_1}>
 
-            <div>
+            <div style={{ marginLeft: 30 }}>
                  
-                <Typography className={classes.companyName} variant="h3">
-                    <img src="http://localhost:8080/img/logo.png" alt="logo" height="80" width="auto"  className={classes.img}/>
-                    <span>NOMAD LEDGER</span>
+                <Typography className={classes.companyName} variant="h1">
+                    <img src={`${DEFAULT_URL}img/logo.png`} alt="logo" height="80" width="auto"  className={classes.logo}/>
+                    <span>{locale.company_name}</span>
                 </Typography>
             </div>
 
                 <div className={ classes.img_01 }>
+                <Typography align="center" variant="h1" className={classes.title}>
+                    <img src={`${DEFAULT_URL}img/logo.png`} alt="logo" height="80" width="auto"  className={classes.logoMobile}/><br />
+                        {locale.home_page.title_01}
+                </Typography>
+                    <div id="textIntro" className={classes.textIntro}>
+                        <Typography align="justify" variant="body2" style={{color: "white"}}>
+                            {locale.home_page.paragraphe_01}
+                        </Typography>
+                    </div>
+
+
                 </div>
                
             </div>
             <div className={classes.jumbotron_2}>
 
+            <div className={classes.wrapForm}>               
+            </div>
             </div>
     </div>
-
-        
-        <div className={ classes.section_1 }>
-            <Typography variant="overline" className={ classes.headline }>
-                    TEXT D"INFORMATION COMPLEMENTAIRES
-            </Typography>
-            <Typography component="p" className={ classes.paragraphe }>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis ex voluptates numquam exercitationem libero ducimus omnis iusto sit veritatis, magnam doloribus adipisci ullam autem qui et alias! Dolor, quo saepe! Nobis ex voluptates numquam exercitationem libero ducimus omnis iusto sit veritatis, magnam doloribus adipisci ullam autem qui et alias! Dolor, quo saepe! Nobis ex voluptates numquam exercitationem libero ducimus omnis iusto sit veritatis, magnam doloribus adipisci ullam autem qui et alias! Dolor, quo saepe!
-            </Typography>
-        </div>
-
-        <div>
+    <div>
         {   isError ? <p> {locale.message[message]}</p> : null }
         {   isCreated ? <p>{locale.message[message]}</p> : null }
         </div>
         
+        <div className={ classes.section_1 }>
+            <Typography variant="h2" className={ classes.headline }>
+                    YOUR NEW COMPANION
+            </Typography>
+       
+
+       
+        
         <div className={ classes.section_3 }>
-        <Link to="/login">Login</Link>
             {
                 !isFetching ? 
                 <Paper className={ classes.form }>
                     <Typography variant="overline">
-                            Commencer gratuitement
+                            register now for free
                     </Typography>
+                    <form onSubmit={ this.onSubmitForm }>
                     <ApxForm 
                         formField={form.fields} 
                         formHandler={ this.handleChange } 
                         locale={ locale } 
                         xs={12} 
                         md={12} 
-                        objData={ newUser }/>
-
-                    <Button variant="contained" color="secondary"  className={  classes.button } onClick={ this.onSubmit }>{ locale.wording.register }</Button>
+                        objData={ newUser }
+                    />
+                    <br />
+                        <Button variant="contained" 
+                            color="primary"  
+                            type="submit"
+                            className={  classes.button } 
+                            >{ locale.wording.register }
+                        </Button>
+                    </form>
                 </Paper>
             : <Spinner />
             }
         </div>
-
+        </div>
 
 
         <div className={ classes.section_4 }>
-            <Typography variant="overline" className={ classes.headline }>
+            <Typography variant="h2" className={ classes.headline }>
                     PRICING
             </Typography>
-            <Grid container spacing={16}>
+            <Grid container spacing={24}>
 
                 <Grid item xs={12} md={4}>
                     <Paper className={ classes.paper }>
-                        <p>test</p>
+                        <p>FREE TRIAL</p>
+                        <p><CheckIcon />Full access</p>
+                        <p><CheckIcon />No credit card ask</p>
+                        <p><CheckIcon /></p>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4}>
                     <Paper className={ classes.paper }>
-                        <p>test</p>
+                        <p>2€/Month</p>
+                        <p><CheckIcon />Customize your app</p>
+                        <p><CheckIcon />Set up to your server</p>
+                        <p><CheckIcon />Add more function</p>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4}>
                     <Paper className={ classes.paper }>
-                        <p>test</p>
+                        <p>Selft hosted</p>
+                        <p><CheckIcon />Customize your app</p>
+                        <p><CheckIcon />Set up to your server</p>
+                        <p><CheckIcon />Add more function</p>
                     </Paper>
                 </Grid>
 
@@ -252,4 +333,4 @@ const mapStateToProps = (state) => {
 const StyledAuth = withStyles(styles)(Auth)
 
 
-export default connect(mapStateToProps, {createStateUser, createUser, resetUser})(StyledAuth);
+export default connect(mapStateToProps, {createStateUser, createUser, resetUser, initLocale})(StyledAuth);

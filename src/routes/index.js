@@ -6,10 +6,14 @@ import { getLocale, initLocale } from '../redux/locale/actions'
 import { getLogout } from '../redux/auth/actions'
 import PrivateRoute from './privateRoute'
 
+// Common
+import SnackBar from '../lib/snackBar'
+
 // Login
 import Auth from '../pages/auth'
 import Login from '../pages/auth/login'
 import ForgotPassword from '../pages/auth/forgotPassword'
+import ResetPassword from '../pages/auth/resetPassword'
 
 
 // Pages
@@ -45,19 +49,26 @@ class Routes extends React.Component {
 
     render(){
      
-        const { isLoggedIn, locale, authUser, company } = this.props
+        const { isLoggedIn, locale, authUser, company, text, status, openSnack } = this.props
 
         return (
-            <Router basename="/" history={history}>
+            <Router history={history}>
                     <React.Fragment>
-                    
+                        <SnackBar 
+                            text={text} 
+                            openSnack={ openSnack }
+                            status={status}
+                            locale={locale}/>
                         <Switch>
                         <Route exact path="/" component={Auth} />
                         <Route path="/login" component={Login} />
                         <Route path="/forgot-password" component={ForgotPassword} />
+                        <Route path="/reset-password/:token" component={ResetPassword} />
+
                         {
                             isLoggedIn && authUser !== null  ? 
                             <Layout company={company} _onChangeLocale={this.handleChangeLocale} user={authUser} logout={this.props.getLogout} locale={locale}>
+                            
                             <Switch>
                                 <PrivateRoute path="/home" component={ Home } auth={isLoggedIn}/>
                                 <PrivateRoute path="/account" component={Account}  auth={isLoggedIn}/>
@@ -98,7 +109,10 @@ const mapStateToProps = (state) => {
         isLoggedIn: state.auth.isLoggedIn,
         isFetching: state.account.user.isFetching,
         authUser: state.account.user.item,
-        company: state.account.company.item || {}
+        company: state.account.company.item || {},
+        text: state.notification.text,
+        openSnak: state.notification.openStack,
+        status: state.notification.status
            
     }
 }

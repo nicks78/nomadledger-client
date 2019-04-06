@@ -2,6 +2,7 @@
 
 import axios from 'axios'
 import {API_ENDPOINT} from '../constant'
+import {setNotification} from '../notification/actions'
 
 
 export const getData = (fieldName, endPoint) => {
@@ -21,6 +22,7 @@ export const getData = (fieldName, endPoint) => {
         .catch(function (error) {
             // handle error
             var message = error.response ? error.response.data.message : 'error_500'
+            dispatch(setNotification(message, "error"))
             dispatch(requestFailed( message ));
         })    
     }

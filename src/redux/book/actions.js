@@ -4,6 +4,8 @@ import axios from 'axios';
 import { API_ENDPOINT } from '../constant'
 import {history} from '../../routes/history'
 import {updateArrayOfObject} from '../../utils/help_function'
+import {setNotification} from '../notification/actions'
+
 
 /**
  * // GET FULL LIST OF DOCUMENT
@@ -29,6 +31,7 @@ export function getBookList( actionType, endPoint ){
         .catch(function (error) {
           // handle error
           var message = error.response ? error.response.data.message : 'error_500'
+          dispatch(setNotification(message, "error"))
           dispatch(requestFailed(actionType, message));
         })             
     }
@@ -73,12 +76,14 @@ export function createDocument (actionType) {
             return response.data
         }) 
         .then( res => {
+            dispatch(setNotification("success_create", "success"))
             dispatch(resetState(actionType));
             history.push(`/${ actionType.toLowerCase() }`)
         })
         .catch(function (error) {
           // handle error
           var message = error.response ? error.response.data.message : 'error_500'
+          dispatch(setNotification(message, "error"))
           dispatch(requestFailed(actionType, message));
         })             
     }
@@ -97,8 +102,6 @@ export function updateDocument (actionType) {
         // Set withCredentials
         axios.defaults.withCredentials = true;
 
-        console.log("DATA", data)
-
         axios.put(`${API_ENDPOINT}${actionType.toLowerCase()}/update`,
             { 
                 data,
@@ -112,11 +115,13 @@ export function updateDocument (actionType) {
             return response.data
         }) 
         .then( res => {
+            dispatch(setNotification("success_update", "success"))
             dispatch( setDocument(actionType, res.item) )
         })
         .catch(function (error) {
           // handle error
           var message = error.response ? error.response.data.message : 'error_500'
+          dispatch(setNotification(message, "error"))
           dispatch(requestFailed(actionType, message));
         })             
     }
@@ -158,12 +163,14 @@ export function updateField (actionType, data, id) {
             return response.data
         }) 
         .then( res => {
+            dispatch(setNotification("success_update", "success"))
             var newList = updateArrayOfObject(list, res.item);
             dispatch(receiveDocuments(actionType, newList )) 
         })
         .catch(function (error) {
           // handle error
           var message = error.response ? error.response.data.message : 'error_500'
+          dispatch(setNotification(message, "error"))
           dispatch(requestFailed(actionType, message));
         })             
     }
@@ -194,6 +201,7 @@ export function getDocument( actionType, id ){
         .catch(function (error) {
           // handle error
           var message = error.response ? error.response.data.message : 'error_500'
+          dispatch(setNotification(message, "error"))
           dispatch(requestFailed(actionType, message));
         })             
     }
@@ -235,6 +243,7 @@ export function convertToOtherDocument( actionType, id, newType ){
         .catch(function (error) {
           // handle error
           var message = error.response ? error.response.data.message : 'error_500'
+          dispatch(setNotification(message, "error"))
           dispatch(requestFailed(actionType, message));
         })             
     }
@@ -286,6 +295,7 @@ export function getBookTotal( actionType, endPoint ){
         .catch(function (error) {
           // handle error
           var message = error.response ? error.response.data.message : 'error_500'
+          dispatch(setNotification(message, "error"))
           dispatch(requestFailed(actionType, message));
         })             
     }

@@ -5,7 +5,6 @@ import {connect} from 'react-redux'
 import {DEFAULT_IMG} from '../../../redux/constant'
 import { withStyles, Typography } from '@material-ui/core';
 import UploadImg from '../../../lib/uploadImg'
-import ApxAlert from '../../../components/common/alert'
 import ApxTitleBar from '../../../components/common/titleBar'
 import { uploadFileToServer , updateDocument, updatePassword} from '../../../redux/account/actions'
 import Avatar from '@material-ui/core/Avatar';
@@ -74,7 +73,7 @@ class User extends Component {
   }
 
   render() {
-    const {  user, locale, classes, isFetching, isUploading, progress, isError, message } = this.props;
+    const {  user, locale, classes, isFetching, isUploading, progress  } = this.props;
     const {showEdit, password, password_confirm, reducer} = this.state
     
 
@@ -86,8 +85,6 @@ class User extends Component {
             openAction={ this.openEdit }
             editAction={ this.updateDocument }
           />
-
-        { isError && <ApxAlert message={message} /> }
 
           <div className={ classes.wrapper }>
           <Grid container className={classes.root} spacing={16}>
@@ -199,8 +196,6 @@ const mapStateToProps = (state) => {
   
       return {
           isFetching: state.account.user.isFetching,
-          isError: state.account.user.isError,
-          message: state.account.user.message,
           receivedAt: state.account.user.receivedAt,
           locale: state.locale.locale,
           user: state.account.user.item, 

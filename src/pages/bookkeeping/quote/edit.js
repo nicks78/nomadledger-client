@@ -8,7 +8,6 @@ import { withStyles, Fab } from '@material-ui/core';
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEyeOutlined'
 import Form from '../common/form'
 import Spinner from '../../../components/common/spinner'
-import ApxAlert from '../../../components/common/alert'
 
 class EditQuote extends React.Component {
 
@@ -42,7 +41,7 @@ class EditQuote extends React.Component {
 
     render(){
 
-    const { isFetching, locale, classes, quote, listItems, vat, message, isError, isUpdating, currency, status } = this.props;
+    const { isFetching, locale, classes, quote, listItems, vat, isUpdating, currency, status } = this.props;
 
     if(isFetching || quote === null ){
         return <Spinner />
@@ -50,8 +49,6 @@ class EditQuote extends React.Component {
 
     return (
             <div className={ classes.root}>
-
-                { isError ? <ApxAlert message={message} type="danger"/> : null }
                 <Form 
                     formTitle="edit_quote"
                     data={quote}
@@ -95,9 +92,7 @@ const mapStateToProps = (state) => {
     return {
         isFetching: state.book.quote.isFetching,
         isUpdating: state.book.quote.isUpdating,
-        isError: state.book.quote.isError,
         locale: state.locale.locale,
-        message: state.book.quote.message,
         quote: state.book.quote.item,
         listItems: state.book.quote.item ? state.book.quote.item.list_items : [],
         vat: state.account.company.item ? state.account.company.item.vat : [],

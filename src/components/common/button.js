@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
+    width: 100
   },
 });
 
@@ -16,6 +17,7 @@ const Buttons = (props) => {
     <div>
       <Button 
           variant={props.variant} 
+          type={ props.type || "button"}
           color={props.color} 
           onClick={ props.action } 
           className={classes.button}

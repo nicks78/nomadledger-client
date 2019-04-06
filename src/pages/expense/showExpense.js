@@ -31,7 +31,7 @@ class ShowExpense extends Component {
 
 
     render() {
-      const {classes, expense, isFetching, locale, isError, message, category, isUpdating, progress, currency} = this.props
+      const {classes, expense, isFetching, locale, category, isUpdating, progress, currency, vat} = this.props
       const {reducer} = this.state
 
 
@@ -58,8 +58,7 @@ class ShowExpense extends Component {
                 image={ <img src={`${ expense.receipt.full_path || DEFAULT_IMG }`} alt="logo" height="150" style={{ maxHeight: 250 }} />}
               />
             {/* </div> */}
-            
-            {isError ? <ApxAlert message={message} /> : null }
+          
             <TextField 
                     id="name"
                     variant="filled" 
@@ -98,16 +97,13 @@ class ShowExpense extends Component {
                   <EditSelect 
                     showEdit={true}
                     variant="filled" 
-                    arrayField={category}
-                    field="category"
+                    arrayField={currency}
                     required={true}
-                    value={expense.category[localStorage.getItem('locale')]}
-                    handleAction={ (e) => { this.props.createState(reducer, "category", e.target.value) } }
+                    field="currency"
+                    value={expense.currency[localStorage.getItem('locale')]}
+                    handleAction={ (e) => { this.props.createState(reducer, "currency", e.target.value) } }
                     locale={locale}
                   />
-              </Grid>
-
-              <Grid item xs={12} md={6}>
                   <TextField 
                     id="price"
                     variant="filled" 
@@ -118,17 +114,40 @@ class ShowExpense extends Component {
                     value={expense.price}
                     onChange={ (e) => { this.props.createState(reducer, "price", e.target.value) } }
                   />
+              </Grid>
+
+              <Grid item xs={12} md={6}>
+                 <EditSelect 
+                    showEdit={true}
+                    variant="filled" 
+                    arrayField={category}
+                    field="category"
+                    required={true}
+                    value={expense.category[localStorage.getItem('locale')]}
+                    handleAction={ (e) => { this.props.createState(reducer, "category", e.target.value) } }
+                    locale={locale}
+                  />
                   <EditSelect 
                     showEdit={true}
                     variant="filled" 
-                    arrayField={currency}
+                    arrayField={vat}
                     required={true}
-                    field="currency"
-                    value={expense.currency[localStorage.getItem('locale')]}
-                    handleAction={ (e) => { this.props.createState(reducer, "currency", e.target.value) } }
+                    field="vat"
+                    value={expense.vat[localStorage.getItem('locale')]}
+                    handleAction={ (e) => { this.props.createState(reducer, "vat", e.target.value) } }
                     locale={locale}
                   />
 
+                  <TextField 
+                    id="quantity"
+                    variant="filled" 
+                    margin="dense"
+                    fullWidth
+                    required
+                    label={locale.wording.quantity}
+                    value={expense.quantity}
+                    onChange={ (e) => { this.props.createState(reducer, "quantity", e.target.value) } }
+                  />
 
               </Grid>
             </Grid>
@@ -170,12 +189,11 @@ const mapStateToProps = (state) => {
       isFetching: state.library.expense.isFetching,
       isUpdating: state.library.expense.isUpdating,
       progress: state.library.expense.progress,
-      isError: state.library.expense.isError,
-      message: state.library.expense.message,
       expense: state.library.expense.item,
       locale: state.locale.locale,
       category: state.account.company.item ?  state.account.company.item.category_name : [],
-      currency: state.helper.items.currency
+      currency: state.helper.items.currency,
+      vat: state.account.company.item ? state.account.company.item.vat : []
 
   }
 }

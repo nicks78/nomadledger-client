@@ -2,6 +2,7 @@
 
 const en = {
     lang: "en",
+    company_name: "NomadLedger",
     home:{
         name: "Home",
         url: "home"
@@ -82,7 +83,11 @@ const en = {
         label_contact_info: "Contact informations",
         label_comp_address: "Company address", 
         label_annual_turnover: "Annual turnover",
-        label_daily_task: "TODO"
+        label_daily_task: "TODO",
+        label_forgot_pwd: "We'll send a recovery link to",
+        link_forgot_pwd: "Forgot password ?",
+        label_reset_pwd: "Change your password",
+        label_login: "Login in to "
     },
     wording: {
         create: "Create",
@@ -208,7 +213,9 @@ const en = {
         preview: "Preview",
         register: "Register",
         sign_up: "Sign Up",
-        login: "Logion",
+        login: "Login",
+        reset_pwd: "Reset password",
+        send_link: "Send recovery link",
         return_list: "Back to list",
         address: "Address",
         represented_by: "Represented by",
@@ -234,7 +241,10 @@ const en = {
     message: {
         success_create: "Congratulation !",
         success_update: "Successfully update",
+        success_uploaded: "File(s) uploaded",
+        success_delete: "Element removed",
         success_sent: "Email sent",
+        success_updated_pw: "Password has been updated",
 
         error_create: "Element create successfully",
         error_update: "Element update successfully",
@@ -253,12 +263,22 @@ const en = {
         error_wrong_token: "Error authentication, please try again or contact or service support",
         error_no_token: "Error authentication, please try again or contact or service support",
         error_file_not_allowed: "This type of file is not allowed",
+        error_pw_not_match: "Password not matches",
+        error_pw_min_8: "Your password must have at least 8 caracteres",
 
         alert_password_not_match: "Password not match, please verify !",
         phone_required: "Your mobile phone is required",
+        required: "All fields with * are required",
+        request_reset_pw: "Please check your email and follow the instructions"
 
     },
-    days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    home_page: {
+        title_01: "The Digital Book of Ledger",
+        paragraphe_01: `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis ex voluptates numquam exercitationem 
+        libero ducimus omnis iusto sit veritatis, magnam doloribus adipisci ullam autem qui et alias! Dolor, quo saepe! Nobis ex 
+        voluptates numquam exercitationem libero ducimus omnis iusto sit veritatis.`
+    }
 }
 
 export {en}

@@ -45,7 +45,7 @@ class ShowProduct extends React.Component {
 
   render() {
 
-    const {classes, product, isFetching, locale, isError, message, categories, currency} = this.props;
+    const {classes, product, isFetching, locale, categories, currency} = this.props;
     const {reducer, main_img, showEdit} = this.state;
     
     if( isFetching ){
@@ -60,7 +60,6 @@ class ShowProduct extends React.Component {
         <ApxPaper>
           
           <ApxBackBtn/>
-          { isError ? <ApxAlert message={message} /> : null }
           <Grid container spacing={24}>
               <Grid item xs={12} sm={9} md={9} className={classes.thumbnail}>
                   
@@ -291,8 +290,6 @@ const mapStateToProps = (state) => {
       locale: state.locale.locale,
       isFetching: state.library.product.isFetching,
       isUpdating: state.library.product.isUpdating,
-      isError: state.library.product.isError,
-      message: state.library.product.message,
       product: state.library.product.item,
       categories: state.account.company.item ? state.account.company.item.category_name : [],
       currency: state.helper.items.currency

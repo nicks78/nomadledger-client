@@ -13,7 +13,6 @@ import EditSelect from '../../../lib/editSelect'
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid'
-import Snackbar from '../../../components/common/snackBar'
 import ApxSelect from '../../../components/common/select'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 
@@ -53,7 +52,7 @@ class Company extends Component {
   }
 
   render() {
-    const {company, progress, isUploading, locale, classes, isError, message, company_type, country, currency, months} = this.props;
+    const {company, progress, isUploading, locale, classes, company_type, country, currency, months} = this.props;
     const {showEdit, reducer} = this.state;
 
     const address = ["addresses_street", "addresses_zip", "addresses_city"]
@@ -180,13 +179,6 @@ class Company extends Component {
                                 locale={locale}
                                 handleAction={ (ev) => { this.props.handleFormEdit(ev, reducer) } }
                             />
-                            {/* <ApxSelect 
-                                arrayField={ o() }
-                                field="fiscal_day"
-                                value={company.fiscal_day[localStorage.getItem('locale')] }
-                                locale={locale}
-                                handleAction={ (ev) => { this.props.handleFormEdit(ev, reducer) } }
-                            /> */}
 
                         </React.Fragment>
                         : 
@@ -230,12 +222,6 @@ class Company extends Component {
               </Grid>
             </Grid>
         </Grid>
-        
-        <Snackbar
-            locale={locale}
-            message={message}
-            isError={isError}
-        />
       </div>
     )
   }
@@ -244,9 +230,6 @@ class Company extends Component {
 const mapStateToProps = (state) => {
 
     return {
-        isError: state.account.company.isError,
-        message: state.account.company.message,
-        receivedAt: state.account.company.receivedAt,
         isUploading: state.account.company.isUploading,
         locale: state.locale.locale,
         company: state.account.company.item, 

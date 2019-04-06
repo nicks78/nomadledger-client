@@ -21,6 +21,7 @@ class Home extends Component {
     componentDidMount(){
         this.props.getData( "mainStat", "" );
         this.props.getData( "pieQuote", "compare/quote/success-onhold-rejected" );
+        // this.props.getData( "expensesBy", "sum/expenses/bycategory" );
         this.props.getAllTask("daily", "dailyTask");
     }
 
@@ -30,7 +31,7 @@ class Home extends Component {
 
     render() {
 
-        const {classes, tasks, isFetching, pieQuote, mainStat, locale, currency} = this.props
+        const {classes, tasks, isFetching, pieQuote, mainStat, expensesBy, locale, currency} = this.props
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
         if(isFetching){
@@ -45,8 +46,8 @@ class Home extends Component {
             <Grid container spacing={0} className={ classes.charts }>
                 <Grid  item xs={12} sm={8} md={8}>
                     {
-                        this.props.mainStat ? 
-                            <BarCharts chartData={ mainStat } />
+                        mainStat ? 
+                            <BarCharts chartData={ mainStat } id="mainStat"/>
                         : null
                     }
                 </Grid>
@@ -59,7 +60,7 @@ class Home extends Component {
                     {
                         pieQuote ?
                             <PieCharts 
-                                chartData={ this.props.pieQuote }
+                                chartData={ pieQuote }
                                 locale={locale}
                             />
                         : null 
@@ -71,7 +72,7 @@ class Home extends Component {
             <Grid container spacing={0}>
 
             <Grid item xs={12}>
-            <Typography variant="caption" style={{ padding: 12, backgroundColor: 'grey', color: "white" }}>{locale.subheading.label_daily_task}&nbsp;
+            <Typography variant="caption" style={{ padding: 12, backgroundColor: 'rgba(44,47,50,1)', color: "white" }}>{locale.subheading.label_daily_task}&nbsp;
                     <span style={{textTransform: "capitalize"}}>{ tasks.date ? new Date(tasks.date.date).toLocaleDateString("fr", options) : null }</span>
                 </Typography>
                 <div>
@@ -95,7 +96,11 @@ class Home extends Component {
                     </div>
             </Grid>
             </Grid>
-            
+            {/* {
+                expensesBy ? 
+                    <BarCharts chartData={ expensesBy }  id="expensesBy"/>
+                : null
+            } */}
             
         </ApxPaper>
     )
@@ -143,6 +148,7 @@ const mapStateToProps = (state) => {
         locale: state.locale.locale,
         isFetching: state.stat.isFetching,
         mainStat: state.stat.mainStat || null,
+        expensesBy: state.stat.expensesBy || null,
         pieQuote: state.stat.pieQuote || null,
         tasks: state.task.dailyTask || {},
         currency: state.account.company.item ? state.account.company.item.currency : {}

@@ -3,6 +3,7 @@
 import axios from 'axios';
 import { API_ENDPOINT } from '../../constant'
 import { requestData, requestFailed  } from './'
+import {setNotification} from '../../notification/actions'
 
 
 // GET A SINGLE ITEM
@@ -25,6 +26,7 @@ export function getItem( actionType, id ){
     .catch(function (error) {
       // handle error
       var message = error.response ? error.response.data.message : 'error_500'
+      dispatch(setNotification(message, "error"))
       dispatch(requestFailed(actionType, message));
     })          
   }

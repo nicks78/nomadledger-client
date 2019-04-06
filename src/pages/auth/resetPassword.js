@@ -1,20 +1,25 @@
-//src/pages/auth/forgotPassword.js
-
+//src/pages/auth/resetPassword.js
 import React, { Component } from 'react'
 import {DEFAULT_URL} from '../../redux/constant'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {recoverPassword} from '../../redux/auth/actions'
+import {resetPassword} from '../../redux/auth/actions'
+import {setNotification} from '../../redux/notification/actions'
 import {TextField, withStyles, Typography, Button, Paper } from '@material-ui/core'
 
-class ForgotPassword extends Component {
+class ResetPassword extends Component {
 
     state = {
-        email: "email",
+        password: "",
+        confirm_pwd: "",
+        token: "",
         height: window.innerHeight
     }
 
     componentDidMount(){
+        this.setState({
+            token : this.props.match.params.token
+        })
         window.addEventListener("resize", this.changeHeight )
     }
 
@@ -25,15 +30,24 @@ class ForgotPassword extends Component {
     }
 
     onSubmitForm = (e) =>{
-        e.preventDefault()
-        this.props.recoverPassword(this.state.email)
+        e.preventDefault();
+
+        if( this.state.password.length < 8 ){
+            this.props.setNotification("error_pw_min_8", "error");
+            return;
+        }
+
+        if(this.state.password === this.state.confirm_pwd){
+            this.props.resetPassword(this.state.token, this.state.password )
+        }else{
+            this.props.setNotification("error_pw_not_match", "error")
+        }
     }
 
 
     render() {
     
         const {classes, locale, isFetching} = this.props
-
     return (
       <div className={classes.container} style={{height: this.state.height}}>
             
@@ -45,14 +59,24 @@ class ForgotPassword extends Component {
                     </Typography><br /> 
                 </div>
             <Typography variant="caption">
-                { locale.subheading.label_forgot_pwd }
+                { locale.subheading.label_reset_pwd }
             </Typography>
             
-            <form onSubmit={(e) => { this.onSubmitForm(e) }}>
+            <form onSubmit={ this.onSubmitForm }>
                 <TextField 
-                    name="email"
-                    label={locale.wording.email}
-                    type="email"
+                    name="password"
+                    label={locale.wording.password}
+                    type="password"
+                    fullWidth
+                    required
+                    margin="dense"
+                    onChange={ (e) => { this.setState({[e.target.name]: e.target.value }) } }
+                    variant="filled"
+                />
+                <TextField 
+                    name="confirm_pwd"
+                    label={locale.wording.password_confirm}
+                    type="password"
                     fullWidth
                     required
                     margin="dense"
@@ -64,7 +88,7 @@ class ForgotPassword extends Component {
                     color="primary" 
                     disabled={isFetching ? true : false }
                     className={classes.button}
-                    variant="contained">{ isFetching ? locale.wording.loading : locale.wording.send_link  }</Button>
+                    variant="contained">{ isFetching ? locale.wording.loading :  locale.wording.reset_pwd  }</Button>
             </form>
 
             </Paper>
@@ -106,6 +130,6 @@ const mapStateToProps =(state) => {
     }
 }
 
-const StyledForgotPassword = withStyles(styles)(ForgotPassword)
+const StyledResetPassword = withStyles(styles)(ResetPassword)
 
-export default connect(mapStateToProps, {recoverPassword})(StyledForgotPassword)
+export default connect(mapStateToProps, {resetPassword, setNotification})(StyledResetPassword)

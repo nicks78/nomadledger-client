@@ -5,7 +5,6 @@ import {connect} from 'react-redux'
 import { createState, createDocument, resetState, convertToOtherDocument} from '../../../redux/book/actions'
 import { convertToCurrency, getListItem } from '../../../redux/book/itemActions'
 import { withStyles } from '@material-ui/core';
-import ApxAlert from '../../../components/common/alert'
 import Spinner from '../../../components/common/spinner'
 import Form from '../common/form'
 
@@ -42,7 +41,7 @@ class CreateRefund extends React.Component {
 
     render(){
 
-    const { isFetching, locale, classes, newRefund, listItems, vat, message, isError, currency, status } = this.props;
+    const { isFetching, locale, classes, newRefund, listItems, vat, currency, status } = this.props;
     const {reducer} = this.state;
 
     if(isFetching){
@@ -52,7 +51,6 @@ class CreateRefund extends React.Component {
     return (
             <div className={ classes.root}>
 
-                { isError ? <ApxAlert message={message} /> : null }
                 <Form 
                     formTitle="add_refund"
                     data={newRefund}
@@ -86,11 +84,9 @@ const styles = theme => ({
 
 const mapStateToProps = (state) => {
     return {
-        isError: state.book.refund.isError,
         isFetching: state.book.refund.isFetching,
         locale: state.locale.locale,
         newRefund: state.book.refund.item || {},
-        message: state.book.refund.message,
         listItems: state.book.refund.item.list_items,
         vat: state.account.company.item ? state.account.company.item.vat : [],
         status: state.helper.items.status_refund,

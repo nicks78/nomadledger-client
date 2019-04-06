@@ -9,7 +9,6 @@ import { getTotal } from '../../../redux/library/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, TableCell, TableRow,} from '@material-ui/core';
 import ApxTableToolBar from '../../../components/common/tableToolBar'
-import ApxAlert from '../../../components/common/alert'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
 import ApxSelect from '../../../components/common/select'
@@ -39,12 +38,8 @@ class Invoice extends Component {
     
     render() {
     
-    const {listInvoice, isFetching, isError,  locale, classes, message, newInvoice, status} = this.props
+    const {listInvoice, isFetching, locale, classes, newInvoice, status} = this.props
     const { reducer } = this.state
-
-    if(isError){
-        return <ApxAlert message={message} />
-    }
 
     return (
       <div className={classes.root}>
@@ -176,8 +171,6 @@ const mapStateToProps = (state) => {
     return {
         isFetching: state.book.invoice.isFetching,
         updated: state.book.invoice.updated,
-        isError: state.book.invoice.isError,
-        message: state.book.invoice.message,
         receivedAt: state.book.invoice.receivedAt,
         newInvoice: state.book.invoice.item || {},
         locale: state.locale.locale,

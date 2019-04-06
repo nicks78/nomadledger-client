@@ -3,7 +3,6 @@
 import React, { Component } from 'react'
 import { getAllTask , createTask, createStateTask, setTask, updateTask} from '../../redux/task/actions'
 import {connect} from 'react-redux'
-import ApxAlert from '../../components/common/alert';
 import {Paper, withStyles, Button} from '@material-ui/core'
 import AddTask from './addTask'
 import TaskCard from './taskCard'
@@ -58,7 +57,7 @@ class Task extends Component {
 
   render() {
 
-    const { classes ,isError, message, createTask, isFetching, createStateTask, isCreating, locale, newTask, listTask, status, itemToUpdate} = this.props;
+    const { classes , createTask, isFetching, createStateTask, isCreating, locale, newTask, listTask, status, itemToUpdate} = this.props;
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const {id} = this.state
 
@@ -78,7 +77,6 @@ class Task extends Component {
           : <Button disabled variant="contained">{ locale.wording.progress }</Button>
           }
           
-     { isError ? <ApxAlert message={message} />: null }
       <div className={classes.step}>
           
       {
@@ -140,7 +138,6 @@ const styles = theme => ({
     },
     step: {
       borderLeft: '1px solid #9e9e9e',
-      // minHeight: 400,
       marginLeft: 20,
       [theme.breakpoints.down('sm')]: {
         marginLeft: 20,
@@ -172,8 +169,6 @@ const mapStateToProps = (state) => {
   return {
       isFetching: state.task.isFetching,
       isCreating: state.task.isCreating,
-      isError: state.task.isError,
-      message: state.task.message,
       listTask: state.task.taskList || [],
       itemToUpdate: state.task.item,
       locale: state.locale.locale,

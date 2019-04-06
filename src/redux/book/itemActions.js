@@ -3,6 +3,9 @@
 import axios from 'axios';
 import { requestFailed } from './actions'
 import { API_ENDPOINT } from '../constant';
+import {setNotification} from '../notification/actions'
+
+
 
 /**
  * Called when add new item in store
@@ -15,7 +18,6 @@ export function getListItem( actionType, name, item ) {
 
         var currency = getState().book[actionType.toLowerCase()].item.currency;
         var price = item.onModel === "product" ? item.selling_price : item.price;
-console.log("getList")
         currencyConvertorApi( item.currency.en, price, currency.en )
         .then( (unit_price) => {
             var tmp = {
@@ -35,6 +37,7 @@ console.log("getList")
         .catch(function (error) {
             // handle error
             dispatch(requestFailed(actionType, "error_500"));
+            dispatch(setNotification("error_500", "error"))
         })        
     }
 }
@@ -76,6 +79,8 @@ export function convertToCurrency( actionType, currency, item ) {
         .catch(function (error) {
             // handle error
             dispatch(requestFailed(actionType, "error_500"));
+            dispatch(setNotification("error_500", "error"))
+            
         })   
     }
 }
@@ -97,11 +102,6 @@ export function updateListItems( actionType, item ) {
  * @param  to 
  */
 async function currencyConvertorApi(from, amount, to){
-
-
-    console.log("from", from)
-    console.log("to", to)
-    console.log("amount", amount)
 
     // Set real time currency convertor
     return new Promise( (resolve, reject) => { 

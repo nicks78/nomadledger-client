@@ -4,6 +4,8 @@
 import axios from 'axios';
 import { API_ENDPOINT } from '../../constant'
 import { requestCreation, requestFailed, progress  } from './'
+import {setNotification} from '../../notification/actions'
+
 
 
 // CREATE NEW ITEM
@@ -44,13 +46,14 @@ export const createItem = ( actionType ) => {
             return response.data
         }) 
         .then( res => {
+            dispatch(setNotification("success_create", "success"))
             dispatch(setCreateItem( actionType, res.item ))  
         })
         .catch(function (error) {
-            console.log("ERR", error)
             dispatch(progress(actionType, 100))
             // handle error
             var message = error.response ? error.response.data.message : 'error_500'
+            dispatch(setNotification(message, "error"))
             dispatch(requestFailed(actionType, message));
         })  
     }

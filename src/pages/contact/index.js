@@ -6,7 +6,6 @@ import {Table, TableHead, TableBody, Paper, TableCell, TableRow, withStyles, } f
 import {connect} from 'react-redux'
 import { createItem, getItemList, getItem, createState, getTotal, resetState} from '../../redux/library/actions'
 import ApxTableToolBar from '../../components/common/tableToolBar'
-import ApxAlert from '../../components/common/alert'
 import AddContact from './addContact'
 import Pagination from '../../lib/pagination'
 
@@ -57,7 +56,7 @@ class Contact extends Component {
 
     render() {
     
-    const {listContacts, isFetching, isError, locale, createItem, createState, newContact, isCreating, progress, message, classes, contactGroup, rowsPerPageOptions, total, country, phone_code} = this.props
+    const {listContacts, isFetching,  locale, createItem, createState, newContact, isCreating, progress, classes, contactGroup, rowsPerPageOptions, total, country, phone_code} = this.props
     const { reducer } = this.state
 
 
@@ -72,8 +71,7 @@ class Contact extends Component {
                         createContactState={  createState } 
                         newData={newContact} 
                         isCreating={ isCreating  }/>
-                
-                { isError ?  <ApxAlert message={message} reducer={ this.state.reducer }/> : null }
+            
                 <Paper className={classes.paper}>
                     <ApxTableToolBar
                         numSelected={0}
@@ -138,13 +136,11 @@ const mapStateToProps = (state) => {
     return {
         isFetching: state.library.contact.isFetching,
         isCreating: state.library.contact.isCreating,
-        isError: state.library.contact.isError,
         listContacts: state.library.contact.list,
         receivedAt: state.library.contact.receivedAt,
         locale: state.locale.locale,
         newContact: state.library.contact.tmp_state,
         progress: state.library.contact.progress,
-        message: state.library.contact.message,
         total: state.library.contact.total,
         rowsPerPageOptions: state.library.contact.rowsPerPageOptions,
         contactGroup: state.account.company.item ?  state.account.company.item.contact_group : [],

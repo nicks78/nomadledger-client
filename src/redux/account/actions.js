@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { API_ENDPOINT } from '../constant'
 import { initLocale } from '../locale/actions'
-
+import {setNotification} from '../notification/actions'
 
 
 // GET A SINGLE ITEM
@@ -33,7 +33,8 @@ export function getAccount(actionType){
     })
     .catch(function (error) {
       // handle error
-      var message = error.response ? error.response.data.message : 'error_500'
+      var message = error.response ? error.response.data.message : 'error_500';
+      dispatch(setNotification(message, "error"))
       dispatch(requestFailed(actionType, message));
     })          
   }
@@ -59,11 +60,13 @@ export function updateDocument(actionType){
                 return response.data
             }) 
             .then( res => {
-                    dispatch(setAccount( actionType, res.payload ))  
+                dispatch(setNotification("success_update", "success"))
+                dispatch(setAccount( actionType, res.payload ))  
             })
             .catch(function (error) {
                 // handle error
-                var message = error.response ? error.response.data.message : 'error_500'
+                var message = error.response ? error.response.data.message : 'error_500';
+                dispatch(setNotification(message, "error"))
                 dispatch(requestFailed(actionType, message));
             })   
         }else{
@@ -89,11 +92,13 @@ export function pushToDocument(actionType, data, endPoint ){
                 return response.data
             }) 
             .then( res => {
+                dispatch(setNotification("success_update", "success"))
                 dispatch(setAccount( actionType, res.payload ))  
             })
             .catch(function (error) {
                 // handle error
                 var message = error.response ? error.response.data.message : 'error_500'
+                dispatch(setNotification(message, "error"))
                 dispatch(requestFailed(actionType, message));
             })   
         }else{
@@ -140,11 +145,13 @@ export const uploadFileToServer = ( actionType, file, field, oldFileObject ) => 
           return response.data
       }) 
       .then( res => {
+            dispatch(setNotification("success_uploaded", "success"))
             dispatch(setAccount( actionType, res.payload ))  
       })
       .catch(function (error) {
           // handle error
           var message = error.response ? error.response.data.message : 'error_500'
+          dispatch(setNotification(message, "error"))
           dispatch(requestFailed(actionType, message));
       })  
   }
@@ -172,11 +179,13 @@ export const updatePassword = ( password ) => {
             return response.data
         }) 
         .then( res => {
+            dispatch(setNotification("success_update", "success"))
             dispatch(setAccount( 'USER', res.payload ))  
         })
         .catch(function (error) {
             // handle error
             var message = error.response ? error.response.data.message : 'error_500'
+            dispatch(setNotification(message, "error"))
             dispatch(requestFailed('USER', message));
         })  
     }
