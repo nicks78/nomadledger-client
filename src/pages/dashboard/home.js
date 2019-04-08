@@ -49,7 +49,7 @@ class Home extends Component {
                 <Grid  item xs={12} sm={8} md={8}>
                     {
                         mainStat ? 
-                            <BarCharts chartData={ mainStat } id="mainStat"/>
+                            <BarCharts chartData={ mainStat } id="mainStat" currency={ currency.value || "-" }/>
                         : null
                     }
                 </Grid>
@@ -73,26 +73,26 @@ class Home extends Component {
             </ApxPaper>
             <br />
             <ApxPaper>
-            <Typography variant="h2" align="center">
-                { locale.subheading.label_graph_expense }
-            </Typography>
+            
             <br />
             <Grid container className={classes.section_2}>
             <Grid xs={12} sm={8} md={8} >
-
+            <Typography variant="h2" align="center" style={{paddingTop: 12, paddingBottom: 12}}>
+                { locale.subheading.label_graph_expense }
+            </Typography>
                     {
                         expensesBy ? 
-                            <BarHorizontal chartData={ expensesBy }  id="expensesBy"/>
+                            <BarHorizontal chartData={ expensesBy }  id="expensesBy" currency={ currency.value || "-" }/>
                         : null
                     }
                 </Grid>
                 <Grid item xs={12} sm={4} md={4}>
                     <Typography variant="caption" style={{ padding: 12, backgroundColor: 'rgba(44,47,50,1)', color: "white" }}>{locale.subheading.label_daily_task}&nbsp;
-                        <span style={{textTransform: "capitalize"}}>{ tasks.date ? new Date(tasks.date.date).toLocaleDateString("fr", options) : null }</span>
+                        <span style={{textTransform: "capitalize"}}>{ new Date().toLocaleDateString("fr", options)  }</span>
                     </Typography>
                     <div>
                         {
-                            tasks.tasks && 
+                            tasks.tasks ? 
                             tasks.tasks.map((task, index) => {
                                 return   <div className={classes.task} key={index}>
                                 <span className={ classes.status } style={{ backgroundColor: task.status.color,}}>{task.status.fr}</span>
@@ -106,54 +106,9 @@ class Home extends Component {
                                             
                                         </div>
                             })
-                        }
-                        {
-                            tasks.tasks && 
-                            tasks.tasks.map((task, index) => {
-                                return   <div className={classes.task} key={index}>
-                                <span className={ classes.status } style={{ backgroundColor: task.status.color,}}>{task.status.fr}</span>
-                                            <Typography variant="body1" className={classes.taskTitle} >
-                                                {task.subject}
-                                                
-                                            </Typography>
-                                            <Typography variant="body2">
-                                                    { task.short_desc }
-                                            </Typography>
-                                            
-                                        </div>
-                            })
-                        }
-                        {
-                            tasks.tasks && 
-                            tasks.tasks.map((task, index) => {
-                                return   <div className={classes.task} key={index}>
-                                <span className={ classes.status } style={{ backgroundColor: task.status.color}}>{task.status.fr}</span>
-                                            <Typography variant="body1" className={classes.taskTitle} >
-                                                {task.subject}
-                                                
-                                            </Typography>
-                                            <Typography variant="body2">
-                                                    { task.short_desc }
-                                            </Typography>
-                                            
-                                        </div>
-                            })
-                        }
-                        {
-                            tasks.tasks && 
-                            tasks.tasks.map((task, index) => {
-                                return   <div className={classes.task} key={index}>
-                                <span className={ classes.status } style={{ backgroundColor: task.status.color,}}>{task.status.fr}</span>
-                                            <Typography variant="body1" className={classes.taskTitle} >
-                                                {task.subject}
-                                                
-                                            </Typography>
-                                            <Typography variant="body2">
-                                                    { task.short_desc }
-                                            </Typography>
-                                            
-                                        </div>
-                            })
+                            :   <Typography variant="body1" style={{padding: 10}} align="center">
+                                    {locale.subheading.label_not_task_found}
+                                </Typography>
                         }
 
                         </div>

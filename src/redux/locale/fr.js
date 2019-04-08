@@ -96,6 +96,7 @@ const fr =  {
         label_login: "Connectez vous à",
         label_status: "Sélectionner le statut du document *",
         label_graph_expense: "Dépenses par catégorie",
+        label_not_task_found: "Aucun tache pour aujourd'hui"
 
     },
     wording: {
@@ -238,7 +239,7 @@ const fr =  {
         last_modify: "Mise à jour le ",
         tag_name_en: "Nom de l'étiquette (Anglais)",
         tag_name_fr: "Nom de l'étiquette (Français)",
-        tag_hex: "Code couleur HEX (ex: #ffffff)"
+        tag_hex: "Code couleur HEX (ex: #ffffff)",
     },
     helperText: {
         select_phone_code: "Sélectionner le code téléphone",

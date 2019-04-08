@@ -13,7 +13,8 @@ class BarCharts extends Component {
     }
 
     componentDidMount(){
-				var ctx = document.getElementById(this.props.id).getContext("2d");
+        var ctx = document.getElementById(this.props.id).getContext("2d");
+        var currency  = this.props.currency
         this.setState({
             ctx: new Chart(ctx, {
               type: "bar",
@@ -23,7 +24,7 @@ class BarCharts extends Component {
                   callbacks: {
                     label: function(tooltipItem, data) {
                       var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
-                      return datasetLabel + ' : ' + cvtNumToUserPref(tooltipItem.yLabel) + ' €';
+                      return datasetLabel + ' : ' + cvtNumToUserPref(tooltipItem.yLabel) + ' ' + currency ;
                     }
                   }
                 },

@@ -35,13 +35,9 @@ if( parseInt(x, 10) ){
 
 }else if(history.location.pathname.indexOf("/reset-password") > -1 ){
     history.push(history.location.pathname)
-
 }else{
-    store.dispatch(getAccount('COMPANY'))
-    store.dispatch(getAccount('USER'))
-    store.dispatch(setAuthUser())
-    // store.dispatch(getLogout());
-    // history.push('/')
+    store.dispatch(getLogout());
+    history.push('/')
 }
 
 export default store;

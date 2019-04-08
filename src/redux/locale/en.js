@@ -89,7 +89,8 @@ const en = {
         label_reset_pwd: "Change your password",
         label_login: "Login in to ",
         label_status: "Select one status *",
-        label_graph_expense: "Expenses by category"
+        label_graph_expense: "Expenses by category",
+        label_not_task_found: "No task today"
     },
     wording: {
         create: "Create",

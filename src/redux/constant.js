@@ -1,6 +1,6 @@
 //src/redux/constant.js
 
-var contant = "http://localhost:8080"
+var contant = "http://devapi.nomadledger.com"
 
 export const API_ENDPOINT = `${contant}/api/v1/`
 export const DEFAULT_URL = `${contant}/`

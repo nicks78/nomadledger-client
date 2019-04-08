@@ -13,7 +13,8 @@ class BarHorizontal extends Component {
     }
 
     componentDidMount(){
-				var ctx = document.getElementById(this.props.id).getContext("2d");
+        var ctx = document.getElementById(this.props.id).getContext("2d");
+        var currency  = this.props.currency
         this.setState({
             ctx: new Chart(ctx, {
               type: "horizontalBar",
@@ -21,9 +22,8 @@ class BarHorizontal extends Component {
               options: {
                 tooltips: {
                   callbacks: {
-                    label: function(tooltipItem, data) {
-                      var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
-                      return datasetLabel + ' : ' + cvtNumToUserPref(tooltipItem.yLabel) + ' €';
+                    label: function(tooltipItem) {
+                      return tooltipItem.yLabel + ' : ' + cvtNumToUserPref(tooltipItem.xLabel) + ' ' + currency ;
                     }
                   }
                 },
