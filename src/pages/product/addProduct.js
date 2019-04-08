@@ -12,7 +12,7 @@ const AddProduct = (props) => {
         title: locale.subheading.add_product, 
         label: locale.subheading.label_product,
         fields: [
-          { name: 'name', type:"text", required: true },
+          { name: 'name', type:"text", required: true, length: 50 },
           { name: 'buying_price', type:"text", required: true},
           { name: 'selling_price', type:"text", required: true},
           { name: 'stock', type:"number"},

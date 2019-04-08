@@ -56,6 +56,7 @@ class Items extends Component {
     const { newData, listItems, reducer, classes, locale } = this.props
 
     return (
+        <div style={{overflowX: "auto"}}>
         <Table className={classes.table}>
         <TableHead className={classes.tableHead}>
         <TableRow>
@@ -111,6 +112,7 @@ class Items extends Component {
             </TableRow>
         </TableBody>
     </Table>
+    </div>
 
     )
   }

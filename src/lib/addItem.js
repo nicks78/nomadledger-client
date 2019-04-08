@@ -106,7 +106,7 @@ class Add extends Component {
 
     render() {
 
-        const { locale, newData, classes, formFields, addBtnTitle, headerText, limitUploadFile, isUploading, progress, disabled } = this.props
+        const { locale, newData, classes, formFields, addBtnTitle, headerText, limitUploadFile, isUploading, progress, isCreating} = this.props
     
         const formDrawer = (
                 <div className={ classes.formWindow}>
@@ -134,13 +134,20 @@ class Add extends Component {
                         }
                     </div>
                     </form>
-                    <Button variant="contained" color="primary" className={ classes.btnSave } onClick={ this._handleCreateItem }>{ locale.wording.save }</Button>
+                    <Button 
+                        variant="contained" 
+                        color="primary" 
+                        disabled={ isCreating || false}
+                        className={ classes.btnSave } 
+                        onClick={ this._handleCreateItem }>
+                        { isCreating ? locale.wording.loading : locale.wording.save }
+                    </Button>
                 </div>
           );
         return (
             <div className={ classes.root}>
             <Hidden only={['xs', 'sm']}>
-                <Button variant="contained" color="primary" disabled={ disabled || false}  className={  classes.button } onClick={this.toggleDrawer('right', true)}>{ disabled ? locale.wording.loading : addBtnTitle }</Button>
+                <Button variant="contained" color="primary" disabled={ isCreating || false}  className={  classes.button } onClick={this.toggleDrawer('right', true)}>{ isCreating ? locale.wording.loading : addBtnTitle }</Button>
             </Hidden>
             <ApxRightDrawer toggleDrawer={ this.toggleDrawer } side="right" open={ this.state.right} title={ headerText } requiredText={locale.message.error_400}>
             

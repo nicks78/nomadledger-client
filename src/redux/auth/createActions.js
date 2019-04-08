@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { API_ENDPOINT } from '../constant'
 import {requestUser, requestFailed} from './actions'
-
+import { setNotification } from '../notification/actions'
 
 // CREATE NEW OWNER
 export const createUser = ( actionType ) => {
@@ -28,10 +28,12 @@ export const createUser = ( actionType ) => {
             return response.data
         }) 
         .then( res => { 
+                dispatch(setNotification("success_create_new_user", "success"));
                 dispatch(setCreateUser(res.message));
         })
         .catch(function (error) {
             // handle error
+            dispatch(setNotification("error_500", "danger"));
             var message = error.response ? error.response.data.message : 'error_500'
             dispatch(requestFailed(message));
         })  

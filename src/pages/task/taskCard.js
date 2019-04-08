@@ -34,7 +34,7 @@ const styles = theme => ({
         color: "white", 
         padding: "1px 3px 1px 3px", 
         position: "absolute", 
-        bottom: 5, 
+        bottom: 10, 
         right: 5, 
         fontSize: 11, 
         minWidth: 60, 

@@ -43,8 +43,8 @@ const styles = theme => ({
 
 class Login extends Component {
     state = {
-        login_email: 'contact@apx-dev.com',
-        login_password: '',
+        login_email: 'nicolas@apx-dev.com',
+        login_password: '0000',
         height: window.innerHeight
     }
 

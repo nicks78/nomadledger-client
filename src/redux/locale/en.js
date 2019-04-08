@@ -87,7 +87,9 @@ const en = {
         label_forgot_pwd: "We'll send a recovery link to",
         link_forgot_pwd: "Forgot password ?",
         label_reset_pwd: "Change your password",
-        label_login: "Login in to "
+        label_login: "Login in to ",
+        label_status: "Select one status *",
+        label_graph_expense: "Expenses by category"
     },
     wording: {
         create: "Create",
@@ -128,6 +130,7 @@ const en = {
         receipt_date: "Receipt date",
         repay: "Repay",
         transaction_number: "Transaction Number",
+        my_account: "My Account",
 
         contact_group: "Group",
         contact_drop: "Client",
@@ -177,6 +180,7 @@ const en = {
 
         product: "PRODUIT",
         total: "Total",
+        pricing: "Pricing",
 
         quantity: "Quantity",
         label_rows_per_page: "Rows per page:",
@@ -214,6 +218,7 @@ const en = {
         register: "Register",
         sign_up: "Sign Up",
         login: "Login",
+        logout: "Logout",
         reset_pwd: "Reset password",
         send_link: "Send recovery link",
         return_list: "Back to list",
@@ -225,7 +230,8 @@ const en = {
         conversions: "Conversions",
         last_modified: "Last modified ",
         tag_name_en: "Tag name (English)",
-        tag_name_fr: "Tag name (French)"
+        tag_name_fr: "Tag name (French)",
+        tag_hex: "Color code HEX (ex: #ffffff)"
     },
     helperText: {
         select_phone_code: "Select phone code",
@@ -237,6 +243,7 @@ const en = {
         select_contact_group: "Select a group",
         textarea_quote: "Type a description",
         textarea_terms: "Type a short terms & conditions",
+        infos_status: "<span style='color: red;font-weight: 700'>CAUTIOUS</span> - Only status < Draft & Pending > are editable"
     },
     message: {
         success_create: "Congratulation !",
@@ -245,6 +252,7 @@ const en = {
         success_delete: "Element removed",
         success_sent: "Email sent",
         success_updated_pw: "Password has been updated",
+        success_create_new_user: "Congratulation ! Your account has been created, you can now login",
 
         error_create: "Element create successfully",
         error_update: "Element update successfully",
@@ -274,10 +282,21 @@ const en = {
     },
     days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     home_page: {
-        title_01: "The Digital Book of Ledger",
-        paragraphe_01: `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis ex voluptates numquam exercitationem 
-        libero ducimus omnis iusto sit veritatis, magnam doloribus adipisci ullam autem qui et alias! Dolor, quo saepe! Nobis ex 
-        voluptates numquam exercitationem libero ducimus omnis iusto sit veritatis.`
+        title_01: "Activate your efficiency",
+        paragraphe_01: `Maitrisez et exploitez tout le potentiel de votre entreprise en simplifiant la gestion de vos factures,
+        taches et contacts. Revolutionnez maintenant votre experience client en quelques clics`,
+        block_title_001: "By Nomads for Nomads",
+        block_paragraphe_001: `A complete platform ! Invoices, FollowUp, Stock, Repports... With a simple and easy tools, you will take control of all aspect of your business
+        and can focus on developing your turnover`,
+        block_title_002: "Digital invoices",
+        block_paragraphe_002: `Créez facillement des documents de facturation irréprochables et personnalisés: devis,
+        factures, avoirs, proforma... Le tout sans erreur de calcul et en moins d'une minute ! 
+        Efficacité et gain de temps sont assurés avec notre logiciel de facturation en ligne.`,
+        block_title_003: "Easy to use and flexible",
+        block_paragraphe_003: `Créé specialement pour les proffessionnels qui veulent tenir efficacement et 
+        simplement leur gestion, notre outils s'adatera parfaitement a votre structure et a vos besoins. Nomade, Autoentrepreuneurs, TPE, PME, PML...Quel 
+        que soit votre statut, vous pourrez maitriser votre gestion en toute simplicité.`,
+        form_title: "Register now for free"
     }
 }
 

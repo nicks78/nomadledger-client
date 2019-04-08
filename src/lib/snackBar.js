@@ -96,7 +96,6 @@ SimpleSnackbar.propTypes = {
 
 
 const mapStateToProps = (state) => {
-  console.log(state.notification)
   return {
       openSnack: state.notification.openSnack,
       text: state.notification.text

@@ -13,9 +13,9 @@ const AddTask = (props) => {
         label: locale.subheading.label_task,
         fields: [
             { name: 'due_date', type:"date"},
-            { name: 'subject', type:"text" },
+            { name: 'subject', type:"text" , length: 30 },
             { name: 'status', type:"select", selections: status, helperText: "select_status" },            
-            { name: 'short_desc', type:"longtext", multiline: true, rowsMax:"4" }
+            { name: 'short_desc', type:"longtext", multiline: true, rowsMax:"4", length: 144 }
           ]
       }
     ]

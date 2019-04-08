@@ -1,5 +1,6 @@
 import React  from 'react'
 import { NavLink } from "react-router-dom";
+import { DEFAULT_IMG } from '../../redux/constant'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -18,8 +19,6 @@ import AccountBalanceIcon from '@material-ui/icons/AccountBalanceOutlined'
 import ExpandLess from '@material-ui/icons/ExpandLessOutlined';
 import ExpandMore from '@material-ui/icons/ExpandMoreOutlined';
 import Hidden from '@material-ui/core/Hidden';
-import Logo from '../../logo.png';
-import Bg from '../../utils/img/bg.jpg'
 
 const Styles = theme => ({
     root: {
@@ -56,8 +55,7 @@ const Styles = theme => ({
     header: { 
         padding: '24px', 
         textAlign: 'center', 
-        backgroundImage: `url(${Bg})`,
-        backgroundSize: 'cover'
+        backgroundColor: theme.palette.darkGrey,
     },
     nested: {
         '& span': {
@@ -78,25 +76,25 @@ class MainMenu extends React.Component {
     }
 
     render() {
-    const { classes, locale } = this.props;
+    const { classes, locale, company } = this.props;
  
     return (
         <div className={classes.root}>
             <Hidden mdUp>
                 <div className={classes.header}>
-                    <img src={Logo} alt="logo" height="40" width="auto" /> 
-                    <p style={{marginBottom: '0px', color: 'white', fontWeight: '600'}}>APX DEV</p>
+                    <img src={company.logo_company ? company.logo_company.full_path : DEFAULT_IMG} alt="logo" height="40" width="auto" /> 
+                    <p style={{marginBottom: '0px', color: 'white', fontWeight: '600'}}>{ company.company_name }</p>
                 </div>
             </Hidden>
             <List component="nav" disablePadding className={classes.listText}>
-                <ListItem button component={NavLink} className={classes.listText} to="/home" activeClassName={classes.active}>
+                <ListItem button component={NavLink} className={classes.listText} onClick={ this.props.closeDrawer } to="/home" activeClassName={classes.active}>
                     <ListItemIcon >
                         <HomeIcon />
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.home.name } />
                 </ListItem>
 
-                <ListItem button component={NavLink} className={classes.listText}  to="/contact" activeClassName={classes.active}>
+                <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/contact" activeClassName={classes.active}>
                     <ListItemIcon>
                         <GroupIcon  />
                     </ListItemIcon>
@@ -112,32 +110,32 @@ class MainMenu extends React.Component {
                 </ListItem>
                     <Collapse in={ this.state.open} timeout="auto" unmountOnExit>
                         <List >
-                            <ListItem button component={NavLink} className={classes.listText}  to="/quote" activeClassName={classes.active}>
+                            <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/quote" activeClassName={classes.active}>
                                 <ListItemText inset  primary={ locale.quote.name }/>
                             </ListItem>
-                            <ListItem button component={NavLink} className={classes.listText}  to="/invoice" activeClassName={classes.active}>
+                            <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/invoice" activeClassName={classes.active}>
                                 <ListItemText inset  primary={ locale.invoice.name }/>
                             </ListItem>
-                            <ListItem button component={NavLink} className={classes.listText}  to="/refund" activeClassName={classes.active}>
+                            <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/refund" activeClassName={classes.active}>
                                 <ListItemText inset  primary={ locale.refund.name }/>
                             </ListItem>
                         </List>
                     </Collapse>
              
-                <ListItem button component={NavLink} className={classes.listText}  to="/service" activeClassName={classes.active}>
+                <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/service" activeClassName={classes.active}>
                     <ListItemIcon>
                         <HeadsetMicIcon  />
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.service.name } />
                 </ListItem>
-                <ListItem button component={NavLink} className={classes.listText}  to="/product" activeClassName={classes.active}>
+                <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/product" activeClassName={classes.active}>
                     <ListItemIcon>
                         <StoreIcon  />
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.product.name } />
                 </ListItem>
                 
-                <ListItem button component={NavLink} className={classes.listText}  to="/expense" activeClassName={classes.active}>
+                <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/expense" activeClassName={classes.active}>
                     <ListItemIcon>
                         <ReceiptIcon  />
                     </ListItemIcon>
@@ -145,7 +143,7 @@ class MainMenu extends React.Component {
                 </ListItem>
 
                 
-                <ListItem button component={NavLink} className={classes.listText}  to="/task" activeClassName={classes.active}>
+                <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/task" activeClassName={classes.active}>
                     <ListItemIcon>
                         <ListAltIcon  />
                     </ListItemIcon>
@@ -154,7 +152,7 @@ class MainMenu extends React.Component {
             </List>
             <Divider style={{borderColor: 'white'}}/>
             <List component="nav"> 
-                <ListItem button component={NavLink} className={classes.listText}  to="/archive" activeClassName={classes.active}>
+                <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/archive" activeClassName={classes.active}>
                     <ListItemText primary={ locale.archive.name } />
                 </ListItem>
             </List>

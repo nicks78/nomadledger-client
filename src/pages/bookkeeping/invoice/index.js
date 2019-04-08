@@ -7,7 +7,8 @@ import {connect} from 'react-redux'
 import {  getBookList, updateField, createState, downloadPdf } from '../../../redux/book/actions'
 import { getTotal } from '../../../redux/library/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
-import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, TableCell, TableRow,} from '@material-ui/core';
+import AddIcon from '@material-ui/icons/AddOutlined'
+import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, TableCell, TableRow, Fab } from '@material-ui/core';
 import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
@@ -133,6 +134,15 @@ class Invoice extends Component {
                         filterName="status"
                         onGetItemList={ this.props.getBookList }
                     />
+                    <Hidden only={['lg', 'xl', 'md']}>
+                        <Fab variant="contained"
+                            color="primary"
+                            style={{position: "fixed", right: 10, bottom: 10}}
+                            component={Link}
+                            to="/invoice/create">
+                            <AddIcon />
+                        </Fab>
+                    </Hidden>
             </Paper>
       </div>
     )

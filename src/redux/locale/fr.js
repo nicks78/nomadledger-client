@@ -93,7 +93,10 @@ const fr =  {
         label_forgot_pwd: "Nous enverrons un lien de récupération à",
         link_forgot_pwd: "Mot de passe oublié ?",
         label_reset_pwd: "Modifier votre mot de passe",
-        label_login: "Connectez vous à"
+        label_login: "Connectez vous à",
+        label_status: "Sélectionner le statut du document *",
+        label_graph_expense: "Dépenses par catégorie",
+
     },
     wording: {
         create: "Créer",
@@ -134,6 +137,7 @@ const fr =  {
         receipt_date: "Date du reçu",
         repay: "Rembourser",
         transaction_number: "Référence du virement",
+        my_account: "Mon Profil",
 
         contact_group: "Groupe",
         contact_drop: "Client",
@@ -178,6 +182,7 @@ const fr =  {
         quote: "Devis",
         refund: "Avoir",
         description: "Déscription",
+        pricing: "Prix",
 
         service_name: "Nom du service",
         product_name: "Nom du produit",
@@ -220,6 +225,7 @@ const fr =  {
         register: "S'enregistrer",
         sign_up: "S'enregistrer",
         login: "Se connecter",
+        logout: "Déconnexion",
         reset_pwd: "Reinitialisé mon mot de passe",
         send_link: "Envoyer le lien de récupération",
         return_list: "Retour à la liste",
@@ -231,7 +237,8 @@ const fr =  {
         conversions: "Conversions",
         last_modify: "Mise à jour le ",
         tag_name_en: "Nom de l'étiquette (Anglais)",
-        tag_name_fr: "Nom de l'étiquette (Français)"
+        tag_name_fr: "Nom de l'étiquette (Français)",
+        tag_hex: "Code couleur HEX (ex: #ffffff)"
     },
     helperText: {
         select_phone_code: "Sélectionner le code téléphone",
@@ -242,7 +249,8 @@ const fr =  {
         select_contact: "Sélectionner un client",
         select_contact_group: "Sélectionner un groupe",
         textarea_quote: "Taper une déscription de votre devis",
-        textarea_terms: "Taper un court texte de conditions générale"
+        textarea_terms: "Taper un court texte de conditions générale",
+        infos_status: "<span style='color: red;font-weight: 700'>ATTENTION</span> - Seule les statuts < Brouillion & En Attente > sont editable"
     },
     message: {
         success_create: "Felicitation !",
@@ -251,6 +259,7 @@ const fr =  {
         success_sent: "Email envoyée",
         success_delete: "Element supprimé",
         success_updated_pw: "Votre mot de passe a été mise à jour",
+        success_create_new_user: "Felicitation ! Votre compte a bien été créé, vous pouvez maintenant vous connecter",
 
         error_create: "Erreur donnée non créer",
         error_update: "Erreur donnée non mise ajour",
@@ -279,10 +288,22 @@ const fr =  {
     },
     days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
     home_page: {
-        title_01: "The Digital Book of Ledger",
-        paragraphe_01: `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis ex voluptates numquam exercitationem 
-        libero ducimus omnis iusto sit veritatis, magnam doloribus adipisci ullam autem qui et alias! Dolor, quo saepe! Nobis ex 
-        voluptates numquam exercitationem libero ducimus omnis iusto sit veritatis.`
+        title_01: "Activez votre efficacité !",
+        paragraphe_01: `Maitrisez et exploitez tout le potentiel de votre entreprise en simplifiant la gestion de vos factures,
+        taches et contacts. Revolutionnez maintenant votre experience client en quelques clics`,
+        block_title_001: "Par des nomades pour les nomades",
+        block_paragraphe_001: `Une plateforme complete ! Facturation, Paiments, Relances, Stock, Rapports... Grace a notre outil simple et intuitif, 
+        vous pourrez maitriser facillement tous les aspects de la gestion de votre entreprise et vous concentrer sur le developpement de votre chiffre d'affaire. 
+        Decuplez maintenant votre efficacité !`,
+        block_title_002: "Ma facturation en ligne",
+        block_paragraphe_002: `Créez facillement des documents de facturation irréprochables et personnalisés: devis,
+        factures, avoirs, proforma... Le tout sans erreur de calcul et en moins d'une minute ! 
+        Efficacité et gain de temps sont assurés avec notre logiciel de facturation en ligne.`,
+        block_title_003: "Simple et flexible",
+        block_paragraphe_003: `Créé specialement pour les proffessionnels qui veulent tenir efficacement et 
+        simplement leur gestion, notre outils s'adatera parfaitement a votre structure et a vos besoins. Nomade, Autoentrepreuneurs, TPE, PME, PML...Quel 
+        que soit votre statut, vous pourrez maitriser votre gestion en toute simplicité.`,
+        form_title: "Inscrivez-vous gratuitement"
     }
 };
 

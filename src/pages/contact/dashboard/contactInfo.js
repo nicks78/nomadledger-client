@@ -7,7 +7,6 @@ import EditInput from '../../../lib/editInput'
 import EditSelect from '../../../lib/editSelect'
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Input from '@material-ui/core/Input';
 
 
@@ -21,10 +20,6 @@ const styles = theme => ({
     icon: {
         top: '-12px',
         right: '-12px'
-    },
-    circular: {
-        width: 20, 
-        height: 20
     },
     editIcon: {
         width: '0.7em !important',
@@ -79,15 +74,13 @@ class ContactInfo extends Component {
             <div className={ classes.root }>
                 <div className={ classes.iconBtn }>
                 
-                {   !isUpdating ?
                     <ApxButtonEdit 
                         style={{top: '-5px', right: '-12px'}}
                         updateDocument={this.updateDocument}
                         openEdit={this.openEdit} 
                         showEdit={showEdit}
+                        isUpdating={isUpdating}
                   />
-                    : <CircularProgress className={ classes.circular }color="secondary" />
-                }
                 </div>
             
             { !showEdit ? 

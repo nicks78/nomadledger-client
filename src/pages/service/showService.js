@@ -42,7 +42,7 @@ class ShowService extends Component {
       return (
         <ApxPaper>
           <ApxBackBtn/>
-            <Typography variant="h2">
+            <Typography variant="h2" align="center">
               { service.name}
             </Typography>
             <br />

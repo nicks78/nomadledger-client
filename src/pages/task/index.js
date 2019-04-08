@@ -128,12 +128,14 @@ const styles = theme => ({
     paper: {
       padding: '5px 10px 5px 10px',
       position: 'relative',
-      minHeight: 50,
-      margin: 20,
+      minHeight: 60,
+      margin: "20px 0px 20px 20px",
       marginLeft: -20,
       [theme.breakpoints.down('sm')]: {
         margin: 0,
         marginLeft: -20,
+        boxShadow: "none",
+        borderRadius: 0
       },
     },
     step: {

@@ -10,7 +10,7 @@ import {Typography, withStyles, Paper, Grid, Button} from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/CheckOutlined'
 import ApxForm from '../../components/common/form'
 import Spinner from '../../components/common/spinner'
-
+import withWidth from '@material-ui/core/withWidth';
 
 
 
@@ -92,34 +92,41 @@ const styles = theme => ({
         color: "white", 
         marginBottom: 12,
     },
-    container: {
-        marginBottom: 100
-    },
     headline: {
         color: '#ef6c00',
         textAlign: 'center',
+        textTransform: "uppercase",
         marginBottom: 24
     },
     section_1: {
-        padding: "48px 0px 48px 0px"
+        padding: "48px 0px 0px 0px"
+    },
+    textBlock001: {
+        width: "60%",
+        margin: '0 auto',
+        textAlign: "justify",
+        [theme.breakpoints.down('sm')]: {
+            width: "95%"
+        }
     },
     section_3: {
         display: 'flex',
         justifyContent: 'center',
         padding: 24,
         margin: '0 auto',
-        marginBottom: 14,
+        marginBottom: 24,
         [theme.breakpoints.down('sm')]: {
             padding: 0,
             boxShadow: 'none',
             borderRadius: 0,
+            marginBottom: 0,
             
         }
     },
     form: {
        padding: 24,
        [theme.breakpoints.down('sm')]: {
-            padding: 12,
+            padding: '24px 12px 24px 12px',
             boxShadow: 'none',
             borderRadius: 0,
 
@@ -131,14 +138,48 @@ const styles = theme => ({
     },
     section_4: {
         backgroundColor: theme.palette.darkGrey,
-        padding: 24  
-    },
+        padding: 48,
+        [theme.breakpoints.down('sm')]: {
+            padding: '24px 12px 24px 12px',
 
+        }
+    },
+    pricingTitle: {
+        backgroundColor: theme.palette.secondary.main,
+        borderRadius: '0px 20px 0px 20px',
+        color: "white",
+        padding: 12,
+        textAlign: "center",
+        fontWeight: 600
+    },  
+    icon: {
+        color: "green"
+    },
     paper: {
         height: 200,
         padding: 24,
         marginBottom: 24,
         borderRadius: "20% 0% 20% 0%",
+    },
+
+    section_5: {
+        padding: 48,
+        [theme.breakpoints.down('sm')]: {
+            padding: '24px 12px 24px 12px',
+
+        }
+    },
+    section_5_img:{
+        width: "auto",
+        height: 250,
+        [theme.breakpoints.down('sm')]: {
+            width: "100%",
+            maxHeight: null,
+        }
+    },
+    footer: {
+        padding: 48,
+        backgroundColor: theme.palette.secondary.main
     }
 })
 
@@ -168,7 +209,7 @@ class Auth extends Component {
 
     render() {
     
-    const { classes, locale, newUser, isFetching, isError, message, isCreated } = this.props
+    const { classes, locale, newUser, isFetching } = this.props
 
     const form = {
           title: locale.wording.create, 
@@ -235,16 +276,20 @@ class Auth extends Component {
             </div>
     </div>
     <div>
-        {   isError ? <p> {locale.message[message]}</p> : null }
-        {   isCreated ? <p>{locale.message[message]}</p> : null }
         </div>
         
         <div className={ classes.section_1 }>
-            <Typography variant="h2" className={ classes.headline }>
-                    YOUR NEW COMPANION
-            </Typography>
-       
+        <div className={classes.textBlock001}>
 
+            <Typography variant="h2" className={ classes.headline }>
+                    {locale.home_page.block_title_001}
+                </Typography>
+                <Typography variant="body2" align="center">
+                    { locale.home_page.block_paragraphe_001 }
+                </Typography>
+
+        </div>
+                
        
         
         <div className={ classes.section_3 }>
@@ -252,7 +297,7 @@ class Auth extends Component {
                 !isFetching ? 
                 <Paper className={ classes.form }>
                     <Typography variant="overline">
-                            register now for free
+                            {locale.home_page.form_title}
                     </Typography>
                     <form onSubmit={ this.onSubmitForm }>
                     <ApxForm 
@@ -280,36 +325,88 @@ class Auth extends Component {
 
         <div className={ classes.section_4 }>
             <Typography variant="h2" className={ classes.headline }>
-                    PRICING
+                    {locale.wording.pricing}
             </Typography>
             <Grid container spacing={24}>
 
                 <Grid item xs={12} md={4}>
                     <Paper className={ classes.paper }>
-                        <p>FREE TRIAL</p>
-                        <p><CheckIcon />Full access</p>
-                        <p><CheckIcon />No credit card ask</p>
-                        <p><CheckIcon /></p>
+                        <p className={classes.pricingTitle}>FREE TRIAL</p>
+                        <Typography variant="body2" align="left"><CheckIcon className={classes.icon} />Full access</Typography>
+                        <Typography variant="body2" align="left"><CheckIcon className={classes.icon} />No credit card ask</Typography>
+                        <Typography variant="body2" align="left"><CheckIcon className={classes.icon} /></Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4}>
                     <Paper className={ classes.paper }>
-                        <p>2€/Month</p>
-                        <p><CheckIcon />Customize your app</p>
-                        <p><CheckIcon />Set up to your server</p>
-                        <p><CheckIcon />Add more function</p>
+                        <p className={classes.pricingTitle}>2€/MONTH</p>
+                        <Typography variant="body2" align="left"><CheckIcon className={classes.icon} />Customize your app</Typography>
+                        <Typography variant="body2" align="left"><CheckIcon className={classes.icon} />Set up to your server</Typography>
+                        <Typography variant="body2" align="left"><CheckIcon className={classes.icon} />Add more function</Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4}>
                     <Paper className={ classes.paper }>
-                        <p>Selft hosted</p>
-                        <p><CheckIcon />Customize your app</p>
-                        <p><CheckIcon />Set up to your server</p>
-                        <p><CheckIcon />Add more function</p>
+                        <p className={classes.pricingTitle}>SELF HOSTED</p>
+                        <Typography variant="body2" align="left"><CheckIcon className={classes.icon} />Customize your app</Typography>
+                        <Typography variant="body2" align="left"><CheckIcon className={classes.icon} />Set up to your server</Typography>
+                        <Typography variant="body2" align="left"><CheckIcon className={classes.icon} />Add more function</Typography>
                     </Paper>
                 </Grid>
 
             </Grid>
+        </div>
+
+        <div className={classes.section_5}>
+
+            <Grid container spacing={24}>
+                <Grid item xs={12} sm={6} md={6}>
+                    <div align="center">
+                        <img className={ classes.section_5_img } src={`${DEFAULT_URL}/img/block001.jpg`} alt="left" />
+                    </div>
+                    
+                </Grid>
+                <Grid item xs={12} sm={6} md={6} style={{display: 'flex', alignItems: "center"}}>
+                    <div>
+                    <Typography variant="h2">
+                            {locale.home_page.block_title_002}
+                    </Typography><br />
+                    <Typography variant="body2">
+                            {locale.home_page.block_paragraphe_002}
+                    </Typography>
+                    </div>
+
+                </Grid>
+            </Grid>
+            <br /><br /><br />
+            <Grid container spacing={24}>
+                <Grid item xs={12} sm={6} md={6} style={{display: 'flex', alignItems: "center"}}>
+                <div>
+                    <Typography variant="h2">
+                            {locale.home_page.block_title_003}
+                    </Typography><br />
+                    <Typography variant="body2">
+                            {locale.home_page.block_paragraphe_003}
+                    </Typography>
+                </div>
+
+                </Grid>
+                <Grid item xs={12} sm={6} md={6}>
+                    <div align="center">
+                        <img className={ classes.section_5_img } src={`${DEFAULT_URL}/img/block002.jpg`} alt="right" />
+                    </div>
+                    
+                </Grid>
+            </Grid>
+
+
+        </div>
+        <div className={classes.footer}>
+            <Typography align="center" variant="caption" style={{color: "#303030"}}>
+                &copy;{new Date().getFullYear()}&nbsp;Apx Development Limited<br />
+                All rights reserved.&nbsp;
+                <a href="https://apx-dev.com" rel="noopener noreferrer" target="_blank">Terms and conditions</a>, features, support, pricing, and service options subject to change without notice.
+            </Typography>
         </div>
         
       </div>
@@ -321,16 +418,13 @@ const mapStateToProps = (state) => {
 
     return {
         isFetching: state.auth.isFetching,
-        isError: state.auth.isError,
-        message: state.auth.message,
         locale: state.locale.locale,
-        newUser: state.auth.state_user,
-        isCreated: state.auth.isCreated
+        newUser: state.auth.state_user
     }
 }
 
-
-const StyledAuth = withStyles(styles)(Auth)
+const auth = withWidth()(Auth)
+const StyledAuth = withStyles(styles)(auth)
 
 
 export default connect(mapStateToProps, {createStateUser, createUser, resetUser, initLocale})(StyledAuth);

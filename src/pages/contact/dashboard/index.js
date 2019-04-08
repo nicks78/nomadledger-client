@@ -17,7 +17,6 @@ import Typography from '@material-ui/core/Typography';
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import ContactInfo from './contactInfo'
-import Divider from '@material-ui/core/Divider'
 import AppBar from '@material-ui/core/AppBar'
 import SwipeableViews from 'react-swipeable-views'
 import StatContact from './stat'
@@ -26,11 +25,18 @@ import { TableQuote, TableRefund, TableInvoice } from '../../bookkeeping/common/
 
 const styles = theme => ({
   root: {
-      padding: '24px'
+      padding: 24,
+      [theme.breakpoints.down('sm')]: {
+        padding: "24px 12px 24px 12px"
+      }
   },
-  contactWrapper: {
+  statWrapper: {
     marginBottom: 24, 
-    marginLeft: 16 
+    marginLeft: 16 ,
+    [theme.breakpoints.down('sm')]: {
+      marginLeft: 0,
+      marginTop: 24
+    }
   },
   tabRoot: {
     fontSize: '0.85rem',
@@ -48,7 +54,12 @@ const styles = theme => ({
       color: theme.palette.primary.main,
     },
   },
-  tabSelected: {},
+  tabWrapper: {
+    marginLeft: 16,
+    [theme.breakpoints.down('sm')]: {
+      marginLeft: 0
+    }
+  },
 })
 
 function TabContainer({ children, dir }) {
@@ -121,14 +132,14 @@ class ShowContact extends React.Component {
                   />
                 </div>
 
-              <Divider />
+              
               
               <ContactInfo  locale={locale} contact={ contact } createState={this.props.createState} id={contact._id}/>
               
             </Grid>
             <Grid item xs={12} md={9}>
             
-            <div className={ classes.contactWrapper}>
+            <div className={ classes.statWrapper}>
                 <StatContact 
                   total_quote={total_quote}
                   total_invoice={total_invoice}
@@ -137,7 +148,7 @@ class ShowContact extends React.Component {
                   locale={locale}
                 />
             </div>
-            <div style={{ marginLeft: 16}}>
+            <div className={ classes.tabWrapper }>
             <AppBar position="static" style={{backgroundColor: '#fff', color: '#000'}}>
               <Tabs value={this.state.value} 
                     onChange={this.handleChange}

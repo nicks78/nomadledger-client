@@ -48,15 +48,7 @@ const Form = (props) => {
                                     reducer={reducer}
                                 />
                             </div>
-                            <TextField
-                                    label={ locale.wording.transaction_number }
-                                    id="transaction_number"
-                                    margin="dense"
-                                    onChange={ (e) => { props.createState( reducer, "transaction_number", e.target.value ) } }
-                                    style={{width: '100%'}}
-                                    value={ data.transaction_number ||  ""}
-                                    variant="filled"
-                                />
+                           
                                 
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
@@ -122,7 +114,7 @@ const Form = (props) => {
                                 </Grid>
                                 <Grid item xs={12} md={6} sm={6}>
                                     <ApxSelect 
-                                        arrayField={vat}
+                                        arrayField={vat || []}
                                         field="vat"
                                         required={true}
                                         value={data.vat && data.vat[localStorage.getItem('locale')]}
@@ -151,13 +143,22 @@ const Form = (props) => {
                                         }}
                                     />
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <ApxRadioGroup 
-                                        action={  props.handleDropDown }
-                                        value={data.status ? data.status.code : '0'}
-                                        arrayObject={ status  }
-                                    />
-                                </Grid>
+                                {
+                                    reducer !== "QUOTE" ? 
+                                        <Grid item xs={12}>
+                                        <TextField
+                                            label={ locale.wording.transaction_number }
+                                            id="transaction_number"
+                                            margin="dense"
+                                            onChange={ (e) => { props.createState( reducer, "transaction_number", e.target.value ) } }
+                                            style={{width: '100%'}}
+                                            value={ data.transaction_number ||  ""}
+                                            variant="filled"
+                                        />
+                                        </Grid>
+                                    : null 
+                                }
+
                             </Grid>
                         
                         
@@ -165,6 +166,14 @@ const Form = (props) => {
 
                     </Grid>
                     <br/>
+                    <Typography variant="overline">{ locale.subheading.label_status }</Typography>
+                    <Typography variant="caption" dangerouslySetInnerHTML={{__html: locale.helperText.infos_status }} ></Typography>
+                    <ApxRadioGroup 
+                            action={  props.handleDropDown }
+                            value={data.status ? data.status.code : '0'}
+                            arrayObject={ status  }
+                        />
+                    <br/><br/>
                 <Typography variant="overline">{ locale.subheading.info_comp }</Typography>
                 <br />
                 <ApxRichEditor 
@@ -256,6 +265,11 @@ const styles = theme => ({
         padding: 24,
         marginBottom: 24,
         overflow: 'hidden',
+        [theme.breakpoints.down("sm")]: {
+            paddingLeft: 12,
+            paddingRight: 12,
+            boxShadow: 'none'
+        }
     },
     btnSave: {
         float: 'right'

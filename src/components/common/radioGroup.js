@@ -35,6 +35,7 @@ const RadioGroups = (props) => {
                 onChange={(event) => { _selected(event) }}
             >
             {
+                arrayObject && arrayObject.length > 0 ?
                 arrayObject.map((radio, index) => {
                     return  <FormControlLabel   
                                 key={index} 
@@ -43,6 +44,7 @@ const RadioGroups = (props) => {
                                 label={ radio[localStorage.getItem('locale')] } 
                             />
                 })
+                : null 
             }
         </RadioGroup>
     )

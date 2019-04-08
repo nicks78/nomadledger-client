@@ -65,13 +65,15 @@ const Select = (props) => {
             variant={variant || "filled"}
             >
             {
-                arrayField.map((option, index) => (
+                arrayField && arrayField.length > 0 ?
+                    arrayField.map((option, index) => (
+                    
                 
-            
-                <MenuItem key={index} value={ option[localStorage.getItem('locale')]}>
-                    <span style={{color: option.color || 'inherit'}} >{option[props.locale.lang]} {option.value && '(' + option.value +')'}</span>
-                </MenuItem>
-            ))
+                    <MenuItem key={index} value={ option[localStorage.getItem('locale')]}>
+                        <span style={{color: option.color || 'inherit'}} >{option[props.locale.lang]} {option.value && '(' + option.value +')'}</span>
+                    </MenuItem>
+                ))
+                : null 
             }
             </TextField>
     )

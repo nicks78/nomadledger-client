@@ -30,7 +30,7 @@ class AddService extends React.Component {
         label: locale.subheading.label_service,
         section_1: false,
         fields: [
-            { name: 'name', type:"text", required: true },
+            { name: 'name', type:"text", required: true, length: 50},
             { name: 'currency', type:"select", selections: currency, helperText: "select_currency" , required: true },
             { name: 'price', type:"text", required: true },
             { name: 'service_type', type:"select", selections: service_type, helperText: "select_service_type", required: true },

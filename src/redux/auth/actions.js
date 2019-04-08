@@ -34,6 +34,7 @@ export function authUser(data){
             localStorage.setItem('locale', res.locale);
 
             // Set user auth
+            dispatch(getAccount("COMPANY"));
             dispatch(getAccount("USER"));
             dispatch(setAuthUser());
 

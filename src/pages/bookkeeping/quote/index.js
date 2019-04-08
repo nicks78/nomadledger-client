@@ -6,7 +6,8 @@ import {DEFAULT_URL} from "../../../redux/constant"
 import {connect} from 'react-redux'
 import {  getBookList, updateField, createState, downloadPdf } from '../../../redux/book/actions'
 import { getTotal } from '../../../redux/library/actions'
-import { withStyles, Button, Hidden,  Paper, Table, TableHead, TableBody, TableCell, TableRow } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/AddOutlined'
+import { withStyles, Button, Hidden,  Paper, Table, TableHead, TableBody, TableCell, TableRow , Fab} from '@material-ui/core';
 import ApxSelect from '../../../components/common/select'
 import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxTableActions from '../../../components/common/tableActions'
@@ -135,6 +136,17 @@ class Quote extends Component {
                         filterName="status"
                         onGetItemList={ this.props.getBookList }
                     />
+
+            <Hidden only={['lg', 'xl', 'md']}>
+                <Fab variant="contained"
+                    color="primary"
+                    style={{position: "fixed", right: 10, bottom: 10}}
+                    component={Link}
+                    to="/quote/create">
+                    <AddIcon />
+                </Fab>
+
+            </Hidden>
             </Paper>
       </div>
     )

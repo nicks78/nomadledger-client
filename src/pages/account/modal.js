@@ -46,7 +46,18 @@ class SimpleModal extends React.Component {
       fr: this.props.obj.fr,
       en: this.props.obj.en,
       value: this.props.obj.indice,
+      color: this.props.obj.color,
       id: this.props.obj._id
+    })
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      fr: nextProps.obj.fr,
+      en: nextProps.obj.en,
+      value: nextProps.obj.indice,
+      color: nextProps.obj.color,
+      id: nextProps.obj._id
     })
   }
 
@@ -60,7 +71,8 @@ class SimpleModal extends React.Component {
       id: "",
       value: '',
       fr: '',
-      en: ""
+      en: "",
+      color: ""
     })
   };
 
@@ -74,7 +86,8 @@ class SimpleModal extends React.Component {
       id: "",
       value: '',
       fr: '',
-      en: ""
+      en: "",
+      color: ""
     })
     if( this.props.type === 'vat' ){
         var num = checkNumFormatRegex( this.state.value || 0 ) 
@@ -83,16 +96,20 @@ class SimpleModal extends React.Component {
         _id: this.state.id,
         fr: this.state.fr,
         en: this.state.en,
+        color: this.state.color,
         value: this.state.value + " %",
         indice: num || 0
     }
-    this.props.pushToDocument("COMPANY", data, `push-pull/modify/set/${this.props.type}/` )
+  
+    this.props.pushToDocument("COMPANY", data, `push-pull/modify/set/${this.props.type}/` );
+
   }
 
   render() {
     const { classes , obj, type, locale } = this.props;
-    const {fr, en, value } = this.state
-
+    const {fr, en, value , color} = this.state
+console.log("PROPS", this.props.obj)
+console.log("STATE", this.state)
     return (
       <React.Fragment>
         <EditIcon className={classes.icon} onClick={this.handleOpen}/>
@@ -106,7 +123,7 @@ class SimpleModal extends React.Component {
           <div  className={classes.paper}>
           <Typography variant="subtitle1" align="center">{ locale.subheading.edit_tag }</Typography>
             <TextField 
-                value={ en || "" }
+                value={  en ? en : this.props.obj.en }
                 onChange={(e) => { this.handleForm(e.target.name, e.target.value) }}
                 label={ locale.wording.tag_name_en }
                 name="en"
@@ -116,7 +133,7 @@ class SimpleModal extends React.Component {
 
             />
              <TextField 
-                value={ fr || "" }
+                value={ fr ? fr : this.props.obj.fr }
                 onChange={(e) => { this.handleForm(e.target.name, e.target.value) }}
                 label={locale.wording.tag_name_fr}
                 name="fr"
@@ -126,9 +143,24 @@ class SimpleModal extends React.Component {
 
             />
             { 
+              type === 'category_name' ? 
+            <TextField 
+                value={ color ? color : this.props.obj.color }
+                onChange={(e) => { this.handleForm(e.target.name, e.target.value) }}
+                label={locale.wording.tag_hex}
+                name="color"
+                fullWidth
+                inputProps={{ maxLength: 7 }}
+                margin="dense"
+                variant="filled"
+
+            />
+            : null 
+            }
+            { 
               type === 'vat' ? 
                 <TextField 
-                  value={ value }
+                  value={ value ? value : this.props.obj.value }
                   onChange={(e) => { this.handleForm(e.target.name, e.target.value) }}
                   label={locale.wording.rate}
                   name="value"

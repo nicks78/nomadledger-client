@@ -44,6 +44,7 @@ const Form = (props) => {
                                         multiline
                                         rows="4"
                                         name={cp.name}
+                                        inputProps={{ maxLength: cp.length || 3000 }}
                                         label={locale.wording[cp.name]}
                                         className={ classes.textField}
                                         value={objData[cp.name] || ''}
@@ -80,6 +81,8 @@ const Form = (props) => {
                         return <Grid item xs={xs} sm={md} key={index}>
                                     <TextField
                                         id={cp.name}
+
+                                        inputProps={{ maxLength: cp.length || 256 }}
                                         required={ cp.required || false }
                                         type={cp.type}
                                         name={cp.name}

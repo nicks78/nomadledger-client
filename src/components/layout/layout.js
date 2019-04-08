@@ -121,7 +121,7 @@ class Layout extends React.Component {
     };
     
     handleClose = () => {
-        this.setState({ anchorEl: null });
+        this.setState({ anchorEl: null, mobileOpen: false });
     };
 
 
@@ -150,7 +150,7 @@ class Layout extends React.Component {
                 </Hidden>
                 
                 <Typography className={classes.title}>
-                <Hidden smDown>{company.company_name ? company.company_name.toUpperCase() : "BOOKKEPING SOLUTIONS"}</Hidden>
+                <Hidden smDown>{company.company_name ? company.company_name.toUpperCase() : "NomadLedger"}</Hidden>
                 </Typography>
 
                 <Typography>
@@ -175,8 +175,8 @@ class Layout extends React.Component {
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <MenuItem component={Link} onClick={this.handleClose}  to="/account" >My account</MenuItem>
-                  <MenuItem onClick={this.props.logout}>Deconnexion</MenuItem>
+                  <MenuItem component={Link} onClick={this.handleClose}  to="/account" >{locale.wording.my_account}</MenuItem>
+                  <MenuItem onClick={this.props.logout}>{locale.wording.logout}</MenuItem>
                 </Menu>
                 </Typography>
                     <Typography variant="overline" className={classes.lang} onClick={ () => { this.props._onChangeLocale(locale.lang === 'fr' ? 'en' : 'fr') } }>{ locale.lang !== 'fr' ? 'EN' : 'FR' }</Typography>
@@ -189,6 +189,7 @@ class Layout extends React.Component {
                 variant="temporary"
                 anchor="left"
                 open={this.state.mobileOpen}
+                // onClick={() => this.setState({mobileOpen: false }) }
                 onClose={this.handleDrawerToggle}
                 classes={{
                     paper: classes.drawerPaper,
@@ -197,7 +198,7 @@ class Layout extends React.Component {
                     keepMounted: true, // Better open performance on mobile.
                 }}
             >
-                <MainMenu locale={ locale }  />
+                <MainMenu locale={ locale } company={company} closeDrawer={ ()  => { this.setState({ mobileOpen: false }) } }/>
                     <ApxCopyright />      
                 </Drawer>
             </Hidden>
@@ -209,7 +210,7 @@ class Layout extends React.Component {
                         paper: classes.drawerPaper,
                     }}
                 >
-                <MainMenu locale={ locale } />
+                <MainMenu locale={ locale } company={company} />
                 <ApxCopyright /> 
             </Drawer>
             </Hidden>

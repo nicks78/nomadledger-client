@@ -13,7 +13,7 @@ const AddExpense = (props) => {
         label: locale.subheading.label_expense,
         fields: [
             { name: 'receipt_date', type:"date"},
-            { name: 'name', type:"text", required: true },
+            { name: 'name', type:"text", required: true, length: 50 },
             { name: 'category', type:"select", selections: category, helperText: "select_category", required: true },
             { name: 'currency', type:"select", selections: currency, helperText: "select_currency", required: true },
             { name: 'vat', type:"select", selections: vat, helperText: "select_vat", required: true },

@@ -31,7 +31,7 @@ export const updateItem = ( actionType, endPoint ) => {
             return response.data
         }) 
         .then( res => {
-            dispatch(setNotification("sucess_update", "success"))
+            dispatch(setNotification("success_update", "success"))
             dispatch(setUpdateItem( actionType, res.item ))  
         }) 
         .catch(function (error) {

@@ -57,8 +57,13 @@ class AddCategory extends Component {
 
   _pushToDoc = () => {
     var data = {
-      category_name: { fr: this.state.value, en:  this.state.value}
+      category_name: { 
+        fr: this.state.value, 
+        en:  this.state.value,
+        color: '#'+Math.floor(Math.random()*16777215).toString(16)
+      }
     }
+
     this.setState({value: ''})
     this.props.pushToDocument(this.state.reducer, data, this.state.addApi )
   }

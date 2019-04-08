@@ -5,6 +5,7 @@ import { getData } from '../../redux/stat/actions'
 import { getAllTask } from '../../redux/task/actions'
 import {Grid, Typography, withStyles } from '@material-ui/core'
 import BarCharts from '../../components/common/barCharts'
+import BarHorizontal from '../../components/common/barHorizontal'
 import PieCharts from '../../components/common/pie'
 import ApxPaper from '../../components/common/paper'
 import {cvtNumToUserPref} from '../../utils/help_function'
@@ -21,7 +22,7 @@ class Home extends Component {
     componentDidMount(){
         this.props.getData( "mainStat", "" );
         this.props.getData( "pieQuote", "compare/quote/success-onhold-rejected" );
-        // this.props.getData( "expensesBy", "sum/expenses/bycategory" );
+        this.props.getData( "expensesBy", "sum/expenses/bycategory" );
         this.props.getAllTask("daily", "dailyTask");
     }
 
@@ -39,6 +40,7 @@ class Home extends Component {
         }
 
         return (
+            <div>
         <ApxPaper>
             <Typography variant="h1" align="center">  { cvtNumToUserPref( mainStat ? mainStat.turnover : 0) }  { currency.value } </Typography>
             <Typography variant="caption" align="center" style={{ marginTop: 5, paddingBottom: 24 }}>{locale.subheading.label_annual_turnover} - { mainStat && mainStat.fiscal_year  }</Typography>
@@ -68,41 +70,99 @@ class Home extends Component {
                     </div>                  
                 </Grid>
             </Grid>
-            
-            <Grid container spacing={0}>
+            </ApxPaper>
+            <br />
+            <ApxPaper>
+            <Typography variant="h2" align="center">
+                { locale.subheading.label_graph_expense }
+            </Typography>
+            <br />
+            <Grid container className={classes.section_2}>
+            <Grid xs={12} sm={8} md={8} >
 
-            <Grid item xs={12}>
-            <Typography variant="caption" style={{ padding: 12, backgroundColor: 'rgba(44,47,50,1)', color: "white" }}>{locale.subheading.label_daily_task}&nbsp;
-                    <span style={{textTransform: "capitalize"}}>{ tasks.date ? new Date(tasks.date.date).toLocaleDateString("fr", options) : null }</span>
-                </Typography>
-                <div>
                     {
-                        tasks.tasks && 
-                        tasks.tasks.map((task, index) => {
-                            return   <div className={classes.task} key={index}>
-                            <span className={ classes.status } style={{ backgroundColor: task.status.color,}}>{task.status.fr}</span>
-                                        <Typography variant="body1" className={classes.taskTitle} >
-                                            {task.subject}
-                                            
-                                        </Typography>
-                                        <Typography variant="body2">
-                                                { task.short_desc }
-                                        </Typography>
-                                        
-                                    </div>
-                        })
+                        expensesBy ? 
+                            <BarHorizontal chartData={ expensesBy }  id="expensesBy"/>
+                        : null
                     }
+                </Grid>
+                <Grid item xs={12} sm={4} md={4}>
+                    <Typography variant="caption" style={{ padding: 12, backgroundColor: 'rgba(44,47,50,1)', color: "white" }}>{locale.subheading.label_daily_task}&nbsp;
+                        <span style={{textTransform: "capitalize"}}>{ tasks.date ? new Date(tasks.date.date).toLocaleDateString("fr", options) : null }</span>
+                    </Typography>
+                    <div>
+                        {
+                            tasks.tasks && 
+                            tasks.tasks.map((task, index) => {
+                                return   <div className={classes.task} key={index}>
+                                <span className={ classes.status } style={{ backgroundColor: task.status.color,}}>{task.status.fr}</span>
+                                            <Typography variant="body1" className={classes.taskTitle} >
+                                                {task.subject}
+                                                
+                                            </Typography>
+                                            <Typography variant="body2">
+                                                    { task.short_desc }
+                                            </Typography>
+                                            
+                                        </div>
+                            })
+                        }
+                        {
+                            tasks.tasks && 
+                            tasks.tasks.map((task, index) => {
+                                return   <div className={classes.task} key={index}>
+                                <span className={ classes.status } style={{ backgroundColor: task.status.color,}}>{task.status.fr}</span>
+                                            <Typography variant="body1" className={classes.taskTitle} >
+                                                {task.subject}
+                                                
+                                            </Typography>
+                                            <Typography variant="body2">
+                                                    { task.short_desc }
+                                            </Typography>
+                                            
+                                        </div>
+                            })
+                        }
+                        {
+                            tasks.tasks && 
+                            tasks.tasks.map((task, index) => {
+                                return   <div className={classes.task} key={index}>
+                                <span className={ classes.status } style={{ backgroundColor: task.status.color}}>{task.status.fr}</span>
+                                            <Typography variant="body1" className={classes.taskTitle} >
+                                                {task.subject}
+                                                
+                                            </Typography>
+                                            <Typography variant="body2">
+                                                    { task.short_desc }
+                                            </Typography>
+                                            
+                                        </div>
+                            })
+                        }
+                        {
+                            tasks.tasks && 
+                            tasks.tasks.map((task, index) => {
+                                return   <div className={classes.task} key={index}>
+                                <span className={ classes.status } style={{ backgroundColor: task.status.color,}}>{task.status.fr}</span>
+                                            <Typography variant="body1" className={classes.taskTitle} >
+                                                {task.subject}
+                                                
+                                            </Typography>
+                                            <Typography variant="body2">
+                                                    { task.short_desc }
+                                            </Typography>
+                                            
+                                        </div>
+                            })
+                        }
 
-                    </div>
+                        </div>
+                </Grid>
             </Grid>
-            </Grid>
-            {/* {
-                expensesBy ? 
-                    <BarCharts chartData={ expensesBy }  id="expensesBy"/>
-                : null
-            } */}
+
             
         </ApxPaper>
+        </div>
     )
   }
 }
@@ -121,7 +181,7 @@ const styles = theme => ({
         clear: "both",
         overflow: 'hidden',
         padding: "12px",
-        backgroundColor: theme.palette.lightSecondary,
+        // backgroundColor: theme.palette.lightSecondary,
         borderBottom: `1px solid rgba(58,58,58,.22)`
     },
     taskTitle: {
@@ -139,6 +199,9 @@ const styles = theme => ({
         minWidth: 60, 
         textAlign: 'center'
     },
+    section_2: {
+        backgroundColor: theme.palette.lightSecondary,
+    }
 })
 
 
