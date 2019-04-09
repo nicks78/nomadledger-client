@@ -28,10 +28,7 @@ class BarHorizontal extends Component {
                   }
                 },
                 legend: {
-                  display: true,
-                  labels: {
-                      fontColor: '#303030'
-                  }
+                  display: false,
               }
               }
             })

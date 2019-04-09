@@ -64,7 +64,7 @@ class DatePickers extends React.Component {
             month: month,
             dayOfMonth: date.getDate(),
             label: date.getDate() +'/'+ month +'/'+ date.getFullYear(),
-            intl_format: date.getFullYear() +'/'+ month +'/'+ date.getDate(),
+            intl_format: date.getFullYear() +'-'+ month +'-'+ date.getDate(),
             timestamp: date.getTime()
         }
 

@@ -72,7 +72,7 @@ export const createTask = () => {
     }
 }
 
-// CREATE NEW ITEM
+// UPDATE TASK
 export const updateTask = () => {
 
     return (dispatch, getState) => {
@@ -96,6 +96,42 @@ export const updateTask = () => {
             dispatch(getAllTask( `list`, "taskList" ))  
         }) 
         .catch(function (error) {
+            // handle error
+            var message = error.response ? error.response.data.message : 'error_500'
+            dispatch(setNotification(message, "error"))
+            dispatch(requestFailed( message));
+        })    
+    }
+}
+
+// UPDATE STATUS OF TASK
+export const updateStatus = (task, fieldName) => {
+
+    return (dispatch, getState) => {
+
+        var list = getState().task[fieldName] || []
+
+        axios.put(`${API_ENDPOINT}task/update`,
+            {data: task},
+            { headers: {
+                    'Content-Type': 'application/json',
+            }
+        })
+        .then(function (response) { 
+            return response.data
+        }) 
+        .then( res => {
+            var items = {};
+            if(list.tasks){
+                items.tasks = list.tasks.filter((x) => { return x._id !== task._id });
+                items.tasks.push(res.item);
+            }
+            dispatch(receiveTask(items, fieldName))
+            dispatch(setNotification("success_update", "success"))
+            
+        }) 
+        .catch(function (error) {
+            console.log(error)
             // handle error
             var message = error.response ? error.response.data.message : 'error_500'
             dispatch(setNotification(message, "error"))

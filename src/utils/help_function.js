@@ -51,7 +51,7 @@ export const convertToNumber = (num) => {
 export const cvtNumToUserPref = (num) => {
 
     var locale = localStorage.getItem('locale');
-    var result = parseFloat(num).toLocaleString(locale);
+    var result = num.toLocaleString(locale);
     return result;
 }
 

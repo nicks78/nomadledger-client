@@ -2,20 +2,19 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { resetTask} from '../../redux/task/actions'
 import { getData } from '../../redux/stat/actions'
-import { getAllTask } from '../../redux/task/actions'
-import {Grid, Typography, withStyles } from '@material-ui/core'
+import { getAllTask, updateStatus } from '../../redux/task/actions'
+import {Grid, Typography, withStyles} from '@material-ui/core'
 import BarCharts from '../../components/common/barCharts'
 import BarHorizontal from '../../components/common/barHorizontal'
 import PieCharts from '../../components/common/pie'
 import ApxPaper from '../../components/common/paper'
 import {cvtNumToUserPref} from '../../utils/help_function'
 import Spinner from '../../components/common/spinner'
-
+import StatusTask from '../task/statusTask'
 
 class Home extends Component {
 
     state = {
-        showContact: false,
         reducer: 'STAT'
     }
 
@@ -32,7 +31,7 @@ class Home extends Component {
 
     render() {
 
-        const {classes, tasks, isFetching, pieQuote, mainStat, expensesBy, locale, currency, isFetchingTask} = this.props
+        const {classes, tasks, isFetching, pieQuote, mainStat, expensesBy, locale, currency, isFetchingTask, status} = this.props
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
         if(isFetching || isFetchingTask ){
@@ -74,10 +73,8 @@ class Home extends Component {
             </ApxPaper>
             <br />
             <ApxPaper>
-            
-            <br />
             <Grid container className={classes.section_2}>
-            <Grid item xs={12} sm={4} md={4}>
+            <Grid item xs={12} sm={4} md={4} style={{backgroundColor: "rgb(238,238,238)"}}>
                     <Typography variant="caption" style={{ padding: 12, backgroundColor: 'rgba(44,47,50,1)', color: "white" }}>{locale.subheading.label_daily_task}&nbsp;
                         <span style={{textTransform: "capitalize"}}>{ new Date().toLocaleDateString("fr", options)  }</span>
                     </Typography>
@@ -85,27 +82,27 @@ class Home extends Component {
                         {
                             tasks.tasks ? 
                             tasks.tasks.map((task, index) => {
-                                return   <div className={classes.task} key={index}>
-                                <span className={ classes.status } style={{ backgroundColor: task.status.color,}}>{task.status.fr}</span>
-                                            <Typography variant="body1" className={classes.taskTitle} >
-                                                {task.subject}
-                                                
-                                            </Typography>
-                                            <Typography variant="body2">
-                                                    { task.short_desc }
-                                            </Typography>
+                                return  <div className={classes.task} key={index}>
+                                        <StatusTask task={task} />
+                                        <Typography variant="body1" className={classes.taskTitle} >
+                                            {task.subject}
+                                            
+                                        </Typography>
+                                        <Typography variant="body2">
+                                                { task.short_desc }
+                                        </Typography>
                                             
                                         </div>
                             })
-                            :   <Typography variant="body1" style={{padding: 10}} align="center">
+                            :   <Typography variant="body1" style={{padding: 10}}>
                                     {locale.subheading.label_not_task_found}
                                 </Typography>
                         }
 
                         </div>
                 </Grid>
-            <Grid xs={12} sm={8} md={8} >
-            <Typography variant="h2" align="center" style={{paddingTop: 12, paddingBottom: 12}}>
+            <Grid item xs={12} sm={8} md={8} >
+            <Typography variant="caption" align="center" style={{ padding: 12, backgroundColor: 'rgba(44,47,50,0.5)', color: "white" }}>
                 { locale.subheading.label_graph_expense }
             </Typography>
                     {
@@ -138,23 +135,12 @@ const styles = theme => ({
         clear: "both",
         overflow: 'hidden',
         padding: "12px",
-        // backgroundColor: theme.palette.lightSecondary,
+        backgroundColor: theme.palette.lightGrey,
         borderBottom: `1px solid rgba(58,58,58,.22)`
     },
     taskTitle: {
         margin: 0,
         textTransform: "capitalize"
-    },
-    status: {
-        borderRadius: 4, 
-        color: "white", 
-        padding: "1px 3px 1px 3px", 
-        float: "right",
-        bottom: 5, 
-        right: 5, 
-        fontSize: 11, 
-        minWidth: 60, 
-        textAlign: 'center'
     },
     section_2: {
         // backgroundColor: theme.palette.lightSecondary,
@@ -172,11 +158,12 @@ const mapStateToProps = (state) => {
         expensesBy: state.stat.expensesBy || null,
         pieQuote: state.stat.pieQuote || null,
         tasks: state.task.dailyTask || {},
-        currency: state.account.company.item ? state.account.company.item.currency : {}
+        currency: state.account.company.item ? state.account.company.item.currency : {},
+        status: state.helper.items.status_task
     }
 }
 
 
 const StyledHome = withStyles(styles)(Home)
 
-export default connect(mapStateToProps, { getData, getAllTask, resetTask })(StyledHome);
+export default connect(mapStateToProps, { getData, getAllTask, resetTask, updateStatus })(StyledHome);
