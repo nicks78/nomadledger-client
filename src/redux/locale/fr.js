@@ -254,7 +254,7 @@ const fr =  {
         select_contact_group: "Sélectionner un groupe",
         textarea_quote: "Taper une déscription de votre devis",
         textarea_terms: "Taper un court texte de conditions générale",
-        infos_status: "<span style='color: red;font-weight: 700'>ATTENTION</span> - Seule les statuts < Brouillion & En Attente > sont modifiable",
+        infos_status: "<span style='color: red;font-weight: 700'>ATTENTION *</span> - Seule les statuts < Brouillion & En Attente > sont modifiable",
         type_message: "Taper votre message..."
     },
     message: {

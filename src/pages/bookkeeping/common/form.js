@@ -27,6 +27,7 @@ const Form = (props) => {
     const { data, list, reducer, locale, classes, vat, btnLabel, date_1, date_2, formTitle, isUpdating, currency, status } = props
 
     return  <div>
+
                 <Paper className={classes.paper}>
                 <Typography variant="h2" className={classes.title}>
                     {locale.subheading[formTitle] }
@@ -37,7 +38,7 @@ const Form = (props) => {
                     } 
                     
                 </Typography>
-
+                <Typography variant="caption">{locale.message.required}</Typography>
                     <Grid container spacing={24}>
 
                         <Grid item xs={12} sm={6} md={6}>
@@ -166,12 +167,11 @@ const Form = (props) => {
 
                     </Grid>
                     <br/>
-                    <Typography variant="overline">{ locale.subheading.label_status }</Typography>
                     <Typography variant="caption" dangerouslySetInnerHTML={{__html: locale.helperText.infos_status }} ></Typography>
                     <ApxRadioGroup 
-                            action={  props.handleDropDown }
-                            value={data.status ? data.status.code : '0'}
-                            arrayObject={ status  }
+                        action={  props.handleDropDown }
+                        value={data.status ? data.status.code : '0'}
+                        arrayObject={ status  }
                         />
                     <br/><br/>
                 <Typography variant="overline">{ locale.subheading.info_comp }</Typography>
@@ -237,7 +237,7 @@ const Form = (props) => {
                         <Button 
                             variant="contained" 
                             color="primary" 
-                            disabled={ isUpdating ? true : false }
+                            disabled={ isUpdating || !data.status || !data.currency || !data.vat || !data.contact_id ? true : false }
                             onClick={ () => { props.handleSubmit(reducer)} }>
                             { isUpdating ? locale.wording.loading : btnLabel}
                         </Button>

@@ -247,7 +247,7 @@ const en = {
         select_contact_group: "Select a group",
         textarea_quote: "Type a description",
         textarea_terms: "Type a short terms & conditions",
-        infos_status: "<span style='color: red;font-weight: 700'>CAUTIOUS</span> - Only status < Draft & Pending > are editable",
+        infos_status: "<span style='color: red;font-weight: 700'>CAUTIOUS *</span> - Only status < Draft & Pending > are editable",
         type_message: "Type your message..."
     },
     message: {

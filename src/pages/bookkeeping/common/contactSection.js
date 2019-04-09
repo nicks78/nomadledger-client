@@ -21,7 +21,7 @@ const ContactSection = (props) => {
                     state="contact_id"
                     model="contact"
                     reducer={reducer}
-                    placeholder={locale.wording.search_contact}
+                    placeholder={locale.wording.search_contact + " *"}
                     setSelectedObject={ props.createState }
                 />
                 <br />
