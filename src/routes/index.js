@@ -9,12 +9,15 @@ import PrivateRoute from './privateRoute'
 // Common
 import SnackBar from '../lib/snackBar'
 
+// Public Pages
+import ContactUs from '../public_pages/contactUs'
+
 // Login
 import Auth from '../pages/auth'
 import Login from '../pages/auth/login'
 import ForgotPassword from '../pages/auth/forgotPassword'
 import ResetPassword from '../pages/auth/resetPassword'
-
+import Payment from '../pages/payment'
 
 // Pages
 import Home from '../pages/dashboard/home'
@@ -28,7 +31,6 @@ import ShowService from '../pages/service/showService'
 import Expense from '../pages/expense'
 import ShowExpense from '../pages/expense/showExpense'
 import Task from '../pages/task'
-
 
 
 // Book
@@ -62,8 +64,11 @@ class Routes extends React.Component {
                         <Switch>
                         <Route exact path="/" component={Auth} />
                         <Route path="/login" component={Login} />
-                        <Route path="/forgot-password" component={ForgotPassword} />
-                        <Route path="/reset-password/:token" component={ResetPassword} />
+                        <Route exact path="/public" component={NotFound} />
+                        <Route path="/public/forgot-password" component={ForgotPassword} />
+                        <Route path="/public/reset-password/:token" component={ResetPassword} />
+                        <Route path="/public/payment-gateway" component={Payment} />
+                        <Route path="/public/contact-us" component={ContactUs} />
 
                         {
                             isLoggedIn && authUser !== null  ? 

@@ -32,15 +32,16 @@ class Home extends Component {
 
     render() {
 
-        const {classes, tasks, isFetching, pieQuote, mainStat, expensesBy, locale, currency} = this.props
+        const {classes, tasks, isFetching, pieQuote, mainStat, expensesBy, locale, currency, isFetchingTask} = this.props
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
-        if(isFetching){
+        if(isFetching || isFetchingTask ){
             return <Spinner />
         }
 
         return (
             <div>
+                <a href="payment-gateway">Payment</a>
         <ApxPaper>
             <Typography variant="h1" align="center">  { cvtNumToUserPref( mainStat ? mainStat.turnover : 0) }  { currency.value } </Typography>
             <Typography variant="caption" align="center" style={{ marginTop: 5, paddingBottom: 24 }}>{locale.subheading.label_annual_turnover} - { mainStat && mainStat.fiscal_year  }</Typography>
@@ -76,17 +77,7 @@ class Home extends Component {
             
             <br />
             <Grid container className={classes.section_2}>
-            <Grid xs={12} sm={8} md={8} >
-            <Typography variant="h2" align="center" style={{paddingTop: 12, paddingBottom: 12}}>
-                { locale.subheading.label_graph_expense }
-            </Typography>
-                    {
-                        expensesBy ? 
-                            <BarHorizontal chartData={ expensesBy }  id="expensesBy" currency={ currency.value || "-" }/>
-                        : null
-                    }
-                </Grid>
-                <Grid item xs={12} sm={4} md={4}>
+            <Grid item xs={12} sm={4} md={4}>
                     <Typography variant="caption" style={{ padding: 12, backgroundColor: 'rgba(44,47,50,1)', color: "white" }}>{locale.subheading.label_daily_task}&nbsp;
                         <span style={{textTransform: "capitalize"}}>{ new Date().toLocaleDateString("fr", options)  }</span>
                     </Typography>
@@ -113,6 +104,17 @@ class Home extends Component {
 
                         </div>
                 </Grid>
+            <Grid xs={12} sm={8} md={8} >
+            <Typography variant="h2" align="center" style={{paddingTop: 12, paddingBottom: 12}}>
+                { locale.subheading.label_graph_expense }
+            </Typography>
+                    {
+                        expensesBy ? 
+                            <BarHorizontal chartData={ expensesBy }  id="expensesBy" currency={ currency.value || "-" }/>
+                        : null
+                    }
+                </Grid>
+                
             </Grid>
 
             
@@ -126,7 +128,7 @@ class Home extends Component {
 const styles = theme => ({
 
     charts: {
-        backgroundColor: "aliceblue", 
+        // backgroundColor: "aliceblue", 
         padding: 10,
     },
     devis: {
@@ -155,7 +157,7 @@ const styles = theme => ({
         textAlign: 'center'
     },
     section_2: {
-        backgroundColor: theme.palette.lightSecondary,
+        // backgroundColor: theme.palette.lightSecondary,
     }
 })
 
@@ -165,6 +167,7 @@ const mapStateToProps = (state) => {
     return {
         locale: state.locale.locale,
         isFetching: state.stat.isFetching,
+        isFetchingTask: state.task.isFetching,
         mainStat: state.stat.mainStat || null,
         expensesBy: state.stat.expensesBy || null,
         pieQuote: state.stat.pieQuote || null,

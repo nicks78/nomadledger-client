@@ -24,16 +24,17 @@ const store = createStore(reducers,
 
 store.dispatch(getHelpers());
 
+
 // Check if user is loggedIn
 var x =   document.cookie.replace('auth=', '')
 
-if( parseInt(x, 10) ){
+if( parseInt(x, 10) || localStorage.getItem('locale') !== ""){
     // Set company && user infos
     store.dispatch(getAccount('COMPANY'))
     store.dispatch(getAccount('USER'))
     store.dispatch(setAuthUser())
 
-}else if(history.location.pathname.indexOf("/reset-password") > -1 ){
+}else if(history.location.pathname.indexOf("/public") >= 0 ){
     history.push(history.location.pathname)
 }else{
     store.dispatch(getLogout());

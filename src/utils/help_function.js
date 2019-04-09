@@ -39,12 +39,9 @@ export const checkNumFormatRegex = (num) => {
  * @param {*} num 
  */
 export const convertToNumber = (num) => {
-    var res = num;
-    if(typeof res === 'string'){
-        res = num.replace(',', '.')
-    }
-    res = parseFloat(res)
-    return res;
+    var locale = localStorage.getItem('locale');
+    var formatedNum = num.toLocaleString(locale)
+    return formatedNum
 }
 
 /**
@@ -54,21 +51,8 @@ export const convertToNumber = (num) => {
 export const cvtNumToUserPref = (num) => {
 
     var locale = localStorage.getItem('locale');
-    var result = '0';
-
-    // Set to number
-    num = parseFloat(num);
-
-    if(num !== undefined){
-        var numberToString = num.toFixed(2)
-        if(locale === 'fr'){
-            result = numberToString.replace('.', ',')
-        }else{
-            result = numberToString
-        }
-    }
-
-    return result.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    var result = parseFloat(num).toLocaleString(locale);
+    return result;
 }
 
 /**

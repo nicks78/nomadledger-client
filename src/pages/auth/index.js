@@ -153,10 +153,18 @@ const styles = theme => ({
         fontWeight: 600
     },  
     icon: {
-        color: "green"
+        color: "green",
+        fontSize: 18
     },
+    feature: {
+        float: "left",
+        position: "relative",
+        left: "-50%",
+        clear: "both",
+        marginBottom: 10
+    },  
     paper: {
-        height: 200,
+        height: 230,
         padding: 24,
         marginBottom: 24,
         borderRadius: "20% 0% 20% 0%",
@@ -224,7 +232,6 @@ class Auth extends Component {
     var loc = localStorage.getItem("locale");
     return (
       <div className={ classes.container}>
-
       <div className={classes.appBar} >
             <Button style={{ float: 'right', paddingLeft: 0, paddingRight: 5 }} onClick={ () => { this.props.initLocale( loc === "fr" ? "en" : "fr" )} }>{localStorage.getItem("locale")}</Button>
             <Button 
@@ -243,7 +250,9 @@ class Auth extends Component {
             
       </div>
 
-      <div className={classes.jumbotron}>
+      
+
+    <div className={classes.jumbotron}>
             <div className={classes.jumbotron_1}>
 
             <div style={{ marginLeft: 30 }}>
@@ -264,31 +273,24 @@ class Auth extends Component {
                             {locale.home_page.paragraphe_01}
                         </Typography>
                     </div>
-
-
                 </div>
                
             </div>
             <div className={classes.jumbotron_2}>
-
-            <div className={classes.wrapForm}>               
             </div>
             </div>
+        <div>
     </div>
-    <div>
-        </div>
         
         <div className={ classes.section_1 }>
-        <div className={classes.textBlock001}>
-
-            <Typography variant="h2" className={ classes.headline }>
+            <div className={classes.textBlock001}>
+                <Typography variant="h2" className={ classes.headline }>
                     {locale.home_page.block_title_001}
                 </Typography>
                 <Typography variant="body2" align="center">
                     { locale.home_page.block_paragraphe_001 }
                 </Typography>
-
-        </div>
+            </div>
                 
        
         
@@ -299,6 +301,7 @@ class Auth extends Component {
                     <Typography variant="overline">
                             {locale.home_page.form_title}
                     </Typography>
+                    <Typography variant="caption">Free 30-Day Trial</Typography>
                     <form onSubmit={ this.onSubmitForm }>
                     <ApxForm 
                         formField={form.fields} 
@@ -322,7 +325,6 @@ class Auth extends Component {
         </div>
         </div>
 
-
         <div className={ classes.section_4 }>
             <Typography variant="h2" className={ classes.headline }>
                     {locale.wording.pricing}
@@ -331,26 +333,46 @@ class Auth extends Component {
 
                 <Grid item xs={12} md={4}>
                     <Paper className={ classes.paper }>
-                        <p className={classes.pricingTitle}>FREE TRIAL</p>
-                        <Typography variant="body2" align="left"><CheckIcon className={classes.icon} />Full access</Typography>
-                        <Typography variant="body2" align="left"><CheckIcon className={classes.icon} />No credit card ask</Typography>
-                        <Typography variant="body2" align="left"><CheckIcon className={classes.icon} /></Typography>
+                        <p className={classes.pricingTitle}>30/<span>Days</span> FREE TRIAL</p>
+                        <div style={{position: "relative", float: "left", left: "50%"}}>
+                            <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;Gestion des contacts</Typography>
+                            <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;Gestions des vos documents comptables</Typography>
+                            <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;Gérer vos tâches quotidienne</Typography>
+                            <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;Gérer vos services/produits</Typography>
+                        </div>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4}>
                     <Paper className={ classes.paper }>
-                        <p className={classes.pricingTitle}>2€/MONTH</p>
-                        <Typography variant="body2" align="left"><CheckIcon className={classes.icon} />Customize your app</Typography>
-                        <Typography variant="body2" align="left"><CheckIcon className={classes.icon} />Set up to your server</Typography>
-                        <Typography variant="body2" align="left"><CheckIcon className={classes.icon} />Add more function</Typography>
+                        <p className={classes.pricingTitle}>3.50€/<span>Month</span></p>
+                        <div style={{position: "relative", float: "left", left: "50%"}}>
+                        <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;Gestion des contacts</Typography>
+                        <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;Gestions des vos documents comptables</Typography>
+                        <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;Gérer vos tâches quotidienne</Typography>
+                        <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;Gérer vos services/produits</Typography>
+                        </div>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <Paper className={ classes.paper }>
+                    <Paper className={ classes.paper } >
                         <p className={classes.pricingTitle}>SELF HOSTED</p>
-                        <Typography variant="body2" align="left"><CheckIcon className={classes.icon} />Customize your app</Typography>
-                        <Typography variant="body2" align="left"><CheckIcon className={classes.icon} />Set up to your server</Typography>
-                        <Typography variant="body2" align="left"><CheckIcon className={classes.icon} />Add more function</Typography>
+                        <div style={{textAlign: 'center'}}>
+                        <Typography variant="caption" >
+                            Customize into your need !
+                            
+                        </Typography>
+                        <br />
+                        <Typography variant="body2">
+                                <Button 
+                                    variant="contained" 
+                                    color="primary"
+                                    component={Link}
+                                    to="/public/contact-us"
+                                    >
+                                    {locale.wording.contact_us}
+                                </Button>
+                        </Typography>
+                        </div>
                     </Paper>
                 </Grid>
 

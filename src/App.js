@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Routes from './routes'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css'
+import {StripeProvider} from 'react-stripe-elements';
 
 
 // #33B3A9 == green
@@ -117,9 +118,15 @@ class App extends Component {
   render() {
 
     return (
-      <MuiThemeProvider theme={theme}>
-          <Routes />
-      </MuiThemeProvider> 
+      <React.Fragment>
+              <StripeProvider apiKey="pk_test_GblxUSlJYaYq5b3dU2GIoPql00wt6XzrAC">
+
+          <MuiThemeProvider theme={theme}>
+              <Routes />
+          </MuiThemeProvider> 
+        </StripeProvider>
+      </React.Fragment>
+
     )
   }
 }

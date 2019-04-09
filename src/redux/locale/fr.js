@@ -96,7 +96,8 @@ const fr =  {
         label_login: "Connectez vous à",
         label_status: "Sélectionner le statut du document *",
         label_graph_expense: "Dépenses par catégorie",
-        label_not_task_found: "Aucun tache pour aujourd'hui"
+        label_not_task_found: "Aucun tache pour aujourd'hui",
+        label_contact_us: "Demande de contact"
 
     },
     wording: {
@@ -108,6 +109,8 @@ const fr =  {
         progress: "En cours...",
         upload: "Téléverser",
         loading: "Chargement...",
+        send: "Envoyer",
+        contact_us: "Contacter-nous",
         others: "Autres",
         label_tax: "Année fiscale",
         start: "Début",
@@ -251,7 +254,8 @@ const fr =  {
         select_contact_group: "Sélectionner un groupe",
         textarea_quote: "Taper une déscription de votre devis",
         textarea_terms: "Taper un court texte de conditions générale",
-        infos_status: "<span style='color: red;font-weight: 700'>ATTENTION</span> - Seule les statuts < Brouillion & En Attente > sont editable"
+        infos_status: "<span style='color: red;font-weight: 700'>ATTENTION</span> - Seule les statuts < Brouillion & En Attente > sont modifiable",
+        type_message: "Taper votre message..."
     },
     message: {
         success_create: "Felicitation !",
@@ -261,7 +265,9 @@ const fr =  {
         success_delete: "Element supprimé",
         success_updated_pw: "Votre mot de passe a été mise à jour",
         success_create_new_user: "Felicitation ! Votre compte a bien été créé, vous pouvez maintenant vous connecter",
+        success_email_sent: "Message envoyé, nous vous contacterons dans les meilleurs délais",
 
+        error_email_not_sent: "Erreur - message non envoyé, veuillez recommencer ou prendre contact a support@nomadledger.com",
         error_create: "Erreur donnée non créer",
         error_update: "Erreur donnée non mise ajour",
         error_sent: "Email non envoyée",

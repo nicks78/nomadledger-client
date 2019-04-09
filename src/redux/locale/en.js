@@ -90,7 +90,8 @@ const en = {
         label_login: "Login in to ",
         label_status: "Select one status *",
         label_graph_expense: "Expenses by category",
-        label_not_task_found: "No task today"
+        label_not_task_found: "No task today",
+        label_contact_us: "Ask us for anything"
     },
     wording: {
         create: "Create",
@@ -101,6 +102,8 @@ const en = {
         progress: "Progress...",
         upload: "Upload",
         loading: "Loading...",
+        send: "Send",
+        contact_us: "Contact-us",
         others: "Others",
         label_tax: "Fiscal year",
         start: "Start",
@@ -244,7 +247,8 @@ const en = {
         select_contact_group: "Select a group",
         textarea_quote: "Type a description",
         textarea_terms: "Type a short terms & conditions",
-        infos_status: "<span style='color: red;font-weight: 700'>CAUTIOUS</span> - Only status < Draft & Pending > are editable"
+        infos_status: "<span style='color: red;font-weight: 700'>CAUTIOUS</span> - Only status < Draft & Pending > are editable",
+        type_message: "Type your message..."
     },
     message: {
         success_create: "Congratulation !",
@@ -254,7 +258,9 @@ const en = {
         success_sent: "Email sent",
         success_updated_pw: "Password has been updated",
         success_create_new_user: "Congratulation ! Your account has been created, you can now login",
+        success_email_sent: "Message sent, we'll get back to you as soon as possible",
 
+        error_email_not_sent: "Error - message not sent, please try again or contact us at support@nomadledger.com",
         error_create: "Element create successfully",
         error_update: "Element update successfully",
         error_sent: "Email not sent",
