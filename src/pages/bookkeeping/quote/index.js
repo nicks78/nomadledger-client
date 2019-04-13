@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 import {  getBookList, updateField, createState, downloadPdf } from '../../../redux/book/actions'
 import { getTotal } from '../../../redux/library/actions'
 import AddIcon from '@material-ui/icons/AddOutlined'
-import { withStyles, Button, Hidden,  Paper, Table, TableHead, TableBody, TableCell, TableRow , Fab} from '@material-ui/core';
+import { withStyles, Button, Hidden,  Paper, Table, TableHead, TableBody, TableCell, TableRow , Fab, Switch} from '@material-ui/core';
 import ApxSelect from '../../../components/common/select'
 import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxTableActions from '../../../components/common/tableActions'
@@ -54,7 +54,7 @@ class Quote extends Component {
             <Paper className={classes.paper}>
 
                 <ApxTableToolBar
-                        title={locale.wording.quote}
+                        title={isFetching ? locale.wording.loading : locale.wording.quote}
                         selected={locale.wording.selected}
                         locale={locale}
                         menus={ [...status, {fr: "Tous", en: "All", code: "none"}]  }
@@ -72,7 +72,8 @@ class Quote extends Component {
                             <TableCell>{locale.wording.status}</TableCell>
                             <TableCell align="center">{locale.wording.invoicer}</TableCell>
                             <TableCell>PDF</TableCell>
-                            <TableCell align="center">Actions</TableCell>                           
+                            <TableCell align="center">Actions</TableCell>   
+                            <TableCell align="center">{ locale.wording.archive }</TableCell>                           
 
                         </TableRow>
                     </TableHead>
@@ -117,6 +118,9 @@ class Quote extends Component {
                                                     actionCheck={item.status.code === "6" ? true : false }
                                                     actionArchive={item.status.code === '11' ? true : false }
                                                 />
+                                                <TableCell>
+                                                    <Switch checked={ !item.archive } onChange={ () => { this.props.updateField(reducer, {archive: true}, item._id ) }} />
+                                                </TableCell>
                                             </TableRow>
                                 })
                                 : null                           

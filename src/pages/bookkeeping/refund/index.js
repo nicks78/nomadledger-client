@@ -8,7 +8,7 @@ import {  getBookList, updateField, createState, downloadPdf } from '../../../re
 import { getTotal } from '../../../redux/library/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import AddIcon from '@material-ui/icons/AddOutlined'
-import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, TableCell, TableRow, Fab} from '@material-ui/core';
+import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, TableCell, TableRow, Fab, Switch} from '@material-ui/core';
 import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
@@ -54,8 +54,8 @@ class Refund extends Component {
             <Paper className={classes.paper}>
 
             <ApxTableToolBar
-                title={locale.wording.refund}
-                selected={locale.wording.selected}
+                title={ isFetching ? locale.wording.loading : locale.wording.refund}
+                selected={ locale.wording.selected}
                 locale={locale}
                 menus={ [...status, {fr: "Tous", en: "All", code: "none"}]  }
                 onChangeQuery={ this.handleFilterRequest }
@@ -73,6 +73,7 @@ class Refund extends Component {
                             <TableCell>{locale.wording.status}</TableCell>
                             <TableCell>PDF</TableCell>
                             <TableCell align="center">Actions</TableCell>
+                            <TableCell align="center">{ locale.wording.archive }</TableCell>
 
                         </TableRow>
                         </TableHead>
@@ -113,6 +114,9 @@ class Refund extends Component {
                                                     actionArchive={refund.status.code === "11" ? true : false }
 
                                                 />
+                                                 <TableCell>
+                                                    <Switch checked={ !refund.archive } onChange={ () => { this.props.updateField(reducer, {archive: true}, refund._id ) }} />
+                                                </TableCell>
                                             </TableRow>
                                 })
                                 : null                           

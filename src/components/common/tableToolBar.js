@@ -1,3 +1,4 @@
+//src/components/common/tableToolBar.js
 import React from 'react';
 import { 
 withStyles, 
@@ -33,27 +34,40 @@ const styles = theme => ({
     title: {
       flex: '0 0 auto',
     },
+    linkToExcel: {
+      margin: 0, 
+      fontSize: 9, 
+      cursor: "pointer",
+      color: 'rgba(128, 128, 128, 0.8)',
+      '& :hover i': {
+        color: theme.palette.primary.main
+      }
+    }
 })
 
 const EnhancedToolBar = (props) => {
 
-  const { numSelected, classes, selected, title, menus, locale } = props;
+  const { numSelected, classes, selected, title, menus, locale, toExcel } = props;
 
   return (
-    <Toolbar>
+    <div><Toolbar>
         <div className={classes.title}>
-          {numSelected > 0 ? (
+          { numSelected > 0 ? (
             <Typography color="inherit" variant="subtitle2">
               {numSelected} {selected}
             </Typography>
           ) : (
             <Typography variant="subtitle1" id="tableTitle">
               { title }
+              { toExcel ? <p className={classes.linkToExcel} onClick={ props.onDownload } ><u><i>Export to excel file</i></u></p> : null  }
             </Typography>
           )}
         </div>
         <div className={classes.spacer} />
+       
         <div className={classes.actions}>
+         
+
           {numSelected > 0 ? (
             <Tooltip title="Delete">
               <IconButton aria-label="Delete">
@@ -62,20 +76,27 @@ const EnhancedToolBar = (props) => {
             </Tooltip>
           ) : (
             <Tooltip title="Filter list">
+             
               { 
                   menus ? 
+                  <React.Fragment>
                     <BtnMenu 
-                      menus={menus}
-                      onChangeQuery={ props.onChangeQuery}
-                      locale={locale}
-                  />
-                : <p> </p>
+                        menus={menus}
+                        onChangeQuery={ props.onChangeQuery}
+                        locale={locale}
+                    />
+                  </React.Fragment>
+                    
+                : null 
               }
             </Tooltip>
           )}
+          
         </div>
-    
+        
       </Toolbar>
+            
+      </div>
   )
 }
 

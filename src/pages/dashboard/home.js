@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import { resetTask} from '../../redux/task/actions'
 import { getData } from '../../redux/stat/actions'
 import { getAllTask, updateStatus } from '../../redux/task/actions'
-import {Grid, Typography, withStyles} from '@material-ui/core'
+import {Grid, Typography, withStyles, Paper} from '@material-ui/core'
 import BarCharts from '../../components/common/barCharts'
 import BarHorizontal from '../../components/common/barHorizontal'
 import PieCharts from '../../components/common/pie'
@@ -31,7 +31,7 @@ class Home extends Component {
 
     render() {
 
-        const {classes, tasks, isFetching, pieQuote, mainStat, expensesBy, locale, currency, isFetchingTask, status} = this.props
+        const {classes, tasks, isFetching, pieQuote, mainStat, expensesBy, locale, currency, isFetchingTask} = this.props
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
         if(isFetching || isFetchingTask ){
@@ -40,7 +40,6 @@ class Home extends Component {
 
         return (
             <div>
-                <a href="payment-gateway">Payment</a>
         <ApxPaper>
             <Typography variant="h1" align="center">  { cvtNumToUserPref( mainStat ? mainStat.turnover : 0) }  { currency.value } </Typography>
             <Typography variant="caption" align="center" style={{ marginTop: 5, paddingBottom: 24 }}>{locale.subheading.label_annual_turnover} - { mainStat && mainStat.fiscal_year  }</Typography>
@@ -72,10 +71,23 @@ class Home extends Component {
             </Grid>
             </ApxPaper>
             <br />
+            <Grid container spacing={24}>
+            
+            <Grid item xs={12} sm={8} md={8} >
             <ApxPaper>
-            <Grid container className={classes.section_2}>
-            <Grid item xs={12} sm={4} md={4} style={{backgroundColor: "rgb(238,238,238)"}}>
-                    <Typography variant="caption" style={{ padding: 12, backgroundColor: 'rgba(44,47,50,1)', color: "white" }}>{locale.subheading.label_daily_task}&nbsp;
+            <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px", color: "#303030" }}>
+                { locale.subheading.label_graph_expense }
+            </Typography>
+                    {
+                        expensesBy ? 
+                            <BarHorizontal chartData={ expensesBy }  id="expensesBy" currency={ currency.value || "-" }/>
+                        : null
+                    }
+                    </ApxPaper>
+                </Grid>
+                <Grid item xs={12} sm={4} md={4}>
+                <Paper>
+                    <Typography variant="caption" style={{ padding: 15,borderRadius: "4px 4px 0px 0px",  backgroundColor: 'rgba(44,47,50,1)', color: "white" }}>{locale.subheading.label_daily_task}&nbsp;
                         <span style={{textTransform: "capitalize"}}>{ new Date().toLocaleDateString("fr", options)  }</span>
                     </Typography>
                     <div>
@@ -88,7 +100,7 @@ class Home extends Component {
                                             {task.subject}
                                             
                                         </Typography>
-                                        <Typography variant="body2">
+                                        <Typography variant="caption">
                                                 { task.short_desc }
                                         </Typography>
                                             
@@ -100,22 +112,9 @@ class Home extends Component {
                         }
 
                         </div>
+                        </Paper>
                 </Grid>
-            <Grid item xs={12} sm={8} md={8} >
-            <Typography variant="caption" align="center" style={{ padding: 12, backgroundColor: 'rgba(44,47,50,0.5)', color: "white" }}>
-                { locale.subheading.label_graph_expense }
-            </Typography>
-                    {
-                        expensesBy ? 
-                            <BarHorizontal chartData={ expensesBy }  id="expensesBy" currency={ currency.value || "-" }/>
-                        : null
-                    }
-                </Grid>
-                
             </Grid>
-
-            
-        </ApxPaper>
         </div>
     )
   }
@@ -125,7 +124,6 @@ class Home extends Component {
 const styles = theme => ({
 
     charts: {
-        // backgroundColor: "aliceblue", 
         padding: 10,
     },
     devis: {
@@ -134,17 +132,13 @@ const styles = theme => ({
     task: {
         clear: "both",
         overflow: 'hidden',
-        padding: "12px",
-        backgroundColor: theme.palette.lightGrey,
+        padding: "15px 12px 15px 12px",
         borderBottom: `1px solid rgba(58,58,58,.22)`
     },
     taskTitle: {
         margin: 0,
         textTransform: "capitalize"
     },
-    section_2: {
-        // backgroundColor: theme.palette.lightSecondary,
-    }
 })
 
 

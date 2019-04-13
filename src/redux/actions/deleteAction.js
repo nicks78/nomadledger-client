@@ -3,9 +3,9 @@
 
 import axios from 'axios';
 import { API_ENDPOINT, apiCall } from '../../utils/constant'
-import { requestFailed  } from './'
+import { requestFailed  } from '../library/actions'
 import {setNotification} from '../notification/actions'
-
+import {setError} from '../error/errorReducer'
 
 // DELETE ITEM
 export const deleteItem = ( actionType, id ) => {
@@ -25,10 +25,8 @@ export const deleteItem = ( actionType, id ) => {
             dispatch(setDeletedItem( actionType, res.deteledId ))  
         }) 
         .catch(function (error) {
-            // handle error
-            var message = error.response ? error.response.data.message : 'error_500'
-            dispatch(setNotification(message, "error"))
-            dispatch(requestFailed(actionType, message));
+            dispatch(setError(error));
+            dispatch(requestFailed(actionType));
         })    
     }
   }

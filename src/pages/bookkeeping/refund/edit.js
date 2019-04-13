@@ -2,11 +2,13 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
-import { createState , updateDocument, getDocument, resetState} from '../../../redux/book/actions'
+import { createState , updateDocument, getDocument, resetState, downloadPdf} from '../../../redux/book/actions'
 import { convertToCurrency, getListItem} from '../../../redux/book/itemActions'
-import { withStyles } from '@material-ui/core';
+import { withStyles, Fab } from '@material-ui/core';
 import Form from '../common/form'
 import Spinner from '../../../components/common/spinner'
+import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEyeOutlined'
+
 
 class EditRefund extends React.Component {
 
@@ -40,10 +42,14 @@ class EditRefund extends React.Component {
 
     render(){
 
-    const { isFetching, locale, classes, refund, listItems, vat, currency, status } = this.props;
+    const { isFetching, locale, classes, refund, listItems, vat, currency, status , isUpdating} = this.props;
 
-    if(isFetching || refund === null ){
+    if( isFetching ){
         return <Spinner />
+    }
+
+    if( refund === null ){
+        return <p>Error</p>
     }
 
     return (
@@ -62,11 +68,14 @@ class EditRefund extends React.Component {
                     createState={this.props.createState}
                     reducer={this.state.reducer}
                     btnLabel={locale.wording.update}
+                    isUpdating={isUpdating}
                     refund={true}
                     date_1="created_at"
                     date_2="due_at"
                 />
-                
+                <Fab size="medium" color="primary" className={classes.icon}>
+                    <RemoveRedEyeIcon onClick={ () => {this.props.downloadPdf("REFUND", refund._id)} } />
+                </Fab>
             </div>
         )
     }
@@ -77,11 +86,17 @@ const styles = theme => ({
         flex: 1,
         marginBottom: theme.margin.unit
     },
+    icon: {
+        position: 'fixed',
+        bottom: 10,
+        right: 10
+    }
 })
 
 const mapStateToProps = (state) => {
     return {
         isFetching: state.book.refund.isFetching,
+        isUpdating: state.book.refund.isUpdating,
         locale: state.locale.locale,
         refund: state.book.refund.item,
         listItems: state.book.refund.item ? state.book.refund.item.list_items : [],
@@ -93,4 +108,4 @@ const mapStateToProps = (state) => {
 
 const StyledEditRefund = withStyles(styles)(EditRefund)
 
-export default connect(mapStateToProps, { getListItem, convertToCurrency, updateDocument, getDocument, createState, resetState })(StyledEditRefund);
+export default connect(mapStateToProps, { getListItem, convertToCurrency, updateDocument, getDocument, createState, resetState , downloadPdf})(StyledEditRefund);

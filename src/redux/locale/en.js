@@ -104,6 +104,8 @@ const en = {
         loading: "Loading...",
         send: "Send",
         contact_us: "Contact-us",
+        confirm_payment: "Confirm payment",
+        payment_progress: "Payment in progress...",
         others: "Others",
         label_tax: "Fiscal year",
         start: "Start",
@@ -135,6 +137,7 @@ const en = {
         repay: "Repay",
         transaction_number: "Transaction Number",
         my_account: "My Account",
+        archive: "Archive",
 
         contact_group: "Group",
         contact_drop: "Client",
@@ -235,7 +238,8 @@ const en = {
         last_modified: "Last modified ",
         tag_name_en: "Tag name (English)",
         tag_name_fr: "Tag name (French)",
-        tag_hex: "Color code HEX (ex: #ffffff)"
+        tag_hex: "Color code HEX (ex: #ffffff)",
+        tandc: "Terms & Conditions"
     },
     helperText: {
         select_phone_code: "Select phone code",
@@ -248,7 +252,10 @@ const en = {
         textarea_quote: "Type a description",
         textarea_terms: "Type a short terms & conditions",
         infos_status: "<span style='color: red;font-weight: 700'>CAUTIOUS *</span> - Only status < Draft & Pending > are editable",
-        type_message: "Type your message..."
+        type_message: "Type your message...",
+        payment_terms: "Membership give you full access to NomadLegder for 365 days",
+        add_tags: "One you create your tag, you can edit 2 language FR - EN ",
+        trial_30: "Free 30-Day Trial"
     },
     message: {
         success_create: "Congratulation !",
@@ -259,7 +266,9 @@ const en = {
         success_updated_pw: "Password has been updated",
         success_create_new_user: "Congratulation ! Your account has been created, you can now login",
         success_email_sent: "Message sent, we'll get back to you as soon as possible",
+        success_payment: "Payment success, you can now login to your account",
 
+        error_payment: "Payment error, please try again or contact our service support@nomadledger.com",
         error_email_not_sent: "Error - message not sent, please try again or contact us at support@nomadledger.com",
         error_create: "Element create successfully",
         error_update: "Element update successfully",
@@ -280,30 +289,60 @@ const en = {
         error_file_not_allowed: "This type of file is not allowed",
         error_pw_not_match: "Password not matches",
         error_pw_min_8: "Your password must have at least 8 caracteres",
+        error_422_lastname: "Lastname is required",
+        error_422_email: "Email is required",
+        error_422_firstname: "Firstname is required",
+        error_422_company_name: "Company name is required",
+        error_422_password: "Password is required", 
+
+        warning_not_refresh: "Please do not refresh the page during the payment process",
 
         alert_password_not_match: "Password not match, please verify !",
         phone_required: "Your mobile phone is required",
         required: "All fields with * are required",
-        request_reset_pw: "Please check your email and follow the instructions"
+        request_reset_pw: "Please check your email and follow the instructions",
+
+        beta_1: "Beta 1 - All data will be lost",
 
     },
     days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     home_page: {
         title_01: "Activate your efficiency",
-        paragraphe_01: `Maitrisez et exploitez tout le potentiel de votre entreprise en simplifiant la gestion de vos factures,
-        taches et contacts. Revolutionnez maintenant votre experience client en quelques clics`,
+        paragraphe_01: `An easy way to manage your finance, tasks and contact. 
+        With just a few click create your required documents and focus on your business,
+        taches et contacts. Revolutionize your user experience with few click !`,
         block_title_001: "By Nomads for Nomads",
-        block_paragraphe_001: `A complete platform ! Invoices, FollowUp, Stock, Repports... With a simple and easy tools, you will take control of all aspect of your business
-        and can focus on developing your turnover`,
+        block_paragraphe_001: `A complete platform ! Invoices, FollowUp, Stock, Reports... With a simple and easy tools, you will take control of all aspect of your business
+        and can focus on developing your turnover. NomadLedger as been developed with simplicity in mind for everyone to use`,
         block_title_002: "Digital invoices",
-        block_paragraphe_002: `Créez facillement des documents de facturation irréprochables et personnalisés: devis,
-        factures, avoirs, proforma... Le tout sans erreur de calcul et en moins d'une minute ! 
-        Efficacité et gain de temps sont assurés avec notre logiciel de facturation en ligne.`,
+        block_paragraphe_002: `Simply create invoice - quote - refund in just a few click. Avoid error and let NomadLedger do the hard work.
+        Time efficiency has been drivin the concept of our software as a service.`,
         block_title_003: "Easy to use and flexible",
-        block_paragraphe_003: `Créé specialement pour les proffessionnels qui veulent tenir efficacement et 
-        simplement leur gestion, notre outils s'adatera parfaitement a votre structure et a vos besoins. Nomade, Autoentrepreuneurs, TPE, PME, PML...Quel 
-        que soit votre statut, vous pourrez maitriser votre gestion en toute simplicité.`,
-        form_title: "Register now for free"
+        block_paragraphe_003: `Create professionnal document and keep track. Simplify the management of your accounting. Our tool will adapt to many type of
+        business, freelancer - nomad - solo entrepreneur ... With simplicity manage your document.`,
+        form_title: "Register now for free",
+        pricing: {
+            block_001:{
+                title: "30 Day Trial",
+                feature_1: "Contact managment",
+                feature_2: "Accounting managment",
+                feature_3: "Tasks manager",
+                feature_4: "Services/products managment",
+                feature_5: "Online support"
+            },
+            block_002:{
+                title: "3.50 €/ Mois",
+                feature_1: "Contact managment",
+                feature_2: "Accounting managment",
+                feature_3: "Tasks manager",
+                feature_4: "Services/products managment",
+                feature_5: "Online support"
+            },
+            block_003:{
+                title: "Self Hosted",
+                feature_1: "Customize into your need !",
+            }
+        }
     }
 }
 

@@ -15,7 +15,6 @@ const initialState = {
     progress : 0,
     isFetching : false,
     isError : false,
-    message : '',
     list : []
 }
 
@@ -43,7 +42,6 @@ const authReducer = (state = initialState, action) => {
                 isError: action.isError,
                 receivedAt: action.receivedAt,
                 isUpdating: action.isUpdating,
-                message: action.message
             }
         case `RECEIVE`:
             return  { 

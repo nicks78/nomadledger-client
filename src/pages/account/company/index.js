@@ -60,7 +60,7 @@ class Company extends Component {
     const {showEdit, reducer} = this.state;
 
     const address = ["addresses_street", "addresses_zip", "addresses_city"]
-console.log("UP", isUploading)
+
     return (
       <div>
         <Grid container spacing={16}>

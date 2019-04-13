@@ -3,8 +3,7 @@
 import axios from 'axios';
 import { requestFailed } from './actions'
 import { API_ENDPOINT } from '../constant';
-import {setNotification} from '../notification/actions'
-
+import { setError} from '../error/actions'
 
 
 /**
@@ -35,9 +34,8 @@ export function getListItem( actionType, name, item ) {
             dispatch(setListItem(actionType, name, tmp))
         })
         .catch(function (error) {
-            // handle error
-            dispatch(requestFailed(actionType, "error_500"));
-            dispatch(setNotification("error_500", "error"))
+            dispatch(setError(error));
+            dispatch(requestFailed(actionType));
         })        
     }
 }
@@ -77,9 +75,8 @@ export function convertToCurrency( actionType, currency, item ) {
             dispatch(updateListItems(actionType,  item ))
         })
         .catch(function (error) {
-            // handle error
-            dispatch(requestFailed(actionType, "error_500"));
-            dispatch(setNotification("error_500", "error"))
+            dispatch(setError(error));
+            dispatch(requestFailed(actionType));
             
         })   
     }

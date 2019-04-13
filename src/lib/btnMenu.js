@@ -1,10 +1,10 @@
+//src/lib/btnMenu.js
+
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import FilterListIcon from '@material-ui/icons/FilterListOutlined'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-
-
 
 /**
  * @menus array of object
@@ -37,7 +37,7 @@ class BtnMenu extends React.Component {
     return (
       <div>
         <IconButton
-          aria-owns={anchorEl ? 'simple-menu' : undefined}
+          aria-owns={anchorEl ? 'menu-list-grow' : undefined}
           aria-haspopup="true"
           onClick={this.handleClick}
         >

@@ -1,39 +1,37 @@
-//src/redux/helper/helperReducer.js
+//src/redux/download/downloadReducer.js
+
 
 const initialState = {
     isFetching: false,
-    items: [],
     isError: false,
-    message: '',
 }
 
 
-
-const helperReducer = (state = initialState, action) => {
+const downloadReducer = (state = initialState, action) => {
     
 
     switch (action.type) {
-        case `REQUEST_HELPERS`:
+        case `REQUEST_DOWNLOAD`:
             return  { 
                 ...state,
                 isFetching: action.isFetching,
-                isError: action.isError
+                isError: false
             }
-        case `FAILED_HELPERS`:
+        case `FAILED_DOWNLOAD`:
             return  { 
                 ...state,
                 isFetching: action.isFetching,
-                isError: action.isError
+                isError: action.isError,
             }
-        case `GET_HELPERS`:
+        case `GET_DOWNLOAD`:
             return  { 
                 ...state, 
-                isFetching: false,
-                items: action.items,
+                isFetching: action.isFetching,
+                isError: action.isError
             }
         default:
             return state;
     }
 }
 
-export default helperReducer;
+export default downloadReducer;

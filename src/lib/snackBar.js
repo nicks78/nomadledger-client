@@ -13,11 +13,9 @@ const styles = theme => ({
   close: {
     padding: theme.spacing.unit / 2,
   },
-  snack: {
-    marginTop: 24
-  },
   success: {
     marginTop: 24,
+    textAlign: "center",
     "& div":{
       color: "white",
       backgroundColor: "green",
@@ -25,6 +23,7 @@ const styles = theme => ({
   },
   error: {
     marginTop: 24,
+    textAlign: "center",
     "& div":{
       color: "white",
       backgroundColor: "red",
@@ -32,6 +31,7 @@ const styles = theme => ({
   },
   info: {
     marginTop: 24,
+    textAlign: "center",
     "& div":{
       color: "white",
       backgroundColor: "blue",
@@ -39,6 +39,7 @@ const styles = theme => ({
   },
   warning: {
     marginTop: 24,
+    textAlign: "center",
     "& div":{
       color: "white",
       backgroundColor: "amber",

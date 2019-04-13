@@ -31,6 +31,7 @@ import ShowService from '../pages/service/showService'
 import Expense from '../pages/expense'
 import ShowExpense from '../pages/expense/showExpense'
 import Task from '../pages/task'
+import Archive from '../pages/archive'
 
 
 // Book
@@ -67,7 +68,7 @@ class Routes extends React.Component {
                         <Route exact path="/public" component={NotFound} />
                         <Route path="/public/forgot-password" component={ForgotPassword} />
                         <Route path="/public/reset-password/:token" component={ResetPassword} />
-                        <Route path="/public/payment-gateway" component={Payment} />
+                        <Route path="/public/payment-gateway/:token_id" component={Payment} />
                         <Route path="/public/contact-us" component={ContactUs} />
 
                         {
@@ -91,6 +92,8 @@ class Routes extends React.Component {
                                 <PrivateRoute path="/expense/view/:id" component={ShowExpense}  auth={isLoggedIn}/>
 
                                 <PrivateRoute exact path="/task" component={Task}  auth={isLoggedIn}/>
+
+                                <PrivateRoute exact path="/archive" component={Archive}  auth={isLoggedIn}/>
 
                                 <BookkeepingRoute isLoggedIn={isLoggedIn}/>
 

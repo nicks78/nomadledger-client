@@ -140,7 +140,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-
+console.log(state)
     return {
         message: state.auth.message,
         isError: state.auth.isError,

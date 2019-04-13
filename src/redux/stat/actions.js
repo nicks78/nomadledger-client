@@ -2,8 +2,7 @@
 
 import axios from 'axios'
 import {API_ENDPOINT} from '../constant'
-import {setNotification} from '../notification/actions'
-
+import {setError} from '../error/actions'
 
 export const getData = (fieldName, endPoint) => {
 
@@ -20,10 +19,8 @@ export const getData = (fieldName, endPoint) => {
             dispatch(setData( res.datasets, fieldName ))  
         }) 
         .catch(function (error) {
-            // handle error
-            var message = error.response ? error.response.data.message : 'error_500'
-            dispatch(setNotification(message, "error"))
-            dispatch(requestFailed( message ));
+            dispatch(setError(error));
+            dispatch(requestFailed());
         })    
     }
 }
@@ -37,10 +34,9 @@ function setData(data, fieldName) {
     }
 }
 
-function requestFailed(message) {
+function requestFailed() {
     return {
         type: "FAILED_STAT",
-        message,
         isError: true,
     }
 }

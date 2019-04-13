@@ -6,6 +6,8 @@ import { resetState } from '../library/actions/initAction'
 import {getAccount} from '../account/actions'
 import {history} from '../../routes/history'
 import {setNotification} from '../notification/actions'
+import {setPayment} from '../payment/actions'
+import {setError} from '../error/actions'
 
 // Set withCredentials
 axios.defaults.withCredentials = true;
@@ -30,23 +32,33 @@ export function authUser(data){
             return response.data
         }) 
         .then( res => {
-            // Set locale
-            localStorage.setItem('locale', res.locale);
 
-            // Set user auth
-            dispatch(getAccount("COMPANY"));
-            dispatch(getAccount("USER"));
-            dispatch(setAuthUser());
+            if( !res.success ){
+                /**
+                 * Redirect to payment-gateway/:token
+                 */
+                history.push(res.url);
+                dispatch(setPayment(res));
+                dispatch(resetUser())
+                dispatch(setNotification(res.message, "info"))
+            }else{
+                // Set locale
+                localStorage.setItem('locale', res.locale);
 
-            // Redirect to home page
-            history.push('/home')
+                // Set user auth
+                dispatch(getAccount("COMPANY"));
+                dispatch(getAccount("USER"));
+                dispatch(setAuthUser());
+
+                // Redirect to home page
+                history.push('/home')
+            }
+
             
         }) 
         .catch(function (error) {
-            // handle error
-            var message = error.response ? error.response.data.message : 'error_500'
-            dispatch(setNotification(message, "error"))
-            dispatch(requestFailed(message));
+            dispatch(setError(error));
+            dispatch(requestFailed());
         })          
     }
 }
@@ -73,12 +85,11 @@ export function requestUser(){
     }
 }
 
-export function requestFailed( message ) {
+export function requestFailed( ) {
     return {
         type: `FAILED_AUTH`,
         isFetching: false,
-        isError: true,
-        message: message
+        isError: true
     }
 }
 
@@ -87,8 +98,6 @@ export function resetUser (){
       type: `RESET_AUTH`
     }
 }
-
-
 
 // Logout 
 export function getLogout(){
@@ -151,10 +160,8 @@ export function recoverPassword(email){
             
         }) 
         .catch(function (error) {
-            // handle error
-            var message = error.response ? error.response.data.message : 'error_500'
-            dispatch(setNotification(message, "error"))
-            dispatch(requestFailed(message));
+            dispatch(setError(error));
+            dispatch(requestFailed());
         })
     }
 }
@@ -190,10 +197,8 @@ export function resetPassword(token, password){
             
         }) 
         .catch(function (error) {
-            // handle error
-            var message = error.response ? error.response.data.message : 'error_500'
-            dispatch(setNotification(message, "error"))
-            dispatch(requestFailed(message));
+            dispatch(setError(error));
+            dispatch(requestFailed());
         })
     }
 }

@@ -159,6 +159,7 @@ class User extends Component {
                                       className={classes.textField}
                                       value={password}
                                       fullWidth
+                                      inputProps={{ minLength: 8 }}
                                       name="password"
                                       onChange={ this.handlePassword  }
                                       margin="normal"
@@ -172,6 +173,7 @@ class User extends Component {
                                 className={classes.textField}
                                 value={password_confirm}
                                 fullWidth
+                                inputProps={{ minLength: 8 }}
                                 name="password_confirm"
                                 onChange={ this.handlePassword  }
                                 margin="normal"

@@ -51,8 +51,21 @@ export const convertToNumber = (num) => {
 export const cvtNumToUserPref = (num) => {
 
     var locale = localStorage.getItem('locale');
-    var result = num.toLocaleString(locale);
-    return result;
+    var result = '0';
+
+    // Set to number
+    num = parseFloat(num);
+
+    if(num !== undefined){
+        var numberToString = num.toFixed(2)
+        if(locale === 'fr'){
+            result = numberToString.replace('.', ',')
+        }else{
+            result = numberToString
+        }
+    }
+
+    return result.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 
 /**

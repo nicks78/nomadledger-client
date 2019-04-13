@@ -28,15 +28,21 @@ store.dispatch(getHelpers());
 // Check if user is loggedIn
 var x =   document.cookie.replace('auth=', '')
 
-if( parseInt(x, 10) || localStorage.getItem('locale') !== ""){
+if(history.location.pathname === "/"){
+    console.log("STORE-1")
+    history.push('/')
+}else if( parseInt(x, 10) || localStorage.getItem('locale') !== ""){
+    console.log("STORE-2")
     // Set company && user infos
     store.dispatch(getAccount('COMPANY'))
     store.dispatch(getAccount('USER'))
     store.dispatch(setAuthUser())
 
 }else if(history.location.pathname.indexOf("/public") >= 0 ){
+    console.log("STORE-3")
     history.push(history.location.pathname)
 }else{
+    console.log("STORE-4")
     store.dispatch(getLogout());
     history.push('/')
 }

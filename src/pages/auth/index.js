@@ -8,89 +8,15 @@ import { createStateUser, createUser } from '../../redux/auth/createActions'
 import { resetUser } from '../../redux/auth/actions'
 import {Typography, withStyles, Paper, Grid, Button} from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/CheckOutlined'
-import ApxForm from '../../components/common/form'
-import Spinner from '../../components/common/spinner'
 import withWidth from '@material-ui/core/withWidth';
-
-
+import Jumbotron from './components/jumbotron'
+import RegisterForm from './components/registerForm'
 
 const styles = theme => ({
     appBar: {
         padding: 10,
         backgroundColor: theme.palette.secondary.main,
         overflow: "hidden"
-    },
-    jumbotron: {
-        height: 500,
-        backgroundColor: 'rgb(44,47,50)',
-        overflow: "hidden",
-        [theme.breakpoints.down('sm')]: {
-            height: 250
-        }
-        
-    },
-    jumbotron_1: {
-        float: 'left',
-        width: '35%',
-        [theme.breakpoints.down('sm')]: {
-            width: '100%',
-            height: '100%' 
-        }
-    },
-    companyName: {
-        color: "white",
-        width: '100%',
-        [theme.breakpoints.down('sm')]: {
-            display: "none" 
-        }
-    },
-    textIntro: {
-        [theme.breakpoints.down('sm')]: {
-            display: "none" 
-        }
-    },
-    img_01: {
-        backgroundImage: `url(${DEFAULT_URL}img/background_1.jpg)`,
-        backgroundSize: 'cover',
-        backgroundPosition: "top",
-        backgroundRepeat: "no-repeat",
-        paddingTop: 80,
-        paddingBottom: 100,
-        width: "120%",
-        [theme.breakpoints.down('sm')]: {
-            paddingTop: 0,
-            paddingBottom: 0,
-            width: "100%", 
-            height: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-        }
-    },
-    logo:{
-        display: "inline-block",
-        margin: "0 auto",
-        verticalAlign: "middle"
-    },
-    logoMobile:{
-        [theme.breakpoints.up('sm')]: {
-            display: 'none' 
-        }
-    },
-    jumbotron_2: {
-        backgroundImage: `url(${DEFAULT_URL}img/background_2.jpg)`,
-        backgroundSize: 'cover',
-        backgroundRepeat: "no-repeat",
-        height: "100%",
-        backgroundPosition: "top",
-        marginLeft: '30%',
-        [theme.breakpoints.down('sm')]: {
-            display: 'none' 
-        }
-    },
-    title: {
-        color: "white", 
-        marginBottom: 12,
     },
     headline: {
         color: '#ef6c00',
@@ -114,10 +40,12 @@ const styles = theme => ({
         justifyContent: 'center',
         padding: 24,
         margin: '0 auto',
+        width: "50%",
         marginBottom: 24,
         [theme.breakpoints.down('sm')]: {
             padding: 0,
             boxShadow: 'none',
+            width: "100%",
             borderRadius: 0,
             marginBottom: 0,
             
@@ -154,6 +82,10 @@ const styles = theme => ({
     },  
     icon: {
         color: "green",
+        fontSize: 18
+    },
+    iconClose: {
+        color: "red",
         fontSize: 18
     },
     feature: {
@@ -224,6 +156,8 @@ class Auth extends Component {
           label: locale.subheading.label_company,
           fields: [
                 { name: 'company_name', type:"text", required: true },
+                { name: 'firstname', type:"text", required: true },
+                { name: 'lastname', type:"text", required: true },
                 { name: 'email', type:"email", required: true },
                 { name: 'password',type:"password", required: true},
             ]
@@ -250,35 +184,9 @@ class Auth extends Component {
             
       </div>
 
-      
+        <Jumbotron locale={locale } />
 
-    <div className={classes.jumbotron}>
-            <div className={classes.jumbotron_1}>
-
-            <div style={{ marginLeft: 30 }}>
-                 
-                <Typography className={classes.companyName} variant="h1">
-                    <img src={`${DEFAULT_URL}img/logo.png`} alt="logo" height="80" width="auto"  className={classes.logo}/>
-                    <span>{locale.company_name}</span>
-                </Typography>
-            </div>
-
-                <div className={ classes.img_01 }>
-                <Typography align="center" variant="h1" className={classes.title}>
-                    <img src={`${DEFAULT_URL}img/logo.png`} alt="logo" height="80" width="auto"  className={classes.logoMobile}/><br />
-                        {locale.home_page.title_01}
-                </Typography>
-                    <div id="textIntro" className={classes.textIntro}>
-                        <Typography align="justify" variant="body2" style={{color: "white"}}>
-                            {locale.home_page.paragraphe_01}
-                        </Typography>
-                    </div>
-                </div>
-               
-            </div>
-            <div className={classes.jumbotron_2}>
-            </div>
-            </div>
+    
         <div>
     </div>
         
@@ -295,33 +203,28 @@ class Auth extends Component {
        
         
         <div className={ classes.section_3 }>
-            {
-                !isFetching ? 
                 <Paper className={ classes.form }>
                     <Typography variant="overline">
                             {locale.home_page.form_title}
                     </Typography>
-                    <Typography variant="caption">Free 30-Day Trial</Typography>
+                    <Typography variant="caption">{locale.helperText.trial_30}</Typography>
                     <form onSubmit={ this.onSubmitForm }>
-                    <ApxForm 
-                        formField={form.fields} 
-                        formHandler={ this.handleChange } 
-                        locale={ locale } 
-                        xs={12} 
-                        md={12} 
-                        objData={ newUser }
-                    />
-                    <br />
+                        <RegisterForm 
+                            locale={locale}
+                            updateState={ this.handleChange }
+                            state={newUser}
+                        />
+                   
+                        <br />
                         <Button variant="contained" 
                             color="primary"  
                             type="submit"
+                            disabled={ isFetching }
                             className={  classes.button } 
-                            >{ locale.wording.register }
+                            >{ isFetching ? locale.wording.loading : locale.wording.register }
                         </Button>
                     </form>
                 </Paper>
-            : <Spinner />
-            }
         </div>
         </div>
 
@@ -333,32 +236,32 @@ class Auth extends Component {
 
                 <Grid item xs={12} md={4}>
                     <Paper className={ classes.paper }>
-                        <p className={classes.pricingTitle}>30/<span>Days</span> FREE TRIAL</p>
+                        <p className={classes.pricingTitle}>{locale.home_page.pricing.block_001.title}</p>
                         <div style={{position: "relative", float: "left", left: "50%"}}>
-                            <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;Gestion des contacts</Typography>
-                            <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;Gestions des vos documents comptables</Typography>
-                            <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;Gérer vos tâches quotidienne</Typography>
-                            <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;Gérer vos services/produits</Typography>
+                            <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;{locale.home_page.pricing.block_001.feature_1}</Typography>
+                            <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;{locale.home_page.pricing.block_001.feature_2}</Typography>
+                            <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;{locale.home_page.pricing.block_001.feature_3}</Typography>
+                            <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;{locale.home_page.pricing.block_001.feature_4}</Typography>
                         </div>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4}>
                     <Paper className={ classes.paper }>
-                        <p className={classes.pricingTitle}>3.50€/<span>Month</span></p>
+                        <p className={classes.pricingTitle}>{locale.home_page.pricing.block_002.title}</p>
                         <div style={{position: "relative", float: "left", left: "50%"}}>
-                        <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;Gestion des contacts</Typography>
-                        <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;Gestions des vos documents comptables</Typography>
-                        <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;Gérer vos tâches quotidienne</Typography>
-                        <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;Gérer vos services/produits</Typography>
+                        <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;{locale.home_page.pricing.block_001.feature_1}</Typography>
+                        <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;{locale.home_page.pricing.block_002.feature_2}</Typography>
+                        <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;{locale.home_page.pricing.block_002.feature_3}</Typography>
+                        <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;{locale.home_page.pricing.block_002.feature_4}</Typography>
                         </div>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4}>
                     <Paper className={ classes.paper } >
-                        <p className={classes.pricingTitle}>SELF HOSTED</p>
+                        <p className={classes.pricingTitle}>{locale.home_page.pricing.block_003.title}</p>
                         <div style={{textAlign: 'center'}}>
                         <Typography variant="caption" >
-                            Customize into your need !
+                        {locale.home_page.pricing.block_003.feature_1}
                             
                         </Typography>
                         <br />

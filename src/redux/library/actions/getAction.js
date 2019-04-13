@@ -3,8 +3,7 @@
 import axios from 'axios';
 import { API_ENDPOINT } from '../../constant'
 import { requestData, requestFailed  } from './'
-import {setNotification} from '../../notification/actions'
-
+import {setError} from '../../error/actions'
 
 // GET A SINGLE ITEM
 export function getItem( actionType, id ){
@@ -24,10 +23,8 @@ export function getItem( actionType, id ){
         dispatch(setItem(actionType, res.payload ))  
     })
     .catch(function (error) {
-      // handle error
-      var message = error.response ? error.response.data.message : 'error_500'
-      dispatch(setNotification(message, "error"))
-      dispatch(requestFailed(actionType, message));
+      dispatch(setError(error));
+      dispatch(requestFailed(actionType));
     })          
   }
 }

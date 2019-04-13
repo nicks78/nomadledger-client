@@ -167,7 +167,7 @@ const styles = theme => ({
 
 
 const mapStateToProps = (state) => {
-  
+ 
   return {
       isFetching: state.task.isFetching,
       isCreating: state.task.isCreating,

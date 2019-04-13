@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import {DEFAULT_IMG} from '../../redux/constant'
+import {downloadFile} from '../../redux/download/actions'
 import { createItem, getItemList, getItem, createState, getTotal , resetState, deleteElement} from '../../redux/library/actions'
 import {connect} from 'react-redux'
 import { TableCell, TableRow, Table, TableHead, TableBody, withStyles, Paper} from '@material-ui/core';
@@ -79,9 +80,11 @@ class Expense extends Component {
                 <ApxTableToolBar
                         numSelected={0}
                         menus={[...category, {fr: "Tous", en: "All", _id: "none"}]}
-                        title={locale.wording.expense}
+                        title={ isFetching ? locale.wording.loading : locale.wording.expense}
                         selected={locale.wording.selected}
                         onChangeQuery={ this.handleFilterRequest }
+                        toExcel={true}
+                        onDownload={ () => { this.props.downloadFile(reducer, `export/excel-file`) } }
                     />
                     <div style={{overflowY: "auto"}}>
                     <Table>
@@ -156,4 +159,4 @@ const mapStateToProps = (state) => {
 
 const StyledExpense = withStyles(styles)(Expense)
 
-export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, getTotal, resetState , deleteElement })(StyledExpense);
+export default connect(mapStateToProps, { downloadFile, createItem, getItemList, getItem, createState, getTotal, resetState , deleteElement })(StyledExpense);

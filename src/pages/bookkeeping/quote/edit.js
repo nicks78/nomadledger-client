@@ -37,14 +37,16 @@ class EditQuote extends React.Component {
         this.props.createState( this.state.reducer, name, value)
     }
 
-
-
     render(){
 
     const { isFetching, locale, classes, quote, listItems, vat, isUpdating, currency, status } = this.props;
 
-    if(isFetching || quote === null ){
+    if( isFetching  ){
         return <Spinner />
+    }
+
+    if( quote === null ){
+        return <p>Error</p>
     }
 
     return (

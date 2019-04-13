@@ -11,7 +11,6 @@ class BaseState {
     isFetching = false;
     isUpdating = false;
     isError = false;
-    message = '';
     list_items =[];
     list = []
 }

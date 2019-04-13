@@ -55,16 +55,18 @@ class DatePickers extends React.Component {
             show: false
         });
 
-        var month = date.getMonth() + 1;
+        var month = ("0" + (date.getMonth() + 1)).slice(-2);
+        var dayOfMonth = ("0" + date.getDate()).slice(-2);
+
 
         // Set date object
         var obj = {
             date: new Date(date),
             year: date.getFullYear(),
-            month: month,
-            dayOfMonth: date.getDate(),
-            label: date.getDate() +'/'+ month +'/'+ date.getFullYear(),
-            intl_format: date.getFullYear() +'-'+ month +'-'+ date.getDate(),
+            month: parseInt(month, 10),
+            dayOfMonth: parseInt(dayOfMonth, 10),
+            label: dayOfMonth +'/'+ month +'/'+ date.getFullYear(),
+            intl_format: date.getFullYear() +'-'+ month +'-'+ dayOfMonth,
             timestamp: date.getTime()
         }
 

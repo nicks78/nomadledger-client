@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import { API_ENDPOINT } from '../constant'
-
+import {setError} from '../error/actions'
 
 // GET FULL LIST OF ITEM
 export function getHelpers( ){
@@ -21,9 +21,8 @@ export function getHelpers( ){
             dispatch(setHelpers(res.payload ))  
         })
         .catch(function (error) {
-          // handle error
-          var message = error.response ? error.response.data.message : 'error_500'
-          dispatch(failedHelpers(message));
+            dispatch(setError(error));
+            dispatch(failedHelpers());
         })             
     }
 }
@@ -43,11 +42,10 @@ function requestHelpers() {
     }
 }
 
-function failedHelpers(message) {
+function failedHelpers() {
     return {
         type: "FAILED_HELPERS",
         isFetching: false,
-        isError: true,
-        message
+        isError: true
     }
 }

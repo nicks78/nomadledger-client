@@ -5,7 +5,7 @@ import axios from 'axios';
 import { API_ENDPOINT } from '../../constant'
 import { requestUpload, requestFailed, progress  } from './'
 import {setNotification} from '../../notification/actions'
-
+import {setError} from '../../error/actions'
 
 // UPLOAD IMAGE/DOCS TO SERVER
 /**
@@ -49,10 +49,8 @@ export const uploadFileToServer = ( actionType, id, file, oldFileObject ) => {
             dispatch(setUploaded( actionType, res.payload ))  
         })
         .catch(function (error) {
-            // handle error
-            var message = error.response ? error.response.data.message : 'error_500'
-            dispatch(setNotification(message, "error"))
-            dispatch(requestFailed(actionType, message));
+            dispatch(setError(error));
+            dispatch(requestFailed(actionType));
         })  
     }
 }
@@ -101,10 +99,8 @@ export const uploadProductFileToServer = ( actionType, file ) => {
             dispatch(setUploaded( actionType, res.payload ))  
         })
         .catch(function (error) {
-            // handle error
-            var message = error.response ? error.response.data.message : 'error_500'
-            dispatch(setNotification(message, "error"))
-            dispatch(requestFailed(actionType, message));
+            dispatch(setError(error));
+            dispatch(requestFailed(actionType));
         })  
     }
 }

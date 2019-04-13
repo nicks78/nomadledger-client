@@ -2,8 +2,7 @@
 
 import axios from 'axios';
 import { API_ENDPOINT } from '../constant'
-import {setNotification} from '../notification/actions'
-
+import {setError} from '../error/actions'
 
 export function getAutocompleteList(query, field, model){
 
@@ -25,10 +24,8 @@ export function getAutocompleteList(query, field, model){
             dispatch(receiveItems( res.payload ))  
         })
         .catch(function (error) {
-          // handle error
-          var message = error.response ? error.response.data.message : 'error_500'
-          dispatch(setNotification(message, "error"))
-          dispatch(requestFailed( message));
+            dispatch(setError(error));
+            dispatch(requestFailed());
         })             
     }
 }
@@ -43,7 +40,7 @@ export function receiveItems(items ) {
 }
 
 
-function requestFailed( items ) {
+function requestFailed() {
     return {
         type: `FAILED_ITEM`,
         isFetching: false,

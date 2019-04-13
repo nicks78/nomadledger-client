@@ -14,6 +14,9 @@ import helperReducer from './helper/helperReducer'
 import taskReducer from './task/taskReducer'
 import statReducer from './stat/statReducer'
 import notificationReducer from './notification/notificationReducer'
+import paymentReducer from './payment/paymentReducer';
+import errorReducer from './error/errorReducer'
+import downloadReducer from './download/downloadReducer'
 
 export default combineReducers({
     locale: localeReducer,
@@ -25,5 +28,8 @@ export default combineReducers({
     helper: helperReducer,
     task: taskReducer,
     stat: statReducer,
-    notification: notificationReducer
+    notification: notificationReducer,
+    payment: paymentReducer,
+    error: errorReducer,
+    download: downloadReducer
 })

@@ -19,6 +19,7 @@ import AccountBalanceIcon from '@material-ui/icons/AccountBalanceOutlined'
 import ExpandLess from '@material-ui/icons/ExpandLessOutlined';
 import ExpandMore from '@material-ui/icons/ExpandMoreOutlined';
 import Hidden from '@material-ui/core/Hidden';
+import { Typography } from '@material-ui/core';
 
 const Styles = theme => ({
     root: {
@@ -55,13 +56,22 @@ const Styles = theme => ({
     header: { 
         padding: '24px', 
         textAlign: 'center', 
-        backgroundColor: theme.palette.darkGrey,
+        // backgroundColor: theme.palette.lightGrey,
+        borderBottom: `1px solid #8c8c8c`
     },
     nested: {
         '& span': {
            color: 'white',
        },
     },
+    listTextSecondary: {
+        '& span': {
+            color: '#8c8c8c', 
+        },
+         '& :focus': {
+             backgroundColor: theme.palette.secondary.main,
+         }
+     },
 
 });
 
@@ -72,7 +82,7 @@ class MainMenu extends React.Component {
     }
 
     handleClick = () => {
-        this.setState(state => ({ open: !this.state.open }));
+        this.setState( state => ({ open: !this.state.open }));
     }
 
     render() {
@@ -83,7 +93,7 @@ class MainMenu extends React.Component {
             <Hidden mdUp>
                 <div className={classes.header}>
                     <img src={company.logo_company ? company.logo_company.full_path : DEFAULT_IMG} alt="logo" height="40" width="auto" /> 
-                    <p style={{marginBottom: '0px', color: 'white', fontWeight: '600'}}>{ company.company_name }</p>
+                    <Typography variant="body1" style={{ color: 'white'}}>{ company.company_name }</Typography>
                 </div>
             </Hidden>
             <List component="nav" disablePadding className={classes.listText}>
@@ -152,8 +162,8 @@ class MainMenu extends React.Component {
             </List>
             <Divider style={{borderColor: 'white'}}/>
             <List component="nav"> 
-                <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/archive" activeClassName={classes.active}>
-                    <ListItemText primary={ locale.archive.name } />
+                <ListItem button component={NavLink}  className={classes.listTextSecondary}  onClick={ this.props.closeDrawer } to="/archive" activeClassName={classes.active}>
+                    <ListItemText  primary={ locale.archive.name } />
                 </ListItem>
             </List>
         </div>

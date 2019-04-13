@@ -108,8 +108,7 @@ class SimpleModal extends React.Component {
   render() {
     const { classes , obj, type, locale } = this.props;
     const {fr, en, value , color} = this.state
-console.log("PROPS", this.props.obj)
-console.log("STATE", this.state)
+
     return (
       <React.Fragment>
         <EditIcon className={classes.icon} onClick={this.handleOpen}/>

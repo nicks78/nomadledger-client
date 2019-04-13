@@ -81,6 +81,7 @@ class Account extends Component {
 
           
           <Grid container spacing={24}> 
+          
                 <Grid item xs={12} md={8}>
                     <Grid container spacing={24}> 
                       <Grid item xs={12}>
@@ -88,9 +89,11 @@ class Account extends Component {
 
                           <Typography variant="overline" className={classes.titleBar}>
                               {locale.subheading.param_company}
+                              
                           </Typography>
                           <br />
                           <Grid container spacing={24}> 
+                          
                               <Grid item xs={12} md={6}>
                                 <Typography variant="subtitle2"  >
                                     {locale.subheading.my_vat}

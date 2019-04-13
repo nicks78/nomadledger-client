@@ -6,13 +6,16 @@ import Typography from '@material-ui/core/Typography';
 const styles = theme => ({
   root: {
       position: 'absolute', 
-      bottom: 60, 
+      bottom: 55, 
       padding: '20px',
       color: 'rgb(238,238,238)',
-      fontSize: '9px !important'
+      fontSize: '9px !important',
+      [theme.breakpoints.down('sm')]: {
+        bottom: 5
+      }
   },
   span: {
-      color: 'grey', 
+      color: '#8c8c8c', 
       cursor: 'pointer'
   }
 });

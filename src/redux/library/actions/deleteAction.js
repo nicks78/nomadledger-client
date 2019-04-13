@@ -4,7 +4,7 @@ import axios from 'axios';
 import { API_ENDPOINT } from '../../constant'
 import {requestFailed  } from './'
 import {setNotification} from '../../notification/actions'
-
+import {setError} from '../../error/actions'
 
 // REMOVE AN ELEMENT
 export function deleteElement( actionType, endPoint ){
@@ -23,10 +23,8 @@ export function deleteElement( actionType, endPoint ){
         dispatch(updateListItems(actionType, res._id ))  
     })
     .catch(function (error) {
-      // handle error
-      var message = error.response ? error.response.data.message : 'error_500'
-      dispatch(setNotification(message, "error"))
-      dispatch(requestFailed(actionType, message));
+      dispatch(setError(error));
+      dispatch(requestFailed(actionType));
     })          
   }
 }
@@ -48,10 +46,8 @@ export function removeImageFromArray( actionType, endPoint ){
         dispatch(setItem(actionType, res.item ))  
     })
     .catch(function (error) {
-      // handle error
-      var message = error.response ? error.response.data.message : 'error_500'
-      dispatch(setNotification(message, "error"))
-      dispatch(requestFailed(actionType, message));
+      dispatch(setError(error));
+      dispatch(requestFailed(actionType));
     })          
   }
 }

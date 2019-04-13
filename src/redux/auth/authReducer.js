@@ -6,7 +6,6 @@ const initialState = {
     isFetching: false,
     isLoggedIn: false,
     isError: false,
-    message: '',
     state_user: {}
 }
 
@@ -30,7 +29,6 @@ const authReducer = (state = initialState, action) => {
                 isError: action.isError,
                 isLoggedIn: false,
                 isCreated: false,
-                message: action.message
             }
         case `CREATE_AUTH`:
             return  { 
@@ -49,6 +47,11 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 state_user: { ...state.state_user, [ action.payload.fieldName ] : action.payload.value }
+            }
+        case `SET_PAYMENT`:
+            return {
+                ...state,
+                payment: action.payload
             }
         case `RESET_AUTH`:
             return initialState

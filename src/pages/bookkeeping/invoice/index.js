@@ -3,12 +3,13 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom"
 import {DEFAULT_URL} from "../../../redux/constant"
+import {downloadFile} from '../../../redux/download/actions'
 import {connect} from 'react-redux'
 import {  getBookList, updateField, createState, downloadPdf } from '../../../redux/book/actions'
 import { getTotal } from '../../../redux/library/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import AddIcon from '@material-ui/icons/AddOutlined'
-import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, TableCell, TableRow, Fab } from '@material-ui/core';
+import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, TableCell, TableRow, Fab, Switch} from '@material-ui/core';
 import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
@@ -54,11 +55,13 @@ class Invoice extends Component {
             <Paper className={classes.paper}>
 
             <ApxTableToolBar
-                title={locale.wording.invoice}
-                selected={locale.wording.selected}
+                title={isFetching ? locale.wording.loading :  locale.wording.invoice}
+                selected={ locale.wording.selected}
                 locale={locale}
-                menus={ [...status, {fr: "Tous", en: "All", code: "none"}]  }
+                menus={ [...status || [], {fr: "Tous", en: "All", code: "none"}]  }
                 onChangeQuery={ this.handleFilterRequest }
+                toExcel={true}
+                onDownload={ () => { this.props.downloadFile(reducer, `export/excel-file`) } }
             />
             <div style={{ overflowY: "auto" }}>
                     <Table padding="dense">
@@ -73,6 +76,7 @@ class Invoice extends Component {
                             <TableCell align="center">{locale.wording.repay}</TableCell>
                             <TableCell>PDF</TableCell>
                             <TableCell align="center">Actions</TableCell>
+                            <TableCell align="center">{ locale.wording.archive }</TableCell>
 
                         </TableRow>
                         </TableHead>
@@ -115,6 +119,9 @@ class Invoice extends Component {
                                                     actionCheck={invoice.status.code === "7" ? true : false }
                                                     actionArchive={invoice.status.code === "11" ? true : false }
                                                 />
+                                                 <TableCell>
+                                                    <Switch checked={ !invoice.archive } onChange={ () => { this.props.updateField(reducer, {archive: true}, invoice._id ) }} />
+                                                </TableCell>
                                             </TableRow>
                                 })
                                 : null                           
@@ -193,4 +200,4 @@ const mapStateToProps = (state) => {
 
 const StyledInvoice = withStyles(styles)(Invoice)
 
-export default connect(mapStateToProps, {  getBookList, getTotal, updateField, createState, downloadPdf  })(StyledInvoice);
+export default connect(mapStateToProps, {  getBookList, getTotal, updateField, createState, downloadPdf, downloadFile  })(StyledInvoice);

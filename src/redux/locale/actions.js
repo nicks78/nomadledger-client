@@ -3,29 +3,28 @@
 import { GET_LOCALE } from '../actionsTypes'
 import axios from 'axios'
 import { API_ENDPOINT } from '../constant'
-
+import {setError} from '../error/actions'
 
 import {fr, en } from './index'
 
 export function getLocale( locale ){
     return dispatch => {
 
-        var localeObject = locale === 'fr' ? fr : en
-
-        dispatch(setLocale(localeObject)) 
-
-        localStorage.setItem('locale', locale)
+       
 
         axios.get(`${API_ENDPOINT}company/update/locale/${locale}`, {
             method: 'GET',
             mode: 'cors',
         })
         .then( (response) => { 
+            var localeObject = locale === 'fr' ? fr : en
+            dispatch(setLocale(localeObject)) 
+            localStorage.setItem('locale', locale)
+            document.location.reload(true)
             return true
         }) 
         .catch((error) => {
-            console.log(error)
-            return false
+            dispatch(setError(error));
         })
     }
 }

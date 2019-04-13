@@ -3,6 +3,7 @@
 
 
 export function setNotification(text, status){
+
     return {
         type: "SET_NOTIFICATION",
         status: status,

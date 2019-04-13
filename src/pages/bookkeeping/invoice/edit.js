@@ -2,11 +2,13 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
-import { createState , updateDocument, getDocument, resetState} from '../../../redux/book/actions'
+import { createState , updateDocument, getDocument, resetState, downloadPdf} from '../../../redux/book/actions'
 import { convertToCurrency, getListItem} from '../../../redux/book/itemActions'
-import { withStyles } from '@material-ui/core';
+import { withStyles, Fab } from '@material-ui/core';
 import Form from '../common/form'
 import Spinner from '../../../components/common/spinner'
+import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEyeOutlined'
+
 
 class EditInvoice extends React.Component {
 
@@ -40,10 +42,13 @@ class EditInvoice extends React.Component {
 
     render(){
 
-    const { isFetching, locale, classes, invoice, listItems, vat, currency, status } = this.props;
+    const { isFetching, locale, classes, invoice, listItems, vat, currency, status, isUpdating } = this.props;
 
-    if(isFetching || invoice === null ){
+    if( isFetching ){
         return <Spinner />
+    }
+    if( invoice === null ){
+        return <p>Error</p>
     }
 
     return (
@@ -61,28 +66,39 @@ class EditInvoice extends React.Component {
                     getListItem={this.props.getListItem}
                     createState={this.props.createState}
                     reducer={this.state.reducer}
+                    isUpdating={isUpdating}
                     btnLabel={locale.wording.update}
                     date_1="created_at"
                     date_2="due_at"
                 />
-                
+                <Fab size="medium" color="primary" className={classes.icon}>
+                    <RemoveRedEyeIcon onClick={ () => {this.props.downloadPdf("INVOICE", invoice._id)} } />
+                </Fab>
             </div>
         )
     }
 }
+
+
+
 
 const styles = theme => ({
     root: {
         flex: 1,
         marginBottom: theme.margin.unit
     },
-    
+    icon: {
+        position: 'fixed',
+        bottom: 10,
+        right: 10
+    }
 })
 
 const mapStateToProps = (state) => {
     return {
         isFetching: state.book.invoice.isFetching,
         locale: state.locale.locale,
+        isUpdating: state.book.invoice.isUpdating,
         invoice: state.book.invoice.item,
         listItems: state.book.invoice.item ? state.book.invoice.item.list_items : [],
         vat: state.account.company.item ? state.account.company.item.vat : [],
@@ -93,4 +109,4 @@ const mapStateToProps = (state) => {
 
 const StyledEditInvoice = withStyles(styles)(EditInvoice)
 
-export default connect(mapStateToProps, { getListItem, convertToCurrency, updateDocument, getDocument, createState, resetState })(StyledEditInvoice);
+export default connect(mapStateToProps, { getListItem, convertToCurrency, updateDocument, getDocument, createState, resetState, downloadPdf })(StyledEditInvoice);

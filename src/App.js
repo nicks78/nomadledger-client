@@ -3,7 +3,7 @@ import Routes from './routes'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css'
 import {StripeProvider} from 'react-stripe-elements';
-
+import ApxAlert from './components/common/alert'
 
 // #33B3A9 == green
 // #1F2A3F == darck green
@@ -18,7 +18,7 @@ const theme = createMuiTheme({
     },
     secondary: {
       // light: '#38CC24', // '#ff6666', //'#ff9d3f',
-      main: 'rgb(239, 108, 0)', //'#2ca01c',  
+      main: 'rgba(239, 108, 0, 0.9)', //'#2ca01c',  
       // dark:  '#38CC24', 
       contrastText: '#fff',
     },
@@ -26,7 +26,7 @@ const theme = createMuiTheme({
     grey: {
       light: 'rgba(251,251,251,1)',
       main: 'rgb(128, 128, 128)',
-      dark: '#080808',
+      dark: 'rgb(51,51,51)',
     },
     lightGrey: 'rgb(238,238,238)',
     darkGrey: "rgb(44,47,50)", // 58.58.58
@@ -57,45 +57,50 @@ const theme = createMuiTheme({
     h1:{
       fontSize: '1.8rem',
       fontWeight: 700,
-      colro: '#080808'
+      color: 'rgb(51,51,51)',
+      textTransform: "capitalize"
     },
     h2: {
       fontSize: '1.3rem',
-      color: '#080808',
-      fontWeight: 400,
+      color: 'rgb(51,51,51)',
+      fontWeight: 500,
       textTransform: "capitalize"
     },
     h3: {
       fontSize: '1.1rem',
-      colro: '#080808'
+      fontWeight: 400,
+      color: 'rgb(51,51,51)',
+      textTransform: "capitalize"
     },
     subtitle1: {
       fontWeight: 600,
+      color: 'rgba(48,48,48,1)',
       fontSize: '0.9rem'
     },
     subtitle2: {
       fontWeight: 500,
-      color: 'rgb(72, 72, 72)',
+      color: 'rgba(48,48,48,1)',
       fontSize: '0.9rem'
+    },
+    body1: {
+      fontSize: '0.8rem',
+      fontWeight: 600,
+      color: 'rgba(48,48,48,0.8)'
+    },
+    body2: {
+      fontWeight: 500,
+      color: 'rgba(48,48,48,0.8)',
+      fontSize: '0.8rem'
     },
     caption: {
       fontWeight: 500,
       color: 'rgba(128, 128, 128, 0.8)',
       fontSize: '0.8rem'
     },
-    body1: {
-      fontSize: '0.85rem',
-      color: '#303030'
-    },
-    body2: {
-      fontWeight: 500,
-      color: 'rgb(72, 72, 72)',
-      fontSize: '0.9rem'
-    },
     overline: {
-      fontSize: '0.85rem',
+      fontSize: '0.8rem',
       fontWeight: 700,
-      color: 'rgb(72, 72, 72)',
+      color: 'rgba(48,48,48,1)',
       lineHeight: 1.6
     },
     fontWeightMedium: 700,
@@ -119,8 +124,8 @@ class App extends Component {
 
     return (
       <React.Fragment>
-              <StripeProvider apiKey="pk_test_GblxUSlJYaYq5b3dU2GIoPql00wt6XzrAC">
-
+        <ApxAlert message="beta_1" />
+        <StripeProvider apiKey="pk_test_GblxUSlJYaYq5b3dU2GIoPql00wt6XzrAC">
           <MuiThemeProvider theme={theme}>
               <Routes />
           </MuiThemeProvider> 

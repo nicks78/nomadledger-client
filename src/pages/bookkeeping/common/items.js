@@ -76,7 +76,7 @@ class Items extends Component {
                             <TableCell>{locale.wording[item.onModel]}-{ item.ref}</TableCell>
                             <TableCell className={ classes.contentEditable }><ApxContenEditable value={ item.desc || "" } id={item.item_id} actionInput={(event) => { this.props.editItem(reducer, item, 'desc' , event.target.innerText ) }} name="desc" /></TableCell>
                             <TableCell>{ cvtNumToUserPref(item.unit_price)}</TableCell>
-                            <TableCell>
+                            <TableCell style={{whiteSpace: 'nowrap'}}>
                             
                             <div className={ classes.quantity }>
                                 <ArrowDropDownIcon className={ classes.btnArrow} onClick={ () => { this.props.addRemoveQuantity(reducer, item.item_id, "down")}} />

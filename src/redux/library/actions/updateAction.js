@@ -5,7 +5,7 @@ import axios from 'axios';
 import { API_ENDPOINT } from '../../constant'
 import { requestUpdate, requestFailed  } from './'
 import {setNotification} from '../../notification/actions'
-
+import {setError} from '../../error/actions'
 
 // CREATE NEW ITEM
 export const updateItem = ( actionType, endPoint ) => {
@@ -35,10 +35,8 @@ export const updateItem = ( actionType, endPoint ) => {
             dispatch(setUpdateItem( actionType, res.item ))  
         }) 
         .catch(function (error) {
-            // handle error
-            var message = error.response ? error.response.data.message : 'error_500'
-            dispatch(setNotification(message, "error"))
-            dispatch(requestFailed(actionType, message));
+            dispatch(setError(error));
+            dispatch(requestFailed(actionType));
         })    
     }
 }

@@ -7,8 +7,9 @@ import ErrorIcon from '@material-ui/icons/Error'
 
 const styles = theme => ({
     root: {
-        marginTop: theme.spacing.unit,
-        marginBottom: theme.spacing.unit,
+        
+        top: 0,
+        width: '100%',
         backgroundColor: theme.palette.error.main,
         padding: 10
     },

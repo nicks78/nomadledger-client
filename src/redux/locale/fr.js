@@ -108,9 +108,11 @@ const fr =  {
         updating: "Mise à jour...",
         progress: "En cours...",
         upload: "Téléverser",
-        loading: "Chargement...",
+        loading:"Chargement...",
         send: "Envoyer",
         contact_us: "Contacter-nous",
+        confirm_payment: "Confirmer le paiement",
+        payment_progress: "Paiment en cours...",
         others: "Autres",
         label_tax: "Année fiscale",
         start: "Début",
@@ -142,6 +144,7 @@ const fr =  {
         repay: "Rembourser",
         transaction_number: "Référence du virement",
         my_account: "Mon Profil",
+        archive: "Archiver",
 
         contact_group: "Groupe",
         contact_drop: "Client",
@@ -243,6 +246,7 @@ const fr =  {
         tag_name_en: "Nom de l'étiquette (Anglais)",
         tag_name_fr: "Nom de l'étiquette (Français)",
         tag_hex: "Code couleur HEX (ex: #ffffff)",
+        tandc: "Termes & Conditions"
     },
     helperText: {
         select_phone_code: "Sélectionner le code téléphone",
@@ -255,7 +259,10 @@ const fr =  {
         textarea_quote: "Taper une déscription de votre devis",
         textarea_terms: "Taper un court texte de conditions générale",
         infos_status: "<span style='color: red;font-weight: 700'>ATTENTION *</span> - Seule les statuts < Brouillion & En Attente > sont modifiable",
-        type_message: "Taper votre message..."
+        type_message: "Taper votre message...",
+        payment_terms: "Cette abonnement vous donne total accès à la plateforme pendant 365 jours",
+        add_tags: "Une fois l'élement créer, vous aurez la possibilité d'editer en 2 langue FR - EN ",
+        trial_30: "30 jours d'essais gratuit"
     },
     message: {
         success_create: "Felicitation !",
@@ -266,7 +273,9 @@ const fr =  {
         success_updated_pw: "Votre mot de passe a été mise à jour",
         success_create_new_user: "Felicitation ! Votre compte a bien été créé, vous pouvez maintenant vous connecter",
         success_email_sent: "Message envoyé, nous vous contacterons dans les meilleurs délais",
+        success_payment: "Paiement accepter, vous allez recevoir un reçu par couriel",
 
+        error_payment: "Error lors du paiement, veuillez recommencer ou contacter notre service support@nomadledger.com",
         error_email_not_sent: "Erreur - message non envoyé, veuillez recommencer ou prendre contact a support@nomadledger.com",
         error_create: "Erreur donnée non créer",
         error_update: "Erreur donnée non mise ajour",
@@ -279,7 +288,12 @@ const fr =  {
         error_422_contact: "Erreur, veuillez recommencer ou contacter notre service client",
         error_403_delete: "Cette donnée ne peux être supprimer",
         error_422: "Les champs chiffres doivent correspondre au format intl '42.18' ou format français '36,85'",
-        error_422_email_format: "L'email a un format incorrect, veuillez verifier",
+        error_422_email_format: "Veuillez verifier le format de votre couriel",
+        error_422_lastname: "Le nom est obligatoire",
+        error_422_email: "Le email est obligatoire",
+        error_422_firstname: "Le prénom est obligatoire",
+        error_422_company_name: "Le nom de société est obligatoire",
+        error_422_password: "Le mot de passe est obligatoire", 
         error_membership_end: "Votre period d'essai viens de se terminer, vous pouvez renouveller avec nous ou faire une demande pour recuperer vos donnée",
         error_409: "Cette e,qil existe dejq dqns notre base de donnée",
         error_wrong_token: "Error d'authentification, veuillez recommencer ou contacter notre service client",
@@ -288,10 +302,13 @@ const fr =  {
         error_pw_not_match: "Mot de passe non identique",
         error_pw_min_8: "Votre mot de passe doit faire au minimum 8 charactère",
 
+        warning_not_refresh: "Veuillez ne pas rafraichir la page pendant la procedure de payment",
+
         alert_password_not_match: "Mots de passe ne correspondent pas",
         phone_required: "Mobile obligatoire",
         required: "Tous les champs marqué d'une * sont obligatoires",
-        request_reset_pw: "Veuillez consulter votre email et suivre les instructions"
+        request_reset_pw: "Veuillez consulter votre email et suivre les instructions",
+        beta_1: "Beta 1 - Toutes les données enregistrées seront perdus",
     },
     days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
     home_page: {
@@ -310,7 +327,29 @@ const fr =  {
         block_paragraphe_003: `Créé specialement pour les proffessionnels qui veulent tenir efficacement et 
         simplement leur gestion, notre outils s'adatera parfaitement a votre structure et a vos besoins. Nomade, Autoentrepreuneurs, TPE, PME, PML...Quel 
         que soit votre statut, vous pourrez maitriser votre gestion en toute simplicité.`,
-        form_title: "Inscrivez-vous gratuitement"
+        form_title: "Inscrivez-vous gratuitement",
+        pricing: {
+            block_001:{
+                title: "30 jours d'essais gratuit",
+                feature_1: "Gestion des contacts",
+                feature_2: "Gestions des vos documents comptables",
+                feature_3: "Gérer vos tâches quotidienne",
+                feature_4: "Gérer vos services/produits",
+                feature_5: "Assistance en ligne"
+            },
+            block_002:{
+                title: "3.50 €/ Mois",
+                feature_1: "Gestion des contacts",
+                feature_2: "Gestions des vos documents comptables",
+                feature_3: "Gérer vos tâches quotidienne",
+                feature_4: "Gérer vos services/produits",
+                feature_5: "Assistance en ligne"
+            },
+            block_003:{
+                title: "Auto hébergé",
+                feature_1: "A la carte !",
+            }
+        }
     }
 };
 

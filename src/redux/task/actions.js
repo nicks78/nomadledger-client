@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { API_ENDPOINT } from '../constant'
 import {setNotification} from '../notification/actions'
-
+import {setError} from '../error/actions'
 
 
 // GET AUTHENTICATED
@@ -21,10 +21,8 @@ export function getAllTask(endPoint, fieldName){
             dispatch(receiveTask(res.payload, fieldName))
         }) 
         .catch(function (error) {
-            // handle error
-            var message = error.response ? error.response.data.message : 'error_500';
-            dispatch(setNotification(message, "error"))
-            dispatch(requestFailed(message));
+            dispatch(setError(error));
+            dispatch(requestFailed());
         })          
     }
 }
@@ -64,10 +62,8 @@ export const createTask = () => {
             dispatch(getAllTask( `list`, "taskList" ))
         })
         .catch(function (error) {
-            // handle error
-            var message = error.response ? error.response.data.message : 'error_500';
-            dispatch(setNotification(message, "error"))
-            dispatch(requestFailed( message));
+            dispatch(setError(error));
+            dispatch(requestFailed());
         })  
     }
 }
@@ -96,10 +92,8 @@ export const updateTask = () => {
             dispatch(getAllTask( `list`, "taskList" ))  
         }) 
         .catch(function (error) {
-            // handle error
-            var message = error.response ? error.response.data.message : 'error_500'
-            dispatch(setNotification(message, "error"))
-            dispatch(requestFailed( message));
+            dispatch(setError(error));
+            dispatch(requestFailed());
         })    
     }
 }
@@ -131,11 +125,8 @@ export const updateStatus = (task, fieldName) => {
             
         }) 
         .catch(function (error) {
-            console.log(error)
-            // handle error
-            var message = error.response ? error.response.data.message : 'error_500'
-            dispatch(setNotification(message, "error"))
-            dispatch(requestFailed( message));
+            dispatch(setError(error));
+            dispatch(requestFailed());
         })    
     }
 }
@@ -171,7 +162,6 @@ export function setTask(item){
         type: "GET_TASK",
         isFetching: false,
         isError: false,
-        message: "",
         payload: item
     }
 }

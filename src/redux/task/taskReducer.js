@@ -4,7 +4,6 @@ const initialState = {
     isCreating: false,
     isFetching: false,
     isError: false,
-    message: '',
     item: null,
     list: []
 }
@@ -19,16 +18,14 @@ const taskReducer = (state = initialState, action) => {
             return  { 
                 ...state,
                 isFetching: action.isFetching,
-                isError: action.isError,
-                message: action.message
+                isError: action.isError
             }
         case `FAILED_TASK`:
             return  { 
                 ...state,
                 isFetching: action.isFetching,
                 isError: action.isError,
-                isCreating: action.isCreating,
-                message: action.message
+                isCreating: action.isCreating
             }
         case `RECEIVE_TASK`:
             return  { 
@@ -42,7 +39,6 @@ const taskReducer = (state = initialState, action) => {
                 ...state, 
                 isFetching: action.isFetching,
                 isError: action.isError,
-                message: action.message,
                 item: action.payload
             }
         case `STATE_TASK`:

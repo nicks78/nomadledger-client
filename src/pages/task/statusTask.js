@@ -76,7 +76,7 @@ const styles = theme => ({
         borderRadius: 4, 
         border: 'none',
         color: "white", 
-        padding: "1px 3px 1px 3px", 
+        padding: "3px 5px 3px 5px", 
         float: "right",
         bottom: 5, 
         right: 5, 

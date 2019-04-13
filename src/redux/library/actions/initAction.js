@@ -39,11 +39,10 @@ export const requestUpload = (actionType) => {
 }
 
 
-export const requestFailed = (actionType, message = 'error_505') =>  {
+export const requestFailed = (actionType) =>  {
     return {
         type: `FAILED`,
         subtype: actionType,
-        message: message,
         isFetching: false,
         isCreating: false, 
         isUpdating: false,

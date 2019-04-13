@@ -54,8 +54,7 @@ class MyTable extends React.Component {
                                                         item.status.code === "7"  || 
                                                         item.status.code === "8"  || 
                                                         item.status.code === "9"  || 
-                                                        item.status.code === "10"  || 
-                                                        item.status.code === "11"  ? 
+                                                        item.status.code === "10" ? 
 
                                                         <span style={{color: item.status.color }}>
 
@@ -78,7 +77,6 @@ class MyTable extends React.Component {
                                                 actionEdit={ item.status.code === "1" || item.status.code === "2" || item.status.code === "3" ? `/${reducer.toLowerCase()}/edit/${item._id}` : false }
                                                 actionView={false}
                                                 actionCheck={item.status.code === "7" || item.status.code === "6" || item.status.code === "5" ? true : false }
-                                                actionArchive={item.status.code === "11" ? true : false }
                                             />
                                         </TableRow>
                             })

@@ -75,7 +75,7 @@ class Contact extends Component {
                 <Paper className={classes.paper}>
                     <ApxTableToolBar
                         numSelected={0}
-                        title={locale.wording.contact}
+                        title={isFetching ? locale.wording.loading : locale.wording.contact}
                         selected={locale.wording.selected}
                         menus={ [...contactGroup, {fr: "Tous", en: "All", code: "none"}]   }
                         locale={locale}
