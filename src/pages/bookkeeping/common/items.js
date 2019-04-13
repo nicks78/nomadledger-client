@@ -62,10 +62,10 @@ class Items extends Component {
         <TableRow>
             <TableCell>{locale.wording.ref}</TableCell>
             <TableCell>{locale.wording.description}</TableCell>
-            <TableCell>{locale.wording.unit_price} { newData.currency && newData.currency.value }</TableCell>
+            <TableCell style={{whiteSpace: 'nowrap'}}>{locale.wording.unit_price}&nbsp;{ newData.currency && newData.currency.value }</TableCell>
             <TableCell>{locale.wording.quantity}</TableCell>
             <TableCell>{locale.wording.discount}</TableCell>
-            <TableCell>{locale.wording.total} { newData.currency && newData.currency.value }</TableCell>
+            <TableCell style={{whiteSpace: 'nowrap'}}>{locale.wording.total} { newData.currency && newData.currency.value }</TableCell>
             <TableCell>{locale.wording.remove}</TableCell>
         </TableRow>
         </TableHead>
