@@ -85,6 +85,7 @@ class Expense extends Component {
                         onChangeQuery={ this.handleFilterRequest }
                         toExcel={true}
                         onDownload={ () => { this.props.downloadFile(reducer, `export/excel-file`) } }
+                        locale={locale}
                     />
                     <div style={{overflowY: "auto"}}>
                     <Table>

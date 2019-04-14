@@ -101,6 +101,7 @@ const fr =  {
 
     },
     wording: {
+        exportcsv: "Export au format csv",
         create: "Créer",
         save: "Enregistrer",
         edit: 'Editer',
@@ -332,7 +333,7 @@ const fr =  {
             block_001:{
                 title: "30 jours d'essais gratuit",
                 feature_1: "Gestion des contacts",
-                feature_2: "Gestions des vos documents comptables",
+                feature_2: "Gestions de vos documents comptables",
                 feature_3: "Gérer vos tâches quotidienne",
                 feature_4: "Gérer vos services/produits",
                 feature_5: "Assistance en ligne"

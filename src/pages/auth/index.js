@@ -8,6 +8,7 @@ import { createStateUser, createUser } from '../../redux/auth/createActions'
 import { resetUser } from '../../redux/auth/actions'
 import {Typography, withStyles, Paper, Grid, Button} from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/CheckOutlined'
+import ExitToAppIcon from '@material-ui/icons/ExitToAppOutlined'
 import withWidth from '@material-ui/core/withWidth';
 import Jumbotron from './components/jumbotron'
 import RegisterForm from './components/registerForm'
@@ -89,9 +90,9 @@ const styles = theme => ({
         fontSize: 18
     },
     feature: {
-        float: "left",
-        position: "relative",
-        left: "-50%",
+        // float: "left",
+        // position: "relative",
+        // left: "-50%",
         clear: "both",
         marginBottom: 10
     },  
@@ -174,12 +175,12 @@ class Auth extends Component {
                 component={Link}
                 to="/login"
                 style={{
-                    float: "right",
+                    float: "left",
                     marginRight: 5,
                     color: "white"
                 }}
                 >
-                {locale.wording.login}
+                { true ? <ExitToAppIcon /> : locale.wording.login}
             </Button>
             
       </div>
@@ -237,7 +238,7 @@ class Auth extends Component {
                 <Grid item xs={12} md={4}>
                     <Paper className={ classes.paper }>
                         <p className={classes.pricingTitle}>{locale.home_page.pricing.block_001.title}</p>
-                        <div style={{position: "relative", float: "left", left: "50%"}}>
+                        <div style={{}}>
                             <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;{locale.home_page.pricing.block_001.feature_1}</Typography>
                             <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;{locale.home_page.pricing.block_001.feature_2}</Typography>
                             <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;{locale.home_page.pricing.block_001.feature_3}</Typography>
@@ -248,7 +249,7 @@ class Auth extends Component {
                 <Grid item xs={12} md={4}>
                     <Paper className={ classes.paper }>
                         <p className={classes.pricingTitle}>{locale.home_page.pricing.block_002.title}</p>
-                        <div style={{position: "relative", float: "left", left: "50%"}}>
+                        <div style={{}}>
                         <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;{locale.home_page.pricing.block_001.feature_1}</Typography>
                         <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;{locale.home_page.pricing.block_002.feature_2}</Typography>
                         <Typography variant="caption" className={ classes.feature }><CheckIcon className={classes.icon} />&nbsp;&nbsp;{locale.home_page.pricing.block_002.feature_3}</Typography>

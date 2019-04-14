@@ -94,6 +94,7 @@ const en = {
         label_contact_us: "Ask us for anything"
     },
     wording: {
+        exportcsv: "Export to csv",
         create: "Create",
         save: "Save",
         edit: 'Edit',

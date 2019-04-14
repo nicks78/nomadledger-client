@@ -59,7 +59,7 @@ const EnhancedToolBar = (props) => {
           ) : (
             <Typography variant="subtitle1" id="tableTitle">
               { title }
-              { toExcel ? <p className={classes.linkToExcel} onClick={ props.onDownload } ><u><i>Export to excel file</i></u></p> : null  }
+              { toExcel ? <p className={classes.linkToExcel} onClick={ props.onDownload } ><u><i>{locale.wording.exportcsv}</i></u></p> : null  }
             </Typography>
           )}
         </div>

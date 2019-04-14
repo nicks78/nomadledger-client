@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import {Table, TableHead, TableBody, Paper, TableCell, TableRow, withStyles, } from '@material-ui/core';
 import {connect} from 'react-redux'
+import {downloadFile} from '../../redux/download/actions'
 import { createItem, getItemList, getItem, createState, getTotal, resetState} from '../../redux/library/actions'
 import ApxTableToolBar from '../../components/common/tableToolBar'
 import AddContact from './addContact'
@@ -80,6 +81,8 @@ class Contact extends Component {
                         menus={ [...contactGroup, {fr: "Tous", en: "All", code: "none"}]   }
                         locale={locale}
                         onChangeQuery={ this.handleFilterRequest }
+                        toExcel={true}
+                        onDownload={ () => { this.props.downloadFile(reducer, `export/excel-file`) } }
                     />
                     <div style={{ overflowY: "auto" }}>
                     <Table>
@@ -151,4 +154,4 @@ const mapStateToProps = (state) => {
 
 const StyledContact = withStyles(styles)(Contact)
 
-export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, getTotal, resetState })(StyledContact);
+export default connect(mapStateToProps, { downloadFile, createItem, getItemList, getItem, createState, getTotal, resetState })(StyledContact);

@@ -18,7 +18,7 @@ const theme = createMuiTheme({
     },
     secondary: {
       // light: '#38CC24', // '#ff6666', //'#ff9d3f',
-      main: 'rgba(239, 108, 0, 0.9)', //'#2ca01c',  
+      main: 'rgba(239, 108, 0, 1)', //'#2ca01c',  
       // dark:  '#38CC24', 
       contrastText: '#fff',
     },
@@ -114,17 +114,15 @@ const theme = createMuiTheme({
 
 
 /** TODO 
- * - Check local and send menu name accordingly
- * - Check if user is loggedIn
- * - If no loggedIn => Logout
+ * 
+ * 
  */
-
 class App extends Component {
   render() {
 
     return (
       <React.Fragment>
-        <ApxAlert message="beta_1" />
+        {/* <ApxAlert message="beta_1" /> */}
         <StripeProvider apiKey="pk_test_GblxUSlJYaYq5b3dU2GIoPql00wt6XzrAC">
           <MuiThemeProvider theme={theme}>
               <Routes />
