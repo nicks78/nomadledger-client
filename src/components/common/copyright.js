@@ -11,7 +11,9 @@ const styles = theme => ({
       color: 'rgb(238,238,238)',
       fontSize: '9px !important',
       [theme.breakpoints.down('sm')]: {
-        bottom: 5
+        bottom: 5,
+        position: 'relative', 
+        padding: '10px',
       }
   },
   span: {

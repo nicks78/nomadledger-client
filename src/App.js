@@ -122,7 +122,7 @@ class App extends Component {
 
     return (
       <React.Fragment>
-        {/* <ApxAlert message="beta_1" /> */}
+        <ApxAlert message="beta_1" />
         <StripeProvider apiKey="pk_test_GblxUSlJYaYq5b3dU2GIoPql00wt6XzrAC">
           <MuiThemeProvider theme={theme}>
               <Routes />

@@ -50,8 +50,14 @@ export function authUser(data){
                 dispatch(getAccount("USER"));
                 dispatch(setAuthUser());
 
-                // Redirect to home page
-                history.push('/home')
+
+                if(!res.last_co){
+                    dispatch(setNotification("first_co", "info"))
+                    history.push('/account')
+                }else{
+                    history.push('/home')
+                }
+
             }
 
             

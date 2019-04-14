@@ -7,8 +7,8 @@ import {history} from '../../routes/history'
 export function setError(error){
 
     return dispatch => {
-        var message = error.response ? error.response.data.message : 'error_500';
-console.log(error)
+        var message = error.response && error.response.data ? error.response.data.message : 'error_500';
+
         switch (error.response.status) {
             case 403: // Not authorized
                 dispatch(setNotification(message, "error"))

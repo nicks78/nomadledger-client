@@ -164,23 +164,23 @@ class Auth extends Component {
             ]
     }
 
-    var loc = localStorage.getItem("locale");
+    // var loc = localStorage.getItem("locale");
     return (
       <div className={ classes.container}>
       <div className={classes.appBar} >
-            <Button style={{ float: 'right', paddingLeft: 0, paddingRight: 5 }} onClick={ () => { this.props.initLocale( loc === "fr" ? "en" : "fr" )} }>{localStorage.getItem("locale")}</Button>
+            {/* <Button style={{ float: 'right', paddingLeft: 0, paddingRight: 5 }} onClick={ () => { this.props.initLocale( loc === "fr" ? "en" : "fr" )} }>{localStorage.getItem("locale")}</Button> */}
             <Button 
                 variant="contained" 
                 color="primary"
                 component={Link}
                 to="/login"
                 style={{
-                    float: "left",
+                    float: "right",
                     marginRight: 5,
                     color: "white"
                 }}
                 >
-                { true ? <ExitToAppIcon /> : locale.wording.login}
+                { window.innerWidth < 480 ? <ExitToAppIcon /> : locale.wording.login}
             </Button>
             
       </div>

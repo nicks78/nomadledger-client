@@ -86,6 +86,15 @@ const styles = theme => ({
 
         }
     },
+    avatarActive: {
+        cursor: 'pointer',
+        border: `2px solid ${theme.palette.secondary.main}`,
+        '& img': {
+            width: '120%',
+            transition: 'all 0.2s ease',
+
+        }
+    },
     hamburger: {
         color: theme.palette.secondary.main
     },
@@ -145,21 +154,22 @@ class Layout extends React.Component {
                 </IconButton>
                 <Hidden smDown>
                     <Typography >
-                        <img src={company.logo_company.full_path !== "" ? company.logo_company.full_path : DEFAULT_IMG } alt="logo" className={classes.img} /> 
+                        <img src={company.logo_company.full_path !== "" || DEFAULT_IMG } alt="logo" className={classes.img} /> 
                     </Typography>
                 </Hidden>
                 
                 <Typography className={classes.title}>
-                <Hidden smDown>{company.company_name ? company.company_name.toUpperCase() : "NomadLedger"}</Hidden>
+                    <Hidden smDown>{company.company_name ? company.company_name.toUpperCase() : "NomadLedger"}</Hidden>
                 </Typography>
 
                 <Typography>
                 <Avatar
                     component="span"
                     onClick={ this.handleMenu }
-                    alt="Nicolas"
-                    src={`${ user.avatar.full_path||  DEFAULT_AVATAR }`}
-                    className={ classes.avatar }
+                    alt={user.firstname || "firstname"}
+                    src={`${ user.avatar.full_path ||  DEFAULT_AVATAR }`}
+                    className={ this.props.location.pathname === "/account" ? classes.avatarActive : classes.avatar  }
+                    style={{  }}
                 />
                 <Menu
                   id="menu-appbar"

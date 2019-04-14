@@ -297,6 +297,7 @@ const en = {
         error_422_password: "Password is required", 
 
         warning_not_refresh: "Please do not refresh the page during the payment process",
+        first_co: "Get your App ready ! Add/Remove your Categories - VAT - Contact group et fill up your company informations",
 
         alert_password_not_match: "Password not match, please verify !",
         phone_required: "Your mobile phone is required",

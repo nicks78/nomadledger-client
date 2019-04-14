@@ -304,7 +304,7 @@ const fr =  {
         error_pw_min_8: "Votre mot de passe doit faire au minimum 8 charactère",
 
         warning_not_refresh: "Veuillez ne pas rafraichir la page pendant la procedure de payment",
-
+        first_co: "Préparer votre application ! Ajouter/Supprimer vos Catégories - TVA - Groupe de contact et valider les informations de votre société",
         alert_password_not_match: "Mots de passe ne correspondent pas",
         phone_required: "Mobile obligatoire",
         required: "Tous les champs marqué d'une * sont obligatoires",

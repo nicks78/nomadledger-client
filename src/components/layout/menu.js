@@ -92,7 +92,7 @@ class MainMenu extends React.Component {
         <div className={classes.root}>
             <Hidden mdUp>
                 <div className={classes.header}>
-                    <img src={company.logo_company ? company.logo_company.full_path : DEFAULT_IMG} alt="logo" height="40" width="auto" /> 
+                    <img src={company.logo_company.full_path !== "" || DEFAULT_IMG} alt="logo" height="40" width="auto" /> 
                     <Typography variant="body1" style={{ color: 'white'}}>{ company.company_name }</Typography>
                 </div>
             </Hidden>
