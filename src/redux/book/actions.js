@@ -9,7 +9,7 @@ import {setError} from '../error/actions'
 
 /**
  * // GET FULL LIST OF DOCUMENT
- * @param actionType 
+ * @param actionType
  * @param query  (optional)
  */
 export function getBookList( actionType, endPoint ){
@@ -25,7 +25,7 @@ export function getBookList( actionType, endPoint ){
         }catch(error){
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
-        }           
+        }
     }
 }
 
@@ -44,7 +44,7 @@ function receiveDocuments( actionType, items ) {
 
 /**
  * // CREATE A NEW DOCUMENT
- * @param  actionType 
+ * @param  actionType
  */
 export function createDocument (actionType) {
     return async (dispatch, getState) => {
@@ -57,21 +57,21 @@ export function createDocument (actionType) {
 
         try{
             await axios.post(`${API_ENDPOINT}/${actionType.toLowerCase()}/create`, {data})
-            
+
             dispatch(setNotification("success_create", "success"))
             dispatch(resetState(actionType));
-            
+
             history.push(`/${ actionType.toLowerCase() }`)
         }catch(error){
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
-        }          
+        }
     }
 }
 
 /**
  * // UPDATE DOCUMENT
- * @param  actionType 
+ * @param  actionType
  */
 export function updateDocument (actionType) {
 
@@ -91,7 +91,7 @@ export function updateDocument (actionType) {
         }catch(error){
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
-        }            
+        }
     }
 }
 
@@ -106,12 +106,12 @@ export function requestUpdate( actionType ) {
 
 /**
  * // UPDATE SINGLE FIELD IN DOCUMENT
- * @param  actionType 
+ * @param  actionType
  * @param  data to be update
  * @param  id of document
  */
 export function updateField (actionType, data, id) {
-    
+
     return (dispatch, getState) => {
 
         // Set withCredentials
@@ -119,19 +119,19 @@ export function updateField (actionType, data, id) {
         var list = getState().library[actionType.toLowerCase()].list;
 
         axios.put(`${API_ENDPOINT}common/update-field/${actionType.toLowerCase()}/${id}`,
-            { 
+            {
                 data,
                 mode: 'cors'
-            },   
+            },
             { headers: {
                     'Content-Type': 'application/json'
             }
         })
-        .then(function (response) { 
+        .then(function (response) {
             return response.data
-        }) 
+        })
         .then( res => {
-            
+
             var newList = updateArrayOfObject(list, res.item);
             dispatch(receiveDocuments(actionType, newList )) ;
             dispatch(setNotification("success_update", "success"))
@@ -146,8 +146,8 @@ export function updateField (actionType, data, id) {
 
 /**
  * // GET SINGLE DOCUMENT
- * @param  actionType 
- * @param  id 
+ * @param  actionType
+ * @param  id
  */
 export function getDocument( actionType, id ){
 
@@ -159,23 +159,24 @@ export function getDocument( actionType, id ){
           method: 'GET',
           mode: 'cors'
         })
-        .then(function (response) { 
+        .then(function (response) {
             return response.data
-        }) 
+        })
         .then( res => {
-            dispatch(setDocument(actionType, res.payload ))  
+            dispatch(setDocument(actionType, res.payload ))
         })
         .catch(function (error) {
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
-        })             
+        })
     }
 }
 
 /**
- * // GET SINGLE DOCUMENT
- * @param  actionType 
- * @param  id 
+ * // CREATE DOCUMENT BASE ON ANOTHER ONE
+ * @param  actionType
+ * @param  id
+ * @param  newType
  */
 export function convertToOtherDocument( actionType, id, newType ){
 
@@ -188,9 +189,9 @@ export function convertToOtherDocument( actionType, id, newType ){
           method: 'GET',
           mode: 'cors'
         })
-        .then(function (response) { 
+        .then(function (response) {
             return response.data
-        }) 
+        })
         .then( res => {
             var item = {
                 list_items: res.payload.list_items,
@@ -203,12 +204,12 @@ export function convertToOtherDocument( actionType, id, newType ){
                 onRef: locale.wording[actionType.toLowerCase()] +"-"+res.payload.ref
             }
 
-            dispatch(setDocument(newType, item ))  
+            dispatch(setDocument(newType, item ))
         })
         .catch(function (error) {
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
-        })             
+        })
     }
 }
 
@@ -236,8 +237,8 @@ export function createState ( actionType, fieldName, value ){
 
 /**
  * // GET SUM OF DOCUMENT
- * @param  actionType 
- * @param  id 
+ * @param  actionType
+ * @param  id
  */
 export function getBookTotal( actionType, endPoint ){
 
@@ -249,16 +250,16 @@ export function getBookTotal( actionType, endPoint ){
           method: 'GET',
           mode: 'cors'
         })
-        .then(function (response) { 
+        .then(function (response) {
             return response.data
-        }) 
+        })
         .then( res => {
-            dispatch(setTotal(actionType, res.total ))  
+            dispatch(setTotal(actionType, res.total ))
         })
         .catch(function (error) {
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
-        })             
+        })
     }
 }
 
@@ -273,8 +274,8 @@ export function setTotal ( actionType, total ){
 
 /**
  * // GET SINGLE DOCUMENT
- * @param  actionType 
- * @param  id 
+ * @param  actionType
+ * @param  id
  */
 export function downloadPdf( actionType, id ){
 
@@ -284,24 +285,24 @@ export function downloadPdf( actionType, id ){
           method: 'GET',
           mode: 'cors'
         })
-        .then(function (response) { 
+        .then(function (response) {
             return response.data
-        }) 
+        })
         .then( res => {
             window.open(res, "_blank");
         })
         .catch(function (error) {
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
-        })             
+        })
     }
 }
 
 
 /********************************************************************************************************************************
- * 
+ *
  * COMMON FUNCTION INIT
- * 
+ *
  ***********************************************************************************************************************************/
 
 

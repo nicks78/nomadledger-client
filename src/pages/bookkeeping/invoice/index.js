@@ -37,17 +37,17 @@ class Invoice extends Component {
     handleStatus = (event) => {
         this.props.createState(this.state.reducer, event.target.name, event.target.value);
     }
-    
+
     render() {
-    
+
     const {listInvoice, isFetching, locale, classes, newInvoice, status} = this.props
     const { reducer } = this.state
 
     return (
       <div className={classes.root}>
             <Hidden only={['xs', 'sm']}>
-                <Button component={Link} to="/invoice/create" 
-                        variant="contained" color="primary"  
+                <Button component={Link} to="/invoice/create"
+                        variant="contained" color="primary"
                         className={  classes.button }>
                         { newInvoice.contact_id ? locale.wording.progress : locale.wording.create}
                 </Button>
@@ -80,9 +80,9 @@ class Invoice extends Component {
 
                         </TableRow>
                         </TableHead>
-                        
+
                         <TableBody className={classes.tableBody}>
-                            {   !isFetching ? 
+                            {   !isFetching ?
                                 listInvoice.map(( invoice, index) => {
                                     let vat = invoice.subtotal * invoice.vat.indice / 100
                                     return  <TableRow key={index}>
@@ -93,26 +93,26 @@ class Invoice extends Component {
                                                 <TableCell className={classes.price}>{cvtNumToUserPref(vat + invoice.subtotal  )} {invoice.currency.value}</TableCell>
                                                 <TableCell>
                                                     {
-                                                        invoice.status.code === "7" ||   
-                                                        invoice.status.code === "9"  || 
-                                                        invoice.status.code === "11"  ? 
+                                                        invoice.status.code === "7" ||
+                                                        invoice.status.code === "9"  ||
+                                                        invoice.status.code === "11"  ?
 
                                                         <span style={{color: invoice.status.color }}>
 
                                                         { invoice.status[localStorage.getItem('locale')] }</span>
 
-                                                        :   <ApxSelect 
+                                                        :   <ApxSelect
                                                                 arrayField={status}
                                                                 value={invoice.status[localStorage.getItem('locale')]}
                                                                 variant="standard"
                                                                 handleAction={ (event) => { this.props.updateField(reducer, { status: event.target.value}, invoice._id) } }
                                                                 locale={locale}
                                                             />
-                                                    }    
+                                                    }
                                                 </TableCell>
-                                                <TableCell align="center"><Link to={`/refund/create/${invoice._id}`}><img alt="convert-to-refund" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link></TableCell>                                                
+                                                <TableCell align="center"><Link to={`/refund/create/${invoice._id}`}><img alt="convert-to-refund" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link></TableCell>
                                                 <TableCell><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, invoice._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
-                                                 <ApxTableActions 
+                                                 <ApxTableActions
                                                     actionDelete={ invoice.status.code === "9" ? true : false}
                                                     actionEdit={ invoice.status.code === "1" || invoice.status.code === "2" || invoice.status.code === "3" ? `/invoice/edit/${invoice._id}` : false }
                                                     actionView={false}
@@ -124,9 +124,9 @@ class Invoice extends Component {
                                                 </TableCell>
                                             </TableRow>
                                 })
-                                : null                           
+                                : null
                             }
-                            
+
                         </TableBody>
 
                     </Table>
@@ -166,7 +166,7 @@ const styles = theme => ({
         marginRight: 10,
         marginBottom: theme.margin.unit,
         '& :hover': {
-            color: 'white !important', 
+            color: 'white !important',
         }
     },
     paper: {

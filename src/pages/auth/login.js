@@ -43,8 +43,8 @@ const styles = theme => ({
 
 class Login extends Component {
     state = {
-        login_email: 'nicolas@apx-dev.com',
-        login_password: '0000',
+        login_email: '',
+        login_password: "",
         height: window.innerHeight
     }
 
@@ -140,7 +140,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-console.log(state)
+
     return {
         message: state.auth.message,
         isError: state.auth.isError,

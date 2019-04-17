@@ -1,7 +1,7 @@
 //src/redux/constant.js
 
-// var contant = "http://devapi.nomadledger.com"
-var contant = "http://localhost:8080"
+var contant = "http://devapi.nomadledger.com"
+// var contant = "http://localhost:8080"
 
 
 export const API_ENDPOINT = `${contant}/api/v1/`

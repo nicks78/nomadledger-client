@@ -8,8 +8,8 @@ export function setError(error){
 
     return dispatch => {
         var message = error.response && error.response.data ? error.response.data.message : 'error_500';
-
-        switch (error.response.status) {
+        var status = error.response ? error.response.status : 500
+        switch (status) {
             case 403: // Not authorized
                 dispatch(setNotification(message, "error"))
                 history.push('/')

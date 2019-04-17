@@ -240,7 +240,9 @@ const en = {
         tag_name_en: "Tag name (English)",
         tag_name_fr: "Tag name (French)",
         tag_hex: "Color code HEX (ex: #ffffff)",
-        tandc: "Terms & Conditions"
+        tandc: "Terms & Conditions",
+        login_email: "Email",
+        login_password: "Password"
     },
     helperText: {
         select_phone_code: "Select phone code",

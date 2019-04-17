@@ -154,7 +154,7 @@ class Layout extends React.Component {
                 </IconButton>
                 <Hidden smDown>
                     <Typography >
-                        <img src={company.logo_company.full_path !== "" || DEFAULT_IMG } alt="logo" className={classes.img} /> 
+                        <img src={company.logo_company && company.logo_company.full_path !== "" ? company.logo_company.full_path :  DEFAULT_IMG } alt="logo" className={classes.img} /> 
                     </Typography>
                 </Hidden>
                 
