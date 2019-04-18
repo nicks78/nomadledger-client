@@ -1,14 +1,13 @@
 //src/components/common/tableToolBar.js
 import React from 'react';
-import { 
-withStyles, 
+import {
+withStyles,
 Toolbar,
 Typography,
 Tooltip,
 IconButton } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/DeleteOutlined'
 import { lighten } from '@material-ui/core/styles/colorManipulator';
-
 import BtnMenu from '../../lib/btnMenu'
 
 const styles = theme => ({
@@ -35,8 +34,8 @@ const styles = theme => ({
       flex: '0 0 auto',
     },
     linkToExcel: {
-      margin: 0, 
-      fontSize: 9, 
+      margin: 0,
+      fontSize: 9,
       cursor: "pointer",
       color: 'rgba(128, 128, 128, 0.8)',
       '& :hover i': {
@@ -59,14 +58,13 @@ const EnhancedToolBar = (props) => {
           ) : (
             <Typography variant="subtitle1" id="tableTitle">
               { title }
-              { toExcel ? <p className={classes.linkToExcel} onClick={ props.onDownload } ><u><i>{locale.wording.exportcsv}</i></u></p> : null  }
             </Typography>
           )}
         </div>
         <div className={classes.spacer} />
-       
+
         <div className={classes.actions}>
-         
+
 
           {numSelected > 0 ? (
             <Tooltip title="Delete">
@@ -76,26 +74,28 @@ const EnhancedToolBar = (props) => {
             </Tooltip>
           ) : (
             <Tooltip title="Filter list">
-             
-              { 
-                  menus ? 
+
+              {
+                  menus ?
                   <React.Fragment>
-                    <BtnMenu 
+                    <BtnMenu
+                        toExcel={toExcel}
+                        onDownload={ props.onDownload}
                         menus={menus}
                         onChangeQuery={ props.onChangeQuery}
                         locale={locale}
                     />
                   </React.Fragment>
-                    
-                : null 
+
+                : null
               }
             </Tooltip>
           )}
-          
+
         </div>
-        
+
       </Toolbar>
-            
+
       </div>
   )
 }

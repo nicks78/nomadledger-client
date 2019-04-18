@@ -56,23 +56,23 @@ class Contact extends Component {
 
 
     render() {
-    
+
     const {listContacts, isFetching,  locale, createItem, createState, newContact, isCreating, progress, classes, contactGroup, rowsPerPageOptions, total, country, phone_code} = this.props
     const { reducer } = this.state
 
 
     return (
         <div className={classes.container}>
-            <AddContact progress={progress} 
+                  <AddContact progress={progress} 
                         country={country}
                         phone_code={phone_code}
-                        contactGroup={contactGroup} 
-                        locale={ locale } 
-                        createContact={ createItem } 
-                        createContactState={  createState } 
-                        newData={newContact} 
+                        contactGroup={contactGroup}
+                        locale={ locale }
+                        createContact={ createItem }
+                        createContactState={  createState }
+                        newData={newContact}
                         isCreating={ isCreating  }/>
-            
+
                 <Paper className={classes.paper}>
                     <ApxTableToolBar
                         numSelected={0}
@@ -93,7 +93,7 @@ class Contact extends Component {
                             <TableCell>{locale.wording.full_name}</TableCell>
                             <TableCell>{locale.wording.phone}</TableCell>
                             <TableCell>{locale.wording.email}</TableCell>
-                            
+
                         </TableRow>
                         </TableHead>
 
@@ -101,18 +101,18 @@ class Contact extends Component {
                             {   !isFetching ?
                                 listContacts.map(( contact, index) => {
                                     return  <TableRow key={index}>
-                                                
+
                                                 <TableCell><Link to={`/${reducer.toLowerCase()}/view/${contact._id.toLowerCase()}`}><span  className="link">{contact.company_name}</span></Link></TableCell>
                                                 <TableCell style={{textTransform: "capitalize"}}>{contact.contact_group[localStorage.getItem('locale') || 'fr']}</TableCell>
                                                 <TableCell style={{textTransform: "capitalize"}}>{ contact.firstname } {contact.lastname}</TableCell>
                                                 <TableCell><a href={`tel:${contact.phone_code.value}${contact.phone.replace('0', '')}`}><span  className="link">({contact.phone_code.value}) {contact.phone.replace('0', '')}</span></a></TableCell>
                                                 <TableCell><a href={`mailto:${contact.email}`}><span className="link">{contact.email}</span></a></TableCell>
-                                                
+
                                             </TableRow>
                                 })
                                 : null
                             }
-                            
+
                         </TableBody>
                     </Table>
                     </div>
@@ -126,9 +126,9 @@ class Contact extends Component {
                         filterName="status"
                         onGetItemList={ this.props.getItemList }
                     />
-                
-                  
-            </Paper>    
+
+
+            </Paper>
         </div>
     )
   }

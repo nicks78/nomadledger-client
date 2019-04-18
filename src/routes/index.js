@@ -51,14 +51,14 @@ class Routes extends React.Component {
 
 
     render(){
-     
+
         const { isLoggedIn, locale, authUser, company, text, status, openSnack } = this.props
 
         return (
             <Router history={history}>
                     <React.Fragment>
-                        <SnackBar 
-                            text={text} 
+                        <SnackBar
+                            text={text}
                             openSnack={ openSnack }
                             status={status}
                             locale={locale}/>
@@ -70,11 +70,10 @@ class Routes extends React.Component {
                         <Route path="/public/reset-password/:token" component={ResetPassword} />
                         <Route path="/public/payment-gateway/:token_id" component={Payment} />
                         <Route path="/public/contact-us" component={ContactUs} />
-
                         {
-                            isLoggedIn && authUser !== null  ? 
+                            isLoggedIn && authUser !== null  ?
                             <Layout company={company} _onChangeLocale={this.handleChangeLocale} user={authUser} logout={this.props.getLogout} locale={locale}>
-                            
+
                             <Switch>
                                 <PrivateRoute path="/home" component={ Home } auth={isLoggedIn}/>
                                 <PrivateRoute path="/account" component={Account}  auth={isLoggedIn}/>
@@ -100,10 +99,12 @@ class Routes extends React.Component {
                                 <PrivateRoute path="*" component={NotFound}  auth={isLoggedIn}/>
                             </Switch>
                             </Layout>
-                            : null 
+                            : null
                         }
-                          
+
                         <Route path="*" component={NotFound} />
+
+
                     </Switch>
                 </React.Fragment>
             </Router>
@@ -121,7 +122,7 @@ const mapStateToProps = (state) => {
         text: state.notification.text,
         openSnak: state.notification.openStack,
         status: state.notification.status
-           
+
     }
 }
 

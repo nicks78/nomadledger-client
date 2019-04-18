@@ -5,11 +5,12 @@ import IconButton from '@material-ui/core/IconButton';
 import FilterListIcon from '@material-ui/icons/FilterListOutlined'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import GetAppIcon from '@material-ui/icons/GetApp'
 
 /**
  * @menus array of object
- * 
- * 
+ *
+ *
  */
 class BtnMenu extends React.Component {
 
@@ -32,17 +33,18 @@ class BtnMenu extends React.Component {
 
   render() {
     const { anchorEl } = this.state;
-    const { fontSize, menus } = this.props
+    const { fontSize, menus, toExcel } = this.props
 
     return (
-      <div>
+      <div style={{ display: "inline-flex" }}>
         <IconButton
           aria-owns={anchorEl ? 'menu-list-grow' : undefined}
           aria-haspopup="true"
           onClick={this.handleClick}
         >
           <FilterListIcon style={{ fontSize: fontSize || 24 }}/>
-        </IconButton> 
+        </IconButton>
+        {toExcel ? <IconButton  onClick={ this.props.onDownload }><GetAppIcon /></IconButton> : null }
         <Menu
           id={Date.now()}
           anchorEl={anchorEl}
@@ -52,8 +54,8 @@ class BtnMenu extends React.Component {
         >
         {
             menus.map(( menu, index) => {
-                return <MenuItem 
-                        key={index} 
+                return <MenuItem
+                        key={index}
                         style={{textTransform: 'capitalize', color: menu.color || "#303030"}}
                         onClick={ () => this.handleAction( menu ) }>{menu[localStorage.getItem('locale')]}
                       </MenuItem>

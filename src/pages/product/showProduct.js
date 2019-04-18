@@ -57,8 +57,12 @@ class ShowProduct extends React.Component {
         <ApxPaper>
 
           <ApxBackBtn/>
+            <IconButton style={{float: 'right', marginTop: -10}} color="primary" onClick={ this.handleEdit }>
+              { !showEdit ? <EditIcon />
+                : <CheckIcon style={{ color: 'green' }} /> }
+            </IconButton><br />
           <Grid container>
-              <Grid item xs={12} sm={9} md={9} className={classes.thumbnail}>
+              <Grid item xs={12} sm={8} md={8} className={classes.thumbnail}>
 
                     <div className={classes.mainImgWrap}>
                         <CarouselProduct
@@ -87,44 +91,46 @@ class ShowProduct extends React.Component {
                     </div>
 
               </Grid>
-              <Grid item xs={12} sm={3} md={3}>
-                <IconButton style={{float: 'right', marginTop: -10}} color="primary" onClick={ this.handleEdit }>
-                  { !showEdit ? <EditIcon />
-                    : <CheckIcon style={{ color: 'green' }} /> }
-                </IconButton><br />
+
+              <Grid item xs={12} sm={4} md={4}>
                   <Typography variant="h1">{ product.name}
 
                   </Typography><br />
                   <Typography variant="h3">{ locale.wording.marg}
-                      <span style={{ float: 'right' }}>
+                      <span style={{ float: 'right', color: 'rgba(239, 108, 0, 1)', fontWeight: 700}}>
                         {cvtNumToUserPref( product.selling_price - product.buying_price)}&nbsp;
                         { product.currency.value }
                       </span>
                   </Typography>
                   <br />
-                  <Typography variant="subtitle1">{ locale.wording.buying_price}
-                      <span style={{ float: 'right' }}>
+                    <Typography variant="body1" className={classes.body1}>{ locale.wording.selling_price}
+                        <span className={classes.span}>
+                          {cvtNumToUserPref(product.selling_price)}&nbsp;
+                          { product.currency.value }
+                        </span>
+                    </Typography>
+                  <Typography variant="body1" className={classes.body1}>{ locale.wording.buying_price}
+                      <span className={classes.span}>
                         {cvtNumToUserPref(product.buying_price)}&nbsp;
                         { product.currency.value }
                       </span>
                   </Typography>
-                  <Typography variant="subtitle1">{ locale.wording.selling_price}
-                      <span style={{ float: 'right' }}>
-                        {cvtNumToUserPref(product.selling_price)}&nbsp;
-                        { product.currency.value }
-                      </span>
-                  </Typography>
-                  <Typography variant="subtitle1">{ locale.wording.stock}
-                      <span style={{ float: 'right' }}>
+                  <Typography variant="body1" className={classes.body1}>{ locale.wording.stock}
+                      <span className={classes.span}>
                         {product.stock}
                       </span>
                   </Typography>
-                  <Typography variant="subtitle1">{ locale.wording.category}
-                      <span style={{ float: 'right' }}>
+                  <Typography variant="body1" className={classes.body1}>{ locale.wording.category}
+                      <span className={classes.span}>
                         {product.category[localStorage.getItem("locale")]}
                       </span>
                   </Typography>
-
+                  <br />
+                  <Typography variant="body1">{ locale.wording.description}:
+                      <br /><span>
+                        {product.description}
+                      </span>
+                  </Typography>
               </Grid>
           </Grid>
           <br />
@@ -221,12 +227,7 @@ class ShowProduct extends React.Component {
             : null
           }
           <br />
-          <div>
-            <Typography variant="caption">
-              { locale.wording.description} :
-            </Typography>
-            <Typography variant="body2">{product.description}</Typography>
-          </div>
+
 
         </ApxPaper>
       )
@@ -248,6 +249,16 @@ const styles = theme => ({
   },
   input: {
     display: "none"
+  },
+  span: {
+    float: "right",
+    color: theme.palette.darkGrey,
+    textTransform: "capitalize",
+    marginBottom: 5,
+    clear: 'right'
+  },
+  body1: {
+    marginBottom: 5,
   }
 })
 

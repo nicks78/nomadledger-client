@@ -28,14 +28,14 @@ const styles = theme => ({
       paddingRight: theme.padding.unit,
       paddingLeft: theme.padding.unit,
       height: '100%',
-      clear: 'both'
+      // clear: 'both'
     },
     button: {
         color: 'white',
         marginRight: 10
     },
     container: {
-        display: 'flex',
+        // display: 'flex',
         flexWrap: 'wrap',
     },
     card: {
@@ -43,10 +43,10 @@ const styles = theme => ({
         width: '100%'
     },
     btnSave: {
-        float: 'right', 
+        float: 'right',
         marginTop: '24px',
-        marginBottom: '24px', 
-        color: 'white' 
+        marginBottom: '24px',
+        color: 'white'
     },
     loading: {
         margin: 10
@@ -59,7 +59,7 @@ class Add extends Component {
     state = {
         right: false,
     };
-    
+
     toggleDrawer = (side, open) => () => {
         this.setState({
           [side]: open,
@@ -71,7 +71,7 @@ class Add extends Component {
         var value = event.target.value;
 
         if(fieldName === 'doc'){ // If input file
-            
+
             value = this.handleFile(event.target.files[0]);
         }
         this.props.createItemState( this.props.reducer, fieldName, value )
@@ -80,9 +80,9 @@ class Add extends Component {
     handleFile (file) {
         var imagesArray = this.props.newData.doc ?  this.props.newData.doc : [];
         if(file)
-            if(file.type === 'image/png' || file.type === 'image/jpeg' ){ // Check file format 
-                file.blob = URL.createObjectURL(file) 
-                imagesArray.push(file) 
+            if(file.type === 'image/png' || file.type === 'image/jpeg' ){ // Check file format
+                file.blob = URL.createObjectURL(file)
+                imagesArray.push(file)
             }else{
                 alert(this.props.locale.message.error_file_not_allowed)
             }
@@ -100,48 +100,52 @@ class Add extends Component {
         this.props.createItemState( this.props.reducer, fieldName, newImages )
     }
 
-    _handleCreateItem = ()  => {
-        this.props.createItem(this.props.reducer, this.props.newData)
+
+    onFormSubmit = (e) => {
+      e.preventDefault();
+      this.props.createItem(this.props.reducer, this.props.newData)
     }
 
     render() {
 
         const { locale, newData, classes, formFields, addBtnTitle, headerText, limitUploadFile, isUploading, progress, isCreating} = this.props
-    
+
         const formDrawer = (
                 <div className={ classes.formWindow}>
-                    <form className={ classes.container} noValidate autoComplete="off">
+                    <form className={ classes.container} onSubmit={ this.onFormSubmit } autoComplete="off">
                         {
                             formFields.map(( form, index) => {
                                 return  <div key={index} className={  classes.card }>
                                             <ApxExpanded heading={ form.label }>
                                                 <ApxForm formField={form.fields} formHandler={ this.handleChange } locale={ locale } xs={12} md={6} objData={ newData }/>
-                                            </ApxExpanded>        
+                                            </ApxExpanded>
                                         </div>
                             })
                         }
                         <div className={  classes.card }>
-                        { limitUploadFile > 0 ? 
+                        { limitUploadFile > 0 ?
                             <ApxExpanded heading={locale.subheading.label_assets}>
-                                    <ApxUpload  onChange={ (event) => { this.handleChange(event) } } 
-                                                docType="all" 
-                                                removeItem={this.handleRemoveItem} 
-                                                images={ newData.doc || [] } 
-                                                title={ locale.wording.upload } 
+                                    <ApxUpload  onChange={ (event) => { this.handleChange(event) } }
+                                                docType="all"
+                                                removeItem={this.handleRemoveItem}
+                                                images={ newData.doc || [] }
+                                                title={ locale.wording.upload }
                                                 limitUploadFile={limitUploadFile}/>
-                            </ApxExpanded> 
-                            : null 
+                            </ApxExpanded>
+                            : null
                         }
                     </div>
-                    </form>
-                    <Button 
-                        variant="contained" 
-                        color="primary" 
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        type="submit"
                         disabled={ isCreating || false}
-                        className={ classes.btnSave } 
-                        onClick={ this._handleCreateItem }>
+                        className={ classes.btnSave }
+                        >
                         { isCreating ? locale.wording.loading : locale.wording.save }
                     </Button>
+                    </form>
+
                 </div>
           );
         return (
@@ -150,19 +154,19 @@ class Add extends Component {
                 <Button variant="contained" color="primary" disabled={ isCreating || false}  className={  classes.button } onClick={this.toggleDrawer('right', true)}>{ isCreating ? locale.wording.loading : addBtnTitle }</Button>
             </Hidden>
             <ApxRightDrawer toggleDrawer={ this.toggleDrawer } side="right" open={ this.state.right} title={ headerText } requiredText={locale.message.error_400}>
-            
-                    { 
-                        isUploading ? 
+
+                    {
+                        isUploading ?
                         <div className={ classes.loading }>
                             <Spinner /><br />
                             <p>{progress} %</p>
                             <LinearProgress color="primary" variant="determinate" value={ progress  } />
-                        </div> 
-                        : formDrawer 
+                        </div>
+                        : formDrawer
                     }
             </ApxRightDrawer>
             <Hidden only={['lg', 'xl', 'md']}>
-                <ApxButtonCircle 
+                <ApxButtonCircle
                     handleAction={this.toggleDrawer}
                     open={true}
                     variant="contained"
