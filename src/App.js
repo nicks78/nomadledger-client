@@ -11,15 +11,15 @@ import ApxAlert from './components/common/alert'
 const theme = createMuiTheme({
   palette: {
     primary: {
-      // light:  '#009AFF', 
-      main: '#00aff2', // '#0077c5', 
-      // dark:  '#265C7F', 
+      // light:  '#009AFF',
+      main: '#00aff2', // '#0077c5',
+      // dark:  '#265C7F',
       contrastText: '#fff',
     },
     secondary: {
       // light: '#38CC24', // '#ff6666', //'#ff9d3f',
-      main: 'rgba(239, 108, 0, 1)', //'#2ca01c',  
-      // dark:  '#38CC24', 
+      main: 'rgba(239, 108, 0, 1)', //'#2ca01c',
+      // dark:  '#38CC24',
       contrastText: '#fff',
     },
     green:  '#4CAF50',
@@ -113,20 +113,20 @@ const theme = createMuiTheme({
 });
 
 
-/** TODO 
- * 
- * 
+/** TODO
+ *
+ *
  */
 class App extends Component {
   render() {
 
     return (
       <React.Fragment>
-        <ApxAlert message="beta_1" />
+         <ApxAlert message="beta_1" />
         <StripeProvider apiKey="pk_test_GblxUSlJYaYq5b3dU2GIoPql00wt6XzrAC">
           <MuiThemeProvider theme={theme}>
               <Routes />
-          </MuiThemeProvider> 
+          </MuiThemeProvider>
         </StripeProvider>
       </React.Fragment>
 

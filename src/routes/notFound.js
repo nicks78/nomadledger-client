@@ -29,7 +29,7 @@ class NotFound extends Component {
       <div style={{textAlign: 'center', marginTop: "20%"}}>
         {
           !timeout ?
-            <Spinner />
+            <div><Spinner />BIM</div>
           : <h2>"404 - Page not found !"</h2>
         }
 

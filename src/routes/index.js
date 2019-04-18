@@ -96,7 +96,7 @@ class Routes extends React.Component {
 
                                 <BookkeepingRoute isLoggedIn={isLoggedIn}/>
 
-                                <PrivateRoute path="*" component={NotFound}  auth={isLoggedIn}/>
+
                             </Switch>
                             </Layout>
                             : null

@@ -4,7 +4,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { cvtNumToUserPref, cvtToLocale } from '../../utils/help_function'
 import { getItem, resetState, updateItem, createState, removeImageFromArray, uploadProductFileToServer } from '../../redux/library/actions'
-import { withStyles, Typography, Grid, TextField, IconButton} from '@material-ui/core';
+import { withStyles, Typography, Grid, TextField, IconButton, Hidden, Button } from '@material-ui/core';
 import ApxBackBtn from '../../components/common/backBtn'
 import Spinner from '../../components/common/spinner'
 import ApxPaper from '../../components/common/paper'
@@ -14,6 +14,7 @@ import CameraAltIcon from '@material-ui/icons/CameraAltOutlined'
 import EditIcon from '@material-ui/icons/EditOutlined'
 import CheckIcon from '@material-ui/icons/CheckOutlined'
 import CarouselProduct from './carouselProduct'
+import LinearProgress from '@material-ui/core/LinearProgress'
 
 
 
@@ -21,12 +22,18 @@ class ShowProduct extends React.Component {
 
     state = {
       reducer: "PRODUCT",
-      showEdit: false
+      showEdit: false,
+      width: window.innerWidth
     }
 
   componentDidMount(){
       var id = this.props.match.params.id;
-      this.props.getItem(this.state.reducer, id)
+      this.props.getItem(this.state.reducer, id);
+      window.addEventListener("resize",  this.catchWidth )
+  }
+
+  catchWidth = () => {
+    this.setState({ width: window.innerWidth })
   }
 
   componentWillUnmount(){
@@ -42,7 +49,7 @@ class ShowProduct extends React.Component {
 
   render() {
 
-    const {classes, product, isFetching, locale, categories, currency} = this.props;
+    const {classes, product, isFetching, locale, categories, currency, isUploading, progress, isUpdating} = this.props;
     const {reducer, showEdit} = this.state;
 
     if( isFetching ){
@@ -57,10 +64,13 @@ class ShowProduct extends React.Component {
         <ApxPaper>
 
           <ApxBackBtn/>
+          <Hidden xsDown>
             <IconButton style={{float: 'right', marginTop: -10}} color="primary" onClick={ this.handleEdit }>
               { !showEdit ? <EditIcon />
                 : <CheckIcon style={{ color: 'green' }} /> }
             </IconButton><br />
+          </Hidden>
+
           <Grid container>
               <Grid item xs={12} sm={8} md={8} className={classes.thumbnail}>
 
@@ -87,11 +97,12 @@ class ShowProduct extends React.Component {
                                 <CameraAltIcon />
                               </IconButton>
                             </label>
+                            { isUploading ? <LinearProgress color="secondary" variant="determinate" value={ progress  } /> : null }
                         </div>
                     </div>
 
               </Grid>
-
+                <Hidden xsDown>
               <Grid item xs={12} sm={4} md={4}>
                   <Typography variant="h1">{ product.name}
 
@@ -132,11 +143,13 @@ class ShowProduct extends React.Component {
                       </span>
                   </Typography>
               </Grid>
+              </Hidden>
           </Grid>
+
           <br />
           <br />
           {
-            showEdit ?
+            showEdit || this.state.width < 600 ?
             <div>
 
             <Grid container spacing={8}>
@@ -223,6 +236,16 @@ class ShowProduct extends React.Component {
                       />
                       </Grid>
             </Grid>
+            <Hidden smUp>
+              <Button
+                  variant="contained"
+                  color="primary"
+                  disabled={ isUpdating }
+                  style={{ float: "right" }}
+                  onClick={ () => { this.props.updateItem(this.state.reducer, `update`) } }>
+                  { !isUpdating ?  locale.wording.update : locale.wording.loading }
+              </Button><br />
+            </Hidden>
             </div>
             : null
           }
@@ -241,7 +264,6 @@ const styles = theme => ({
     position: 'relative',
     height: 300,
     padding: 12,
-    // backgroundColor: theme.palette.lightSecondary,
     borderRadius: 4,
     [theme.breakpoints.down('sm')]: {
       height: 200
@@ -263,10 +285,13 @@ const styles = theme => ({
 })
 
 const mapStateToProps = (state) => {
+
   return {
       locale: state.locale.locale,
       isFetching: state.library.product.isFetching,
       isUpdating: state.library.product.isUpdating,
+      isUploading: state.library.product.isUploading,
+      progress: state.library.product.progress,
       product: state.library.product.item,
       categories: state.account.company.item ? state.account.company.item.category_name : [],
       currency: state.helper.items.currency
