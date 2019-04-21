@@ -16,21 +16,21 @@ axios.defaults.withCredentials = true;
 export function authUser(data){
 
     return dispatch => {
-  
+
       dispatch(requestUser());
-      
+
       axios.post(`${API_ENDPOINT}auth`,
-        { 
+        {
             data: data,
-            mode: 'cors',
-        },   
+            mode: 'cors'
+        },
         { headers: {
             'Content-Type': 'application/json',
         }
         })
-        .then(function (response) { 
+        .then(function (response) {
             return response.data
-        }) 
+        })
         .then( res => {
 
             if( !res.success ){
@@ -60,12 +60,12 @@ export function authUser(data){
 
             }
 
-            
-        }) 
+
+        })
         .catch(function (error) {
             dispatch(setError(error));
             dispatch(requestFailed());
-        })          
+        })
     }
 }
 
@@ -105,7 +105,7 @@ export function resetUser (){
     }
 }
 
-// Logout 
+// Logout
 export function getLogout(){
 
     return dispatch => {
@@ -135,7 +135,7 @@ export function getLogout(){
             dispatch(setLogout());
             dispatch(requestFailed(message));
             history.push('/')
-      })     
+      })
     }
 }
 
@@ -147,24 +147,24 @@ export function recoverPassword(email){
         dispatch(requestUser())
 
         axios.post(`${API_ENDPOINT}auth/forgot-password`,
-        { 
+        {
             email: email,
             mode: 'cors',
-        },   
+        },
         { headers: {
             'Content-Type': 'application/json',
         }
         })
-        .then(function (response) { 
+        .then(function (response) {
             return response.data
-        }) 
+        })
         .then( res => {
             dispatch(setNotification("request_reset_pw", "success"));
             dispatch(resetUser())
             // Redirect to home page
             history.push('/')
-            
-        }) 
+
+        })
         .catch(function (error) {
             dispatch(setError(error));
             dispatch(requestFailed());
@@ -184,24 +184,24 @@ export function resetPassword(token, password){
         }
 
         axios.post(`${API_ENDPOINT}public/reset-password`,
-        { 
+        {
             data: data,
             mode: 'cors',
-        },   
+        },
         { headers: {
             'Content-Type': 'application/json',
         }
         })
-        .then(function (response) { 
+        .then(function (response) {
             return response.data
-        }) 
+        })
         .then( res => {
             dispatch(setNotification(res.message, "success"))
             dispatch(resetUser())
             // Redirect to home page
             history.push('/login')
-            
-        }) 
+
+        })
         .catch(function (error) {
             dispatch(setError(error));
             dispatch(requestFailed());

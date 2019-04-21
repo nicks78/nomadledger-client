@@ -8,105 +8,105 @@ import { setError } from '../error/actions'
 
 // GET A SINGLE ITEM
 /**
- * @param actionType 
- * 
+ * @param actionType
+ *
  */
 export function getAccount(actionType){
 
   return async dispatch => {
 
     dispatch(requestData(actionType))
-  
+
     axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/infos-${actionType.toLowerCase()}`, {
       method: 'GET',
       mode: 'cors',
     })
-    .then(function (response) { 
+    .then(function (response) {
         return response.data
-    }) 
+    })
     .then( res => {
         if(actionType === "COMPANY"){
             dispatch(initLocale(res.payload.locale || "fr"))
         }
 
-        dispatch(setAccount( actionType, res.payload ))  
+        dispatch(setAccount( actionType, res.payload ))
     })
     .catch(  (error) => {
         dispatch(setError(error));
         dispatch(requestFailed(actionType));
-    })          
+    })
   }
 }
 
 // UPDATE DOCUMENT
 /**
- * @param actionType 
- * 
+ * @param actionType
+ *
  */
 export function updateDocument(actionType){
 
     return (dispatch, getState) => {
-  
+
       var data = getState().account[actionType.toLowerCase()].tmp_state;
 
         if(Object.keys(data).length > 0 ){
-        
+
             axios.put(`${API_ENDPOINT}${actionType.toLowerCase()}/update/infos/${actionType.toLowerCase()}`, {
                     data: data
             })
-            .then(function (response) { 
+            .then(function (response) {
                 return response.data
-            }) 
+            })
             .then( res => {
                 dispatch(setNotification("success_update", "success"))
-                dispatch(setAccount( actionType, res.payload ))  
+                dispatch(setAccount( actionType, res.payload ))
             })
             .catch(function (error) {
                 dispatch(setError(error));
                 dispatch(requestFailed(actionType));
-            })   
+            })
         }else{
             return null
-        }       
+        }
     }
 }
 
 // PUSH - PULL  DOCUMENT
 /**
- * @param actionType 
- * 
+ * @param actionType
+ *
  */
 export function pushToDocument(actionType, data, endPoint ){
 
     return (dispatch) => {
         if(Object.keys(data).length > 0 ){
-        
+
             axios.put(`${API_ENDPOINT}${endPoint}${actionType.toLowerCase()}`, {
                     data: data
             })
-            .then(function (response) { 
+            .then(function (response) {
                 return response.data
-            }) 
+            })
             .then( res => {
                 dispatch(setNotification("success_update", "success"))
-                dispatch(setAccount( actionType, res.payload ))  
+                dispatch(setAccount( actionType, res.payload ))
             })
             .catch(function (error) {
                 dispatch(setError(error));
                 dispatch(requestFailed(actionType));
-            })   
+            })
         }else{
             return null
-        }       
+        }
     }
 }
 
 
 // UPLOAD IMAGE/DOCS TO SERVER
 /**
- * 
+ *
  * @param actionType // model name
- * @param file  // file to be uploaded 
+ * @param file  // file to be uploaded
  * @param id // id of the document if 'null', company_id is the default
  * @param field // name of the field in the document
  * @param oldFile // old file name to be delete
@@ -125,8 +125,8 @@ export const uploadFileToServer = ( actionType, file, field, oldFileObject ) => 
       formData.append("files", file);
 
       axios.post(`${API_ENDPOINT}${url_path}`,
-          formData,   
-          { 
+          formData,
+          {
             headers: {
               'content-type': 'application/form-data'
           },
@@ -135,49 +135,49 @@ export const uploadFileToServer = ( actionType, file, field, oldFileObject ) => 
               dispatch(progress(actionType, parseInt(p, 10)))
           }
       })
-      .then(function (response) { 
+      .then(function (response) {
           return response.data
-      }) 
+      })
       .then( res => {
             dispatch(setNotification("success_uploaded", "success"))
-            dispatch(setAccount( actionType, res.payload ))  
+            dispatch(setAccount( actionType, res.payload ))
       })
       .catch(function (error) {
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
-      })  
+      })
   }
 }
 
 
 // UPDATE PASSWORD
 /**
- * @param password 
- * 
+ * @param password
+ *
  */
 export const updatePassword = ( password ) => {
 
     return (dispatch) => {
-  
+
         dispatch(requestData("USER"))
-  
+
         axios.put(`${API_ENDPOINT}user/change-password`,
         {data: password},
         { headers: {
             'Content-Type': 'application/json',
         }
         })
-        .then(function (response) { 
+        .then(function (response) {
             return response.data
-        }) 
+        })
         .then( res => {
             dispatch(setNotification("success_update", "success"))
-            dispatch(setAccount( 'USER', res.payload ))  
+            dispatch(setAccount( 'USER', res.payload ))
         })
         .catch(function (error) {
             dispatch(setError(error));
             dispatch(requestFailed("USER"));
-        })  
+        })
     }
 }
 
@@ -204,7 +204,7 @@ export function uploading ( actionType ){
     isUploading: true,
   }
 }
-  
+
 
 function requestData(actionType) {
     return {
@@ -222,7 +222,7 @@ export function setAccount( actionType, item) {
         isFetching: false,
         subtype: actionType,
         isError: false,
-        isUploading: false, 
+        isUploading: false,
         item: item,
         receivedAt: Date.now()
     }
@@ -233,7 +233,7 @@ function requestFailed(actionType) {
         type: `FAILED`,
         isFetching: false,
         subtype: actionType,
-        isUploading: false, 
+        isUploading: false,
         isError: true
     }
 }

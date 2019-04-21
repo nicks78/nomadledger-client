@@ -87,7 +87,7 @@ const EnhancedToolBar = (props) => {
                     />
                   </React.Fragment>
 
-                : null
+                : <React.Fragment><span></span></React.Fragment>
               }
             </Tooltip>
           )}

@@ -36,17 +36,17 @@ class Refund extends Component {
     handleStatus = (event) => {
         this.props.createState(this.state.reducer, event.target.name, event.target.value);
     }
-    
+
     render() {
-    
+
     const {listRefund, isFetching,  locale, classes, newRefund, status} = this.props
     const { reducer } = this.state
 
     return (
       <div className={classes.root}>
             <Hidden only={['xs', 'sm']}>
-                <Button component={Link} to="/refund/create" 
-                        variant="contained" color="primary"  
+                <Button component={Link} to="/refund/create"
+                        variant="contained" color="primary"
                         className={  classes.button }>
                         { newRefund.contact_id ? locale.wording.progress : locale.wording.create}
                 </Button>
@@ -57,7 +57,7 @@ class Refund extends Component {
                 title={ isFetching ? locale.wording.loading : locale.wording.refund}
                 selected={ locale.wording.selected}
                 locale={locale}
-                menus={ [...status, {fr: "Tous", en: "All", code: "none"}]  }
+                menus={ status && [...status, {fr: "Tous", en: "All", code: "none"}]  }
                 onChangeQuery={ this.handleFilterRequest }
             />
             <div style={{ overflowY: "auto" }}>
@@ -77,9 +77,9 @@ class Refund extends Component {
 
                         </TableRow>
                         </TableHead>
-                        
+
                         <TableBody className={classes.tableBody}>
-                            {   !isFetching ? 
+                            {   !isFetching ?
                                 listRefund.map(( refund, index) => {
                                     let total = refund.subtotal * refund.vat.indice / 100
                                     return  <TableRow key={index}>
@@ -91,22 +91,22 @@ class Refund extends Component {
                                                 <TableCell className={classes.price}>{cvtNumToUserPref(total  )} {refund.currency.value}</TableCell>
                                                 <TableCell>
                                                     {
-                                                        refund.status.code === "11" || refund.status.code === "8" ? 
+                                                        refund.status.code === "11" || refund.status.code === "8" ?
                                                         <span style={{color: refund.status.color }}>
 
                                                         { refund.status[localStorage.getItem('locale')] }</span>
 
-                                                        :   <ApxSelect 
+                                                        :   <ApxSelect
                                                                 arrayField={status}
                                                                 value={refund.status[localStorage.getItem('locale')]}
                                                                 variant="standard"
                                                                 handleAction={ (event) => { this.props.updateField(reducer, { status: event.target.value}, refund._id) } }
                                                                 locale={locale}
                                                             />
-                                                    }    
+                                                    }
                                                 </TableCell>
                                                 <TableCell><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, refund._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
-                                                <ApxTableActions 
+                                                <ApxTableActions
                                                     actionDelete={refund.status.code === "9" ? true : false}
                                                     actionEdit={refund.status.code === "1" || refund.status.code === "2" || refund.status.code === "3" ? `/refund/edit/${refund._id}` : false }
                                                     actionView={false}
@@ -119,9 +119,9 @@ class Refund extends Component {
                                                 </TableCell>
                                             </TableRow>
                                 })
-                                : null                           
+                                : null
                             }
-                            
+
                         </TableBody>
 
                     </Table>
@@ -161,7 +161,7 @@ const styles = theme => ({
         marginRight: 10,
         marginBottom: theme.margin.unit,
         '& :hover': {
-            color: 'white !important', 
+            color: 'white !important',
         }
     },
     paper: {

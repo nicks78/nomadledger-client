@@ -341,7 +341,7 @@ const fr =  {
                 feature_5: "Assistance en ligne"
             },
             block_002:{
-                title: "3.50 €/ Mois",
+                title: "4,16 €/ Mois",
                 feature_1: "Gestion des contacts",
                 feature_2: "Gestions de vos documents comptables",
                 feature_3: "Gérer vos tâches quotidiennes",

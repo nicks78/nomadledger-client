@@ -63,7 +63,7 @@ class Contact extends Component {
 
     return (
         <div className={classes.container}>
-                  <AddContact progress={progress} 
+                  <AddContact progress={progress}
                         country={country}
                         phone_code={phone_code}
                         contactGroup={contactGroup}
@@ -78,7 +78,7 @@ class Contact extends Component {
                         numSelected={0}
                         title={isFetching ? locale.wording.loading : locale.wording.contact}
                         selected={locale.wording.selected}
-                        menus={ [...contactGroup, {fr: "Tous", en: "All", code: "none"}]   }
+                        menus={ contactGroup && [...contactGroup, {fr: "Tous", en: "All", code: "none"}]   }
                         locale={locale}
                         onChangeQuery={ this.handleFilterRequest }
                         toExcel={true}

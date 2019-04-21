@@ -17,7 +17,6 @@ import CarouselProduct from './carouselProduct'
 import LinearProgress from '@material-ui/core/LinearProgress'
 
 
-
 class ShowProduct extends React.Component {
 
     state = {
@@ -85,7 +84,7 @@ class ShowProduct extends React.Component {
                         <div className={classes.button}>
                             <input
                                 accept="all"
-                                disabled={ product.img.length >= 3 ? true : false }
+                                disabled={ product.img.length >= 19 ? true : false }
                                 className={classes.input}
                                 id="upload"
                                 name="img"

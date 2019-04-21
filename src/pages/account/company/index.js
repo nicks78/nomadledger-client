@@ -25,7 +25,7 @@ const styles = theme => ({
   icon: {
     float: 'right',
     backgroundColor: '#008489',
-    
+
   },
   checkicon: {
     color: theme.palette.green
@@ -65,7 +65,7 @@ class Company extends Component {
       <div>
         <Grid container spacing={16}>
             <Grid item xs={12} md={3}>
-                  <UploadImg 
+                  <UploadImg
                     field="logo_company"
                     _handleUploadFile={ (e) => { this.props.uploadFileToServer("COMPANY", e.target.files[0], 'logo_company', company.logo_company ) }}
                     progress={progress}
@@ -73,21 +73,21 @@ class Company extends Component {
                     isUploading={isUploading}
                     image={ <img src={`${ company.logo_company.full_path || DEFAULT_IMG }`} alt="logo" width="80%" height={null} />}
                   />
-               
+
             </Grid>
 
             <Grid item  xs={12} md={9}>
-              <ApxButtonEdit 
+              <ApxButtonEdit
                   updateDocument={this.updateDocument}
-                  openEdit={this.openEdit} 
+                  openEdit={this.openEdit}
                   showEdit={showEdit}
               />
               <Typography variant="h1">
-              { showEdit ? 
+              { showEdit ?
                 <TextField
                     value={ company.company_name || ""}
                     label={ locale.wording.company_name }
-                    onChange={ (event) => { this.props.handleFormEdit(event, reducer) }} 
+                    onChange={ (event) => { this.props.handleFormEdit(event, reducer) }}
                     name="company_name"
                     fullWidth
                     variant="filled"
@@ -97,14 +97,14 @@ class Company extends Component {
               <br />
               <Grid container spacing={8}>
 
-                  <Grid item xs={12} md={5}>
+                  <Grid item xs={12} sm={5} md={5}>
 
                   <Typography variant="subtitle1">
                       {locale.subheading.label_comp_info}
                     </Typography>
                   <Divider className={ classes.divider }/>
-                  
-                  <EditSelect 
+
+                  <EditSelect
                         arrayField={company_type}
                         field="company_type"
                         helperText="select_service_type"
@@ -114,7 +114,7 @@ class Company extends Component {
                         label={locale.wording.company_type}
                         value={ company.company_type[localStorage.getItem("locale")]}
                     />
-                  <EditInput 
+                  <EditInput
                       label={ locale.wording.company_register }
                       value={ company.company_register}
                       showEdit={showEdit}
@@ -122,7 +122,7 @@ class Company extends Component {
                       field="company_register"
                       handleAction={(event) => { this.props.handleFormEdit(event, reducer) }}
                   />
-                  <EditInput 
+                  <EditInput
                       label={ locale.wording.company_vat }
                       value={ company.company_vat}
                       showEdit={showEdit}
@@ -137,7 +137,7 @@ class Company extends Component {
                     <Divider className={ classes.divider }/>
                     {
                       showEdit ?
-                      <EditSelect 
+                      <EditSelect
                           arrayField={currency}
                           field="currency"
                           helperText="select_currency"
@@ -147,15 +147,15 @@ class Company extends Component {
                           label={locale.subheading.label_currency_fav }
                           value={ company.currency[localStorage.getItem("locale")]}
                       />
-                      : 
-                      <ApxtextIndexValue 
-                            value={company.currency[localStorage.getItem('locale')]} 
+                      :
+                      <ApxtextIndexValue
+                            value={company.currency[localStorage.getItem('locale')]}
                             label={locale.subheading.label_currency_fav}
-                        /> 
+                        />
                     }
                      {
                       showEdit ?
-                        <EditInput 
+                        <EditInput
                           label={ locale.wording.capital }
                           value={ company.capital }
                           showEdit={showEdit}
@@ -163,20 +163,20 @@ class Company extends Component {
                           field="capital"
                           handleAction={(event) => { this.props.handleFormEdit(event, reducer) }}
                       />
-                      : 
-                      <ApxtextIndexValue 
-                            value={ cvtNumToUserPref(company.capital || 0)} 
+                      :
+                      <ApxtextIndexValue
+                            value={ cvtNumToUserPref(company.capital || 0)}
                             label={locale.wording.capital }
-                        /> 
+                        />
                     }
 
-                    
+
 
                     {
-                        showEdit ? 
-                        
+                        showEdit ?
+
                         <React.Fragment>
-                             <ApxSelect 
+                             <ApxSelect
                                 arrayField={months}
                                 field="fiscal_month"
                                 value={company.fiscal_month[localStorage.getItem('locale')] }
@@ -185,22 +185,22 @@ class Company extends Component {
                             />
 
                         </React.Fragment>
-                        : 
-                        <ApxtextIndexValue 
-                            value={ company.fiscal_day[localStorage.getItem('locale')] +" "+ company.fiscal_month[localStorage.getItem('locale')] } 
+                        :
+                        <ApxtextIndexValue
+                            value={ company.fiscal_day[localStorage.getItem('locale')] +" "+ company.fiscal_month[localStorage.getItem('locale')] }
                             label={locale.wording.fiscal_date}
-                        /> 
+                        />
                     }
                 </Grid>
-                <Grid item xs={12} md={1}></Grid>
-                <Grid item xs={12} md={5}>
+                <Grid item xs={12} sm={2} md={2}></Grid>
+                <Grid item xs={12} sm={5} md={5}>
                 <Typography variant="subtitle1">
                         {locale.subheading.label_comp_address}
                   </Typography>
                   <Divider className={ classes.divider }/>
                   {
                     address.map(( name, index) => {
-                      return <EditInput 
+                      return <EditInput
                                 key={index}
                                 label={ locale.wording[name] }
                                 value={ company[name]}
@@ -211,7 +211,7 @@ class Company extends Component {
                             />
                     })
                   }
-                  <EditSelect 
+                  <EditSelect
                     arrayField={country}
                     field="addresses_country"
                     helperText="select_country_code"
@@ -222,7 +222,7 @@ class Company extends Component {
                     value={ company.addresses_country[localStorage.getItem("locale")]}
                 />
                   </Grid>
-        
+
               </Grid>
             </Grid>
         </Grid>
@@ -236,7 +236,7 @@ const mapStateToProps = (state) => {
     return {
         isUploading: state.account.company.isUploading,
         locale: state.locale.locale,
-        company: state.account.company.item, 
+        company: state.account.company.item,
         progress: state.account.company.progress,
         company_type: state.helper.items.company_type,
         months: state.helper.items.months,

@@ -48,7 +48,7 @@ const en = {
         url: "archive"
     },
     titles: {
-        
+
     },
     subheading: {
         info_profile: "Profiles informations",
@@ -77,11 +77,11 @@ const en = {
         label_service: "Service informations",
         label_expense: "Expense informations",
         label_task: "task informations",
-        label_assets: "Photo(s)",  
+        label_assets: "Photo(s)",
         label_currency_fav: "Your currency",
         label_comp_info: "Company informations",
         label_contact_info: "Contact informations",
-        label_comp_address: "Company address", 
+        label_comp_address: "Company address",
         label_annual_turnover: "Annual turnover",
         label_daily_task: "TODO",
         label_forgot_pwd: "We'll send a recovery link to",
@@ -120,7 +120,7 @@ const en = {
         company_name: "Company name",
         company_line_code: "Phone code",
         company_line: "Landline",
-        company_type: "Company type",  
+        company_type: "Company type",
         phone_code: 'Phone code',
         line_code: 'Phone code',
         land_line: "Landline",
@@ -129,10 +129,10 @@ const en = {
         vat: 'VAT',
         rate: "Rate",
         capital : "Capital",
-        addresses_street: "Address", 
-        addresses_zip: "Zip code", 
-        addresses_city: "City", 
-        addresses_country: "Country", 
+        addresses_street: "Address",
+        addresses_zip: "Zip code",
+        addresses_city: "City",
+        addresses_country: "Country",
         num_format: "Number format",
         receipt_date: "Receipt date",
         repay: "Repay",
@@ -296,7 +296,7 @@ const en = {
         error_422_email: "Email is required",
         error_422_firstname: "Firstname is required",
         error_422_company_name: "Company name is required",
-        error_422_password: "Password is required", 
+        error_422_password: "Password is required",
 
         warning_not_refresh: "Please do not refresh the page during the payment process",
         first_co: "Get your App ready ! Add/Remove your Categories - VAT - Contact group et fill up your company informations",
@@ -312,7 +312,7 @@ const en = {
     days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     home_page: {
         title_01: "Activate your efficiency",
-        paragraphe_01: `An easy way to manage your finance, tasks and contact. 
+        paragraphe_01: `An easy way to manage your finance, tasks and contact.
         With just a few click create your required documents and focus on your business,
         taches et contacts. Revolutionize your user experience with few click !`,
         block_title_001: "By Nomads for Nomads",
@@ -335,7 +335,7 @@ const en = {
                 feature_5: "Online support"
             },
             block_002:{
-                title: "3.50 €/ Mois",
+                title: "4.16 €/ Mois",
                 feature_1: "Contact managment",
                 feature_2: "Accounting managment",
                 feature_3: "Tasks manager",

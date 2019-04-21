@@ -9,12 +9,12 @@ import CameraAltIcon from '@material-ui/icons/CameraAltOutlined'
 const styles = theme => ({
 
     root: {
-        minHeight: 100, 
+        minHeight: 100,
         margin: '0 auto',
         textAlign: 'center',
     },
     wrapper: {
-        // margin: 5, 
+        // margin: 5,
     },
     input: {
         display: 'none'
@@ -28,9 +28,9 @@ const  UploadImg = (props) => {
     return (
         <div className={ classes.root }>
                     {image}
-            
+
             { isUploading ? <LinearProgress color="secondary" variant="determinate" value={ progress  } /> : null }
-            
+
             <div className={ classes.wrapper }>
                 <input
                     accept="image/*"
@@ -40,15 +40,15 @@ const  UploadImg = (props) => {
                     name={field}
                     type="file"
                     />
-                
+
                 <label htmlFor={field}>
                 <IconButton color="primary" component="p" >
                     <CameraAltIcon />
                 </IconButton>
-                
+
                 </label>
-            
-            </div> 
+
+            </div>
         </div>
     )
 }

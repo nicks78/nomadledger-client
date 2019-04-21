@@ -58,7 +58,7 @@ class Invoice extends Component {
                 title={isFetching ? locale.wording.loading :  locale.wording.invoice}
                 selected={ locale.wording.selected}
                 locale={locale}
-                menus={ [...status || [], {fr: "Tous", en: "All", code: "none"}]  }
+                menus={ status && [...status || [], {fr: "Tous", en: "All", code: "none"}]  }
                 onChangeQuery={ this.handleFilterRequest }
                 toExcel={true}
                 onDownload={ () => { this.props.downloadFile(reducer, `export/excel-file`) } }

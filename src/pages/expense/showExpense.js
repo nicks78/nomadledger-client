@@ -31,7 +31,7 @@ class ShowExpense extends Component {
 
 
     render() {
-      const {classes, expense, isFetching, locale, category, isUpdating, progress, currency, vat} = this.props
+      const {classes, expense, isFetching, locale, category, isUpdating, progress, currency, vat, isUploading} = this.props
       const {reducer} = this.state
 
 
@@ -46,22 +46,21 @@ class ShowExpense extends Component {
         <ApxPaper>
           <ApxBackBtn/>
             <br />
-            {/* <div style={{ backgroundColor: "rgba(239, 108, 0, 0.10)", paddingTop: 48 }}> */}
-              <UploadImg 
+
+              <UploadImg
                 field="receipt"
                 _handleUploadFile={ (e) => { this.props.uploadFileToServer(reducer, expense._id,  e.target.files[0], expense.receipt ) }}
                 reducer={this.state.reducer}
                 progress={progress}
+                isUploading={isUploading}
                 idModel={expense._id}
                 oldFile={expense.receipt.path}
-                isUploading={ false }
                 image={ <img src={`${ expense.receipt.full_path || DEFAULT_IMG }`} alt="logo" height="150" style={{ maxHeight: 250 }} />}
               />
-            {/* </div> */}
-          
-            <TextField 
+
+            <TextField
                     id="name"
-                    variant="filled" 
+                    variant="filled"
                     type="text"
                     margin="dense"
                     required
@@ -73,7 +72,7 @@ class ShowExpense extends Component {
             <Grid container spacing={24}>
 
               <Grid item xs={12} md={6}>
-                 
+
                   <TextField
                       label={locale.wording.receipt_date}
                       id="receipt_date"
@@ -81,22 +80,22 @@ class ShowExpense extends Component {
                       required
                       margin="dense"
                       style={{width: '100%'}}
-                      value={expense.receipt_date.label} 
+                      value={expense.receipt_date.label}
                       variant="filled"
                       InputProps={{
                           startAdornment: <InputAdornment position="start">
-                              <DatePickers 
+                              <DatePickers
                                       handleDate={ (e) => { this.props.createState(reducer, "receipt_date", e.target.value) }}
                                       field="receipt_date"
-                                  /> 
+                                  />
                           </InputAdornment>,
                       }}
                   />
                   <br />
-                 
-                  <EditSelect 
+
+                  <EditSelect
                     showEdit={true}
-                    variant="filled" 
+                    variant="filled"
                     arrayField={currency}
                     required={true}
                     field="currency"
@@ -104,9 +103,9 @@ class ShowExpense extends Component {
                     handleAction={ (e) => { this.props.createState(reducer, "currency", e.target.value) } }
                     locale={locale}
                   />
-                  <TextField 
+                  <TextField
                     id="price"
-                    variant="filled" 
+                    variant="filled"
                     margin="dense"
                     fullWidth
                     required
@@ -117,9 +116,9 @@ class ShowExpense extends Component {
               </Grid>
 
               <Grid item xs={12} md={6}>
-                 <EditSelect 
+                 <EditSelect
                     showEdit={true}
-                    variant="filled" 
+                    variant="filled"
                     arrayField={category}
                     field="category"
                     required={true}
@@ -127,9 +126,9 @@ class ShowExpense extends Component {
                     handleAction={ (e) => { this.props.createState(reducer, "category", e.target.value) } }
                     locale={locale}
                   />
-                  <EditSelect 
+                  <EditSelect
                     showEdit={true}
-                    variant="filled" 
+                    variant="filled"
                     arrayField={vat}
                     required={true}
                     field="vat"
@@ -138,9 +137,9 @@ class ShowExpense extends Component {
                     locale={locale}
                   />
 
-                  <TextField 
+                  <TextField
                     id="quantity"
-                    variant="filled" 
+                    variant="filled"
                     margin="dense"
                     fullWidth
                     required
@@ -152,21 +151,21 @@ class ShowExpense extends Component {
               </Grid>
             </Grid>
             <TextField variant="filled"
-                label={locale.wording.description } 
+                label={locale.wording.description }
                 fullWidth
                 multiline
                 rows={6}
-                className={classes.margin} 
+                className={classes.margin}
                 margin="normal"
-                value={ expense.description } 
+                value={ expense.description }
                 onChange={ (e) => {this.props.createState(reducer, "description",  e.target.value)} }
             />
             <br />
-            <Button 
-                variant="contained" 
-                color="primary" 
+            <Button
+                variant="contained"
+                color="primary"
                 disabled={ isUpdating }
-                className={ classes.btnSave } 
+                className={ classes.btnSave }
                 onClick={ () => { this.props.updateItem(reducer, `update`)} }>
                 { !isUpdating ?  locale.wording.update : locale.wording.loading }</Button>
         </ApxPaper>
@@ -188,6 +187,7 @@ const mapStateToProps = (state) => {
   return {
       isFetching: state.library.expense.isFetching,
       isUpdating: state.library.expense.isUpdating,
+      isUploading: state.library.expense.isUploading,
       progress: state.library.expense.progress,
       expense: state.library.expense.item,
       locale: state.locale.locale,

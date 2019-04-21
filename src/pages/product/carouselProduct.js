@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import {withStyles, IconButton} from '@material-ui/core'
+import {DEFAULT_IMG} from "../../redux/constant"
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft'
 import ArrowRightIcon from '@material-ui/icons/ArrowRight'
 import CloseIcon from '@material-ui/icons/CloseOutlined'
@@ -23,34 +24,36 @@ class ProductCarousel extends Component {
         this.setState({ imageIndex: this.state.imageIndex + 1 })
     }
 
+    componentWillReceiveProps(){
+      this.setState({ imageIndex: 0})
+    }
+
 
   render() {
 
-    const {classes, images, productId, reducer} = this.props
+    const {classes, images, reducer} = this.props
     const {imageIndex} = this.state;
 
     if(!images){
       return <div className={ classes.root } style={{height: window.innerHeight}}><p>No product found !</p></div>
     }
 
-    if(images.length === 0 ){
-          return <div className={ classes.root } style={{height: window.innerHeight}}><p>No images for this products !</p></div>
-    }
-
-
     return (
       <div className={ classes.root } style={{height: "100%"}}>
           <ArrowLeftIcon style={{color: imageIndex === 0 && "grey" }} className={ classes.icon } onClick={ this.prev } />
             <div className={ classes.imageWrapper }>
               <IconButton
-                onClick={() => { this.props.removeImageFromArray(reducer, `remove/${images[imageIndex].path}/${images[imageIndex]._id}/${productId}`) }}
+                onClick={() => { this.props.removeImageFromArray(reducer, `remove/${images[imageIndex].path}/${images[imageIndex]._id}`) }}
                 style={{position: 'absolute', top: 0, right: 20, color:'red'}}>
                 <CloseIcon  />
               </IconButton>
-
-              <a target="_blank" rel="noreferrer" href={images[imageIndex].full_path}>
-              <img className={classes.img} src={images[imageIndex].full_path} alt={images[imageIndex].id}/>
-              </a>
+              {
+                images.length !== 0 ?
+                <a target="_blank" rel="noreferrer" href={images[imageIndex].full_path}>
+                  <img className={classes.img} src={ images[imageIndex].full_path } alt={images[imageIndex].id}/>
+                </a>
+                : <img className={classes.img} src={  DEFAULT_IMG } alt="default-img"/>
+              }
           </div>
 
           <ArrowRightIcon style={{color: imageIndex === (images.length -1 ) && "grey" }} className={ classes.icon } onClick={ this.next }/>

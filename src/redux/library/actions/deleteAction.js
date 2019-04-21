@@ -10,22 +10,22 @@ import {setError} from '../../error/actions'
 export function deleteElement( actionType, endPoint ){
 
   return dispatch => {
-  
+
     axios(`${API_ENDPOINT}${actionType.toLowerCase()}/${endPoint}`, {
       method: 'DELETE',
       withCredentials: true,
     })
-    .then(function (response) { 
+    .then(function (response) {
         return response.data
-    }) 
+    })
     .then( res => {
         dispatch(setNotification("success_delete", "error"))
-        dispatch(updateListItems(actionType, res._id ))  
+        dispatch(updateListItems(actionType, res._id ))
     })
     .catch(function (error) {
       dispatch(setError(error));
       dispatch(requestFailed(actionType));
-    })          
+    })
   }
 }
 
@@ -33,22 +33,24 @@ export function deleteElement( actionType, endPoint ){
 export function removeImageFromArray( actionType, endPoint ){
 
   return dispatch => {
-  
+
     axios(`${API_ENDPOINT}${actionType.toLowerCase()}/${endPoint}`, {
       method: 'DELETE',
       withCredentials: true,
     })
-    .then(function (response) { 
+    .then(function (response) {
         return response.data
-    }) 
+    })
     .then( res => {
+
+        console.log(res.item)
         dispatch(setNotification("success_delete", "error"))
-        dispatch(setItem(actionType, res.item ))  
+        dispatch(setItem(actionType, res.item ))
     })
     .catch(function (error) {
       dispatch(setError(error));
       dispatch(requestFailed(actionType));
-    })          
+    })
   }
 }
 

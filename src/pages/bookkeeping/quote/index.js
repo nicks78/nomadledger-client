@@ -37,18 +37,18 @@ class Quote extends Component {
     handleStatus = (event) => {
         this.props.createState(this.state.reducer, event.target.name, event.target.value);
     }
-    
-    render() {
-    
-    const {listQuote, isFetching,  locale, classes, newQuote, status} = this.props
-    const { reducer } = this.state; 
 
+    render() {
+
+    const {listQuote, isFetching,  locale, classes, newQuote, status} = this.props
+    const { reducer } = this.state;
+console.log(status)
     return (
       <div className={classes.root}>
             <Hidden only={['xs', 'sm']}>
                 <Button component={Link} to="/quote/create" variant="contained" color="primary"  className={  classes.button }>
                 { newQuote.contact_id ? locale.wording.progress : locale.wording.create}
-                
+
                 </Button>
             </Hidden>
             <Paper className={classes.paper}>
@@ -57,7 +57,7 @@ class Quote extends Component {
                         title={isFetching ? locale.wording.loading : locale.wording.quote}
                         selected={locale.wording.selected}
                         locale={locale}
-                        menus={ [...status, {fr: "Tous", en: "All", code: "none"}]  }
+                        menus={ status && [...status, {fr: "Tous", en: "All", code: "none"}]  }
                         onChangeQuery={ this.handleFilterRequest }
                     />
                     <div style={{overflowY: "auto"}}>
@@ -72,14 +72,14 @@ class Quote extends Component {
                             <TableCell>{locale.wording.status}</TableCell>
                             <TableCell align="center">{locale.wording.invoicer}</TableCell>
                             <TableCell>PDF</TableCell>
-                            <TableCell align="center">Actions</TableCell>   
-                            <TableCell align="center">{ locale.wording.archive }</TableCell>                           
+                            <TableCell align="center">Actions</TableCell>
+                            <TableCell align="center">{ locale.wording.archive }</TableCell>
 
                         </TableRow>
                     </TableHead>
-                        
+
                         <TableBody className={classes.tableBody}>
-                            {   !isFetching ? 
+                            {   !isFetching ?
                                 listQuote.map(( item, index) => {
                                     let vat = item.subtotal * item.vat.indice / 100
                                     return  <TableRow key={index}>
@@ -91,27 +91,27 @@ class Quote extends Component {
                                                 <TableCell>
 
                                                 {
-                                                    item.status.code === "6" ||   item.status.code === "10" ||   item.status.code === "11"  ? 
+                                                    item.status.code === "6" ||   item.status.code === "10" ||   item.status.code === "11"  ?
                                                     <span style={{color: item.status.color }}>
 
                                                     { item.status[localStorage.getItem('locale')] }</span>
 
-                                                    :   <ApxSelect 
+                                                    :   <ApxSelect
                                                             arrayField={status}
                                                             value={item.status[localStorage.getItem('locale')]}
                                                             variant="standard"
                                                             handleAction={ (event) => { this.props.updateField(reducer, { status: event.target.value}, item._id) } }
                                                             locale={locale}
                                                         />
-                                                }    
-                                                
-                                                
+                                                }
+
+
                                                 </TableCell>
                                                 <TableCell align="center"><Link to={`/invoice/create/${item._id}`}><img alt="convert-to-invoice" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link></TableCell>
                                                 <TableCell><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, item._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
-                                                
-        
-                                                <ApxTableActions 
+
+
+                                                <ApxTableActions
                                                     actionDelete={item.status.code === "10" ? true : false}
                                                     actionEdit={ item.status.code === "1" || item.status.code === "2" ? `/quote/edit/${item._id}` : false }
                                                     actionView={false}
@@ -123,9 +123,9 @@ class Quote extends Component {
                                                 </TableCell>
                                             </TableRow>
                                 })
-                                : null                           
+                                : null
                             }
-                            
+
                         </TableBody>
 
                     </Table>
@@ -167,7 +167,7 @@ const styles = theme => ({
         marginRight: 10,
         marginBottom: theme.margin.unit,
         '& :hover': {
-            color: 'white !important', 
+            color: 'white !important',
         }
     },
     paper: {
@@ -185,7 +185,7 @@ const styles = theme => ({
 })
 
 const mapStateToProps = (state) => {
-    
+
     return {
         isFetching: state.book.quote.isFetching,
         updated: state.book.quote.updated,
@@ -194,7 +194,7 @@ const mapStateToProps = (state) => {
         total: state.library.quote.total,
         listQuote: state.book.quote.list,
         rowsPerPageOptions: state.library.quote.rowsPerPageOptions,
-        status: state.helper.items.status_quote 
+        status: state.helper.items.status_quote
     }
 }
 
