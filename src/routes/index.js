@@ -75,7 +75,7 @@ class Routes extends React.Component {
                             <Layout company={company} _onChangeLocale={this.handleChangeLocale} user={authUser} logout={this.props.getLogout} locale={locale}>
 
                             <Switch>
-                                <PrivateRoute path="/home" component={ Home } auth={isLoggedIn}/>
+                                <PrivateRoute path="/dashboard" component={ Home } auth={isLoggedIn}/>
                                 <PrivateRoute path="/account" component={Account}  auth={isLoggedIn}/>
 
                                 <PrivateRoute exact path="/contact" component={Contact}  auth={isLoggedIn}/>

@@ -35,13 +35,13 @@ const Styles = theme => ({
             fontWeight: 'bold'
         },
         '& svg': {
-            color: 'white', 
+            color: 'white',
         },
-       
+
     },
     listText: {
        '& span': {
-           color: 'white', 
+           color: 'white',
        },
        '& svg': {
         color: 'white',
@@ -51,11 +51,11 @@ const Styles = theme => ({
         }
     },
     icon: {
-        color: 'white', 
+        color: 'white',
     },
-    header: { 
-        padding: '24px', 
-        textAlign: 'center', 
+    header: {
+        padding: '24px',
+        textAlign: 'center',
         // backgroundColor: theme.palette.lightGrey,
         borderBottom: `1px solid #8c8c8c`
     },
@@ -66,7 +66,7 @@ const Styles = theme => ({
     },
     listTextSecondary: {
         '& span': {
-            color: '#8c8c8c', 
+            color: '#8c8c8c',
         },
          '& :focus': {
              backgroundColor: theme.palette.secondary.main,
@@ -87,17 +87,17 @@ class MainMenu extends React.Component {
 
     render() {
     const { classes, locale, company } = this.props;
- 
+
     return (
         <div className={classes.root}>
             <Hidden mdUp>
                 <div className={classes.header}>
-                    <img src={company.logo_company && company.logo_company.full_path !== "" ? company.logo_company.full_path : DEFAULT_IMG} alt="logo" height="40" width="auto" /> 
+                    <img src={company.logo_company && company.logo_company.full_path !== "" ? company.logo_company.full_path : DEFAULT_IMG} alt="logo" height="40" width="auto" />
                     <Typography variant="body1" style={{ color: 'white'}}>{ company.company_name }</Typography>
                 </div>
             </Hidden>
             <List component="nav" disablePadding className={classes.listText}>
-                <ListItem button component={NavLink} className={classes.listText} onClick={ this.props.closeDrawer } to="/home" activeClassName={classes.active}>
+                <ListItem button component={NavLink} className={classes.listText} onClick={ this.props.closeDrawer } to="/dashboard" activeClassName={classes.active}>
                     <ListItemIcon >
                         <HomeIcon />
                     </ListItemIcon>
@@ -131,7 +131,7 @@ class MainMenu extends React.Component {
                             </ListItem>
                         </List>
                     </Collapse>
-             
+
                 <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/service" activeClassName={classes.active}>
                     <ListItemIcon>
                         <HeadsetMicIcon  />
@@ -144,7 +144,7 @@ class MainMenu extends React.Component {
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.product.name } />
                 </ListItem>
-                
+
                 <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/expense" activeClassName={classes.active}>
                     <ListItemIcon>
                         <ReceiptIcon  />
@@ -152,7 +152,7 @@ class MainMenu extends React.Component {
                     <ListItemText className={ classes.listText } primary={ locale.expense.name } />
                 </ListItem>
 
-                
+
                 <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/task" activeClassName={classes.active}>
                     <ListItemIcon>
                         <ListAltIcon  />
@@ -161,7 +161,7 @@ class MainMenu extends React.Component {
                 </ListItem>
             </List>
             <Divider style={{borderColor: 'white'}}/>
-            <List component="nav"> 
+            <List component="nav">
                 <ListItem button component={NavLink}  className={classes.listTextSecondary}  onClick={ this.props.closeDrawer } to="/archive" activeClassName={classes.active}>
                     <ListItemText  primary={ locale.archive.name } />
                 </ListItem>

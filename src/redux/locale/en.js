@@ -4,7 +4,7 @@ const en = {
     lang: "en",
     company_name: "NomadLedger",
     home:{
-        name: "Home",
+        name: "Dashboard",
         url: "home"
     },
     contact:{

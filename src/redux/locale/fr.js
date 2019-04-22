@@ -5,7 +5,7 @@ const fr =  {
     lang: "fr",
     company_name: "NomadLedger",
     home:{
-        name: "Accueil",
+        name: "Tableau de bord",
         url: "accueil"
     },
     contact:{

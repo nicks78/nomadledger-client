@@ -3,7 +3,6 @@ import Routes from './routes'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css'
 import {StripeProvider} from 'react-stripe-elements';
-import ApxAlert from './components/common/alert'
 
 // #33B3A9 == green
 // #1F2A3F == darck green
@@ -122,7 +121,6 @@ class App extends Component {
 
     return (
       <React.Fragment>
-         <ApxAlert message="beta_1" />
         <StripeProvider apiKey="pk_test_GblxUSlJYaYq5b3dU2GIoPql00wt6XzrAC">
           <MuiThemeProvider theme={theme}>
               <Routes />

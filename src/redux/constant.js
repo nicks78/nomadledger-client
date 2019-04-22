@@ -1,6 +1,6 @@
 //src/redux/constant.js
 
-var contant = "https://devapi.nomadledger.com"
+var contant = "https://api.nomadledger.com"
 // var contant = "http://localhost:8080"
 
 

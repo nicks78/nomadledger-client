@@ -55,7 +55,7 @@ export function authUser(data){
                     dispatch(setNotification("first_co", "info"))
                     history.push('/account')
                 }else{
-                    history.push('/home')
+                    history.push('/dashboard')
                 }
 
             }
