@@ -18,7 +18,7 @@ class BarCharts extends Component {
         this.setState({
             ctx: new Chart(ctx, {
               type: "bar",
-              data: this.props.chartData, 
+              data: this.props.chartData,
               options: {
                 tooltips: {
                   callbacks: {
@@ -27,6 +27,14 @@ class BarCharts extends Component {
                       return datasetLabel + ' : ' + cvtNumToUserPref(tooltipItem.yLabel) + ' ' + currency ;
                     }
                   }
+                },
+                scales: {
+                  xAxes: [{
+                     stacked: true
+                  }],
+                  yAxes: [{
+                     stacked: true
+                  }]
                 },
                 legend: {
                   display: true,
@@ -48,7 +56,7 @@ class BarCharts extends Component {
           ctx: ctx
         })
       }
-        
+
     }
 
   render() {
@@ -61,4 +69,3 @@ class BarCharts extends Component {
 }
 
 export default BarCharts
-

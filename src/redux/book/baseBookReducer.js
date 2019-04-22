@@ -1,8 +1,8 @@
 //src/redux/book/baseBookReducer.js
 
-import {removeFromArray,
-removeDuplicateAndAddQuantity, 
-discountPrice, 
+import {
+removeDuplicateAndAddQuantity,
+discountPrice,
 manageQuantity,
 editObjectInArray,
 replaceObjectInArray } from '../../utils/help_function'
@@ -19,24 +19,24 @@ const initialState = {
 }
 
 const authReducer = (state = initialState, action) => {
-    
+
 
     switch (action.type) {
         case `REQUEST`:
-            return  { 
+            return  {
                 ...state,
                 isFetching: action.isFetching,
                 isError: action.isError,
                 isUpdating: action.isUpdating
             }
         case `UPDATING`:
-            return  { 
+            return  {
                 ...state,
                 isError: action.isError,
                 isUpdating: action.isUpdating
             }
         case `FAILED`:
-            return  { 
+            return  {
                 ...state,
                 isFetching: action.isFetching,
                 isError: action.isError,
@@ -44,15 +44,15 @@ const authReducer = (state = initialState, action) => {
                 isUpdating: action.isUpdating,
             }
         case `RECEIVE`:
-            return  { 
-                ...state, 
+            return  {
+                ...state,
                 isFetching: action.isFetching,
                 isUpdating: action.isUpdating,
                 list: action.payload,
                 receivedAt: action.receivedAt
             }
         case `GET`:
-            return  { 
+            return  {
                 ...state,
                 isFetching: action.isFetching,
                 isUpdating: action.isUpdating,
@@ -65,8 +65,8 @@ const authReducer = (state = initialState, action) => {
                 item: { ...state.item, [ action.payload.fieldName ] : action.payload.value },
             }
         case `STATE_ITEM`:
-            return  { 
-                ...state, 
+            return  {
+                ...state,
                 isFetching: action.isFetching,
                 isError: action.isError,
                 item: {...state.item, list_items :  removeDuplicateAndAddQuantity(state.item.list_items || [], action)},
@@ -97,8 +97,10 @@ const authReducer = (state = initialState, action) => {
         case `REMOVE_ITEM`:
             return {
                 ...state,
-                item: { ...state.item, list_items : removeFromArray( state.item.list_items, action.payload ) },
+                item: { ...state.item, list_items : state.item.list_items.filter((el) => { return el.item_id !== action.payload.item_id }) },
             }
+
+
         case `SET_TOTAL`:
             return {
                 ...state,
@@ -112,4 +114,3 @@ const authReducer = (state = initialState, action) => {
 }
 
 export default authReducer;
-

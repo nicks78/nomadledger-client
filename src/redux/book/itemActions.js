@@ -8,22 +8,32 @@ import { setError} from '../error/actions'
 
 /**
  * Called when add new item in store
- * @param actionType 
+ * @param actionType
  * @param name // database field name
- * @param item 
+ * @param item
  */
 export function getListItem( actionType, name, item ) {
     return (dispatch, getState) => {
 
         var currency = getState().book[actionType.toLowerCase()].item.currency;
         var price = item.onModel === "product" ? item.selling_price : item.price;
+
+        if(!currency){
+          var error = {
+            response: { status: 422 , data: {message: "error_422_missing_currency"}}
+          }
+            dispatch(setError(error));
+            dispatch(requestFailed(actionType));
+            return
+        }
+
         currencyConvertorApi( item.currency.en, price, currency.en )
         .then( (unit_price) => {
             var tmp = {
                     quantity: 1,
                     ref: item.ref,
                     onModel: item.onModel,
-                    desc: item.name, 
+                    desc: item.name,
                     discount: 0,
                     currency: currency.en || item.currency.en,
                     unit_price: unit_price,
@@ -36,7 +46,7 @@ export function getListItem( actionType, name, item ) {
         .catch(function (error) {
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
-        })        
+        })
     }
 }
 
@@ -50,16 +60,16 @@ export function setListItem( actionType, name, item ) {
         isError: false,
         name: name,
         payload:  item
-    } 
+    }
 }
 
 /**
  * Update all item in the list
  * Called when user change currency dropdown
- * 
- * @param actionType 
- * @param currency 
- * 
+ *
+ * @param actionType
+ * @param currency
+ *
  */
 export function convertToCurrency( actionType, currency, item ) {
 
@@ -77,8 +87,8 @@ export function convertToCurrency( actionType, currency, item ) {
         .catch(function (error) {
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
-            
-        })   
+
+        })
     }
 }
 
@@ -94,30 +104,30 @@ export function updateListItems( actionType, item ) {
 
 /**
  * Call API and convert each amount
- * @param  from 
- * @param  price 
- * @param  to 
+ * @param  from
+ * @param  price
+ * @param  to
  */
 async function currencyConvertorApi(from, amount, to){
 
     // Set real time currency convertor
-    return new Promise( (resolve, reject) => { 
+    return new Promise( (resolve, reject) => {
         axios.post(`${API_ENDPOINT}common/convert-currency`,
-        { 
+        {
             data: {
                 from: from,
                 to: to,
                 amount: amount
             },
             mode: 'cors'
-        },   
+        },
         { headers: {
                 'Content-Type': 'application/json'
         }
         })
-        .then(function (response) { 
+        .then(function (response) {
             return response.data
-        }) 
+        })
         .then( res => {
             resolve(res);
         })
@@ -137,7 +147,6 @@ export function addRemoveQuantity ( actionType, id, move ){
 }
 
 export function discountPrice ( actionType, id, fieldName, value ){
-    
     return  {
         type: `DISCOUNT`,
         subtype: actionType,
@@ -150,7 +159,7 @@ export function discountPrice ( actionType, id, fieldName, value ){
 
 
 export function editItem ( actionType, item, fieldName, value ){
-    
+
     return  {
         type: `EDIT_SINGLE_ITEM`,
         subtype: actionType,

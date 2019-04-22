@@ -9,7 +9,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import Divider from '@material-ui/core/Divider';
-import HomeIcon from '@material-ui/icons/HomeOutlined';
+import InsertChartIcon from '@material-ui/icons/InsertChartOutlined';
 import GroupIcon from '@material-ui/icons/GroupOutlined';
 import StoreIcon from '@material-ui/icons/StoreOutlined';
 import ReceiptIcon from '@material-ui/icons/ReceiptOutlined';
@@ -25,7 +25,7 @@ const Styles = theme => ({
     root: {
         width: '100%',
         maxWidth: 360,
-        backgroundColor: theme.palette.darkGrey,
+        // backgroundColor: theme.palette.darkGrey,
         fontSize: '10%!important'
     },
     active: {
@@ -99,7 +99,7 @@ class MainMenu extends React.Component {
             <List component="nav" disablePadding className={classes.listText}>
                 <ListItem button component={NavLink} className={classes.listText} onClick={ this.props.closeDrawer } to="/dashboard" activeClassName={classes.active}>
                     <ListItemIcon >
-                        <HomeIcon />
+                        <InsertChartIcon />
                     </ListItemIcon>
                     <ListItemText className={ classes.listText } primary={ locale.home.name } />
                 </ListItem>

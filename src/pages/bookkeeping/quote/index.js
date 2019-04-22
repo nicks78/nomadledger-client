@@ -42,7 +42,7 @@ class Quote extends Component {
 
     const {listQuote, isFetching,  locale, classes, newQuote, status} = this.props
     const { reducer } = this.state;
-console.log(status)
+
     return (
       <div className={classes.root}>
             <Hidden only={['xs', 'sm']}>

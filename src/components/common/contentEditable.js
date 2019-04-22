@@ -1,23 +1,40 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, TextField } from '@material-ui/core';
 
 const styles = theme => ({
+    textField: {
+      '& div input': {
+        paddingTop: 5,
+        paddingBottom: 5
+      }
 
+    }
 });
 
 const ContenEditable = (props) => {
 
-  const { value, actionInput, id, name } = props;
+  const { value, actionInput, id, name, classes } = props;
   return (
-        <div    id={name}
-                suppressContentEditableWarning={true} 
-                contentEditable 
-                onBlur={ (event) => { actionInput(event, id) } }>
-                {  value.toString() }
-        </div>
+
+        <TextField
+          id={name}
+          margin="dense"
+          className={classes.textField}
+          onChange={ (event) => { actionInput(event, id) } }
+          variant="outlined"
+          value={value.toString()}
+        />
   );
 }
 
 const ApxContenEditable =  withStyles(styles)(ContenEditable)
 
 export default ApxContenEditable;
+
+// <p    id={name}
+//         suppressContentEditableWarning={true}
+//         contentEditable
+//         onKeyPress={(e) => { e.key === "Enter" ? actionInput(e, id) : null  }}
+//         onBlur={ (event) => { actionInput(event, id) } }>
+//         {  value.toString() }
+// </p>

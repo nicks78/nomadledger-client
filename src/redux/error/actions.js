@@ -5,7 +5,6 @@ import {history} from '../../routes/history'
 
 
 export function setError(error){
-
     return dispatch => {
         var message = error.response && error.response.data ? error.response.data.message : 'error_500';
         var status = error.response ? error.response.status : 500
@@ -21,9 +20,9 @@ export function setError(error){
                 dispatch(setNotification(message, "error"))
                 break;
             case 422: // Wrong token
-                dispatch(setNotification(message, "error"))
+                dispatch(setNotification(message, "error"));
                 break;
-            default: 
+            default:
                 dispatch(setNotification(message, "error"))
                 break
         }

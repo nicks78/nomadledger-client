@@ -30,7 +30,7 @@ const styles = theme => ({
         width: '100%',
     },
     toolbar: theme.mixins.toolbar,
-    
+
     drawerPaper: {
         position: 'relative',
         height: '100vh',
@@ -42,13 +42,13 @@ const styles = theme => ({
         },
         boxShadow: '2px 0 10px -8px black'
     },
-    
+
     navIconHide: {
         [theme.breakpoints.up('md')]: {
           display: 'none',
         },
     },
-    
+
     appBar: {
         position: 'absolute',
         marginLeft: drawerWidth,
@@ -128,7 +128,7 @@ class Layout extends React.Component {
     handleMenu = event => {
         this.setState({ anchorEl: event.currentTarget });
     };
-    
+
     handleClose = () => {
         this.setState({ anchorEl: null, mobileOpen: false });
     };
@@ -154,10 +154,10 @@ class Layout extends React.Component {
                 </IconButton>
                 <Hidden smDown>
                     <Typography >
-                        <img src={company.logo_company && company.logo_company.full_path !== "" ? company.logo_company.full_path :  DEFAULT_IMG } alt="logo" className={classes.img} /> 
+                        <img src={company.logo_company && company.logo_company.full_path !== "" ? company.logo_company.full_path :  DEFAULT_IMG } alt="logo" className={classes.img} />
                     </Typography>
                 </Hidden>
-                
+
                 <Typography className={classes.title}>
                     <Hidden smDown>{company.company_name ? company.company_name.toUpperCase() : "NomadLedger"}</Hidden>
                 </Typography>
@@ -192,10 +192,10 @@ class Layout extends React.Component {
                     <Typography variant="overline" className={classes.lang} onClick={ () => { this.props._onChangeLocale(locale.lang === 'fr' ? 'en' : 'fr') } }>{ locale.lang !== 'fr' ? 'EN' : 'FR' }</Typography>
                 </Toolbar>
             </AppBar>
-            
+
             <Hidden mdUp>
                 <Drawer
-                
+
                 variant="temporary"
                 anchor="left"
                 open={this.state.mobileOpen}
@@ -209,7 +209,7 @@ class Layout extends React.Component {
                 }}
             >
                 <MainMenu locale={ locale } company={company} closeDrawer={ ()  => { this.setState({ mobileOpen: false }) } }/>
-                    <ApxCopyright />      
+                    <ApxCopyright />
                 </Drawer>
             </Hidden>
             <Hidden smDown implementation="css">
@@ -221,7 +221,7 @@ class Layout extends React.Component {
                     }}
                 >
                 <MainMenu locale={ locale } company={company} />
-                <ApxCopyright /> 
+                <ApxCopyright />
             </Drawer>
             </Hidden>
 
@@ -229,7 +229,7 @@ class Layout extends React.Component {
                 <div className={classes.toolbar} />
                     {this.props.children}
             </main>
-            
+
         </div>
     )
   }

@@ -1,14 +1,14 @@
 //manager/src/pages/bookkeeping/quote/form.js
 
 import React  from 'react'
-import { 
-Paper, 
-withStyles, 
-Grid, 
+import {
+Paper,
+withStyles,
+Grid,
 Typography,
 Button,
 TextField,
-InputAdornment 
+InputAdornment
  } from '@material-ui/core';
 
 import ApxSelect  from '../../../components/common/select'
@@ -34,23 +34,23 @@ const Form = (props) => {
                     {
                         data.onRef ?
                         <span style={{fontWeight: 700}}> { locale.wording.on }  { data.onRef}</span>
-                        : null 
-                    } 
-                    
+                        : null
+                    }
+
                 </Typography>
                 <Typography variant="caption">{locale.message.required}</Typography>
                     <Grid container spacing={24}>
 
                         <Grid item xs={12} sm={6} md={6}>
                             <div style={{border: '1px solid rgb(238,238,238)', borderRadius: 1, marginTop: 8}}>
-                                <ContactSection 
+                                <ContactSection
                                     locale={locale}
                                     contact={data}
                                     reducer={reducer}
                                 />
                             </div>
-                           
-                                
+
+
                         </Grid>
                         <Grid item xs={12} sm={6} md={6}>
 
@@ -67,11 +67,11 @@ const Form = (props) => {
                                             variant="filled"
                                             InputProps={{
                                                 startAdornment: <InputAdornment position="start">
-                                                    <DatePickers 
+                                                    <DatePickers
                                                             value={ data[date_1] ? data[date_1].intl_format : ""}
                                                             handleDate={ props.handleDropDown }
                                                             field={date_1}
-                                                        /> 
+                                                        />
                                                 </InputAdornment>,
                                             }}
                                         />
@@ -90,20 +90,20 @@ const Form = (props) => {
                                                 variant="filled"
                                                 InputProps={{
                                                     startAdornment: <InputAdornment position="start">
-                                                        <DatePickers 
+                                                        <DatePickers
                                                                 value={ data[date_2] ? data[date_2].intl_format : ""}
                                                                 handleDate={ props.handleDropDown }
                                                                 field={date_2}
-                                                            /> 
+                                                            />
                                                     </InputAdornment>,
                                                 }}
                                             />
                                     </Grid>
-                                    : null  
+                                    : null
                                 }
 
                                 <Grid item xs={12} md={6} sm={6}>
-                                    <ApxSelect 
+                                    <ApxSelect
                                         arrayField={currency}
                                         field="currency"
                                         required={true}
@@ -114,7 +114,7 @@ const Form = (props) => {
                                     />
                                 </Grid>
                                 <Grid item xs={12} md={6} sm={6}>
-                                    <ApxSelect 
+                                    <ApxSelect
                                         arrayField={vat || []}
                                         field="vat"
                                         required={true}
@@ -135,17 +135,17 @@ const Form = (props) => {
                                         style={{width: '100%'}}
                                         InputProps={{
                                             startAdornment: <InputAdornment position="start">
-                                                <DatePickers 
+                                                <DatePickers
                                                         value={ data.follow_up_date ? data.follow_up_date.intl_format : ""}
                                                         handleDate={ props.handleDropDown }
                                                         field="follow_up_date"
-                                                    /> 
+                                                    />
                                             </InputAdornment>,
                                         }}
                                     />
                                 </Grid>
                                 {
-                                    reducer !== "QUOTE" ? 
+                                    reducer !== "QUOTE" ?
                                         <Grid item xs={12}>
                                         <TextField
                                             label={ locale.wording.transaction_number }
@@ -157,18 +157,18 @@ const Form = (props) => {
                                             variant="filled"
                                         />
                                         </Grid>
-                                    : null 
+                                    : null
                                 }
 
                             </Grid>
-                        
-                        
+
+
                         </Grid>
 
                     </Grid>
                     <br/>
                     <Typography variant="caption" dangerouslySetInnerHTML={{__html: locale.helperText.infos_status }} ></Typography>
-                    <ApxRadioGroup 
+                    <ApxRadioGroup
                         action={  props.handleDropDown }
                         value={data.status ? data.status.code : '0'}
                         arrayObject={ status  }
@@ -176,7 +176,7 @@ const Form = (props) => {
                     <br/><br/>
                 <Typography variant="overline">{ locale.subheading.info_comp }</Typography>
                 <br />
-                <ApxRichEditor 
+                <ApxRichEditor
                     reducer={reducer}
                     field="infos"
                     initText={ data.infos || locale.helperText.textarea_quote }
@@ -186,44 +186,33 @@ const Form = (props) => {
                 <br />
 
                     <Grid container spacing={24}>
-                            <Grid item xs={6}>
+                            <Grid item xs={12}>
                                 <AutoComplete
-                                    // disabled={ data.currency && data.contact_id && data.vat ? false : true }
+                                    disabled={ data.currency && data.contact_id && data.vat ? false : true }
                                     field="name"
                                     state="name"
                                     model="service"
                                     reducer={reducer}
-                                    placeholder={locale.wording.search_service}
+                                    placeholder={locale.wording.search_service_product}
                                     setSelectedObject={  props.getListItem }
                                 />
-                                
+
                             </Grid>
 
-                            <Grid item xs={6}>
-                                <AutoComplete 
-                                    // disabled={ data.currency && data.contact_id && data.vat ? false : true }
-                                    field="name"
-                                    state="name"
-                                    model="product"
-                                    reducer={reducer}
-                                    placeholder={locale.wording.search_product}
-                                    setSelectedObject={  props.getListItem }
-                                />
-                            </Grid>
-                    
+
                     </Grid>
-                    
+
                     <br />
-                    <Items 
+                    <Items
                         listItems={list}
                         newData={data}
                         reducer={reducer}
                     />
-                    <br />
+
                     <TextField
                         label={ locale.helperText.textarea_terms }
                         id="terms"
-                        style={{ backgroundColor: 'rgba(255,0,0,0.14)', fontWeight: 600}}
+                        style={{ backgroundColor: 'rgba(255,0,0,0.14)', fontWeight: 600, marginTop: 24}}
                         rows={2}
                         fullWidth
                         multiline
@@ -234,9 +223,9 @@ const Form = (props) => {
                     />
                     <br /><br />
                     <div className={classes.btnSave}>
-                        <Button 
-                            variant="contained" 
-                            color="primary" 
+                        <Button
+                            variant="contained"
+                            color="primary"
                             disabled={ isUpdating || !data.status || !data.currency || !data.vat || !data.contact_id ? true : false }
                             onClick={ () => { props.handleSubmit(reducer)} }>
                             { isUpdating ? locale.wording.loading : btnLabel}
@@ -279,3 +268,15 @@ const styles = theme => ({
 const ApxForm = withStyles(styles)(Form)
 
 export default ApxForm;
+
+  // <Grid item xs={6}>
+  //     <AutoComplete
+  //         disabled={ data.currency && data.contact_id && data.vat ? false : true }
+  //         field="name"
+  //         state="name"
+  //         model="product"
+  //         reducer={reducer}
+  //         placeholder={locale.wording.search_product}
+  //         setSelectedObject={  props.getListItem }
+  //     />
+  // </Grid>

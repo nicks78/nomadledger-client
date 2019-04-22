@@ -33,12 +33,12 @@ const styles = theme => ({
 });
 
 /**
- * @String  model 
+ * @String  model
  * @String  field (database)
  * @String  state (redux)
- * @String  reducer (name) 
+ * @String  reducer (name)
  * @String  placeholder
- * 
+ *
  */
 class AutoComplete extends React.Component {
 
@@ -62,7 +62,7 @@ class AutoComplete extends React.Component {
           />
       )
   }
-  
+
   renderSuggestion = ({ suggestion, index, itemProps, highlightedIndex }) => {
     const isHighlighted = highlightedIndex === index;
     return (
@@ -70,7 +70,7 @@ class AutoComplete extends React.Component {
         {...itemProps}
         key={index}
         selected={isHighlighted}
-        
+
         component="div"
         style={{
           fontWeight: 400,
@@ -87,7 +87,7 @@ class AutoComplete extends React.Component {
       this.setState({value: ""})
   }
 
-  
+
   inputOnChange = (event) => {
     const inputValue = deburr(event.target.value.trim()).toLowerCase();
 
@@ -97,7 +97,15 @@ class AutoComplete extends React.Component {
         this.props.receiveItems([]);
         return
     }
-    this.props.getAutocompleteList(inputValue, this.props.field, this.props.model)
+
+    var endpoint = "";
+
+    if(this.props.model === "contact"){
+      endpoint = `contact/search/${inputValue}`
+    }else{
+      endpoint = `common/search?query=${inputValue}&field=${this.props.field}`
+    }
+    this.props.getAutocompleteList(endpoint)
   }
 
   render(){
@@ -106,7 +114,7 @@ class AutoComplete extends React.Component {
 
   return (
     <div className={classes.root}>
-      <Downshift id={field} 
+      <Downshift id={field}
         onChange={ this.downshiftOnChange }
         itemToString={item => (item ? item[field] : '')}>
         {({
@@ -135,7 +143,7 @@ class AutoComplete extends React.Component {
               { isOpen ? (
                 <Paper className={classes.paper}>
                   {
-                    suggestions.map((suggestion, index) => 
+                    suggestions.map((suggestion, index) =>
                       this.renderSuggestion({
                         suggestion,
                         index,
@@ -150,7 +158,7 @@ class AutoComplete extends React.Component {
           </div>
         )}
       </Downshift>
-      
+
     </div>
   )
   }

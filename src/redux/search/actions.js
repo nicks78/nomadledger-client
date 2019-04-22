@@ -4,29 +4,25 @@ import axios from 'axios';
 import { API_ENDPOINT } from '../constant'
 import {setError} from '../error/actions'
 
-export function getAutocompleteList(query, field, model){
+export function getAutocompleteList(endpoint){
 
     return dispatch => {
 
         // Set withCredentials
         axios.defaults.withCredentials = true;
-        var stock = '';
-        if(model === 'contact' || model === 'service'){
-            stock = '&stock=0'
-        }
-        axios.get(`${API_ENDPOINT}common/search/${model}?query=${query}&field=${field}${stock}`, {
+        axios.get(`${API_ENDPOINT}${endpoint}`, {
           method: 'GET',
         })
-        .then(function (response) { 
+        .then(function (response) {
             return response.data
-        }) 
+        })
         .then( res => {
-            dispatch(receiveItems( res.payload ))  
+            dispatch(receiveItems( res.payload ))
         })
         .catch(function (error) {
             dispatch(setError(error));
             dispatch(requestFailed());
-        })             
+        })
     }
 }
 
@@ -47,4 +43,3 @@ function requestFailed() {
         isError: true,
     }
 }
-
