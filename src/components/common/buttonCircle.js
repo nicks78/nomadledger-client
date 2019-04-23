@@ -5,9 +5,10 @@ import Fab from '@material-ui/core/Fab'
 
 const styles = theme => ({
   fab: {
-    position: 'fixed', 
-    bottom: 10, 
-    right: 10, 
+    position: 'fixed',
+    bottom: 10,
+    right: 10,
+    zIndex: 9
   },
 });
 

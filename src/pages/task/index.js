@@ -20,9 +20,9 @@ class Task extends Component {
     this.props.getAllTask(`list?day=0`, "taskList");
   }
 
-  getDrop = ( ev, due ) => { 
+  getDrop = ( ev, due ) => {
     ev.preventDefault();
-    
+
     // get data localy
     var data = ev.dataTransfer.getData("task");
     var task = JSON.parse(data);
@@ -44,7 +44,7 @@ class Task extends Component {
     event.preventDefault();
   }
 
-  handleUpdateTask = () => {  
+  handleUpdateTask = () => {
     this.setState({id: null });
       this.props.updateTask();
   }
@@ -64,35 +64,35 @@ class Task extends Component {
     return (
       <div className={classes.root}>
           {
-            id === null ? 
-            <AddTask 
+            id === null ?
+            <AddTask
               locale={ locale }
-              disabled={isFetching}  
-              newData={newTask} 
-              createTaskState={ createStateTask } 
-              createTask={ createTask } 
+              disabled={isFetching}
+              newData={newTask}
+              createTaskState={ createStateTask }
+              createTask={ createTask }
               isCreating={isCreating}
               status={status}
           />
           : <Button disabled variant="contained">{ locale.wording.progress }</Button>
           }
-          
+
       <div className={classes.step}>
-          
+
       {
           listTask.map((label, index) => {
               return  <div id={label.date.date} key={index} onDrop={ (e) => {this.getDrop(e, label.date.due_date)  } } onDragOver={this.dragOver}>
-                            <p className={classes.title}> 
+                            <p className={classes.title}>
                               <span className={classes.span}></span>
                               <span className={classes.spanDate}>{new Date(label.date.date).toLocaleDateString(localStorage.getItem('locale'), options)}</span>
                             </p>
-                          
+
                             {
                               label.tasks.map((task, index) => {
                                   return  <Paper id={task._id} key={index} className={classes.paper} draggable={ id === null ? true : false } onDragStart={ (e) => { this.drag(e, task) }}>
                                                 {
                                                     id === task._id ?
-                                                      <EditTask 
+                                                      <EditTask
                                                         locale={locale}
                                                         task={task}
                                                         status={status}
@@ -101,7 +101,7 @@ class Task extends Component {
                                                         onUpdateTask={this.handleUpdateTask}
                                                       />
 
-                                                    : <TaskCard 
+                                                    : <TaskCard
                                                         task={task}
                                                         id={id}
                                                         onEdit={this.handleEdit}
@@ -110,12 +110,12 @@ class Task extends Component {
                                           </Paper>
                               })
                             }
-                           
+
                       </div>
           })
       }
       </div>
-          
+
       </div>
     )
   }
@@ -134,6 +134,7 @@ const styles = theme => ({
       [theme.breakpoints.down('sm')]: {
         margin: 0,
         marginLeft: -20,
+        marginBottom: 10,
         boxShadow: "none",
         borderRadius: 0
       },
@@ -167,7 +168,7 @@ const styles = theme => ({
 
 
 const mapStateToProps = (state) => {
- 
+
   return {
       isFetching: state.task.isFetching,
       isCreating: state.task.isCreating,

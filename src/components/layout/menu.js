@@ -7,17 +7,16 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
 import Divider from '@material-ui/core/Divider';
 import InsertChartIcon from '@material-ui/icons/InsertChartOutlined';
 import GroupIcon from '@material-ui/icons/GroupOutlined';
 import StoreIcon from '@material-ui/icons/StoreOutlined';
 import ReceiptIcon from '@material-ui/icons/ReceiptOutlined';
 import HeadsetMicIcon from '@material-ui/icons/HeadsetMicOutlined';
+import CachedIcon from '@material-ui/icons/CachedOutlined';
 import ListAltIcon from '@material-ui/icons/ListAltOutlined';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalanceOutlined'
-import ExpandLess from '@material-ui/icons/ExpandLessOutlined';
-import ExpandMore from '@material-ui/icons/ExpandMoreOutlined';
+import AssignmentIcon from '@material-ui/icons/AssignmentOutlined';
 import Hidden from '@material-ui/core/Hidden';
 import { Typography } from '@material-ui/core';
 
@@ -29,13 +28,13 @@ const Styles = theme => ({
         fontSize: '10%!important'
     },
     active: {
-        backgroundColor: theme.palette.secondary.main,
+        color: theme.palette.secondary.main,
         '& span': {
-            color: 'white',
+            color: `${theme.palette.secondary.main} !important`,
             fontWeight: 'bold'
         },
         '& svg': {
-            color: 'white',
+            color: `${theme.palette.secondary.main} !important`,
         },
 
     },
@@ -44,10 +43,10 @@ const Styles = theme => ({
            color: 'white',
        },
        '& svg': {
-        color: 'white',
+         color: 'white',
         },
         '& :focus': {
-            backgroundColor: theme.palette.secondary.main,
+            color: theme.palette.secondary.main,
         }
     },
     icon: {
@@ -72,6 +71,12 @@ const Styles = theme => ({
              backgroundColor: theme.palette.secondary.main,
          }
      },
+     divider: {
+       backgroundColor: "#797979",
+       width: "90%",
+       marginTop: 5,
+       marginBottom: 5
+     }
 
 });
 
@@ -104,33 +109,38 @@ class MainMenu extends React.Component {
                     <ListItemText className={ classes.listText } primary={ locale.home.name } />
                 </ListItem>
 
-                <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/contact" activeClassName={classes.active}>
+                <Divider className={classes.divider}/>
+
+                    <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/invoice" activeClassName={classes.active}>
+                        <ListItemIcon>
+                            <AccountBalanceIcon  />
+                        </ListItemIcon>
+                        <ListItemText className={ classes.listText } primary={ locale.invoice.name } />
+                    </ListItem>
+                    <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/quote" activeClassName={classes.active}>
+                        <ListItemIcon>
+                            <AssignmentIcon  />
+                        </ListItemIcon>
+                        <ListItemText className={ classes.listText } primary={ locale.quote.name } />
+                    </ListItem>
+                    <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/refund" activeClassName={classes.active}>
+                        <ListItemIcon>
+                            <CachedIcon  />
+                        </ListItemIcon>
+                        <ListItemText className={ classes.listText } primary={ locale.refund.name } />
+                    </ListItem>
+
+              <Divider className={classes.divider}/>
+
+                <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/expense" activeClassName={classes.active}>
                     <ListItemIcon>
-                        <GroupIcon  />
+                        <ReceiptIcon  />
                     </ListItemIcon>
-                    <ListItemText className={ classes.listText } primary={ locale.contact.name } />
+                    <ListItemText className={ classes.listText } primary={ locale.expense.name } />
                 </ListItem>
 
-                <ListItem button onClick={this.handleClick}>
-                <ListItemIcon>
-                    <AccountBalanceIcon className={ classes.icon }/>
-                </ListItemIcon>
-                <ListItemText inset className={ classes.listText } primary={ locale.bookkeeping.name } />
-                { this.state.open ? <ExpandLess /> : <ExpandMore />}
-                </ListItem>
-                    <Collapse in={ this.state.open} timeout="auto" unmountOnExit>
-                        <List >
-                            <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/quote" activeClassName={classes.active}>
-                                <ListItemText inset  primary={ locale.quote.name }/>
-                            </ListItem>
-                            <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/invoice" activeClassName={classes.active}>
-                                <ListItemText inset  primary={ locale.invoice.name }/>
-                            </ListItem>
-                            <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/refund" activeClassName={classes.active}>
-                                <ListItemText inset  primary={ locale.refund.name }/>
-                            </ListItem>
-                        </List>
-                    </Collapse>
+
+              <Divider className={classes.divider}/>
 
                 <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/service" activeClassName={classes.active}>
                     <ListItemIcon>
@@ -145,13 +155,14 @@ class MainMenu extends React.Component {
                     <ListItemText className={ classes.listText } primary={ locale.product.name } />
                 </ListItem>
 
-                <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/expense" activeClassName={classes.active}>
-                    <ListItemIcon>
-                        <ReceiptIcon  />
-                    </ListItemIcon>
-                    <ListItemText className={ classes.listText } primary={ locale.expense.name } />
-                </ListItem>
+              <Divider className={classes.divider}/>
 
+                <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/contact" activeClassName={classes.active}>
+                    <ListItemIcon>
+                        <GroupIcon  />
+                    </ListItemIcon>
+                    <ListItemText className={ classes.listText } primary={ locale.contact.name } />
+                </ListItem>
 
                 <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/task" activeClassName={classes.active}>
                     <ListItemIcon>
