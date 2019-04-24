@@ -55,8 +55,7 @@ const Styles = theme => ({
     header: {
         padding: '24px',
         textAlign: 'center',
-        // backgroundColor: theme.palette.lightGrey,
-        borderBottom: `1px solid #8c8c8c`
+        borderBottom: `1px solid rgba(0, 0, 0, 0.12)`
     },
     nested: {
         '& span': {
@@ -171,7 +170,7 @@ class MainMenu extends React.Component {
                     <ListItemText className={ classes.listText } primary={ locale.task.name } />
                 </ListItem>
             </List>
-            <Divider style={{borderColor: 'white'}}/>
+            <Divider/>
             <List component="nav">
                 <ListItem button component={NavLink}  className={classes.listTextSecondary}  onClick={ this.props.closeDrawer } to="/archive" activeClassName={classes.active}>
                     <ListItemText  primary={ locale.archive.name } />

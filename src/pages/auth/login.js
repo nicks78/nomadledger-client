@@ -52,6 +52,11 @@ class Login extends Component {
         window.addEventListener("resize", this.changeHeight )
     }
 
+    componentWillUnmount() {
+      window.removeEventListener("resize", this.changeHeight);
+    }
+
+
     changeHeight = () => {
         this.setState({
             height: window.innerHeight
@@ -77,10 +82,10 @@ class Login extends Component {
 
     render() {
 
-        
+
     const {isError, locale, message, isFetching, classes } = this.props
     const formLogin = {
-            title: locale.subheading.add_contact, 
+            title: locale.subheading.add_contact,
             label: locale.subheading.label_company,
             fields: [
                   { name: 'login_email', type:"email", required: true },
@@ -97,33 +102,33 @@ class Login extends Component {
             <div >
 
                 <div className={ classes.container } style={{ height: this.state.height }}>
-                
+
 
                 <Paper className={ classes.paper }>
                 <div>
                     <Typography className={classes.companyName} variant="h1" align="center">
                         <Link to="/"><img src={`${DEFAULT_URL}img/logo.png`} alt="logo" height="80" width="auto" /></Link><br />
                         <span>{locale.company_name}</span>
-                    </Typography><br /> 
+                    </Typography><br />
                 </div>
                         <Typography variant="caption">
                           { locale.subheading.label_login}&nbsp;{locale.company_name}
                         </Typography>
                         {   isError ? <p> {locale.message[message]}</p> : null }
                         <form onSubmit={ this.onSubmitForm }>
-                        <ApxForm 
-                            formField={formLogin.fields} 
-                            formHandler={ this.handleLogin } 
-                            locale={ locale } 
-                            xs={12} 
-                            md={12} 
+                        <ApxForm
+                            formField={formLogin.fields}
+                            formHandler={ this.handleLogin }
+                            locale={ locale }
+                            xs={12}
+                            md={12}
                             objData={ this.state }/>
-                        <br /> 
-                        <Button 
-                            variant="contained" 
-                            color="primary"  
+                        <br />
+                        <Button
+                            variant="contained"
+                            color="primary"
                             type="submit"
-                            className={  classes.button } 
+                            className={  classes.button }
                             >
                             { locale.wording.login }
                         </Button>
@@ -134,7 +139,7 @@ class Login extends Component {
 
             </div>
             </div>
-            
+
         )
   }
 }

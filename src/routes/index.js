@@ -39,6 +39,7 @@ import BookkeepingRoute from './bookkeeping'
 import NotFound from './notFound'
 import Layout from '../components/layout/layout'
 
+
 class Routes extends React.Component {
 
     componentDidMount(){
@@ -70,6 +71,7 @@ class Routes extends React.Component {
                         <Route path="/public/reset-password/:token" component={ResetPassword} />
                         <Route path="/public/payment-gateway/:token_id" component={Payment} />
                         <Route path="/public/contact-us" component={ContactUs} />
+                    
                         {
                             isLoggedIn && authUser !== null  ?
                             <Layout company={company} _onChangeLocale={this.handleChangeLocale} user={authUser} logout={this.props.getLogout} locale={locale}>

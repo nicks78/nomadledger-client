@@ -9,11 +9,11 @@ const AddExpense = (props) => {
 
     const fields = [
       {
-        title: locale.subheading.add_expense, 
+        title: locale.subheading.add_expense,
         label: locale.subheading.label_expense,
         fields: [
             { name: 'receipt_date', type:"date"},
-            { name: 'name', type:"text", required: true, length: 50 },
+            { name: 'name', type:"text", required: true, length: 30 },
             { name: 'category', type:"select", selections: category, helperText: "select_category", required: true },
             { name: 'currency', type:"select", selections: currency, helperText: "select_currency", required: true },
             { name: 'vat', type:"select", selections: vat, helperText: "select_vat", required: true },
@@ -26,11 +26,11 @@ const AddExpense = (props) => {
 
     return (
       <div>
-          <AddItem 
-            formFields={fields} 
-            locale={locale} 
-            newData={props.newData} 
-            addBtnTitle={ locale.wording.create } 
+          <AddItem
+            formFields={fields}
+            locale={locale}
+            newData={props.newData}
+            addBtnTitle={ locale.wording.create }
             headerText={ locale.subheading.add_expense }
             limitUploadFile={1}
             reducer="EXPENSE"

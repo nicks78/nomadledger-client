@@ -12,6 +12,8 @@ import AddExpense from './addExpense'
 import Pagination from '../../lib/pagination'
 import DeleteIcon from '@material-ui/icons/DeleteOutlined'
 import { cvtNumToUserPref } from '../../utils/help_function'
+import MobileView from './mobileView'
+
 
 // STYLES
 const styles = theme =>  ({
@@ -34,20 +36,40 @@ const styles = theme =>  ({
 
 class Expense extends Component {
 
+    constructor(props) {
+      super(props);
 
-    state = {
-        reducer: 'EXPENSE',
-        rowCount: 0,
-        category: 'none',
+      this.state = {
+          reducer: 'EXPENSE',
+          rowCount: 0,
+          category: 'none',
+          width: window.innerWidth,
+          listExpenses: [],
+          receivedAt: ""
+      }
     }
 
     componentDidMount(){
             this.props.getTotal(this.state.reducer)
             this.props.getItemList(this.state.reducer, "list?limit=10&skip=0");
+            window.addEventListener('resize', this.getWindowWidth);
     }
 
-    componentWillUnmount(){
-        this.props.resetState(this.state.reducer)
+    componentWillReceiveProps(nextProps){
+      if(this.state.receivedAt !== nextProps.receivedAt )
+        this.setState({
+          listExpenses: [...this.state.listExpenses, ...nextProps.listExpenses],
+          receivedAt: nextProps.receivedAt
+        })
+    }
+
+    componentWillUnmount() {
+      this.props.resetState(this.state.reducer)
+      window.removeEventListener('resize', this.getWindowWidth);
+    }
+
+    getWindowWidth = () => {
+      this.setState({width: window.innerWidth})
     }
 
     handleFilterRequest = (value) => {
@@ -56,27 +78,32 @@ class Expense extends Component {
         this.props.getItemList(this.state.reducer, `list?limit=10&skip=0&category=${value._id}`);
     }
 
+
     render() {
-    
-    const {isFetching, listExpenses, locale, newExpense, createItem, createState, isCreating, progress, category, classes, currency, vat} = this.props
-    const {reducer } = this.state
+
+    const {isFetching, locale, newExpense, createItem, createState, isCreating, progress, category, classes, currency, vat, total} = this.props
+    const {reducer, width, listExpenses } = this.state
+    const isMobile = width <= 500;
+
 
     return (
         <div className={ classes.container }>
-        
-            <AddExpense 
-                locale={ locale } 
-                category={category} 
+
+            <AddExpense
+                locale={ locale }
+                category={category}
                 newData={newExpense}
-                progress={progress} 
-                createExpenseState={ createState } 
-                createExpense={ createItem } 
+                progress={progress}
+                createExpenseState={ createState }
+                createExpense={ createItem }
                 isCreating={isCreating}
                 vat={vat}
                 currency={currency}
             />
+
+          { !isMobile ?
             <Paper className={classes.paper}>
-                
+
                 <ApxTableToolBar
                         numSelected={0}
                         menus={[...category, {fr: "Tous", en: "All", _id: "none"}]}
@@ -87,6 +114,7 @@ class Expense extends Component {
                         onDownload={ () => { this.props.downloadFile(reducer, `export/excel-file`) } }
                         locale={locale}
                     />
+
                     <div style={{overflowY: "auto"}}>
                     <Table>
                     <TableHead className={classes.tableHead}>
@@ -102,7 +130,7 @@ class Expense extends Component {
 
                         <TableBody>
                             {   !isFetching ?
-                                listExpenses.map(( expense, index) => {
+                                this.props.listExpenses.map(( expense, index) => {
                                     return  <TableRow key={index}>
                                                 <TableCell><a href={`${ expense.receipt ? expense.receipt.full_path : DEFAULT_IMG }`}  target="_blank">
                                                             <img alt={ expense.receipt.org_name } height="30" className={classes.img} src={`${ expense.receipt ? expense.receipt.full_path : DEFAULT_IMG }`} />
@@ -128,8 +156,17 @@ class Expense extends Component {
                         reducer={reducer}
                         label2={locale.wording.of}
                         onGetItemList={ this.props.getItemList }
-                    />        
+                    />
             </Paper>
+
+            : <MobileView
+                  expenses={listExpenses}
+                  getMoreData={this.props.getItemList }
+                  total={total}
+                  isFetching={isFetching}
+                  locale={locale}
+                  reducer={reducer}/>
+        }
         </div>
     )
   }
@@ -138,11 +175,12 @@ class Expense extends Component {
 
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+
     return {
         isFetching: state.library.expense.isFetching,
         isCreating: state.library.expense.isCreating,
-        listExpenses: state.library.expense.list,
+        listExpenses: [...ownProps, ...state.library.expense.list],
         receivedAt: state.library.expense.receivedAt,
         locale: state.locale.locale,
         progress: state.library.expense.progress,

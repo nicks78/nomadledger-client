@@ -18,6 +18,10 @@ class ForgotPassword extends Component {
         window.addEventListener("resize", this.changeHeight )
     }
 
+    componentWillUnmount() {
+      window.removeEventListener("resize", this.changeHeight);
+    }
+
     changeHeight = () => {
         this.setState({
             height: window.innerHeight
@@ -31,25 +35,25 @@ class ForgotPassword extends Component {
 
 
     render() {
-    
+
         const {classes, locale, isFetching} = this.props
 
     return (
       <div className={classes.container} style={{height: this.state.height}}>
-            
+
             <Paper className={classes.paper}>
             <div>
                     <Typography className={classes.companyName} variant="h1" align="center">
                     <Link to="/"><img src={`${DEFAULT_URL}img/logo.png`} alt="logo" height="80" width="auto" /></Link><br />
                         <span>{locale.company_name}</span>
-                    </Typography><br /> 
+                    </Typography><br />
                 </div>
             <Typography variant="caption">
                 { locale.subheading.label_forgot_pwd }
             </Typography>
-            
+
             <form onSubmit={(e) => { this.onSubmitForm(e) }}>
-                <TextField 
+                <TextField
                     name="email"
                     label={locale.wording.email}
                     type="email"
@@ -59,9 +63,9 @@ class ForgotPassword extends Component {
                     onChange={ (e) => { this.setState({[e.target.name]: e.target.value }) } }
                     variant="filled"
                 /><br /><br />
-                <Button 
-                    type="submit" 
-                    color="primary" 
+                <Button
+                    type="submit"
+                    color="primary"
                     disabled={isFetching ? true : false }
                     className={classes.button}
                     variant="contained">{ isFetching ? locale.wording.loading : locale.wording.send_link  }</Button>

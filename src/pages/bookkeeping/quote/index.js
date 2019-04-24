@@ -13,6 +13,7 @@ import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
 import { cvtNumToUserPref } from '../../../utils/help_function'
+// import MobileView from './mobileView'
 
 
 class Quote extends Component {
@@ -20,13 +21,30 @@ class Quote extends Component {
     state = {
         showQuote: false,
         reducer: "QUOTE",
-        status: 'none'
+        status: 'none',
+        width: window.innerWidth,
+        receivedAt: "",
+        listQuote: []
+
     }
 
     componentDidMount(){
         this.props.getTotal(this.state.reducer);
         this.props.getBookList(this.state.reducer, `list?limit=10&skip=0`);
+        // window.addEventListener('resize', this.getWindowWidth);
     }
+
+    // componentWillReceiveProps(nextProps){
+    //   if(this.state.receivedAt !== nextProps.receivedAt )
+    //     this.setState({
+    //       listQuote: [...this.state.listQuote, ...nextProps.listQuote],
+    //       receivedAt: nextProps.receivedAt
+    //     })
+    // }
+
+    // getWindowWidth = () => {
+    //   this.setState({width: window.innerWidth})
+    // }
 
     handleFilterRequest = (value) => {
         this.setState({status: value.code});
@@ -40,8 +58,9 @@ class Quote extends Component {
 
     render() {
 
-    const {listQuote, isFetching,  locale, classes, newQuote, status} = this.props
+    const { isFetching,  locale, classes, newQuote, status} = this.props
     const { reducer } = this.state;
+
 
     return (
       <div className={classes.root}>
@@ -51,6 +70,7 @@ class Quote extends Component {
 
                 </Button>
             </Hidden>
+
             <Paper className={classes.paper}>
 
                 <ApxTableToolBar
@@ -80,7 +100,7 @@ class Quote extends Component {
 
                         <TableBody className={classes.tableBody}>
                             {   !isFetching ?
-                                listQuote.map(( item, index) => {
+                                this.props.listQuote.map(( item, index) => {
                                     let vat = item.subtotal * item.vat.indice / 100
                                     return  <TableRow key={index}>
                                                 <TableCell>{locale.wording.qto}-{item.ref}</TableCell>
@@ -140,9 +160,10 @@ class Quote extends Component {
                         filterName="status"
                         onGetItemList={ this.props.getBookList }
                     />
+            </Paper>
 
             <Hidden only={['lg', 'xl', 'md']}>
-                <Fab variant="contained"
+                <Fab
                     color="primary"
                     style={{position: "fixed", right: 10, bottom: 10}}
                     component={Link}
@@ -151,7 +172,7 @@ class Quote extends Component {
                 </Fab>
 
             </Hidden>
-            </Paper>
+
       </div>
     )
   }
@@ -189,6 +210,7 @@ const mapStateToProps = (state) => {
     return {
         isFetching: state.book.quote.isFetching,
         updated: state.book.quote.updated,
+        receivedAt: state.book.quote.receivedAt,
         newQuote: state.book.quote.item || {},
         locale: state.locale.locale,
         total: state.library.quote.total,

@@ -8,7 +8,6 @@ import { withStyles } from '@material-ui/core';
 import Spinner from '../../../components/common/spinner'
 import Form from '../common/form'
 
-
 class CreateQuote extends React.Component {
 
     handleDropDown = (event) => {
@@ -34,8 +33,7 @@ class CreateQuote extends React.Component {
 
     return (
             <div className={ classes.root}>
-
-                <Form 
+                <Form
                     formTitle="add_quote"
                     data={newQuote}
                     vat={vat}

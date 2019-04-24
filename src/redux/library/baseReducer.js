@@ -22,66 +22,66 @@ class BaseState {
 
 
 const baseReducer = (state = new BaseState(), action) => {
-    
+
 
     switch (action.type) {
         case `REQUEST`:
-            return  { 
+            return  {
                 ...state,
                 isFetching: action.isFetching,
                 isError: action.isError
             }
         case `REQUEST_CREATE`:
-            return  { 
+            return  {
                 ...state,
                 isCreating: action.isCreating,
                 isError: action.isError
             }
         case `REQUEST_UPLOAD`:
-            return  { 
+            return  {
                 ...state,
                 isUploading: action.isUploading,
                 isError: action.isError
             }
         case `REQUEST_UPDATE`:
-            return  { 
+            return  {
                 ...state,
                 isUpdating: action.isUpdating,
                 isError: action.isError
             }
-        case `FAILED`: 
+        case `FAILED`:
             return {
                 ...state,
                 isFetching: action.isFetching,
                 message: action.message,
-                receivedAt: action.receivedAt, 
+                receivedAt: action.receivedAt,
                 isUpdating: action.isUpdating,
                 isError: action.isError,
                 isCreating: action.isCreating
             }
 
         case `RECEIVE`:
-            return  { 
+            return  {
                 ...state,
                 isFetching: action.isFetching,
                 list: action.payload,
                 receivedAt: action.receivedAt
             }
 
-        case `GET`: 
+        case `GET`:
             return {
                 ...state,
                 item: action.item,
                 isFetching: action.isFetching,
             }
 
-        case `STATE`: 
+        case `STATE`:
             return {
                 ...state,
                 tmp_state: { ...state.tmp_state, [ action.payload.fieldName ] : action.payload.value },
                 item: { ...state.item, [ action.payload.fieldName ] : action.payload.value }
             }
-            
+
         case `CREATE`:
             return {
                 ...state,
@@ -106,7 +106,7 @@ const baseReducer = (state = new BaseState(), action) => {
                 ...state,
                 list:  state.list.filter( (element) => { return element._id !== action.id })
             }
-            
+
         case `PROGRESS`:
             return {
                 ...state,
@@ -114,9 +114,9 @@ const baseReducer = (state = new BaseState(), action) => {
                 isUploading: action.isUploading
             }
 
-        case `RESET`: 
+        case `RESET`:
             return new BaseState()
-            
+
         case `UPLOAD`:
             return {
                 ...state,
@@ -130,7 +130,7 @@ const baseReducer = (state = new BaseState(), action) => {
                 total: action.total,
                 isFetching: action.isFetching,
                 rowsPerPageOptions: action.rowsPerPageOptions
-                
+
             }
         default:
             return state;
