@@ -32,7 +32,7 @@ class MobileView extends React.Component {
     const scrollTop = el.scrollTop;
     const toBottom = offsetHeight + scrollTop
 
-    if( toBottom ===  scrollHeight ) {
+    if( toBottom  ===  scrollHeight ) {
       if( !this.props.isFetching && this.props.expenses.length < this.props.total){
           this.loadMoreData()
       }
@@ -54,7 +54,11 @@ class MobileView extends React.Component {
               <div className={this.props.classes.details}>
                 <CardContent className={this.props.classes.content}>
                   <Typography variant="body1">
-                    {expense.name} - <span>{expense.receipt_date.label}</span>
+                    <span style={{ fontSize: 8 }}>{expense.receipt_date.label}</span><br />
+                    {expense.name}
+                  <span style={{position: "absolute", right: 24, fontWeight: 700}}>
+                      {expense.price} {expense.currency.en}
+                    </span>
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
                     {expense.description.slice(0, 30)}
@@ -63,9 +67,7 @@ class MobileView extends React.Component {
                 </CardContent>
 
               </div>
-              <Typography variant="h3" style={{position: "absolute", right: 24, fontWeight: 700}} color="textSecondary">
-                {expense.price} {expense.currency.en}
-              </Typography>
+
           </Card></Link>
   }
 
@@ -86,6 +88,7 @@ class MobileView extends React.Component {
              <div style={{textAlign: "center"}}><CircularProgress color="secondary" /></div>
          : null
       }
+      <br/><br/>
       </div>
   )
   }
