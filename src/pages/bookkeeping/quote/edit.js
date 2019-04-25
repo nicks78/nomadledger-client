@@ -8,6 +8,8 @@ import { withStyles, Fab } from '@material-ui/core';
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEyeOutlined'
 import Form from '../common/form'
 import Spinner from '../../../components/common/spinner'
+import ApxBackBtn from '../../../components/common/backBtn'
+
 
 class EditQuote extends React.Component {
 
@@ -23,7 +25,7 @@ class EditQuote extends React.Component {
         var id = this.props.match.params.id;
         this.props.getDocument(this.state.reducer, id);
     }
-    
+
     handleDropDown = (event) => {
         var name = event.target.name;
         var value = event.target.value;
@@ -51,7 +53,10 @@ class EditQuote extends React.Component {
 
     return (
             <div className={ classes.root}>
-                <Form 
+              <div style={{display: "flex", padding: 12}}>
+                  <ApxBackBtn styled={{ marginBottom: 0 }}/>
+              </div>
+                <Form
                     formTitle="edit_quote"
                     data={quote}
                     vat={vat}

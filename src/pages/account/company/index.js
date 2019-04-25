@@ -123,6 +123,14 @@ class Company extends Component {
                       handleAction={(event) => { this.props.handleFormEdit(event, reducer) }}
                   />
                   <EditInput
+                      label={ locale.wording.company_register_city }
+                      value={ company.company_register_city}
+                      showEdit={showEdit}
+                      locale={locale}
+                      field="company_register_city"
+                      handleAction={(event) => { this.props.handleFormEdit(event, reducer) }}
+                  />
+                  <EditInput
                       label={ locale.wording.company_vat }
                       value={ company.company_vat}
                       showEdit={showEdit}

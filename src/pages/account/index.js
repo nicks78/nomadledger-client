@@ -11,6 +11,8 @@ import Spinner from '../../components/common/spinner'
 import AddCategory from './addCategory'
 import AddVat from './addVat'
 import AddContactGroup from './addContactGroup'
+import HelpIcon from '@material-ui/icons/HelpOutlined'
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 const styles = theme => ({
@@ -35,6 +37,10 @@ const styles = theme => ({
     borderRadius: 4,
     backgroundColor: 'rgb(238,238,238)',
     // border: `1px solid ${theme.palette.secondary.light}`
+  },
+  iconHelp: {
+    fontSize: 13,
+    marginLeft: 10
   }
 })
 
@@ -50,7 +56,7 @@ class Account extends Component {
   handleFormEdit = (event, reducer) => {
     var name = event.target.name;
     var value = event.target.value
-    
+
     // Temporary save data into redux store
     this.props.createState(reducer, name, value)
   }
@@ -70,33 +76,32 @@ class Account extends Component {
     return (
       <div>
           <Grid container className={classes.root} spacing={16}>
-             
+
                 <Grid item xs={12}>
                 <Paper className={classes.paper}>
                   <Company handleFormEdit={ this.handleFormEdit }/>
                 </Paper>
                 </Grid>
-              
+
           </Grid>
 
-          
-          <Grid container spacing={24}> 
-          
+
+          <Grid container spacing={24}>
+
                 <Grid item xs={12} md={8}>
-                    <Grid container spacing={24}> 
+                    <Grid container spacing={24}>
                       <Grid item xs={12}>
                           <Paper className={classes.paper} elevation={1}>
 
                           <Typography variant="overline" className={classes.titleBar}>
                               {locale.subheading.param_company}
-                              
                           </Typography>
                           <br />
-                          <Grid container spacing={24}> 
-                          
+                          <Grid container spacing={24}>
+
                               <Grid item xs={12} md={6}>
                                 <Typography variant="subtitle2"  >
-                                    {locale.subheading.my_vat}
+                                    {locale.subheading.my_vat}<Tooltip title={locale.helperText.account_vat} className={ classes.iconHelp } aria-label="setting"><HelpIcon /></Tooltip>
                                   </Typography>
                                   <Divider className={ classes.divider }/>
                                   <AddVat />
@@ -104,22 +109,22 @@ class Account extends Component {
                               <br />
                               <Grid item xs={12} md={6}>
                               <Typography variant="subtitle2"  >
-                              {locale.subheading.contact_group}
+                              {locale.subheading.contact_group}<Tooltip title={locale.helperText.account_group} className={ classes.iconHelp } aria-label="setting"><HelpIcon /></Tooltip>
                                 </Typography>
                                 <Divider className={ classes.divider }/>
                                   <AddContactGroup />
                               </Grid>
                               <Grid item xs={12}>
-                              
+
 
                                 <Typography variant="subtitle2"  >
-                                {locale.subheading.my_categories}
+                                {locale.subheading.my_categories}<Tooltip title={locale.helperText.account_category} className={ classes.iconHelp } aria-label="setting"><HelpIcon /></Tooltip>
                                 </Typography>
                                 <Divider className={ classes.divider }/>
                                 <AddCategory />
                               </Grid>
                           </Grid>
-                                
+
 
                           </Paper>
                       </Grid>
@@ -128,11 +133,11 @@ class Account extends Component {
 
               <Grid item xs={12} md={4}>
                   <Paper className={classes.paper} >
-                    <User handleFormEdit={ this.handleFormEdit }/> 
+                    <User handleFormEdit={ this.handleFormEdit }/>
                   </Paper>
               </Grid>
           </Grid>
-        
+
       </div>
     )
   }
@@ -143,7 +148,7 @@ const mapStateToProps = (state) => {
   return {
       companyIsFetching: state.account.company.isFetching,
       companyReceivedAt: state.account.company.receivedAt,
-      company: state.account.company.item, 
+      company: state.account.company.item,
 
       userIsFetching: state.account.user.isFetching,
       userReceivedAt: state.account.user.receivedAt,

@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom"
 import {DEFAULT_URL} from "../../../redux/constant"
 import {connect} from 'react-redux'
-import {  getBookList, updateField, createState, downloadPdf } from '../../../redux/book/actions'
+import {  getBookList, updateField, createState, downloadPdf, resetState } from '../../../redux/book/actions'
 import { getTotal } from '../../../redux/library/actions'
 import AddIcon from '@material-ui/icons/AddOutlined'
 import { withStyles, Button, Hidden,  Paper, Table, TableHead, TableBody, TableCell, TableRow , Fab, Switch} from '@material-ui/core';
@@ -13,7 +13,7 @@ import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
 import { cvtNumToUserPref } from '../../../utils/help_function'
-// import MobileView from './mobileView'
+import MobileView from '../common/mobileView'
 
 
 class Quote extends Component {
@@ -31,20 +31,25 @@ class Quote extends Component {
     componentDidMount(){
         this.props.getTotal(this.state.reducer);
         this.props.getBookList(this.state.reducer, `list?limit=10&skip=0`);
-        // window.addEventListener('resize', this.getWindowWidth);
+        window.addEventListener('resize', this.getWindowWidth);
     }
 
-    // componentWillReceiveProps(nextProps){
-    //   if(this.state.receivedAt !== nextProps.receivedAt )
-    //     this.setState({
-    //       listQuote: [...this.state.listQuote, ...nextProps.listQuote],
-    //       receivedAt: nextProps.receivedAt
-    //     })
-    // }
+    componentWillUnmount(){
+      window.removeEventListener('resize', this.getWindowWidth);
+      this.props.resetState(this.state.reducer)
+    }
 
-    // getWindowWidth = () => {
-    //   this.setState({width: window.innerWidth})
-    // }
+    componentWillReceiveProps(nextProps){
+      if(this.state.receivedAt !== nextProps.receivedAt )
+        this.setState({
+          listQuote: [...this.state.listQuote, ...nextProps.listQuote],
+          receivedAt: nextProps.receivedAt
+        })
+    }
+
+    getWindowWidth = () => {
+      this.setState({width: window.innerWidth})
+    }
 
     handleFilterRequest = (value) => {
         this.setState({status: value.code});
@@ -58,9 +63,9 @@ class Quote extends Component {
 
     render() {
 
-    const { isFetching,  locale, classes, newQuote, status} = this.props
-    const { reducer } = this.state;
-
+    const { isFetching,  locale, classes, newQuote, status, total} = this.props
+    const { reducer, listQuote, width } = this.state;
+    const isMobile = width <= 500;
 
     return (
       <div className={classes.root}>
@@ -71,6 +76,7 @@ class Quote extends Component {
                 </Button>
             </Hidden>
 
+            { !isMobile ?
             <Paper className={classes.paper}>
 
                 <ApxTableToolBar
@@ -103,7 +109,7 @@ class Quote extends Component {
                                 this.props.listQuote.map(( item, index) => {
                                     let vat = item.subtotal * item.vat.indice / 100
                                     return  <TableRow key={index}>
-                                                <TableCell>{locale.wording.qto}-{item.ref}</TableCell>
+                                                <TableCell><Link className="link" to={`/quote/view/${item._id}`}>{locale.wording.qto}-{item.ref}</Link></TableCell>
                                                 <TableCell><Link className="link" to={{ pathname: `/contact/view/${item.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{item.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell className={classes.price}>{cvtNumToUserPref(item.subtotal)} {item.currency.value}</TableCell>
                                                 <TableCell className={classes.price}>{cvtNumToUserPref( vat ) + " "+item.currency.value }</TableCell>
@@ -161,6 +167,14 @@ class Quote extends Component {
                         onGetItemList={ this.props.getBookList }
                     />
             </Paper>
+            : <MobileView
+                  items={listQuote}
+                  getMoreData={this.props.getBookList }
+                  total={total}
+                  isFetching={isFetching}
+                  locale={locale}
+                  reducer={reducer}/>
+          }
 
             <Hidden only={['lg', 'xl', 'md']}>
                 <Fab
@@ -222,4 +236,4 @@ const mapStateToProps = (state) => {
 
 const StyledQuote = withStyles(styles)(Quote)
 
-export default connect(mapStateToProps, {  getBookList, getTotal, updateField, createState,downloadPdf })(StyledQuote);
+export default connect(mapStateToProps, {  getBookList, getTotal, updateField, createState, downloadPdf, resetState })(StyledQuote);

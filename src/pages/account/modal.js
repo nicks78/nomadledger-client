@@ -47,7 +47,8 @@ class SimpleModal extends React.Component {
       en: this.props.obj.en,
       value: this.props.obj.indice,
       color: this.props.obj.color,
-      id: this.props.obj._id
+      id: this.props.obj._id,
+      vat_terms: this.props.obj.vat_terms
     })
   }
 
@@ -57,7 +58,8 @@ class SimpleModal extends React.Component {
       en: nextProps.obj.en,
       value: nextProps.obj.indice,
       color: nextProps.obj.color,
-      id: nextProps.obj._id
+      id: nextProps.obj._id,
+      vat_terms: nextProps.obj.vat_terms
     })
   }
 
@@ -66,7 +68,7 @@ class SimpleModal extends React.Component {
   };
 
   handleClose = () => {
-    this.setState({ 
+    this.setState({
       open: false,
       id: "",
       value: '',
@@ -81,16 +83,17 @@ class SimpleModal extends React.Component {
   }
 
   updateElement = () => {
-    this.setState({ 
+    this.setState({
       open: false,
       id: "",
       value: '',
       fr: '',
       en: "",
-      color: ""
+      color: "",
+      vat_terms: ""
     })
-    if( this.props.type === 'vat' ){
-        var num = checkNumFormatRegex( this.state.value || 0 ) 
+    if( this.props.type === 'vat' && typeof this.state.value !== "number" ){
+        var num = checkNumFormatRegex( this.state.value || 0 )
     }
     var data = {
         _id: this.state.id,
@@ -98,16 +101,17 @@ class SimpleModal extends React.Component {
         en: this.state.en,
         color: this.state.color,
         value: this.state.value + " %",
+        vat_terms: this.state.vat_terms,
         indice: num || 0
     }
-  
+
     this.props.pushToDocument("COMPANY", data, `push-pull/modify/set/${this.props.type}/` );
 
   }
 
   render() {
     const { classes , obj, type, locale } = this.props;
-    const {fr, en, value , color} = this.state
+    const {fr, en, value , color, vat_terms} = this.state
 
     return (
       <React.Fragment>
@@ -121,7 +125,7 @@ class SimpleModal extends React.Component {
 
           <div  className={classes.paper}>
           <Typography variant="subtitle1" align="center">{ locale.subheading.edit_tag }</Typography>
-            <TextField 
+            <TextField
                 value={  en ? en : this.props.obj.en }
                 onChange={(e) => { this.handleForm(e.target.name, e.target.value) }}
                 label={ locale.wording.tag_name_en }
@@ -131,7 +135,7 @@ class SimpleModal extends React.Component {
                 variant="filled"
 
             />
-             <TextField 
+             <TextField
                 value={ fr ? fr : this.props.obj.fr }
                 onChange={(e) => { this.handleForm(e.target.name, e.target.value) }}
                 label={locale.wording.tag_name_fr}
@@ -141,9 +145,9 @@ class SimpleModal extends React.Component {
                 variant="filled"
 
             />
-            { 
-              type === 'category_name' ? 
-            <TextField 
+            {
+              type === 'category_name' ?
+            <TextField
                 value={ color ? color : this.props.obj.color }
                 onChange={(e) => { this.handleForm(e.target.name, e.target.value) }}
                 label={locale.wording.tag_hex}
@@ -154,12 +158,12 @@ class SimpleModal extends React.Component {
                 variant="filled"
 
             />
-            : null 
+            : null
             }
-            { 
-              type === 'vat' ? 
-                <TextField 
-                  value={ value ? value : this.props.obj.value }
+            {
+              type === 'vat' ?
+                <TextField
+                  value={ value  }
                   onChange={(e) => { this.handleForm(e.target.name, e.target.value) }}
                   label={locale.wording.rate}
                   name="value"
@@ -169,7 +173,22 @@ class SimpleModal extends React.Component {
                   variant="filled"
 
               />
-              : null 
+              : null
+            }
+            {
+              type === 'vat' ?
+                <TextField
+                  value={ vat_terms  }
+                  onChange={(e) => { this.handleForm(e.target.name, e.target.vat_terms) }}
+                  label={locale.wording.vat_terms}
+                  name="vat_terms"
+                  type="text"
+                  fullWidth
+                  margin="dense"
+                  variant="filled"
+
+              />
+              : null
             }
 
             <Button variant="contained" color="primary" className={classes.btn} onClick={ this.updateElement }>{locale.wording.save}</Button>

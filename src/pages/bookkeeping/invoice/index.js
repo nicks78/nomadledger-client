@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import {DEFAULT_URL} from "../../../redux/constant"
 import {downloadFile} from '../../../redux/download/actions'
 import {connect} from 'react-redux'
-import {  getBookList, updateField, createState, downloadPdf } from '../../../redux/book/actions'
+import {  getBookList, updateField, createState, downloadPdf , resetState} from '../../../redux/book/actions'
 import { getTotal } from '../../../redux/library/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import AddIcon from '@material-ui/icons/AddOutlined'
@@ -14,18 +14,40 @@ import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
 import ApxSelect from '../../../components/common/select'
-
+import MobileView from '../common/mobileView'
 
 class Invoice extends Component {
 
     state = {
         reducer: "INVOICE",
-        status: 'none'
+        status: 'none',
+        width: window.innerWidth,
+        receivedAt: "",
+        listInvoice: []
     }
 
     componentDidMount(){
         this.props.getTotal(this.state.reducer );
         this.props.getBookList(this.state.reducer, "list?limit=10&skip=0");
+        window.addEventListener('resize', this.getWindowWidth);
+    }
+
+    componentWillReceiveProps(nextProps){
+      if(this.state.receivedAt !== nextProps.receivedAt )
+        this.setState({
+          listInvoice: [...this.state.listInvoice, ...nextProps.listInvoice],
+          receivedAt: nextProps.receivedAt
+        })
+    }
+
+    componentWillUnmount(){
+      window.removeEventListener('resize', this.getWindowWidth);
+      this.props.resetState(this.state.reducer)
+    }
+
+
+    getWindowWidth = () => {
+      this.setState({width: window.innerWidth})
     }
 
     handleFilterRequest = (value) => {
@@ -40,8 +62,9 @@ class Invoice extends Component {
 
     render() {
 
-    const {listInvoice, isFetching, locale, classes, newInvoice, status} = this.props
-    const { reducer } = this.state
+    const { isFetching, locale, classes, newInvoice, status, total } = this.props
+    const { reducer, width, listInvoice } = this.state
+    const isMobile = width <= 500;
 
     return (
       <div className={classes.root}>
@@ -52,6 +75,7 @@ class Invoice extends Component {
                         { newInvoice.contact_id ? locale.wording.progress : locale.wording.create}
                 </Button>
             </Hidden>
+            { !isMobile ?
             <Paper className={classes.paper}>
 
             <ApxTableToolBar
@@ -83,10 +107,10 @@ class Invoice extends Component {
 
                         <TableBody className={classes.tableBody}>
                             {   !isFetching ?
-                                listInvoice.map(( invoice, index) => {
+                                this.props.listInvoice.map(( invoice, index) => {
                                     let vat = invoice.subtotal * invoice.vat.indice / 100
                                     return  <TableRow key={index}>
-                                                <TableCell>{locale.wording.inv}-{invoice.ref}</TableCell>
+                                                <TableCell><Link className="link" to={`/invoice/view/${invoice._id}`}>{locale.wording.inv}-{invoice.ref}</Link></TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${invoice.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{invoice.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell className={classes.price}>{cvtNumToUserPref(invoice.subtotal)} {invoice.currency.value}</TableCell>
                                                 <TableCell className={classes.price}>{cvtNumToUserPref(vat ) + " "+ invoice.currency.value }</TableCell>
@@ -141,16 +165,25 @@ class Invoice extends Component {
                         filterName="status"
                         onGetItemList={ this.props.getBookList }
                     />
-                    <Hidden only={['lg', 'xl', 'md']}>
-                        <Fab variant="contained"
-                            color="primary"
-                            style={{position: "fixed", right: 10, bottom: 10}}
-                            component={Link}
-                            to="/invoice/create">
-                            <AddIcon />
-                        </Fab>
-                    </Hidden>
+
             </Paper>
+            : <MobileView
+                  items={listInvoice}
+                  getMoreData={this.props.getBookList }
+                  total={total}
+                  isFetching={isFetching}
+                  locale={locale}
+                  reducer={reducer}/>
+          }
+          <Hidden only={['lg', 'xl', 'md']}>
+              <Fab
+                  color="primary"
+                  style={{position: "fixed", right: 10, bottom: 10}}
+                  component={Link}
+                  to="/invoice/create">
+                  <AddIcon />
+              </Fab>
+          </Hidden>
       </div>
     )
   }
@@ -200,4 +233,4 @@ const mapStateToProps = (state) => {
 
 const StyledInvoice = withStyles(styles)(Invoice)
 
-export default connect(mapStateToProps, {  getBookList, getTotal, updateField, createState, downloadPdf, downloadFile  })(StyledInvoice);
+export default connect(mapStateToProps, {  getBookList, getTotal, updateField, createState, downloadPdf, downloadFile, resetState  })(StyledInvoice);

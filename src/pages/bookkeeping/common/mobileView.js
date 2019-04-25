@@ -32,7 +32,7 @@ class MobileView extends React.Component {
     const toBottom = offsetHeight + scrollTop
 
     if( toBottom ===  scrollHeight ) {
-      if( !this.props.isFetching && this.props.quotes.length < this.props.total){
+      if( !this.props.isFetching && this.props.items.length < this.props.total){
           this.loadMoreData()
       }
     }
@@ -43,37 +43,38 @@ class MobileView extends React.Component {
     this.setState({skip: this.state.skip +10 })
   }
 
-  renderCard = (quote) => {
-      return <Link to={`/${this.props.reducer.toLowerCase()}/view/${quote._id.toLowerCase()}`}>
+  renderCard = (item) => {
+      return <Link to={`/${this.props.reducer.toLowerCase()}/${item.status.code === "1" ? "edit" : "view" }/${item._id.toLowerCase()}`}>
               <Card className={this.props.classes.card} >
               <div className={this.props.classes.details}>
                 <CardContent className={this.props.classes.content}>
                   <Typography variant="body1">
-                    {quote.contact_id.company_name} - <span>{new Date(quote.createAt.date).toLocaleString("fr")}</span>
+                    {item.contact_id.company_name}<br />
+                    <span style={{ fontSize: 8 }}>{new Date(item.createAt.date).toLocaleString("fr")}</span>
+                      <span style={{position: "absolute", right: 24, fontWeight: 700}}>
+                          {item.subtotal} {item.currency.en}
+                        </span>
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
-                    <span style={{ color: quote.status.color }}>{quote.status[localStorage.getItem('locale')]}</span>
+                    <span style={{ color: item.status.color }}>{item.status[localStorage.getItem('locale')]}</span>
                   </Typography>
 
                 </CardContent>
 
               </div>
-              <Typography variant="h3" style={{position: "absolute", right: 24, fontWeight: 700}} color="textSecondary">
-                {quote.price} {quote.currency.en}
-              </Typography>
           </Card></Link>
   }
 
 
   render () {
-    const { quotes, classes , locale} = this.props
+    const { items, classes , locale} = this.props
 
     return (
       <div className={classes.root} id="mobileView">
-      <Typography variant="h1" align="center" className={classes.title}>{locale.quote.name}</Typography>
+      <Typography variant="h1" align="center" className={classes.title}>{locale[this.props.reducer.toLowerCase()].name}</Typography>
       {
-         quotes.map((quote, index) => {
-            return <div key={index} id="main">{this.renderCard(quote)}</div>
+         items.map((item, index) => {
+            return <div key={index} id="main">{this.renderCard(item)}</div>
         })
       }
       {

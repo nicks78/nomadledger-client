@@ -7,6 +7,9 @@ import { convertToCurrency, getListItem} from '../../../redux/book/itemActions'
 import { withStyles } from '@material-ui/core';
 import Spinner from '../../../components/common/spinner'
 import Form from '../common/form'
+import ApxBackBtn from '../../../components/common/backBtn'
+
+
 
 class CreateQuote extends React.Component {
 
@@ -33,6 +36,9 @@ class CreateQuote extends React.Component {
 
     return (
             <div className={ classes.root}>
+              <div style={{display: "flex", padding: 12}}>
+                  <ApxBackBtn styled={{ marginBottom: 0 }}/>
+              </div>
                 <Form
                     formTitle="add_quote"
                     data={newQuote}

@@ -8,7 +8,7 @@ import { withStyles, Fab } from '@material-ui/core';
 import Form from '../common/form'
 import Spinner from '../../../components/common/spinner'
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEyeOutlined'
-
+import ApxBackBtn from '../../../components/common/backBtn'
 
 class EditInvoice extends React.Component {
 
@@ -24,7 +24,7 @@ class EditInvoice extends React.Component {
         var id = this.props.match.params.id;
         this.props.getDocument(this.state.reducer, id);
     }
-    
+
     handleDropDown = (event) => {
         var name = event.target.name;
         var value = event.target.value;
@@ -53,7 +53,10 @@ class EditInvoice extends React.Component {
 
     return (
             <div className={ classes.root}>
-                <Form 
+              <div style={{display: "flex", padding: 12}}>
+                  <ApxBackBtn styled={{ marginBottom: 0 }}/>
+              </div>
+                <Form
                     formTitle="edit_invoice"
                     data={invoice}
                     vat={vat}

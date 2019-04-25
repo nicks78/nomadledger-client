@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom"
 import {DEFAULT_URL} from "../../../redux/constant"
 import {connect} from 'react-redux'
-import {  getBookList, updateField, createState, downloadPdf } from '../../../redux/book/actions'
+import {  getBookList, updateField, createState, downloadPdf, resetState } from '../../../redux/book/actions'
 import { getTotal } from '../../../redux/library/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import AddIcon from '@material-ui/icons/AddOutlined'
@@ -13,19 +13,42 @@ import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
 import ApxSelect from '../../../components/common/select'
+import MobileView from '../common/mobileView'
 
 
 class Refund extends Component {
 
     state = {
         reducer: "REFUND",
-        status: 'none'
+        status: 'none',
+        width: window.innerWidth,
+        receivedAt: "",
+        listRefund: []
     }
 
     componentDidMount(){
         this.props.getTotal(this.state.reducer );
         this.props.getBookList(this.state.reducer, "list?limit=10&skip=0");
     }
+
+    componentWillReceiveProps(nextProps){
+      if(this.state.receivedAt !== nextProps.receivedAt )
+        this.setState({
+          listRefund: [...this.state.listRefund, ...nextProps.listRefund],
+          receivedAt: nextProps.receivedAt
+        })
+    }
+
+    componentWillUnmount(){
+      window.removeEventListener('resize', this.getWindowWidth);
+      this.props.resetState(this.state.reducer)
+    }
+
+
+    getWindowWidth = () => {
+      this.setState({width: window.innerWidth})
+    }
+
 
     handleFilterRequest = (value) => {
         this.setState({status: value.code});
@@ -39,8 +62,9 @@ class Refund extends Component {
 
     render() {
 
-    const {listRefund, isFetching,  locale, classes, newRefund, status} = this.props
-    const { reducer } = this.state
+    const { isFetching,  locale, classes, newRefund, status, total} = this.props
+    const { reducer, width, listRefund } = this.state
+    const isMobile = width <= 500;
 
     return (
       <div className={classes.root}>
@@ -51,6 +75,7 @@ class Refund extends Component {
                         { newRefund.contact_id ? locale.wording.progress : locale.wording.create}
                 </Button>
             </Hidden>
+            { !isMobile ?
             <Paper className={classes.paper}>
 
             <ApxTableToolBar
@@ -80,10 +105,10 @@ class Refund extends Component {
 
                         <TableBody className={classes.tableBody}>
                             {   !isFetching ?
-                                listRefund.map(( refund, index) => {
+                                this.props.listRefund.map(( refund, index) => {
                                     let total = refund.subtotal * refund.vat.indice / 100
                                     return  <TableRow key={index}>
-                                                <TableCell>{locale.wording.pya}-{refund.ref}</TableCell>
+                                                <TableCell><Link className="link" to={`/refund/view/${refund._id}`}>{locale.wording.pya}-{refund.ref}</Link></TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${refund.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{refund.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell>{refund.currency.en}</TableCell>
                                                 <TableCell className={classes.price}>{cvtNumToUserPref(refund.subtotal)} {refund.currency.value}</TableCell>
@@ -136,16 +161,25 @@ class Refund extends Component {
                         filterName="status"
                         onGetItemList={ this.props.getBookList }
                     />
-                    <Hidden only={['lg', 'xl', 'md']}>
-                        <Fab variant="contained"
-                            color="primary"
-                            style={{position: "fixed", right: 10, bottom: 10}}
-                            component={Link}
-                            to="/invoice/create">
-                            <AddIcon />
-                        </Fab>
-                    </Hidden>
+
             </Paper>
+            : <MobileView
+                  items={listRefund}
+                  getMoreData={this.props.getBookList }
+                  total={total}
+                  isFetching={isFetching}
+                  locale={locale}
+                  reducer={reducer}/>
+          }
+          <Hidden only={['lg', 'xl', 'md']}>
+              <Fab
+                  color="primary"
+                  style={{position: "fixed", right: 10, bottom: 10}}
+                  component={Link}
+                  to="/invoice/create">
+                  <AddIcon />
+              </Fab>
+          </Hidden>
       </div>
     )
   }
@@ -195,4 +229,4 @@ const mapStateToProps = (state) => {
 
 const StyledRefund = withStyles(styles)(Refund)
 
-export default connect(mapStateToProps, {  getBookList, getTotal, updateField, createState, downloadPdf  })(StyledRefund);
+export default connect(mapStateToProps, {  getBookList, getTotal, updateField, createState, downloadPdf, resetState  })(StyledRefund);

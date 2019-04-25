@@ -257,7 +257,8 @@ const styles = theme => ({
         [theme.breakpoints.down("sm")]: {
             paddingLeft: 12,
             paddingRight: 12,
-            boxShadow: 'none'
+            boxShadow: 'none',
+            borderRadius: 0
         }
     },
     btnSave: {
@@ -268,15 +269,3 @@ const styles = theme => ({
 const ApxForm = withStyles(styles)(Form)
 
 export default ApxForm;
-
-  // <Grid item xs={6}>
-  //     <AutoComplete
-  //         disabled={ data.currency && data.contact_id && data.vat ? false : true }
-  //         field="name"
-  //         state="name"
-  //         model="product"
-  //         reducer={reducer}
-  //         placeholder={locale.wording.search_product}
-  //         setSelectedObject={  props.getListItem }
-  //     />
-  // </Grid>

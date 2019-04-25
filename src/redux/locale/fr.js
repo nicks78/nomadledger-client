@@ -122,7 +122,8 @@ const fr =  {
         password_confirm: 'Confirmer mon mot de passe',
         firstname: "Prénom",
         lastname: "Nom",
-        company_register: "Siret",
+        company_register: "Siret Nº",
+        company_register_city: "RCS",
         company_vat: "TVA",
         company_name: "Nom de société",
         company_line_code: "Code téléphone",
@@ -134,6 +135,7 @@ const fr =  {
         email: "Courriel",
         company: "Société",
         vat: 'TVA',
+        vat_terms: "Règle TVA",
         rate: "Taux",
         capital : "Capital",
         addresses_street: "Adresse",
@@ -205,6 +207,7 @@ const fr =  {
         phone: "Téléphone",
 
         of: "à",
+        bill_to: "Facturer à",
         on: "sur",
         group: "Groupe",
         date: "Date",
@@ -267,7 +270,12 @@ const fr =  {
         type_message: "Taper votre message...",
         payment_terms: "Cet abonnement vous donne un accès total à la plateforme pendant 365 jours",
         add_tags: "Une fois l'élément créé, vous aurez la possibilité d'éditer en 2 langues FR - EN ",
-        trial_30: "30 jours d'essai gratuit"
+        trial_30: "30 jours d'essai gratuit",
+        account_setting: " Vous pouvez ajouter initialiser vos paramètres, afin d'optimiser vos documents comptables et filtre de recherche",
+        account_vat: "Lister vos taux de TVA, ils vous seront utile pour la redaction de vos documents comptables",
+        account_group: "Créer vos propres groupes de contact afin de facilité, vos recherches dans la sections contacts",
+        account_category: "Catégorisé vos produits/services/dépenses, vous pourrez également associé une couleur par catégorie et analysé votre tabelau de bord en en clein d'oeil.",
+
     },
     message: {
         success_create: "Félicitation !",

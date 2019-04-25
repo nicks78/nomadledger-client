@@ -49,6 +49,7 @@ class AddVat extends Component {
   state = {
     value: '',
     name: '',
+    vat_terms: "",
     indice: 0,
     reducer: "COMPANY",
     addApi: 'push-pull/update/push/',
@@ -60,7 +61,7 @@ class AddVat extends Component {
             this.props.getAccount(this.state.reducer)
         }
     }
-  
+
     _handleFormEdit = (event) => {
         var name = event.target.name;
         var value = event.target.value;
@@ -75,17 +76,18 @@ class AddVat extends Component {
             alert("Must give a name !")
             return ;
         }
-        
+
         if( num && this.state.name ){
             var data = {
-                vat: { 
-                    en: this.state.name, 
-                    fr: this.state.name, 
+                vat: {
+                    en: this.state.name,
+                    fr: this.state.name,
                     value: this.state.value + " %",
-                    indice: num 
+                    indice: num,
+                    vat_terms: ""
                 }
             }
-            this.setState({value: "", name: '', indice: 0 })
+            this.setState({value: "", name: '', indice: 0, vat_terms: "" })
             this.props.pushToDocument(this.state.reducer, data, this.state.addApi )
         }else{
             alert("Format de numero ou nom incorrect (ex: 18.06 | 18,06 )!")
@@ -112,7 +114,7 @@ class AddVat extends Component {
       <div>
 
                     <div className={ classes.addVat}>
-                        <TextField 
+                        <TextField
                                 id="vatname"
                                 label={locale.wording.name}
                                 className={classes.textField}
@@ -122,7 +124,7 @@ class AddVat extends Component {
                                 margin="normal"
                             />
 
-                            <TextField 
+                            <TextField
                                 id="vat"
                                 type="number"
                                 label={locale.wording.add_vat}
@@ -133,17 +135,28 @@ class AddVat extends Component {
                                 onChange={this._handleFormEdit}
                                 margin="normal"
                             />
-                        
+                            <TextField
+                                id="vat_terms"
+                                type="text"
+                                label={locale.wording.vat_terms}
+                                style={{ width: "90%" }}
+                                value={this.state.value}
+                                name="vat_terms"
+                                onKeyPress={(e) => { e.key === "Enter" && this._pushToDoc() }}
+                                onChange={this._handleFormEdit}
+                                margin="normal"
+                            />
+
                         <AddIcon className={ classes.addBtn} onClick={ this._pushToDoc }/>
-                        
-                       
+
+
                     </div>
 
                     <div className={ classes.tagWrapper}>
 
                     {
                         company.vat.map((vat, index) => {
-                          return <ApxTag 
+                          return <ApxTag
                                   key={index}
                                   obj={vat}
                                   edit={true}
@@ -155,7 +168,7 @@ class AddVat extends Component {
                                 />
                         })
                     }
-                        
+
 
                     </div>
       </div>

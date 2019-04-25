@@ -115,7 +115,8 @@ const en = {
         password_confirm: 'Confirm password',
         firstname: "Firstname",
         lastname: "Lastname",
-        company_register: "Company register",
+        company_register: "Company register Nº",
+        company_register_city: "Company register city",
         company_vat: "VAT",
         company_name: "Company name",
         company_line_code: "Phone code",
@@ -127,6 +128,7 @@ const en = {
         email: "Email",
         company: "Company",
         vat: 'VAT',
+        vat_terms: "VAT rule",
         rate: "Rate",
         capital : "Capital",
         addresses_street: "Address",
@@ -197,6 +199,7 @@ const en = {
         phone: "Phone",
 
         of: "To",
+        bill_to: "Bill to",
         on: "on",
         group: "Group",
         expense_name: "Name",
@@ -260,7 +263,12 @@ const en = {
         type_message: "Type your message...",
         payment_terms: "Membership give you full access to NomadLegder for 365 days",
         add_tags: "One you create your tag, you can edit 2 language FR - EN ",
-        trial_30: "Free 30-Day Trial"
+        trial_30: "Free 30-Day Trial",
+        account_setting: "Vous pouvez ajouter initialiser vos paramètres, afin d'optimiser vos documents comptables et filtre de recherche",
+        account_vat: "List all your VAT rate, you will need it to create your accounting documents",
+        account_group: "Easly create contact groupes to add search filter",
+        account_category: "Categorize your products/services/expenses, you can add a color for each category that will be use in your dashboard",
+
     },
     message: {
         success_create: "Congratulation !",
