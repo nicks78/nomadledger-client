@@ -2,7 +2,7 @@
 
 import React  from 'react'
 import {connect} from 'react-redux'
-import { withStyles } from '@material-ui/core';
+import { withStyles, Hidden } from '@material-ui/core';
 import { DEFAULT_IMG} from '../../../redux/constant'
 import ApxBackBtn from '../../../components/common/backBtn'
 import Spinner from '../../../components/common/spinner'
@@ -31,7 +31,7 @@ const styles = theme => ({
       }
   },
   statWrapper: {
-    marginBottom: 24, 
+    marginBottom: 24,
     marginLeft: 16 ,
     [theme.breakpoints.down('sm')]: {
       marginLeft: 0,
@@ -48,7 +48,7 @@ const styles = theme => ({
     '&$tabSelected': {
       color: theme.palette.primary.main,
       fontWeight: theme.typography.fontWeightMedium,
-      
+
     },
     '&:focus': {
       color: theme.palette.primary.main,
@@ -96,17 +96,17 @@ class ShowContact extends React.Component {
     }
 
     render(){
-      const { contact, 
-              isFetching, 
-              locale, 
-              progress, 
-              isUploading, 
-              classes, 
-              total_quote , 
-              total_invoice, 
+      const { contact,
+              isFetching,
+              locale,
+              progress,
+              isUploading,
+              classes,
+              total_quote ,
+              total_invoice,
               currency,
               total_refund} = this.props
- 
+
       if(isFetching){
         return <Spinner />
       }
@@ -121,26 +121,26 @@ class ShowContact extends React.Component {
 
             <Grid item xs={12} md={3}>
                 <div style={{textAlign:'center'}}>
-                  <UploadImg 
+                  <UploadImg
                     field="logo_contact"
                     _handleUploadFile={ (e) => { this.props.uploadFileToServer("CONTACT", contact._id, e.target.files[0], contact.logo_contact )} }
                     progress={progress}
                     isUploading={isUploading}
-                    image={<img src={`${ contact.logo_contact.full_path || DEFAULT_IMG }`} alt={contact.logo_contact.org_name} 
-                    
+                    image={<img src={`${ contact.logo_contact.full_path || DEFAULT_IMG }`} alt={contact.logo_contact.org_name}
+
                     style={{ maxWidth: '100%', maxHeight: '100px'}} />}
                   />
                 </div>
 
-              
-              
+
+
               <ContactInfo  locale={locale} contact={ contact } createState={this.props.createState} id={contact._id}/>
-              
+
             </Grid>
             <Grid item xs={12} md={9}>
-            
+
             <div className={ classes.statWrapper}>
-                <StatContact 
+                <StatContact
                   total_quote={total_quote}
                   total_invoice={total_invoice}
                   total_refund={total_refund}
@@ -148,9 +148,10 @@ class ShowContact extends React.Component {
                   locale={locale}
                 />
             </div>
+            <Hidden xsDown>
             <div className={ classes.tabWrapper }>
             <AppBar position="static" style={{backgroundColor: '#fff', color: '#000'}}>
-              <Tabs value={this.state.value} 
+              <Tabs value={this.state.value}
                     onChange={this.handleChange}
                     classes={classes.tabsRoot}
                     variant="fullWidth"
@@ -161,7 +162,7 @@ class ShowContact extends React.Component {
               </Tabs>
             </AppBar>
               <SwipeableViews
-                
+
                 index={this.state.value}
                 onChangeIndex={this.handleChangeIndex}
               >
@@ -169,8 +170,9 @@ class ShowContact extends React.Component {
                 <TabContainer><TableInvoice reducer="INVOICE" contactId={this.props.match.params.id}/></TabContainer>
                 <TabContainer><TableRefund reducer="REFUND" contactId={this.props.match.params.id}/></TabContainer>
               </SwipeableViews>
-              </div>
-            
+            </div>
+            </Hidden>
+
             </Grid>
         </Grid>
         </Paper>
