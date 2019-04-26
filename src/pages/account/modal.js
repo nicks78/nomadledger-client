@@ -38,6 +38,7 @@ class SimpleModal extends React.Component {
     id: "",
     value: '',
     fr: '',
+    vat_terms: "",
     en: ""
   }
 
@@ -74,11 +75,13 @@ class SimpleModal extends React.Component {
       value: '',
       fr: '',
       en: "",
-      color: ""
+      color: "",
+      vat_terms: ""
     })
   };
 
   handleForm = (name, value) => {
+    console.log(name + "=> "+ value)
       this.setState({[name]: value})
   }
 
@@ -100,10 +103,12 @@ class SimpleModal extends React.Component {
         fr: this.state.fr,
         en: this.state.en,
         color: this.state.color,
-        value: this.state.value + " %",
+        value: this.state.indice + " %",
         vat_terms: this.state.vat_terms,
         indice: num || 0
     }
+
+    console.log(data)
 
     this.props.pushToDocument("COMPANY", data, `push-pull/modify/set/${this.props.type}/` );
 
@@ -111,7 +116,7 @@ class SimpleModal extends React.Component {
 
   render() {
     const { classes , obj, type, locale } = this.props;
-    const {fr, en, value , color, vat_terms} = this.state
+    const {fr, en , color, vat_terms, indice} = this.state
 
     return (
       <React.Fragment>
@@ -163,10 +168,10 @@ class SimpleModal extends React.Component {
             {
               type === 'vat' ?
                 <TextField
-                  value={ value  }
+                  value={ indice ? indice : this.props.obj.indice  }
                   onChange={(e) => { this.handleForm(e.target.name, e.target.value) }}
                   label={locale.wording.rate}
-                  name="value"
+                  name="indice"
                   type="number"
                   fullWidth
                   margin="dense"
@@ -178,8 +183,8 @@ class SimpleModal extends React.Component {
             {
               type === 'vat' ?
                 <TextField
-                  value={ vat_terms  }
-                  onChange={(e) => { this.handleForm(e.target.name, e.target.vat_terms) }}
+                  value={ vat_terms ? vat_terms : this.props.obj.vat_terms  }
+                  onChange={(e) => { this.handleForm(e.target.name, e.target.value) }}
                   label={locale.wording.vat_terms}
                   name="vat_terms"
                   type="text"

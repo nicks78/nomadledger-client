@@ -105,7 +105,7 @@ class Items extends Component {
         <Typography variant="body1" className={ classes.sum } style={{backgroundColor: "white"}}>
           <b style={{ marginLeft: 24 }}>{locale.wording.vat}&nbsp;{ newData.vat ? newData.vat.value : "0%" }</b>
           <span className={ classes.sumSpan }><b>{ this.totalHT(listItems).vat } { newData.currency && newData.currency.value }</b></span><br />
-          <span>{ newData.vat && newData.vat.vat_terms }</span>
+          <span style={{ marginLeft: 24, fontSize: 10 }}>{ newData.vat && newData.vat.vat_terms }</span>
         </Typography>
         <Typography variant="body1" className={ classes.sum }>
           <b style={{ marginLeft: 24 }}>{locale.wording.total_ttc}</b>

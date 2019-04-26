@@ -9,6 +9,8 @@ import { createItem, getItemList, getItem, createState, getTotal, resetState} fr
 import ApxTableToolBar from '../../components/common/tableToolBar'
 import AddContact from './addContact'
 import Pagination from '../../lib/pagination'
+import MobileView from './mobileView'
+
 
 const styles =  theme => ({
     container: {
@@ -36,16 +38,33 @@ class Contact extends Component {
     state = {
         reducer: 'CONTACT',
         selected: [],
-        group: 'none'
+        group: 'none',
+        width: window.innerWidth,
+        listContacts: [],
+        receivedAt: ""
     }
 
     componentDidMount(){
         this.props.getTotal(this.state.reducer)
-        this.props.getItemList(this.state.reducer, `list?limit=10&skip=0`)
+        this.props.getItemList(this.state.reducer, `list?limit=10&skip=0`);
+        window.addEventListener('resize', this.getWindowWidth);
+    }
+
+    componentWillReceiveProps(nextProps){
+      if(this.state.receivedAt !== nextProps.receivedAt )
+        this.setState({
+          listContacts: [...this.state.listContacts, ...nextProps.listContacts],
+          receivedAt: nextProps.receivedAt
+        })
     }
 
     componentWillUnmount() {
-        this.props.resetState("CONTACT")
+        this.props.resetState(this.state.reducer);
+        window.removeEventListener('resize', this.getWindowWidth);
+    }
+
+    getWindowWidth = () => {
+      this.setState({width: window.innerWidth})
     }
 
     handleFilterRequest = (value) => {
@@ -57,8 +76,9 @@ class Contact extends Component {
 
     render() {
 
-    const {listContacts, isFetching,  locale, createItem, createState, newContact, isCreating, progress, classes, contactGroup, rowsPerPageOptions, total, country, phone_code} = this.props
-    const { reducer } = this.state
+    const { isFetching,  locale, createItem, createState, newContact, isCreating, progress, classes, contactGroup, rowsPerPageOptions, total, country, phone_code} = this.props
+    const {reducer, width, listContacts } = this.state
+    const isMobile = width <= 500;
 
 
     return (
@@ -73,6 +93,7 @@ class Contact extends Component {
                         newData={newContact}
                         isCreating={ isCreating  }/>
 
+              { !isMobile  ?
                 <Paper className={classes.paper}>
                     <ApxTableToolBar
                         numSelected={0}
@@ -99,7 +120,7 @@ class Contact extends Component {
 
                         <TableBody>
                             {   !isFetching ?
-                                listContacts.map(( contact, index) => {
+                                this.props.listContacts.map(( contact, index) => {
                                     return  <TableRow key={index}>
 
                                                 <TableCell><Link to={`/${reducer.toLowerCase()}/view/${contact._id.toLowerCase()}`}><span  className="link">{contact.company_name}</span></Link></TableCell>
@@ -129,6 +150,16 @@ class Contact extends Component {
 
 
             </Paper>
+
+            : <MobileView
+                  contacts={listContacts}
+                  getMoreData={this.props.getItemList }
+                  total={total}
+                  isFetching={isFetching}
+                  locale={locale}
+                  reducer={reducer}/>
+
+          }
         </div>
     )
   }
