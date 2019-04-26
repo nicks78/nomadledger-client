@@ -21,7 +21,7 @@ class MobileView extends React.Component {
   }
 
   componentWillUnmount() {
-    // window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('scroll', this.handleScroll);
   }
 
   handleScroll = (event) => {
@@ -53,7 +53,7 @@ class MobileView extends React.Component {
               />
               <div className={this.props.classes.details}>
                 <CardContent className={this.props.classes.content}>
-                  <Typography variant="body1">
+                  <Typography variant="body1" style={{textTransform: "capitalize"}}>
                     {contact.company_name}
                   </Typography>
                   <Typography variant="body2" color="textSecondary">

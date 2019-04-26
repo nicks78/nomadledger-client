@@ -15,6 +15,9 @@ const styles = theme => ({
   },
   success: {
     marginTop: 24,
+    marginRight: 10,
+    marginLeft: 10,
+    borderRadius: 4,
     textAlign: "center",
     "& div":{
       color: "white",
@@ -23,6 +26,9 @@ const styles = theme => ({
   },
   error: {
     marginTop: 24,
+    marginRight: 10,
+    marginLeft: 10,
+    borderRadius: 4,
     textAlign: "center",
     "& div":{
       color: "white",
@@ -31,6 +37,9 @@ const styles = theme => ({
   },
   info: {
     marginTop: 24,
+    marginRight: 10,
+    marginLeft: 10,
+    borderRadius: 4,
     textAlign: "center",
     "& div":{
       color: "white",
@@ -39,6 +48,9 @@ const styles = theme => ({
   },
   warning: {
     marginTop: 24,
+    marginRight: 10,
+    marginLeft: 10,
+    borderRadius: 4,
     textAlign: "center",
     "& div":{
       color: "white",

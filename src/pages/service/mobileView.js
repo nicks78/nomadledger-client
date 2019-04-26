@@ -1,8 +1,8 @@
-//src/pages/expense/mobileView.js
+//src/pages/service/mobileView.js
 import React from 'react'
 import { Link } from 'react-router-dom'
 import {DEFAULT_IMG} from '../../redux/constant'
-import { withStyles, Typography, Avatar } from '@material-ui/core';
+import { withStyles, Typography } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -33,7 +33,7 @@ class MobileView extends React.Component {
     const toBottom = offsetHeight + scrollTop
 
     if( toBottom  ===  scrollHeight ) {
-      if( !this.props.isFetching && this.props.expenses.length < this.props.total){
+      if( !this.props.isFetching && this.props.services.length < this.props.total){
           this.loadMoreData()
       }
     }
@@ -44,43 +44,38 @@ class MobileView extends React.Component {
     this.setState({skip: this.state.skip +10 })
   }
 
-  renderCard = (expense) => {
-      return <Link to={`/${this.props.reducer.toLowerCase()}/view/${expense._id.toLowerCase()}`}>
-              <Card className={this.props.classes.card} >
-              <Avatar
-                  alt={expense.name}
-                  src={`${ expense.receipt.full_path ||  DEFAULT_IMG }`}
-              />
-              <div className={this.props.classes.details}>
-                <CardContent className={this.props.classes.content}>
-                  <Typography variant="body1" style={{textTransform: "capitalize"}}>
-                    <span style={{ fontSize: 8 }}>{expense.receipt_date.label}</span><br />
-                    {expense.name}
-                  <span style={{position: "absolute", right: 24, fontWeight: 700}}>
-                      {expense.price} {expense.currency.en}
-                    </span>
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    {expense.description.slice(0, 30)}
-                  </Typography>
+  renderCard = (service) => {
+    return <Link to={`/${this.props.reducer.toLowerCase()}/view/${service._id.toLowerCase()}`}>
+            <Card className={this.props.classes.card} >
+            <div className={this.props.classes.details}>
+              <CardContent className={this.props.classes.content}>
+                <Typography variant="body1" style={{textTransform: "capitalize"}}>
+                  {service.name}
+                  <span style={{position: "absolute", right: 24, fontWeight: 700, color: '#303030'}}>
+                    {service.price} {service.currency.en} (<i>{service.service_type[localStorage.getItem("locale")]}</i>)<br />
+                  </span>
+                </Typography>
+                <Typography variant="body2" style={{ color: service.category.color, textTransform: "capitalize", fontWeight: 700 }}>
+                  {service.category[localStorage.getItem('locale')]}
+                </Typography>
 
-                </CardContent>
+              </CardContent>
 
-              </div>
+            </div>
 
-          </Card></Link>
+        </Card></Link>
   }
 
 
   render () {
-    const { expenses, classes , locale} = this.props
+    const { services, classes , locale} = this.props
 
     return (
       <div className={classes.root} id="mobileView">
-      <Typography variant="h1" align="center" className={classes.title}>{locale.expense.name}</Typography>
+      <Typography variant="h1" align="center" className={classes.title}>{locale.service.name}</Typography>
       {
-         expenses.map((expense, index) => {
-            return <div key={index} id="main">{this.renderCard(expense)}</div>
+         services.map((service, index) => {
+            return <div key={index} id="main">{this.renderCard(service)}</div>
         })
       }
       {

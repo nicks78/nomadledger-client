@@ -48,7 +48,7 @@ class MobileView extends React.Component {
               <Card className={this.props.classes.card} >
               <div className={this.props.classes.details}>
                 <CardContent className={this.props.classes.content}>
-                  <Typography variant="body1">
+                  <Typography variant="body1" style={{textTransform: "capitalize"}}>
                     {item.contact_id.company_name}<br />
                     <span style={{ fontSize: 8 }}>{new Date(item.createAt.date).toLocaleString("fr")}</span>
                       <span style={{position: "absolute", right: 24, fontWeight: 700}}>

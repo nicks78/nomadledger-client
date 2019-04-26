@@ -10,7 +10,7 @@ import AddService from './addService'
 import {cvtNumToUserPref} from '../../utils/help_function'
 import Pagination from '../../lib/pagination'
 import DeleteIcon from '@material-ui/icons/DeleteOutlined'
-
+import MobileView from './mobileView'
 
 // STYLES
 const styles = theme =>  ({
@@ -38,15 +38,28 @@ class Service extends Component {
         reducer: 'SERVICE',
         rowCount: 0,
         category: 'none',
+        listServices: [],
+        width: window.innerWidth,
+        receivedAt: ""
     }
 
     componentDidMount(){
             this.props.getTotal(this.state.reducer)
             this.props.getItemList(this.state.reducer, "list?limit=10&skip=0");
+            window.addEventListener('resize', this.getWindowWidth);
+    }
+
+    componentWillReceiveProps(nextProps){
+      if(this.state.receivedAt !== nextProps.receivedAt )
+        this.setState({
+          listServices: [...this.state.listServices, ...nextProps.listServices],
+          receivedAt: nextProps.receivedAt
+        })
     }
 
     componentWillUnmount(){
-        this.props.resetState("SERVICE")
+        this.props.resetState(this.state.reducer);
+        window.removeEventListener('resize', this.getWindowWidth);
     }
 
     handleFilterRequest = (value) => {
@@ -56,26 +69,29 @@ class Service extends Component {
     }
 
     render() {
-    
-    const {isFetching, listServices,  locale, newService, createItem, createState, isCreating, progress, category, classes, currency, service_type} = this.props
-    const {reducer } = this.state
+
+    const {isFetching,  locale, newService, createItem, createState, isCreating, progress, category, classes, currency, service_type, total} = this.props
+    const {reducer, listServices, width } = this.state;
+    const isMobile = width <= 500;
+
 
     return (
         <div className={ classes.container }>
-        
-            <AddService 
-                locale={ locale } 
-                newData={newService} 
+
+            <AddService
+                locale={ locale }
+                newData={newService}
                 progress={progress}
                 currency={currency}
-                createServiceState={  createState } 
-                createService={ createItem  } 
-                isCreating={isCreating} 
+                createServiceState={  createState }
+                createService={ createItem  }
+                isCreating={isCreating}
                 category={category}
                 service_type={service_type}
             />
+          { !isMobile ?
             <Paper className={classes.paper}>
-                
+
                 <ApxTableToolBar
                         numSelected={0}
                         menus={[...category, {fr: "Tous", en: "All", _id: "none"}]}
@@ -99,13 +115,13 @@ class Service extends Component {
 
                         <TableBody>
                             {   !isFetching ?
-                                listServices.map(( service, index) => {
+                                this.props.listServices.map(( service, index) => {
                                     return  <TableRow key={index}>
                                                 <TableCell><Link to={ `/${reducer.toLowerCase()}/view/${service._id.toLowerCase()}`}><span  className="link">{service.name}</span></Link></TableCell>
                                                 <TableCell align="right">{cvtNumToUserPref(service.price)}</TableCell>
                                                 <TableCell align="right">{ service.service_type[localStorage.getItem('locale')] }</TableCell>
                                                 <TableCell align="center">{service.currency.en}</TableCell>
-                                                <TableCell style={{textTransform: 'capitalize'}}>{service.category[localStorage.getItem('locale')]}</TableCell> 
+                                                <TableCell style={{textTransform: 'capitalize'}}>{service.category[localStorage.getItem('locale')]}</TableCell>
                                                 <Tooltip className={classes.customWidth} title={service.description}><TableCell>{service.description.slice(0,5)}...</TableCell></Tooltip>
                                                 <TableCell align="center" onClick={() => { this.props.deleteElement( reducer, `delete/${service._id}`) } }><DeleteIcon style={{color: 'red', cursor: 'pointer', fontSize: 18}}  /></TableCell>
                                             </TableRow>
@@ -124,8 +140,17 @@ class Service extends Component {
                         reducer={reducer}
                         label2={locale.wording.of}
                         onGetItemList={ this.props.getItemList }
-                    />        
+                    />
             </Paper>
+            : <MobileView
+                  services={listServices}
+                  getMoreData={this.props.getItemList }
+                  total={total}
+                  isFetching={isFetching}
+                  locale={locale}
+                  reducer={reducer}/>
+
+          }
         </div>
     )
   }

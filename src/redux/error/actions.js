@@ -20,7 +20,7 @@ export function setError(error){
                 dispatch(setNotification(message, "error"))
                 break;
             case 422: // Wrong token
-                dispatch(setNotification(message, "error"));
+                dispatch(setNotification(message, "warning"));
                 break;
             default:
                 dispatch(setNotification(message, "error"))
