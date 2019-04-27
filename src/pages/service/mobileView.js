@@ -1,7 +1,7 @@
 //src/pages/service/mobileView.js
+
 import React from 'react'
 import { Link } from 'react-router-dom'
-import {DEFAULT_IMG} from '../../redux/constant'
 import { withStyles, Typography } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';

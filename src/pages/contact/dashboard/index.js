@@ -132,8 +132,6 @@ class ShowContact extends React.Component {
                   />
                 </div>
 
-
-
               <ContactInfo  locale={locale} contact={ contact } createState={this.props.createState} id={contact._id}/>
 
             </Grid>

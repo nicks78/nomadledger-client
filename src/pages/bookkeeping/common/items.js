@@ -36,9 +36,8 @@ class Items extends Component {
         var vat = this.props.newData.vat ? this.props.newData.vat.indice : 0
         var total = { vat : 0, ht: 0, ttc: 0 };
 
-        for(var i = 0; i < listItems.length; i++){
-            total.ht = parseFloat( (total.ht + listItems[i].total).toFixed(2))
-        }
+        total.ht = listItems.reduce((accumulator, currentValue) => { return accumulator + currentValue.total  }, 0)
+        
         var vat_value =  parseFloat((total.ht /100 * vat ).toFixed(2))
         total.vat = vat_value;
 
