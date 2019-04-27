@@ -197,3 +197,18 @@ export function replaceObjectInArray(list, obj) {
     }
     return newList
 }
+
+
+/**
+ *
+ * @param length of the string to be generated
+ */
+export function  randomString(length) {
+   var result           = '';
+   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+   var charactersLength = characters.length;
+   for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+   }
+   return result;
+}

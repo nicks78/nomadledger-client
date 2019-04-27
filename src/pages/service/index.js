@@ -117,7 +117,7 @@ class Service extends Component {
                             {   !isFetching ?
                                 this.props.listServices.map(( service, index) => {
                                     return  <TableRow key={index}>
-                                                <TableCell><Link to={ `/${reducer.toLowerCase()}/view/${service._id.toLowerCase()}`}><span  className="link">{service.name}</span></Link></TableCell>
+                                                <TableCell><Link to={ `/${reducer.toLowerCase()}/view/${service._id.toLowerCase()}`}><span style={{textTransform: "capitalize"}}  className="link">{service.name}</span></Link></TableCell>
                                                 <TableCell align="right">{cvtNumToUserPref(service.price)}</TableCell>
                                                 <TableCell align="right">{ service.service_type[localStorage.getItem('locale')] }</TableCell>
                                                 <TableCell align="center">{service.currency.en}</TableCell>

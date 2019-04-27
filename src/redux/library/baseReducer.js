@@ -104,7 +104,8 @@ const baseReducer = (state = new BaseState(), action) => {
         case `UPDATE_LIST`:
             return {
                 ...state,
-                list:  state.list.filter( (element) => { return element._id !== action.id })
+                list:  state.list.filter( (element) => { return element._id !== action.id }),
+                total: state.total -1,
             }
 
         case `PROGRESS`:

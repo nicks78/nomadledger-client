@@ -7,6 +7,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+const height = window.innerHeight;
 
 class MobileView extends React.Component {
 
@@ -17,11 +18,13 @@ class MobileView extends React.Component {
 
   componentDidMount() {
     var el = document.getElementById('scrollable');
+    el.scrollTo(0, 0)
     el.addEventListener('scroll', this.handleScroll);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
+    var el = document.getElementById('scrollable');
+    el.removeEventListener('scroll', this.handleScroll);
   }
 
   handleScroll = (event) => {
@@ -32,7 +35,7 @@ class MobileView extends React.Component {
     const scrollTop = el.scrollTop;
     const toBottom = offsetHeight + scrollTop
 
-    if( toBottom  ===  scrollHeight ) {
+    if( toBottom  >=  scrollHeight ) {
       if( !this.props.isFetching && this.props.expenses.length < this.props.total){
           this.loadMoreData()
       }
@@ -95,6 +98,9 @@ class MobileView extends React.Component {
 }
 
 const styles = theme => ({
+  root: {
+    minHeight: height + 10
+  },
   title: {
     marginTop: 12,
     marginBottom: 12

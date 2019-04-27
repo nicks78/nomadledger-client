@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {DEFAULT_IMG} from '../../redux/constant'
 import {downloadFile} from '../../redux/download/actions'
 import { createItem, getItemList, getItem, createState, getTotal , resetState, deleteElement} from '../../redux/library/actions'
 import {connect} from 'react-redux'
@@ -13,7 +12,7 @@ import Pagination from '../../lib/pagination'
 import DeleteIcon from '@material-ui/icons/DeleteOutlined'
 import { cvtNumToUserPref } from '../../utils/help_function'
 import MobileView from './mobileView'
-
+import RenderImage from '../../components/common/renderImage'
 
 // STYLES
 const styles = theme =>  ({
@@ -132,10 +131,8 @@ class Expense extends Component {
                             {   !isFetching ?
                                 this.props.listExpenses.map(( expense, index) => {
                                     return  <TableRow key={index}>
-                                                <TableCell><a href={`${ expense.receipt ? expense.receipt.full_path : DEFAULT_IMG }`}  target="_blank">
-                                                            <img alt={ expense.receipt.org_name } height="30" className={classes.img} src={`${ expense.receipt ? expense.receipt.full_path : DEFAULT_IMG }`} />
-                                                            </a></TableCell>
-                                                <TableCell><Link to={`/${reducer.toLowerCase()}/view/${expense._id.toLowerCase()}`}><span  className="link">{expense.name}</span></Link></TableCell>
+                                                <TableCell> <RenderImage img={ expense.receipt } /></TableCell>
+                                                <TableCell><Link to={`/${reducer.toLowerCase()}/view/${expense._id.toLowerCase()}`}><span style={{textTransform: "capitalize"}}  className="link">{expense.name}</span></Link></TableCell>
                                                 <TableCell style={{textTransform: 'capitalize'}}>{ expense.category[localStorage.getItem('locale')] }</TableCell>
                                                 <TableCell>{ cvtNumToUserPref(expense.price) } { expense.currency.value }</TableCell>
                                                 <TableCell>{ new Date(expense.receipt_date.date).toLocaleDateString(localStorage.getItem('locale')) }</TableCell>
