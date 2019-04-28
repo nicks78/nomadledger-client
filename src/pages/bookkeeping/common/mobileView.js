@@ -1,7 +1,7 @@
 //src/pages/expense/mobileView.js
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { withStyles, Typography } from '@material-ui/core';
+import { withStyles, Typography, Avatar } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -49,6 +49,9 @@ class MobileView extends React.Component {
   renderCard = (item) => {
       return <Link to={`/${this.props.reducer.toLowerCase()}/${item.status.code === "1" ? "edit" : "view" }/${item._id.toLowerCase()}`}>
               <Card className={this.props.classes.card} >
+                <Avatar style={{backgroundColor: item.status.color, fontWeight: 400 , fontSize: 15 }} >
+                  {item.status[localStorage.getItem("locale")].slice(0,1)}
+                </Avatar>
               <div className={this.props.classes.details}>
                 <CardContent className={this.props.classes.content}>
                   <Typography variant="body1" style={{textTransform: "capitalize"}}>

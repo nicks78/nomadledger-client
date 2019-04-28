@@ -62,6 +62,10 @@ class Service extends Component {
         window.removeEventListener('resize', this.getWindowWidth);
     }
 
+    getWindowWidth = () => {
+      this.setState({width: window.innerWidth})
+    }
+    
     handleFilterRequest = (value) => {
         this.setState({category: value._id});
         this.props.getTotal(this.state.reducer, `?category=${value._id}`);

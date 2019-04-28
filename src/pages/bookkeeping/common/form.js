@@ -18,6 +18,7 @@ import AutoComplete from '../../../lib/autoComplete'
 import ContactSection from './contactSection';
 import Items from './items'
 import DatePickers from '../../../lib/dayPicker'
+import ApxBackBtn from '../../../components/common/backBtn'
 
 
 
@@ -29,6 +30,9 @@ const Form = (props) => {
     return  <div>
 
                 <Paper className={classes.paper}>
+                  <div style={{display: "flex", padding: 12}}>
+                      <ApxBackBtn styled={{ marginBottom: 0 }}/>
+                  </div>
                 <Typography variant="h2" className={classes.title}>
                     {locale.subheading[formTitle] }
                     {
@@ -212,7 +216,7 @@ const Form = (props) => {
                     <TextField
                         label={ locale.helperText.textarea_terms }
                         id="terms"
-                        style={{ backgroundColor: 'rgba(255,0,0,0.14)', fontWeight: 600, marginTop: 24}}
+                        style={{ backgroundColor: 'rgba(255,0,0,0.14)', clear: "both",  fontWeight: 400, marginTop: 24}}
                         rows={2}
                         fullWidth
                         multiline
@@ -247,8 +251,9 @@ const styles = theme => ({
         paddingBottom: 12,
         marginTop: -24,
         fontWeight: 500,
-        backgroundColor: theme.palette.primary.light,
-        color: 'white'
+        // backgroundColor: theme.palette.primary.light,
+        textAlign: "center",
+        color: '#303030'
     },
     paper: {
         padding: 24,

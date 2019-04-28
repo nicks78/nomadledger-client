@@ -6,6 +6,7 @@ import { withStyles, Typography } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import {cvtNumToUserPref} from '../../utils/help_function'
 
 const height = window.innerHeight;
 
@@ -55,7 +56,7 @@ class MobileView extends React.Component {
                 <Typography variant="body1" style={{textTransform: "capitalize"}}>
                   {service.name}
                   <span style={{position: "absolute", right: 24, fontWeight: 700, color: '#303030'}}>
-                    {service.price} {service.currency.en} (<i>{service.service_type[localStorage.getItem("locale")]}</i>)<br />
+                    {cvtNumToUserPref(service.price)} {service.currency.en} (<i>{service.service_type[localStorage.getItem("locale")]}</i>)<br />
                   </span>
                 </Typography>
               </CardContent>

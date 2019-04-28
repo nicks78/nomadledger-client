@@ -54,7 +54,7 @@ const styles = theme => ({
     textAlign: "center",
     "& div":{
       color: "white",
-      backgroundColor: "amber",
+      backgroundColor: "#ffae42",
     }
   },
 });
@@ -71,6 +71,8 @@ class SimpleSnackbar extends React.Component {
 
   render() {
     const { classes, status, locale } = this.props;
+
+    console.log(status)
     return (
       <div>
         <Snackbar
