@@ -53,9 +53,6 @@ class EditInvoice extends React.Component {
 
     return (
             <div className={ classes.root}>
-              <div style={{display: "flex", padding: 12}}>
-                  <ApxBackBtn styled={{ marginBottom: 0 }}/>
-              </div>
                 <Form
                     formTitle="edit_invoice"
                     data={invoice}
