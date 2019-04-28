@@ -97,7 +97,9 @@ const fr =  {
         label_status: "Sélectionner le statut du document *",
         label_graph_expense: "Dépenses par catégorie",
         label_not_task_found: "Aucune tâche pour aujourd'hui",
-        label_contact_us: "Demande de contact"
+        label_contact_us: "Demande de contact",
+        label_confirm_email: "Demande d'un nouveau courriel de confirmation",
+        label_forgot_pwd_body1: "Mot de passe oublié ?"
 
     },
     wording: {
@@ -241,6 +243,7 @@ const fr =  {
         logout: "Déconnexion",
         reset_pwd: "Réinitialiser mon mot de passe",
         send_link: "Envoyer le lien de récupération",
+        send_link_confirm: "Envoyer un lien de confirmation",
         return_list: "Retour à la liste",
         address: "Adresse",
         represented_by: "Représenté par",
@@ -287,6 +290,7 @@ const fr =  {
         success_create_new_user: "Félicitation! Votre compte a bien été créé, vous pouvez maintenant vous connecter",
         success_email_sent: "Message envoyé, nous vous contacterons dans les meilleurs délais",
         success_payment: "Paiement accepté, vous allez recevoir un reçu par courriel",
+        success_send_email_confirm: "Un courriel de confiramtion vous à été envoyé; veuillez suivre les instructions",
 
         error_payment: "Erreur lors du paiement, veuillez recommencer ou contacter notre service support@nomadledger.com",
         error_email_not_sent: "Erreur - message non envoyé, veuillez recommencer ou prendre contact avec notre support@nomadledger.com",
@@ -295,23 +299,25 @@ const fr =  {
         error_sent: "Email non envoyé",
         error_user_not_found: "Utilisateur non trouvé",
         error_wrong_password: "Mot de passe incorrect",
-        error_500: "Erreur inconnu, veuillez recommencer ou contacter notre service client",
+        error_500: "Erreur serveur, veuillez recommencer ou contacter notre service support@nomadledger.com",
         error_400: "Les champs marqués avec une * sont obligatoires",
-        error_404: "Élément non trouvé, veuillez recommencer ou contacter notre service client",
+        error_404: "Aucun élément trouvé !",
         error_403_delete: "Cette donnée ne peux être supprimée",
         error_membership_end: "Votre période d'essai vient de se terminer, vous pouvez renouveler votre abonnement ou nous faire une demande pour récupérer vos données",
         error_409: "Cette email existe déjà dans notre base de donnée",
-        error_wrong_token: "Erreur d'authentification, veuillez recommencer ou contacter notre service client",
-        error_no_token: " Erreur d'authentification, veuillez recommencer ou contacter notre service client",
+        error_wrong_token: "Erreur d'authentification, veuillez recommencer ou contacter notre service support@nomadledger.com",
+        error_session_token: "Session expiré, veuillez vous reconnecter",
+        error_no_token: "Erreur aucun jeton, veuillez recommencer ou contacter notre service support@nomadledger.com",
         error_file_not_allowed: "Ce type de fichier n'est pas autorisé",
         error_pw_not_match: "Mot de passe non identique",
         error_pw_min_8: "Votre mot de passe doit faire au minimum 8 caractères",
         error_500_upload: "Erreur téléchargement du fichier, veuillez recommencer ou contacter support@nomadledger.com",
+        
 
         // Bad value
         error_422: "Valeur champs incorrect ou manquant",
         error_422_missing_currency: "Le champs devise doit être renseigné",
-        error_422_contact: "Erreur, veuillez recommencer ou contacter notre service client",
+        error_422_contact: "Erreur, veuillez recommencer ou contacter notre service support@nomadledger.com",
         error_422_price: "Les champs chiffres doivent correspondre au format intl '42.18' ou format français '36,85'",
         error_422_email_format: "Veuillez vérifier le format de votre courriel",
         error_422_lastname: "Le nom est obligatoire",
@@ -324,6 +330,8 @@ const fr =  {
         warning_not_refresh: "Veuillez ne pas rafraichir la page pendant la procédure de paiement",
         first_co: "Préparer votre application ! Ajouter/Supprimer vos Catégories - TVA - Groupe de contact et valider les informations de votre société",
         alert_password_not_match: "Les mots de passe ne correspondent pas",
+        email_confirmed: "Merci ! Votre courriel a bien été confirmé",
+        email_not_confirm: "Votre courriel, n'a pas encore été confirmé. Si vous n'avez pas reçu votre courriel de confirmation vous pouvez faire une nouvelle demande",
         phone_required: "Mobile obligatoire",
         required: "Tous les champs marqués d'un * sont obligatoires",
         request_reset_pw: "Veuillez consulter votre email et suivre les instructions",

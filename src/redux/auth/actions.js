@@ -208,3 +208,35 @@ export function resetPassword(token, password){
         })
     }
 }
+
+
+export function confirmEmail(email){
+    return dispatch => {
+
+        dispatch(requestUser())
+
+        axios.post(`${API_ENDPOINT}public/resend/email-confirm`,
+        {
+            email: email,
+            mode: 'cors',
+        },
+        { headers: {
+            'Content-Type': 'application/json',
+        }
+        })
+        .then(function (response) {
+            return response.data
+        })
+        .then( res => {
+            dispatch(setNotification(res.message, "success"));
+            dispatch(resetUser())
+            // Redirect to home page
+            history.push('/login')
+
+        })
+        .catch(function (error) {
+            dispatch(setError(error));
+            dispatch(requestFailed());
+        })
+    }
+}

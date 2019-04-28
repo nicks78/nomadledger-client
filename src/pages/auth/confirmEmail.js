@@ -1,26 +1,25 @@
-//src/pages/auth/resetPassword.js
+//src/pages/auth/confirmEmail.js
 import React, { Component } from 'react'
 import {DEFAULT_URL} from '../../redux/constant'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {resetPassword} from '../../redux/auth/actions'
+import {confirmEmail} from '../../redux/auth/actions'
 import {setNotification} from '../../redux/notification/actions'
 import {TextField, withStyles, Typography, Button, Paper } from '@material-ui/core'
 
-class ResetPassword extends Component {
+class ConfirmEmail extends Component {
 
     state = {
-        password: "",
-        confirm_pwd: "",
-        token: "",
+        email: "email",
         height: window.innerHeight
     }
 
     componentDidMount(){
-        this.setState({
-            token : this.props.match.params.token
-        })
         window.addEventListener("resize", this.changeHeight )
+    }
+
+    componentWillUnmount() {
+      window.removeEventListener("resize", this.changeHeight);
     }
 
     changeHeight = () => {
@@ -30,65 +29,46 @@ class ResetPassword extends Component {
     }
 
     onSubmitForm = (e) =>{
-        e.preventDefault();
-
-        if( this.state.password.length < 8 ){
-            this.props.setNotification("error_pw_min_8", "error");
-            return;
-        }
-
-        if(this.state.password === this.state.confirm_pwd){
-            this.props.resetPassword(this.state.token, this.state.password )
-        }else{
-            this.props.setNotification("error_pw_not_match", "error")
-        }
+        e.preventDefault()
+        this.props.confirmEmail(this.state.email)
     }
 
 
     render() {
-    
+
         const {classes, locale, isFetching} = this.props
+
     return (
       <div className={classes.container} style={{height: this.state.height}}>
-            
+
             <Paper className={classes.paper}>
             <div>
                     <Typography className={classes.companyName} variant="h1" align="center">
                     <Link to="/"><img src={`${DEFAULT_URL}img/logo.png`} alt="logo" height="80" width="auto" /></Link><br />
                         <span>{locale.company_name}</span>
-                    </Typography><br /> 
+                    </Typography><br />
                 </div>
             <Typography variant="caption">
-                { locale.subheading.label_reset_pwd }
+                { locale.subheading.label_confirm_email }
             </Typography>
-            
-            <form onSubmit={ this.onSubmitForm }>
-                <TextField 
-                    name="password"
-                    label={locale.wording.password}
-                    type="password"
-                    fullWidth
-                    required
-                    margin="dense"
-                    onChange={ (e) => { this.setState({[e.target.name]: e.target.value }) } }
-                    variant="filled"
-                />
-                <TextField 
-                    name="confirm_pwd"
-                    label={locale.wording.password_confirm}
-                    type="password"
+
+            <form onSubmit={(e) => { this.onSubmitForm(e) }}>
+                <TextField
+                    name="email"
+                    label={locale.wording.email}
+                    type="email"
                     fullWidth
                     required
                     margin="dense"
                     onChange={ (e) => { this.setState({[e.target.name]: e.target.value }) } }
                     variant="filled"
                 /><br /><br />
-                <Button 
-                    type="submit" 
-                    color="primary" 
+                <Button
+                    type="submit"
+                    color="primary"
                     disabled={isFetching ? true : false }
                     className={classes.button}
-                    variant="contained">{ isFetching ? locale.wording.loading :  locale.wording.reset_pwd  }</Button>
+                    variant="contained">{ isFetching ? locale.wording.loading : locale.wording.send_link_confirm  }</Button>
             </form>
 
             </Paper>
@@ -130,6 +110,6 @@ const mapStateToProps =(state) => {
     }
 }
 
-const StyledResetPassword = withStyles(styles)(ResetPassword)
+const StyledConfirmEmail = withStyles(styles)(ConfirmEmail)
 
-export default connect(mapStateToProps, {resetPassword, setNotification})(StyledResetPassword)
+export default connect(mapStateToProps, {confirmEmail, setNotification})(StyledConfirmEmail)

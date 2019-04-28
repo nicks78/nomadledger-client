@@ -17,6 +17,7 @@ import Auth from '../pages/auth'
 import Login from '../pages/auth/login'
 import ForgotPassword from '../pages/auth/forgotPassword'
 import ResetPassword from '../pages/auth/resetPassword'
+import ConfirmEmail from '../pages/auth/confirmEmail'
 import Payment from '../pages/payment'
 
 // Pages
@@ -67,18 +68,23 @@ class Routes extends React.Component {
                         <Route exact path="/" component={Auth} />
                         <Route path="/login" component={Login} />
                         <Route exact path="/public" component={NotFound} />
+                        <Route path="/public/confirm-email" component={ConfirmEmail} />
                         <Route path="/public/forgot-password" component={ForgotPassword} />
                         <Route path="/public/reset-password/:token" component={ResetPassword} />
                         <Route path="/public/payment-gateway/:token_id" component={Payment} />
                         <Route path="/public/contact-us" component={ContactUs} />
-                    
+
                         {
                             isLoggedIn && authUser !== null  ?
                             <Layout company={company} _onChangeLocale={this.handleChangeLocale} user={authUser} logout={this.props.getLogout} locale={locale}>
 
                             <Switch>
-                                <PrivateRoute path="/dashboard" component={ Home } auth={isLoggedIn}/>
-                                <PrivateRoute path="/account" component={Account}  auth={isLoggedIn}/>
+                                <PrivateRoute exact path="/dashboard" component={ Home } auth={isLoggedIn}/>
+                                <Route path="/dashboard/*" component={NotFound} />
+
+                                <PrivateRoute exact path="/account" component={Account}  auth={isLoggedIn}/>
+                                <Route path="/account/*" component={NotFound} />
+
 
                                 <PrivateRoute exact path="/contact" component={Contact}  auth={isLoggedIn}/>
                                 <PrivateRoute path="/contact/view/:id" component={ShowContact}  auth={isLoggedIn}/>

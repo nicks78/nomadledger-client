@@ -14,13 +14,16 @@ export function setError(error){
                 history.push('/')
                 break;
             case 404:
-                dispatch(setNotification(message, "error"))
+                dispatch(setNotification(message, "info"))
                 break;
-            case 401: // Wrong token
+            case 401: 
                 dispatch(setNotification(message, "error"))
                 break;
             case 422: // Wrong token
                 dispatch(setNotification(message, "warning"));
+                if(message === "email_not_confirm"){
+                    history.push('/public/confirm-email')
+                }
                 break;
             default:
                 dispatch(setNotification(message, "error"))

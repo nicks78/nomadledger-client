@@ -72,7 +72,6 @@ class SimpleSnackbar extends React.Component {
   render() {
     const { classes, status, locale } = this.props;
 
-    console.log(status)
     return (
       <div>
         <Snackbar
@@ -82,7 +81,7 @@ class SimpleSnackbar extends React.Component {
             horizontal: 'center',
           }}
           open={this.props.openSnack}
-          autoHideDuration={ status === "info" ? 8000 : 6000}
+          autoHideDuration={ status === "info" || status === "warning"   ? 12000 : 6000}
           onClose={this.handleClose}
           ContentProps={{
             'aria-describedby': 'message-id',

@@ -48,6 +48,11 @@ class ForgotPassword extends Component {
                         <span>{locale.company_name}</span>
                     </Typography><br />
                 </div>
+
+            <Typography variant="subtitle1" align="center">
+                { locale.subheading.label_forgot_pwd_body1 }
+            </Typography>
+        <br />
             <Typography variant="caption">
                 { locale.subheading.label_forgot_pwd }
             </Typography>
@@ -85,7 +90,7 @@ const styles = theme => ({
         justifyContent: "center",
     },
     paper: {
-        width: '40%',
+        width: '25%',
         margin: '0 auto',
         padding: 24,
         overflow: 'hidden',

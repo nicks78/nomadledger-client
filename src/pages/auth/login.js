@@ -16,7 +16,7 @@ const styles = theme => ({
     },
 
     paper: {
-        width: '40%',
+        width: '25%',
         margin: '0 auto',
         padding: 24,
         overflow: 'hidden',
@@ -29,7 +29,8 @@ const styles = theme => ({
         }
     },
     button: {
-        float: "right"
+        // float: "right",
+        width: "100%"
     },
     link: {
         clear: "right",

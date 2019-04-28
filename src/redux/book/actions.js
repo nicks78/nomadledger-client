@@ -23,6 +23,7 @@ export function getBookList( actionType, endPoint ){
             const res = request.data
             dispatch(receiveDocuments(actionType, res.payload ))
         }catch(error){
+          console.log("ERROR", error)
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
         }
