@@ -144,6 +144,10 @@ class Layout extends React.Component {
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
+    if(!user || !company){
+      return null
+    }
+
     return (
         <div className={ classes.root} >
             <AppBar className={classes.appBar} >

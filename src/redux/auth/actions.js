@@ -10,7 +10,7 @@ import {setPayment} from '../payment/actions'
 import {setError} from '../error/actions'
 
 // Set withCredentials
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 
 // GET AUTHENTICATED
 export function authUser(data){
@@ -22,7 +22,8 @@ export function authUser(data){
       axios.post(`${API_ENDPOINT}auth`,
         {
             data: data,
-            mode: 'cors'
+            mode: 'cors',
+            withCredentials: true
         },
         { headers: {
             'Content-Type': 'application/json',
@@ -44,6 +45,7 @@ export function authUser(data){
             }else{
                 // Set locale
                 localStorage.setItem('locale', res.locale);
+                localStorage.setItem('auth', "1");
 
                 // Set user auth
                 dispatch(getAccount("COMPANY"));
@@ -109,6 +111,8 @@ export function resetUser (){
 export function getLogout(){
 
     return dispatch => {
+
+    localStorage.setItem('auth', "0");
 
     axios.get(`${API_ENDPOINT}auth/logout`, {
         method: 'GET',

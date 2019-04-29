@@ -57,7 +57,7 @@ class Routes extends React.Component {
         const { isLoggedIn, locale, authUser, company, text, status, openSnack } = this.props
 
         return (
-            <Router history={history}>
+            <Router base history={history}>
                     <React.Fragment>
                         <SnackBar
                             text={text}
@@ -80,11 +80,8 @@ class Routes extends React.Component {
 
                             <Switch>
                                 <PrivateRoute exact path="/dashboard" component={ Home } auth={isLoggedIn}/>
-                                <Route path="/dashboard/*" component={NotFound} />
 
                                 <PrivateRoute exact path="/account" component={Account}  auth={isLoggedIn}/>
-                                <Route path="/account/*" component={NotFound} />
-
 
                                 <PrivateRoute exact path="/contact" component={Contact}  auth={isLoggedIn}/>
                                 <PrivateRoute path="/contact/view/:id" component={ShowContact}  auth={isLoggedIn}/>
@@ -104,14 +101,16 @@ class Routes extends React.Component {
 
                                 <BookkeepingRoute isLoggedIn={isLoggedIn}/>
 
+                              <PrivateRoute path="*" component={NotFound} auth={isLoggedIn}/>
 
                             </Switch>
                             </Layout>
-                            : null
+                            :  null
+
                         }
 
-                        <Route path="*" component={NotFound} />
 
+                        <Route component={NotFound} />
 
                     </Switch>
                 </React.Fragment>

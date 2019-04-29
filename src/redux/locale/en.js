@@ -329,6 +329,7 @@ const en = {
         email_confirmed: "Thank you ! Your email has been confirmed",
         email_not_confirm: "Your email has not been confirm yet. If you did not receive your confirmation email, please follow the step bellow",
         beta_1: "Beta 1 - All data will be lost",
+        confirm_delete: "Do you really want to delete this element ?"
 
     },
     days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],

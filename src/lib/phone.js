@@ -14,28 +14,28 @@ const styles = theme => ({
 
 
 /**
- * 
+ *
  * @param arrayField List of options
  * @param field Name of the field in database
  * @param helperText Text helper for UI
  * @param locale List of translated text
- * @func handleAction handle selected option 
+ * @func handleAction handle selected option
  */
 const Phone = (props) => {
-    
+
     const { field, fieldCode, handleAction, showEdit, label, valueCode, value , classes, reducer, phone_code }= props
 
     const selected = (event) => {
-        
+
         var value = event.target.value
         for(var i =0; i < phone_code.length ; i++){
             if(value === phone_code[i]['fr'] || value === phone_code[i]['en']){
                 event.target.value =  phone_code[i]
             }
         }
-        return props.handleAction(event, reducer)   
+        return props.handleAction(event, reducer)
     }
-
+console.log()
     if(showEdit){
         return  <Grid container spacing={8}>
                     <Grid item xs={5}>
@@ -56,16 +56,16 @@ const Phone = (props) => {
                         margin="dense"
                         >
                         {phone_code.map((option, index) => (
-                            
+
                             <MenuItem key={index} value={ option[localStorage.getItem('locale')]}>
                                 {option.code} {option.value && '(' + option.value +')'}
                             </MenuItem>
                         ))}
                         </TextField>
-                    
+
                     </Grid>
                     <Grid item xs={7}>
-                        <TextField 
+                        <TextField
                             id={field}
                             label={label}
                             variant="filled"
@@ -77,20 +77,20 @@ const Phone = (props) => {
                         />
                     </Grid>
                 </Grid>
-                
+
     }
 
     if(!showEdit){
         return (
-            
-                <ApxtextIndexValue 
+
+                <ApxtextIndexValue
                     html_tag="a"
                     href={`tel:${valueCode.value}${value.replace('0', '')}`}
                     value={ '('+valueCode.value +') ' +value}
                     label={label}
                 />
-            
-            
+
+
         )
     }
 }
@@ -101,7 +101,7 @@ const mapStateToProps = (state) => {
         phone_code: state.helper.items.phone_code || [],
     }
   }
-  
+
 const StyledPhone = withStyles(styles)(Phone)
-  
+
 export default connect(mapStateToProps)(StyledPhone);

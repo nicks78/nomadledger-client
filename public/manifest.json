@@ -1,6 +1,8 @@
 {
-  "short_name": "Bookkeping manger",
-  "name": "Invoices manager",
+  "short_name": "NomadLedger",
+  "name": "NomadLedger",
+  "lang": "fr",
+  "description": "NomadLedger - Facturation simplifié !",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,6 +12,6 @@
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#2c2f32",
   "background_color": "transparent"
 }

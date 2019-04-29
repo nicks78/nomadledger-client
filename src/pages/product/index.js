@@ -1,7 +1,7 @@
 //manager/src/pages/product/index.js
 
 import React, { Component } from 'react'
-import { createItem, getItemList, getItem, createState, getTotal, resetState } from '../../redux/library/actions'
+import { createItem, getItemList, getItem, createState, getTotal, resetState , deleteElement} from '../../redux/library/actions'
 import {connect} from 'react-redux'
 import { withStyles, Grid, Button} from '@material-ui/core';
 import Spinner from '../../components/common/spinner'
@@ -40,25 +40,64 @@ class Product extends Component {
 
     state = {
         reducer: 'PRODUCT',
-        limit: 6
+        limit: 8,
+        skip: 0,
+        height: window.innerHeight,
+        receivedAt: "",
+        listProducts: []
     }
 
     componentDidMount(){
         this.props.getTotal(this.state.reducer)
         this.props.getItemList(this.state.reducer, `list?limit=${this.state.limit}&skip=0`);
+        // Set scroll event
+        var el = document.getElementById("scrollable");
+        el.addEventListener("scroll", this.handleScroll )
     }
 
     componentWillUnmount(){
-        this.props.resetState("PRODUCT");
+        this.props.resetState(this.state.reducer);
+        var el = document.getElementById("scrollable");
+        el.removeEventListener('scroll', this.handleScroll);
+    }
+
+    componentWillReceiveProps(nextProps){
+      if(this.state.receivedAt !== nextProps.receivedAt )
+        this.setState({
+          listProducts: [...this.state.listProducts, ...nextProps.listProducts],
+          receivedAt: nextProps.receivedAt
+        })
+    }
+
+    handleScroll = (event) => {
+      var el = document.getElementById('scrollable');
+
+      const offsetHeight = el.offsetHeight;
+      const scrollHeight = el.scrollHeight;
+      const scrollTop = el.scrollTop;
+      const toBottom = offsetHeight + scrollTop
+
+      if( toBottom  >=  scrollHeight ) {
+        if( !this.props.isFetching && this.state.listProducts.length < this.props.total){
+            this.hanldeLoadMore()
+        }
+      }
     }
 
     hanldeLoadMore = () => {
-        this.props.getItemList(this.state.reducer, `list?limit=${this.state.limit + 6 }&skip=0`);
-        this.setState({ limit: this.state.limit + 6 });
+        this.props.getItemList(this.state.reducer, `list?limit=${this.skip.limit}&skip=${this.state.skip}`);
+        this.setState({ skip: this.state.skip + 8 });
+    }
+
+    handleDelete = (productId) => {
+        var bool = window.confirm(this.props.locale.message.confirm_delete);
+        if(bool){
+            this.props.deleteElement(this.state.reducer, `delete/${productId}`)
+        }
     }
 
     render() {
-    
+
     const {listProducts, isFetching,total,  locale, newProduct, createState, createItem, isCreating, category, classes, currency } = this.props
 
     if( isFetching ){
@@ -66,27 +105,27 @@ class Product extends Component {
     }
 
 
-    
+
     return (
         <div style={styles.container}>
 
-            <AddProduct 
+            <AddProduct
                 category={category}
-                locale={ locale } 
+                locale={ locale }
                 currency={currency}
-                newData={newProduct} 
-                createItemState={ createState } 
-                createItem={ createItem } 
+                newData={newProduct}
+                createItemState={ createState }
+                createItem={ createItem }
                 isCreating={ isCreating  }/>
 
             <Grid container spacing={24}>
             {
                 listProducts.map((product, index) => {
                     return <Grid item xs={12} sm={6} md={3}  key={index}>
-                                <ProductCard  product={product} />
+                                <ProductCard  product={product} locale={locale} onDeleteProduct={ this.handleDelete }/>
                             </Grid>
                 })
-                
+
             }
             </Grid>
             {
@@ -96,10 +135,10 @@ class Product extends Component {
                         {locale.wording.load_more_product}
                     </Button>
                 </div>
-                : null 
+                : null
             }
-            
-            
+
+
         </div>
     )
   }
@@ -120,10 +159,10 @@ const mapStateToProps = (state) => {
         category: state.account.company.item && state.account.company.item.category_name,
         total: state.library.product.total,
         currency: state.helper.items.currency,
-        
+
     }
 }
 
 const StyledProduct = withStyles(styles)(Product)
 
-export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, getTotal, resetState  })(StyledProduct);
+export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, getTotal, resetState, deleteElement  })(StyledProduct);

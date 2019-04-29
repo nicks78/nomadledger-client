@@ -312,7 +312,7 @@ const fr =  {
         error_pw_not_match: "Mot de passe non identique",
         error_pw_min_8: "Votre mot de passe doit faire au minimum 8 caractères",
         error_500_upload: "Erreur téléchargement du fichier, veuillez recommencer ou contacter support@nomadledger.com",
-        
+
 
         // Bad value
         error_422: "Valeur champs incorrect ou manquant",
@@ -336,6 +336,7 @@ const fr =  {
         required: "Tous les champs marqués d'un * sont obligatoires",
         request_reset_pw: "Veuillez consulter votre email et suivre les instructions",
         beta_1: "Beta 1 - Toutes les données enregistrées seront perdues",
+        confirm_delete: "Voulez-vous vraiment supprimer cette élément ?"
     },
     days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
     home_page: {

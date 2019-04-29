@@ -35,7 +35,7 @@ if(parseInt(confirm, 10) === 1){
 
 
 
-if( parseInt(auth, 10) === 1 ){
+if( parseInt(auth, 10) === 1 || parseInt(localStorage.getItem('auth'), 10) === 1 ){
     // Set company && user infos
     store.dispatch(getAccount('COMPANY'))
     store.dispatch(getAccount('USER'))

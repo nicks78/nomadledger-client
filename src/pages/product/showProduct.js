@@ -46,6 +46,8 @@ class ShowProduct extends React.Component {
     this.setState({showEdit: !this.state.showEdit});
   }
 
+
+
   render() {
 
     const {classes, product, isFetching, locale, categories, currency, isUploading, progress, isUpdating} = this.props;
@@ -63,11 +65,12 @@ class ShowProduct extends React.Component {
         <ApxPaper>
 
           <ApxBackBtn/>
-          <Hidden xsDown>
+          <Hidden xsDown >
             <IconButton style={{float: 'right', marginTop: -10}} color="primary" onClick={ this.handleEdit }>
               { !showEdit ? <EditIcon />
                 : <CheckIcon style={{ color: 'green' }} /> }
-            </IconButton><br />
+            </IconButton>
+
           </Hidden>
 
           <Grid container>

@@ -11,12 +11,13 @@ export function setError(error){
         switch (status) {
             case 403: // Not authorized
                 dispatch(setNotification(message, "error"))
+                localStorage.setItem('auth', "0");
                 history.push('/')
                 break;
             case 404:
                 dispatch(setNotification(message, "info"))
                 break;
-            case 401: 
+            case 401:
                 dispatch(setNotification(message, "error"))
                 break;
             case 422: // Wrong token
