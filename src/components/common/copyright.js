@@ -5,19 +5,19 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   root: {
-      position: 'absolute', 
-      bottom: 55, 
+      position: 'absolute',
+      bottom: 55,
       padding: '20px',
       color: 'rgb(238,238,238)',
       fontSize: '9px !important',
       [theme.breakpoints.down('sm')]: {
         bottom: 5,
-        position: 'relative', 
+        position: 'relative',
         padding: '10px',
       }
   },
   span: {
-      color: '#8c8c8c', 
+      color: '#8c8c8c',
       cursor: 'pointer'
   }
 });
@@ -29,8 +29,11 @@ const Copyright = (props) => {
 
   return (
         <Typography variant="caption" className={ classes.root }>
-                &copy;Copyright {new Date().getFullYear()} by <span className={ classes.span } onClick={ () => { window.open('https://apx-dev.com', '_blank') }}>APX Development Limited</span>. All right reserved.
-        </Typography> 
+                &copy;Copyright {new Date().getFullYear()} by
+                <span className={ classes.span } onClick={ () => { window.open('https://apx-dev.com', '_blank') }}>
+                  APX Development Limited</span>. All right reserved.&nbsp;
+                  <span className={ classes.span } onClick={() => { window.open('https://api.nomadledger.com/terms.pdf') }}>Terms & Conditions</span>
+        </Typography>
   );
 }
 

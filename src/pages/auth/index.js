@@ -49,7 +49,7 @@ const styles = theme => ({
             width: "100%",
             borderRadius: 0,
             marginBottom: 0,
-            
+
         }
     },
     form: {
@@ -80,7 +80,7 @@ const styles = theme => ({
         padding: 12,
         textAlign: "center",
         fontWeight: 600
-    },  
+    },
     icon: {
         color: "green",
         fontSize: 18
@@ -95,7 +95,7 @@ const styles = theme => ({
         // left: "-50%",
         clear: "both",
         marginBottom: 10
-    },  
+    },
     paper: {
         height: 230,
         padding: 24,
@@ -149,11 +149,11 @@ class Auth extends Component {
 
 
     render() {
-    
+
     const { classes, locale, newUser, isFetching } = this.props
 
     const form = {
-          title: locale.wording.create, 
+          title: locale.wording.create,
           label: locale.subheading.label_company,
           fields: [
                 { name: 'company_name', type:"text", required: true },
@@ -169,8 +169,8 @@ class Auth extends Component {
       <div className={ classes.container}>
       <div className={classes.appBar} >
             {/* <Button style={{ float: 'right', paddingLeft: 0, paddingRight: 5 }} onClick={ () => { this.props.initLocale( loc === "fr" ? "en" : "fr" )} }>{localStorage.getItem("locale")}</Button> */}
-            <Button 
-                variant="contained" 
+            <Button
+                variant="contained"
                 color="primary"
                 component={Link}
                 to="/login"
@@ -182,15 +182,15 @@ class Auth extends Component {
                 >
                 { window.innerWidth < 480 ? <ExitToAppIcon /> : locale.wording.login}
             </Button>
-            
+
       </div>
 
         <Jumbotron locale={locale } />
 
-    
+
         <div>
     </div>
-        
+
         <div className={ classes.section_1 }>
             <div className={classes.textBlock001}>
                 <Typography variant="h2" className={ classes.headline }>
@@ -200,9 +200,9 @@ class Auth extends Component {
                     { locale.home_page.block_paragraphe_001 }
                 </Typography>
             </div>
-                
-       
-        
+
+
+
         <div className={ classes.section_3 }>
                 <Paper className={ classes.form }>
                     <Typography variant="overline">
@@ -210,18 +210,18 @@ class Auth extends Component {
                     </Typography>
                     <Typography variant="caption">{locale.helperText.trial_30}</Typography>
                     <form onSubmit={ this.onSubmitForm }>
-                        <RegisterForm 
+                        <RegisterForm
                             locale={locale}
                             updateState={ this.handleChange }
                             state={newUser}
                         />
-                   
+
                         <br />
-                        <Button variant="contained" 
-                            color="primary"  
+                        <Button variant="contained"
+                            color="primary"
                             type="submit"
                             disabled={ isFetching }
-                            className={  classes.button } 
+                            className={  classes.button }
                             >{ isFetching ? locale.wording.loading : locale.wording.register }
                         </Button>
                     </form>
@@ -263,12 +263,12 @@ class Auth extends Component {
                         <div style={{textAlign: 'center'}}>
                         <Typography variant="caption" >
                         {locale.home_page.pricing.block_003.feature_1}
-                            
+
                         </Typography>
                         <br />
                         <Typography variant="body2">
-                                <Button 
-                                    variant="contained" 
+                                <Button
+                                    variant="contained"
                                     color="primary"
                                     component={Link}
                                     to="/public/contact-us"
@@ -290,7 +290,7 @@ class Auth extends Component {
                     <div align="center">
                         <img className={ classes.section_5_img } src={`${DEFAULT_URL}/img/block001.jpg`} alt="left" />
                     </div>
-                    
+
                 </Grid>
                 <Grid item xs={12} sm={6} md={6} style={{display: 'flex', alignItems: "center"}}>
                     <div>
@@ -321,7 +321,7 @@ class Auth extends Component {
                     <div align="center">
                         <img className={ classes.section_5_img } src={`${DEFAULT_URL}/img/block002.jpg`} alt="right" />
                     </div>
-                    
+
                 </Grid>
             </Grid>
 
@@ -331,10 +331,10 @@ class Auth extends Component {
             <Typography align="center" variant="caption" style={{color: "#303030"}}>
                 &copy;{new Date().getFullYear()}&nbsp;Apx Development Limited<br />
                 All rights reserved.&nbsp;
-                <a href="https://apx-dev.com" rel="noopener noreferrer" target="_blank">Terms and conditions</a>, features, support, pricing, and service options subject to change without notice.
+                <a href="https://api.nomadledger.com/terms.pdf" rel="noopener noreferrer" target="_blank">Terms and conditions</a>, features, support, pricing, and service options subject to change without notice.
             </Typography>
         </div>
-        
+
       </div>
     )
   }

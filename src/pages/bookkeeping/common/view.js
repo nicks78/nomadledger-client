@@ -2,11 +2,13 @@
 
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { withStyles, Paper, Table, TableRow, TableBody, TableHead, TableCell , Typography} from '@material-ui/core';
-import { getDocument, resetState} from '../../../redux/book/actions'
+import { withStyles, Paper, Table, TableRow, TableBody, TableHead, TableCell , Typography, Fab} from '@material-ui/core';
+import { getDocument, resetState, downloadPdf} from '../../../redux/book/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import Spinner from '../../../components/common/spinner'
 import ApxBackBtn from '../../../components/common/backBtn'
+import CloudDownloadIcon from '@material-ui/icons/CloudDownloadOutlined'
+
 
 class View extends Component {
 
@@ -54,7 +56,7 @@ class View extends Component {
         if(isFetching){
           return <Spinner />
         }
-        if(!item){
+        if(!item || !company){
           return <p>Not data found !</p>
         }
 
@@ -64,25 +66,7 @@ class View extends Component {
               <div style={{textAlign: "center"}}>
                 <img src={ company && company.logo_company.full_path } width="80" alt={company.company_name}/>
               </div>
-              <div>
-                {
-                  company ?
-                    <div style={{textTransform: "capitalize"}}>
-                      <Typography variant="body1">{ company.company_name }</Typography>
-                      <Typography variant="body1">{locale.wording.company_register} { company.company_register }</Typography>
-                      <Typography variant="body1">{locale.wording.company_register_city} { company.company_register_city }</Typography>
-                      <Typography variant="body1">{locale.wording.vat} Nº{ company.company_register }</Typography>
-                      <Typography variant="body1">{ company.addresses_street }</Typography>
-                      <Typography variant="body1">{ company.addresses_zip }&nbsp;{ company.addresses_city }</Typography>
-                      <Typography variant="body1">{ company.addresses_country[localStorage.getItem("locale")] }</Typography>
-                    </div>
-                  : <div></div>
-                }
 
-                <div>
-
-                </div>
-            </div>
             <div className={classes.header}>
                 {
                   item.contact_id ?
@@ -184,10 +168,14 @@ class View extends Component {
             </Typography>
         </div>
 
+        <Typography variant="caption" align="left">{ locale.message.terms }</Typography>
         <Typography variant="body1">
           { item.terms }
         </Typography>
-            </Paper>
+        <Fab color="primary" className={classes.fab}>
+            <CloudDownloadIcon onClick={ () => {this.props.downloadPdf(this.state.reducer, item._id)} } />
+        </Fab>
+      </Paper>
         )
     }
 }
@@ -244,6 +232,11 @@ const styles = theme => ({
     },
     tableHead: {
       backgroundColor: theme.palette.lightGrey
+    },
+    fab: {
+        position: 'fixed',
+        bottom: 10,
+        right: 10
     }
 })
 
@@ -261,4 +254,4 @@ const mapStateToProps = (state, ownProps) => {
 
 const StyledView = withStyles(styles)(View)
 
-export default connect(mapStateToProps, {  getDocument, resetState  })(StyledView);
+export default connect(mapStateToProps, {  getDocument, resetState, downloadPdf  })(StyledView);

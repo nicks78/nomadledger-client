@@ -7,10 +7,12 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = theme => ({
     textField: {
         width: '100%',
-        marginTop: '7px',
+        marginTop: '0px',
         marginBottom: '3px',
+        fontWeight: 300,
         '& span': {
-            color: theme.palette.secondary.main
+            color: theme.palette.secondary.main,
+
         },
         '& svg': {
             color: theme.palette.secondary.main
@@ -21,19 +23,19 @@ const styles = theme => ({
     }
 })
 /**
- * 
+ *
  * @param arrayField List of options
  * @param field Name of the field in database
  * @param helperText Text helper for UI
  * @param locale List of translated text
- * @func handleAction handle selected option 
+ * @func handleAction handle selected option
  */
 const Select = (props) => {
 
     const {classes, arrayField, field, helperText, required, variant} = props
 
     const selected = (event) => {
-        
+
         var value = event.target.value;
         for(var i =0; i < arrayField.length ; i++){
 
@@ -41,7 +43,7 @@ const Select = (props) => {
                 event.target.value =  arrayField[i]
             }
         }
-        return props.handleAction(event)   
+        return props.handleAction(event)
     }
 
     return (
@@ -50,7 +52,7 @@ const Select = (props) => {
             select
             label={props.locale.wording[field]}
             className={classes.textField}
-            
+
             name={field}
             required={ required || false }
             value={ props.value || ''}
@@ -62,18 +64,18 @@ const Select = (props) => {
               }}
             helperText={props.locale.helperText[helperText]}
             margin="dense"
-            variant={variant || "filled"}
+            variant={variant || "outlined"}
             >
             {
                 arrayField && arrayField.length > 0 ?
                     arrayField.map((option, index) => (
-                    
-                
+
+
                     <MenuItem key={index} value={ option[localStorage.getItem('locale')]}>
                         <span style={{color: option.color || 'inherit'}} >{option[props.locale.lang]} {option.value && '(' + option.value +')'}</span>
                     </MenuItem>
                 ))
-                : null 
+                : null
             }
             </TextField>
     )
@@ -82,4 +84,3 @@ const Select = (props) => {
 const ApxSelect =  withStyles(styles)(Select)
 
 export default ApxSelect;
-

@@ -21,20 +21,15 @@ const theme = createMuiTheme({
       // dark:  '#38CC24',
       contrastText: '#fff',
     },
-    green:  '#4CAF50',
+    green: "green",
     grey: {
       light: 'rgba(251,251,251,1)',
       main: 'rgb(128, 128, 128)',
-      dark: 'rgb(51,51,51)',
+      dark: 'rgb(48, 48, 48)',
     },
+    caption: "rgba(0, 0, 0, 0.54)",
     lightGrey: 'rgb(238,238,238)',
-    darkGrey: "rgb(44,47,50)", // 58.58.58
-    lightSecondary: "rgba(239, 108, 0, 0.05)",
-    blue: {
-      light: 'rgb(66, 133, 244)',
-      main: 'rgb(51, 103, 214)'
-    },
-    btnblue: 'rgb(66, 133, 244)',
+    sideBar: "rgb(44,47,50)",
     error: {
       warning: 'yellow',
       light: '#FFEBEE',
@@ -52,57 +47,58 @@ const theme = createMuiTheme({
   typography: {
     // Tell Material-UI what's the font-size on the html element is.
     htmlFontSize: 17,
-    fontFamily: "'Open Sans', sans-serif",
+    fontFamily: "'Lato', sans-serif",
+    fontWeight: 300,
     h1:{
       fontSize: '1.8rem',
-      fontWeight: 700,
-      color: 'rgb(51,51,51)',
+      fontWeight: 300,
+      color: 'rgb(48, 48, 48)',
       textTransform: "capitalize"
     },
     h2: {
       fontSize: '1.3rem',
-      color: 'rgb(51,51,51)',
-      fontWeight: 500,
+      color: 'rgb(48, 48, 48)',
+      fontWeight: 400,
       textTransform: "capitalize"
     },
     h3: {
       fontSize: '1.1rem',
-      fontWeight: 400,
-      color: 'rgb(51,51,51)',
+      fontWeight: 600,
+      color: 'rgb(48, 48, 48)',
       textTransform: "capitalize"
     },
     subtitle1: {
       fontWeight: 600,
-      color: 'rgba(48,48,48,1)',
+      color: '#303030',
       fontSize: '0.9rem'
     },
     subtitle2: {
-      fontWeight: 500,
-      color: 'rgba(48,48,48,1)',
+      fontWeight: 400,
+      color: '#303030',
       fontSize: '0.9rem'
     },
     body1: {
       fontSize: '0.8rem',
       fontWeight: 600,
-      color: 'rgba(48,48,48,0.8)'
+      color: '#303030'
     },
     body2: {
-      fontWeight: 500,
-      color: 'rgba(48,48,48,0.8)',
+      fontWeight: 400,
+      color: '#303030',
       fontSize: '0.8rem'
     },
     caption: {
-      fontWeight: 500,
-      color: 'rgba(128, 128, 128, 0.8)',
+      fontWeight: 400,
+      color: 'rgba(0, 0, 0, 0.54)',
       fontSize: '0.8rem'
     },
     overline: {
       fontSize: '0.8rem',
-      fontWeight: 700,
-      color: 'rgba(48,48,48,1)',
+      fontWeight: 600,
+      color: '#303030',
       lineHeight: 1.6
     },
-    fontWeightMedium: 700,
+    fontWeightMedium: 400,
   },
   overrides: {
     tableHead: {

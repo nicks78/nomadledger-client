@@ -13,12 +13,15 @@ const styles = theme => ({
 
 const ContenEditable = (props) => {
 
-  const { value, actionInput, id, name, classes } = props;
+  const { value, actionInput, id, name, classes, length } = props;
   return (
 
         <TextField
           id={name}
           margin="dense"
+          inputProps={{
+            maxLength: length || 256
+          }}
           className={classes.textField}
           onChange={ (event) => { actionInput(event, id) } }
           variant="outlined"

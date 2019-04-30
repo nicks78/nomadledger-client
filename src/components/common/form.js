@@ -14,24 +14,28 @@ const styles = theme => ({
     },
     textField: {
         width: '100%',
+        fontWeight: 300,
+        "& span": {
+          color: `${theme.palette.secondary.main} !important`
+        }
     },
 })
 
 const Form = (props) => {
-    
+
     const {formField, locale, objData, xs, md, classes, formHandler} = props;
 
     return ( <Grid container className={classes.root} spacing={8}>
             {
                 formField.map((cp, index) => {
                     if (cp.type === "select") {
-                        
+
                         return <Grid item xs={xs} sm={md} key={index}>
-                                    <ApxSelect 
-                                        arrayField={ cp.selections } 
-                                        field={cp.name} 
-                                        value={ objData[cp.name] && objData[cp.name][localStorage.getItem('locale')]  } 
-                                        handleAction={  formHandler } 
+                                    <ApxSelect
+                                        arrayField={ cp.selections }
+                                        field={cp.name}
+                                        value={ objData[cp.name] && objData[cp.name][localStorage.getItem('locale')]  }
+                                        handleAction={  formHandler }
                                         locale={ locale }
                                         required={ cp.required || false }
                                         helperText={ cp.helperText }/>
@@ -49,7 +53,7 @@ const Form = (props) => {
                                         className={ classes.textField}
                                         value={objData[cp.name] || ''}
                                         onChange={ formHandler }
-                                        variant="filled"
+                                        variant="outlined"
                                         margin="dense"
                                         />
                                 </Grid>
@@ -62,15 +66,15 @@ const Form = (props) => {
                                         style={{width: '100%'}}
                                         value={  objData[cp.name] ? objData[cp.name].label : ''}
                                         className={classes.test}
-                                        variant="filled"
+                                        variant="outlined"
                                         margin="dense"
                                         InputProps={{
                                             startAdornment: <InputAdornment position="start">
-                                                <DatePickers 
+                                                <DatePickers
                                                         value={ objData[cp.name] ? objData[cp.name].label : '' }
                                                         handleDate={ formHandler }
                                                         field={cp.name}
-                                                    /> 
+                                                    />
                                             </InputAdornment>,
                                         }}
                                     />
@@ -90,16 +94,16 @@ const Form = (props) => {
                                         className={ classes.textField}
                                         value={objData[cp.name] || ''}
                                         onChange={ formHandler }
-                                        variant="filled"
+                                        variant="outlined"
                                         margin="dense"
                                     /></Grid>
                     }
                 })
 
-                
+
             }
 
-            
+
             </Grid>
     )
 }

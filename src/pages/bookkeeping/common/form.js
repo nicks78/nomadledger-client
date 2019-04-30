@@ -19,7 +19,7 @@ import ContactSection from './contactSection';
 import Items from './items'
 import DatePickers from '../../../lib/dayPicker'
 import ApxBackBtn from '../../../components/common/backBtn'
-
+import ApxTitleBar from '../../../components/common/titleBar'
 
 
 
@@ -33,7 +33,7 @@ const Form = (props) => {
                   <div style={{display: "flex", padding: 12}}>
                       <ApxBackBtn styled={{ marginBottom: 0 }}/>
                   </div>
-                <Typography variant="h2" className={classes.title}>
+                <Typography variant="h1" className={classes.title} align="center">
                     {locale.subheading[formTitle] }
                     {
                         data.onRef ?
@@ -66,9 +66,9 @@ const Form = (props) => {
                                             disabled
                                             required
                                             margin="dense"
-                                            style={{width: '100%'}}
+                                            className={ classes.inputDate }
                                             value={ data[date_1] ? data[date_1].label : ""}
-                                            variant="filled"
+                                            variant="outlined"
                                             InputProps={{
                                                 startAdornment: <InputAdornment position="start">
                                                     <DatePickers
@@ -89,9 +89,9 @@ const Form = (props) => {
                                                 disabled
                                                 required
                                                 margin="dense"
-                                                style={{width: '100%'}}
+                                                className={ classes.inputDate }
                                                 value={ data[date_2] ? data[date_2].label : ""}
-                                                variant="filled"
+                                                variant="outlined"
                                                 InputProps={{
                                                     startAdornment: <InputAdornment position="start">
                                                         <DatePickers
@@ -135,8 +135,8 @@ const Form = (props) => {
                                         disabled
                                         margin="dense"
                                         value={ data.follow_up_date ? data.follow_up_date.label : ""}
-                                        variant="filled"
-                                        style={{width: '100%'}}
+                                        variant="outlined"
+                                        className={ classes.inputDate }
                                         InputProps={{
                                             startAdornment: <InputAdornment position="start">
                                                 <DatePickers
@@ -156,9 +156,9 @@ const Form = (props) => {
                                             id="transaction_number"
                                             margin="dense"
                                             onChange={ (e) => { props.createState( reducer, "transaction_number", e.target.value ) } }
-                                            style={{width: '100%'}}
+                                            style={{width: '100%', fontWeight: 300}}
                                             value={ data.transaction_number ||  ""}
-                                            variant="filled"
+                                            variant="outlined"
                                         />
                                         </Grid>
                                     : null
@@ -178,7 +178,10 @@ const Form = (props) => {
                         arrayObject={ status  }
                         />
                     <br/><br/>
-                <Typography variant="overline">{ locale.subheading.info_comp }</Typography>
+                  <ApxTitleBar
+                    text={locale.subheading.info_comp }
+                    hideEdit={true}
+                  />
                 <br />
                 <ApxRichEditor
                     reducer={reducer}
@@ -186,7 +189,7 @@ const Form = (props) => {
                     initText={ data.infos || locale.helperText.textarea_quote }
                     handleAction={ props.createState }
                 /><br />
-                <Typography variant="overline">{ locale.subheading.items }</Typography>
+
                 <br />
 
                     <Grid container spacing={24}>
@@ -216,14 +219,14 @@ const Form = (props) => {
                     <TextField
                         label={ locale.helperText.textarea_terms }
                         id="terms"
-                        style={{ backgroundColor: 'rgba(255,0,0,0.14)', clear: "both",  fontWeight: 400, marginTop: 24}}
+                        style={{ backgroundColor: 'rgba(255,0,0,0.14)', clear: "both",  fontWeight: 300, marginTop: 24}}
                         rows={2}
                         fullWidth
                         multiline
                         margin="dense"
                         value={ data.terms }
                         onChange={ (e) => { props.createState( reducer, "terms", e.target.value ) } }
-                        variant="filled"
+                        variant="outlined"
                     />
                     <br /><br />
                     <div className={classes.btnSave}>
@@ -243,17 +246,6 @@ const Form = (props) => {
 const styles = theme => ({
     title: {
         marginBottom: 24,
-        marginLeft: -24,
-        marginRight: -24,
-        paddingLeft: 24,
-        paddingRight: 24,
-        paddingTop: 12,
-        paddingBottom: 12,
-        marginTop: -24,
-        fontWeight: 500,
-        // backgroundColor: theme.palette.primary.light,
-        textAlign: "center",
-        color: '#303030'
     },
     paper: {
         padding: 24,
@@ -268,6 +260,19 @@ const styles = theme => ({
     },
     btnSave: {
         float: 'right'
+    },
+    inputDate: {
+      width: '100%',
+      '& input': {
+        color: theme.palette.darkGrey,
+      },
+      '& label':  {
+        color: `${theme.palette.caption} !important`,
+        fontWeight: 300
+      },
+      '& span':  {
+        color: theme.palette.secondary.main
+      }
     }
 })
 

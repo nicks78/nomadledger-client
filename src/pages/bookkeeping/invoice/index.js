@@ -112,9 +112,9 @@ class Invoice extends Component {
                                     return  <TableRow key={index}>
                                                 <TableCell><Link className="link" to={`/invoice/view/${invoice._id}`}>{locale.wording.inv}-{invoice.ref}</Link></TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${invoice.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{invoice.contact_id.company_name}</span></Link></TableCell>
-                                                <TableCell className={classes.price}>{cvtNumToUserPref(invoice.subtotal)} {invoice.currency.value}</TableCell>
-                                                <TableCell className={classes.price}>{cvtNumToUserPref(vat ) + " "+ invoice.currency.value }</TableCell>
-                                                <TableCell className={classes.price}>{cvtNumToUserPref(vat + invoice.subtotal  )} {invoice.currency.value}</TableCell>
+                                                <TableCell className="tableNumber">{cvtNumToUserPref(invoice.subtotal)} {invoice.currency.value}</TableCell>
+                                                <TableCell className="tableNumber">{cvtNumToUserPref(vat ) + " "+ invoice.currency.value }</TableCell>
+                                                <TableCell className="tableNumber">{cvtNumToUserPref(vat + invoice.subtotal  )} {invoice.currency.value}</TableCell>
                                                 <TableCell>
                                                     {
                                                         invoice.status.code === "7" ||
@@ -210,9 +210,6 @@ const styles = theme => ({
             boxShadow: 'none',
             borderRadius: 0
         },
-    },
-    price: {
-        whiteSpace: 'nowrap'
     }
 })
 

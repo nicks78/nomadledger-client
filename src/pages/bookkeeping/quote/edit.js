@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import { createState , updateDocument, getDocument, resetState, downloadPdf} from '../../../redux/book/actions'
 import { convertToCurrency, getListItem} from '../../../redux/book/itemActions'
 import { withStyles, Fab } from '@material-ui/core';
-import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEyeOutlined'
+import CloudDownloadIcon from '@material-ui/icons/CloudDownloadOutlined'
 import Form from '../common/form'
 import Spinner from '../../../components/common/spinner'
 
@@ -71,7 +71,7 @@ class EditQuote extends React.Component {
                     date_2="expired_at"
                 />
                 <Fab size="medium" color="primary" className={classes.icon}>
-                    <RemoveRedEyeIcon onClick={ () => {this.props.downloadPdf("QUOTE", quote._id)} } />
+                    <CloudDownloadIcon onClick={ () => {this.props.downloadPdf("QUOTE", quote._id)} } />
                 </Fab>
             </div>
         )
@@ -86,8 +86,8 @@ const styles = theme => ({
     },
     icon: {
         position: 'fixed',
-        bottom: 10,
-        right: 10
+        bottom: 15,
+        right: 15
     }
 })
 

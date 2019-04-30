@@ -7,6 +7,7 @@ class BaseState {
     receivedAt = null;
     progress = 0;
     isCreating = false;
+    requestPW = false;
     isFetching = false;
     isError = false;
     message = '';
@@ -16,36 +17,41 @@ class BaseState {
 
 
 const baseAccountReducer = (state = new BaseState(), action) => {
-    
+
 
     switch (action.type) {
         case `REQUEST`:
-            return  { 
+            return  {
                 ...state,
                 isFetching: action.isFetching,
                 isError: action.isError
             }
-        case `FAILED`: 
+        case `REQUEST_PASSWORD`:
+                return  {
+                    ...state,
+                    requestPW: action.requestPW,
+                }
+        case `FAILED`:
             return {
                 ...state,
                 isFetching: action.isFetching,
-                isUploading: action.isUploading, 
+                isUploading: action.isUploading,
                 message: action.message,
-                receivedAt: action.receivedAt, 
+                receivedAt: action.receivedAt,
                 isError: action.isError,
             }
-        case `GET`: 
+        case `GET`:
             return {
                 ...state,
                 item: action.item,
                 isError: action.isError,
-                isUploading: action.isUploading, 
+                isUploading: action.isUploading,
                 receivedAt: action.receivedAt,
                 progress: 0,
                 isFetching: action.isFetching,
                 tmp_state: {}
             }
-        case `STATE`: 
+        case `STATE`:
             return {
                 ...state,
                 tmp_state: { ...state.tmp_state, [ action.payload.fieldName ] : action.payload.value },
@@ -62,7 +68,7 @@ const baseAccountReducer = (state = new BaseState(), action) => {
                 ...state,
                 isUploading: action.isUploading,
             }
-        case `RESET_STATE`: 
+        case `RESET_STATE`:
             return new BaseState()
         default:
             return state;

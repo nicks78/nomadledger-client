@@ -15,6 +15,7 @@ const styles = theme => ({
     },
     value: {
         float: "right",
+        textTransform: "capitalize"
     },
     label: {
         float: "left"
@@ -23,7 +24,7 @@ const styles = theme => ({
 
 
 /**
- * 
+ *
  * @param  value
  * @param label
  * @param html_tag
@@ -39,9 +40,9 @@ const TextIndexValue = (props) => {
             <span className={ classes.label }>{label} :</span>
         </Typography>
         <Typography className={ classes.spanWrapper } variant="body1" component={html_tag || "p"} href={href || null }>
-            <span className={ classes.value }>{value}</span>
+            <span style={{ textTransform:  html_tag ? "lowercase" : "capitalize" }} className={ classes.value }>{value}</span>
         </Typography>
-        
+
     </div>
   );
 }

@@ -8,40 +8,42 @@ import TextField from '@material-ui/core/TextField';
 const styles = theme => ({
     textField: {
         marginTop: 0,
+        fontWeight: 300,
         width: '100%'
     }
 })
 
 
 /**
- * 
+ *
  * @param arrayField List of options
  * @param field Name of the field in database
  * @param helperText Text helper for UI
  * @param locale List of translated text
- * @func handleAction handle selected option 
+ * @func handleAction handle selected option
  */
 const EditInput = (props) => {
-    
+
     const { field, handleAction, showEdit, label, value , classes, required} = props
 
     if(showEdit){
-        return <TextField 
+        return <div style={{marginBottom: 15}}>
+                <TextField
                     id={field}
                     label={label}
                     required={required}
                     className={classes.textField}
                     value={value}
                     name={field}
-                    variant="filled"
+                    variant="outlined"
                     onChange={ handleAction  }
                     margin="dense"
-                />
+                /></div>
     }
 
     if(!showEdit){
         return (
-            <ApxtextIndexValue 
+            <ApxtextIndexValue
                 html_tag={props.html_tag}
                 href={props.href}
                 value={value}

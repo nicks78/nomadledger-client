@@ -20,25 +20,29 @@ const styles = (theme) => ({
     checkicon: {
         color: theme.palette.green,
     }
-    
+
 });
 
 const titleBar = (props) => {
 
-    const { classes , showEdit, openAction, editAction } = props 
+    const { classes , showEdit, openAction, editAction, hideEdit } = props
 
     return (
         <div className={ classes.banner }>
             <Typography variant="overline">
                 { props.text }
             </Typography>
+            {
+              !hideEdit ?
+              <ApxButtonEdit
+                  style={{top: '-31px', right: '-5px'}}
+                  updateDocument={editAction}
+                  openEdit={openAction}
+                  showEdit={showEdit}
+                />
+              : null
+            }
 
-            <ApxButtonEdit 
-                style={{top: '-33px', right: '-5px'}}
-                updateDocument={editAction}
-                openEdit={openAction} 
-                showEdit={showEdit}
-              />
         </div>
     )
 }
@@ -46,4 +50,3 @@ const titleBar = (props) => {
 const ApxTitleBar = withStyles(styles)(titleBar);
 
 export default ApxTitleBar;
-

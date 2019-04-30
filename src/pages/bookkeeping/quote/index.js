@@ -111,9 +111,9 @@ class Quote extends Component {
                                     return  <TableRow key={index}>
                                                 <TableCell><Link className="link" to={`/quote/view/${item._id}`}>{locale.wording.qto}-{item.ref}</Link></TableCell>
                                                 <TableCell><Link className="link" to={{ pathname: `/contact/view/${item.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{item.contact_id.company_name}</span></Link></TableCell>
-                                                <TableCell className={classes.price}>{cvtNumToUserPref(item.subtotal)} {item.currency.value}</TableCell>
-                                                <TableCell className={classes.price}>{cvtNumToUserPref( vat ) + " "+item.currency.value }</TableCell>
-                                                <TableCell className={classes.price}>{cvtNumToUserPref( item.subtotal + vat  )} {item.currency.value}</TableCell>
+                                                <TableCell className="tableNumber">{cvtNumToUserPref(item.subtotal)} {item.currency.value}</TableCell>
+                                                <TableCell className="tableNumber">{cvtNumToUserPref( vat ) + " "+item.currency.value }</TableCell>
+                                                <TableCell className="tableNumber">{cvtNumToUserPref( item.subtotal + vat  )} {item.currency.value}</TableCell>
                                                 <TableCell>
 
                                                 {
@@ -213,9 +213,6 @@ const styles = theme => ({
             boxShadow: 'none',
             borderRadius: 0
         },
-    },
-    price: {
-        whiteSpace: 'nowrap'
     }
 })
 

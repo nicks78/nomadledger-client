@@ -71,7 +71,7 @@ class Company extends Component {
                     progress={progress}
                     oldFile={company.logo_company}
                     isUploading={isUploading}
-                    image={ <img src={`${ company.logo_company.full_path || DEFAULT_IMG }`} alt="logo" width="80%" height={null} />}
+                    image={ <img src={`${ company.logo_company.full_path || DEFAULT_IMG }`} alt="logo" width="70%" height={null} />}
                   />
 
             </Grid>
@@ -90,14 +90,14 @@ class Company extends Component {
                     onChange={ (event) => { this.props.handleFormEdit(event, reducer) }}
                     name="company_name"
                     fullWidth
-                    variant="filled"
+                    variant="outlined"
                     className={ classes.input }
                 />  : company.company_name }
               </Typography>
               <br />
-              <Grid container spacing={8}>
+              <Grid container spacing={24}>
 
-                  <Grid item xs={12} sm={5} md={5}>
+                  <Grid item xs={12} sm={7} md={7}>
 
                   <Typography variant="subtitle1">
                       {locale.subheading.label_comp_info}
@@ -107,7 +107,6 @@ class Company extends Component {
                   <EditSelect
                         arrayField={company_type}
                         field="company_type"
-                        helperText="select_service_type"
                         handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
                         locale={locale}
                         showEdit={showEdit}
@@ -200,7 +199,6 @@ class Company extends Component {
                         />
                     }
                 </Grid>
-                <Grid item xs={12} sm={2} md={2}></Grid>
                 <Grid item xs={12} sm={5} md={5}>
                 <Typography variant="subtitle1">
                         {locale.subheading.label_comp_address}

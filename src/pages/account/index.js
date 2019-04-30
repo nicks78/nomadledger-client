@@ -21,7 +21,7 @@ const styles = theme => ({
     marginBottom: 18
   },
   paper: {
-      padding: 24
+      height: "100%"
   },
   control: {
     padding: theme.spacing.unit * 2,
@@ -39,9 +39,25 @@ const styles = theme => ({
     // border: `1px solid ${theme.palette.secondary.light}`
   },
   iconHelp: {
-    fontSize: 13,
+    fontSize: 15,
     marginLeft: 10
-  }
+  },
+  paddingContent: {
+    padding: 24,
+    [theme.breakpoints.down("sm")]: {
+      padding: 12
+    }
+  },
+  lightTooltip: {
+    color: 'white',
+    fontWeight: 600,
+    maxWidth: 500,
+    textAlign: 'center',
+    padding: '5px 5px 5px 5px',
+    fontSize: 14,
+    width: '100%',
+    backgroundColor: 'rgba(0,0,0,1)',
+}
 })
 
 
@@ -79,20 +95,25 @@ class Account extends Component {
 
                 <Grid item xs={12}>
                 <Paper className={classes.paper}>
-                  <Company handleFormEdit={ this.handleFormEdit }/>
+                  <div className={classes.paddingContent}>
+                    <Company handleFormEdit={ this.handleFormEdit }/>
+                  </div>
                 </Paper>
                 </Grid>
 
           </Grid>
 
 
-          <Grid container spacing={24}>
+          <Grid container spacing={24}
+              direction="row"
+              justify="space-between"
+              alignItems="stretch">
 
-                <Grid item xs={12} md={8}>
-                    <Grid container spacing={24}>
+                <Grid item xs={12} md={8} >
+                    <Grid container spacing={24} >
                       <Grid item xs={12}>
                           <Paper className={classes.paper} elevation={1}>
-
+                          <div className={classes.paddingContent}>
                           <Typography variant="overline" className={classes.titleBar}>
                               {locale.subheading.param_company}
                           </Typography>
@@ -101,7 +122,7 @@ class Account extends Component {
 
                               <Grid item xs={12} md={6}>
                                 <Typography variant="subtitle2"  >
-                                    {locale.subheading.my_vat}<Tooltip title={locale.helperText.account_vat} className={ classes.iconHelp } aria-label="setting"><HelpIcon /></Tooltip>
+                                    {locale.subheading.my_vat}<Tooltip classes={{ tooltip: classes.lightTooltip }} title={locale.helperText.account_vat} className={ classes.iconHelp } aria-label="setting"><HelpIcon /></Tooltip>
                                   </Typography>
                                   <Divider className={ classes.divider }/>
                                   <AddVat />
@@ -109,7 +130,7 @@ class Account extends Component {
                               <br />
                               <Grid item xs={12} md={6}>
                               <Typography variant="subtitle2"  >
-                              {locale.subheading.contact_group}<Tooltip title={locale.helperText.account_group} className={ classes.iconHelp } aria-label="setting"><HelpIcon /></Tooltip>
+                              {locale.subheading.contact_group}<Tooltip classes={{ tooltip: classes.lightTooltip }} title={locale.helperText.account_group} className={ classes.iconHelp } aria-label="setting"><HelpIcon /></Tooltip>
                                 </Typography>
                                 <Divider className={ classes.divider }/>
                                   <AddContactGroup />
@@ -118,26 +139,27 @@ class Account extends Component {
 
 
                                 <Typography variant="subtitle2"  >
-                                {locale.subheading.my_categories}<Tooltip title={locale.helperText.account_category} className={ classes.iconHelp } aria-label="setting"><HelpIcon /></Tooltip>
+                                {locale.subheading.my_categories}<Tooltip classes={{ tooltip: classes.lightTooltip }} title={locale.helperText.account_category} className={ classes.iconHelp } aria-label="setting"><HelpIcon /></Tooltip>
                                 </Typography>
                                 <Divider className={ classes.divider }/>
                                 <AddCategory />
                               </Grid>
                           </Grid>
 
-
+                          </div>
                           </Paper>
                       </Grid>
                     </Grid>
                 </Grid>
 
               <Grid item xs={12} md={4}>
-                  <Paper className={classes.paper} >
-                    <User handleFormEdit={ this.handleFormEdit }/>
+                  <Paper className={classes.paper}>
+                    <div className={classes.paddingContent}>
+                        <User handleFormEdit={ this.handleFormEdit }/>
+                    </div>
                   </Paper>
               </Grid>
           </Grid>
-
       </div>
     )
   }

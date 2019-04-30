@@ -37,7 +37,7 @@ class Items extends Component {
         var total = { vat : 0, ht: 0, ttc: 0 };
 
         total.ht = listItems.reduce((accumulator, currentValue) => { return accumulator + currentValue.total  }, 0)
-        
+
         var vat_value =  parseFloat((total.ht /100 * vat ).toFixed(2))
         total.vat = vat_value;
 
@@ -59,11 +59,11 @@ class Items extends Component {
         <TableHead className={classes.tableHead}>
         <TableRow>
             <TableCell>{locale.wording.ref}</TableCell>
-            <TableCell className={classes.contentEditable}>{locale.wording.description}&nbsp;<EditIcon className={classes.icon} /></TableCell>
-            <TableCell className={classes.tablenoWrap}>{locale.wording.unit_price}&nbsp;{ newData.currency && newData.currency.value }</TableCell>
-            <TableCell className={classes.tablenoWrap}>{locale.wording.quantity}&nbsp;<EditIcon className={classes.icon} /></TableCell>
-            <TableCell className={classes.tablenoWrap}>{locale.wording.discount_unit}&nbsp;<EditIcon className={classes.icon} /></TableCell>
-            <TableCell className={classes.tablenoWrap}>{locale.wording.total} { newData.currency && newData.currency.value }</TableCell>
+            <TableCell variant="head" className={classes.contentEditable}>{locale.wording.description}&nbsp;<EditIcon className={classes.icon} /></TableCell>
+            <TableCell variant="head" className={classes.tablenoWrap}>{locale.wording.unit_price}&nbsp;{ newData.currency && newData.currency.value }</TableCell>
+            <TableCell variant="head" className={classes.tablenoWrap}>{locale.wording.quantity}&nbsp;<EditIcon className={classes.icon} /></TableCell>
+            <TableCell variant="head" className={classes.tablenoWrap}>{locale.wording.discount_unit}&nbsp;<EditIcon className={classes.icon} /></TableCell>
+            <TableCell variant="head" className={classes.tablenoWrap}>{locale.wording.total} { newData.currency && newData.currency.value }</TableCell>
             <TableCell>{locale.wording.remove}</TableCell>
         </TableRow>
         </TableHead>
@@ -72,7 +72,7 @@ class Items extends Component {
             listItems.map(( item, index) => {
                 return  <TableRow key={index} className={classes.tableRow}>
                             <TableCell>{locale.wording[item.onModel].toUpperCase()}-{ item.ref}</TableCell>
-                            <TableCell className={ classes.contentEditable }><ApxContenEditable value={ item.desc || "" }  id={item.item_id} actionInput={(event) => { this.props.editItem(reducer, item, 'desc' , event.target.value ) }} name="desc" /></TableCell>
+                            <TableCell className={ classes.contentEditable }><ApxContenEditable value={ item.desc || "" } length="40"  id={item.item_id} actionInput={(event) => { this.props.editItem(reducer, item, 'desc' , event.target.value ) }} name="desc" /></TableCell>
                             <TableCell>{ cvtNumToUserPref(item.unit_price)}</TableCell>
                             <TableCell className={classes.tablenoWrap}>
 
@@ -84,7 +84,7 @@ class Items extends Component {
 
                             </TableCell>
                             <TableCell>
-                              <ApxContenEditable value={item.discount} id={item.item_id} actionInput={this.getInput} name="discount" />
+                              <ApxContenEditable value={item.discount} length="10" id={item.item_id} actionInput={this.getInput} name="discount" />
                             </TableCell>
                             <TableCell>{ cvtNumToUserPref(item.total) }</TableCell>
                             <TableCell ><IconButton onClick={ () => { this.props.removeItem(reducer, item)}} ><DeleteIcon style={{ color: 'red' }}/></IconButton></TableCell>
@@ -125,10 +125,12 @@ const styles = theme => ({
 
     },
     tableHead: {
-        backgroundColor: "rgb(238,238,238)"
+        backgroundColor: "rgb(238,238,238)",
+
     },
     tablenoWrap: {
-        whiteSpace: "nowrap"
+        whiteSpace: "nowrap",
+
     },
     tableRow: {
         height: 28,
@@ -140,6 +142,7 @@ const styles = theme => ({
     },
     tableCell: {
         borderLeft:'1px solid rgba(224, 224, 224, 1)',
+        fontWeight: 500
     },
     quantity: {
         display: 'inline-block'

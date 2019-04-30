@@ -65,7 +65,7 @@ class Service extends Component {
     getWindowWidth = () => {
       this.setState({width: window.innerWidth})
     }
-    
+
     handleFilterRequest = (value) => {
         this.setState({category: value._id});
         this.props.getTotal(this.state.reducer, `?category=${value._id}`);
@@ -109,8 +109,8 @@ class Service extends Component {
                         <TableRow>
                             <TableCell>{locale.wording.service_name}</TableCell>
                             <TableCell align="right">{locale.wording.price}</TableCell>
-                            <TableCell align="right">{locale.wording.type}</TableCell>
                             <TableCell align="center">{locale.wording.currency}</TableCell>
+                            <TableCell align="right">{locale.wording.type}</TableCell>
                             <TableCell>{locale.wording.category}</TableCell>
                             <TableCell>{locale.wording.description}</TableCell>
                             <TableCell align="center">Actions</TableCell>
@@ -122,9 +122,9 @@ class Service extends Component {
                                 this.props.listServices.map(( service, index) => {
                                     return  <TableRow key={index}>
                                                 <TableCell><Link to={ `/${reducer.toLowerCase()}/view/${service._id.toLowerCase()}`}><span style={{textTransform: "capitalize"}}  className="link">{service.name}</span></Link></TableCell>
-                                                <TableCell align="right">{cvtNumToUserPref(service.price)}</TableCell>
-                                                <TableCell align="right">{ service.service_type[localStorage.getItem('locale')] }</TableCell>
+                                                <TableCell className="tableNumber" align="right">{cvtNumToUserPref(service.price)}</TableCell>
                                                 <TableCell align="center">{service.currency.en}</TableCell>
+                                                <TableCell align="right">{ service.service_type[localStorage.getItem('locale')] }</TableCell>
                                                 <TableCell style={{textTransform: 'capitalize'}}>{service.category[localStorage.getItem('locale')]}</TableCell>
                                                 <Tooltip className={classes.customWidth} title={service.description}><TableCell>{service.description.slice(0,5)}...</TableCell></Tooltip>
                                                 <TableCell align="center" onClick={() => { this.props.deleteElement( reducer, `delete/${service._id}`) } }><DeleteIcon style={{color: 'red', cursor: 'pointer', fontSize: 18}}  /></TableCell>

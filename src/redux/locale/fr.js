@@ -99,7 +99,8 @@ const fr =  {
         label_not_task_found: "Aucune tâche pour aujourd'hui",
         label_contact_us: "Demande de contact",
         label_confirm_email: "Demande d'un nouveau courriel de confirmation",
-        label_forgot_pwd_body1: "Mot de passe oublié ?"
+        label_forgot_pwd_body1: "Mot de passe oublié ?",
+        label_terms: "Ajouter des conditions de payment etc...",
 
     },
     wording: {
@@ -176,9 +177,9 @@ const fr =  {
         add_group: "Ajouter un groupe",
         add_vat: "Taux TVA",
 
-        fiscal_month: "Mois fiscal",
+        fiscal_month: "Exercice fiscal",
         fiscal_day: "Jour fiscal",
-        fiscal_date: "Début fiscal",
+        fiscal_date: "Exercice fiscal",
         expired_at: "Valide jusqu'au",
         created_at: "Créé le",
         due_at: "Dû le",
@@ -269,11 +270,12 @@ const fr =  {
         select_contact_group: "Sélectionner un groupe",
         textarea_quote: "Taper une description de votre devis",
         textarea_terms: "Taper un court texte de conditions générales",
+        expend_contact_info: "Cliquer pour afficher/editer les informations du contact",
         infos_status: "<span style='color: red;font-weight: 700'>ATTENTION *</span> - Seule les statuts < Brouillion & En Attente > sont modifiable",
         type_message: "Taper votre message...",
         payment_terms: "Cet abonnement vous donne un accès total à la plateforme pendant 365 jours",
         add_tags: "Une fois l'élément créé, vous aurez la possibilité d'éditer en 2 langues FR - EN ",
-        trial_30: "30 jours d'essai gratuit",
+        trial_30: "15 jours d'essai gratuit",
         account_setting: " Vous pouvez ajouter initialiser vos paramètres, afin d'optimiser vos documents comptables et filtre de recherche",
         account_vat: "Lister vos taux de TVA, ils vous seront utile pour la redaction de vos documents comptables",
         account_group: "Créer vos propres groupes de contact afin de facilité, vos recherches dans la sections contacts",
@@ -334,7 +336,7 @@ const fr =  {
         email_not_confirm: "Votre courriel, n'a pas encore été confirmé. Si vous n'avez pas reçu votre courriel de confirmation vous pouvez faire une nouvelle demande",
         phone_required: "Mobile obligatoire",
         required: "Tous les champs marqués d'un * sont obligatoires",
-        request_reset_pw: "Veuillez consulter votre email et suivre les instructions",
+        request_reset_pw: "Votre demande a bien été prise en compte. Veuillez consulter votre email et suivre les instructions",
         beta_1: "Beta 1 - Toutes les données enregistrées seront perdues",
         confirm_delete: "Voulez-vous vraiment supprimer cette élément ?"
     },
@@ -358,7 +360,7 @@ const fr =  {
         form_title: "Inscrivez-vous gratuitement",
         pricing: {
             block_001:{
-                title: "30 jours d'essai gratuit",
+                title: "15 jours d'essai gratuit",
                 feature_1: "Gestion des contacts",
                 feature_2: "Gestion de vos documents comptables",
                 feature_3: "Gérer vos tâches quotidiennes",

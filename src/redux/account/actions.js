@@ -155,14 +155,14 @@ export const uploadFileToServer = ( actionType, file, field, oldFileObject ) => 
  * @param password
  *
  */
-export const updatePassword = ( password ) => {
+export const updatePassword = ( email ) => {
 
     return (dispatch) => {
 
-        dispatch(requestData("USER"))
+        dispatch(requestPassword(true))
 
-        axios.put(`${API_ENDPOINT}user/change-password`,
-        {data: password},
+        axios.post(`${API_ENDPOINT}auth/forgot-password`,
+        {email: email},
         { headers: {
             'Content-Type': 'application/json',
         }
@@ -171,16 +171,25 @@ export const updatePassword = ( password ) => {
             return response.data
         })
         .then( res => {
-            dispatch(setNotification("success_update", "success"))
-            dispatch(setAccount( 'USER', res.payload ))
+            dispatch(setNotification("request_reset_pw", "success"));
+            dispatch(requestPassword(false))
         })
         .catch(function (error) {
+            dispatch(requestPassword(false))
             dispatch(setError(error));
             dispatch(requestFailed("USER"));
         })
     }
 }
 
+
+export function requestPassword ( bool ){
+    return {
+      type: `REQUEST_PASSWORD`,
+      subtype: "USER",
+      requestPW: bool
+    }
+}
 
 export function createState ( actionType, fieldName, value ){
     return {

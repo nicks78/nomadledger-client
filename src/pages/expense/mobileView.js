@@ -103,7 +103,8 @@ const styles = theme => ({
   },
   title: {
     marginTop: 12,
-    marginBottom: 12
+    marginBottom: 24,
+    fontWeight: 400
   },
   card: {
     position: "relative",

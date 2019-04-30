@@ -14,7 +14,7 @@ class MyTable extends React.Component {
 
     componentDidMount(){
         this.props.getTotal(this.props.reducer, `?contact=${this.props.contactId}`);
-        this.props.getBookList(this.props.reducer, `list/${this.props.contactId}?limit=10&skip=0`);
+        this.props.getBookList(this.props.reducer, `list/${this.props.contactId}?limit=5&skip=0`);
     }
 
     componentWillUnmount(){
@@ -38,39 +38,39 @@ class MyTable extends React.Component {
 
                     </TableRow>
                 </TableHead>
-                    
+
                     <TableBody className={classes.tableBody}>
-                        {   !isFetching ? 
+                        {   !isFetching ?
                             list.map(( item, index) => {
-                                
+
                                 return  <TableRow key={index}>
                                             <TableCell>{ locale.wording[reducer.toLowerCase()].toUpperCase() }-{item.ref}</TableCell>
-                                            <TableCell>{cvtNumToUserPref(item.subtotal)} {item.currency.value}</TableCell>
-                                            <TableCell>{cvtNumToUserPref(item.vat.indice) + "%"}</TableCell>
+                                            <TableCell className="tableNumber">{cvtNumToUserPref(item.subtotal)} {item.currency.value}</TableCell>
+                                            <TableCell className="tableNumber">{cvtNumToUserPref(item.vat.indice) + "%"}</TableCell>
                                             <TableCell>
                                                     {
-                                                        item.status.code === "5" ||   
+                                                        item.status.code === "5" ||
                                                         item.status.code === "6"  ||
-                                                        item.status.code === "7"  || 
-                                                        item.status.code === "8"  || 
-                                                        item.status.code === "9"  || 
-                                                        item.status.code === "10" ? 
+                                                        item.status.code === "7"  ||
+                                                        item.status.code === "8"  ||
+                                                        item.status.code === "9"  ||
+                                                        item.status.code === "10" ?
 
                                                         <span style={{color: item.status.color }}>
 
                                                         { item.status[localStorage.getItem('locale')] }</span>
 
-                                                        :   <ApxSelect 
+                                                        :   <ApxSelect
                                                                 arrayField={status}
                                                                 value={item.status[localStorage.getItem('locale')]}
                                                                 variant="standard"
                                                                 handleAction={ (event) => { this.props.updateField(reducer, { status: event.target.value}, item._id) } }
                                                                 locale={locale}
                                                             />
-                                                    }    
+                                                    }
                                                 </TableCell>
                                             <TableCell><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, item._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
-                                            <ApxTableActions 
+                                            <ApxTableActions
                                                 actionDelete={  item.status.code === "8" ||
                                                                 item.status.code === "9" ||
                                                                 item.status.code === "10" ? true : false}
@@ -80,11 +80,11 @@ class MyTable extends React.Component {
                                             />
                                         </TableRow>
                             })
-                            : null                           
+                            : null
                         }
-                        
+
                     </TableBody>
-                    
+
                 </Table>
                 <Pagination
                 total={total}
@@ -92,6 +92,7 @@ class MyTable extends React.Component {
                 label={locale.wording.label_rows_per_page}
                 label2={locale.wording.of}
                 reducer={reducer}
+                limit={5}
                 value=""
                 filterName=""
                 contactId={this.props.contactId}
@@ -111,7 +112,7 @@ const styles = theme => ({
     }
 })
 
-const mapStateToPropsQuote = (state) => {  
+const mapStateToPropsQuote = (state) => {
     return {
         isFetching: state.book.quote.isFetching,
         updated: state.book.quote.updated,
@@ -126,7 +127,7 @@ const mapStateToPropsQuote = (state) => {
     }
 }
 
-const mapStateToPropsInvoice = (state) => {  
+const mapStateToPropsInvoice = (state) => {
     return {
         isFetching: state.book.invoice.isFetching,
         updated: state.book.invoice.updated,
@@ -141,7 +142,7 @@ const mapStateToPropsInvoice = (state) => {
     }
 }
 
-const mapStateToPropsPayback = (state) => {  
+const mapStateToPropsPayback = (state) => {
     return {
         isFetching: state.book.refund.isFetching,
         updated: state.book.refund.updated,

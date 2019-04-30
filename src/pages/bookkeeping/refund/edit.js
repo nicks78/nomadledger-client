@@ -7,7 +7,7 @@ import { convertToCurrency, getListItem} from '../../../redux/book/itemActions'
 import { withStyles, Fab } from '@material-ui/core';
 import Form from '../common/form'
 import Spinner from '../../../components/common/spinner'
-import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEyeOutlined'
+import CloudDownloadIcon from '@material-ui/icons/CloudDownloadOutlined'
 
 
 class EditRefund extends React.Component {
@@ -74,7 +74,7 @@ class EditRefund extends React.Component {
                     date_2="due_at"
                 />
                 <Fab size="medium" color="primary" className={classes.icon}>
-                    <RemoveRedEyeIcon onClick={ () => {this.props.downloadPdf("REFUND", refund._id)} } />
+                    <CloudDownloadIcon onClick={ () => {this.props.downloadPdf("REFUND", refund._id)} } />
                 </Fab>
             </div>
         )
@@ -88,8 +88,8 @@ const styles = theme => ({
     },
     icon: {
         position: 'fixed',
-        bottom: 10,
-        right: 10
+        bottom: 15,
+        right: 15
     }
 })
 

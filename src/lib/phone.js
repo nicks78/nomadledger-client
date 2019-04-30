@@ -8,6 +8,8 @@ import ApxtextIndexValue from '../components/common/textIndexValue'
 const styles = theme => ({
     textField: {
         marginTop: 0,
+        marginBottom: 15,
+        fontWeight: 300,
         width: '100%'
     }
 })
@@ -35,14 +37,13 @@ const Phone = (props) => {
         }
         return props.handleAction(event, reducer)
     }
-console.log()
     if(showEdit){
         return  <Grid container spacing={8}>
                     <Grid item xs={5}>
                     <TextField
                         id={fieldCode}
                         select
-                        variant="filled"
+                        variant="outlined"
                         label={props.locale.wording.phone_code}
                         className={classes.textField}
                         name={fieldCode}
@@ -68,7 +69,7 @@ console.log()
                         <TextField
                             id={field}
                             label={label}
-                            variant="filled"
+                            variant="outlined"
                             className={classes.textField}
                             value={value}
                             name={field}

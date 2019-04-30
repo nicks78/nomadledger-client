@@ -34,7 +34,7 @@ const styles = theme => ({
     drawerPaper: {
         position: 'relative',
         height: '100vh',
-        backgroundColor: theme.palette.darkGrey,
+        backgroundColor: theme.palette.sideBar,
         width: drawerWidth,
         marginTop: '0px',
         [theme.breakpoints.up('md')]: {
@@ -62,10 +62,7 @@ const styles = theme => ({
     },
     title: {
         flex: 1,
-        marginLeft: '20px',
-        fontSize: '20px',
-        fontWeight: "700",
-        color: theme.palette.grey.dark
+        marginLeft: '20px'
     },
     content: {
         flexGrow: 1,
@@ -166,7 +163,7 @@ class Layout extends React.Component {
                     </Typography>
                 </Hidden>
 
-                <Typography className={classes.title}>
+                <Typography className={classes.title} variant="h3">
                     <Hidden smDown>{company.company_name ? company.company_name.toUpperCase() : "NomadLedger"}</Hidden>
                 </Typography>
 

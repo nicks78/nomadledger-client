@@ -6,21 +6,21 @@ import ApxtextIndexValue  from '../components/common/textIndexValue'
 
 
 /**
- * 
+ *
  * @param arrayField List of options
  * @param field Name of the field in database
  * @param helperText Text helper for UI
  * @param locale List of translated text
  * @param label UI name of the field
  * @param value value of the field
- * @func handleAction handle selected option 
+ * @func handleAction handle selected option
  */
 const EditSelect = (props) => {
-    
+
     const {arrayField, field, helperText, handleAction, locale, showEdit, label, value, variant, required } = props
 
     if(showEdit){
-        return  <ApxSelect 
+        return  <div style={{marginBottom: 15}}><ApxSelect
                     arrayField={arrayField}
                     field={field}
                     value={value}
@@ -29,12 +29,11 @@ const EditSelect = (props) => {
                     locale={locale}
                     required={required}
                     variant={variant}
-                />
+                /></div>
     }
-
     if(!showEdit){
         return (
-            <ApxtextIndexValue 
+            <ApxtextIndexValue
                 value={value}
                 label={label}
             />

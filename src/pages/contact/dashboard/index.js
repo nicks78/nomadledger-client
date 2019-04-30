@@ -11,7 +11,7 @@ import UploadImg from '../../../lib/uploadImg'
 import Paper from '@material-ui/core/Paper'
 import { getItem, createState, uploadFileToServer } from '../../../redux/library/actions'
 import { getBookTotal, resetState } from '../../../redux/book/actions'
-
+import IconButton from '@material-ui/core/IconButton'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography';
 import Tabs from '@material-ui/core/Tabs'
@@ -21,7 +21,11 @@ import AppBar from '@material-ui/core/AppBar'
 import SwipeableViews from 'react-swipeable-views'
 import StatContact from './stat'
 import { TableQuote, TableRefund, TableInvoice } from '../../bookkeeping/common/table'
-
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMoreOutlined';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = theme => ({
   root: {
@@ -32,7 +36,7 @@ const styles = theme => ({
   },
   statWrapper: {
     marginBottom: 24,
-    marginLeft: 16 ,
+    // marginLeft: 16 ,
     [theme.breakpoints.down('sm')]: {
       marginLeft: 0,
       marginTop: 24
@@ -55,11 +59,28 @@ const styles = theme => ({
     },
   },
   tabWrapper: {
-    marginLeft: 16,
+    // marginLeft: 16,
     [theme.breakpoints.down('sm')]: {
       marginLeft: 0
     }
   },
+  expandPanel: {
+    boxShadow: "none !important",
+    border: "none",
+  },
+  expandDetail: {
+    display: "block",
+  },
+  lightTooltip: {
+    color: 'white',
+    fontWeight: 600,
+    maxWidth: 500,
+    textAlign: 'center',
+    padding: '5px 5px 5px 5px',
+    fontSize: 14,
+    width: '100%',
+    backgroundColor: 'rgba(0,0,0,1)',
+}
 })
 
 function TabContainer({ children, dir }) {
@@ -117,25 +138,38 @@ class ShowContact extends React.Component {
       return (
         <Paper className={ classes.root }>
         <ApxBackBtn/>
+        <Typography variant="h1" align="center">{ contact.company_name }</Typography>
+
         <Grid container spacing={8}>
+          <Grid item xs={12} md={12}>
+          <ExpansionPanel className={classes.expandPanel}>
 
-            <Grid item xs={12} md={3}>
-                <div style={{textAlign:'center'}}>
-                  <UploadImg
-                    field="logo_contact"
-                    _handleUploadFile={ (e) => { this.props.uploadFileToServer("CONTACT", contact._id, e.target.files[0], contact.logo_contact )} }
-                    progress={progress}
-                    isUploading={isUploading}
-                    image={<img src={`${ contact.logo_contact.full_path || DEFAULT_IMG }`} alt={contact.logo_contact.org_name}
+         <ExpansionPanelSummary expandIcon={<Tooltip classes={{ tooltip: classes.lightTooltip }} title={ locale.helperText.expend_contact_info }><IconButton><ExpandMoreIcon /></IconButton></Tooltip>} className={classes.expandSummary}>
 
-                    style={{ maxWidth: '100%', maxHeight: '100px'}} />}
-                  />
-                </div>
+           <br />
+         </ExpansionPanelSummary>
+       <ExpansionPanelDetails className={classes.expandDetail}>
 
-              <ContactInfo  locale={locale} contact={ contact } createState={this.props.createState} id={contact._id}/>
+             <div style={{textAlign:'center'}}>
+               <UploadImg
+                 field="logo_contact"
+                 _handleUploadFile={ (e) => { this.props.uploadFileToServer("CONTACT", contact._id, e.target.files[0], contact.logo_contact )} }
+                 progress={progress}
+                 isUploading={isUploading}
+                 image={<img src={`${ contact.logo_contact.full_path || DEFAULT_IMG }`} alt={contact.logo_contact.org_name}
 
-            </Grid>
-            <Grid item xs={12} md={9}>
+                 style={{ maxWidth: '100%', maxHeight: '100px'}} />}
+               />
+             </div>
+
+           <ContactInfo  locale={locale} contact={ contact } createState={this.props.createState} id={contact._id}/>
+
+
+       </ExpansionPanelDetails>
+     </ExpansionPanel>
+</Grid>
+
+            <Grid item xs={12} md={12}>
 
             <div className={ classes.statWrapper}>
                 <StatContact
@@ -154,7 +188,7 @@ class ShowContact extends React.Component {
                     classes={classes.tabsRoot}
                     variant="fullWidth"
                     >
-                <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={locale.quote.name} />
+                <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={locale.quote.name } />
                 <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={locale.invoice.name} />
                 <Tab classes={{ root: classes.tabRoot, selected: classes.tabSelected }} label={locale.refund.name} />
               </Tabs>

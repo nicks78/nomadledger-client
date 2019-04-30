@@ -31,7 +31,7 @@ const Styles = theme => ({
         color: theme.palette.secondary.main,
         '& span': {
             color: `${theme.palette.secondary.main} !important`,
-            fontWeight: 'bold'
+            fontWeight: '700 !important'
         },
         '& svg': {
             color: `${theme.palette.secondary.main} !important`,
@@ -39,8 +39,10 @@ const Styles = theme => ({
 
     },
     listText: {
+
        '& span': {
            color: 'white',
+           fontWeight: 300,
        },
        '& svg': {
          color: 'white',

@@ -3,15 +3,13 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {DEFAULT_IMG} from '../../../redux/constant'
-import { withStyles, Typography } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import UploadImg from '../../../lib/uploadImg'
 import ApxTitleBar from '../../../components/common/titleBar'
 import { uploadFileToServer , updateDocument, updatePassword} from '../../../redux/account/actions'
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid'
 import EditInput from '../../../lib/editInput'
-import Divider from '@material-ui/core/Divider';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Phone from '../../../lib/phone'
 
@@ -35,6 +33,18 @@ const styles = theme => ({
     clear: 'both',
     marginTop: 24,
     marginBottom: 24,
+  },
+  passwordTitle: {
+    marginTop: 24
+  },
+  btnChangePassword: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      height: "100%",
+      [theme.breakpoints.down("sm")]: {
+          height: "auto",
+      }
   }
 })
 
@@ -44,8 +54,6 @@ class User extends Component {
     state = {
       reducer: "USER",
       showEdit: false,
-      password: '',
-      password_confirm: ''
     }
 
   openEdit = () => {
@@ -63,23 +71,21 @@ class User extends Component {
     this.setState({ [name] : value })
   }
 
-  _updatePassword = () => {
-
-    if(this.state.password === this.state.password_confirm){
-        this.props.updatePassword(this.state.password )
-    }else{
-      alert( this.props.locale.message.alert_password_not_match )
+  requestNewPassword = (e) => {
+    e.preventDefault();
+    if(this.props.user.email){
+        this.props.updatePassword(this.props.user.email)
     }
   }
 
   render() {
-    const {  user, locale, classes, isFetching, isUploading, progress  } = this.props;
-    const {showEdit, password, password_confirm, reducer} = this.state
-    
+    const {  user, locale, classes, requestPW, isUploading, progress  } = this.props;
+    const {showEdit, reducer} = this.state
+
 
     return (
       <div>
-          <ApxTitleBar 
+          <ApxTitleBar
             text={locale.subheading.info_profile }
             showEdit={showEdit}
             openAction={ this.openEdit }
@@ -89,12 +95,12 @@ class User extends Component {
           <div className={ classes.wrapper }>
           <Grid container className={classes.root} spacing={16}>
                 <Grid item  xs={12}>
-                <UploadImg 
+                <UploadImg
                     field="avatar"
                     _handleUploadFile={ (e) => { this.props.uploadFileToServer("USER", e.target.files[0], 'avatar', user.avatar ) }}
                     progress={progress}
                     isUploading={isUploading}
-                    image={ 
+                    image={
                       <Avatar
                         component="p"
                         alt={user.firstname}
@@ -106,7 +112,7 @@ class User extends Component {
                 </Grid>
 
                 <Grid item xs={12}>
-                      <EditInput 
+                      <EditInput
                           label={ locale.wording.firstname }
                           value={  user.firstname }
                           showEdit={showEdit}
@@ -114,7 +120,7 @@ class User extends Component {
                           field="firstname"
                           handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
                       />
-                      <EditInput 
+                      <EditInput
                           label={ locale.wording.lastname }
                           value={ user.lastname }
                           showEdit={showEdit}
@@ -122,8 +128,8 @@ class User extends Component {
                           field="lastname"
                           handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
                       />
-                      <Phone 
-                        locale={locale} 
+                      <Phone
+                        locale={locale}
                         showEdit={showEdit}
                         fieldCode="phone_code"
                         field="phone"
@@ -135,8 +141,8 @@ class User extends Component {
                         value={user.phone}
                         reducer="USER"
                       />
-                      
-                      <EditInput 
+
+                      <EditInput
                           html_tag="a"
                           href={`mailto:${user.email}`}
                           label={ locale.wording.email }
@@ -147,44 +153,20 @@ class User extends Component {
                           required={true}
                           handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
                       />
-<br /><br />
 
-                      <Typography variant="subtitle1" className={classes.heading}>{ locale.wording.save_password }</Typography>
-                      <div><Divider/></div>
-                      <Grid container>
-                        <Grid item xs={12}>
-                        <TextField 
-                                      id="password"
-                                      label={locale.wording.password}
-                                      className={classes.textField}
-                                      value={password}
-                                      fullWidth
-                                      inputProps={{ minLength: 8 }}
-                                      name="password"
-                                      onChange={ this.handlePassword  }
-                                      margin="normal"
-                                  />
-                        </Grid>
 
-                        <Grid item xs={12}>
-                            <TextField 
-                                id="password_confirm"
-                                label={locale.wording.password_confirm}
-                                className={classes.textField}
-                                value={password_confirm}
-                                fullWidth
-                                inputProps={{ minLength: 8 }}
-                                name="password_confirm"
-                                onChange={ this.handlePassword  }
-                                margin="normal"
-                                  />
-                        </Grid>
-                        <br />
-                      <Button color="primary" 
-                              variant="contained" onClick={ this._updatePassword }>{ isFetching ? locale.wording.loading :  locale.wording.save }</Button>    
+                    <br /><br />
+                    <div className={classes.btnChangePassword}>
 
-                      </Grid>
-    
+                      <Button color="primary"
+                              disabled={requestPW}
+                              variant="contained"
+                              onClick={ this.requestNewPassword }>
+                              { requestPW ? locale.wording.loading :  locale.wording.save_password }
+                      </Button>
+
+                    </div>
+
                 </Grid>
           </Grid>
           </div>
@@ -195,17 +177,17 @@ class User extends Component {
 
 
 const mapStateToProps = (state) => {
-  
+
       return {
-          isFetching: state.account.user.isFetching,
+          requestPW: state.account.user.requestPW,
           receivedAt: state.account.user.receivedAt,
           locale: state.locale.locale,
-          user: state.account.user.item, 
-          isUploading: state.account.user.isUploading, 
+          user: state.account.user.item,
+          isUploading: state.account.user.isUploading,
           progress: state.account.user.progress,
       }
   }
-  
+
   const styledUser = withStyles(styles,  { withTheme: true })(User);
-  
+
   export default connect(mapStateToProps, {  uploadFileToServer, updateDocument, updatePassword })(styledUser);

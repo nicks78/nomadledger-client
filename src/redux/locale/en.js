@@ -93,7 +93,8 @@ const en = {
         label_not_task_found: "No task today",
         label_contact_us: "Ask us for anything",
         label_confirm_email: "Request a new email confirmation",
-        label_forgot_pwd_body1: "Forgot your password ?"
+        label_forgot_pwd_body1: "Forgot your password ?",
+        label_terms: "Specific payment terms and conditions :",
     },
     wording: {
         exportcsv: "Export to csv",
@@ -262,11 +263,12 @@ const en = {
         select_contact_group: "Select a group",
         textarea_quote: "Type a description",
         textarea_terms: "You can add here a short Terms & conditions",
+        expend_contact_info: "Expand to view full contact informations",
         infos_status: "<span style='color: red;font-weight: 700'>CAUTIOUS *</span> - Only status < Draft & Pending > are editable",
         type_message: "Type your message...",
         payment_terms: "Membership give you full access to NomadLegder for 365 days",
         add_tags: "One you create your tag, you can edit 2 language FR - EN ",
-        trial_30: "Free 30-Day Trial",
+        trial_30: "Free 15-Day Trial",
         account_setting: "Vous pouvez ajouter initialiser vos paramètres, afin d'optimiser vos documents comptables et filtre de recherche",
         account_vat: "List all your VAT rate, you will need it to create your accounting documents",
         account_group: "Easly create contact groupes to add search filter",
@@ -350,7 +352,7 @@ const en = {
         form_title: "Register now for free",
         pricing: {
             block_001:{
-                title: "30 Day Trial",
+                title: "15 Day Trial",
                 feature_1: "Contact managment",
                 feature_2: "Accounting managment",
                 feature_3: "Tasks manager",
