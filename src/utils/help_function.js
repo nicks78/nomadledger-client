@@ -20,19 +20,19 @@ export const updateArrayOfObject = (list, obj) => {
  * @param {*} num
  */
 export const checkNumFormatRegex = (num) => {
-    const regexFr = /^([0-9]{0,}),?[0-9]?[0-9]?$/gm;
-    const regexEn = /^([0-9]{0,})\.?[0-9]?[0-9]?$/gm;
+    var regex = /^[0-9]{0,}([,.])?([0-9]{1,2})?$/gm;
 
-    var fr = new RegExp(regexFr);
-    var en = new RegExp(regexEn);
-    if( en.test(num) ||  fr.test(num) ){
-        var x = parseFloat(num.replace(',', '.')).toFixed(2)
+    var fr = new RegExp(regex);
+    if( fr.test(num) ){
+        var tmp = num.replace(',', '.');
+        var x = parseFloat(tmp)
 
         return x
     }
 
     return false
 }
+
 
 /**
  *
@@ -41,7 +41,6 @@ export const checkNumFormatRegex = (num) => {
 export const convertToNumber = (num) => {
     var formatedNum = num;
     if(typeof num !== 'number'){
-      console.log("YEAH", num)
       var x = num.replace(',', '.');
       formatedNum = parseFloat(x)
     }

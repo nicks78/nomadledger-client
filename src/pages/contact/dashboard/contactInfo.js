@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { withStyles } from '@material-ui/core';
+import { withStyles, Grid } from '@material-ui/core';
 import { createState, updateItem } from '../../../redux/library/actions'
 import ApxButtonEdit from '../../../components/common/buttonEdit'
 import EditInput from '../../../lib/editInput'
@@ -12,10 +12,9 @@ import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
     root: {
-        marginTop: '24px'
     },
     iconBtn: {
-        float: 'right',
+        // float: 'right',
     },
     icon: {
         top: '-12px',
@@ -75,7 +74,6 @@ class ContactInfo extends Component {
                 <div className={ classes.iconBtn }>
 
                     <ApxButtonEdit
-                        style={{top: '-5px', right: '-12px'}}
                         updateDocument={this.updateDocument}
                         openEdit={this.openEdit}
                         showEdit={showEdit}
@@ -83,19 +81,26 @@ class ContactInfo extends Component {
                   />
                 </div>
 
-            { !showEdit ?
-                null
-                :
-                <TextField
-                    defaultValue={contact.company_name}
-                    label={ locale.wording.company }
-                    onChange={this.handleFormEdit}
-                    name="company_name"
-                    variant="outlined"
-                    style={{width: '80%'}}
-                />
-            }
-            <br /><br />
+          <Grid container spacing={24}>
+            <Grid item xs={12}>
+              { !showEdit ?
+                  null
+                  :
+                  <TextField
+                      defaultValue={contact.company_name}
+                      label={ locale.wording.company }
+                      onChange={this.handleFormEdit}
+                      name="company_name"
+                      inputProps={{
+                        maxLength: "40"
+                      }}
+                      variant="outlined"
+                      fullWidth
+                  />
+              }
+            </Grid>
+
+            <Grid item xs={12} sm={4} md={4} >
             <Typography variant="subtitle1">
                       {locale.subheading.label_contact_info}
             </Typography>
@@ -150,7 +155,9 @@ class ContactInfo extends Component {
                 field="email"
                 handleAction={this.handleFormEdit}
             />
-            <br /><br />
+            </Grid>
+
+          <Grid item xs={12} sm={4} md={4} >
             <Typography variant="subtitle1">
                       {locale.subheading.label_comp_address}
             </Typography>
@@ -188,7 +195,8 @@ class ContactInfo extends Component {
                     value={  contact.addresses_country && contact.addresses_country[localStorage.getItem("locale")] }
                 />
 
-            <br /><br />
+            </Grid>
+            <Grid item xs={12} sm={4} md={4} >
             <Typography variant="subtitle1">
                       {locale.subheading.label_comp_info}
             </Typography>
@@ -218,7 +226,8 @@ class ContactInfo extends Component {
                 field="company_vat"
                 handleAction={this.handleFormEdit}
             />
-
+          </Grid>
+</Grid>
         <br />
         </div>
     )

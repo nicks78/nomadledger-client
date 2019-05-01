@@ -15,6 +15,7 @@ const styles = theme => ({
     textField: {
         width: '100%',
         fontWeight: 300,
+        marginTop: 0,
         "& span": {
           color: `${theme.palette.secondary.main} !important`
         }

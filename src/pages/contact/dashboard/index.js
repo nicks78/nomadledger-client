@@ -31,7 +31,8 @@ const styles = theme => ({
   root: {
       padding: 24,
       [theme.breakpoints.down('sm')]: {
-        padding: "24px 12px 24px 12px"
+        padding: "24px 12px 24px 12px",
+        boxShadow: "none"
       }
   },
   statWrapper: {
@@ -70,6 +71,9 @@ const styles = theme => ({
   },
   expandDetail: {
     display: "block",
+    [theme.breakpoints.down("sm")]: {
+      padding: 0
+    }
   },
   lightTooltip: {
     color: 'white',
@@ -80,7 +84,12 @@ const styles = theme => ({
     fontSize: 14,
     width: '100%',
     backgroundColor: 'rgba(0,0,0,1)',
-}
+  },
+  expandSummary : {
+    textAlign: "center",
+    paddingRight: 0,
+    display: "block"
+  }
 })
 
 function TabContainer({ children, dir }) {
@@ -138,15 +147,13 @@ class ShowContact extends React.Component {
       return (
         <Paper className={ classes.root }>
         <ApxBackBtn/>
-        <Typography variant="h1" align="center">{ contact.company_name }</Typography>
 
         <Grid container spacing={8}>
           <Grid item xs={12} md={12}>
           <ExpansionPanel className={classes.expandPanel}>
 
-         <ExpansionPanelSummary expandIcon={<Tooltip classes={{ tooltip: classes.lightTooltip }} title={ locale.helperText.expend_contact_info }><IconButton><ExpandMoreIcon /></IconButton></Tooltip>} className={classes.expandSummary}>
-
-           <br />
+         <ExpansionPanelSummary className={classes.expandSummary} classes={{ content: classes.expandSummary  }} expandIcon={<Tooltip classes={{ tooltip: classes.lightTooltip }} title={ locale.helperText.expend_contact_info }><IconButton><ExpandMoreIcon /></IconButton></Tooltip>} >
+           <Typography variant="h1" align="center">{ contact.company_name }</Typography>
          </ExpansionPanelSummary>
        <ExpansionPanelDetails className={classes.expandDetail}>
 
@@ -158,7 +165,7 @@ class ShowContact extends React.Component {
                  isUploading={isUploading}
                  image={<img src={`${ contact.logo_contact.full_path || DEFAULT_IMG }`} alt={contact.logo_contact.org_name}
 
-                 style={{ maxWidth: '100%', maxHeight: '100px'}} />}
+                 style={{ maxWidth: '100%', maxHeight: '70px'}} />}
                />
              </div>
 

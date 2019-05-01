@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import EditIcon from '@material-ui/icons/EditOutlined'
-import { checkNumFormatRegex } from '../../utils/help_function'
+import { checkNumFormatRegex, cvtNumToUserPref} from '../../utils/help_function'
 
 
 const styles = theme => ({
@@ -21,7 +21,10 @@ const styles = theme => ({
     outline: 'none',
     margin: '0 auto',
     marginTop: '10%',
-    overflow: "hidden"
+    overflow: "hidden",
+    [theme.breakpoints.down('sm')]: {
+      width: 'auto'
+    }
   },
   btn: {
       float: 'right'
@@ -38,18 +41,21 @@ class SimpleModal extends React.Component {
     id: "",
     value: '',
     fr: '',
-    vat_terms: "",
-    en: ""
+    en: "",
+    vat_terms_fr: "",
+    vat_terms_en: "",
   }
 
   componentDidMount() {
+
     this.setState({
       fr: this.props.obj.fr,
       en: this.props.obj.en,
-      value: this.props.obj.indice,
+      value: cvtNumToUserPref(this.props.obj.indice || 0 ),
       color: this.props.obj.color,
       id: this.props.obj._id,
-      vat_terms: this.props.obj.vat_terms
+      vat_terms_fr: this.props.obj.vat_terms_fr,
+      vat_terms_en: this.props.obj.vat_terms_en
     })
   }
 
@@ -57,10 +63,11 @@ class SimpleModal extends React.Component {
     this.setState({
       fr: nextProps.obj.fr,
       en: nextProps.obj.en,
-      value: nextProps.obj.indice,
+      value: cvtNumToUserPref(nextProps.obj.indice || 0 ),
       color: nextProps.obj.color,
       id: nextProps.obj._id,
-      vat_terms: nextProps.obj.vat_terms
+      vat_terms_fr: nextProps.obj.vat_terms_fr,
+      vat_terms_en: nextProps.obj.vat_terms_en
     })
   }
 
@@ -76,47 +83,57 @@ class SimpleModal extends React.Component {
       fr: '',
       en: "",
       color: "",
-      vat_terms: ""
+      indice: 0,
+      vat_terms_fr: "",
+      vat_terms_en: "",
     })
   };
 
   handleForm = (name, value) => {
-    console.log(name + "=> "+ value)
       this.setState({[name]: value})
   }
 
   updateElement = () => {
-    this.setState({
-      open: false,
-      id: "",
-      value: '',
-      fr: '',
-      en: "",
-      color: "",
-      vat_terms: ""
-    })
-    if( this.props.type === 'vat' && typeof this.state.value !== "number" ){
-        var num = checkNumFormatRegex( this.state.value || 0 )
+    this.setState({ open: false })
+
+    if( this.props.type === 'vat'){
+        var num = checkNumFormatRegex( this.state.value || 0 );
+
+        if(num === false){
+          alert(this.props.locale.message.error_422_indice)
+          return ;
+        }
     }
+
     var data = {
         _id: this.state.id,
         fr: this.state.fr,
         en: this.state.en,
         color: this.state.color,
-        value: this.state.indice + " %",
-        vat_terms: this.state.vat_terms,
+        value: this.state.value + " %",
+        vat_terms_fr: this.state.vat_terms_fr,
+        vat_terms_en: this.state.vat_terms_en,
         indice: num || 0
     }
 
-    console.log(data)
-
     this.props.pushToDocument("COMPANY", data, `push-pull/modify/set/${this.props.type}/` );
+
+    this.setState({
+              id: "",
+              value: '',
+              indice: 0,
+              fr: '',
+              en: "",
+              color: "",
+              vat_terms_fr: "",
+              vat_terms_en: ""
+    })
 
   }
 
   render() {
     const { classes , obj, type, locale } = this.props;
-    const {fr, en , color, vat_terms, indice} = this.state
+    const {fr, en , color, vat_terms_fr, vat_terms_en, value} = this.state
 
     return (
       <React.Fragment>
@@ -168,11 +185,14 @@ class SimpleModal extends React.Component {
             {
               type === 'vat' ?
                 <TextField
-                  value={ indice ? indice : this.props.obj.indice  }
+                  value={ value ? value : cvtNumToUserPref(this.props.obj.indice)   }
                   onChange={(e) => { this.handleForm(e.target.name, e.target.value) }}
                   label={locale.wording.rate}
-                  name="indice"
-                  type="number"
+                  name="value"
+                  type="text"
+                  inputProps={{
+                    pattern: /^[0-9]$/gm
+                  }}
                   fullWidth
                   margin="dense"
                   variant="filled"
@@ -183,10 +203,25 @@ class SimpleModal extends React.Component {
             {
               type === 'vat' ?
                 <TextField
-                  value={ vat_terms ? vat_terms : this.props.obj.vat_terms  }
+                  value={ vat_terms_fr ? vat_terms_fr : this.props.obj.vat_terms_fr  }
                   onChange={(e) => { this.handleForm(e.target.name, e.target.value) }}
-                  label={locale.wording.vat_terms}
-                  name="vat_terms"
+                  label={locale.wording.vat_terms_fr}
+                  name="vat_terms_fr"
+                  type="text"
+                  fullWidth
+                  margin="dense"
+                  variant="filled"
+
+              />
+              : null
+            }
+            {
+              type === 'vat' ?
+                <TextField
+                  value={ vat_terms_en ? vat_terms_en : this.props.obj.vat_terms_en  }
+                  onChange={(e) => { this.handleForm(e.target.name, e.target.value) }}
+                  label={locale.wording.vat_terms_en}
+                  name="vat_terms_en"
                   type="text"
                   fullWidth
                   margin="dense"

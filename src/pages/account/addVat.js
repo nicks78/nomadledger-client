@@ -49,7 +49,8 @@ class AddVat extends Component {
   state = {
     value: '',
     name: '',
-    vat_terms: "",
+    vat_terms_fr: "",
+    vat_terms_en: "",
     indice: 0,
     reducer: "COMPANY",
     addApi: 'push-pull/update/push/',
@@ -72,26 +73,28 @@ class AddVat extends Component {
     _pushToDoc = () => {
         var num = checkNumFormatRegex( this.state.value )
 
+        if(num === false ){
+            alert(this.props.locale.message.error_422_indice)
+            return ;
+        }
         if(this.state.name === ''){
-            alert("Must give a name !")
+            alert(this.props.locale.message.error_422_name)
             return ;
         }
 
-        if( num && this.state.name ){
-            var data = {
-                vat: {
-                    en: this.state.name,
-                    fr: this.state.name,
-                    value: this.state.value + " %",
-                    indice: num,
-                    vat_terms: ""
-                }
+
+        var data = {
+            vat: {
+                en: this.state.name,
+                fr: this.state.name,
+                value: this.state.value + " %",
+                indice: num || 0,
+                vat_terms_fr: this.state.vat_terms_fr,
+                vat_terms_en: this.state.vat_terms_en
             }
-            this.setState({value: "", name: '', indice: 0, vat_terms: "" })
-            this.props.pushToDocument(this.state.reducer, data, this.state.addApi )
-        }else{
-            alert("Format de numero ou nom incorrect (ex: 18.06 | 18,06 )!")
         }
+        this.setState({value: "", name: '', indice: 0, vat_terms_fr: "", vat_terms_en: "" })
+        this.props.pushToDocument(this.state.reducer, data, this.state.addApi )
     }
 
 
@@ -126,7 +129,7 @@ class AddVat extends Component {
 
                             <TextField
                                 id="vat"
-                                type="number"
+                                type="text"
                                 label={locale.wording.add_vat}
                                 className={classes.textField}
                                 value={this.state.value}
@@ -138,10 +141,10 @@ class AddVat extends Component {
                             <TextField
                                 id="vat_terms"
                                 type="text"
-                                label={locale.wording.vat_terms}
+                                label={locale.wording[`vat_terms_${localStorage.getItem("locale")}`]}
                                 style={{ width: "90%" }}
-                                value={this.state.value}
-                                name="vat_terms"
+                                value={this.state[`vat_terms_${localStorage.getItem("locale")}`]}
+                                name={`vat_terms_${localStorage.getItem("locale")}`}
                                 onKeyPress={(e) => { e.key === "Enter" && this._pushToDoc() }}
                                 onChange={this._handleFormEdit}
                                 margin="normal"

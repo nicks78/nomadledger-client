@@ -7,7 +7,7 @@ import 'react-day-picker/lib/style.css';
 import DateRangeIcon from '@material-ui/icons/DateRange'
 
 
-const date = { 
+const date = {
     fr: {
         month : ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
         week_long: ['Dimanche','Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
@@ -26,12 +26,12 @@ const date = {
 
 
 
- 
+
 /**
- * @param value 
+ * @param value
  * @param field
  * @func handleDate
- * 
+ *
  */
 class DatePickers extends React.Component {
     constructor(props) {
@@ -48,7 +48,7 @@ class DatePickers extends React.Component {
             this.setState({ selectedDay: new Date(this.props.value) })
         }
     }
-   
+
     handleDayChange = (date) => {
         this.setState({
             selectedDay: date,
@@ -81,7 +81,7 @@ class DatePickers extends React.Component {
         this.setState({ show: !this.state.show })
     }
 
-   
+
     render() {
     const { classes } = this.props
     const { selectedDay} = this.state
@@ -94,8 +94,8 @@ class DatePickers extends React.Component {
       return (
             <div className={classes.root}>
                 <DateRangeIcon className={ classes.icon } onClick={this.handleShow} />
-                {   this.state.show ? 
-                            <DayPicker 
+                {   this.state.show ?
+                            <DayPicker
                                 id={this.props.field}
                                 onDayClick={  this.handleDayChange }
                                 weekdaysLong={ date[locale].week_long}
@@ -106,8 +106,8 @@ class DatePickers extends React.Component {
                                 modifiers={modifiers}
                                 modifiersStyles={{ position: 'absolute' }}
                                 firstDayOfWeek={1}
-                            />                         
-                    : null 
+                            />
+                    : null
                 }
             </div>
       )
@@ -117,14 +117,14 @@ class DatePickers extends React.Component {
 const styles = theme => ({
     root: {
         // padding: 12,
-        
+
     },
     icon: {
         paddingTop: 5,
-        cursor: 'pointer', 
+        cursor: 'pointer',
         fontSize: '20px !important',
         color: theme.palette.secondary.main,
-        
+
     },
     span: {
         fontSize: 14,

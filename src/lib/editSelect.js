@@ -4,7 +4,6 @@ import React from 'react'
 import ApxSelect  from '../components/common/select'
 import ApxtextIndexValue  from '../components/common/textIndexValue'
 
-
 /**
  *
  * @param arrayField List of options
@@ -17,10 +16,10 @@ import ApxtextIndexValue  from '../components/common/textIndexValue'
  */
 const EditSelect = (props) => {
 
-    const {arrayField, field, helperText, handleAction, locale, showEdit, label, value, variant, required } = props
+    const {arrayField, field, helperText, handleAction, locale, showEdit, label, value, variant, required, margin } = props
 
     if(showEdit){
-        return  <div style={{marginBottom: 15}}><ApxSelect
+        return  <div style={{marginBottom: margin || 15}}><ApxSelect
                     arrayField={arrayField}
                     field={field}
                     value={value}
@@ -40,5 +39,6 @@ const EditSelect = (props) => {
         )
     }
 }
+
 
 export default EditSelect;

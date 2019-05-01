@@ -16,7 +16,7 @@ class StatContact extends Component {
     return (
         <Grid container spacing={24}>
         <Grid item xs={12} md={4} sm={4}>
-          <Paper style={{padding: 10, backgroundColor: '#009034'}} elevation={1}>
+          <Paper style={{padding: 10, backgroundColor: '#0378a6'}} elevation={1}>
                 <Typography className={classes.typoTitle} variant="body1">
                   {locale.wording.quote} ({locale.wording.subtotal})
                 </Typography>
@@ -35,9 +35,9 @@ class StatContact extends Component {
           </Paper>
         </Grid>
         <Grid item xs={12} md={4} sm={4}>
-          <Paper style={{padding: 10, backgroundColor: '#0378a6'}} elevation={1}>
+          <Paper style={{padding: 10, backgroundColor: '#009034'}} elevation={1}>
               <Typography className={classes.typoTitle} variant="body1">
-                {locale.wording.invoice} 
+                {locale.wording.invoice}
                 </Typography>
             <Grid container>
 
@@ -56,7 +56,7 @@ class StatContact extends Component {
         <Grid item xs={12} md={4} sm={4}>
           <Paper style={{padding: 10, backgroundColor: '#bf0404'}} elevation={1}>
               <Typography className={classes.typoTitle} variant="body1">
-                {locale.wording.refund} 
+                {locale.wording.refund}
                 </Typography>
               <Grid container>
 
@@ -83,8 +83,8 @@ const styles = theme => ({
     color: 'white'
   },
   typoValue: {
-    float: 'right', 
-    color: 'white', 
+    float: 'right',
+    color: 'white',
     whiteSpace: 'nowrap'
   }
 

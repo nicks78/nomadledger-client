@@ -9,6 +9,7 @@ import Spinner from '../../components/common/spinner'
 import ApxPaper from '../../components/common/paper'
 import ApxBackBtn from '../../components/common/backBtn'
 import EditSelect from '../../lib/editSelect'
+import { cvtToLocale, checkNumFormatRegex } from '../../utils/help_function'
 
 
 class ShowService extends Component {
@@ -46,14 +47,15 @@ class ShowService extends Component {
               { service.name}
             </Typography>
             <br />
-           
+
             <Grid container spacing={8}>
               <Grid item xs={12}>
-              <TextField 
+              <TextField
                     id="name"
-                    variant="filled" 
+                    variant="outlined"
                     type="text"
                     margin="dense"
+                    className={classes.textField}
                     label={locale.wording.name}
                     value={service.name}
                     fullWidth
@@ -61,9 +63,9 @@ class ShowService extends Component {
                   />
               </Grid>
               <Grid item xs={12} md={6}>
-                  <EditSelect 
+                  <EditSelect
                     showEdit={true}
-                    variant="filled" 
+                    variant="outlined"
                     arrayField={currency}
                     field="currency"
                     required={true}
@@ -71,23 +73,29 @@ class ShowService extends Component {
                     handleAction={ (e) => { this.props.createState(reducer, "currency", e.target.value) } }
                     locale={locale}
                   />
-                  <br />
-                  <TextField 
+                  <TextField
                     id="price"
-                    variant="filled" 
+                    variant="outlined"
+                    className={classes.textField}
                     margin="dense"
                     fullWidth
                     required
                     label={locale.wording.price}
-                    value={  service.price }
-                    onChange={ (e) => { this.props.createState(reducer, "price", e.target.value) } }
+                    value={  cvtToLocale(service.price) }
+                    onChange={ (e) => {
+                        if(checkNumFormatRegex(e.target.value) === false){
+                           alert(locale.message.error_422_price)
+                        }else{
+                          this.props.createState(reducer, "price", e.target.value)
+                        }
+                      }}
                   />
               </Grid>
 
               <Grid item xs={12} md={6}>
-                <EditSelect 
+                <EditSelect
                     showEdit={true}
-                    variant="filled" 
+                    variant="outlined"
                     arrayField={category}
                     field="category"
                     required={true}
@@ -95,38 +103,38 @@ class ShowService extends Component {
                     handleAction={ (e) => { this.props.createState(reducer, "category", e.target.value) } }
                     locale={locale}
                   />
-                  <EditSelect 
+                  <EditSelect
                     showEdit={true}
                     required={true}
-                    variant="filled" 
+                    variant="outlined"
                     arrayField={service_type}
                     field="service_type"
                     value={service.service_type[localStorage.getItem('locale')]}
                     handleAction={ (e) => { this.props.createState(reducer, "service_type", e.target.value) } }
                     locale={locale}
                   />
-                  
+
 
               </Grid>
             </Grid>
 
-            <TextField variant="filled"
-                      label={locale.wording.description } 
+            <TextField variant="outlined"
+                      label={locale.wording.description }
                       fullWidth
                       multiline
                       rows={6}
-                      className={classes.margin} 
+                      className={classes.textField}
                       margin="normal"
-                      value={ service.description } 
+                      value={ service.description }
                       onChange={ (e) => {this.props.createState(reducer, "description",  e.target.value)} }
             />
-           
-            <br />
-            <Button 
-                variant="contained" 
-                color="primary" 
+
+            <br /><br />
+            <Button
+                variant="contained"
+                color="primary"
                 disabled={ isUpdating }
-                className={ classes.btnSave } 
+                className={ classes.btnSave }
                 onClick={ () => { this.props.updateItem(reducer, `update`)} }>
                 { !isUpdating ?  locale.wording.update : locale.wording.loading }</Button>
         </ApxPaper>
@@ -141,7 +149,14 @@ const styles = theme => ({
     },
     btnSave: {
       float: 'right'
-    }
+    },
+    textField: {
+        fontWeight: 300,
+        marginTop: 0,
+        "& span": {
+          color: `${theme.palette.secondary.main} !important`
+        }
+    },
 })
 
 const mapStateToProps = (state) => {

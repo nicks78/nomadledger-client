@@ -11,7 +11,7 @@ import Spinner from '../components/common/spinner'
 import ApxButtonCircle from '../components/common/buttonCircle'
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Hidden from '@material-ui/core/Hidden';
-
+import {checkNumFormatRegex} from '../utils/help_function'
 
 const styles = theme => ({
     root: {
@@ -69,6 +69,14 @@ class Add extends Component {
     handleChange = (event) => {
         var fieldName = event.target.name;
         var value = event.target.value;
+
+        if(fieldName === "price" || fieldName === "selling_price" || fieldName === "buying_price"){
+
+          if(checkNumFormatRegex(value) === false){
+            alert(this.props.locale.message.error_422_price);
+            return
+          }
+        }
 
         if(fieldName === 'doc'){ // If input file
 
@@ -139,7 +147,7 @@ class Add extends Component {
                         variant="contained"
                         color="primary"
                         type="submit"
-                        disabled={ isCreating || false}
+                        disabled={ isCreating }
                         className={ classes.btnSave }
                         >
                         { isCreating ? locale.wording.loading : locale.wording.save }
@@ -151,9 +159,9 @@ class Add extends Component {
         return (
             <div className={ classes.root}>
             <Hidden only={['xs', 'sm']}>
-                <Button variant="contained" color="primary" disabled={ isCreating || false}  className={  classes.button } onClick={this.toggleDrawer('right', true)}>{ isCreating ? locale.wording.loading : addBtnTitle }</Button>
+                <Button variant="contained" color="primary" disabled={ isCreating }  className={  classes.button } onClick={this.toggleDrawer('right', true)}>{ isCreating ? locale.wording.loading : addBtnTitle }</Button>
             </Hidden>
-            <ApxRightDrawer toggleDrawer={ this.toggleDrawer } side="right" open={ this.state.right} title={ headerText } requiredText={locale.message.error_400}>
+            <ApxRightDrawer toggleDrawer={ this.toggleDrawer }  side="right" open={ this.state.right} title={ headerText } requiredText={locale.message.error_400}>
 
                     {
                         isUploading ?

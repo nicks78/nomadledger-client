@@ -14,7 +14,7 @@ const styles = theme => ({
         maxWidth: '450px',
     },
     titleWrap: {
-        display: 'flex', 
+        display: 'flex',
         justifyContent: 'space-between'
     },
     span: {
@@ -31,7 +31,7 @@ const styles = theme => ({
 })
 
 /**
- * 
+ *
  * @param side Which side to open (right/left)
  * @param open true/false
  * @param title Title of the drawer
@@ -49,7 +49,7 @@ const RightDrawer = (props) => {
                     <Typography  variant="overline">{title}</Typography>
                     <Typography  variant="caption">{ requiredText }</Typography>
                 </div>
-                
+
                 <div>
                     <IconButton className={  classes.icon } onClick={ toggleDrawer(side, false) }><CloseIcon /></IconButton>
                 </div>
