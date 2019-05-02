@@ -4,7 +4,7 @@ import { setAuthUser } from './auth/actions'
 import {getHelpers} from './helper/actions'
 import { getAccount } from './account/actions'
 import {setNotification} from './notification/actions'
-
+import {history} from '../routes/history'
 import thunk from 'redux-thunk';
 import reducers from './reducers';
 
@@ -40,6 +40,13 @@ if( parseInt(auth, 10) === 1 || parseInt(localStorage.getItem('auth'), 10) === 1
     store.dispatch(getAccount('COMPANY'))
     store.dispatch(getAccount('USER'))
     store.dispatch(setAuthUser())
+}else{
+  if(history.location.pathname.indexOf("public") >= 0 ){
+      history.push(history.location.pathname + history.location.search)
+  }else{
+    history.push('/')
+  }
+
 }
 
 export default store;

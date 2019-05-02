@@ -31,7 +31,7 @@ const Phone = (props) => {
 
         var value = event.target.value
         for(var i =0; i < phone_code.length ; i++){
-            if(value === phone_code[i]['fr'] || value === phone_code[i]['en']){
+            if(value === phone_code[i]._id){
                 event.target.value =  phone_code[i]
             }
         }
@@ -47,7 +47,7 @@ const Phone = (props) => {
                         label={props.locale.wording.phone_code}
                         className={classes.textField}
                         name={fieldCode}
-                        value={ valueCode[localStorage.getItem("locale")] || ''}
+                        value={ valueCode._id}
                         onChange={ (evt) => { selected(evt) } }
                         SelectProps={{
                             MenuProps: {
@@ -58,8 +58,8 @@ const Phone = (props) => {
                         >
                         {phone_code.map((option, index) => (
 
-                            <MenuItem key={index} value={ option[localStorage.getItem('locale')]}>
-                                {option.code} {option.value && '(' + option.value +')'}
+                            <MenuItem key={index} value={ option._id}>
+                                {option[localStorage.getItem('locale')]} {option.dial_code && '(' + option.dial_code +')'}
                             </MenuItem>
                         ))}
                         </TextField>
@@ -86,8 +86,8 @@ const Phone = (props) => {
 
                 <ApxtextIndexValue
                     html_tag="a"
-                    href={`tel:${valueCode.value}${value.replace('0', '')}`}
-                    value={ '('+valueCode.value +') ' +value}
+                    href={`tel:${valueCode.dial_code}${value.replace('0', '')}`}
+                    value={ '('+valueCode.dial_code +') ' +value}
                     label={label}
                 />
 
