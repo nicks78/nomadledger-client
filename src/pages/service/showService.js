@@ -55,6 +55,7 @@ class ShowService extends Component {
                     variant="outlined"
                     type="text"
                     margin="dense"
+                    required
                     className={classes.textField}
                     label={locale.wording.name}
                     value={service.name}
@@ -77,11 +78,12 @@ class ShowService extends Component {
                     id="price"
                     variant="outlined"
                     className={classes.textField}
+                    style={{ wapInputFormat: 'N'}}
                     margin="dense"
                     fullWidth
                     required
                     label={locale.wording.price}
-                    value={  cvtToLocale(service.price) }
+                    value={  cvtToLocale( service.price  ) }
                     onChange={ (e) => {
                         if(checkNumFormatRegex(e.target.value) === false){
                            alert(locale.message.error_422_price)

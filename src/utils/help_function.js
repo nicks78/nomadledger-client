@@ -74,14 +74,11 @@ export const cvtNumToUserPref = (num) => {
 
 /**
  *
- * @param {*} num
+ * @param {*} num Type Number
  */
 export const cvtToLocale = (num) => {
-
     var locale = localStorage.getItem('locale');
-    if(locale === 'fr'){
-        num = num.toString().replace('.', ',')
-    }
+        num = num.toLocaleString(locale || "fr", {minimumFractionDigits: 2, maximumFractionDigits: 3})
     return num;
 }
 

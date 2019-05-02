@@ -76,7 +76,7 @@ class Contact extends Component {
 
     render() {
 
-    const { isFetching,  locale, createItem, createState, newContact, isCreating, progress, classes, contactGroup, rowsPerPageOptions, total, country, phone_code} = this.props
+    const { isFetching,  locale, createItem, createState, newContact, isCreating, progress, classes, contactGroup, rowsPerPageOptions, total, country} = this.props
     const {reducer, width, listContacts } = this.state
     const isMobile = width <= 500;
 
@@ -85,7 +85,6 @@ class Contact extends Component {
         <div className={classes.container}>
                   <AddContact progress={progress}
                         country={country}
-                        phone_code={phone_code}
                         contactGroup={contactGroup}
                         locale={ locale }
                         createContact={ createItem }
@@ -179,7 +178,6 @@ const mapStateToProps = (state) => {
         total: state.library.contact.total,
         rowsPerPageOptions: state.library.contact.rowsPerPageOptions,
         contactGroup: state.account.company.item ?  state.account.company.item.contact_group : [],
-        phone_code: state.helper.items.phone_code,
         country: state.helper.items.country,
     }
 }

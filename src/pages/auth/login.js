@@ -112,7 +112,7 @@ class Login extends Component {
                         <span>{locale.company_name}</span>
                     </Typography><br />
                 </div>
-                        <Typography variant="caption">
+                        <Typography variant="caption"  style={{marginBottom: 10}}>
                           { locale.subheading.label_login}&nbsp;{locale.company_name}
                         </Typography>
                         {   isError ? <p> {locale.message[message]}</p> : null }

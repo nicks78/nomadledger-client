@@ -25,14 +25,14 @@ const styles = theme => ({
  */
 const Phone = (props) => {
 
-    const { field, fieldCode, handleAction, showEdit, label, valueCode, value , classes, reducer, phone_code }= props
+    const { field, fieldCode, handleAction, showEdit, label, valueCode, value , classes, reducer, country }= props
 
     const selected = (event) => {
 
         var value = event.target.value
-        for(var i =0; i < phone_code.length ; i++){
-            if(value === phone_code[i]._id){
-                event.target.value =  phone_code[i]
+        for(var i =0; i < country.length ; i++){
+            if(value === country[i]._id){
+                event.target.value =  country[i]
             }
         }
         return props.handleAction(event, reducer)
@@ -56,8 +56,7 @@ const Phone = (props) => {
                         }}
                         margin="dense"
                         >
-                        {phone_code.map((option, index) => (
-
+                        {country.map((option, index) => (
                             <MenuItem key={index} value={ option._id}>
                                 {option[localStorage.getItem('locale')]} {option.dial_code && '(' + option.dial_code +')'}
                             </MenuItem>
@@ -99,7 +98,7 @@ const Phone = (props) => {
 const mapStateToProps = (state) => {
 
     return {
-        phone_code: state.helper.items.phone_code || [],
+        country: state.helper.items.country || [],
     }
   }
 

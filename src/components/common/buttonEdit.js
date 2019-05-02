@@ -40,16 +40,25 @@ const styles = theme => ({
 });
 
 const helpText = {
-  fr: "Clique pour ouvrir le panel d'edition et reclique pour mettre à jour les informations ",
-  en: "Click to open edit panel and click back to update informations"
+  check: {
+    en: "Click to update",
+    fr: "Cliquer pour mettre à jour",
+
+  },
+  edit: {
+    en: "Click to open edit panel",
+    fr: "Cliquer pour ouvrir le panneau d'édition",
+  }
+
 }
 
 const ButtonEdit = (props) => {
 
   const {classes, showEdit, openEdit, updateDocument, style, isUpdating } = props
+  var text = showEdit ? helpText.check[localStorage.getItem('locale') || "fr"] : helpText.edit[localStorage.getItem('locale') || "fr"]
 
   return (
-    <Tooltip title={helpText[localStorage.getItem('locale') || "fr"]} classes={{ tooltip: classes.lightTooltip }}><IconButton className={ classes.icon }  onClick={ showEdit ? updateDocument :  openEdit} style={style} >
+    <Tooltip title={text} classes={{ tooltip: classes.lightTooltip }}><IconButton className={ classes.icon }  onClick={ showEdit ? updateDocument :  openEdit} style={style} >
         {
             !isUpdating ?
             showEdit ? <CheckIcon className={ classes.checkicon }/> : <EditIcon className={ classes.editicon }/>

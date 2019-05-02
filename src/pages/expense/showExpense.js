@@ -12,7 +12,7 @@ import ApxBackBtn from '../../components/common/backBtn'
 import EditSelect from '../../lib/editSelect'
 import DatePickers from '../../lib/dayPicker'
 import { DEFAULT_IMG } from '../../redux/constant';
-import {checkNumFormatRegex} from '../../utils/help_function'
+import {checkNumFormatRegex, cvtToLocale} from '../../utils/help_function'
 
 
 class ShowExpense extends Component {
@@ -116,7 +116,7 @@ class ShowExpense extends Component {
                       fullWidth
                       required
                       label={locale.wording.price}
-                      value={expense.price}
+                      value={ cvtToLocale(expense.price)}
                       onChange={ (e) => {
                           if(checkNumFormatRegex(e.target.value) === false){
                              alert(locale.message.error_422_price)

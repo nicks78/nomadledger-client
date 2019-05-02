@@ -6,7 +6,7 @@ import AddItem from '../../lib/addItem'
 
 const AddContact = (props) => {
 
-    const {locale, contactGroup, phone_code, country} = props
+    const {locale, contactGroup, country} = props
 
     const fields = [
       {
@@ -30,7 +30,7 @@ const AddContact = (props) => {
         fields: [
             { name: 'firstname',type:"text", required: true},
             { name: 'lastname',type:"text", required: true },
-            { name: 'phone_code', type:"select", selections: phone_code, helperText: "select_phone_code", required: true },
+            { name: 'phone_code', type:"select", selections: country, helperText: "select_phone_code", required: true },
             { name: 'phone', type:"text", required: true, length: 15 },
             { name: 'email', type:"email", required: true}
           ]

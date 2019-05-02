@@ -65,7 +65,7 @@ class ContactInfo extends Component {
     }
 
     render() {
-        const {locale, contact, isUpdating, tmp_state, classes, contactGroup, country, phone_code, company_type} = this.props
+        const {locale, contact, isUpdating, tmp_state, classes, contactGroup, country, company_type} = this.props
         const { showEdit } = this.state;
 
 
@@ -108,7 +108,6 @@ class ContactInfo extends Component {
             <EditSelect
                 arrayField={contactGroup}
                 field="contact_group"
-                helperText="select_contact_group"
                 handleAction={ this.handleFormEdit }
                 locale={locale}
                 showEdit={showEdit}
@@ -130,7 +129,7 @@ class ContactInfo extends Component {
                 handleAction={this.handleFormEdit}
             />
             <EditSelect
-                arrayField={phone_code}
+                arrayField={country}
                 field="phone_code"
                 helperText="select_phone_code"
                 handleAction={ this.handleFormEdit }
@@ -240,7 +239,6 @@ const mapStateToProps = (state) => {
         tmp_state: state.library.contact.tmp_state,
         contactGroup: state.account.company.item ?  state.account.company.item.contact_group : [],
         company_type: state.helper.items.company_type,
-        phone_code: state.helper.items.phone_code,
         country: state.helper.items.country,
 
     }
