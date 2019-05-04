@@ -12,10 +12,27 @@ import {cvtNumToUserPref} from '../../utils/help_function'
 import Spinner from '../../components/common/spinner'
 import StatusTask from '../task/statusTask'
 
+// Calculate total net profit
+function calNetProfit(mainStat){
+  var total = 0;
+  if(mainStat){
+      var obj = mainStat.datasets.find(obj => obj.id === 4);
+
+      function getSum(total, num) {
+        return total + num;
+      }
+
+      total = obj.data.reduce(getSum,0)
+  }
+
+  return total;
+}
+
 class Home extends Component {
 
     state = {
-        reducer: 'STAT'
+        reducer: 'STAT',
+        net_profit: 0,
     }
 
     componentDidMount(){
@@ -41,11 +58,15 @@ class Home extends Component {
         return (
             <div>
         <ApxPaper>
-            <Typography variant="h1" align="center">  { cvtNumToUserPref( mainStat ? mainStat.turnover : 0) }  { currency.value } </Typography>
-            <Typography variant="caption" align="center" style={{ marginTop: 5, paddingBottom: 24 }}>{locale.subheading.label_annual_turnover} - { mainStat && mainStat.fiscal_year  }</Typography>
+            <Typography variant="h1" align="center">  { cvtNumToUserPref( calNetProfit(mainStat)) }  { currency.value } </Typography>
+            <Typography variant="caption" align="center" style={{ marginTop: 5, paddingBottom: 24 }}>{locale.subheading.label_net_profit} - { mainStat && mainStat.fiscal_year  }</Typography>
 
             <Grid container spacing={0} className={ classes.charts }>
+
                 <Grid  item xs={12} sm={8} md={8}>
+                  <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px", color: "#303030" }}>
+                      { locale.wording.statistics }
+                  </Typography>
                     {
                         mainStat ?
                             <BarCharts chartData={ mainStat } id="mainStat" currency={ currency.value || "-" }/>
@@ -53,10 +74,9 @@ class Home extends Component {
                     }
                 </Grid>
                 <Grid item xs={12} sm={4} md={4} >
-                    <Typography variant="body1" align="center" className={ classes.devis }>
+                    <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px", color: "#303030" }}>
                         { locale.wording.conversions } &nbsp;({ locale.wording.quote })
                     </Typography>
-
                    <div style={{ marginTop: "10%" }}>
                     {
                         pieQuote ?

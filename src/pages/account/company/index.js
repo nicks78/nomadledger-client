@@ -36,6 +36,17 @@ const styles = theme => ({
       width: '100%',
       marginTop: 10
     }
+  },
+  paddingCompanyInfo: {
+    paddingRight: "30px !important",
+    [theme.breakpoints.down("sm")]: {
+      paddingRight: "12px !important",
+    }
+  },
+  img: {
+    [theme.breakpoints.down("sm")]: {
+      maxWidth: 100
+    }
   }
 })
 
@@ -64,19 +75,19 @@ class Company extends Component {
     return (
       <div>
         <Grid container spacing={16}>
-            <Grid item xs={12} md={3}>
+            <Grid item xs={12} md={3} sm={3}>
                   <UploadImg
                     field="logo_company"
                     _handleUploadFile={ (e) => { this.props.uploadFileToServer("COMPANY", e.target.files[0], 'logo_company', company.logo_company ) }}
                     progress={progress}
                     oldFile={company.logo_company}
                     isUploading={isUploading}
-                    image={ <img src={`${ company.logo_company.full_path || DEFAULT_IMG }`} alt="logo" width="70%" height={null} />}
+                    image={ <img className={classes.img} src={`${ company.logo_company.full_path || DEFAULT_IMG }`} alt="logo" width="70%" height={null} />}
                   />
 
             </Grid>
 
-            <Grid item  xs={12} md={9}>
+            <Grid item  xs={12} md={9} sm={9}>
               <ApxButtonEdit
                   updateDocument={this.updateDocument}
                   openEdit={this.openEdit}
@@ -97,7 +108,7 @@ class Company extends Component {
               <br />
               <Grid container spacing={24}>
 
-                  <Grid item xs={12} sm={7} md={7}>
+                  <Grid item xs={12} sm={7} md={7} className={ classes.paddingCompanyInfo }>
 
                   <Typography variant="subtitle1">
                       {locale.subheading.label_comp_info}
@@ -220,7 +231,6 @@ class Company extends Component {
                   <EditSelect
                     arrayField={country}
                     field="addresses_country"
-                    helperText="select_country_code"
                     handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
                     locale={locale}
                     showEdit={showEdit}

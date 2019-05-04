@@ -89,6 +89,7 @@ const fr =  {
         label_contact_info: "Informations contact",
         label_comp_address: "Adresse entreprise",
         label_annual_turnover: "Chiffre d'affaire annuel",
+        label_net_profit: "Profit annuel (net)",
         label_daily_task: "Tâche(s) du ",
         label_forgot_pwd: "Nous enverrons un lien de récupération à",
         link_forgot_pwd: "Mot de passe oublié ?",
@@ -181,6 +182,7 @@ const fr =  {
         fiscal_month: "Exercice fiscal",
         fiscal_day: "Jour fiscal",
         fiscal_date: "Exercice fiscal",
+        fiscal_year: "Exercice fiscal",
         expired_at: "Valide jusqu'au",
         created_at: "Créé le",
         due_at: "Dû le",
@@ -209,6 +211,7 @@ const fr =  {
         label_rows_per_page: "Colonnes par page:",
         full_name: "Nom complet",
         phone: "Téléphone",
+        statistics: "Statistiques",
 
         of: "à",
         bill_to: "Facturer à",
@@ -277,7 +280,7 @@ const fr =  {
         type_message: "Taper votre message...",
         payment_terms: "Cet abonnement vous donne un accès total à la plateforme pendant 365 jours",
         add_tags: "Une fois l'élément créé, vous aurez la possibilité d'éditer en 2 langues FR - EN ",
-        trial_30: "15 jours d'essai gratuit",
+        trial_30: "14 jours d'essai gratuit",
         account_setting: " Vous pouvez ajouter initialiser vos paramètres, afin d'optimiser vos documents comptables et filtre de recherche",
         account_vat: "Lister vos taux de TVA, ils vous seront utile pour la redaction de vos documents comptables",
         account_group: "Créer vos propres groupes de contact afin de facilité, vos recherches dans la sections contacts",
@@ -364,7 +367,7 @@ const fr =  {
         form_title: "Inscrivez-vous gratuitement",
         pricing: {
             block_001:{
-                title: "15 jours d'essai gratuit",
+                title: "14 jours d'essai gratuit",
                 feature_1: "Gestion des contacts",
                 feature_2: "Gestion de vos documents comptables",
                 feature_3: "Gérer vos tâches quotidiennes",

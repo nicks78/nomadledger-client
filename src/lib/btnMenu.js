@@ -6,11 +6,35 @@ import FilterListIcon from '@material-ui/icons/FilterListOutlined'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import GetAppIcon from '@material-ui/icons/GetApp'
+import {Tooltip} from '@material-ui/core'
+
+
+// function renderSelect(props) {
+//   return <TextField
+//             id="Select year"
+//             select
+//             label={props.locale.wording.select_year}
+//             name="fiscal_year"
+//             value={ props.value || ''}
+//             onChange={ (e) => { props.selected(e) } }
+//             margin="dense"
+//             variant="outlined">
+//
+//             {
+//               ["2019", "2020", "2021"].map((option, index) => (
+//                   <MenuItem key={index} value={ option }>
+//                         {option}
+//                   </MenuItem>
+//               ))
+//             }
+//         </TextField>
+// }
 
 /**
- * @menus array of object
- *
- *
+ * @param {*} menus array
+ * @param {*} locale object
+ * @param toExcel boolean
+ * @param fontSize Number
  */
 class BtnMenu extends React.Component {
 
@@ -37,6 +61,7 @@ class BtnMenu extends React.Component {
 
     return (
       <div style={{ display: "inline-flex" }}>
+
         <IconButton
           aria-owns={anchorEl ? 'menu-list-grow' : undefined}
           aria-haspopup="true"
@@ -44,27 +69,64 @@ class BtnMenu extends React.Component {
         >
           <FilterListIcon style={{ fontSize: fontSize || 24 }}/>
         </IconButton>
-        {toExcel ? <IconButton  onClick={ this.props.onDownload }><GetAppIcon /></IconButton> : null }
+
+
+        {toExcel ? <Tooltip title="Export Excel"><IconButton  onClick={ this.props.onDownload }><GetAppIcon /></IconButton></Tooltip> : null }
+
         <Menu
           id={Date.now()}
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
-          style={{maxHeight: 400}}
+          style={{maxHeight: 400, minWidth: 400, padding: 30}}
         >
         {
             menus.map(( menu, index) => {
                 return <MenuItem
                         key={index}
-                        style={{textTransform: 'capitalize', color: menu.color || "#303030"}}
+                        style={{textTransform: 'capitalize', color: menu.color || "#303030", fontWeight: 400}}
                         onClick={ () => this.handleAction( menu ) }>{menu[localStorage.getItem('locale')]}
                       </MenuItem>
             })
         }
-        </Menu>
+
+      </Menu>
+
       </div>
     );
   }
 }
 
 export default BtnMenu;
+
+// <Popover
+//   id={Date.now()}
+//   anchorEl={anchorEl}
+//   open={Boolean(anchorEl)}
+//   onClose={this.handleClose}
+//   style={{maxHeight: 400, minWidth: 400, padding: 30}}
+// >
+//
+//
+//   <div style={{maxHeight: 400, minWidth: 300, padding: 20}}>
+//     <Typography variant="overline">Filters</Typography>
+//     <br />
+//       <Grid container spacing={24}>
+//         <Grid item xs={12}>
+//           <ApxSelect
+//               arrayField={ menus}
+//               field="filter"
+//               value=""
+//               label={locale.wording.filter_by}
+//               locale={ locale }
+//               helperText="Help me god"/>
+//         </Grid>
+//         <Grid item xs={6}>
+//           <Checkbox value="Archive"  />
+//         </Grid>
+//
+//       </Grid>
+//
+//   </div>
+//
+// </Popover>

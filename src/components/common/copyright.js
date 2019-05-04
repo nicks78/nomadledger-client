@@ -8,7 +8,7 @@ const styles = theme => ({
       position: 'absolute',
       bottom: 55,
       padding: '20px',
-      color: 'rgb(238,238,238)',
+      color: '#303030',
       fontSize: '9px !important',
       [theme.breakpoints.down('sm')]: {
         bottom: 5,
@@ -29,7 +29,7 @@ const Copyright = (props) => {
 
   return (
         <Typography variant="caption" className={ classes.root }>
-                &copy;Copyright {new Date().getFullYear()} by
+                &copy;Copyright {new Date().getFullYear()} by&nbsp;
                 <span className={ classes.span } onClick={ () => { window.open('https://apx-dev.com', '_blank') }}>
                   APX Development Limited</span>. All right reserved.&nbsp;
                   <span className={ classes.span } onClick={() => { window.open('https://api.nomadledger.com/terms.pdf') }}>Terms & Conditions</span>

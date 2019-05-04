@@ -29,11 +29,11 @@ const styles = theme => ({
     },
     lightTooltip: {
       color: 'white',
-      fontWeight: 600,
+      fontWeight: 400,
       maxWidth: 500,
       textAlign: 'center',
       padding: '5px 5px 5px 5px',
-      fontSize: 14,
+      fontSize: 12,
       width: '100%',
       backgroundColor: 'rgba(0,0,0,1)',
   }

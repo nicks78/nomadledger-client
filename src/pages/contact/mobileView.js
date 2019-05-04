@@ -150,8 +150,8 @@ const styles = theme => ({
     minHeight: height + 10
   },
   title: {
-    marginTop: 12,
-    marginBottom: 48
+    marginTop: 24,
+    marginBottom: 48,
   },
   card: {
     position: "relative",

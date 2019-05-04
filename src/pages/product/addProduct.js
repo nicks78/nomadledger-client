@@ -9,15 +9,15 @@ const AddProduct = (props) => {
 
     const fields = [
       {
-        title: locale.subheading.add_product, 
+        title: locale.subheading.add_product,
         label: locale.subheading.label_product,
         fields: [
           { name: 'name', type:"text", required: true, length: 50 },
           { name: 'buying_price', type:"text", required: true},
           { name: 'selling_price', type:"text", required: true},
           { name: 'stock', type:"number"},
-          { name: 'currency', type:"select", selections: currency, helperText: "select_currency", required: true},
-          { name: 'category', type:"select", selections: category, helperText: "select_category", required: true  },
+          { name: 'currency', type:"select", selections: currency, required: true},
+          { name: 'category', type:"select", selections: category, required: true  },
           { name: 'description', type:"longtext", multiline: true, rowsMax:"4" },
         ]
       }
@@ -25,12 +25,12 @@ const AddProduct = (props) => {
 
     return (
       <div>
-        
-          <AddItem 
-            formFields={fields} 
-            locale={locale} 
-            newData={props.newData} 
-            addBtnTitle={ locale.wording.create } 
+
+          <AddItem
+            formFields={fields}
+            locale={locale}
+            newData={props.newData}
+            addBtnTitle={ locale.wording.create }
             headerText={ locale.subheading.add_product }
             limitUploadFile={3}
             isCreating={ props.isCreating }

@@ -2,6 +2,11 @@
 import React from 'react'
 import { TextField, Grid } from '@material-ui/core';
 
+
+/*
+* @params fonc
+*
+*/
 const RegisterForm = (props) =>  {
 
     const {state, updateState, locale} = props
@@ -11,7 +16,7 @@ const RegisterForm = (props) =>  {
           <Grid container spacing={8}>
 
                 <Grid item xs={12} sm={6} md={6}>
-                    <TextField 
+                    <TextField
                         name="firstname"
                         id="firstname"
                         value={ state.firstname || "" }
@@ -20,11 +25,11 @@ const RegisterForm = (props) =>  {
                         required
                         label={ locale.wording.firstname }
                         margin="dense"
-                        variant="filled"
+                        variant="outlined"
                     />
                 </Grid>
                 <Grid item xs={12} sm={6} md={6}>
-                    <TextField 
+                    <TextField
                         name="lastname"
                         id="lastname"
                         onChange={ updateState }
@@ -33,11 +38,11 @@ const RegisterForm = (props) =>  {
                         label={ locale.wording.lastname }
                         value={ state.lastname || "" }
                         margin="dense"
-                        variant="filled"
+                        variant="outlined"
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <TextField 
+                    <TextField
                         name="company_name"
                         id="company_name"
                         onChange={ updateState }
@@ -46,11 +51,11 @@ const RegisterForm = (props) =>  {
                         label={ locale.wording.company_name }
                         value={ state.company_name || "" }
                         margin="dense"
-                        variant="filled"
+                        variant="outlined"
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <TextField 
+                    <TextField
                         name="email"
                         id="email"
                         type="email"
@@ -60,11 +65,11 @@ const RegisterForm = (props) =>  {
                         label={ locale.wording.email }
                         value={ state.email || "" }
                         margin="dense"
-                        variant="filled"
+                        variant="outlined"
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <TextField 
+                    <TextField
                         name="password"
                         id="password"
                         type="password"
@@ -75,12 +80,12 @@ const RegisterForm = (props) =>  {
                         label={ locale.wording.password }
                         value={ state.password || "" }
                         margin="dense"
-                        variant="filled"
+                        variant="outlined"
                     />
                 </Grid>
 
           </Grid>
-        
+
       </div>
     )
 }

@@ -39,16 +39,19 @@ const Styles = theme => ({
 
     },
     listText: {
-
+        borderRadius: "0px 50px 50px 0px",
        '& span': {
-           color: 'white',
+           color: '#303030',
            fontWeight: 300,
        },
        '& svg': {
-         color: 'white',
+          color: '#303030',
         },
         '& :focus': {
             color: theme.palette.secondary.main,
+        },
+        '& :hover': {
+            borderRadius: "0px 50px 50px 0px",
         }
     },
     icon: {
@@ -73,7 +76,7 @@ const Styles = theme => ({
          }
      },
      divider: {
-       backgroundColor: "#797979",
+       backgroundColor: "rgba(230,230,230, 1)",
        width: "90%",
        marginTop: 5,
        marginBottom: 5
@@ -172,7 +175,7 @@ class MainMenu extends React.Component {
                     <ListItemText className={ classes.listText } primary={ locale.task.name } />
                 </ListItem>
             </List>
-            <Divider/>
+            <Divider style={{backgroundColor: "rgba(230,230,230, 1)"}}/>
             <List component="nav">
                 <ListItem button component={NavLink}  className={classes.listTextSecondary}  onClick={ this.props.closeDrawer } to="/archive" activeClassName={classes.active}>
                     <ListItemText  primary={ locale.archive.name } />

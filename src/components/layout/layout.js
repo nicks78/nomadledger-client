@@ -34,13 +34,15 @@ const styles = theme => ({
     drawerPaper: {
         position: 'relative',
         height: '100vh',
-        backgroundColor: theme.palette.sideBar,
+        backgroundColor: theme.palette.lightGrey,
         width: drawerWidth,
         marginTop: '0px',
+        boxShadow: "none",
+        borderRight: "none",
         [theme.breakpoints.up('md')]: {
             marginTop: '66px',
         },
-        boxShadow: '2px 0 10px -8px black'
+        // boxShadow: '2px 0 10px -8px black'
     },
 
     navIconHide: {
@@ -68,7 +70,7 @@ const styles = theme => ({
         flexGrow: 1,
         overflowY: 'auto',
         backgroundColor: theme.palette.lightGrey,
-        padding: theme.spacing.unit * 3,
+        padding: "24px 12px 24px 12px",
         [theme.breakpoints.down('sm')]: {
             margin: 0,
             padding: 0

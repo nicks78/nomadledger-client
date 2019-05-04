@@ -21,7 +21,7 @@ const AddContact = (props) => {
             { name: 'addresses_street', type:"text" },
             { name: 'addresses_zip', type:"text", length: 10 },
             { name: 'addresses_city', type:"text" },
-            { name: 'addresses_country', type:"select", selections: country, helperText: "select_country_code" }
+            { name: 'addresses_country', type:"select", selections: country}
           ]
       },
       {

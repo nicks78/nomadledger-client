@@ -18,7 +18,7 @@ class BarHorizontal extends Component {
         this.setState({
             ctx: new Chart(ctx, {
               type: "horizontalBar",
-              data: this.props.chartData, 
+              data: this.props.chartData,
               options: {
                 tooltips: {
                   callbacks: {
@@ -44,7 +44,7 @@ class BarHorizontal extends Component {
           ctx: ctx
         })
       }
-        
+
     }
 
   render() {
@@ -57,4 +57,3 @@ class BarHorizontal extends Component {
 }
 
 export default BarHorizontal
-

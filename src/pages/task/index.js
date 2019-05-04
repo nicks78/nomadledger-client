@@ -147,7 +147,7 @@ const styles = theme => ({
       },
     },
     title: {
-        color: "rgb(128, 128, 128)"
+        color: theme.palette.caption
     },
     span: {
       height: '15px',
@@ -161,7 +161,7 @@ const styles = theme => ({
     },
     spanDate: {
       marginTop: 10,
-      fontWeight: 600,
+      fontWeight: 400,
       textTransform: "capitalize"
     }
 })

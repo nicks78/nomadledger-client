@@ -50,11 +50,11 @@ const styles = theme => ({
   },
   lightTooltip: {
     color: 'white',
-    fontWeight: 600,
+    fontWeight: 400,
     maxWidth: 500,
     textAlign: 'center',
     padding: '5px 5px 5px 5px',
-    fontSize: 14,
+    fontSize: 12,
     width: '100%',
     backgroundColor: 'rgba(0,0,0,1)',
 }
@@ -93,7 +93,7 @@ class Account extends Component {
       <div>
           <Grid container className={classes.root} spacing={16}>
 
-                <Grid item xs={12}>
+          <Grid item xs={12}>
                 <Paper className={classes.paper}>
                   <div className={classes.paddingContent}>
                     <Company handleFormEdit={ this.handleFormEdit }/>

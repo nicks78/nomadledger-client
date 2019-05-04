@@ -17,9 +17,6 @@ const styles = theme =>  ({
     tableHead: {
         backgroundColor: "rgb(238,238,238)"
     },
-    customWidth: {
-        maxWidth: 300,
-    },
     paper: {
         position: 'relative',
         padding: 0,
@@ -28,7 +25,17 @@ const styles = theme =>  ({
             boxShadow: 'none',
             borderRadius: 0
         },
-    }
+    },
+    lightTooltip: {
+      color: 'white',
+      fontWeight: 400,
+      maxWidth: 300,
+      textAlign: 'center',
+      padding: '5px 5px 5px 5px',
+      fontSize: 12,
+      width: '100%',
+      backgroundColor: 'rgba(0,0,0,1)',
+  }
 })
 
 class Service extends Component {
@@ -45,7 +52,7 @@ class Service extends Component {
 
     componentDidMount(){
             this.props.getTotal(this.state.reducer)
-            this.props.getItemList(this.state.reducer, "list?limit=10&skip=0");
+            this.props.getItemList(this.state.reducer, "list?limit=5&skip=0");
             window.addEventListener('resize', this.getWindowWidth);
     }
 
@@ -109,7 +116,6 @@ class Service extends Component {
                         <TableRow>
                             <TableCell>{locale.wording.service_name}</TableCell>
                             <TableCell align="right">{locale.wording.price}</TableCell>
-                            <TableCell align="center">{locale.wording.currency}</TableCell>
                             <TableCell align="right">{locale.wording.type}</TableCell>
                             <TableCell>{locale.wording.category}</TableCell>
                             <TableCell>{locale.wording.description}</TableCell>
@@ -122,11 +128,10 @@ class Service extends Component {
                                 this.props.listServices.map(( service, index) => {
                                     return  <TableRow key={index}>
                                                 <TableCell><Link to={ `/${reducer.toLowerCase()}/view/${service._id.toLowerCase()}`}><span style={{textTransform: "capitalize"}}  className="link">{service.name}</span></Link></TableCell>
-                                                <TableCell className="tableNumber" align="right">{cvtNumToUserPref(service.price)}</TableCell>
-                                                <TableCell align="center">{service.currency.en}</TableCell>
+                                                <TableCell className="tableNumber" align="right">{cvtNumToUserPref(service.price)} {service.currency.value}</TableCell>
                                                 <TableCell align="right">{ service.service_type[localStorage.getItem('locale')] }</TableCell>
                                                 <TableCell style={{textTransform: 'capitalize'}}>{service.category[localStorage.getItem('locale')]}</TableCell>
-                                                <Tooltip className={classes.customWidth} title={service.description}><TableCell>{service.description.slice(0,5)}...</TableCell></Tooltip>
+                                                <Tooltip classes={{ tooltip: classes.lightTooltip }} title={service.description} ><TableCell>{service.description.slice(0,5)}...</TableCell></Tooltip>
                                                 <TableCell align="center" onClick={() => { this.props.deleteElement( reducer, `delete/${service._id}`) } }><DeleteIcon style={{color: 'red', cursor: 'pointer', fontSize: 18}}  /></TableCell>
                                             </TableRow>
                                 })

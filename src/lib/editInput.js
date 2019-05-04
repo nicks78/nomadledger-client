@@ -24,7 +24,7 @@ const styles = theme => ({
  */
 const EditInput = (props) => {
 
-    const { field, handleAction, showEdit, label, value , classes, required} = props
+    const { field, handleAction, showEdit, label, value , classes, required, disabled} = props
 
     if(showEdit){
         return <div style={{marginBottom: 15}}>
@@ -35,6 +35,7 @@ const EditInput = (props) => {
                     className={classes.textField}
                     value={value}
                     name={field}
+                    disabled={disabled || false}
                     variant="outlined"
                     onChange={ handleAction  }
                     margin="dense"

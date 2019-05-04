@@ -11,13 +11,13 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       // light:  '#009AFF',
-      main: '#00aff2', // '#0077c5',
+      main: '#5A6899',
       // dark:  '#265C7F',
       contrastText: '#fff',
     },
     secondary: {
       // light: '#38CC24', // '#ff6666', //'#ff9d3f',
-      main: 'rgba(239, 108, 0, 1)', //'#2ca01c',
+      main: "#F26767", // rgba(239, 108, 0, 1)',
       // dark:  '#38CC24',
       contrastText: '#fff',
     },
@@ -28,7 +28,7 @@ const theme = createMuiTheme({
       dark: 'rgb(48, 48, 48)',
     },
     caption: "rgba(0, 0, 0, 0.54)",
-    lightGrey: 'rgb(238,238,238)',
+    lightGrey: 'rgba(243,243,243)',
     sideBar: "rgb(44,47,50)",
     error: {
       warning: 'yellow',
@@ -58,7 +58,7 @@ const theme = createMuiTheme({
     h2: {
       fontSize: '1.3rem',
       color: 'rgb(48, 48, 48)',
-      fontWeight: 400,
+      fontWeight: 300,
       textTransform: "capitalize"
     },
     h3: {

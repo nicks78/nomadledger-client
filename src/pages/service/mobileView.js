@@ -53,10 +53,10 @@ class MobileView extends React.Component {
             <Card className={this.props.classes.card} >
             <div className={this.props.classes.details}>
               <CardContent className={this.props.classes.content}>
-                <Typography variant="body1" style={{textTransform: "capitalize"}}>
+                <Typography variant="subtitle1" style={{textTransform: "capitalize", fontWeight: 300}}>
                   {service.name}
                   <span style={{position: "absolute", right: 24, fontWeight: 700, color: '#303030'}}>
-                    {cvtNumToUserPref(service.price)} {service.currency.en} (<i>{service.service_type[localStorage.getItem("locale")]}</i>)<br />
+                    {cvtNumToUserPref(service.price)} {service.currency.en}
                   </span>
                 </Typography>
               </CardContent>
@@ -94,18 +94,18 @@ const styles = theme => ({
     minHeight: height + 10
   },
   title: {
-    marginTop: 12,
-    marginBottom: 24,
-    fontWeight: 400
+    marginTop: 24,
+    marginBottom: 24
   },
   card: {
     position: "relative",
     display: "flex",
     alignItems: "center",
     paddingLeft: 24,
-    borderBottom: '1px solid rgb(238,238,238)',
+    borderBottom: '1px solid rgba(230,230,230, 1)',
     borderRadius: 0,
-    height: 80
+    height: 80,
+    boxShadow: 'none'
   }
 })
 

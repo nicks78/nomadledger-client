@@ -49,8 +49,8 @@ class MobileView extends React.Component {
   renderCard = (item) => {
       return <Link to={`/${this.props.reducer.toLowerCase()}/${item.status.code === "1" ? "edit" : "view" }/${item._id.toLowerCase()}`}>
               <Card className={this.props.classes.card} >
-                <Avatar style={{backgroundColor: item.status.color, fontWeight: 400 , fontSize: 15 }} >
-                  {item.status[localStorage.getItem("locale")].slice(0,1)}
+                <Avatar style={{backgroundColor: item.status.color, fontWeight: 400 , fontSize: 15, height: 20, width: 20 }} >
+
                 </Avatar>
               <div className={this.props.classes.details}>
                 <CardContent className={this.props.classes.content}>
@@ -99,18 +99,18 @@ const styles = theme => ({
     minHeight: height + 10
   },
   title: {
-    marginTop: 12,
-    marginBottom: 24,
-    fontWeight: 400
+    marginTop: 24,
+    marginBottom: 24
   },
   card: {
     position: "relative",
     display: "flex",
     alignItems: "center",
     paddingLeft: 24,
-    borderBottom: '1px solid rgb(238,238,238)',
+    borderBottom: '1px solid rgba(230,230,230, 1)',
     borderRadius: 0,
-    height: 80
+    height: 80,
+    boxShadow: 'none'
   }
 })
 

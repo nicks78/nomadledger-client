@@ -6,6 +6,7 @@ import { withStyles, Typography, Avatar } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { cvtNumToUserPref } from '../../utils/help_function';
 
 const height = window.innerHeight;
 
@@ -60,7 +61,7 @@ class MobileView extends React.Component {
                     <span style={{ fontSize: 8 }}>{expense.receipt_date.label}</span><br />
                     {expense.name}
                   <span style={{position: "absolute", right: 24, fontWeight: 700}}>
-                      {expense.price} {expense.currency.en}
+                      { cvtNumToUserPref(expense.price)} {expense.currency.en}
                     </span>
                   </Typography>
                   <Typography variant="body2" color="textSecondary">
@@ -102,9 +103,8 @@ const styles = theme => ({
     minHeight: height + 10
   },
   title: {
-    marginTop: 12,
-    marginBottom: 24,
-    fontWeight: 400
+    marginTop: 24,
+    marginBottom: 24
   },
   card: {
     position: "relative",
@@ -113,7 +113,8 @@ const styles = theme => ({
     paddingLeft: 24,
     borderBottom: '1px solid rgb(238,238,238)',
     borderRadius: 0,
-    height: 80
+    height: 80,
+    boxShadow: 'none'
   }
 })
 

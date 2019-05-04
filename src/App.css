@@ -4,10 +4,10 @@ html, body {
 }
 body{
   background-color: rgba(251,251,251,1);
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 html {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 .AppBar {
   border: 1px solid transparent;
@@ -41,18 +41,18 @@ a:hover {
 .link {
   text-decoration: none;
   position: relative;
-  color: #009AFF;
-  padding-bottom: 2px;
+  color: #5A6899;
+  padding-bottom: 3px;
   cursor: pointer;
 }
-
+/* 009AFF */
 .link:after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 0;
   width: 0%;
-  border-bottom: 1px solid #38CC24;
+  border-bottom: 2px solid #F26767;
   transition: 0.4s;
 }
 
