@@ -5,6 +5,8 @@ import { withStyles, Typography, Avatar } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { cvtNumToUserPref } from '../../../utils/help_function';
+
 
 const height = window.innerHeight;
 
@@ -47,7 +49,7 @@ class MobileView extends React.Component {
   }
 
   renderCard = (item) => {
-      return <Link to={`/${this.props.reducer.toLowerCase()}/${item.status.code === "1" ? "edit" : "view" }/${item._id.toLowerCase()}`}>
+      return <Link to={`/${this.props.reducer.toLowerCase()}/${item.status.code === "1" || item.status.code === "2" ? "edit" : "view" }/${item._id.toLowerCase()}`}>
               <Card className={this.props.classes.card} >
                 <Avatar style={{backgroundColor: item.status.color, fontWeight: 400 , fontSize: 15, height: 20, width: 20 }} >
 
@@ -58,7 +60,7 @@ class MobileView extends React.Component {
                     {item.contact_id.company_name}<br />
                     <span style={{ fontSize: 8 }}>{new Date(item.createAt.date).toLocaleString("fr")}</span>
                       <span style={{position: "absolute", right: 24, fontWeight: 700}}>
-                          {item.subtotal} {item.currency.en}
+                          { cvtNumToUserPref( item.subtotal )} {item.currency.en}
                         </span>
                   </Typography>
                   <Typography variant="body2" color="textSecondary">

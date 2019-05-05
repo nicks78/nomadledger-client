@@ -10,7 +10,7 @@ export default class Pagination extends Component {
         this.state = {
             selected: [],
             skip: 0,
-            limit: this.props.limit || 5,
+            limit: this.props.limit || 10,
             page: 0,
             numSelected: 0,
             rowCount: 0,
