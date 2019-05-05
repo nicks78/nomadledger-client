@@ -219,6 +219,7 @@ class Layout extends React.Component {
                     <ApxCopyright />
                 </Drawer>
             </Hidden>
+
             <Hidden smDown implementation="css">
                 <Drawer
                     variant="permanent"

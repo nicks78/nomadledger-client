@@ -8,46 +8,47 @@ import ApxSelect from '../../components/common/select'
 
 
 const EditTask = (props) => {
-    const { itemToUpdate , classes, status, task, locale} = props
+    const { itemToUpdate , classes, status, task, locale, isFetching} = props
 
     return (
       <div>
-        <CheckIcon onClick={ () => { props.onUpdateTask(task) } } style={{float: 'right', color: 'green', fontSize: 18, cursor: "pointer", marginTop: 5}} />
-        <Grid container spacing={24}>
-          
-            <Grid item xs={4}>
+        { !isFetching ? <CheckIcon onClick={ () => { props.onUpdateTask(task) } } style={{float: 'right', color: 'green', fontSize: 18, cursor: "pointer", marginTop: 5}} /> : null }
+        <Grid container spacing={8}>
+
+            <Grid item xs={12} sm={4} md={4}>
             <TextField
                   label={locale.wording.due_date}
                   id="due_date"
                   disabled
                   style={{width: '100%'}}
                   value={  itemToUpdate.due_date.label || ''}
-                  className={classes.test}
+                  className={classes.textField}
                   variant="filled"
                   margin="dense"
                   InputProps={{
                       startAdornment: <InputAdornment position="start">
-                          <DayPickers 
+                          <DayPickers
                                   value={ itemToUpdate.due_date ? itemToUpdate.due_date.intl_format : ""}
                                   handleDate={ (e) =>  props.onCreateStateTask(null, "due_date", e.target.value) }
                                   field="due_date"
-                              /> 
+                              />
                       </InputAdornment>,
                   }}
               />
             </Grid>
-            <Grid item xs={4}>
-              <TextField 
+            <Grid item xs={12} sm={4} md={4}>
+              <TextField
                   variant="filled"
                   label={locale.wording.subject}
                   value={itemToUpdate.subject || ""}
+                  className={classes.textField}
                   margin="dense"
                   fullWidth
                   onChange={(e) => { props.onCreateStateTask(null, 'subject', e.target.value) }}
                 />
             </Grid>
-            <Grid item xs={4}>
-              <ApxSelect 
+            <Grid item xs={12} sm={4} md={4}>
+              <ApxSelect
                   arrayField={status}
                   field="status"
                   value={itemToUpdate.status[localStorage.getItem("locale")] || ""}
@@ -58,7 +59,7 @@ const EditTask = (props) => {
               />
             </Grid>
         </Grid>
-          <TextField 
+          <TextField
             variant="filled"
             value={itemToUpdate.short_desc || ""}
             label={locale.wording.short_desc}
@@ -75,8 +76,10 @@ const EditTask = (props) => {
 
 
 const styles = theme => ({
+  textField: {
+    marginTop: 0,
+  }
 
-    
 })
 
 

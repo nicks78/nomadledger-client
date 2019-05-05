@@ -5,118 +5,73 @@ import {DEFAULT_URL} from '../../../redux/constant'
 import {Typography, withStyles} from '@material-ui/core';
 
 const Jumbotron = (props) => {
-    
+
     const {locale, classes} = props
 
     return (
-        <div className={classes.jumbotron}>
-        <div className={classes.jumbotron_1}>
-
-        <div style={{ marginLeft: 30 }}>
-             
-            <Typography className={classes.companyName} variant="h1">
-                <img src={`${DEFAULT_URL}img/logo.png`} alt="logo" height="80" width="auto"  className={classes.logo}/>
-                <span>{locale.company_name}</span>
-            </Typography>
-        </div>
-
-            <div className={ classes.img_01 }>
-                <Typography align="center" variant="h1" className={classes.title}>
-                    <img src={`${DEFAULT_URL}img/logo.png`} alt="logo" height="80" width="auto"  className={classes.logoMobile}/><br />
-                        {locale.home_page.title_01}
-                </Typography>
-                <div id="textIntro" className={classes.textIntro}>
-                    <Typography variant="h1" style={{color: "white"}}> {locale.home_page.title_01}</Typography>
-                    <Typography align="justify" variant="body2" style={{color: "white"}}>
-                        {locale.home_page.paragraphe_01}
-                    </Typography>
-                </div>
+        <div>
+          <div id="jumbotron" className={classes.jumbotron}>
+            <div className={classes.headerText}>
+              <Typography className={ classes.title } variant="h1">The nomad software<br />for freelancer</Typography>
+              <br />
+              <Typography variant="h2" className={ classes.subtitle }>
+                NomadLedger is an easy to use software to manage your accounting document and keep track of your objective in just a few click.
+              </Typography>
             </div>
-           
+
+            <div className={classes.headerImg}>
+              <img src={`${DEFAULT_URL}img/header.png`} width="700" alt="header" />
+            </div>
+          </div>
+          <svg width="100%" height="100%" viewBox="0 0 2481 198" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            style={{fillRule: "evenodd", clipRule:"evenodd" , strokeLinecap:"round" , strokeLinejoin:"round", strokeMiterLimit:"1.5", marginTop: -7}}>
+            <g transform="matrix(1,0,0,1,0,-1410.5)">
+             <path
+               d="M5.777,1418.83C258.133,1443.55 510.673,1467.13 763.748,1483.27C932.34,1494.02 1101.29,1502.42 1270.27,1502.52C1433.76,1502.61 1597.22,1494.5 1760.32,1483.84C2001.05,1468.12 2241.21,1444.81 2481.17,1420.26"
+               style={{fill:"rgb(243,243,243)",stroke:"rgb(243,243,243)",strokeWidth:"16.67px"}}/>
+            </g>
+          </svg>
         </div>
-        <div className={classes.jumbotron_2}>
-        </div>
-    </div>
     )
 }
 
 
 const styles = theme => ({
-    jumbotron: {
-        height: 500,
-        backgroundColor: 'rgb(44,47,50)',
-        overflow: "hidden",
-        [theme.breakpoints.down('sm')]: {
-            height: 250
-        }
-        
-    },
-    jumbotron_1: {
-        float: 'left',
-        width: '35%',
-        [theme.breakpoints.down('sm')]: {
-            width: '100%',
-            height: '100%' 
-        }
-    },
-    companyName: {
-        color: "white",
-        width: '100%',
-        [theme.breakpoints.down('sm')]: {
-            display: "none" 
-        }
-    },
-    textIntro: {
-        [theme.breakpoints.down('sm')]: {
-            display: "none" 
-        }
-    },
-    img_01: {
-        backgroundImage: `url(${DEFAULT_URL}img/background_1.jpg)`,
-        backgroundSize: 'cover',
-        backgroundPosition: "top",
-        backgroundRepeat: "no-repeat",
-        paddingTop: 80,
-        paddingBottom: 100,
-        width: "120%",
-        [theme.breakpoints.down('sm')]: {
-            paddingTop: 0,
-            paddingBottom: 0,
-            width: "100%", 
-            height: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-        }
-    },
-    logo:{
-        display: "inline-block",
-        margin: "0 auto",
-        verticalAlign: "middle"
-    },
-    logoMobile:{
-        [theme.breakpoints.up('sm')]: {
-            display: 'none' 
-        }
-    },
-    jumbotron_2: {
-        backgroundImage: `url(${DEFAULT_URL}img/background_2.jpg)`,
-        backgroundSize: 'cover',
-        backgroundRepeat: "no-repeat",
-        height: "100%",
-        backgroundPosition: "top",
-        marginLeft: '30%',
-        [theme.breakpoints.down('sm')]: {
-            display: 'none' 
-        }
-    },
-    title: {
-        color: "white", 
-        marginBottom: 12,
-        [theme.breakpoints.up('sm')]: {
-            display: 'none' 
-        }
-    },
+  title: {
+    color: theme.palette.secondary.main,
+    fontWeight: 100,
+    fontSize: 52
+  },
+  subtitle: {
+    fontSize: 20,
+    color: theme.palette.caption,
+    textTransform: "none",
+    lineHeight: "1.46429em",
+    fontWeight: 300,
+  },
+  jumbotron: {
+      display: "flex",
+      justifyContent: "center",
+      padding: 24,
+      overflow: "hidden",
+      backgroundColor: theme.palette.lightGrey,
+  },
+  headerText: {
+    width: "60%",
+    marginTop: 150,
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+      marginTop: 0,
+      textAlign: "center"
+    }
+  },
+  headerImg: {
+    width: "40%",
+    marginTop: -10,
+    [theme.breakpoints.down("xs")]: {
+      display: "none"
+    }
+  },
 })
 
 export default withStyles(styles)(Jumbotron)

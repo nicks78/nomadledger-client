@@ -62,11 +62,6 @@ const Styles = theme => ({
         textAlign: 'center',
         borderBottom: `1px solid rgba(0, 0, 0, 0.12)`
     },
-    nested: {
-        '& span': {
-           color: 'white',
-       },
-    },
     listTextSecondary: {
         '& span': {
             color: '#8c8c8c',
@@ -102,7 +97,7 @@ class MainMenu extends React.Component {
             <Hidden mdUp>
                 <div className={classes.header}>
                     <img src={company.logo_company && company.logo_company.full_path !== "" ? company.logo_company.full_path : DEFAULT_IMG} alt="logo" height="40" width="auto" />
-                    <Typography variant="body1" style={{ color: 'white'}}>{ company.company_name }</Typography>
+                    <Typography variant="h3">{ company.company_name }</Typography>
                 </div>
             </Hidden>
             <List component="nav" disablePadding className={classes.listText}>
@@ -175,7 +170,7 @@ class MainMenu extends React.Component {
                     <ListItemText className={ classes.listText } primary={ locale.task.name } />
                 </ListItem>
             </List>
-            <Divider style={{backgroundColor: "rgba(230,230,230, 1)"}}/>
+            <Divider style={{backgroundColor: "rgba(0, 0, 0, 0.12)"}}/>
             <List component="nav">
                 <ListItem button component={NavLink}  className={classes.listTextSecondary}  onClick={ this.props.closeDrawer } to="/archive" activeClassName={classes.active}>
                     <ListItemText  primary={ locale.archive.name } />

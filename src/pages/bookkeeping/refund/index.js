@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { Link } from "react-router-dom"
 import {DEFAULT_URL} from "../../../redux/constant"
+import {downloadFile} from '../../../redux/download/actions'
 import {connect} from 'react-redux'
 import {  getBookList, updateField, createState, downloadPdf, resetState } from '../../../redux/book/actions'
 import { getTotal } from '../../../redux/library/actions'
@@ -84,6 +85,8 @@ class Refund extends Component {
                 locale={locale}
                 menus={ status && [...status, {fr: "Tous", en: "All", code: "none"}]  }
                 onChangeQuery={ this.handleFilterRequest }
+                toExcel={true}
+                onDownload={ () => { this.props.downloadFile(reducer, `export/excel-file`) } }
             />
             <div style={{ overflowY: "auto" }}>
                     <Table padding="dense">
@@ -226,4 +229,4 @@ const mapStateToProps = (state) => {
 
 const StyledRefund = withStyles(styles)(Refund)
 
-export default connect(mapStateToProps, {  getBookList, getTotal, updateField, createState, downloadPdf, resetState  })(StyledRefund);
+export default connect(mapStateToProps, {  getBookList, getTotal, updateField, createState, downloadPdf, resetState, downloadFile  })(StyledRefund);

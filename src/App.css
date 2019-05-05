@@ -165,6 +165,14 @@ a:hover {
   100% { color: white }
 }
 
+
+.curve-container__curve {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    position: relative;
+    display: block;
+  }
+
 /*****************************************
   STRIPE
 ********************************************/

@@ -97,12 +97,14 @@ class Task extends Component {
                                                         task={task}
                                                         status={status}
                                                         itemToUpdate={itemToUpdate}
+
                                                         onCreateStateTask={this.props.createStateTask}
                                                         onUpdateTask={this.handleUpdateTask}
                                                       />
 
                                                     : <TaskCard
                                                         task={task}
+                                                        isFetching={isFetching}
                                                         id={id}
                                                         onEdit={this.handleEdit}
                                                       />
@@ -126,7 +128,7 @@ const styles = theme => ({
 
     },
     paper: {
-      padding: '5px 10px 5px 10px',
+      padding: '10px 15px 10px 15px',
       position: 'relative',
       minHeight: 60,
       margin: "20px 0px 20px 20px",
