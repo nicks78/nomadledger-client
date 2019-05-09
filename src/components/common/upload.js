@@ -27,10 +27,10 @@ const styles = theme => ({
 })
 
 // function handleFile (file) {
-//     if(file.type === 'image/png' || file.type === 'image/jpeg' ){ // Check file format 
+//     if(file.type === 'image/png' || file.type === 'image/jpeg' ){ // Check file format
 //         var imagesArray = this.props.newData.doc ?  this.props.newData.doc : [];
-//         file.blob = URL.createObjectURL(file) 
-//         imagesArray.push(file) 
+//         file.blob = URL.createObjectURL(file)
+//         imagesArray.push(file)
 //     }else{
 //         alert(this.props.locale.message.error_file_not_allowed)
 //     }
@@ -54,17 +54,17 @@ const  Upload = (props) => {
     const {classes, images, limitUploadFile, removeItem, docType } = props;
     const idInput =  Date.now().toString();
 
-    
+
 
     return (
-    
+
     <div className={ classes.root}>
         <List className={ classes.gallery }>
             {
                 images.map((value, index) => {
                     return  <ListItem key={index} dense button className={classes.listItem}>
                                 <Avatar  alt={value.name} src={value.blob} />
-                                <ListItemText primary={value.name} />
+                                <ListItemText primary={value.name.slice(0,10)+"..."} />
                                 <ListItemSecondaryAction>
                                     <IconButton className={classes.closeIcon} onClick={ () => { removeItem(value.lastModified, 'lastModified', 'doc') }  }>
                                         <CloseIcon />
@@ -92,7 +92,7 @@ const  Upload = (props) => {
                 </label>
             </div>
         }
-        
+
     </div>
     )
 }

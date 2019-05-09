@@ -13,6 +13,7 @@ InputAdornment
 
 import ApxSelect  from '../../../components/common/select'
 import ApxRichEditor from '../../../components/common/richEditor'
+import ApxRadioGroup from '../../../components/common/radioGroup'
 import AutoComplete from '../../../lib/autoComplete'
 import ContactSection from './contactSection';
 import Items from './items'
@@ -24,7 +25,7 @@ import ApxTitleBar from '../../../components/common/titleBar'
 
 const Form = (props) => {
 
-    const { data, list, reducer, locale, classes, vat, btnLabel, date_1, date_2, formTitle, isUpdating, currency } = props
+    const { data, list, reducer, locale, classes, vat, btnLabel, date_1, date_2, formTitle, isUpdating, currency, status } = props
 
     return  <div>
 
@@ -60,46 +61,46 @@ const Form = (props) => {
                             <Grid container spacing={8}>
                                 <Grid item xs={12} sm={props.refund ? 12 : 6} md={props.refund ? 12 : 6}>
                                     <TextField
-                                        label={ locale.wording[date_1] }
-                                        id={date_1}
-                                        disabled
-                                        required
-                                        margin="dense"
-                                        className={ classes.inputDate }
-                                        value={ data[date_1] ? data[date_1].label : ""}
-                                        variant="outlined"
-                                        InputProps={{
-                                            startAdornment: <InputAdornment position="start">
-                                                <DatePickers
-                                                        value={ data[date_1] ? data[date_1].intl_format : ""}
-                                                        handleDate={ props.handleDropDown }
-                                                        field={date_1}
-                                                    />
-                                            </InputAdornment>,
-                                        }}
+                                            label={ locale.wording[date_1] }
+                                            id={date_1}
+                                            disabled
+                                            required
+                                            margin="dense"
+                                            className={ classes.inputDate }
+                                            value={ data[date_1] ? data[date_1].label : ""}
+                                            variant="outlined"
+                                            InputProps={{
+                                                startAdornment: <InputAdornment position="start">
+                                                    <DatePickers
+                                                            value={ data[date_1] ? data[date_1].intl_format : ""}
+                                                            handleDate={ props.handleDropDown }
+                                                            field={date_1}
+                                                        />
+                                                </InputAdornment>,
+                                            }}
                                         />
                                 </Grid>
                                 {
                                     !props.refund ?
                                     <Grid item xs={12} sm={6} md={6}>
                                         <TextField
-                                            label={ locale.wording[date_2] }
-                                            id={date_2}
-                                            disabled
-                                            required
-                                            margin="dense"
-                                            className={ classes.inputDate }
-                                            value={ data[date_2] ? data[date_2].label : ""}
-                                            variant="outlined"
-                                            InputProps={{
-                                                startAdornment: <InputAdornment position="start">
-                                                    <DatePickers
-                                                            value={ data[date_2] ? data[date_2].intl_format : ""}
-                                                            handleDate={ props.handleDropDown }
-                                                            field={date_2}
-                                                        />
-                                                </InputAdornment>,
-                                            }}
+                                                label={ locale.wording[date_2] }
+                                                id={date_2}
+                                                disabled
+                                                required
+                                                margin="dense"
+                                                className={ classes.inputDate }
+                                                value={ data[date_2] ? data[date_2].label : ""}
+                                                variant="outlined"
+                                                InputProps={{
+                                                    startAdornment: <InputAdornment position="start">
+                                                        <DatePickers
+                                                                value={ data[date_2] ? data[date_2].intl_format : ""}
+                                                                handleDate={ props.handleDropDown }
+                                                                field={date_2}
+                                                            />
+                                                    </InputAdornment>,
+                                                }}
                                             />
                                     </Grid>
                                     : null
@@ -170,6 +171,13 @@ const Form = (props) => {
 
                     </Grid>
                     <br/>
+                    <Typography variant="caption" dangerouslySetInnerHTML={{__html: locale.helperText.infos_status }} ></Typography>
+                    <ApxRadioGroup
+                        action={  props.handleDropDown }
+                        value={data.status ? data.status.code : '0'}
+                        arrayObject={ status  }
+                        />
+                    <br/><br/>
                   <ApxTitleBar
                     text={locale.subheading.info_comp }
                     hideEdit={true}
@@ -225,7 +233,7 @@ const Form = (props) => {
                         <Button
                             variant="contained"
                             color="primary"
-                            disabled={ isUpdating || !data.currency || !data.vat || !data.contact_id ? true : false }
+                            disabled={ isUpdating || !data.status || !data.currency || !data.vat || !data.contact_id ? true : false }
                             onClick={ () => { props.handleSubmit(reducer)} }>
                             { isUpdating ? locale.wording.loading : btnLabel}
                         </Button>

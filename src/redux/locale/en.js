@@ -83,7 +83,7 @@ const en = {
         label_contact_info: "Contact information",
         label_comp_address: "Company address",
         label_annual_turnover: "Annual turnover",
-        label_net_profit: "Annual profit (net)",
+        label_revenue: "Revenues",
         label_daily_task: "TODO",
         label_forgot_pwd: "We'll send a recovery link to",
         link_forgot_pwd: "Forgot password ?",
@@ -225,6 +225,7 @@ const en = {
         approved: 'Approved',
         rejected: "Rejected",
         paid: "Paid",
+        cancel: "Cancel",
         invoicer: "Convert to invoice",
         all: "All",
         reference: "Reference",
@@ -277,6 +278,9 @@ const en = {
         account_vat: "List all your VAT rates, you will need them to create your accounting documents",
         account_group: "Easily create contact groups to aid search filter",
         account_category: "Categorize your products/services/expenses, you can add a color for each category to use in your dashboard",
+        action_table: "CAUTIOUS - Sent/Paid/Canceled cannot be edited !",
+        action_table_refund: "CAUTIOUS - Sent/Refunded/Canceled cannot be edited !",
+        action_table_quote: "CAUTIOUS - Approved/Canceled cannot be edited !"
 
     },
     message: {
@@ -290,6 +294,7 @@ const en = {
         success_email_sent: "Message sent, we'll get back to you as soon as possible",
         success_payment: "Payment successful, you can now log in to your account",
         success_send_email_confirm: "A confirmation email has been sent, please follow the instructions",
+        success_sent_document: "Document sent",
 
         error_payment: "Payment error, please try again or contact us at support@nomadledger.com",
         error_email_not_sent: "Error - message not sent, please try again or contact us at support@nomadledger.com",

@@ -9,12 +9,12 @@ import {  getBookList, updateField, createState, downloadPdf, resetState } from 
 import { getTotal } from '../../../redux/library/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import AddIcon from '@material-ui/icons/AddOutlined'
-import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, TableCell, TableRow, Fab, Switch} from '@material-ui/core';
+import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, TableCell, TableRow, Fab} from '@material-ui/core';
 import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
-import ApxSelect from '../../../components/common/select'
 import MobileView from '../common/mobileView'
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 
 class Refund extends Component {
@@ -29,7 +29,7 @@ class Refund extends Component {
 
     componentDidMount(){
         this.props.getTotal(this.state.reducer );
-        this.props.getBookList(this.state.reducer, "list?limit=5&skip=0");
+        this.props.getBookList(this.state.reducer, "list?limit=10&skip=0");
     }
 
     componentWillReceiveProps(nextProps){
@@ -57,13 +57,9 @@ class Refund extends Component {
         this.props.getBookList(this.state.reducer, `list?limit=10&skip=0&status=${value.code || '10'}`);
     }
 
-    handleStatus = (event) => {
-        this.props.createState(this.state.reducer, event.target.name, event.target.value);
-    }
-
     render() {
 
-    const { isFetching,  locale, classes, newRefund, status, total} = this.props
+    const { isFetching,  locale, classes, newRefund, status, total, actionLoading} = this.props
     const { reducer, width, listRefund } = this.state
     const isMobile = width <= 500;
 
@@ -92,16 +88,16 @@ class Refund extends Component {
                     <Table padding="dense">
                     <TableHead className={classes.tableHead}>
                         <TableRow>
+                            <TableCell>{locale.wording.date}</TableCell>
                             <TableCell>{locale.wording.reference}</TableCell>
                             <TableCell>{locale.wording.client}</TableCell>
-                            <TableCell>{locale.wording.currency}</TableCell>
                             <TableCell>{locale.wording.subtotal}</TableCell>
-                            <TableCell>{locale.wording.vat}</TableCell>
-                            <TableCell>{locale.wording.total}</TableCell>
                             <TableCell>{locale.wording.status}</TableCell>
-                            <TableCell>PDF</TableCell>
-                            <TableCell align="center">Actions</TableCell>
-                            <TableCell align="center">{ locale.wording.archive }</TableCell>
+                            <TableCell align="center">PDF</TableCell>
+                            <TableCell align="center">Actions<br />
+                              <span style={{fontSize: 8, color: "red"}}>{locale.helperText.action_table_refund}</span><br />
+                            { actionLoading ? <LinearProgress color="secondary" variant="query" /> : null }
+                            </TableCell>
 
                         </TableRow>
                         </TableHead>
@@ -109,49 +105,33 @@ class Refund extends Component {
                         <TableBody className={classes.tableBody}>
                             {   !isFetching ?
                                 this.props.listRefund.map(( refund, index) => {
-                                    let total = refund.subtotal * refund.vat.indice / 100
                                     return  <TableRow key={index}>
+                                                <TableCell>{new Date(refund.createAt.date).toLocaleDateString(localStorage.getItem('locale'))}</TableCell>
                                                 <TableCell><Link className="link" to={`/refund/view/${refund._id}`}>{locale.wording.pya}-{refund.ref}</Link></TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${refund.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{refund.contact_id.company_name}</span></Link></TableCell>
-                                                <TableCell>{refund.currency.en}</TableCell>
                                                 <TableCell className="tableNumber">{cvtNumToUserPref(refund.subtotal)} {refund.currency.value}</TableCell>
-                                                <TableCell className="tableNumber">{cvtNumToUserPref(refund.vat.indice) + "%"}</TableCell>
-                                                <TableCell className="tableNumber">{cvtNumToUserPref(total  )} {refund.currency.value}</TableCell>
-                                                <TableCell>
-                                                    {
-                                                        refund.status.code === "11" || refund.status.code === "8" ?
-                                                        <span style={{color: refund.status.color }}>
+                                                <TableCell><span style={{color: refund.status.color }}>{ refund.status[localStorage.getItem('locale')] }</span></TableCell>
+                                                <TableCell align="center"><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, refund._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
 
-                                                        { refund.status[localStorage.getItem('locale')] }</span>
-
-                                                        :   <ApxSelect
-                                                                arrayField={status}
-                                                                value={refund.status[localStorage.getItem('locale')]}
-                                                                variant="standard"
-                                                                handleAction={ (event) => { this.props.updateField(reducer, { status: event.target.value}, refund._id) } }
-                                                                locale={locale}
-                                                            />
-                                                    }
-                                                </TableCell>
-                                                <TableCell><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, refund._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
-                                                <ApxTableActions
-                                                    actionDelete={refund.status.code === "9" ? true : false}
-                                                    actionEdit={refund.status.code === "1" || refund.status.code === "2" || refund.status.code === "3" ? `/refund/edit/${refund._id}` : false }
-                                                    actionView={false}
-                                                    actionCheck={refund.status.code === "8" ? true : false}
-                                                    actionArchive={refund.status.code === "11" ? true : false }
-
-                                                />
-                                                 <TableCell>
-                                                    <Switch checked={ !refund.archive } onChange={ () => { this.props.updateField(reducer, {archive: true}, refund._id ) }} />
-                                                </TableCell>
+                                                <TableCell align="center" style={{ whiteSpace: "nowrap", width: "0%"}}>
+                                                  <ApxTableActions
+                                                    reducer={reducer}
+                                                    id={refund._id}
+                                                    handleAction={this.props.updateField}
+                                                    endpoint="update-status"
+                                                    loading={actionLoading}
+                                                    locale={locale}
+                                                    edit={refund.edit}
+                                                    canceled={refund.canceled}
+                                                    paid={refund.refunded}
+                                                  />
+                                              </TableCell>
                                             </TableRow>
                                 })
                                 : null
                             }
 
                         </TableBody>
-
                     </Table>
                     </div>
                     <Pagination
@@ -221,9 +201,11 @@ const mapStateToProps = (state) => {
         newRefund: state.book.refund.item || {},
         locale: state.locale.locale,
         total: state.library.refund.total,
-        listRefund: state.book.refund.list,
+        listRefund: state.book.refund.list.filter((el) => { return el.archive === false }),
         rowsPerPageOptions: state.library.refund.rowsPerPageOptions,
         status: state.helper.items.status_refund,
+        actionLoading: state.book.refund.actionLoading
+
     }
 }
 

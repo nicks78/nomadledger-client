@@ -47,6 +47,9 @@ class DatePickers extends React.Component {
         if(this.props.value){
             this.setState({ selectedDay: new Date(this.props.value) })
         }
+        if(this.props.field === "created_at"){
+          this.handleDayChange(new Date())
+        }
     }
 
     handleDayChange = (date) => {

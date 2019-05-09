@@ -64,7 +64,8 @@ const styles = theme => ({
     },
     title: {
         flex: 1,
-        marginLeft: '20px'
+        marginLeft: '20px',
+        fontWeight: 300
     },
     content: {
         flexGrow: 1,

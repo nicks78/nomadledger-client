@@ -38,6 +38,7 @@ function receiveDocuments( actionType, items ) {
         isUpdating: false,
         receivedAt: Date.now(),
         isFetching: false,
+        actionLoading: false,
         isError: false,
         payload: items
     }
@@ -111,15 +112,17 @@ export function requestUpdate( actionType ) {
  * @param  data to be update
  * @param  id of document
  */
-export function updateField (actionType, data, id) {
+export function updateField (actionType, data, endpoint) {
 
     return (dispatch, getState) => {
+
+        dispatch(requestAction(actionType));
 
         // Set withCredentials
         axios.defaults.withCredentials = true;
         var list = getState().library[actionType.toLowerCase()].list;
 
-        axios.put(`${API_ENDPOINT}common/update-field/${actionType.toLowerCase()}/${id}`,
+        axios.put(`${API_ENDPOINT}${actionType.toLowerCase()}/${endpoint}`,
             {
                 data,
                 mode: 'cors'
@@ -138,6 +141,7 @@ export function updateField (actionType, data, id) {
             dispatch(setNotification("success_update", "success"))
         })
         .catch(function (error) {
+            console.log(error)
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
         })
@@ -315,6 +319,16 @@ export function resetState ( actionType ){
 }
 
 
+
+export function requestAction( actionType ) {
+    return {
+        type: `REQUEST_ACTION`,
+        subtype: actionType,
+        actionLoading: true,
+    }
+}
+
+
 export function requestData( actionType ) {
     return {
         type: `REQUEST`,
@@ -334,5 +348,6 @@ export function requestFailed( actionType ) {
         isFetching: false,
         isError: true,
         receivedAt: null,
+        actionLoading: false,
     }
 }

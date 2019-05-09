@@ -52,7 +52,7 @@ class Service extends Component {
 
     componentDidMount(){
             this.props.getTotal(this.state.reducer)
-            this.props.getItemList(this.state.reducer, "list?limit=5&skip=0");
+            this.props.getItemList(this.state.reducer, "list?limit=10&skip=0");
             window.addEventListener('resize', this.getWindowWidth);
     }
 

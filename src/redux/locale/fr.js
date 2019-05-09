@@ -89,7 +89,7 @@ const fr =  {
         label_contact_info: "Informations contact",
         label_comp_address: "Adresse entreprise",
         label_annual_turnover: "Chiffre d'affaire annuel",
-        label_net_profit: "Profit annuel (net)",
+        label_revenue: "Recettes",
         label_daily_task: "Tâche(s) du ",
         label_forgot_pwd: "Nous enverrons un lien de récupération à",
         link_forgot_pwd: "Mot de passe oublié ?",
@@ -229,9 +229,10 @@ const fr =  {
         remove: "Supprimer",
         draft: "Brouillon",
         pending: 'En attente',
-        approved: 'Approuvé',
+        approved: 'Approuver',
         rejected: "Rejeté",
-        paid: "Payé",
+        paid: "Payer",
+        cancel: "Annuler",
         invoicer: "Facturateur",
         all: "Tous",
         reference: "Référence",
@@ -285,6 +286,9 @@ const fr =  {
         account_vat: "Lister vos taux de TVA, ils vous seront utile pour la redaction de vos documents comptables",
         account_group: "Créer vos propres groupes de contact afin de facilité, vos recherches dans la sections contacts",
         account_category: "Catégorisé vos produits/services/dépenses, vous pourrez également associé une couleur par catégorie et analysé votre tabelau de bord en en clein d'oeil.",
+        action_table: "ATTENTION - Envoyé/Payé/Annulé sont non modifiable !",
+        action_table_refund: "ATTENTION - Envoyé/Remboursé/Annulé sont non modifiable !",
+        action_table_quote: "ATTENTION - Approuvé/Annulé sont non modifiable !"
 
     },
     message: {
@@ -298,6 +302,7 @@ const fr =  {
         success_email_sent: "Message envoyé, nous vous contacterons dans les meilleurs délais",
         success_payment: "Paiement accepté, vous allez recevoir un reçu par courriel",
         success_send_email_confirm: "Un courriel de confiramtion vous à été envoyé; veuillez suivre les instructions",
+        success_sent_document: "Document envoyé au destinataire",
 
         error_payment: "Erreur lors du paiement, veuillez recommencer ou contacter notre service support@nomadledger.com",
         error_email_not_sent: "Erreur - message non envoyé, veuillez recommencer ou prendre contact avec notre support@nomadledger.com",

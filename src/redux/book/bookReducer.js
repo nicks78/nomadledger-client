@@ -12,7 +12,8 @@ class BaseState {
     isUpdating = false;
     isError = false;
     list_items =[];
-    list = []
+    list = [];
+    actionLoading = false;
 }
 
 
@@ -21,21 +22,21 @@ class InitialState {
     invoice = new BaseState();
     refund = new BaseState();
 }
-  
+
 export default (state = new InitialState(), action) => {
- 
+
     switch (action.subtype) {
         case 'QUOTE':
             return {
                 ...state,
                 quote: baseBookReducer(state.quote, action)
             }
-        case 'INVOICE': 
+        case 'INVOICE':
             return {
                 ...state,
                 invoice:  baseBookReducer(state.invoice, action)
             }
-        case 'REFUND': 
+        case 'REFUND':
             return {
                 ...state,
                 refund:  baseBookReducer(state.refund, action)
@@ -43,4 +44,3 @@ export default (state = new InitialState(), action) => {
       default: return state;
     }
 }
-

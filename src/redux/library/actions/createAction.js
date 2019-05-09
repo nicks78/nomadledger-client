@@ -11,7 +11,7 @@ import {setError} from '../../error/actions'
 export const createItem = ( actionType ) => {
 
     return (dispatch, getState) => {
-        
+
         // Set action name
         var type = actionType.toLowerCase()
 
@@ -27,12 +27,12 @@ export const createItem = ( actionType ) => {
         for (var x = 0; x < state.doc.length; x++) {
             formData.append("files", state.doc[x]);
         }
-        // Set input 
+        // Set input
         formData.append('state', JSON.stringify(state));
 
         axios.post(`${API_ENDPOINT}${type}/create`,
-            formData,   
-            { 
+            formData,
+            {
               headers: {
                 'content-type': 'application/form-data'
             },
@@ -41,20 +41,20 @@ export const createItem = ( actionType ) => {
                 dispatch(progress(actionType, parseInt(p, 10)))
             }
         })
-        .then(function (response) { 
+        .then(function (response) {
             return response.data
-        }) 
+        })
         .then( res => {
             dispatch(setNotification("success_create", "success"))
-            dispatch(setCreateItem( actionType, res.item ))  
+            dispatch(setCreateItem( actionType, res.item ))
         })
         .catch(function (error) {
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
-        })  
+        })
     }
   }
-  
+
 function setCreateItem(actionType, item){
     return {
         type: `CREATE`,

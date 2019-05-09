@@ -9,14 +9,13 @@ import {  getBookList, updateField, createState, downloadPdf , resetState} from 
 import { getTotal } from '../../../redux/library/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import AddIcon from '@material-ui/icons/AddOutlined'
-import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, TableCell, TableRow, Fab} from '@material-ui/core';
+import SendIcon from '@material-ui/icons/SendOutlined'
+import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, TableCell, TableRow, Fab, Switch} from '@material-ui/core';
 import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
+import ApxSelect from '../../../components/common/select'
 import MobileView from '../common/mobileView'
-import LinearProgress from '@material-ui/core/LinearProgress';
-
-
 
 class Invoice extends Component {
 
@@ -64,7 +63,7 @@ class Invoice extends Component {
 
     render() {
 
-    const { isFetching, locale, classes, newInvoice, status, total, actionLoading } = this.props
+    const { isFetching, locale, classes, newInvoice, status, total } = this.props
     const { reducer, width, listInvoice } = this.state
     const isMobile = width <= 500;
 
@@ -93,18 +92,15 @@ class Invoice extends Component {
                     <Table padding="dense">
                     <TableHead className={classes.tableHead}>
                         <TableRow>
-                            <TableCell>{locale.wording.date}</TableCell>
                             <TableCell>{locale.wording.reference}</TableCell>
                             <TableCell>{locale.wording.client}</TableCell>
                             <TableCell>{locale.wording.subtotal}</TableCell>
                             <TableCell>{locale.wording.status}</TableCell>
                             <TableCell align="center">{locale.wording.repay}</TableCell>
-                            <TableCell align="center">PDF</TableCell>
-                            <TableCell align="center">Actions<br />
-                            <span style={{fontSize: 8, color: "red"}}>{locale.helperText.action_table}</span><br />
-                          { actionLoading ? <LinearProgress color="secondary" variant="query" /> : null }
-
-                            </TableCell>
+                            <TableCell>PDF</TableCell>
+                            <TableCell align="center">{locale.wording.send}</TableCell>
+                            <TableCell align="center">Actions</TableCell>
+                            <TableCell align="center">{ locale.wording.archive }</TableCell>
 
                         </TableRow>
                         </TableHead>
@@ -113,26 +109,40 @@ class Invoice extends Component {
                             {   !isFetching ?
                                 this.props.listInvoice.map(( invoice, index) => {
                                     return  <TableRow key={index}>
-                                                <TableCell>{new Date(invoice.createAt.date).toLocaleDateString(localStorage.getItem('locale'))}</TableCell>
                                                 <TableCell><Link className="link" to={`/invoice/view/${invoice._id}`}>{locale.wording.inv}-{invoice.ref}</Link></TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${invoice.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{invoice.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell className="tableNumber">{cvtNumToUserPref(invoice.subtotal)} {invoice.currency.value}</TableCell>
-                                                <TableCell><span style={{color: invoice.status.color }}>{ invoice.status[localStorage.getItem('locale')] }</span></TableCell>
-                                                <TableCell align="center"><Link to={`/refund/create/${invoice._id}`}><img alt="convert-to-refund" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link></TableCell>
-                                                <TableCell align="center"><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, invoice._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
-                                                <TableCell align="center" style={{ whiteSpace: "nowrap", width: "0%"}}>
-                                                      <ApxTableActions
-                                                        reducer={reducer}
-                                                        id={invoice._id}
-                                                        handleAction={this.props.updateField}
-                                                        endpoint="update-status"
-                                                        loading={actionLoading}
-                                                        locale={locale}
-                                                        edit={invoice.edit}
-                                                        canceled={invoice.canceled}
-                                                        paid={invoice.paid}
-                                                      />
+                                                <TableCell>
+                                                    {
+                                                        invoice.status.code === "7" ||
+                                                        invoice.status.code === "9"  ||
+                                                        invoice.status.code === "11"  ?
 
+                                                        <span style={{color: invoice.status.color }}>
+
+                                                        { invoice.status[localStorage.getItem('locale')] }</span>
+
+                                                        :   <ApxSelect
+                                                                arrayField={status}
+                                                                value={invoice.status[localStorage.getItem('locale')]}
+                                                                variant="standard"
+                                                                handleAction={ (event) => { this.props.updateField(reducer, { status: event.target.value}, invoice._id) } }
+                                                                locale={locale}
+                                                            />
+                                                    }
+                                                </TableCell>
+                                                <TableCell align="center"><Link to={`/refund/create/${invoice._id}`}><img alt="convert-to-refund" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link></TableCell>
+                                                <TableCell><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, invoice._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
+                                                <TableCell align="center"><SendIcon style={{ fontSize: 20 }} /></TableCell>
+                                                <ApxTableActions
+                                                    actionDelete={ invoice.status.code === "9" ? true : false}
+                                                    actionEdit={ invoice.status.code === "1" || invoice.status.code === "2" || invoice.status.code === "3" ? `/invoice/edit/${invoice._id}` : false }
+                                                    actionView={false}
+                                                    actionCheck={invoice.status.code === "7" ? true : false }
+                                                    actionArchive={invoice.status.code === "11" ? true : false }
+                                                />
+                                                 <TableCell>
+                                                    <Switch checked={ !invoice.archive } onChange={ () => { this.props.updateField(reducer, {archive: true}, invoice._id ) }} />
                                                 </TableCell>
                                             </TableRow>
                                 })
@@ -210,10 +220,9 @@ const mapStateToProps = (state) => {
         newInvoice: state.book.invoice.item || {},
         locale: state.locale.locale,
         total: state.library.invoice.total,
-        listInvoice: state.book.invoice.list.filter((el) => { return el.archive === false }),
+        listInvoice: state.book.invoice.list,
         rowsPerPageOptions: state.library.invoice.rowsPerPageOptions,
         status: state.helper.items.status_invoice,
-        actionLoading: state.book.invoice.actionLoading
     }
 }
 

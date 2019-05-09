@@ -57,13 +57,14 @@ class Home extends Component {
 
         return (
             <div>
-        <ApxPaper>
-            <Typography variant="h1" align="center">  { cvtNumToUserPref( calNetProfit(mainStat)) }  { currency.value } </Typography>
-            <Typography variant="caption" align="center" style={{ marginTop: 5, paddingBottom: 24 }}>{locale.subheading.label_net_profit} - { mainStat && mainStat.fiscal_year  }</Typography>
 
-            <Grid container spacing={0} className={ classes.charts }>
+            <Typography variant="h1" align="center">  { cvtNumToUserPref( calNetProfit(mainStat)) }  { currency.value } </Typography>
+            <Typography variant="caption" align="center" style={{ marginTop: 5, paddingBottom: 24 }}>{locale.subheading.label_revenue} - { mainStat && mainStat.fiscal_year  }</Typography>
+
+            <Grid container spacing={24} className={ classes.charts }>
 
                 <Grid  item xs={12} sm={8} md={8}>
+                  <ApxPaper>
                   <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px", color: "#303030" }}>
                       { locale.wording.statistics }
                   </Typography>
@@ -72,67 +73,63 @@ class Home extends Component {
                             <BarCharts chartData={ mainStat } id="mainStat" currency={ currency.value || "-" }/>
                         : null
                     }
+                    </ApxPaper>
+
+                    <ApxPaper>
+                      <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px", color: "#303030" }}>
+                          { locale.subheading.label_graph_expense }
+                      </Typography>
+                        {
+                            expensesBy ?
+                                <BarHorizontal chartData={ expensesBy }  id="expensesBy" currency={ currency.value || "-" }/>
+                            : null
+                        }
+                    </ApxPaper>
                 </Grid>
+
                 <Grid item xs={12} sm={4} md={4} >
+                  <ApxPaper>
                     <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px", color: "#303030" }}>
                         { locale.wording.conversions } &nbsp;({ locale.wording.quote })
                     </Typography>
-                   <div style={{ marginTop: "10%" }}>
-                    {
-                        pieQuote ?
-                            <PieCharts
-                                chartData={ pieQuote }
-                                locale={locale}
-                            />
-                        : null
-                    }
-                    </div>
-                </Grid>
-            </Grid>
-            </ApxPaper>
-            <br />
-            <Grid container spacing={24}>
-
-            <Grid item xs={12} sm={8} md={8} >
-            <ApxPaper>
-            <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px", color: "#303030" }}>
-                { locale.subheading.label_graph_expense }
-            </Typography>
-                    {
-                        expensesBy ?
-                            <BarHorizontal chartData={ expensesBy }  id="expensesBy" currency={ currency.value || "-" }/>
-                        : null
-                    }
+                     <div style={{ marginTop: "20%" }}>
+                      {
+                          pieQuote ?
+                              <PieCharts
+                                  chartData={ pieQuote }
+                                  locale={locale}
+                              />
+                          : null
+                      }
+                      </div>
                     </ApxPaper>
-                </Grid>
-                <Grid item xs={12} sm={4} md={4}>
-                <Paper className={ classes.paper }>
-                    <Typography variant="caption" className={ classes.taskHeader }>{locale.subheading.label_daily_task}&nbsp;
-                        <span style={{textTransform: "capitalize"}}>{ new Date().toLocaleDateString(localStorage.getItem("locale"), options)  }</span>
-                    </Typography>
-                    <div>
-                        {
-                            tasks.tasks ?
-                            tasks.tasks.map((task, index) => {
-                                return  <div className={classes.task} key={index}>
-                                        <StatusTask task={task} />
-                                        <Typography variant="body1" className={classes.taskTitle} >
-                                            {task.subject}
 
-                                        </Typography>
-                                        <Typography variant="caption">
-                                                { task.short_desc }
-                                        </Typography>
+                    <Paper className={classes.paper}>
+                        <Typography variant="caption" className={ classes.taskHeader }>{locale.subheading.label_daily_task}&nbsp;
+                            <span style={{textTransform: "capitalize"}}>{ new Date().toLocaleDateString(localStorage.getItem("locale"), options)  }</span>
+                        </Typography>
+                        <div>
+                            {
+                                tasks.tasks ?
+                                tasks.tasks.map((task, index) => {
+                                    return  <div className={classes.task} key={index}>
+                                            <StatusTask task={task} />
+                                            <Typography variant="body1" className={classes.taskTitle} >
+                                                {task.subject}
 
-                                        </div>
-                            })
-                            :   <Typography variant="body1" style={{padding: 10}}>
-                                    {locale.subheading.label_not_task_found}
-                                </Typography>
-                        }
+                                            </Typography>
+                                            <Typography variant="caption">
+                                                    { task.short_desc }
+                                            </Typography>
 
-                        </div>
-                        </Paper>
+                                            </div>
+                                })
+                                :   <Typography variant="body1" style={{padding: 10}} align="center">
+                                        {locale.subheading.label_not_task_found}
+                                    </Typography>
+                            }
+                            </div>
+                    </Paper>
                 </Grid>
             </Grid>
         </div>
@@ -174,6 +171,7 @@ const styles = theme => ({
         textTransform: "capitalize"
     },
     paper: {
+      minHeight: 150,
       [theme.breakpoints.down('sm')]: {
           boxShadow: 'none',
           borderRadius: 0

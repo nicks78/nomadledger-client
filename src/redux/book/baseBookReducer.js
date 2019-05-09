@@ -15,7 +15,8 @@ const initialState = {
     progress : 0,
     isFetching : false,
     isError : false,
-    list : []
+    list : [],
+    actionLoading: false
 }
 
 const authReducer = (state = initialState, action) => {
@@ -29,6 +30,12 @@ const authReducer = (state = initialState, action) => {
                 isError: action.isError,
                 isUpdating: action.isUpdating
             }
+      case `REQUEST_ACTION`:
+          return  {
+              ...state,
+              actionLoading: action.actionLoading,
+              isError: action.isError,
+          }
         case `UPDATING`:
             return  {
                 ...state,
@@ -42,6 +49,7 @@ const authReducer = (state = initialState, action) => {
                 isError: action.isError,
                 receivedAt: action.receivedAt,
                 isUpdating: action.isUpdating,
+                actionLoading: action.actionLoading
             }
         case `RECEIVE`:
             return  {
@@ -49,7 +57,8 @@ const authReducer = (state = initialState, action) => {
                 isFetching: action.isFetching,
                 isUpdating: action.isUpdating,
                 list: action.payload,
-                receivedAt: action.receivedAt
+                receivedAt: action.receivedAt,
+                actionLoading: action.actionLoading
             }
         case `GET`:
             return  {

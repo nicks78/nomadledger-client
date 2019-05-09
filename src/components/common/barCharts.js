@@ -30,10 +30,10 @@ class BarCharts extends Component {
                 },
                 scales: {
                   xAxes: [{
-                     stacked: true
+                     stacked: false
                   }],
                   yAxes: [{
-                     stacked: true
+                     stacked: false
                   }]
                 },
                 legend: {

@@ -109,7 +109,6 @@ class Auth extends Component {
           appBarBoxShadow: "none"
         })
       }
-
     }
 
     handleChange = (event) => {
@@ -167,7 +166,7 @@ class Auth extends Component {
 
           <Grid item xs={12} sm={4} md={4}>
             <img src={`${DEFAULT_URL}img/1.png`} width="150" alt="img-1" /><br />
-            <Typography variant="subtitle1">Task Manager</Typography>
+            <Typography variant="subtitle1">Manager your tasks</Typography>
               <Typography variant="body2">Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Ipsum has been the industry's standard dummy text ever since the
                 , when an unknown printer took a galley of type and scrambled</Typography>
@@ -189,7 +188,7 @@ class Auth extends Component {
         </div>
 
         <div className={ classes.partners }>
-          <Typography variant="h2" align="center">Partners & Customers</Typography>
+          <Typography variant="h2" align="center">Partners</Typography>
           <div className={ classes.partnersImgWrapper }>
             <img src="http://myassistantonline.fr/wp-content/uploads/2018/06/MyAssistantOnLine-e1535366190455.png" width="100"  alt="logo-1"/>
             <img src="https://acte-solutions.com/storage/app/media/acte_solutions_white_text_full.png" width="100"  alt="logo-2"/>

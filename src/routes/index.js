@@ -22,24 +22,39 @@ import Payment from '../pages/payment'
 
 // Pages
 import Home from '../pages/dashboard/home'
+
+// Contact
 import Contact from '../pages/contact'
 import ShowContact from '../pages/contact/dashboard'
-import Account from '../pages/account'
+
+// Product
 import Product from '../pages/product'
 import ShowProduct from '../pages/product/showProduct'
+
+// Service
 import Service from '../pages/service'
 import ShowService from '../pages/service/showService'
+
+// Account
+import Account from '../pages/account'
+
+// Expense
 import Expense from '../pages/expense'
 import ShowExpense from '../pages/expense/showExpense'
-import Task from '../pages/task'
-import Archive from '../pages/archive'
 
+// Task
+import Task from '../pages/task'
+
+// Email
+import Email from '../pages/email'
 
 // Book
 import BookkeepingRoute from './bookkeeping'
 import NotFound from './notFound'
 import Layout from '../components/layout/layout'
 
+// Archive
+import Archive from '../pages/archive'
 
 class Routes extends React.Component {
 
@@ -98,6 +113,8 @@ class Routes extends React.Component {
                                 <PrivateRoute exact path="/task" component={Task}  auth={isLoggedIn}/>
 
                                 <PrivateRoute exact path="/archive" component={Archive}  auth={isLoggedIn}/>
+
+                                <PrivateRoute exact path="/email-content" component={Email}  auth={isLoggedIn}/>
 
                                 <BookkeepingRoute isLoggedIn={isLoggedIn}/>
 

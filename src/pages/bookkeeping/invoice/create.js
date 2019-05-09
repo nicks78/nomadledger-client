@@ -46,7 +46,7 @@ class CreateInvoice extends React.Component {
     if(isFetching){
         return <Spinner/>
     }
-console.log("INVOICES", newInvoice)
+
     return (
             <div className={ classes.root}>
                 <Form

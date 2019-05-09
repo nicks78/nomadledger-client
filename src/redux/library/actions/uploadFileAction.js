@@ -9,9 +9,9 @@ import {setError} from '../../error/actions'
 
 // UPLOAD IMAGE/DOCS TO SERVER
 /**
- * 
+ *
  * @param actionType // model name
- * @param file  // file to be uploaded 
+ * @param file  // file to be uploaded
  * @param id // id of the document if 'null', company_id is the default
  * @param field // name of the field in the document
  * @param oldFile // old file name to be delete
@@ -31,8 +31,8 @@ export const uploadFileToServer = ( actionType, id, file, oldFileObject ) => {
         formData.append("files", file);
 
         axios.post(`${API_ENDPOINT}${url_path}`,
-            formData,   
-            { 
+            formData,
+            {
               headers: {
                 'content-type': 'application/form-data'
             },
@@ -41,26 +41,27 @@ export const uploadFileToServer = ( actionType, id, file, oldFileObject ) => {
                 dispatch(progress(actionType, parseInt(p, 10)))
             }
         })
-        .then(function (response) { 
+        .then(function (response) {
             return response.data
-        }) 
+        })
         .then( res => {
             dispatch(setNotification("success_uploaded", "success"))
-            dispatch(setUploaded( actionType, res.payload ))  
+            dispatch(setUploaded( actionType, res.payload ))
         })
         .catch(function (error) {
+          console.log("ERROR", error.response)
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
-        })  
+        })
     }
 }
 
 
 // UPLOAD IMAGE/DOCS TO SERVER
 /**
- * 
+ *
  * @param actionType // model name
- * @param file  // file to be uploaded 
+ * @param file  // file to be uploaded
  * @param id // id of the document if 'null', company_id is the default
  * @param field // name of the field in the document
  * @param oldFile // old file name to be delete
@@ -71,7 +72,7 @@ export const uploadProductFileToServer = ( actionType, file ) => {
 
         // Set action name
         var url_path = `${actionType.toLowerCase()}/upload-files`;
-        var item = getState().library[actionType.toLowerCase()].item; 
+        var item = getState().library[actionType.toLowerCase()].item;
 
         // // Set loading time
         dispatch(requestUpload(actionType));
@@ -81,8 +82,8 @@ export const uploadProductFileToServer = ( actionType, file ) => {
         formData.append("files", file);
 
         axios.post(`${API_ENDPOINT}${url_path}`,
-            formData,   
-            { 
+            formData,
+            {
               headers: {
                 'content-type': 'application/form-data'
             },
@@ -91,20 +92,22 @@ export const uploadProductFileToServer = ( actionType, file ) => {
                 dispatch(progress(actionType, parseInt(p, 10)))
             }
         })
-        .then(function (response) { 
+        .then(function (response) {
             return response.data
-        }) 
+        })
         .then( res => {
             dispatch(setNotification("success_uploaded", "success"))
-            dispatch(setUploaded( actionType, res.payload ))  
+            dispatch(setUploaded( actionType, res.payload ))
         })
         .catch(function (error) {
+          console.log("ERROR", error)
+
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
-        })  
+        })
     }
 }
-  
+
 function setUploaded(actionType, item){
     return {
         type: `UPLOAD`,
@@ -113,3 +116,32 @@ function setUploaded(actionType, item){
         item: item
     }
 }
+
+
+
+// function compress(file) {
+//     const width = 500;
+//     const height = 300;
+//     const fileName = file.name;
+//     const reader = new FileReader();
+//     reader.readAsDataURL(file);
+//     reader.onload = event => {
+//         const img = new Image();
+//         img.src = event.target.result;
+//         img.onload = () => {
+//                 const elem = document.createElement('canvas');
+//                 elem.width = width;
+//                 elem.height = height;
+//                 const ctx = elem.getContext('2d');
+//                 // img.width and img.height will contain the original dimensions
+//                 ctx.drawImage(img, 0, 0, width, height);
+//                 ctx.canvas.toBlob((blob) => {
+//                     const file = new File([blob], fileName, {
+//                         type: 'image/jpeg',
+//                         lastModified: Date.now()
+//                     });
+//                 }, 'image/jpeg', 1);
+//             },
+//             reader.onerror = error => console.log(error);
+//     };
+// }

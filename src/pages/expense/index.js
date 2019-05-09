@@ -50,7 +50,7 @@ class Expense extends Component {
 
     componentDidMount(){
             this.props.getTotal(this.state.reducer)
-            this.props.getItemList(this.state.reducer, "list?limit=5&skip=0");
+            this.props.getItemList(this.state.reducer, "list?limit=10&skip=0");
             window.addEventListener('resize', this.getWindowWidth);
     }
 
@@ -118,11 +118,11 @@ class Expense extends Component {
                     <Table>
                     <TableHead className={classes.tableHead}>
                         <TableRow>
-                        <TableCell>{ locale.wording.receipt }</TableCell>
+                            <TableCell>{ locale.wording.date }</TableCell>
+                            <TableCell>{ locale.wording.receipt }</TableCell>
                             <TableCell>{ locale.wording.name }</TableCell>
                             <TableCell>{ locale.wording.category }</TableCell>
                             <TableCell>{ locale.wording.price }</TableCell>
-                            <TableCell>{ locale.wording.date }</TableCell>
                             <TableCell align="center">Actions</TableCell>
                         </TableRow>
                         </TableHead>
@@ -131,11 +131,11 @@ class Expense extends Component {
                             {   !isFetching ?
                                 this.props.listExpenses.map(( expense, index) => {
                                     return  <TableRow key={index}>
+                                                <TableCell>{ new Date(expense.receipt_date.date).toLocaleDateString(localStorage.getItem('locale')) }</TableCell>
                                                 <TableCell> <RenderImage img={ expense.receipt } /></TableCell>
                                                 <TableCell><Link to={`/${reducer.toLowerCase()}/view/${expense._id.toLowerCase()}`}><span style={{textTransform: "capitalize"}}  className="link">{expense.name}</span></Link></TableCell>
                                                 <TableCell style={{textTransform: 'capitalize'}}>{ expense.category[localStorage.getItem('locale')] }</TableCell>
                                                 <TableCell className="tableNumber">{ cvtNumToUserPref(expense.price) } { expense.currency.value }</TableCell>
-                                                <TableCell>{ new Date(expense.receipt_date.date).toLocaleDateString(localStorage.getItem('locale')) }</TableCell>
                                                 <TableCell align="center" onClick={() => { this.props.deleteElement( reducer, `delete/${expense._id}`) } }><DeleteIcon style={{color: 'red', cursor: 'pointer', fontSize: 18}}  /></TableCell>
                                             </TableRow>
                                 })

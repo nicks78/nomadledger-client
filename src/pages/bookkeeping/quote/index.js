@@ -7,14 +7,13 @@ import {connect} from 'react-redux'
 import {  getBookList, updateField, createState, downloadPdf, resetState } from '../../../redux/book/actions'
 import { getTotal } from '../../../redux/library/actions'
 import AddIcon from '@material-ui/icons/AddOutlined'
-import { withStyles, Button, Hidden,  Paper, Table, TableHead, TableBody, TableCell, TableRow , Fab, Switch} from '@material-ui/core';
-import ApxSelect from '../../../components/common/select'
+import { withStyles, Button, Hidden,  Paper, Table, TableHead, TableBody, TableCell, TableRow , Fab} from '@material-ui/core';
 import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import MobileView from '../common/mobileView'
-
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 class Quote extends Component {
 
@@ -30,7 +29,7 @@ class Quote extends Component {
 
     componentDidMount(){
         this.props.getTotal(this.state.reducer);
-        this.props.getBookList(this.state.reducer, `list?limit=5&skip=0`);
+        this.props.getBookList(this.state.reducer, `list?limit=10&skip=0`);
         window.addEventListener('resize', this.getWindowWidth);
     }
 
@@ -63,7 +62,7 @@ class Quote extends Component {
 
     render() {
 
-    const { isFetching,  locale, classes, newQuote, status, total} = this.props
+    const { isFetching,  locale, classes, newQuote, status, total, actionLoading} = this.props
     const { reducer, listQuote, width } = this.state;
     const isMobile = width <= 500;
 
@@ -90,63 +89,45 @@ class Quote extends Component {
                     <Table  padding="dense">
                     <TableHead className={classes.tableHead}>
                         <TableRow>
+                            <TableCell>{locale.wording.date}</TableCell>
                             <TableCell>{locale.wording.reference}</TableCell>
                             <TableCell>{locale.wording.client}</TableCell>
                             <TableCell>{locale.wording.subtotal}</TableCell>
-                            <TableCell>{locale.wording.vat}</TableCell>
-                            <TableCell>{locale.wording.total}</TableCell>
                             <TableCell>{locale.wording.status}</TableCell>
                             <TableCell align="center">{locale.wording.invoicer}</TableCell>
-                            <TableCell>PDF</TableCell>
-                            <TableCell align="center">Actions</TableCell>
-                            <TableCell align="center">{ locale.wording.archive }</TableCell>
+                            <TableCell align="center">PDF</TableCell>
+                            <TableCell align="center">Actions<br />
+                              <span style={{fontSize: 8, color: "red"}}>{locale.helperText.action_table_quote}</span><br />
+                            { actionLoading ? <LinearProgress color="secondary" variant="query" /> : null }
+                            </TableCell>
 
                         </TableRow>
                     </TableHead>
 
                         <TableBody className={classes.tableBody}>
                             {   !isFetching ?
-                                this.props.listQuote.map(( item, index) => {
-                                    let vat = item.subtotal * item.vat.indice / 100
+                                this.props.listQuote.map(( quote, index) => {
                                     return  <TableRow key={index}>
-                                                <TableCell><Link className="link" to={`/quote/view/${item._id}`}>{locale.wording.qto}-{item.ref}</Link></TableCell>
-                                                <TableCell><Link className="link" to={{ pathname: `/contact/view/${item.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{item.contact_id.company_name}</span></Link></TableCell>
-                                                <TableCell className="tableNumber">{cvtNumToUserPref(item.subtotal)} {item.currency.value}</TableCell>
-                                                <TableCell className="tableNumber">{cvtNumToUserPref( vat ) + " "+item.currency.value }</TableCell>
-                                                <TableCell className="tableNumber">{cvtNumToUserPref( item.subtotal + vat  )} {item.currency.value}</TableCell>
-                                                <TableCell>
-
-                                                {
-                                                    item.status.code === "6" ||   item.status.code === "10" ||   item.status.code === "11"  ?
-                                                    <span style={{color: item.status.color }}>
-
-                                                    { item.status[localStorage.getItem('locale')] }</span>
-
-                                                    :   <ApxSelect
-                                                            arrayField={status}
-                                                            value={item.status[localStorage.getItem('locale')]}
-                                                            variant="standard"
-                                                            handleAction={ (event) => { this.props.updateField(reducer, { status: event.target.value}, item._id) } }
-                                                            locale={locale}
-                                                        />
-                                                }
-
-
-                                                </TableCell>
-                                                <TableCell align="center"><Link to={`/invoice/create/${item._id}`}><img alt="convert-to-invoice" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link></TableCell>
-                                                <TableCell><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, item._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
-
-
-                                                <ApxTableActions
-                                                    actionDelete={item.status.code === "10" ? true : false}
-                                                    actionEdit={ item.status.code === "1" || item.status.code === "2" ? `/quote/edit/${item._id}` : false }
-                                                    actionView={false}
-                                                    actionCheck={item.status.code === "6" ? true : false }
-                                                    actionArchive={item.status.code === '11' ? true : false }
-                                                />
-                                                <TableCell>
-                                                    <Switch checked={ !item.archive } onChange={ () => { this.props.updateField(reducer, {archive: true}, item._id ) }} />
-                                                </TableCell>
+                                                <TableCell>{new Date(quote.createAt.date).toLocaleDateString(localStorage.getItem('locale'))}</TableCell>
+                                                <TableCell><Link className="link" to={`/quote/view/${quote._id}`}>{locale.wording.qto}-{quote.ref}</Link></TableCell>
+                                                <TableCell><Link className="link" to={{ pathname: `/contact/view/${quote.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{quote.contact_id.company_name}</span></Link></TableCell>
+                                                <TableCell className="tableNumber">{cvtNumToUserPref(quote.subtotal)} {quote.currency.value}</TableCell>
+                                                <TableCell><span style={{color: quote.status.color }}>{ quote.status[localStorage.getItem('locale')] }</span></TableCell>
+                                                <TableCell align="center"><Link to={`/invoice/create/${quote._id}`}><img alt="convert-to-invoice" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link></TableCell>
+                                                <TableCell align="center"><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, quote._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
+                                                <TableCell align="center" style={{ whiteSpace: "nowrap", width: "0%"}}>
+                                                  <ApxTableActions
+                                                    reducer={reducer}
+                                                    id={quote._id}
+                                                    handleAction={this.props.updateField}
+                                                    endpoint="update-status"
+                                                    loading={actionLoading}
+                                                    locale={locale}
+                                                    edit={quote.edit}
+                                                    canceled={quote.canceled}
+                                                    paid={quote.approved}
+                                                  />
+                                              </TableCell>
                                             </TableRow>
                                 })
                                 : null
@@ -225,9 +206,10 @@ const mapStateToProps = (state) => {
         newQuote: state.book.quote.item || {},
         locale: state.locale.locale,
         total: state.library.quote.total,
-        listQuote: state.book.quote.list,
+        listQuote: state.book.quote.list.filter((el) => { return el.archive === false }),
         rowsPerPageOptions: state.library.quote.rowsPerPageOptions,
-        status: state.helper.items.status_quote
+        status: state.helper.items.status_quote,
+        actionLoading: state.book.quote.actionLoading
     }
 }
 

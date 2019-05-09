@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import {connect} from 'react-redux'
 import {getBookList, updateField} from '../../redux/book/actions'
 import { getTotal } from '../../redux/library/actions'
-import { withStyles, Table, TableBody, TableCell, TableHead , Paper, TableRow, Switch, TableSortLabel} from '@material-ui/core';
+import { withStyles, Table, TableBody, TableCell, TableHead , Paper, TableRow, TableSortLabel} from '@material-ui/core';
 import { cvtNumToUserPref } from '../../utils/help_function'
 import Pagination from '../../lib/pagination'
 import ApxTableToolBar from '../../components/common/tableToolBar'
@@ -85,7 +85,6 @@ class Archive extends Component {
                             <TableCell>{locale.wording.subtotal}</TableCell>
                             <TableCell>{locale.wording.vat}</TableCell>
                             <TableCell>{locale.wording.total}</TableCell>
-                            <TableCell align="center">{ locale.wording.archive }</TableCell>
                         </TableRow>
                     </TableHead>
 
@@ -100,9 +99,6 @@ class Archive extends Component {
                                                 <TableCell className={classes.price}>{cvtNumToUserPref(item.subtotal)} {item.currency.value}</TableCell>
                                                 <TableCell className={classes.price}>{cvtNumToUserPref(vat ) + " "+ item.currency.value }</TableCell>
                                                 <TableCell className={classes.price}>{cvtNumToUserPref(vat + item.subtotal  )} {item.currency.value}</TableCell>
-                                                <TableCell align="center">
-                                                    <Switch checked={ item.archive } onChange={ () => { this.props.updateField(reducer, {archive: false}, item._id ) }} />
-                                                </TableCell>
                                             </TableRow>
                                 })
                                 : null
