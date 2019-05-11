@@ -173,6 +173,10 @@ a:hover {
     display: block;
   }
 
+
+.day-picker .DayPicker-wrapper{
+  box-shadow: none;
+}
 /*****************************************
   STRIPE
 ********************************************/

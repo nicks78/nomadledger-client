@@ -83,6 +83,7 @@ class AutoComplete extends React.Component {
 
   // Set selected value to the store
   downshiftOnChange = (selected) => {
+    console.log(selected)
       this.props.setSelectedObject(this.props.reducer, this.props.state, selected)
       this.setState({value: ""})
   }

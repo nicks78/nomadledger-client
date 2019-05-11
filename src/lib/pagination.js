@@ -24,7 +24,7 @@ export default class Pagination extends Component {
         this.setState({page});
         var contactId = this.props.contactId ? "/"+ this.props.contactId : ""
 
-        this.props.onGetItemList(this.props.reducer, `list${contactId}?limit=${ this.state.limit }&skip=${ skip }&${this.props.filterName}=${this.props.value}`);
+        this.props.onGetItemList(this.props.reducer, `list${contactId}?limit=${ this.state.limit }&skip=${ skip }&${this.props.value}`);
 
     }
 
@@ -35,7 +35,7 @@ export default class Pagination extends Component {
             limit: num,
             page: 0
         })
-        this.props.onGetItemList(this.props.reducer, `list${contactId}?limit=${num }&skip=0&${this.props.filterName}=${this.props.value}`);
+        this.props.onGetItemList(this.props.reducer, `list${contactId}?limit=${num }&skip=0&${this.props.value}`);
     }
 
 

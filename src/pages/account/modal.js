@@ -133,7 +133,7 @@ class SimpleModal extends React.Component {
 
   render() {
     const { classes , obj, type, locale } = this.props;
-    const {fr, en , color, vat_terms_fr, vat_terms_en, value} = this.state
+    const {fr, en , vat_terms_fr, vat_terms_en, value} = this.state
 
     return (
       <React.Fragment>
@@ -167,21 +167,6 @@ class SimpleModal extends React.Component {
                 variant="filled"
 
             />
-            {
-              type === 'category_name' ?
-            <TextField
-                value={ color ? color : this.props.obj.color }
-                onChange={(e) => { this.handleForm(e.target.name, e.target.value) }}
-                label={locale.wording.tag_hex}
-                name="color"
-                fullWidth
-                inputProps={{ maxLength: 7 }}
-                margin="dense"
-                variant="filled"
-
-            />
-            : null
-            }
             {
               type === 'vat' ?
                 <TextField

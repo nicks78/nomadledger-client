@@ -257,7 +257,12 @@ const en = {
         tag_hex: "Color code HEX (ex: #ffffff)",
         tandc: "Terms & Conditions",
         login_email: "Email",
-        login_password: "Password"
+        login_password: "Password",
+        filter_status: "Filter by status",
+        filter_contact: "Filter by contact",
+        filter_date: "Filter by date",
+        filter_category: "Filter by category",
+        export_csv: "Export to Excel"
     },
     helperText: {
         select_phone_code: "Phone code",
@@ -346,6 +351,10 @@ const en = {
 
     },
     days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    month : ["January", "February","March","April","May","June", "July","August","September", "October","November", "December"],
+    week_long: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    week_short: ["Sun", "Mon","Tue","Wed","Thu","Fri","Sat"],
+    placeholder: 'DD/MM/YYYY',
     home_page: {
         title_01: "Activate your efficiency",
         paragraphe_01: `An easy way to manage your finance, tasks and contact.

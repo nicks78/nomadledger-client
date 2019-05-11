@@ -72,9 +72,10 @@ class Expense extends Component {
     }
 
     handleFilterRequest = (value) => {
+        var query = value._id ? "category="+ value._id : value
         this.setState({category: value._id});
-        this.props.getTotal(this.state.reducer, `?category=${value._id}`);
-        this.props.getItemList(this.state.reducer, `list?limit=10&skip=0&category=${value._id}`);
+        this.props.getTotal(this.state.reducer, `?${query}`);
+        this.props.getItemList(this.state.reducer, `list?limit=10&skip=0&${query}`);
     }
 
 
@@ -112,6 +113,7 @@ class Expense extends Component {
                         toExcel={true}
                         onDownload={ () => { this.props.downloadFile(reducer, `export/excel-file`) } }
                         locale={locale}
+                        tooltipTitle={locale.wording.filter_category}
                     />
 
                     <div style={{overflowY: "auto"}}>

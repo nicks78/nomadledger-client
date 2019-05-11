@@ -3,32 +3,10 @@
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import FilterListIcon from '@material-ui/icons/FilterListOutlined'
-import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import GetAppIcon from '@material-ui/icons/GetApp'
-import {Tooltip} from '@material-ui/core'
+import { Popover} from '@material-ui/core'
+import Tooltips from '../components/common/tooltips'
 
-
-// function renderSelect(props) {
-//   return <TextField
-//             id="Select year"
-//             select
-//             label={props.locale.wording.select_year}
-//             name="fiscal_year"
-//             value={ props.value || ''}
-//             onChange={ (e) => { props.selected(e) } }
-//             margin="dense"
-//             variant="outlined">
-//
-//             {
-//               ["2019", "2020", "2021"].map((option, index) => (
-//                   <MenuItem key={index} value={ option }>
-//                         {option}
-//                   </MenuItem>
-//               ))
-//             }
-//         </TextField>
-// }
 
 /**
  * @param {*} menus array
@@ -57,76 +35,44 @@ class BtnMenu extends React.Component {
 
   render() {
     const { anchorEl } = this.state;
-    const { fontSize, menus, toExcel } = this.props
+    const { fontSize, menus, tooltipTitle } = this.props
 
     return (
       <div style={{ display: "inline-flex" }}>
 
-        <IconButton
-          aria-owns={anchorEl ? 'menu-list-grow' : undefined}
-          aria-haspopup="true"
-          onClick={this.handleClick}
-        >
-          <FilterListIcon style={{ fontSize: fontSize || 24 }}/>
-        </IconButton>
+        <Tooltips title={tooltipTitle}>
+            <IconButton
+            aria-owns={anchorEl ? 'menu-list-grow' : undefined}
+            aria-haspopup="true"
+            onClick={this.handleClick}
+          >
+            <FilterListIcon style={{ fontSize: fontSize || 24 }}/>
+          </IconButton>
+        </Tooltips>
 
-
-        {toExcel ? <Tooltip title="Export Excel"><IconButton  onClick={ this.props.onDownload }><GetAppIcon /></IconButton></Tooltip> : null }
-
-        <Menu
+        <Popover
           id={Date.now()}
           anchorEl={anchorEl}
+          style={{ backgroundColor: "rgb(0,0,0,0.34)", boxShadow: 'none'}}
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
-          style={{maxHeight: 400, minWidth: 400, padding: 30}}
         >
         {
             menus.map(( menu, index) => {
                 return <MenuItem
                         key={index}
-                        style={{textTransform: 'capitalize', color: menu.color || "#303030", fontWeight: 400}}
+                        style={{textTransform: 'capitalize', color: menu.color ||  "#303030", fontWeight: 400}}
                         onClick={ () => this.handleAction( menu ) }>{menu[localStorage.getItem('locale')]}
                       </MenuItem>
             })
         }
 
-      </Menu>
+      </Popover>
 
       </div>
     );
   }
 }
 
-export default BtnMenu;
 
-// <Popover
-//   id={Date.now()}
-//   anchorEl={anchorEl}
-//   open={Boolean(anchorEl)}
-//   onClose={this.handleClose}
-//   style={{maxHeight: 400, minWidth: 400, padding: 30}}
-// >
-//
-//
-//   <div style={{maxHeight: 400, minWidth: 300, padding: 20}}>
-//     <Typography variant="overline">Filters</Typography>
-//     <br />
-//       <Grid container spacing={24}>
-//         <Grid item xs={12}>
-//           <ApxSelect
-//               arrayField={ menus}
-//               field="filter"
-//               value=""
-//               label={locale.wording.filter_by}
-//               locale={ locale }
-//               helperText="Help me god"/>
-//         </Grid>
-//         <Grid item xs={6}>
-//           <Checkbox value="Archive"  />
-//         </Grid>
-//
-//       </Grid>
-//
-//   </div>
-//
-// </Popover>
+export default BtnMenu;

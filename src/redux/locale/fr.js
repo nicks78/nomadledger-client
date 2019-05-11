@@ -264,7 +264,13 @@ const fr =  {
         tag_hex: "Code couleur HEX (ex: #ffffff)",
         tandc: "Termes & Conditions",
         login_email: "Courriel",
-        login_password: "Mot de passe"
+        login_password: "Mot de passe",
+        filter_status: "Filtrer par statut",
+        filter_contact: "Filtrer par contact",
+        filter_date: "Filtrer par date",
+        filter_category: "Filtrer par catégorie",
+        export_csv: "Exporter au format Excel"
+
     },
     helperText: {
         select_phone_code: "Sélectionner le code téléphone",
@@ -353,6 +359,10 @@ const fr =  {
         confirm_delete: "Voulez-vous vraiment supprimer cette élément ?"
     },
     days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+    month : ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+    week_long: ['Dimanche','Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+    week_short: ["Dim","Lun","Mar","Mer","Jeu","Ven","Sam"],
+    placeholder: 'JJ/MM/AAAA',
     home_page: {
         title_01: "Activez votre efficacité !",
         paragraphe_01: `Maitrisez et exploitez tout le potentiel de votre entreprise en simplifiant la gestion de vos factures,

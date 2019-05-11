@@ -6,7 +6,6 @@ import {DEFAULT_URL} from "../../../redux/constant"
 import {downloadFile} from '../../../redux/download/actions'
 import {connect} from 'react-redux'
 import {  getBookList, updateField, createState, downloadPdf, resetState } from '../../../redux/book/actions'
-import { getTotal } from '../../../redux/library/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import AddIcon from '@material-ui/icons/AddOutlined'
 import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, TableCell, TableRow, Fab} from '@material-ui/core';
@@ -28,7 +27,6 @@ class Refund extends Component {
     }
 
     componentDidMount(){
-        this.props.getTotal(this.state.reducer );
         this.props.getBookList(this.state.reducer, "list?limit=10&skip=0");
     }
 
@@ -52,9 +50,9 @@ class Refund extends Component {
 
 
     handleFilterRequest = (value) => {
-        this.setState({status: value.code});
-        this.props.getTotal(this.state.reducer, `?status=${value.code || '10'}`);
-        this.props.getBookList(this.state.reducer, `list?limit=10&skip=0&status=${value.code || '10'}`);
+      var query = value.en + "=1"
+      this.setState({query: query.toLowerCase()});
+      this.props.getBookList(this.state.reducer, `list?limit=10&skip=0&${query.toLowerCase()}`);
     }
 
     render() {
@@ -82,6 +80,7 @@ class Refund extends Component {
                 menus={ status && [...status, {fr: "Tous", en: "All", code: "none"}]  }
                 onChangeQuery={ this.handleFilterRequest }
                 toExcel={true}
+                tooltipTitle={locale.wording.filter_status}
                 onDownload={ () => { this.props.downloadFile(reducer, `export/excel-file`) } }
             />
             <div style={{ overflowY: "auto" }}>
@@ -110,7 +109,7 @@ class Refund extends Component {
                                                 <TableCell><Link className="link" to={`/refund/view/${refund._id}`}>{locale.wording.pya}-{refund.ref}</Link></TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${refund.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{refund.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell className="tableNumber">{cvtNumToUserPref(refund.subtotal)} {refund.currency.value}</TableCell>
-                                                <TableCell><span style={{color: refund.status.color }}>{ refund.status[localStorage.getItem('locale')] }</span></TableCell>
+                                                <TableCell><span style={{color: refund.status.color, fontWeight: 400 }}>{ refund.status[localStorage.getItem('locale')] }</span></TableCell>
                                                 <TableCell align="center"><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, refund._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
 
                                                 <TableCell align="center" style={{ whiteSpace: "nowrap", width: "0%"}}>
@@ -200,9 +199,9 @@ const mapStateToProps = (state) => {
         receivedAt: state.book.refund.receivedAt,
         newRefund: state.book.refund.item || {},
         locale: state.locale.locale,
-        total: state.library.refund.total,
+        total: state.book.refund.total,
         listRefund: state.book.refund.list.filter((el) => { return el.archive === false }),
-        rowsPerPageOptions: state.library.refund.rowsPerPageOptions,
+        rowsPerPageOptions: state.book.refund.rowsPerPageOptions,
         status: state.helper.items.status_refund,
         actionLoading: state.book.refund.actionLoading
 
@@ -211,4 +210,4 @@ const mapStateToProps = (state) => {
 
 const StyledRefund = withStyles(styles)(Refund)
 
-export default connect(mapStateToProps, {  getBookList, getTotal, updateField, createState, downloadPdf, resetState, downloadFile  })(StyledRefund);
+export default connect(mapStateToProps, {  getBookList, updateField, createState, downloadPdf, resetState, downloadFile  })(StyledRefund);

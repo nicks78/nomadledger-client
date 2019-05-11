@@ -10,6 +10,7 @@ replaceObjectInArray } from '../../utils/help_function'
 const initialState = {
     item : {list_items: []},
     total: 0,
+    rowsPerPageOptions: [],
     isUpdating: false,
     receivedAt : null,
     progress : 0,
@@ -114,6 +115,7 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 total: action.total,
+                rowsPerPageOptions: action.rowsPerPageOptions
             }
         case `RESET_STATE`:
             return initialState

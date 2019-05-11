@@ -83,29 +83,30 @@ class ShowContact extends React.Component {
         <Paper className={ classes.root }>
         <ApxBackBtn/>
           <Typography variant="h1" align="center">{ contact.company_name }</Typography>
-
-           <div style={{textAlign:'center'}}>
-             <UploadImg
-               field="logo_contact"
-               _handleUploadFile={ (e) => { this.props.uploadFileToServer("CONTACT", contact._id, e.target.files[0], contact.logo_contact )} }
-               progress={progress}
-               isUploading={isUploading}
-               image={<img src={`${ contact.logo_contact.full_path || DEFAULT_IMG }`} alt={contact.logo_contact.org_name}
-
-               style={{ maxWidth: '100%', maxHeight: '70px'}} />}
-             />
-           </div>
+          <br />
+            <div className={ classes.statWrapper}>
+                <StatContact
+                  total_quote={total_quote}
+                  total_invoice={total_invoice}
+                  total_refund={total_refund}
+                  currency={currency}
+                  locale={locale}
+                />
+            </div>
         <Grid container spacing={8}>
           <Grid item xs={12} md={12}>
 
-          <div className={ classes.statWrapper}>
-              <StatContact
-                total_quote={total_quote}
-                total_invoice={total_invoice}
-                total_refund={total_refund}
-                currency={currency}
-                locale={locale}
-              />
+
+          <div style={{textAlign:'center'}}>
+            <UploadImg
+              field="logo_contact"
+              _handleUploadFile={ (e) => { this.props.uploadFileToServer("CONTACT", contact._id, e.target.files[0], contact.logo_contact )} }
+              progress={progress}
+              isUploading={isUploading}
+              image={<img src={`${ contact.logo_contact.full_path || DEFAULT_IMG }`} alt={contact.logo_contact.org_name}
+
+              style={{ maxWidth: '100%', maxHeight: '70px'}} />}
+            />
           </div>
           </Grid>
           <Grid item xs={12} md={12}>

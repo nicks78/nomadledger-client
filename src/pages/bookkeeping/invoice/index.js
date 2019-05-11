@@ -6,7 +6,7 @@ import {DEFAULT_URL} from "../../../redux/constant"
 import {downloadFile} from '../../../redux/download/actions'
 import {connect} from 'react-redux'
 import {  getBookList, updateField, createState, downloadPdf , resetState} from '../../../redux/book/actions'
-import { getTotal } from '../../../redux/library/actions'
+import {  getItemList} from '../../../redux/library/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import AddIcon from '@material-ui/icons/AddOutlined'
 import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, TableCell, TableRow, Fab} from '@material-ui/core';
@@ -22,15 +22,15 @@ class Invoice extends Component {
 
     state = {
         reducer: "INVOICE",
-        status: 'none',
+        query: '',
         width: window.innerWidth,
         receivedAt: "",
         listInvoice: []
     }
 
     componentDidMount(){
-        this.props.getTotal(this.state.reducer );
         this.props.getBookList(this.state.reducer, "list?limit=10&skip=0");
+        this.props.getItemList("CONTACT", `list?limit=10&skip=0`);
         window.addEventListener('resize', this.getWindowWidth);
     }
 
@@ -53,9 +53,9 @@ class Invoice extends Component {
     }
 
     handleFilterRequest = (value) => {
-        this.setState({status: value.code});
-        this.props.getTotal(this.state.reducer, `?status=${value.code}`);
-        this.props.getBookList(this.state.reducer, `list?limit=10&skip=0&status=${value.code}`);
+        var query = value.en + "=1"
+        this.setState({query: query.toLowerCase()});
+        this.props.getBookList(this.state.reducer, `list?limit=10&skip=0&${query.toLowerCase()}`);
     }
 
     handleStatus = (event) => {
@@ -64,7 +64,7 @@ class Invoice extends Component {
 
     render() {
 
-    const { isFetching, locale, classes, newInvoice, status, total, actionLoading } = this.props
+    const { isFetching, locale, classes, newInvoice, status, total, actionLoading, listContacts } = this.props
     const { reducer, width, listInvoice } = this.state
     const isMobile = width <= 500;
 
@@ -83,11 +83,13 @@ class Invoice extends Component {
             <ApxTableToolBar
                 title={isFetching ? locale.wording.loading :  locale.wording.invoice}
                 selected={ locale.wording.selected}
+                listContacts={listContacts}
                 locale={locale}
                 menus={ status && [...status || [], {fr: "Tous", en: "All", code: "none"}]  }
                 onChangeQuery={ this.handleFilterRequest }
                 toExcel={true}
                 onDownload={ () => { this.props.downloadFile(reducer, `export/excel-file`) } }
+                tooltipTitle={locale.wording.filter_status}
             />
             <div style={{ overflowY: "auto" }}>
                     <Table padding="dense">
@@ -113,11 +115,11 @@ class Invoice extends Component {
                             {   !isFetching ?
                                 this.props.listInvoice.map(( invoice, index) => {
                                     return  <TableRow key={index}>
-                                                <TableCell>{new Date(invoice.createAt.date).toLocaleDateString(localStorage.getItem('locale'))}</TableCell>
+                                                <TableCell>{new Date(invoice.created_at.date).toLocaleDateString(localStorage.getItem('locale'))}</TableCell>
                                                 <TableCell><Link className="link" to={`/invoice/view/${invoice._id}`}>{locale.wording.inv}-{invoice.ref}</Link></TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${invoice.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{invoice.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell className="tableNumber">{cvtNumToUserPref(invoice.subtotal)} {invoice.currency.value}</TableCell>
-                                                <TableCell><span style={{color: invoice.status.color }}>{ invoice.status[localStorage.getItem('locale')] }</span></TableCell>
+                                                <TableCell><span style={{color: invoice.status.color, fontWeight: 400}}>{ invoice.status[localStorage.getItem('locale')] }</span></TableCell>
                                                 <TableCell align="center"><Link to={`/refund/create/${invoice._id}`}><img alt="convert-to-refund" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link></TableCell>
                                                 <TableCell align="center"><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, invoice._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
                                                 <TableCell align="center" style={{ whiteSpace: "nowrap", width: "0%"}}>
@@ -149,7 +151,7 @@ class Invoice extends Component {
                         label={locale.wording.label_rows_per_page}
                         label2={locale.wording.of}
                         reducer={reducer}
-                        value={this.state.status}
+                        value={this.state.query}
                         filterName="status"
                         onGetItemList={ this.props.getBookList }
                     />
@@ -207,11 +209,12 @@ const mapStateToProps = (state) => {
         isFetching: state.book.invoice.isFetching,
         updated: state.book.invoice.updated,
         receivedAt: state.book.invoice.receivedAt,
+        listContacts: state.library.contact.list,
         newInvoice: state.book.invoice.item || {},
         locale: state.locale.locale,
-        total: state.library.invoice.total,
+        total: state.book.invoice.total,
         listInvoice: state.book.invoice.list.filter((el) => { return el.archive === false }),
-        rowsPerPageOptions: state.library.invoice.rowsPerPageOptions,
+        rowsPerPageOptions: state.book.invoice.rowsPerPageOptions,
         status: state.helper.items.status_invoice,
         actionLoading: state.book.invoice.actionLoading
     }
@@ -219,4 +222,4 @@ const mapStateToProps = (state) => {
 
 const StyledInvoice = withStyles(styles)(Invoice)
 
-export default connect(mapStateToProps, {  getBookList, getTotal, updateField, createState, downloadPdf, downloadFile, resetState  })(StyledInvoice);
+export default connect(mapStateToProps, {  getBookList, updateField, createState, downloadPdf, downloadFile, resetState , getItemList })(StyledInvoice);

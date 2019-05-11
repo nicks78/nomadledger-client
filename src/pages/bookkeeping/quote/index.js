@@ -5,7 +5,6 @@ import { Link } from "react-router-dom"
 import {DEFAULT_URL} from "../../../redux/constant"
 import {connect} from 'react-redux'
 import {  getBookList, updateField, createState, downloadPdf, resetState } from '../../../redux/book/actions'
-import { getTotal } from '../../../redux/library/actions'
 import AddIcon from '@material-ui/icons/AddOutlined'
 import { withStyles, Button, Hidden,  Paper, Table, TableHead, TableBody, TableCell, TableRow , Fab} from '@material-ui/core';
 import ApxTableToolBar from '../../../components/common/tableToolBar'
@@ -20,7 +19,7 @@ class Quote extends Component {
     state = {
         showQuote: false,
         reducer: "QUOTE",
-        status: 'none',
+        query: '',
         width: window.innerWidth,
         receivedAt: "",
         listQuote: []
@@ -28,7 +27,6 @@ class Quote extends Component {
     }
 
     componentDidMount(){
-        this.props.getTotal(this.state.reducer);
         this.props.getBookList(this.state.reducer, `list?limit=10&skip=0`);
         window.addEventListener('resize', this.getWindowWidth);
     }
@@ -51,9 +49,9 @@ class Quote extends Component {
     }
 
     handleFilterRequest = (value) => {
-        this.setState({status: value.code});
-        this.props.getTotal(this.state.reducer, `?status=${value.code}`);
-        this.props.getBookList(this.state.reducer, `list?limit=10&skip=0&status=${value.code}`);
+      var query = value.en + "=1"
+      this.setState({query: query.toLowerCase()});
+      this.props.getBookList(this.state.reducer, `list?limit=10&skip=0&${query.toLowerCase()}`);
     }
 
     handleStatus = (event) => {
@@ -78,12 +76,13 @@ class Quote extends Component {
             { !isMobile ?
             <Paper className={classes.paper}>
 
-                <ApxTableToolBar
+                  <ApxTableToolBar
                         title={isFetching ? locale.wording.loading : locale.wording.quote}
                         selected={locale.wording.selected}
                         locale={locale}
                         menus={ status && [...status, {fr: "Tous", en: "All", code: "none"}]  }
                         onChangeQuery={ this.handleFilterRequest }
+                        tooltipTitle={locale.wording.filter_status}
                     />
                     <div style={{overflowY: "auto"}}>
                     <Table  padding="dense">
@@ -112,7 +111,7 @@ class Quote extends Component {
                                                 <TableCell><Link className="link" to={`/quote/view/${quote._id}`}>{locale.wording.qto}-{quote.ref}</Link></TableCell>
                                                 <TableCell><Link className="link" to={{ pathname: `/contact/view/${quote.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{quote.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell className="tableNumber">{cvtNumToUserPref(quote.subtotal)} {quote.currency.value}</TableCell>
-                                                <TableCell><span style={{color: quote.status.color }}>{ quote.status[localStorage.getItem('locale')] }</span></TableCell>
+                                                <TableCell><span style={{color: quote.status.color, fontWeight: 400 }}>{ quote.status[localStorage.getItem('locale')] }</span></TableCell>
                                                 <TableCell align="center"><Link to={`/invoice/create/${quote._id}`}><img alt="convert-to-invoice" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link></TableCell>
                                                 <TableCell align="center"><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, quote._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
                                                 <TableCell align="center" style={{ whiteSpace: "nowrap", width: "0%"}}>
@@ -143,7 +142,7 @@ class Quote extends Component {
                         label={locale.wording.label_rows_per_page}
                         label2={locale.wording.of}
                         reducer={reducer}
-                        value={this.state.status}
+                        value={this.state.query}
                         filterName="status"
                         onGetItemList={ this.props.getBookList }
                     />
@@ -205,9 +204,9 @@ const mapStateToProps = (state) => {
         receivedAt: state.book.quote.receivedAt,
         newQuote: state.book.quote.item || {},
         locale: state.locale.locale,
-        total: state.library.quote.total,
+        total: state.book.quote.total,
         listQuote: state.book.quote.list.filter((el) => { return el.archive === false }),
-        rowsPerPageOptions: state.library.quote.rowsPerPageOptions,
+        rowsPerPageOptions: state.book.quote.rowsPerPageOptions,
         status: state.helper.items.status_quote,
         actionLoading: state.book.quote.actionLoading
     }
@@ -215,4 +214,4 @@ const mapStateToProps = (state) => {
 
 const StyledQuote = withStyles(styles)(Quote)
 
-export default connect(mapStateToProps, {  getBookList, getTotal, updateField, createState, downloadPdf, resetState })(StyledQuote);
+export default connect(mapStateToProps, {  getBookList, updateField, createState, downloadPdf, resetState })(StyledQuote);

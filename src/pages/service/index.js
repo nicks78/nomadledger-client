@@ -4,8 +4,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { createItem, getItemList, getItem, createState, getTotal , resetState, deleteElement} from '../../redux/library/actions'
 import {connect} from 'react-redux'
-import { TableCell, TableRow, Table, TableHead, TableBody, withStyles, Tooltip, Paper} from '@material-ui/core';
+import { TableCell, TableRow, Table, TableHead, TableBody, withStyles, Paper} from '@material-ui/core';
 import ApxTableToolBar from '../../components/common/tableToolBar'
+import Tooltips from '../../components/common/tooltips'
 import AddService from './addService'
 import {cvtNumToUserPref} from '../../utils/help_function'
 import Pagination from '../../lib/pagination'
@@ -25,17 +26,7 @@ const styles = theme =>  ({
             boxShadow: 'none',
             borderRadius: 0
         },
-    },
-    lightTooltip: {
-      color: 'white',
-      fontWeight: 400,
-      maxWidth: 300,
-      textAlign: 'center',
-      padding: '5px 5px 5px 5px',
-      fontSize: 12,
-      width: '100%',
-      backgroundColor: 'rgba(0,0,0,1)',
-  }
+    }
 })
 
 class Service extends Component {
@@ -103,12 +94,15 @@ class Service extends Component {
           { !isMobile ?
             <Paper className={classes.paper}>
 
-                <ApxTableToolBar
+                    <ApxTableToolBar
                         numSelected={0}
                         menus={[...category, {fr: "Tous", en: "All", _id: "none"}]}
                         title={isFetching ? locale.wording.loading : locale.wording.service}
                         selected={locale.wording.selected}
                         onChangeQuery={ this.handleFilterRequest }
+                        locale={locale}
+                        hideDateFilter={true}
+                        tooltipTitle={locale.wording.filter_category}
                     />
                     <div style={{overflowY: "auto"}}>
                     <Table>
@@ -131,7 +125,7 @@ class Service extends Component {
                                                 <TableCell className="tableNumber" align="right">{cvtNumToUserPref(service.price)} {service.currency.value}</TableCell>
                                                 <TableCell align="right">{ service.service_type[localStorage.getItem('locale')] }</TableCell>
                                                 <TableCell style={{textTransform: 'capitalize'}}>{service.category[localStorage.getItem('locale')]}</TableCell>
-                                                <Tooltip classes={{ tooltip: classes.lightTooltip }} title={service.description} ><TableCell>{service.description.slice(0,5)}...</TableCell></Tooltip>
+                                                <Tooltips title={service.description} ><TableCell>{service.description.slice(0,5)}...</TableCell></Tooltips>
                                                 <TableCell align="center" onClick={() => { this.props.deleteElement( reducer, `delete/${service._id}`) } }><DeleteIcon style={{color: 'red', cursor: 'pointer', fontSize: 18}}  /></TableCell>
                                             </TableRow>
                                 })

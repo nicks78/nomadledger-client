@@ -7,6 +7,7 @@ class BaseState {
     item = {list_items: []};
     total = 0;
     receivedAt = null;
+    rowsPerPageOptions = [];
     progress = 0;
     isFetching = false;
     isUpdating = false;

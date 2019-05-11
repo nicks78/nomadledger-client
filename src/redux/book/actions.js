@@ -21,9 +21,9 @@ export function getBookList( actionType, endPoint ){
         try{
             const request = await axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${endPoint}`);
             const res = request.data
+            dispatch(setTotal(actionType, res))
             dispatch(receiveDocuments(actionType, res.payload ))
         }catch(error){
-          console.log("ERROR", error)
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
         }
@@ -268,11 +268,12 @@ export function getBookTotal( actionType, endPoint ){
     }
 }
 
-export function setTotal ( actionType, total ){
+export function setTotal ( actionType, res ){
     return {
       type: `SET_TOTAL`,
       subtype: actionType,
-      total
+      total: res.total,
+      rowsPerPageOptions: res.rowsPerPageOptions
     }
 }
 
