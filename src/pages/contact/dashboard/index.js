@@ -75,8 +75,9 @@ class ShowContact extends React.Component {
       if(isFetching){
         return <Spinner />
       }
+
       if( contact === null){
-        return <ApxAlert message="error_404" />
+        return <Paper className={ classes.root }><ApxBackBtn/><ApxAlert message="error_404" /></Paper>
       }
 
       return (

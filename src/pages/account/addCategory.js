@@ -49,7 +49,7 @@ class AddCategory extends Component {
     addApi: 'push-pull/update/push/',
     deleteApi: 'push-pull/update/pull/'
   }
-  
+
   _handleFormEdit = (event) => {
       var value = event.target.value;
       this.setState({value: value})
@@ -57,10 +57,9 @@ class AddCategory extends Component {
 
   _pushToDoc = () => {
     var data = {
-      category_name: { 
-        fr: this.state.value, 
+      category_name: {
+        fr: this.state.value,
         en:  this.state.value,
-        color: '#'+Math.floor(Math.random()*16777215).toString(16)
       }
     }
 
@@ -87,9 +86,9 @@ class AddCategory extends Component {
 
     return (
       <div>
-        
+
             <div className={ classes.addCategory}>
-                <TextField 
+                <TextField
                         id="category_name"
                         label={locale.wording.category}
                         className={classes.textField}
@@ -99,16 +98,16 @@ class AddCategory extends Component {
                         onChange={this._handleFormEdit}
                         margin="normal"
                     />
-                
+
                 <AddIcon  className={ classes.addBtn} onClick={ this._pushToDoc }/>
-                
-                
+
+
             </div>
 
                     <div className={ classes.tagWrapper}>
                     {
                         company.category_name.map((category, index) => {
-                          return <ApxTag 
+                          return <ApxTag
                                   color="secondary"
                                   variant="outlined"
                                   edit={true}
@@ -120,7 +119,7 @@ class AddCategory extends Component {
                                 />
                         })
                     }
-                        
+
 
                     </div>
       </div>

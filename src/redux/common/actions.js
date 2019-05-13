@@ -1,4 +1,4 @@
-//src/redux/library/actions/getListAction.js
+//src/redux/common/actions.js
 
 
 import axios from 'axios';
@@ -7,7 +7,7 @@ import { requestData, requestFailed  } from './'
 import {setError} from '../../error/actions'
 
 // GET FULL LIST OF ITEM
-export function getItemList( actionType, endPoint ){
+export function getItemList( actionType, endPoint, stateName ){
 
     return dispatch => {
 
@@ -22,7 +22,6 @@ export function getItemList( actionType, endPoint ){
             return response.data
         })
         .then( res => {
-            dispatch(setTotal(actionType, res))
             dispatch(receiveItems(actionType, res.payload ))
         })
         .catch(function (error) {
@@ -30,27 +29,4 @@ export function getItemList( actionType, endPoint ){
           dispatch(requestFailed(actionType));
         })
     }
-}
-
-
-function receiveItems(actionType, items) {
-  return {
-    type: `RECEIVE`,
-    subtype: actionType,
-    isFetching: false,
-    payload: items,
-    receivedAt: Date.now()
-  }
-}
-
-
-function setTotal(actionType, res) {
-
-  return {
-    type: `TOTAL`,
-    subtype: actionType,
-    isFetching: false,
-    total: res.total,
-    rowsPerPageOptions: res.rowsPerPageOptions
-  }
 }

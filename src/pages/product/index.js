@@ -1,7 +1,7 @@
 //manager/src/pages/product/index.js
 
 import React, { Component } from 'react'
-import { createItem, getItemList, getItem, createState, getTotal, resetState , deleteElement} from '../../redux/library/actions'
+import { createItem, getItemList, getItem, createState, resetState , deleteElement} from '../../redux/library/actions'
 import {connect} from 'react-redux'
 import { withStyles, Grid, Button} from '@material-ui/core';
 import Spinner from '../../components/common/spinner'
@@ -48,7 +48,6 @@ class Product extends Component {
     }
 
     componentDidMount(){
-        this.props.getTotal(this.state.reducer)
         this.props.getItemList(this.state.reducer, `list?limit=${this.state.limit}&skip=0`);
         // Set scroll event
         var el = document.getElementById("scrollable");
@@ -165,4 +164,4 @@ const mapStateToProps = (state) => {
 
 const StyledProduct = withStyles(styles)(Product)
 
-export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, getTotal, resetState, deleteElement  })(StyledProduct);
+export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, resetState, deleteElement  })(StyledProduct);

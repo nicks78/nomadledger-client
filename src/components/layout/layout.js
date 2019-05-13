@@ -109,7 +109,7 @@ const styles = theme => ({
         }
     },
     img: {
-        maxHeight:"50px",
+        maxHeight:"40px",
         maxWidth:"100px",
         width:"auto"
     }

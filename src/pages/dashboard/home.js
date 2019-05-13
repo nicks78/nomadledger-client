@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import { resetTask} from '../../redux/task/actions'
 import { getData } from '../../redux/stat/actions'
 import { getAllTask, updateStatus } from '../../redux/task/actions'
-import {Grid, Typography, withStyles, Paper} from '@material-ui/core'
+import {Grid, Typography, withStyles, Paper } from '@material-ui/core'
 import BarCharts from '../../components/common/barCharts'
 import BarHorizontal from '../../components/common/barHorizontal'
 import PieCharts from '../../components/common/pie'
@@ -58,7 +58,7 @@ class Home extends Component {
         return (
             <div>
 
-            <Typography variant="h1" align="center">  { cvtNumToUserPref( calNetProfit(mainStat)) }  { currency.value } </Typography>
+            <Typography variant="h1" align="center" style={{fontWeight: 600}}>  { cvtNumToUserPref( calNetProfit(mainStat)) }  { currency.value } </Typography>
             <Typography variant="caption" align="center" style={{ marginTop: 5, paddingBottom: 24 }}>{locale.subheading.label_revenue} - { mainStat && mainStat.fiscal_year  }</Typography>
 
             <Grid container spacing={24} className={ classes.charts }>
@@ -74,36 +74,6 @@ class Home extends Component {
                         : null
                     }
                     </ApxPaper>
-
-                    <ApxPaper>
-                      <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px", color: "#303030" }}>
-                          { locale.subheading.label_graph_expense }
-                      </Typography>
-                        {
-                            expensesBy ?
-                                <BarHorizontal chartData={ expensesBy }  id="expensesBy" currency={ currency.value || "-" }/>
-                            : null
-                        }
-                    </ApxPaper>
-                </Grid>
-
-                <Grid item xs={12} sm={4} md={4} >
-                  <ApxPaper>
-                    <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px", color: "#303030" }}>
-                        { locale.wording.conversions } &nbsp;({ locale.wording.quote })
-                    </Typography>
-                     <div style={{ marginTop: "20%" }}>
-                      {
-                          pieQuote ?
-                              <PieCharts
-                                  chartData={ pieQuote }
-                                  locale={locale}
-                              />
-                          : null
-                      }
-                      </div>
-                    </ApxPaper>
-
                     <Paper className={classes.paper}>
                         <Typography variant="caption" className={ classes.taskHeader }>{locale.subheading.label_daily_task}&nbsp;
                             <span style={{textTransform: "capitalize"}}>{ new Date().toLocaleDateString(localStorage.getItem("locale"), options)  }</span>
@@ -130,6 +100,35 @@ class Home extends Component {
                             }
                             </div>
                     </Paper>
+                </Grid>
+
+                <Grid item xs={12} sm={4} md={4} >
+
+                  <ApxPaper>
+                    <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px", color: "#303030" }}>
+                        { locale.wording.conversions } &nbsp;({ locale.wording.quote })
+                    </Typography>
+                     <div style={{ marginTop: "20%" }}>
+                      {
+                          pieQuote ?
+                              <PieCharts
+                                  chartData={ pieQuote }
+                                  locale={locale}
+                              />
+                          : null
+                      }
+                      </div>
+                    </ApxPaper>
+                    <ApxPaper>
+                      <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px", color: "#303030" }}>
+                          { locale.subheading.label_graph_expense }
+                      </Typography>
+                        {
+                            expensesBy ?
+                                <BarHorizontal chartData={ expensesBy }  id="expensesBy" currency={ currency.value || "-" }/>
+                            : null
+                        }
+                    </ApxPaper>
                 </Grid>
             </Grid>
         </div>
@@ -172,11 +171,15 @@ const styles = theme => ({
     },
     paper: {
       minHeight: 150,
+      marginBottom: 24,
       [theme.breakpoints.down('sm')]: {
           boxShadow: 'none',
           borderRadius: 0
       },
-    }
+    },
+    tableHead: {
+        backgroundColor: "rgb(238,238,238)"
+    },
 })
 
 

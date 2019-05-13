@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import {downloadFile} from '../../redux/download/actions'
-import { createItem, getItemList, getItem, createState, getTotal , resetState, deleteElement} from '../../redux/library/actions'
+import { createItem, getItemList, getItem, createState , resetState, deleteElement} from '../../redux/library/actions'
 import {connect} from 'react-redux'
 import { TableCell, TableRow, Table, TableHead, TableBody, withStyles, Paper} from '@material-ui/core';
 import ApxTableToolBar from '../../components/common/tableToolBar'
@@ -41,7 +41,7 @@ class Expense extends Component {
       this.state = {
           reducer: 'EXPENSE',
           rowCount: 0,
-          category: 'none',
+          category: '',
           width: window.innerWidth,
           listExpenses: [],
           receivedAt: ""
@@ -49,7 +49,6 @@ class Expense extends Component {
     }
 
     componentDidMount(){
-            this.props.getTotal(this.state.reducer)
             this.props.getItemList(this.state.reducer, "list?limit=10&skip=0");
             window.addEventListener('resize', this.getWindowWidth);
     }
@@ -67,6 +66,11 @@ class Expense extends Component {
       window.removeEventListener('resize', this.getWindowWidth);
     }
 
+    refresh = () => {
+      this.setState({category: ""})
+      this.props.getItemList(this.state.reducer, `list?limit=10&skip=0`);
+    }
+
     getWindowWidth = () => {
       this.setState({width: window.innerWidth})
     }
@@ -74,7 +78,6 @@ class Expense extends Component {
     handleFilterRequest = (value) => {
         var query = value._id ? "category="+ value._id : value
         this.setState({category: value._id});
-        this.props.getTotal(this.state.reducer, `?${query}`);
         this.props.getItemList(this.state.reducer, `list?limit=10&skip=0&${query}`);
     }
 
@@ -104,16 +107,17 @@ class Expense extends Component {
           { !isMobile ?
             <Paper className={classes.paper}>
 
-                <ApxTableToolBar
-                        numSelected={0}
-                        menus={[...category, {fr: "Tous", en: "All", _id: "none"}]}
-                        title={ isFetching ? locale.wording.loading : locale.wording.expense}
-                        selected={locale.wording.selected}
-                        onChangeQuery={ this.handleFilterRequest }
-                        toExcel={true}
-                        onDownload={ () => { this.props.downloadFile(reducer, `export/excel-file`) } }
-                        locale={locale}
-                        tooltipTitle={locale.wording.filter_category}
+                  <ApxTableToolBar
+                      numSelected={0}
+                      menus={[...category, {fr: "Tous", en: "All", _id: "none"}]}
+                      title={ isFetching ? locale.wording.loading : locale.wording.expense}
+                      selected={locale.wording.selected}
+                      onChangeQuery={ this.handleFilterRequest }
+                      toExcel={true}
+                      refresh={ this.refresh }
+                      onDownload={ () => { this.props.downloadFile(reducer, `export/excel-file`) } }
+                      locale={locale}
+                      tooltipTitle={locale.wording.filter_category}
                     />
 
                     <div style={{overflowY: "auto"}}>
@@ -197,4 +201,4 @@ const mapStateToProps = (state, ownProps) => {
 
 const StyledExpense = withStyles(styles)(Expense)
 
-export default connect(mapStateToProps, { downloadFile, createItem, getItemList, getItem, createState, getTotal, resetState , deleteElement })(StyledExpense);
+export default connect(mapStateToProps, { downloadFile, createItem, getItemList, getItem, createState, resetState , deleteElement })(StyledExpense);

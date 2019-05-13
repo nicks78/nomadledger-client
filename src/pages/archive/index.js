@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom"
 import {connect} from 'react-redux'
 import {getBookList, updateField} from '../../redux/book/actions'
-import { getTotal } from '../../redux/library/actions'
 import { withStyles, Table, TableBody, TableCell, TableHead , Paper, TableRow, TableSortLabel} from '@material-ui/core';
 import { cvtNumToUserPref } from '../../utils/help_function'
 import Pagination from '../../lib/pagination'
@@ -21,7 +20,6 @@ class Archive extends Component {
     }
 
     componentDidMount(){
-        this.props.getTotal( this.state.reducer , `?archive=1`);
         this.props.getBookList(this.state.reducer, `list?limit=10&skip=0&archive=1`)
     }
 
@@ -34,9 +32,11 @@ class Archive extends Component {
     }
 
     handleFilterRequest = (value) => {
-        this.setState({reducer: value.code, results: []});
-        this.props.getTotal(value.code, `?archive=1`);
-        this.props.getBookList(value.code, `list?limit=10&skip=0&archive=1`);
+        var query = value.code ? "" : "&"+value
+        if(value.code){
+            this.setState({reducer: value.code, results: []});
+        }
+        this.props.getBookList(this.state.reducer, `list?limit=10&skip=0&archive=1${query}`);
     }
 
     sortBy = (results, field, id) => {
@@ -64,6 +64,7 @@ class Archive extends Component {
                 locale={locale}
                 menus={[ {fr: "Factures", en: "Invoices", code: "INVOICE"}, {fr: "Devis", en: "Quotes", code: "QUOTE"}, {fr: "Avoirs", en: "Refunds", code: "REFUND"} ]}
                 onChangeQuery={ this.handleFilterRequest }
+                tooltipTitle={locale.wording.filter_doc_type}
             />
 
                  <div style={{overflowY: "auto"}}>
@@ -80,25 +81,22 @@ class Archive extends Component {
                                   >
                             </TableSortLabel>
                             </TableCell>
+                            <TableCell>{locale.wording.date}</TableCell>
                             <TableCell>{locale.wording.reference}</TableCell>
                             <TableCell>{locale.wording.client}</TableCell>
                             <TableCell>{locale.wording.subtotal}</TableCell>
-                            <TableCell>{locale.wording.vat}</TableCell>
-                            <TableCell>{locale.wording.total}</TableCell>
                         </TableRow>
                     </TableHead>
 
                     <TableBody className={classes.tableBody}>
                             {   !loadInvoice || !loadQuote || !loadRefund ?
                                 results.map((item, index) => {
-                                    let vat = item.subtotal * item.vat.indice / 100
                                     return  <TableRow key={index}>
                                                 <TableCell>{item.fiscal_year}</TableCell>
+                                                <TableCell>{new Date(item.created_at.date).toLocaleDateString(localStorage.getItem('locale'))}</TableCell>
                                                 <TableCell>{locale.wording[reducer.toLowerCase()]}-{item.ref}</TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${item.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{item.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell className={classes.price}>{cvtNumToUserPref(item.subtotal)} {item.currency.value}</TableCell>
-                                                <TableCell className={classes.price}>{cvtNumToUserPref(vat ) + " "+ item.currency.value }</TableCell>
-                                                <TableCell className={classes.price}>{cvtNumToUserPref(vat + item.subtotal  )} {item.currency.value}</TableCell>
                                             </TableRow>
                                 })
                                 : null
@@ -165,4 +163,4 @@ const mapStateToProps = (state) => {
 
 const StyledArchive = withStyles(styles)(Archive);
 
-export default connect( mapStateToProps, {getBookList, getTotal, updateField})(StyledArchive)
+export default connect( mapStateToProps, {getBookList, updateField})(StyledArchive)

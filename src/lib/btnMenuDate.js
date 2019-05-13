@@ -65,7 +65,7 @@ class BtnMenuDate extends React.Component {
           onClose={this.handleClose}
         >
         <div style={{height: 260, width: 260, padding: 10}}>
-          <Typography variant="caption">Pick a date</Typography>
+          <Typography variant="caption" align="center">{locale.wording.pick_date}</Typography>
           <DayPicker
               selectedDay={selectedDay}
               onDayClick={  this.handleDayChange }

@@ -269,7 +269,12 @@ const fr =  {
         filter_contact: "Filtrer par contact",
         filter_date: "Filtrer par date",
         filter_category: "Filtrer par catégorie",
-        export_csv: "Exporter au format Excel"
+        filter_group: "Filtrer par groupe",
+        export_csv: "Exporter au format Excel",
+        filter_doc_type: "Filtrer par type de document",
+        hint_refresh: "Remise à zéro",
+        search_contacts: "Rechercher des Contacts",
+        pick_date: "Cliquer sur une date"
 
     },
     helperText: {

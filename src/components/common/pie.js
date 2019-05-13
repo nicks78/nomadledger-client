@@ -17,7 +17,7 @@ class PieCharts extends Component {
         this.setState({
             ctx: new Chart(ctx, {
               type: "doughnut",
-              data: this.props.chartData, 
+              data: this.props.chartData,
               options: {
                 legend: {
                   position: "left"
@@ -43,11 +43,11 @@ class PieCharts extends Component {
           ctx: ctx
         })
       }
-        
+
     }
 
   render() {
-      
+
     return (
       <div  style={{ position: "relative" }}>
           <canvas id="PieChart"></canvas>
@@ -57,4 +57,3 @@ class PieCharts extends Component {
 }
 
 export default PieCharts
-

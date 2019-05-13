@@ -30,7 +30,7 @@ class Invoice extends Component {
 
     componentDidMount(){
         this.props.getBookList(this.state.reducer, "list?limit=10&skip=0");
-        this.props.getItemList("CONTACT", `list?limit=10&skip=0`);
+        // this.props.getItemList("CONTACT", `list?limit=10&skip=0`);
         window.addEventListener('resize', this.getWindowWidth);
     }
 
@@ -47,15 +47,20 @@ class Invoice extends Component {
       this.props.resetState(this.state.reducer)
     }
 
+    refresh = () => {
+      this.setState({query: ""})
+      this.props.getBookList(this.state.reducer, "list?limit=10&skip=0")
+    }
+
 
     getWindowWidth = () => {
       this.setState({width: window.innerWidth})
     }
 
     handleFilterRequest = (value) => {
-        var query = value.en + "=1"
+        var query = value.en ? "&" +value.en + "=1" :  "&" + value;
         this.setState({query: query.toLowerCase()});
-        this.props.getBookList(this.state.reducer, `list?limit=10&skip=0&${query.toLowerCase()}`);
+        this.props.getBookList(this.state.reducer, `list?limit=10&skip=0${query.toLowerCase()}`);
     }
 
     handleStatus = (event) => {
@@ -90,6 +95,7 @@ class Invoice extends Component {
                 toExcel={true}
                 onDownload={ () => { this.props.downloadFile(reducer, `export/excel-file`) } }
                 tooltipTitle={locale.wording.filter_status}
+                refresh={ this.refresh }
             />
             <div style={{ overflowY: "auto" }}>
                     <Table padding="dense">

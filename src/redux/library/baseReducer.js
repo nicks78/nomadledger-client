@@ -29,7 +29,8 @@ const baseReducer = (state = new BaseState(), action) => {
             return  {
                 ...state,
                 isFetching: action.isFetching,
-                isError: action.isError
+                isError: action.isError,
+                list: []
             }
         case `REQUEST_CREATE`:
             return  {

@@ -38,9 +38,7 @@ const styles = theme => ({
     marginTop: 24
   },
   btnChangePassword: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
+      textAlign: "center",
       height: "100%",
       [theme.breakpoints.down("sm")]: {
           height: "auto",
@@ -53,7 +51,7 @@ class User extends Component {
 
     state = {
       reducer: "USER",
-      showEdit: false,
+      showEdit: true,
     }
 
   openEdit = () => {
@@ -156,9 +154,9 @@ class User extends Component {
                       />
 
 
-                    <br /><br />
-                    <div className={classes.btnChangePassword}>
 
+                    <div className={classes.btnChangePassword}>
+                      <br /><br />
                       <Button color="primary"
                               disabled={requestPW}
                               variant="contained"

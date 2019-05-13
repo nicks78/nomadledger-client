@@ -262,7 +262,12 @@ const en = {
         filter_contact: "Filter by contact",
         filter_date: "Filter by date",
         filter_category: "Filter by category",
-        export_csv: "Export to Excel"
+        filter_group: "Filter by group",
+        export_csv: "Export to Excel",
+        filter_doc_type: "Filter by document type",
+        hint_refresh: "Reinitialize result",
+        search_contacts: "Search Contacts",
+        pick_date: "Pick a date"
     },
     helperText: {
         select_phone_code: "Phone code",

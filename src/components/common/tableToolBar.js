@@ -9,31 +9,48 @@ import BtnMenu from '../../lib/btnMenu'
 import BtnMenuDate from '../../lib/btnMenuDate'
 import GetAppIcon from '@material-ui/icons/GetApp'
 import Tooltips from './tooltips'
+import RefreshIcon from '@material-ui/icons/RefreshOutlined'
+import SearchBar from './searchBar'
 
 
 const styles = theme => ({
     spacer: {
-      flex: '1 1 100%',
+      flex: '1 1 10%',
     },
     actions: {
       color: theme.palette.text.secondary,
     },
     title: {
       flex: '0 0 auto',
+    },
+    margin: {
+      margin: theme.spacing.unit,
     }
 })
 
 const EnhancedToolBar = (props) => {
 
-  const { classes, title, menus, locale, toExcel, hideDateFilter, tooltipTitle } = props;
+  const { classes, title, menus, locale, toExcel, hideDateFilter, tooltipTitle, refresh, searchBar, onSearchByName } = props;
 
   return (
     <div><Toolbar>
-        <div className={classes.title}>
-            <Typography variant="subtitle1" id="tableTitle">
-              { title }
-            </Typography>
-        </div>
+          {
+            searchBar ?
+              <SearchBar title={  title } onSearchByName={onSearchByName}/>
+            :
+
+            <Typography variant="h3">{title}</Typography>
+
+          }
+
+
+          <Tooltips title={locale.wording.hint_refresh}>
+            <IconButton aria-label="Refresh" onClick={ refresh }>
+              <RefreshIcon fontSize="small" />
+            </IconButton>
+          </Tooltips>
+
+
 
         <div className={classes.spacer} />
 

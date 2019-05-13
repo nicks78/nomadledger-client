@@ -102,7 +102,7 @@ class AutoComplete extends React.Component {
     var endpoint = "";
 
     if(this.props.model === "contact"){
-      endpoint = `contact/search/${inputValue}`
+      endpoint = `contact/search/query?value=${inputValue}`
     }else{
       endpoint = `common/search?query=${inputValue}&field=${this.props.field}`
     }

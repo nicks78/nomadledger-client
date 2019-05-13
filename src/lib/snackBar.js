@@ -19,9 +19,10 @@ const styles = theme => ({
     marginLeft: 10,
     borderRadius: 4,
     textAlign: "center",
+    border: `1px solid #c3e6cb`,
     "& div":{
-      color: "white",
-      backgroundColor: "green",
+      color: "#155724",
+      backgroundColor: "#d4edda",
     }
   },
   error: {
@@ -30,9 +31,10 @@ const styles = theme => ({
     marginLeft: 10,
     borderRadius: 4,
     textAlign: "center",
+    border: `1px solid #f5c6cb`,
     "& div":{
-      color: "white",
-      backgroundColor: "red",
+      color: "#721c24",
+      backgroundColor: "#f8d7da",
     }
   },
   info: {
@@ -41,9 +43,10 @@ const styles = theme => ({
     marginLeft: 10,
     borderRadius: 4,
     textAlign: "center",
+    border: `1px solid #b8daff`,
     "& div":{
-      color: "white",
-      backgroundColor: "blue",
+      color: "#004085",
+      backgroundColor: "#cce5ff",
     }
   },
   warning: {
@@ -52,9 +55,10 @@ const styles = theme => ({
     marginLeft: 10,
     borderRadius: 4,
     textAlign: "center",
+    border: `1px solid #ffeeba`,
     "& div":{
-      color: "white",
-      backgroundColor: "#ffae42",
+      color: "#856404",
+      backgroundColor: "#fff3cd",
     }
   },
 });

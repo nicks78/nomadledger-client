@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { createItem, getItemList, getItem, createState, getTotal , resetState, deleteElement} from '../../redux/library/actions'
+import { createItem, getItemList, getItem, createState , resetState, deleteElement} from '../../redux/library/actions'
 import {connect} from 'react-redux'
 import { TableCell, TableRow, Table, TableHead, TableBody, withStyles, Paper} from '@material-ui/core';
 import ApxTableToolBar from '../../components/common/tableToolBar'
@@ -29,20 +29,21 @@ const styles = theme =>  ({
     }
 })
 
+
+
 class Service extends Component {
 
 
     state = {
         reducer: 'SERVICE',
         rowCount: 0,
-        category: 'none',
+        category: '',
         listServices: [],
         width: window.innerWidth,
         receivedAt: ""
     }
 
     componentDidMount(){
-            this.props.getTotal(this.state.reducer)
             this.props.getItemList(this.state.reducer, "list?limit=10&skip=0");
             window.addEventListener('resize', this.getWindowWidth);
     }
@@ -60,13 +61,17 @@ class Service extends Component {
         window.removeEventListener('resize', this.getWindowWidth);
     }
 
+    refresh = () => {
+      this.setState({category: ""})
+      this.props.getItemList(this.state.reducer, `list?limit=10&skip=0`);
+    }
+
     getWindowWidth = () => {
       this.setState({width: window.innerWidth})
     }
 
     handleFilterRequest = (value) => {
         this.setState({category: value._id});
-        this.props.getTotal(this.state.reducer, `?category=${value._id}`);
         this.props.getItemList(this.state.reducer, `list?limit=10&skip=0&category=${value._id}`);
     }
 
@@ -102,6 +107,7 @@ class Service extends Component {
                         onChangeQuery={ this.handleFilterRequest }
                         locale={locale}
                         hideDateFilter={true}
+                        refresh={this.refresh}
                         tooltipTitle={locale.wording.filter_category}
                     />
                     <div style={{overflowY: "auto"}}>
@@ -184,4 +190,4 @@ const mapStateToProps = (state) => {
 
 const StyledService = withStyles(styles)(Service)
 
-export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, getTotal, resetState, deleteElement  })(StyledService);
+export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, resetState, deleteElement })(StyledService);

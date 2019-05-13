@@ -20,9 +20,6 @@ class MobileView extends React.Component {
     }
   }
 
-
-
-
   componentDidMount() {
     var el = document.getElementById('scrollable');
     el.scrollTo(0, 0)
@@ -55,7 +52,6 @@ class MobileView extends React.Component {
   }
 
   renderCard = (contacts) => {
-
       return contacts.map(( contact, index) => {
         return<Card  key={index} className={this.props.classes.card} >
                 <Link to={`/${this.props.reducer.toLowerCase()}/view/${contact._id.toLowerCase()}`}>
@@ -112,12 +108,12 @@ class MobileView extends React.Component {
 
 
   render () {
-    const { contacts, classes , locale} = this.props;
+    const { contacts, classes} = this.props;
 
     return (
       <div className={classes.root} id="mobileView">
 
-      <Typography variant="h1" align="center" className={classes.title}>{locale.contact.name}</Typography>
+        <br /><br /><br />
       {
         this.groupBy(contacts).map((group, index) => {
             return <div id="main" key={index}>
@@ -172,3 +168,13 @@ const styles = theme => ({
 })
 
 export default withStyles(styles)(MobileView);
+
+// <Paper style={{margin: 10}}>
+//   <TextField
+//     placeholder="Search contacts"
+//     fullWidth
+//     variant="outlined"
+//     onChange={onSearchByName}
+//   />
+// </Paper>
+//

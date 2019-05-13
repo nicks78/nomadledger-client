@@ -43,6 +43,12 @@ class Refund extends Component {
       this.props.resetState(this.state.reducer)
     }
 
+    refresh = () => {
+      this.setState({query: ""})
+      this.props.getBookList(this.state.reducer, "list?limit=10&skip=0")
+    }
+
+
 
     getWindowWidth = () => {
       this.setState({width: window.innerWidth})
@@ -50,9 +56,9 @@ class Refund extends Component {
 
 
     handleFilterRequest = (value) => {
-      var query = value.en + "=1"
+      var query = value.en ? "&" +value.en + "=1" :  "&" + value;
       this.setState({query: query.toLowerCase()});
-      this.props.getBookList(this.state.reducer, `list?limit=10&skip=0&${query.toLowerCase()}`);
+      this.props.getBookList(this.state.reducer, `list?limit=10&skip=0${query.toLowerCase()}`);
     }
 
     render() {
@@ -82,6 +88,7 @@ class Refund extends Component {
                 toExcel={true}
                 tooltipTitle={locale.wording.filter_status}
                 onDownload={ () => { this.props.downloadFile(reducer, `export/excel-file`) } }
+                refresh={ this.refresh }
             />
             <div style={{ overflowY: "auto" }}>
                     <Table padding="dense">
