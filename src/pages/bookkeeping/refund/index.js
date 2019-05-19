@@ -209,7 +209,7 @@ const mapStateToProps = (state) => {
         total: state.book.refund.total,
         listRefund: state.book.refund.list.filter((el) => { return el.archive === false }),
         rowsPerPageOptions: state.book.refund.rowsPerPageOptions,
-        status: state.helper.items.status_refund,
+        status: state.helper.items.status_refund.filter((el) => { return el.code !== "11" }),
         actionLoading: state.book.refund.actionLoading
 
     }

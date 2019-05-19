@@ -170,15 +170,15 @@ const Form = (props) => {
 
                     </Grid>
                     <br/>
-                  <ApxTitleBar
-                    text={locale.subheading.info_comp }
-                    hideEdit={true}
-                  />
-                <br />
+                <ApxTitleBar
+                  text={locale.subheading.info_comp }
+                  hideEdit={true}
+                  styled={{ borderRadius: "4px 4px 0px 0px" }}
+                />
                 <ApxRichEditor
                     reducer={reducer}
                     field="infos"
-                    initText={ data.infos || locale.helperText.textarea_quote }
+                    initText={ data.infos || "" }
                     handleAction={ props.createState }
                 /><br />
 

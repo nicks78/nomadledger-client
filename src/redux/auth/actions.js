@@ -6,7 +6,6 @@ import { resetState } from '../library/actions/initAction'
 import {getAccount} from '../account/actions'
 import {history} from '../../routes/history'
 import {setNotification} from '../notification/actions'
-import {setPayment} from '../payment/actions'
 import {setError} from '../error/actions'
 
 // Set withCredentials
@@ -34,12 +33,11 @@ export function authUser(data){
         })
         .then( res => {
 
-            if( !res.success ){
+            if( res.isMembershipEnd ){
                 /**
                  * Redirect to payment-gateway/:token
                  */
                 history.push(res.url);
-                dispatch(setPayment(res));
                 dispatch(resetUser())
                 dispatch(setNotification(res.message, "info"))
             }else{

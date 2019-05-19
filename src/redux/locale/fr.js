@@ -102,6 +102,7 @@ const fr =  {
         label_confirm_email: "Demande d'un nouveau courriel de confirmation",
         label_forgot_pwd_body1: "Mot de passe oublié ?",
         label_terms: "Ajouter des conditions de payment etc...",
+        label_comp_member: "Votre abonnement"
 
     },
     wording: {
@@ -262,7 +263,7 @@ const fr =  {
         tag_name_en: "Nom de l'étiquette (Anglais)",
         tag_name_fr: "Nom de l'étiquette (Français)",
         tag_hex: "Code couleur HEX (ex: #ffffff)",
-        tandc: "Termes & Conditions",
+        auto_renewal: "Renouvellement automatique",
         login_email: "Courriel",
         login_password: "Mot de passe",
         filter_status: "Filtrer par statut",
@@ -274,7 +275,13 @@ const fr =  {
         filter_doc_type: "Filtrer par type de document",
         hint_refresh: "Remise à zéro",
         search_contacts: "Rechercher des Contacts",
-        pick_date: "Cliquer sur une date"
+        pick_date: "Cliquer sur une date pour filtrer vos recherches",
+        month: "mois",
+        card_lastname: "Nom sur la carte",
+        card_firstname: "Prénom sur la carte",
+        renewal: "Renouvellement",
+        yes: "Oui",
+        no: "Non"
 
     },
     helperText: {
@@ -299,7 +306,12 @@ const fr =  {
         account_category: "Catégorisé vos produits/services/dépenses, vous pourrez également associé une couleur par catégorie et analysé votre tabelau de bord en en clein d'oeil.",
         action_table: "ATTENTION - Envoyé/Payé/Annulé sont non modifiable !",
         action_table_refund: "ATTENTION - Envoyé/Remboursé/Annulé sont non modifiable !",
-        action_table_quote: "ATTENTION - Approuvé/Annulé sont non modifiable !"
+        action_table_quote: "ATTENTION - Approuvé/Annulé sont non modifiable !",
+        header_large: "entête large",
+        header_medium: "entête moyenne",
+        need_help: "Besoin d'aide ? Contacter nous directement <a href='mailto:support@nomadledger.com'>support@nomadledger.com</a>",
+        member_end: "Votre abonnement actuel prend fin le",
+        cannot_change_email: "L'adresse email n'est modifiable que sur demande."
 
     },
     message: {
@@ -335,6 +347,7 @@ const fr =  {
         error_pw_not_match: "Mot de passe non identique",
         error_pw_min_8: "Votre mot de passe doit faire au minimum 8 caractères",
         error_500_upload: "Erreur téléchargement du fichier, veuillez recommencer ou contacter support@nomadledger.com",
+        error_agreed_terms: "Vous devez accepter les Conditions générales",
 
 
         // Bad value
@@ -351,6 +364,16 @@ const fr =  {
         error_422_selling_price: "Le champs prix de vente est obligatoire",
         error_422_indice: "Taux de TVA doit être un chiffre (ex: 19,60 ou 19.60)",
         error_422_name: "Veuillez indiquer un nom",
+
+        // Stripe err
+        incomplete_zip: "Votre code postal est incomplet.",
+        card_declined: "La carte a été decliné.",
+        expired_card: "La carte est expiré. Verifier la date d'expiration.",
+        incorrect_cvc: "Le code de securité est incorrect.",
+        incorrect_number: "Le numéro de carte est incorrect. Verifier la carte ou utilisé une autre carte.",
+        invalid_cvc: "Le code de securité est invalide. Verifier la carte ou utilisé une autre carte.",
+        token_already_used: "Le token a déja été utilisé. Vous devez créer un nouveau token.",
+        postal_code_invalid: "Le code postal est invalide.",
 
         warning_not_refresh: "Veuillez ne pas rafraichir la page pendant la procédure de paiement",
         first_co: "Préparer votre application ! Ajouter/Supprimer vos Catégories - TVA - Groupe de contact et valider les informations de votre société",
@@ -369,44 +392,9 @@ const fr =  {
     week_short: ["Dim","Lun","Mar","Mer","Jeu","Ven","Sam"],
     placeholder: 'JJ/MM/AAAA',
     home_page: {
-        title_01: "Activez votre efficacité !",
-        paragraphe_01: `Maitrisez et exploitez tout le potentiel de votre entreprise en simplifiant la gestion de vos factures,
-        tâches et contacts. Révolutionnez maintenant votre expérience client en quelques clics`,
-        block_title_001: "Par des nomades pour les nomades",
-        block_paragraphe_001: `Une plateforme complète ! Facturation, Paiements, Relances, Stock, Rapports... Grâce à notre outil simple et intuitif,
-        vous pourrez maîtriser facilement tous les aspects de la gestion de votre entreprise et vous concentrer sur le développement de votre chiffre d'affaire.
-        Décuplez maintenant votre efficacité !`,
-        block_title_002: "Ma facturation en ligne",
-        block_paragraphe_002: `Créez facilement des documents de facturation irréprochables et personnalisés: devis,
-        factures, avoirs, proforma... Le tout sans erreur de calcul et en moins d'une minute !
-        Efficacité et gain de temps sont assurés avec notre logiciel de facturation en ligne.`,
-        block_title_003: "Simple et flexible",
-        block_paragraphe_003: `Créé spécialement pour les professionnels qui veulent tenir efficacement et
-        simplement leur gestion, notre outils s'adaptera parfaitement à votre structure et à vos besoins. Nomade, Autoentrepreuneurs, TPE, PME, PML...Quel
-        que soit votre statut, vous pourrez maîtriser votre gestion en toute simplicité.`,
-        form_title: "Inscrivez-vous gratuitement",
-        pricing: {
-            block_001:{
-                title: "14 jours d'essai gratuit",
-                feature_1: "Gestion des contacts",
-                feature_2: "Gestion de vos documents comptables",
-                feature_3: "Gérer vos tâches quotidiennes",
-                feature_4: "Gérer vos services/produits",
-                feature_5: "Assistance en ligne"
-            },
-            block_002:{
-                title: "4,16 €/ Mois",
-                feature_1: "Gestion des contacts",
-                feature_2: "Gestions de vos documents comptables",
-                feature_3: "Gérer vos tâches quotidiennes",
-                feature_4: "Gérer vos services/produits",
-                feature_5: "Assistance en ligne"
-            },
-            block_003:{
-                title: "Auto hébergé",
-                feature_1: "À la carte !",
-            }
-        }
+        title_01: "Logiciel de facturation <br />pour digital nomade",
+        paragraphe_01: `NomadLedger est un logiciel de facturation simple et rapide a prendre en main, il vous aidera a suivre votre business en quelque clique.`,
+        agreed_terms: ` * En m'inscrivant, j'accepte les <a href="">Conditions générales</a>  et la  <a href="">Politique de protection de la vie privée</a>.`
     }
 };
 

@@ -4,13 +4,12 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {  updateDocument, uploadFileToServer } from '../../../redux/account/actions'
 import { DEFAULT_IMG} from '../../../redux/constant'
-import { withStyles, TextField } from '@material-ui/core'
+import { withStyles, TextField, Checkbox, Typography } from '@material-ui/core'
 import ApxButtonEdit from '../../../components/common/buttonEdit'
 import ApxtextIndexValue from '../../../components/common/textIndexValue'
 import UploadImg from '../../../lib/uploadImg'
 import EditInput from '../../../lib/editInput'
 import EditSelect from '../../../lib/editSelect'
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid'
 import ApxSelect from '../../../components/common/select'
@@ -67,7 +66,7 @@ class Company extends Component {
   }
 
   render() {
-    const {company, progress, isUploading, locale, classes, company_type, country, currency, months} = this.props;
+    const {company, progress, isUploading, locale, classes, company_type, country, currency, months, user} = this.props;
     const {showEdit, reducer} = this.state;
 
     const address = ["addresses_street", "addresses_zip", "addresses_city"]
@@ -148,34 +147,11 @@ class Company extends Component {
                       field="company_vat"
                       handleAction={(event) => { this.props.handleFormEdit(event, reducer) }}
                   />
-                  <br /><br />
-                  <Typography variant="subtitle1">
-                        {locale.subheading.label_tax}
-                    </Typography>
-                    <Divider className={ classes.divider }/>
-                    {
-                      showEdit ?
-                      <EditSelect
-                          arrayField={currency}
-                          field="currency"
-                          helperText="select_currency"
-                          handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
-                          locale={locale}
-                          showEdit={showEdit}
-                          label={locale.subheading.label_currency_fav }
-                          value={ company.currency[localStorage.getItem("locale")]}
-                      />
-                      :
-                      <ApxtextIndexValue
-                            value={company.currency[localStorage.getItem('locale')]}
-                            label={locale.subheading.label_currency_fav}
-                        />
-                    }
                      {
                       showEdit ?
                         <EditInput
                           label={ locale.wording.capital }
-                          value={ company.capital }
+                          value={ company.capital || "" }
                           showEdit={showEdit}
                           locale={locale}
                           field="capital"
@@ -188,30 +164,30 @@ class Company extends Component {
                         />
                     }
 
+                    <EditSelect
+                        arrayField={months}
+                        field="fiscal_month"
+                        handleAction={ (ev) => { this.props.handleFormEdit(ev, reducer) } }
+                        locale={locale}
+                        showEdit={showEdit}
+                        label={locale.wording.fiscal_date }
+                        value={company.fiscal_month[localStorage.getItem('locale')] }
+                    />
 
+                    <EditSelect
+                        arrayField={currency}
+                        field="currency"
+                        helperText="select_currency"
+                        handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
+                        locale={locale}
+                        showEdit={showEdit}
+                        label={locale.subheading.label_currency_fav }
+                        value={ company.currency[localStorage.getItem("locale")]}
+                      />
 
-                    {
-                        showEdit ?
-
-                        <React.Fragment>
-                             <ApxSelect
-                                arrayField={months}
-                                field="fiscal_month"
-                                value={company.fiscal_month[localStorage.getItem('locale')] }
-                                locale={locale}
-                                handleAction={ (ev) => { this.props.handleFormEdit(ev, reducer) } }
-                            />
-
-                        </React.Fragment>
-                        :
-                        <ApxtextIndexValue
-                            value={ company.fiscal_day[localStorage.getItem('locale')] +" "+ company.fiscal_month[localStorage.getItem('locale')] }
-                            label={locale.wording.fiscal_date}
-                        />
-                    }
                 </Grid>
                 <Grid item xs={12} sm={5} md={5}>
-                <Typography variant="subtitle1">
+                  <Typography variant="subtitle1">
                         {locale.subheading.label_comp_address}
                   </Typography>
                   <Divider className={ classes.divider }/>
@@ -237,6 +213,31 @@ class Company extends Component {
                     label={locale.wording.addresses_country }
                     value={ company.addresses_country[localStorage.getItem("locale")]}
                 />
+              <br /><br />
+                <Typography variant="subtitle1">
+                      {locale.subheading.label_comp_member}
+                </Typography>
+                <Divider className={ classes.divider }/>
+                <div>
+                  <ApxtextIndexValue
+                        value={new Date(user.membership_end).toLocaleDateString("fr")}
+                        label={locale.wording.end}
+                    />
+
+                </div>
+                  {
+                    showEdit ?
+                    <p style={{display: "inline-flex", alignItems: "center"}}>
+                      <Checkbox style={{paddingLeft: 0}} name="autoRenewal" checked={ user.autoRenewal } onChange={(e) => { this.props.handleFormEdit(e, "USER") }} />
+                      <Typography component="span" variant="body2">{ locale.wording.auto_renewal }</Typography>
+                    </p>
+
+                    : <ApxtextIndexValue
+                          value={ user.autoRenewal ? locale.wording.yes : locale.wording.no }
+                          label={locale.wording.renewal}
+                      />
+                  }
+
                   </Grid>
 
               </Grid>
@@ -258,6 +259,7 @@ const mapStateToProps = (state) => {
         months: state.helper.items.months,
         country: state.helper.items.country,
         currency: state.helper.items.currency,
+        user: state.account.user.item
     }
 }
 

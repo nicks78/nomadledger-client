@@ -73,6 +73,10 @@ class Account extends Component {
     var name = event.target.name;
     var value = event.target.value
 
+    if(name === "autoRenewal"){
+      value = event.target.checked
+    }
+
     // Temporary save data into redux store
     this.props.createState(reducer, name, value)
   }

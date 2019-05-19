@@ -6,7 +6,7 @@ import { CardNumberElement, CardExpiryElement, CardCVCElement, PostalCodeElement
 class CardSection extends React.Component {
   render() {
     return (
-      <div style={{width: 400}}>
+      <div style={{width: "100%"}}>
         <CardNumberElement  placeholder="Numéro de carte" />
         <CardExpiryElement placeholder="MM AA" />
         <CardCVCElement />

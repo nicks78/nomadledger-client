@@ -35,18 +35,18 @@ const styles = theme => ({
 
 const Tag = (props) => {
 
-  const {classes, actionTag, label, variant, color, obj, type, edit } = props
- 
+  const {classes, actionTag, label, variant, color, obj, type, edit, canDelete } = props
+
   return (
           <Chip
             label={label}
             avatar={ edit ? <Avatar className={ classes.avatar } ><Modal obj={obj} type={type} /></Avatar> : null  }
-            onDelete={actionTag}
-            deleteIcon={ <DeleteIcon className={ classes.icon } /> }
+            onDelete={canDelete ? actionTag : null}
+            deleteIcon={ <DeleteIcon className={ classes.icon } />  }
             color={ color || "primary" }
             variant={variant || 'default'}
             className={classes.chip}
-          />              
+          />
   );
 }
 

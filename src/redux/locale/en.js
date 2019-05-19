@@ -96,6 +96,7 @@ const en = {
         label_confirm_email: "Request a new email confirmation",
         label_forgot_pwd_body1: "Forgot password ?", // check duplicate
         label_terms: "Specific payment terms and conditions :",
+        label_comp_member: "Your membership"
     },
     wording: {
         exportcsv: "Export as csv",
@@ -255,7 +256,7 @@ const en = {
         tag_name_en: "Tag name (English)",
         tag_name_fr: "Tag name (French)",
         tag_hex: "Color code HEX (ex: #ffffff)",
-        tandc: "Terms & Conditions",
+        auto_renewal: "Auto renewal",
         login_email: "Email",
         login_password: "Password",
         filter_status: "Filter by status",
@@ -267,7 +268,10 @@ const en = {
         filter_doc_type: "Filter by document type",
         hint_refresh: "Reinitialize result",
         search_contacts: "Search Contacts",
-        pick_date: "Pick a date"
+        pick_date: "Pick a date",
+        month: "month",
+        card_lastname: "Lastname on card",
+        card_firstname: "Firstname on card"
     },
     helperText: {
         select_phone_code: "Phone code",
@@ -290,7 +294,15 @@ const en = {
         account_category: "Categorize your products/services/expenses, you can add a color for each category to use in your dashboard",
         action_table: "CAUTIOUS - Sent/Paid/Canceled cannot be edited !",
         action_table_refund: "CAUTIOUS - Sent/Refunded/Canceled cannot be edited !",
-        action_table_quote: "CAUTIOUS - Approved/Canceled cannot be edited !"
+        action_table_quote: "CAUTIOUS - Approved/Canceled cannot be edited !",
+        header_large: "Header large",
+        header_medium: "Header medium",
+        need_help: "Need help ? Contact us at <a href='mailto:support@nomadledger.com'>support@nomadledger.com</a>",
+        member_end: "Your current membership end",
+        cannot_change_email: "Email address can be changed on demand.",
+        renewal: "Renewal",
+        yes: "Yes",
+        no: "No"
 
     },
     message: {
@@ -326,6 +338,7 @@ const en = {
         error_pw_not_match: "Password does not match",
         error_pw_min_8: "Your password must have at least 8 characters",
         error_500_upload: "File upload error, please try again or contact us at support@nomadledger.com",
+        error_agreed_terms: "You must agreed with our Terms and Conditions",
 
         // Bad value
         error_422: "Bad value",
@@ -341,6 +354,16 @@ const en = {
         error_422_selling_price: "Sell price field is required",
         error_422_indice: "VAT rate must be a number (ex:19.60)",
         error_422_name: "Must contain a name",
+
+        // Stripe err
+        incomplete_zip: "Your postal code is incomplete.",
+        card_declined: "The card has been declined",
+        expired_card: "The card has expired. Check the expiration date or use a different card",
+        incorrect_cvc: "The card’s security code is incorrect. Check the card’s security code or use a different card.",
+        incorrect_number: "The card number is incorrect. Check the card’s number or use a different card.",
+        invalid_cvc: "The card’s security code is invalid. Check the card’s security code or use a different card.",
+        token_already_used: "The token provided has already been used. You must create a new token before you can retry this request.",
+        postal_code_invalid: "The postal code provided was incorrect.",
 
         warning_not_refresh: "Please do not refresh the page during the payment process",
         first_co: "Get your app ready ! Add/Remove your Categories - VAT - Contact group and fill in your company information",
@@ -361,42 +384,10 @@ const en = {
     week_short: ["Sun", "Mon","Tue","Wed","Thu","Fri","Sat"],
     placeholder: 'DD/MM/YYYY',
     home_page: {
-        title_01: "Activate your efficiency",
-        paragraphe_01: `An easy way to manage your finance, tasks and contact.
-        With just a few click create your required documents and focus on your business,
-        taches et contacts. Revolutionize your user experience with few click !`,
-        block_title_001: "By Nomads for Nomads",
-        block_paragraphe_001: `A complete platform ! Invoices, FollowUp, Stock, Reports... With a simple and easy tools, you will take control of all aspect of your business
-        and can focus on developing your turnover. NomadLedger as been developed with simplicity in mind for everyone to use`,
-        block_title_002: "Digital invoices",
-        block_paragraphe_002: `Simply create invoice - quote - refund in just a few click. Avoid error and let NomadLedger do the hard work.
-        Time efficiency has been drivin the concept of our software as a service.`,
-        block_title_003: "Easy to use and flexible",
-        block_paragraphe_003: `Create professionnal document and keep track. Simplify the management of your accounting. Our tool will adapt to many type of
-        business, freelancer - nomad - solo entrepreneur ... With simplicity manage your document.`,
-        form_title: "Register now for free",
-        pricing: {
-            block_001:{
-                title: "15 Day Trial",
-                feature_1: "Contact managment",
-                feature_2: "Accounting managment",
-                feature_3: "Tasks manager",
-                feature_4: "Services/products managment",
-                feature_5: "Online support"
-            },
-            block_002:{
-                title: "4.16 €/ Mois",
-                feature_1: "Contact managment",
-                feature_2: "Accounting managment",
-                feature_3: "Tasks manager",
-                feature_4: "Services/products managment",
-                feature_5: "Online support"
-            },
-            block_003:{
-                title: "Self Hosted",
-                feature_1: "Customize into your need !",
-            }
-        }
+        title_01: "The invoicing software <br />for digital nomad",
+        paragraphe_01: `NomadLedger is an easy to use software to manage your invoicing document and keep track of your tasks in just a few click.`,
+
+        agreed_terms: `* By signing up, you agree to the <a href="">Terms and Conditions</a> and <a href="">Privacy Policy</a>.`
     }
 }
 

@@ -113,6 +113,7 @@ class AddCategory extends Component {
                                   edit={true}
                                   type="category_name"
                                   obj={category}
+                                  canDelete={company.category_name.length === 1 ? false : true }
                                   key={index}
                                   actionTag={ () => { this.deleteCategory(category._id) } }
                                   label={ category[localStorage.getItem('locale')] }

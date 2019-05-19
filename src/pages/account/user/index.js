@@ -51,7 +51,7 @@ class User extends Component {
 
     state = {
       reducer: "USER",
-      showEdit: true,
+      showEdit: false,
     }
 
   openEdit = () => {
@@ -149,6 +149,7 @@ class User extends Component {
                           locale={locale}
                           disabled={true}
                           field="email"
+                          helperText={locale.helperText.cannot_change_email}
                           required={true}
                           handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
                       />

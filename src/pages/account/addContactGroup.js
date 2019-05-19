@@ -49,7 +49,7 @@ class AddContactGroup extends Component {
     addApi: 'push-pull/update/push/',
     deleteApi: 'push-pull/update/pull/'
   }
-  
+
   _handleFormEdit = (event) => {
       var value = event.target.value;
       this.setState({value: value})
@@ -81,9 +81,9 @@ class AddContactGroup extends Component {
 
     return (
       <div>
-        
+
             <div className={ classes.addContactGroup}>
-                    <TextField 
+                    <TextField
                         id="contact_group"
                         label={locale.wording.add_group}
                         className={classes.textField}
@@ -93,29 +93,30 @@ class AddContactGroup extends Component {
                         onChange={this._handleFormEdit}
                         margin="normal"
                     />
-                
+
                 <AddIcon className={ classes.addBtn} onClick={ this._pushToDoc }/>
-                
-                
+
+
             </div>
 
                     <div className={ classes.tagWrapper}>
 
                     {
                         company.contact_group.map((contact, index) => {
-                          return <ApxTag 
+                          return <ApxTag
                                   key={index}
                                   edit={true}
                                   color="secondary"
                                   type="contact_group"
                                   obj={contact}
                                   variant="outlined"
+                                  canDelete={company.contact_group.length === 1 ? false : true }
                                   actionTag={ () => { this.deleteContact(contact._id) } }
                                   label={ contact[localStorage.getItem('locale')] }
                                 />
                         })
                     }
-                        
+
 
                     </div>
       </div>

@@ -10,6 +10,7 @@ import {Typography, withStyles, Paper, Grid, Button} from '@material-ui/core';
 import withWidth from '@material-ui/core/withWidth';
 import Jumbotron from './components/jumbotron'
 import RegisterForm from './components/registerForm'
+import {setNotification} from '../../redux/notification/actions'
 import Footer from './components/footer'
 
 const styles = theme => ({
@@ -18,6 +19,7 @@ const styles = theme => ({
     },
     appBarWrapper: {
       position: "fixed",
+      zIndex: 9,
       width: "100%",
       transition: "all 0.2s ease"
     },
@@ -83,7 +85,8 @@ class Auth extends Component {
         showLogin: true,
         openSnack: true,
         appBarBackground: "rgba(243,243,243)",
-        appBarBoxShadow: "none"
+        appBarBoxShadow: "none",
+        agreedTerms: false,
 
     }
 
@@ -120,14 +123,21 @@ class Auth extends Component {
 
     onSubmitForm = (e) => {
         e.preventDefault();
-        this.props.createUser()
+        if(this.state.agreedTerms){
+            this.props.setNotification("error_agreed_terms", "error")
+            return;
+        }else{
+          this.props.createStateUser( "agreedTerms", true )
+          this.props.createUser()
+        }
+
     }
 
 
     render() {
 
     const { classes, locale, newUser, isFetching } = this.props;
-    const {appBarBackground, appBarBoxShadow} = this.state
+    const {appBarBackground, appBarBoxShadow, agreedTerms} = this.state
 
     return (
       <div id="main" className={ classes.root}>
@@ -148,11 +158,9 @@ class Auth extends Component {
 
           <Grid item xs={12} sm={4} md={4}>
             <img src={`${DEFAULT_URL}img/1.png`} width="150" alt="img-1" /><br />
-            <div>
-              <Typography variant="subtitle1">Multi-currency support</Typography>
-              <Typography variant="body2">Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Ipsum has been the industry's standard dummy text ever since the
-                , when an unknown printer took a galley of type and scrambled</Typography>
+            <div style={{marginTop: 24}}>
+              <Typography variant="h2">Multi-currency support</Typography>
+
             </div>
           </Grid>
 
@@ -180,9 +188,9 @@ class Auth extends Component {
             <Typography variant="h3" align="center">{locale.helperText.trial_30}</Typography><br />
             <Typography variant="caption">{locale.home_page.form_title}</Typography>
             <form onSubmit={ this.onSubmitForm }>
-              <RegisterForm updateState={ this.handleChange } state={ newUser } locale={locale}/>
+              <RegisterForm updateState={ this.handleChange } state={ newUser } locale={locale} onAgreedToTerms={ (e) => { this.setState({agreedTerms: e.target.checked}) } }/>
               <br />
-              <Button fullWidth disabled={isFetching} type="submit" color="primary" variant="contained">{ isFetching ? locale.wording.loading : locale.wording.register }</Button>
+              <Button fullWidth disabled={isFetching || !agreedTerms} type="submit" color="primary" variant="contained">{ isFetching ? locale.wording.loading : locale.wording.register }</Button>
             </form>
           </Paper>
         </div>
@@ -220,4 +228,4 @@ const auth = withWidth()(Auth)
 const StyledAuth = withStyles(styles)(auth)
 
 
-export default connect(mapStateToProps, {createStateUser, createUser, resetUser, initLocale})(StyledAuth);
+export default connect(mapStateToProps, {createStateUser, createUser, resetUser, initLocale, setNotification})(StyledAuth);

@@ -1,6 +1,6 @@
 //src/pages/auth/components/registerForm.js
 import React from 'react'
-import { TextField, Grid } from '@material-ui/core';
+import { TextField, Grid, Checkbox, Typography } from '@material-ui/core';
 
 
 /*
@@ -82,6 +82,12 @@ const RegisterForm = (props) =>  {
                         margin="dense"
                         variant="outlined"
                     />
+                </Grid>
+                <Grid xs={12}>
+                    <p style={{display: "inline-flex", alignItems: "center"}}>
+                      <Checkbox onChange={props.onAgreedToTerms} /><Typography variant="body1" component="span" dangerouslySetInnerHTML={{__html: locale.home_page.agreed_terms }} />
+
+                    </p>
                 </Grid>
 
           </Grid>

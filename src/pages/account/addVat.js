@@ -164,6 +164,7 @@ class AddVat extends Component {
                                   obj={vat}
                                   edit={true}
                                   type="vat"
+                                  canDelete={company.vat.length === 1 ? false : true }
                                   color="secondary"
                                   variant="outlined"
                                   actionTag={ () => { this.deleteCategory(vat._id) } }

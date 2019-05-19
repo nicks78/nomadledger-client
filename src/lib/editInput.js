@@ -24,7 +24,7 @@ const styles = theme => ({
  */
 const EditInput = (props) => {
 
-    const { field, handleAction, showEdit, label, value , classes, required, disabled} = props
+    const { field, handleAction, showEdit, label, value , classes, required, disabled, helperText} = props
 
     if(showEdit){
         return <div style={{marginBottom: 15}}>
@@ -33,6 +33,7 @@ const EditInput = (props) => {
                     label={label}
                     required={required}
                     className={classes.textField}
+                    helperText={helperText}
                     value={value}
                     name={field}
                     disabled={disabled || false}

@@ -214,7 +214,7 @@ const mapStateToProps = (state) => {
         total: state.book.quote.total,
         listQuote: state.book.quote.list.filter((el) => { return el.archive === false }),
         rowsPerPageOptions: state.book.quote.rowsPerPageOptions,
-        status: state.helper.items.status_quote,
+        status: state.helper.items.status_quote.filter((el) => { return el.code !== "11" }),
         actionLoading: state.book.quote.actionLoading
     }
 }

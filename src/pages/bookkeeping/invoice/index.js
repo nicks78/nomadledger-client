@@ -221,7 +221,7 @@ const mapStateToProps = (state) => {
         total: state.book.invoice.total,
         listInvoice: state.book.invoice.list.filter((el) => { return el.archive === false }),
         rowsPerPageOptions: state.book.invoice.rowsPerPageOptions,
-        status: state.helper.items.status_invoice,
+        status: state.helper.items.status_invoice.filter((el) => { return el.code !== "11" }),
         actionLoading: state.book.invoice.actionLoading
     }
 }

@@ -12,10 +12,10 @@ const Jumbotron = (props) => {
         <div>
           <div id="jumbotron" className={classes.jumbotron}>
             <div className={classes.headerText}>
-              <Typography className={ classes.title } variant="h1">The nomad software<br />for freelancer</Typography>
+              <Typography className={ classes.title } variant="h1" dangerouslySetInnerHTML={{__html: locale.home_page.title_01 }} />
               <br />
               <Typography variant="h2" className={ classes.subtitle }>
-                NomadLedger is an easy to use software to manage your accounting document and keep track of your objective in just a few click.
+                {locale.home_page.paragraphe_01}
               </Typography>
             </div>
 

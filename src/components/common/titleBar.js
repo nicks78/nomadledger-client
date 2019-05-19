@@ -25,10 +25,10 @@ const styles = (theme) => ({
 
 const titleBar = (props) => {
 
-    const { classes , showEdit, openAction, editAction, hideEdit } = props
+    const { classes , showEdit, openAction, editAction, hideEdit, styled } = props
 
     return (
-        <div className={ classes.banner }>
+        <div className={ classes.banner } style={styled}>
             <Typography variant="overline">
                 { props.text }
             </Typography>

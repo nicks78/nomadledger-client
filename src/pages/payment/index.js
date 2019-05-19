@@ -2,19 +2,23 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {getPaymentInfo} from '../../redux/payment/actions'
+import { initLocale } from '../../redux/locale/actions'
 import {DEFAULT_URL} from '../../redux/constant'
 import MyStoreCheckout from '../payment/MyStoreCheckout';
-import {Paper, withStyles, Typography} from '@material-ui/core'
+import {Paper, withStyles, Typography, Button} from '@material-ui/core'
 
 
 
 class Payment extends Component {
 
     state = {
-        height: window.innerHeight
+        height: window.innerHeight 
     }
 
     componentDidMount(){
+        var user_token = this.props.match.params.token_id;
+        this.props.getPaymentInfo(user_token)
         window.addEventListener("resize", this.changeHeight)
     }
 
@@ -22,16 +26,21 @@ class Payment extends Component {
         this.setState({height: window.innerHeight})
     }
 
-  render() {
+    render() {
       const {classes, locale } = this.props
+
     return (
         <div className={classes.root} style={{height: this.state.height}}>
+
             <Paper className={classes.paper}>
+                <div>
+                  <Button color="primary" className={ classes.btn } onClick={() => { this.props.initLocale( localStorage.getItem("locale") === "en" ? "fr" : "en" ) }}  >{ localStorage.getItem("locale") }</Button>
+                </div>
                 <div>
                     <Typography className={classes.companyName} variant="h1" align="center">
                     <Link to="/"><img src={`${DEFAULT_URL}img/logo.png`} alt="logo" height="80" width="auto" /></Link><br />
                         <span>{locale.company_name}</span>
-                    </Typography><br /> 
+                    </Typography><br />
                 </div>
                 <MyStoreCheckout {...this.props}/>
             </Paper>
@@ -48,6 +57,7 @@ const styles = theme => ({
         justifyContent: 'center'
     },
     paper: {
+        position: "relative",
         padding: "20px",
         width: "50%",
         [theme.breakpoints.down('sm')]: {
@@ -55,7 +65,12 @@ const styles = theme => ({
             boxShadow: 'none'
         }
     },
-    
+    btn: {
+      position: "absolute",
+      right: 10,
+      top: 10
+    }
+
 })
 
 const mapStateToProps =(state) => {
@@ -66,4 +81,4 @@ const mapStateToProps =(state) => {
 
 const StyledPayment = withStyles(styles)(Payment)
 
-export default connect(mapStateToProps)(StyledPayment)
+export default connect(mapStateToProps, {getPaymentInfo, initLocale})(StyledPayment)

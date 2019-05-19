@@ -27,13 +27,13 @@ class RichEditor extends React.Component {
     super(props);
     this.state ={
       value: RichTextEditor.createValueFromString(this.props.initText, "html")
-    }  
+    }
   }
 
   onChange = (value) => {
     this.setState({value});
     this.props.handleAction(this.props.reducer, this.props.field, value.toString('html'))
-    
+
   };
 
   render() {
@@ -42,7 +42,7 @@ class RichEditor extends React.Component {
 
 
     return (
-      <div className="container container-naow">
+      <div className="" style={{borderRadius: 0}}>
       <RichTextEditor
         editorClassName={classes.editor}
         value={this.state.value}
@@ -57,7 +57,9 @@ class RichEditor extends React.Component {
 
 const styles = theme => ({
   editor: {
-    minHeight: 150
+    minHeight: 150,
+    borderRadius: 0,
+    borderBottom: "0px solid white"
   }
 })
 

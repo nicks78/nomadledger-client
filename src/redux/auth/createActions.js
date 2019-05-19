@@ -10,33 +10,33 @@ import {setError} from '../error/actions'
 export const createUser = ( ) => {
 
     return (dispatch, getState) => {
-    
+
         // Get current state
         var state = getState().auth.state_user
 
         // // Set loading time
         dispatch(requestUser());
 
-        axios.post(`${API_ENDPOINT}public/create-new-account`,
-            { 
+        axios.post(`${API_ENDPOINT}public/create-new-account?locale=${localStorage.getItem("locale") || "fr"}`,
+            {
                 data: state,
                 mode: 'cors'
-            },   
+            },
             { headers: {
                     'Content-Type': 'application/json'
             }
         })
-        .then(function (response) { 
+        .then(function (response) {
             return response.data
-        }) 
-        .then( res => { 
+        })
+        .then( res => {
                 dispatch(setNotification("success_create_new_user", "success"));
                 dispatch(setCreateUser(res.message));
         })
         .catch(function (error) {
             dispatch(setError(error));
             dispatch(requestFailed());
-        })  
+        })
     }
 }
 
