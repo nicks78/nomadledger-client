@@ -12,7 +12,6 @@ import EditInput from '../../../lib/editInput'
 import EditSelect from '../../../lib/editSelect'
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid'
-import ApxSelect from '../../../components/common/select'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 
 const styles = theme => ({

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {DEFAULT_URL} from '../../redux/constant'
+import {initLocale} from '../../redux/locale/actions'
 import {Link}  from 'react-router-dom'
 import {connect} from 'react-redux'
 import { authUser } from '../../redux/auth/actions'
@@ -16,6 +17,7 @@ const styles = theme => ({
     },
 
     paper: {
+        position: "relative",
         width: '25%',
         margin: '0 auto',
         padding: 24,
@@ -85,6 +87,8 @@ class Login extends Component {
 
 
     const {isError, locale, message, isFetching, classes } = this.props
+    const langue = localStorage.getItem("locale");
+
     const formLogin = {
             title: locale.subheading.add_contact,
             label: locale.subheading.label_company,
@@ -103,9 +107,12 @@ class Login extends Component {
             <div >
 
                 <div className={ classes.container } style={{ height: this.state.height }}>
-
+                  <div style={{position: "absolute", top: 10, right: 10}}>
+                    <Button onClick={() => { this.props.initLocale(langue === "fr" ? "en" : "fr") }} color="primary" >{ langue === "fr" ? "FR" : "EN"}</Button>
+                  </div>
 
                 <Paper className={ classes.paper }>
+
                 <div>
                     <Typography className={classes.companyName} variant="h1" align="center">
                         <Link to="/"><img src={`${DEFAULT_URL}img/logo.png`} alt="logo" height="80" width="auto" /></Link><br />
@@ -157,4 +164,4 @@ const mapStateToProps = (state) => {
 
 const StyledLogin = withStyles(styles)(Login)
 
-export default connect(mapStateToProps, { authUser })(StyledLogin);
+export default connect(mapStateToProps, { authUser, initLocale })(StyledLogin);

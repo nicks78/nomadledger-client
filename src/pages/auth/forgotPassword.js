@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import {DEFAULT_URL} from '../../redux/constant'
+import {initLocale} from '../../redux/locale/actions'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {recoverPassword} from '../../redux/auth/actions'
@@ -36,12 +37,16 @@ class ForgotPassword extends Component {
 
     render() {
 
-        const {classes, locale, isFetching} = this.props
+    const {classes, locale, isFetching} = this.props
+    const langue = localStorage.getItem("locale")
 
     return (
       <div className={classes.container} style={{height: this.state.height}}>
-
+        <div style={{position: "absolute", top: 10, right: 10}}>
+          <Button onClick={() => { this.props.initLocale(langue === "fr" ? "en" : "fr") }} color="primary" >{ langue === "fr" ? "FR" : "EN"}</Button>
+        </div>
             <Paper className={classes.paper}>
+
             <div>
                     <Typography className={classes.companyName} variant="h1" align="center">
                     <Link to="/"><img src={`${DEFAULT_URL}img/logo.png`} alt="logo" height="80" width="auto" /></Link><br />
@@ -66,7 +71,7 @@ class ForgotPassword extends Component {
                     required
                     margin="dense"
                     onChange={ (e) => { this.setState({[e.target.name]: e.target.value }) } }
-                    variant="filled"
+                    variant="outlined"
                 /><br /><br />
                 <Button
                     type="submit"
@@ -117,4 +122,4 @@ const mapStateToProps =(state) => {
 
 const StyledForgotPassword = withStyles(styles)(ForgotPassword)
 
-export default connect(mapStateToProps, {recoverPassword})(StyledForgotPassword)
+export default connect(mapStateToProps, {recoverPassword, initLocale})(StyledForgotPassword)

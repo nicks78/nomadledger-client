@@ -61,7 +61,7 @@ class ConfirmEmail extends Component {
                     required
                     margin="dense"
                     onChange={ (e) => { this.setState({[e.target.name]: e.target.value }) } }
-                    variant="filled"
+                    variant="outlined"
                 /><br /><br />
                 <Button
                     type="submit"

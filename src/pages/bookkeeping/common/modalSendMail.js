@@ -10,14 +10,8 @@ import SendIcon from '@material-ui/icons/SendOutlined'
 import CloseIcon from '@material-ui/icons/CloseOutlined'
 
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
 
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
   return {
     top: `${50}%`,
     left: `${50}%`,

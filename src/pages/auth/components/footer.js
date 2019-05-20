@@ -9,9 +9,9 @@ const Footer = (props) => {
   return (
     <div className={classes.footer}>
         <Typography align="center" variant="caption" style={{color: "#303030"}}>
-            &copy;{new Date().getFullYear()}&nbsp;Apx Development Limited<br />
+            &copy;2016-{new Date().getFullYear()}&nbsp;Apx Development Limited<br />
             All rights reserved.&nbsp;
-            <a href="https://api.nomadledger.com/terms.pdf" rel="noopener noreferrer" target="_blank">Terms and conditions</a>, features, support, pricing, and service options subject to change without notice.
+            <a href="https://api.nomadledger.com/terms.pdf" rel="noopener noreferrer" target="_blank">Terms and Conditions</a>, features, support, pricing, and service options subject to change without notice.
         </Typography>
     </div>
   )

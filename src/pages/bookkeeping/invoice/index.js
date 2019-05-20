@@ -15,7 +15,6 @@ import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
 import MobileView from '../common/mobileView'
 import LinearProgress from '@material-ui/core/LinearProgress';
-import ModalSendMail from '../common/modalSendMail'
 
 
 class Invoice extends Component {

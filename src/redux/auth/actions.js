@@ -148,7 +148,7 @@ export function recoverPassword(email){
 
         dispatch(requestUser())
 
-        axios.post(`${API_ENDPOINT}auth/forgot-password`,
+        axios.post(`${API_ENDPOINT}auth/forgot-password?locale=${localStorage.getItem("locale")}`,
         {
             email: email,
             mode: 'cors',
@@ -185,7 +185,7 @@ export function resetPassword(token, password){
             password: password
         }
 
-        axios.post(`${API_ENDPOINT}public/reset-password`,
+        axios.post(`${API_ENDPOINT}public/reset-password?locale=${localStorage.getItem("locale")}`,
         {
             data: data,
             mode: 'cors',
@@ -211,13 +211,35 @@ export function resetPassword(token, password){
     }
 }
 
+// Recover my password
+export function verifyToken( token ){
+    return dispatch => {
+
+        axios.get(`${API_ENDPOINT}public/verify/${token}`, {
+            method: 'GET',
+            mode: 'cors'
+        })
+        .then(function (response) {
+            return response.data
+        })
+        .then( res => {
+            return
+        })
+        .catch(function (error) {
+            dispatch(setError(error));
+            dispatch(requestFailed());
+            history.push('/')
+        })
+    }
+}
+
 
 export function confirmEmail(email){
     return dispatch => {
 
         dispatch(requestUser())
 
-        axios.post(`${API_ENDPOINT}public/resend/email-confirm`,
+        axios.post(`${API_ENDPOINT}public/resend/email-confirm?locale=${localStorage.getItem("locale")}`,
         {
             email: email,
             mode: 'cors',

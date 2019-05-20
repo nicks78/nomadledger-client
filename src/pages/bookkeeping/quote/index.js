@@ -13,7 +13,6 @@ import Pagination from '../../../lib/pagination'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import MobileView from '../common/mobileView'
 import LinearProgress from '@material-ui/core/LinearProgress';
-import ModalSendMail from '../common/modalSendMail'
 
 class Quote extends Component {
 

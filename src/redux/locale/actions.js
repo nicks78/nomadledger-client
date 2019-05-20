@@ -10,19 +10,19 @@ import {fr, en } from './index'
 export function getLocale( locale ){
     return dispatch => {
 
-       
+
 
         axios.get(`${API_ENDPOINT}company/update/locale/${locale}`, {
             method: 'GET',
             mode: 'cors',
         })
-        .then( (response) => { 
+        .then( (response) => {
             var localeObject = locale === 'fr' ? fr : en
-            dispatch(setLocale(localeObject)) 
+            dispatch(setLocale(localeObject))
             localStorage.setItem('locale', locale)
             document.location.reload(true)
             return true
-        }) 
+        })
         .catch((error) => {
             dispatch(setError(error));
         })
@@ -31,16 +31,16 @@ export function getLocale( locale ){
 
 export function initLocale( locale ){
     return dispatch => {
-        
+        console.log(localStorage.getItem("locale"))
         var localeObject = locale === 'fr' ? fr : en;
-        dispatch(setLocale(localeObject)) 
+        dispatch(setLocale(localeObject))
 
         localStorage.setItem('locale', locale)
     }
 }
 
 export function setLocale(locale){
-    
+
     return {
         type: GET_LOCALE,
         payload: locale

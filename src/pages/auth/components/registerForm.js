@@ -83,7 +83,7 @@ const RegisterForm = (props) =>  {
                         variant="outlined"
                     />
                 </Grid>
-                <Grid xs={12}>
+                <Grid item xs={12}>
                     <p style={{display: "inline-flex", alignItems: "center"}}>
                       <Checkbox onChange={props.onAgreedToTerms} /><Typography variant="body1" component="span" dangerouslySetInnerHTML={{__html: locale.home_page.agreed_terms }} />
 

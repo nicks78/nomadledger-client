@@ -12,6 +12,8 @@ import Jumbotron from './components/jumbotron'
 import RegisterForm from './components/registerForm'
 import {setNotification} from '../../redux/notification/actions'
 import Footer from './components/footer'
+import ExitToAppIcon from '@material-ui/icons/ExitToAppOutlined'
+
 
 const styles = theme => ({
     root: {
@@ -84,6 +86,7 @@ class Auth extends Component {
     state = {
         showLogin: true,
         openSnack: true,
+        width: window.innerWidth,
         appBarBackground: "rgba(243,243,243)",
         appBarBoxShadow: "none",
         agreedTerms: false,
@@ -92,11 +95,16 @@ class Auth extends Component {
 
     componentDidMount(){
         window.addEventListener("scroll", this.handleScroll);
+        window.addEventListener("resize", this.handleResize);
     }
 
     componentWillUnmount(){
         this.props.resetUser();
         window.removeEventListener("scroll", this.handleScroll);
+    }
+
+    handleResize = () => {
+      this.setState({ width: window.innerWidth })
     }
 
     handleScroll = () => {
@@ -137,7 +145,9 @@ class Auth extends Component {
     render() {
 
     const { classes, locale, newUser, isFetching } = this.props;
-    const {appBarBackground, appBarBoxShadow, agreedTerms} = this.state
+    const {appBarBackground, appBarBoxShadow, agreedTerms, width} = this.state
+    const isMobile = width <= 500
+    const langue = localStorage.getItem("locale")
 
     return (
       <div id="main" className={ classes.root}>
@@ -145,10 +155,16 @@ class Auth extends Component {
           <div id="appBar" className={classes.appBar}>
               <div style={{display: "flex", alignItems:"center"}} >
                 <img src={`${DEFAULT_URL}img/logo.png`} width="50"  alt="logo"/>
-                <span style={{ fontSize: 25, fontWeight: 300 }}>NomadLedger</span>
+                { !isMobile ? <span style={{ fontSize: 25, fontWeight: 300 }}>NomadLedger</span> : null }
+              </div>
+              <div className={ classes.buttonLogin }>
+                <Button component={Link} to="/login"  color="primary" variant="contained" >
+                  {isMobile ? <ExitToAppIcon/> : locale.wording.login}
+                </Button>&nbsp;
+                <Button onClick={() => { this.props.initLocale(langue === "fr" ? "en" : "fr") }} color="primary" >{ langue === "fr" ? "FR" : "EN"}</Button>
               </div>
 
-              <Button component={Link} to="/login" className={ classes.buttonLogin } color="primary" variant="contained" >{locale.wording.login} </Button>
+
           </div>
         </div>
 
@@ -159,25 +175,22 @@ class Auth extends Component {
           <Grid item xs={12} sm={4} md={4}>
             <img src={`${DEFAULT_URL}img/1.png`} width="150" alt="img-1" /><br />
             <div style={{marginTop: 24}}>
-              <Typography variant="h2">Multi-currency support</Typography>
-
+              <Typography variant="h3">Multi-currency support</Typography>
             </div>
           </Grid>
 
           <Grid item xs={12} sm={4} md={4}>
             <img src={`${DEFAULT_URL}img/1.png`} width="150" alt="img-1" /><br />
-            <Typography variant="subtitle1">Process invoices & quotes</Typography>
-              <Typography variant="body2">Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Ipsum has been the industry's standard dummy text ever since the
-                , when an unknown printer took a galley of type and scrambled</Typography>
+              <div style={{marginTop: 24}}>
+                <Typography variant="h3">Process invoices & quotes</Typography>
+              </div>
           </Grid>
 
           <Grid item xs={12} sm={4} md={4}>
             <img src={`${DEFAULT_URL}img/1.png`} width="150" alt="img-1" /><br />
-            <Typography variant="subtitle1">Manager your tasks</Typography>
-              <Typography variant="body2">Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Ipsum has been the industry's standard dummy text ever since the
-                , when an unknown printer took a galley of type and scrambled</Typography>
+              <div style={{marginTop: 24}}>
+                <Typography variant="h3">Manager your tasks</Typography>
+              </div>
           </Grid>
 
         </Grid>
