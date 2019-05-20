@@ -13,6 +13,7 @@ import Pagination from '../../../lib/pagination'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import MobileView from '../common/mobileView'
 import LinearProgress from '@material-ui/core/LinearProgress';
+import ModalSendMail from '../common/modalSendMail'
 
 class Quote extends Component {
 
@@ -115,7 +116,7 @@ class Quote extends Component {
                                 this.props.listQuote.map(( quote, index) => {
                                     return  <TableRow key={index}>
                                                 <TableCell>{new Date(quote.createAt.date).toLocaleDateString(localStorage.getItem('locale'))}</TableCell>
-                                                <TableCell><Link className="link" to={`/quote/view/${quote._id}`}>{locale.wording.qto}-{quote.ref}</Link></TableCell>
+                                                <TableCell><Link className="link" to={`/quote/view/${quote._id}`}>{quote.ref_add}-{quote.ref}</Link></TableCell>
                                                 <TableCell><Link className="link" to={{ pathname: `/contact/view/${quote.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{quote.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell className="tableNumber">{cvtNumToUserPref(quote.subtotal)} {quote.currency.value}</TableCell>
                                                 <TableCell><span style={{color: quote.status.color, fontWeight: 400 }}>{ quote.status[localStorage.getItem('locale')] }</span></TableCell>
@@ -125,6 +126,7 @@ class Quote extends Component {
                                                   <ApxTableActions
                                                     reducer={reducer}
                                                     id={quote._id}
+                                                    item={quote}
                                                     handleAction={this.props.updateField}
                                                     endpoint="update-status"
                                                     loading={actionLoading}
@@ -214,7 +216,7 @@ const mapStateToProps = (state) => {
         total: state.book.quote.total,
         listQuote: state.book.quote.list.filter((el) => { return el.archive === false }),
         rowsPerPageOptions: state.book.quote.rowsPerPageOptions,
-        status: state.helper.items.status_quote.filter((el) => { return el.code !== "11" }),
+        status: state.helper.items.status_quote && state.helper.items.status_quote.filter((el) => { return el.code !== "11" }),
         actionLoading: state.book.quote.actionLoading
     }
 }

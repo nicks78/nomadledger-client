@@ -16,7 +16,7 @@ const ContactSection = (props) => {
 
         return (
             <div style={{padding: 10,}}>
-                <AutoComplete 
+                <AutoComplete
                     field="company_name"
                     state="contact_id"
                     model="contact"
@@ -25,24 +25,24 @@ const ContactSection = (props) => {
                     setSelectedObject={ props.createState }
                 />
                 <br />
-                <ApxtextIndexValue 
+                <ApxtextIndexValue
                     value={contact.contact_id ? <Link to={{ pathname: `/contact/view/${contact.contact_id._id}`, state: { reducer: "CONTACT" } }}>{contact.contact_id.company_name}</Link> : ''}
                     label={locale.wording.company_name}
                 />
                 {
                     infoContact.map((name, index) => {
-                        return  <ApxtextIndexValue 
+                        return  <ApxtextIndexValue
                                     key={index}
                                     value={contact.contact_id ? contact.contact_id[name] : ''}
                                     label={locale.wording[name]}
                                 />
                     })
                 }
-                    <ApxtextIndexValue 
-                        value={contact.contact_id ? contact.contact_id.phone_code.value +" "+ contact.contact_id.phone : ''}
+                    <ApxtextIndexValue
+                        value={contact.contact_id ? contact.contact_id.phone_code.dial_code +" "+ contact.contact_id.phone : ''}
                         label={locale.wording.phone}
                     />
-                    <ApxtextIndexValue 
+                    <ApxtextIndexValue
                         value={contact.contact_id ? contact.contact_id.addresses_street +" "+ contact.contact_id.addresses_zip  + " " + contact.contact_id.addresses_city + " " + contact.contact_id.addresses_country[localStorage.getItem('locale')] : ''}
                         label={locale.wording.addresses_street}
                     />

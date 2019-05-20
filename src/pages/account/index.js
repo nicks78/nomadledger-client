@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { withStyles, Paper, Typography, Grid, Divider } from '@material-ui/core';
-import { getAccount, createState } from '../../redux/account/actions'
+import { getAccount, createState , updateDocument} from '../../redux/account/actions'
 import User from './user'
 import Company from './company'
 import ApxAlert  from '../../components/common/alert'
@@ -74,7 +74,7 @@ class Account extends Component {
     var value = event.target.value
 
     if(name === "autoRenewal"){
-      value = event.target.checked
+      value = event.target.checked;
     }
 
     // Temporary save data into redux store
@@ -186,4 +186,4 @@ const mapStateToProps = (state) => {
 
 const styledAccount = withStyles(styles)(Account);
 
-export default connect(mapStateToProps, { getAccount, createState })(styledAccount);
+export default connect(mapStateToProps, { getAccount, createState, updateDocument })(styledAccount);

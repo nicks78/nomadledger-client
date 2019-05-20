@@ -15,7 +15,7 @@ import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
 import MobileView from '../common/mobileView'
 import LinearProgress from '@material-ui/core/LinearProgress';
-
+import ModalSendMail from '../common/modalSendMail'
 
 
 class Invoice extends Component {
@@ -122,7 +122,7 @@ class Invoice extends Component {
                                 this.props.listInvoice.map(( invoice, index) => {
                                     return  <TableRow key={index}>
                                                 <TableCell>{new Date(invoice.created_at.date).toLocaleDateString(localStorage.getItem('locale'))}</TableCell>
-                                                <TableCell><Link className="link" to={`/invoice/view/${invoice._id}`}>{locale.wording.inv}-{invoice.ref}</Link></TableCell>
+                                                <TableCell><Link className="link" to={`/invoice/view/${invoice._id}`}>{invoice.ref_add}-{invoice.ref}</Link></TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${invoice.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{invoice.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell className="tableNumber">{cvtNumToUserPref(invoice.subtotal)} {invoice.currency.value}</TableCell>
                                                 <TableCell><span style={{color: invoice.status.color, fontWeight: 400}}>{ invoice.status[localStorage.getItem('locale')] }</span></TableCell>
@@ -132,6 +132,7 @@ class Invoice extends Component {
                                                       <ApxTableActions
                                                         reducer={reducer}
                                                         id={invoice._id}
+                                                        item={invoice}
                                                         handleAction={this.props.updateField}
                                                         endpoint="update-status"
                                                         loading={actionLoading}
@@ -221,7 +222,7 @@ const mapStateToProps = (state) => {
         total: state.book.invoice.total,
         listInvoice: state.book.invoice.list.filter((el) => { return el.archive === false }),
         rowsPerPageOptions: state.book.invoice.rowsPerPageOptions,
-        status: state.helper.items.status_invoice.filter((el) => { return el.code !== "11" }),
+        status: state.helper.items.status_invoice && state.helper.items.status_invoice.filter((el) => { return el.code !== "11" }),
         actionLoading: state.book.invoice.actionLoading
     }
 }

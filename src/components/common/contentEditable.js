@@ -18,10 +18,12 @@ const ContenEditable = (props) => {
 
         <TextField
           id={name}
+          autoComplete="off"
           margin="dense"
           inputProps={{
             maxLength: length || 256
           }}
+          fullWidth
           className={classes.textField}
           onChange={ (event) => { actionInput(event, id) } }
           variant="outlined"

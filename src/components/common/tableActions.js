@@ -9,10 +9,12 @@ import ArchiveIcon from '@material-ui/icons/ArchiveOutlined'
 import HighlightOff from '@material-ui/icons/HighlightOffOutlined'
 import SendIcon from '@material-ui/icons/SendOutlined'
 import Tooltip from '@material-ui/core/Tooltip';
+import ModalSendMail from '../../pages/bookkeeping/common/modalSendMail'
+
 
 const TableActions = (props) => {
 
-    const { classes, locale, reducer, handleAction, id, endpoint, loading,  edit, canceled, paid } = props;
+    const { classes, locale, reducer, handleAction, id, endpoint, loading,  edit, canceled, paid, item } = props;
     const ok = () => {
       var x = "paid";
       if(reducer === "QUOTE"){
@@ -29,7 +31,7 @@ const TableActions = (props) => {
                 <IconButton style={{ minWidth: 5 }} disabled={!edit || loading} component={Link} to={`/invoice/edit/${id}`} color="primary"><EditIcon  style={{ fontSize: 18}}/></IconButton>
               </Tooltip>
               <Tooltip classes={{ tooltip: classes.lightTooltip }} title={locale.wording.send} aria-label="send">
-                <IconButton style={{ minWidth: 5 }} disabled={loading} onClick={ () => { handleAction(reducer, {pending: true, _id: id}, endpoint ) }} color="primary"><SendIcon style={{ fontSize: 18, color:  "darkorange" }} /></IconButton>
+                  <ModalSendMail loading={loading} reducer={reducer} item={item} />
               </Tooltip>
               <Tooltip classes={{ tooltip: classes.lightTooltip }} title={locale.wording[ok()]} aria-label="paid">
                 <IconButton style={{ minWidth: 5 }} disabled={ paid || loading} onClick={ () => { handleAction(reducer, {paid: true, _id: id}, endpoint ) }} color="primary"><CheckIcon style={{ fontSize: 18, color: paid ? "rgba(0, 0, 0, 0.26)" : "forestgreen" }} /></IconButton>
@@ -59,3 +61,5 @@ const styles  = theme => ({
 const ApxTableActions = withStyles(styles)(TableActions)
 
 export default ApxTableActions;
+
+// <IconButton style={{ minWidth: 5 }} disabled={loading} onClick={ () => { handleAction(reducer, {pending: true, _id: id}, endpoint ) }} color="primary"><SendIcon style={{ fontSize: 18, color:  "darkorange" }} /></IconButton>

@@ -59,7 +59,7 @@ class Items extends Component {
         <TableHead className={classes.tableHead}>
         <TableRow>
             <TableCell>{locale.wording.ref}</TableCell>
-            <TableCell variant="head" className={classes.contentEditable}>{locale.wording.description}&nbsp;<EditIcon className={classes.icon} /></TableCell>
+            <TableCell style={{ width: "60%" }} variant="head" className={classes.contentEditable}>{locale.wording.designation}&nbsp;<EditIcon className={classes.icon} /></TableCell>
             <TableCell variant="head" className={classes.tablenoWrap}>{locale.wording.unit_price}&nbsp;{ newData.currency && newData.currency.value }</TableCell>
             <TableCell variant="head" className={classes.tablenoWrap}>{locale.wording.quantity}&nbsp;<EditIcon className={classes.icon} /></TableCell>
             <TableCell variant="head" className={classes.tablenoWrap}>{locale.wording.discount_unit}&nbsp;<EditIcon className={classes.icon} /></TableCell>
@@ -123,6 +123,12 @@ const styles = theme => ({
         boderRadius: 4,
         border: '1px solid rgb(238,238,238)',
 
+        "& td": {
+          padding: "4px 20px 4px 26px"
+        },
+        "& th": {
+          padding: "4px 20px 4px 26px"
+        }
     },
     tableHead: {
         backgroundColor: "rgb(238,238,238)",
@@ -137,7 +143,7 @@ const styles = theme => ({
     },
     contentEditable: {
         whiteSpace: "nowrap",
-        minWidth: 40,
+        width: "60%" ,
         padding: 0
     },
     tableCell: {

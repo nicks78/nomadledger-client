@@ -14,6 +14,7 @@ import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
 import MobileView from '../common/mobileView'
 import LinearProgress from '@material-ui/core/LinearProgress';
+import ModalSendMail from '../common/modalSendMail'
 
 
 class Refund extends Component {
@@ -113,7 +114,7 @@ class Refund extends Component {
                                 this.props.listRefund.map(( refund, index) => {
                                     return  <TableRow key={index}>
                                                 <TableCell>{new Date(refund.createAt.date).toLocaleDateString(localStorage.getItem('locale'))}</TableCell>
-                                                <TableCell><Link className="link" to={`/refund/view/${refund._id}`}>{locale.wording.pya}-{refund.ref}</Link></TableCell>
+                                                <TableCell><Link className="link" to={`/refund/view/${refund._id}`}>{refund.ref_add}-{refund.ref}</Link></TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${refund.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{refund.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell className="tableNumber">{cvtNumToUserPref(refund.subtotal)} {refund.currency.value}</TableCell>
                                                 <TableCell><span style={{color: refund.status.color, fontWeight: 400 }}>{ refund.status[localStorage.getItem('locale')] }</span></TableCell>
@@ -122,6 +123,7 @@ class Refund extends Component {
                                                 <TableCell align="center" style={{ whiteSpace: "nowrap", width: "0%"}}>
                                                   <ApxTableActions
                                                     reducer={reducer}
+                                                    item={refund}
                                                     id={refund._id}
                                                     handleAction={this.props.updateField}
                                                     endpoint="update-status"
@@ -209,7 +211,7 @@ const mapStateToProps = (state) => {
         total: state.book.refund.total,
         listRefund: state.book.refund.list.filter((el) => { return el.archive === false }),
         rowsPerPageOptions: state.book.refund.rowsPerPageOptions,
-        status: state.helper.items.status_refund.filter((el) => { return el.code !== "11" }),
+        status: state.helper.items.status_refund && state.helper.items.status_refund.filter((el) => { return el.code !== "11" }),
         actionLoading: state.book.refund.actionLoading
 
     }

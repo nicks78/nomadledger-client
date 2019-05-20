@@ -279,9 +279,10 @@ const fr =  {
         month: "mois",
         card_lastname: "Nom sur la carte",
         card_firstname: "Prénom sur la carte",
-        renewal: "Renouvellement",
+        renewal: "Renouvellement (automatique)",
         yes: "Oui",
-        no: "Non"
+        no: "Non",
+        designation: "Désignation"
 
     },
     helperText: {

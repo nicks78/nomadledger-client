@@ -271,7 +271,11 @@ const en = {
         pick_date: "Pick a date",
         month: "month",
         card_lastname: "Lastname on card",
-        card_firstname: "Firstname on card"
+        card_firstname: "Firstname on card",
+        renewal: "Auto renewal",
+        yes: "Yes",
+        no: "No",
+        designation: "Designation"
     },
     helperText: {
         select_phone_code: "Phone code",
@@ -300,9 +304,6 @@ const en = {
         need_help: "Need help ? Contact us at <a href='mailto:support@nomadledger.com'>support@nomadledger.com</a>",
         member_end: "Your current membership end",
         cannot_change_email: "Email address can be changed on demand.",
-        renewal: "Renewal",
-        yes: "Yes",
-        no: "No"
 
     },
     message: {

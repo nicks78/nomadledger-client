@@ -128,7 +128,7 @@ class View extends Component {
               <TableHead className={classes.tableHead}>
               <TableRow>
                   <TableCell>{locale.wording.ref}</TableCell>
-                  <TableCell className={classes.contentEditable}>{locale.wording.description}</TableCell>
+                  <TableCell style={{ width: "30%" }} className={classes.contentEditable}>{locale.wording.description}</TableCell>
                   <TableCell className={classes.tablenoWrap}>{locale.wording.unit_price}&nbsp;{ item.currency && item.currency.value }</TableCell>
                   <TableCell className={classes.tablenoWrap}>{locale.wording.quantity}</TableCell>
                   <TableCell className={classes.tablenoWrap}>{locale.wording.discount_unit}</TableCell>
@@ -140,7 +140,7 @@ class View extends Component {
                   item.list_items.map(( item, index) => {
                       return  <TableRow key={index} className={classes.tableRow}>
                                   <TableCell>{locale.wording[item.onModel].toUpperCase()}-{ item.ref}</TableCell>
-                                  <TableCell>{item.desc} </TableCell>
+                                  <TableCell style={{ width: "30%" }}>{item.desc} </TableCell>
                                   <TableCell>{ cvtNumToUserPref(item.unit_price)}</TableCell>
                                   <TableCell className={classes.tablenoWrap}>{ item.quantity }</TableCell>
                                   <TableCell>{item.discount}</TableCell>

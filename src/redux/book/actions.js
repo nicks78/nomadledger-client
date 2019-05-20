@@ -8,7 +8,7 @@ import {setNotification} from '../notification/actions'
 import {setError} from '../error/actions'
 
 /**
- * // GET FULL LIST OF DOCUMENT
+ * GET FULL LIST OF DOCUMENT
  * @param actionType
  * @param query  (optional)
  */
@@ -107,7 +107,7 @@ export function requestUpdate( actionType ) {
 }
 
 /**
- * // UPDATE SINGLE FIELD IN DOCUMENT
+ * UPDATE SINGLE FIELD IN DOCUMENT
  * @param  actionType
  * @param  data to be update
  * @param  id of document
@@ -150,7 +150,7 @@ export function updateField (actionType, data, endpoint) {
 
 
 /**
- * // GET SINGLE DOCUMENT
+ * GET SINGLE DOCUMENT
  * @param  actionType
  * @param  id
  */
@@ -178,7 +178,7 @@ export function getDocument( actionType, id ){
 }
 
 /**
- * // CREATE DOCUMENT BASE ON ANOTHER ONE
+ * CREATE DOCUMENT BASE ON ANOTHER ONE
  * @param  actionType
  * @param  id
  * @param  newType
@@ -217,6 +217,35 @@ export function convertToOtherDocument( actionType, id, newType ){
         })
     }
 }
+
+/**
+* Send email with PDF
+* @param actionType String
+* @param endPoint String
+* @param data Object
+**/
+export function sendEmailWithPdf( actionType, endPoint, data){
+
+  return async (dispatch, getState) => {
+      
+      var list = getState().library[actionType.toLowerCase()].list;
+
+      try{
+          const request = await axios.post(`${API_ENDPOINT}/${actionType.toLowerCase()}/${endPoint}`, {data})
+          const res = request.data;
+
+          dispatch(setNotification("success_sent", "success"));
+
+          var newList = updateArrayOfObject(list, res.item);
+          dispatch(receiveDocuments(actionType, newList )) ;
+
+      }catch(error){
+          dispatch(setError(error));
+          dispatch(requestFailed(actionType));
+      }
+    }
+}
+
 
 // Receive all documents list ( invoice || quote || payback )
 export function setDocument( actionType, item ) {

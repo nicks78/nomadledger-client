@@ -62,6 +62,7 @@ class Company extends Component {
 
   updateDocument = () => {
     this.setState({showEdit: false})
+    this.props.updateDocument("USER");
     this.props.updateDocument(this.state.reducer)
   }
 

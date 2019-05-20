@@ -49,7 +49,7 @@ class MobileView extends React.Component {
   }
 
   renderCard = (item) => {
-      return <Link to={`/${this.props.reducer.toLowerCase()}/${item.status.code === "1" || item.status.code === "2" ? "edit" : "view" }/${item._id.toLowerCase()}`}>
+      return <Link to={`/${this.props.reducer.toLowerCase()}/${item.edit ? "edit" : "view" }/${item._id.toLowerCase()}`}>
               <Card className={this.props.classes.card} >
                 <Avatar style={{backgroundColor: item.status.color, fontWeight: 400 , fontSize: 15, height: 20, width: 20 }} >
 
