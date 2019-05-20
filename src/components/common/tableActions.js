@@ -4,6 +4,7 @@ import React  from 'react'
 import { Link } from "react-router-dom";
 import { withStyles, IconButton } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/EditOutlined'
+import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEyeOutlined'
 import CheckIcon from '@material-ui/icons/CheckOutlined'
 import ArchiveIcon from '@material-ui/icons/ArchiveOutlined'
 import HighlightOff from '@material-ui/icons/HighlightOffOutlined'
@@ -26,9 +27,17 @@ const TableActions = (props) => {
 
 
     return  <React.Fragment>
-              <Tooltip classes={{ tooltip: classes.lightTooltip }} title={locale.wording.edit} aria-label="edit">
-                <IconButton style={{ minWidth: 5 }} disabled={!edit || loading} component={Link} to={`/invoice/edit/${id}`} color="primary"><EditIcon  style={{ fontSize: 18}}/></IconButton>
-              </Tooltip>
+              {
+                edit ?
+                <Tooltip classes={{ tooltip: classes.lightTooltip }} title={locale.wording.edit} aria-label="edit">
+                  <IconButton style={{ minWidth: 5 }} disabled={!edit || loading} component={Link} to={`/${reducer.toLowerCase()}/edit/${id}`} color="primary"><EditIcon  style={{ fontSize: 18}}/></IconButton>
+                </Tooltip>
+                :
+                <Tooltip classes={{ tooltip: classes.lightTooltip }} title={locale.wording.preview} aria-label="edit">
+                  <IconButton style={{ minWidth: 5 }} disabled={loading} component={Link} to={`/${reducer.toLowerCase()}/view/${id}`} color="primary"><RemoveRedEyeIcon  style={{ fontSize: 18}}/></IconButton>
+                </Tooltip>
+              }
+
               <Tooltip classes={{ tooltip: classes.lightTooltip }} title={locale.wording.send} aria-label="send">
                   <ModalSendMail loading={loading} reducer={reducer} item={item} />
               </Tooltip>

@@ -12,6 +12,9 @@ import ApxButtonCircle from '../components/common/buttonCircle'
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Hidden from '@material-ui/core/Hidden';
 import {checkNumFormatRegex} from '../utils/help_function'
+import {resizeFile} from '../utils/resizeFile'
+
+
 
 const styles = theme => ({
     root: {
@@ -66,7 +69,7 @@ class Add extends Component {
         });
     };
 
-    handleChange = (event) => {
+     handleChange = async (event) => {
         var fieldName = event.target.name;
         var value = event.target.value;
 
@@ -79,10 +82,21 @@ class Add extends Component {
         }
 
         if(fieldName === 'doc'){ // If input file
+            // Resize file before upload
+            var file = event.target.files[0];
+            resizeFile( file, this.callback )
 
-            value = this.handleFile(event.target.files[0]);
+            return;
+        }else{
+            this.props.createItemState( this.props.reducer, fieldName, value )
         }
-        this.props.createItemState( this.props.reducer, fieldName, value )
+
+    }
+
+    // Callback after resizing image
+    callback = (file) => {
+        var value = this.handleFile(file)
+        this.props.createItemState( this.props.reducer, "doc", value )
     }
 
     handleFile (file) {

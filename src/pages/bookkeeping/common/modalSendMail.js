@@ -83,7 +83,7 @@ class SimpleModal extends React.Component {
           onClose={this.handleClose}
         >
           <div style={getModalStyle()} className={classes.paper}>
-          <IconButton style={{position: "absolute", top: 10, right: 10}}><CloseIcon style={{color: 'red'}} onClick={this.handleClose} /></IconButton>
+          <IconButton style={{position: "absolute", top: 10, right: 10}} onClick={this.handleClose} ><CloseIcon style={{color: 'red'}} /></IconButton>
           <form onSubmit={this.sendEmail}>
 
             <Typography variant="h2" align="center">{item.contact_id.company_name}</Typography><br />

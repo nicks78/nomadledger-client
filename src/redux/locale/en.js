@@ -387,8 +387,9 @@ const en = {
     home_page: {
         title_01: "The invoicing software <br />for digital nomad",
         paragraphe_01: `NomadLedger is an easy to use software to manage your invoicing document and keep track of your tasks in just a few click.`,
-
-        agreed_terms: `* By signing up, you agree to the <a href="">Terms and Conditions</a> and <a href="">Privacy Policy</a>.`
+        agreed_terms: `* By signing up, you agree to the <a href="">Terms and Conditions</a> and <a href="">Privacy Policy</a>.`,
+        footer_paragraphe: `All rights reserved.&nbsp;<a href="https://api.nomadledger.com/termsandconditions_en.pdf" rel="noopener noreferrer" target="_blank">Terms and Conditions</a>,&nbsp;
+        features, support, pricing, and service options subject to change without notice.`
     }
 }
 

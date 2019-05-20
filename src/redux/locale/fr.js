@@ -395,7 +395,9 @@ const fr =  {
     home_page: {
         title_01: "Logiciel de facturation <br />pour digital nomade",
         paragraphe_01: `NomadLedger est un logiciel de facturation simple et rapide a prendre en main, il vous aidera a suivre votre business en quelque clique.`,
-        agreed_terms: ` * En m'inscrivant, j'accepte les <a href="">Conditions générales</a>  et la  <a href="">Politique de protection de la vie privée</a>.`
+        agreed_terms: ` * En m'inscrivant, j'accepte les <a href="">Conditions générales</a>  et la  <a href="">Politique de protection de la vie privée</a>.`,
+        footer_paragraphe: `Tous droits réservés.&nbsp;<a href="https://api.nomadledger.com/termsandconditions_fr.pdf" rel="noopener noreferrer" target="_blank">Conditions Générales</a>,&nbsp;
+        les fonctionnalités, l'assistance, la tarification et les options sont susceptibles d'être modifiées sans préavis.`
     }
 };
 

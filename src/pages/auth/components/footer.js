@@ -8,11 +8,8 @@ const Footer = (props) => {
 
   return (
     <div className={classes.footer}>
-        <Typography align="center" variant="caption" style={{color: "#303030"}}>
-            &copy;2016-{new Date().getFullYear()}&nbsp;Apx Development Limited<br />
-            All rights reserved.&nbsp;
-            <a href="https://api.nomadledger.com/terms.pdf" rel="noopener noreferrer" target="_blank">Terms and Conditions</a>, features, support, pricing, and service options subject to change without notice.
-        </Typography>
+        <Typography componet="span" align="center" style={{color: "#303030"}} variant="caption">&copy;2016-{ new Date().getFullYear() }&nbsp;Apx Development Limited</Typography>
+        <Typography align="center" variant="caption" style={{color: "#303030"}} dangerouslySetInnerHTML={{__html: locale.home_page.footer_paragraphe }} />
     </div>
   )
 }

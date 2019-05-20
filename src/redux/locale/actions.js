@@ -10,8 +10,6 @@ import {fr, en } from './index'
 export function getLocale( locale ){
     return dispatch => {
 
-
-
         axios.get(`${API_ENDPOINT}company/update/locale/${locale}`, {
             method: 'GET',
             mode: 'cors',
@@ -31,7 +29,6 @@ export function getLocale( locale ){
 
 export function initLocale( locale ){
     return dispatch => {
-        console.log(localStorage.getItem("locale"))
         var localeObject = locale === 'fr' ? fr : en;
         dispatch(setLocale(localeObject))
 

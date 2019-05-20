@@ -74,8 +74,8 @@ class View extends Component {
                         <Typography variant="caption">{ locale.wording.bill_to }</Typography>
                         <Typography variant="body1" align="left">{ item.contact_id.company_name }</Typography>
                         <Typography variant="body1" align="left">{ item.contact_id.addresses_street }</Typography>
-                        <Typography variant="body1" align="left">{ item.contact_id.addresses_zip }&nbsp;{ item.contact_id.addresses_city }</Typography>
-                        <Typography variant="body1" align="left">{  item.contact_id.addresses_country && item.contact_id.addresses_country[localStorage.getItem("locale")] }</Typography>
+                        <Typography variant="body1" align="left">{ item.contact_id.addresses_zip +" " }{ item.contact_id.addresses_city }</Typography>
+                        <Typography variant="body1" align="left">{ item.contact_id.addresses_country && item.contact_id.addresses_country[localStorage.getItem("locale")] }</Typography>
                     </div>
                   : <div></div>
                 }
@@ -90,7 +90,7 @@ class View extends Component {
                         : null
                       }
                       <Typography variant="caption" align="left">{locale.wording[reducer]}&nbsp;
-                        <span className={ classes.span }>Nº{ item.ref }</span>
+                        <span className={ classes.span }>Nº{ item.ref_add +"-"+item.ref }</span>
                       </Typography>
                       <Typography variant="caption" align="left">{locale.wording.created_at}&nbsp;
                         <span className={ classes.span }>{ item.created_at && new Date(item.created_at.date).toLocaleDateString(localStorage.getItem("locale"), options) }</span>
@@ -161,6 +161,7 @@ class View extends Component {
             <Typography variant="body1" className={ classes.sum } style={{backgroundColor: "white"}}>
               <b style={{ marginLeft: 24 }}>{locale.wording.vat}&nbsp;{ item.vat ? item.vat.value : "0%" }</b>
               <span className={ classes.sumSpan }><b>{ this.totalHT(item.list_items).vat } { item.currency && item.currency.value }</b></span>
+              <span style={{ marginLeft: 24, fontSize: 10 }}>{ item.vat && item.vat["vat_terms_" + localStorage.getItem('locale')] }</span>
             </Typography>
             <Typography variant="body1" className={ classes.sum }>
               <b style={{ marginLeft: 24 }}>{locale.wording.total_ttc}</b>
