@@ -128,7 +128,7 @@ class View extends Component {
               <TableHead className={classes.tableHead}>
               <TableRow>
                   <TableCell>{locale.wording.ref}</TableCell>
-                  <TableCell style={{ width: "30%" }} className={classes.contentEditable}>{locale.wording.description}</TableCell>
+                  <TableCell style={{ width: "30%" }} className={classes.contentEditable}>{locale.wording.designation}</TableCell>
                   <TableCell className={classes.tablenoWrap}>{locale.wording.unit_price}&nbsp;{ item.currency && item.currency.value }</TableCell>
                   <TableCell className={classes.tablenoWrap}>{locale.wording.quantity}</TableCell>
                   <TableCell className={classes.tablenoWrap}>{locale.wording.discount_unit}</TableCell>

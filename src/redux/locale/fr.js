@@ -116,6 +116,7 @@ const fr =  {
         upload: "Uploader",
         loading:"Chargement...",
         send: "Envoyer",
+        delete: "Supprimer",
         contact_us: "Contactez-nous",
         confirm_payment: "Confirmer le paiement",
         payment_progress: "Paiement en cours...",
@@ -305,9 +306,9 @@ const fr =  {
         account_vat: "Lister vos taux de TVA, ils vous seront utile pour la redaction de vos documents comptables",
         account_group: "Créer vos propres groupes de contact afin de facilité, vos recherches dans la sections contacts",
         account_category: "Catégorisé vos produits/services/dépenses, vous pourrez également associé une couleur par catégorie et analysé votre tabelau de bord en en clein d'oeil.",
-        action_table: "ATTENTION - Envoyé/Payé/Annulé sont non modifiable !",
-        action_table_refund: "ATTENTION - Envoyé/Remboursé/Annulé sont non modifiable !",
-        action_table_quote: "ATTENTION - Approuvé/Annulé sont non modifiable !",
+        action_table: "ATTENTION - Une fois le document envoyé, annulé ou payé, il ne sera plus modifiable.",
+        action_table_refund: "ATTENTION - Une fois le document envoyé, annulé ou remboursé, il ne sera plus modifiable.",
+        action_table_quote: "ATTENTION - Une fois le document approuvé ou annulé, il ne sera plus modifiable.",
         header_large: "entête large",
         header_medium: "entête moyenne",
         need_help: "Besoin d'aide ? Contacter nous directement <a href='mailto:support@nomadledger.com'>support@nomadledger.com</a>",
@@ -325,7 +326,7 @@ const fr =  {
         success_create_new_user: "Félicitation! Votre compte a bien été créé, vous pouvez maintenant vous connecter",
         success_email_sent: "Message envoyé, nous vous contacterons dans les meilleurs délais",
         success_payment: "Paiement accepté, vous allez recevoir un reçu par courriel",
-        success_send_email_confirm: "Un courriel de confiramtion vous à été envoyé; veuillez suivre les instructions",
+        success_send_email_confirm: "Un courriel de confirmation vous à été envoyé, veuillez suivre les instructions",
         success_sent_document: "Document envoyé au destinataire",
 
         error_payment: "Erreur lors du paiement, veuillez recommencer ou contacter notre service support@nomadledger.com",
@@ -338,7 +339,7 @@ const fr =  {
         error_500: "Erreur serveur, veuillez recommencer ou contacter notre service support@nomadledger.com",
         error_400: "Les champs marqués avec une * sont obligatoires",
         error_404: "Aucun élément trouvé !",
-        error_403_delete: "Cette donnée ne peux être supprimée",
+        error_403_delete: "Cette donnée ne peux être supprimée. Cela signifie qu'elle est associée à un autre document.",
         error_membership_end: "Votre période d'essai vient de se terminer, vous pouvez renouveler votre abonnement ou nous faire une demande pour récupérer vos données",
         error_409: "Cette email existe déjà dans notre base de donnée",
         error_wrong_token: "Erreur d'authentification, veuillez recommencer ou contacter notre service support@nomadledger.com",
@@ -395,7 +396,7 @@ const fr =  {
     home_page: {
         title_01: "Logiciel de facturation <br />pour digital nomade",
         paragraphe_01: `NomadLedger est un logiciel de facturation simple et rapide a prendre en main, il vous aidera a suivre votre business en quelque clique.`,
-        agreed_terms: ` * En m'inscrivant, j'accepte les <a href="">Conditions générales</a>  et la  <a href="">Politique de protection de la vie privée</a>.`,
+        agreed_terms: ` * En m'inscrivant, j'accepte les <a href="https://api.nomadledger.com/termsandconditions_fr.pdf">Conditions générales</a>  et la  <a href="https://api.nomadledger.com/privacypolicy_fr.pdf">Politique de protection de la vie privée</a>.`,
         footer_paragraphe: `Tous droits réservés.&nbsp;<a href="https://api.nomadledger.com/termsandconditions_fr.pdf" rel="noopener noreferrer" target="_blank">Conditions Générales</a>,&nbsp;
         les fonctionnalités, l'assistance, la tarification et les options sont susceptibles d'être modifiées sans préavis.`
     }

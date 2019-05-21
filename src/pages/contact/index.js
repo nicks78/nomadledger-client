@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {Table, TableHead, TableBody, Paper, TableCell, TableRow, withStyles, } from '@material-ui/core';
+import {Table, TableHead, TableBody, Paper, TableCell, TableRow, withStyles, IconButton} from '@material-ui/core';
 import {connect} from 'react-redux'
 import {downloadFile} from '../../redux/download/actions'
 import { createItem, getItemList, getItem, createState, resetState, deleteElement} from '../../redux/library/actions'
@@ -11,6 +11,8 @@ import AddContact from './addContact'
 import Pagination from '../../lib/pagination'
 import MobileView from './mobileView'
 import DeleteIcon from '@material-ui/icons/DeleteOutlined'
+import EditIcon from '@material-ui/icons/EditOutlined'
+import Tooltips from '../../components/common/tooltips';
 
 
 const styles =  theme => ({
@@ -132,7 +134,7 @@ class Contact extends Component {
                             <TableCell>{locale.wording.full_name}</TableCell>
                             <TableCell>{locale.wording.phone}</TableCell>
                             <TableCell>{locale.wording.email}</TableCell>
-                            <TableCell>Actions</TableCell>
+                            <TableCell align="center">Actions</TableCell>
 
                         </TableRow>
                         </TableHead>
@@ -147,7 +149,10 @@ class Contact extends Component {
                                                 <TableCell style={{textTransform: "capitalize"}}>{ contact.firstname } {contact.lastname}</TableCell>
                                                 <TableCell><a href={`tel:${contact.phone_code.dial_code}${contact.phone.replace('0', '')}`}><span  className="link">({contact.phone_code.dial_code}) {contact.phone.replace('0', '')}</span></a></TableCell>
                                                 <TableCell><a href={`mailto:${contact.email}`}><span className="link">{contact.email}</span></a></TableCell>
-                                                <TableCell align="center" onClick={() => { this.props.deleteElement( reducer, `delete/${contact._id}`) } }><DeleteIcon style={{color: 'red', cursor: 'pointer', fontSize: 18}}  /></TableCell>
+                                                <TableCell  align="center"  style={{display: "flex", justifyContent: "center"}}>
+                                                  <Tooltips title={locale.wording.edit}><IconButton component={Link} to={`/${reducer.toLowerCase()}/view/${contact._id.toLowerCase()}`} style={{ minWidth: 5 }} color="primary"><EditIcon style={{fontSize: 18}} /></IconButton></Tooltips>
+                                                  <Tooltips title={locale.wording.delete}><IconButton onClick={() => { this.props.deleteElement( reducer, `delete/${contact._id}`) } } style={{ minWidth: 5 }}><DeleteIcon style={{color: 'red', fontSize: 18}}  /></IconButton></Tooltips>
+                                                </TableCell>
                                             </TableRow>
                                 })
                                 : null
@@ -157,8 +162,8 @@ class Contact extends Component {
                     </Table>
                     </div>
                     <Pagination
-                        total={total}
-                        rowsPerPageOptions={rowsPerPageOptions}
+                        total={total || 0}
+                        rowsPerPageOptions={rowsPerPageOptions || []}
                         label={locale.wording.label_rows_per_page}
                         label2={locale.wording.of}
                         reducer={reducer}

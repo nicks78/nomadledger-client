@@ -9,7 +9,7 @@ const Tooltips = (props) => {
     const {classes, title } = props
 
     return (
-      <Tooltip classes={{ tooltip: classes.lightTooltip }} title={title}>
+      <Tooltip classes={{ tooltip: classes.lightTooltip }} className={ classes.iconHelp } title={title}>
         { props.children }
       </Tooltip>
     )
@@ -26,6 +26,9 @@ const styles = theme => ({
       fontSize: 12,
       width: '100%',
       backgroundColor: 'rgba(0,0,0,1)',
+  },
+  iconHelp: {
+    fontSize: 18
   }
 })
 

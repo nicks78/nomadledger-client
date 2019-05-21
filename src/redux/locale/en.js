@@ -109,6 +109,7 @@ const en = {
         upload: "Upload",
         loading: "Loading...",
         send: "Send",
+        delete: "Delete",
         contact_us: "Contact us",
         confirm_payment: "Confirm payment",
         payment_progress: "Payment in progress...",
@@ -292,13 +293,13 @@ const en = {
         type_message: "Type your message...",
         payment_terms: "Membership gives you full access to NomadLegder for 365 days",
         add_tags: "Once you create your tag, you can edit in two languages FR - EN ",
-        trial_30: "Free 15-Day Trial",
+        trial_30: "Free 14-Day Trial",
         account_vat: "List all your VAT rates, you will need them to create your accounting documents",
         account_group: "Easily create contact groups to aid search filter",
         account_category: "Categorize your products/services/expenses, you can add a color for each category to use in your dashboard",
-        action_table: "CAUTIOUS - Sent/Paid/Canceled cannot be edited !",
-        action_table_refund: "CAUTIOUS - Sent/Refunded/Canceled cannot be edited !",
-        action_table_quote: "CAUTIOUS - Approved/Canceled cannot be edited !",
+        action_table: "CAUTIOUS - Once the document is sent, canceled or paid, it cannot be edited",
+        action_table_refund: "CAUTIOUS - Once the document is sent, refunded or canceled it cannot be edited !",
+        action_table_quote: "CAUTIOUS - Once the document is approved or canceled, it cannot be edited !",
         header_large: "Header large",
         header_medium: "Header medium",
         need_help: "Need help ? Contact us at <a href='mailto:support@nomadledger.com'>support@nomadledger.com</a>",
@@ -329,7 +330,7 @@ const en = {
         error_500: "Server error, please try again or contact us at support@nomadledger.com",
         error_400: "All fields marked with * are required",
         error_404: "Element not found !",
-        error_403_delete: "This element cannot be deleted - Element related to other element",
+        error_403_delete: "This element cannot be deleted. This mean it has a relation with another element",
         error_membership_end: "Your membership just ended, you can renew or request all your data (takes up to 14 business days)",
         error_409: "This email is already in our database",
         error_wrong_token: "Authentication error, please try again or contact us at support@nomadledger.com",
@@ -387,7 +388,7 @@ const en = {
     home_page: {
         title_01: "The invoicing software <br />for digital nomad",
         paragraphe_01: `NomadLedger is an easy to use software to manage your invoicing document and keep track of your tasks in just a few click.`,
-        agreed_terms: `* By signing up, you agree to the <a href="">Terms and Conditions</a> and <a href="">Privacy Policy</a>.`,
+        agreed_terms: `* By signing up, you agree to the <a href="https://api.nomadledger.com/termsandconditions_en.pdf">Terms and Conditions</a> and <a href="https://api.nomadledger.com/privacypolicy_en.pdf">Privacy Policy</a>.`,
         footer_paragraphe: `All rights reserved.&nbsp;<a href="https://api.nomadledger.com/termsandconditions_en.pdf" rel="noopener noreferrer" target="_blank">Terms and Conditions</a>,&nbsp;
         features, support, pricing, and service options subject to change without notice.`
     }

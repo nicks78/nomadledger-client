@@ -8,6 +8,7 @@ import Modal from '@material-ui/core/Modal';
 import IconButton from '@material-ui/core/IconButton';
 import SendIcon from '@material-ui/icons/SendOutlined'
 import CloseIcon from '@material-ui/icons/CloseOutlined'
+import Tooltips from '../../../components/common/tooltips'
 
 
 
@@ -36,7 +37,11 @@ class SimpleModal extends React.Component {
     open: false,
     email: this.props.item.contact_id.email,
     subject: "",
-    content: "",
+    content: `<p><br /><br />${this.props.company.company_name}<br />
+          ${this.props.user.lastname} ${this.props.user.firstname}<br />
+        ${this.props.user.email}<br />
+          (${this.props.user.phone_code.dial_code})${this.props.user.phone}<br />
+    </p>`,
     isLoading: false
   }
 
@@ -75,7 +80,7 @@ class SimpleModal extends React.Component {
 
     return (
       <React.Fragment>
-        <IconButton onClick={this.handleOpen} style={{ minWidth: 5 }} disabled={loading}  color="primary"><SendIcon style={{ fontSize: 18, color:  "darkorange" }} /></IconButton>
+        <Tooltips title={locale.wording.send}><IconButton onClick={this.handleOpen} style={{ minWidth: 5 }} disabled={loading}  color="primary"><SendIcon style={{ fontSize: 18, color:  "darkorange" }} /></IconButton></Tooltips>
         <Modal
           aria-labelledby={item._id}
           aria-describedby="simple-modal-description"
@@ -136,6 +141,8 @@ const mapStateToProps = (state) => {
 
     return {
         locale: state.locale.locale,
+        company: state.account.company.item,
+        user: state.account.user.item
     }
 }
 

@@ -123,7 +123,7 @@ class ShowContact extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-
+console.log(state.book)
   return {
       isFetching: state.library.contact.isFetching,
       receivedAt: state.library.contact.receivedAt,

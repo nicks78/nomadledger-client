@@ -13,6 +13,8 @@ import Pagination from '../../../lib/pagination'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import MobileView from '../common/mobileView'
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Tooltips from '../../../components/common/tooltips'
+import WarningIcon from '@material-ui/icons/WarningOutlined'
 
 class Quote extends Component {
 
@@ -102,8 +104,7 @@ class Quote extends Component {
                             <TableCell>{locale.wording.status}</TableCell>
                             <TableCell align="center">{locale.wording.invoicer}</TableCell>
                             <TableCell align="center">PDF</TableCell>
-                            <TableCell align="center">Actions<br />
-                              <span style={{fontSize: 8, color: "red"}}>{locale.helperText.action_table_quote}</span><br />
+                            <TableCell align="center">Actions&nbsp;&nbsp;<Tooltips title={locale.helperText.action_table_quote}><WarningIcon style={{color: 'red'}}/></Tooltips><br />
                             { actionLoading ? <LinearProgress color="secondary" variant="query" /> : null }
                             </TableCell>
 
@@ -121,7 +122,7 @@ class Quote extends Component {
                                                 <TableCell><span style={{color: quote.status.color, fontWeight: 400 }}>{ quote.status[localStorage.getItem('locale')] }</span></TableCell>
                                                 <TableCell align="center"><Link to={`/invoice/create/${quote._id}`}><img alt="convert-to-invoice" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link></TableCell>
                                                 <TableCell align="center"><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, quote._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
-                                                <TableCell align="center" style={{ whiteSpace: "nowrap", width: "0%"}}>
+                                                <TableCell align="center" style={{ display: 'flex', justifyContent: "center"}}>
                                                   <ApxTableActions
                                                     reducer={reducer}
                                                     id={quote._id}
@@ -145,8 +146,8 @@ class Quote extends Component {
                     </Table>
                     </div>
                     <Pagination
-                        total={this.props.total}
-                        rowsPerPageOptions={this.props.rowsPerPageOptions}
+                        total={this.props.total || 0 }
+                        rowsPerPageOptions={this.props.rowsPerPageOptions || []}
                         label={locale.wording.label_rows_per_page}
                         label2={locale.wording.of}
                         reducer={reducer}

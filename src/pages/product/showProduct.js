@@ -13,6 +13,7 @@ import EditSelect from '../../lib/editSelect';
 import CameraAltIcon from '@material-ui/icons/CameraAltOutlined'
 import CarouselProduct from './carouselProduct'
 import LinearProgress from '@material-ui/core/LinearProgress'
+import {resizeFile} from '../../utils/resizeFile'
 
 
 
@@ -35,6 +36,15 @@ class ShowProduct extends React.Component {
 
   componentWillUnmount(){
     this.props.resetState(this.state.reducer)
+  }
+
+  handleImageUpload = (file) => {
+    if(!file){return;}
+    resizeFile( file, this.callBackUpload )
+  }
+
+  callBackUpload = (file) => {
+    this.props.uploadProductFileToServer("PRODUCT", file)
   }
 
   render() {
@@ -69,12 +79,12 @@ class ShowProduct extends React.Component {
 
                         <div className={classes.button}>
                             <input
-                                accept="all"
+                                accept="image/*"
                                 disabled={ product.img.length >= 19 ? true : false }
                                 className={classes.input}
                                 id="upload"
                                 name="img"
-                                onChange={ (e) => { e.target.files.length > 0 && this.props.uploadProductFileToServer("PRODUCT", e.target.files[0]) } }
+                                onChange={ (e) => { this.handleImageUpload(e.target.files[0]) } }
                                 type="file"
                             />
                             <label htmlFor="upload">

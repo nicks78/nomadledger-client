@@ -13,6 +13,7 @@ import EditSelect from '../../lib/editSelect'
 import DatePickers from '../../lib/dayPicker'
 import { DEFAULT_IMG } from '../../redux/constant';
 import {checkNumFormatRegex, cvtToLocale} from '../../utils/help_function'
+import {resizeFile} from '../../utils/resizeFile'
 
 
 class ShowExpense extends Component {
@@ -29,6 +30,17 @@ class ShowExpense extends Component {
     componentWillUnmount(){
       this.props.resetState(this.state.reducer)
     }
+
+    handleImageUpload = (file) => {
+      if(!file){return;}
+      resizeFile( file, this.callBackUpload )
+    }
+
+    callBackUpload = (file) => {
+      var expense = this.props.expense
+      this.props.uploadFileToServer(this.state.reducer, expense._id, file, expense.receipt)
+    }
+
 
 
 
@@ -51,7 +63,7 @@ class ShowExpense extends Component {
 
               <UploadImg
                 field="receipt"
-                _handleUploadFile={ (e) => { this.props.uploadFileToServer(reducer, expense._id,  e.target.files[0], expense.receipt ) }}
+                _handleUploadFile={ (e) => { this.handleImageUpload( e.target.files[0] ) }}
                 reducer={this.state.reducer}
                 progress={progress}
                 isUploading={isUploading}

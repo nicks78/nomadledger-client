@@ -4,7 +4,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import {submitPayment, requestPayment} from '../../redux/payment/actions'
 import {injectStripe, CardElement} from 'react-stripe-elements';
-import { Button, Typography, TextField, Checkbox } from '@material-ui/core'
+import { Button, Typography, TextField } from '@material-ui/core'
 import WarningIcon from '@material-ui/icons/WarningOutlined'
 import {cvtNumToUserPref} from '../../utils/help_function'
 
@@ -58,7 +58,7 @@ class Checkout extends React.Component {
   render() {
 
     const { payment, locale, isFetching } = this.props
-    const { autoRenewal, lastname, firstname } = this.state;
+    const { lastname, firstname } = this.state;
 
     if(!payment){
       return null
@@ -76,11 +76,6 @@ class Checkout extends React.Component {
           <TextField label={locale.wording.card_lastname} value={ lastname } onChange={ (e ) => { this.setState({ lastname : e.target.value }) }} variant="outlined" margin="dense" fullWidth />
           <TextField label={locale.wording.card_firstname} value={ firstname } onChange={ (e ) => { this.setState({ firstname : e.target.value }) }} variant="outlined" margin="dense" fullWidth />
           <CardElement  />
-
-          <p style={{display: "inline-flex", alignItems: "center"}}>
-            <Checkbox style={{paddingLeft: 0}} checked={ autoRenewal } onChange={(e, isChecked) => { this.setState({autoRenewal: isChecked}) }} />
-            <Typography component="span" variant="body2">{ locale.wording.auto_renewal }</Typography>
-          </p>
           <br />
           <Button
             variant="contained"
@@ -113,3 +108,8 @@ const CheckoutForm = connect( mapStateToProps, {submitPayment, requestPayment} )
 
 
 export default injectStripe(CheckoutForm);
+
+// <p style={{display: "inline-flex", alignItems: "center"}}>
+//   <Checkbox style={{paddingLeft: 0}} checked={ autoRenewal } onChange={(e, isChecked) => { this.setState({autoRenewal: isChecked}) }} />
+//   <Typography component="span" variant="body2">{ locale.wording.auto_renewal }</Typography>
+// </p>

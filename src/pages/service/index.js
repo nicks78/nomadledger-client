@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { createItem, getItemList, getItem, createState , resetState, deleteElement} from '../../redux/library/actions'
 import {connect} from 'react-redux'
-import { TableCell, TableRow, Table, TableHead, TableBody, withStyles, Paper} from '@material-ui/core';
+import { TableCell, TableRow, Table, TableHead, TableBody, withStyles, Paper, IconButton} from '@material-ui/core';
 import ApxTableToolBar from '../../components/common/tableToolBar'
 import Tooltips from '../../components/common/tooltips'
 import AddService from './addService'
@@ -12,6 +12,8 @@ import {cvtNumToUserPref} from '../../utils/help_function'
 import Pagination from '../../lib/pagination'
 import DeleteIcon from '@material-ui/icons/DeleteOutlined'
 import MobileView from './mobileView'
+import EditIcon from '@material-ui/icons/EditOutlined'
+
 
 // STYLES
 const styles = theme =>  ({
@@ -132,7 +134,11 @@ class Service extends Component {
                                                 <TableCell align="right">{ service.service_type[localStorage.getItem('locale')] }</TableCell>
                                                 <TableCell style={{textTransform: 'capitalize'}}>{service.category[localStorage.getItem('locale')]}</TableCell>
                                                 <Tooltips title={service.description} ><TableCell>{service.description.slice(0,5)}...</TableCell></Tooltips>
-                                                <TableCell align="center" onClick={() => { this.props.deleteElement( reducer, `delete/${service._id}`) } }><DeleteIcon style={{color: 'red', cursor: 'pointer', fontSize: 18}}  /></TableCell>
+
+                                                  <TableCell  align="center"  style={{display: "flex", justifyContent: "center"}}>
+                                                    <Tooltips title={locale.wording.edit}><IconButton component={Link} to={`/${reducer.toLowerCase()}/view/${service._id.toLowerCase()}`} style={{ minWidth: 5 }} color="primary"><EditIcon style={{fontSize: 18}} /></IconButton></Tooltips>
+                                                    <Tooltips title={locale.wording.delete}><IconButton onClick={() => { this.props.deleteElement( reducer, `delete/${service._id}`) } } style={{ minWidth: 5 }}><DeleteIcon style={{color: 'red', fontSize: 18}}  /></IconButton></Tooltips>
+                                                  </TableCell>
                                             </TableRow>
                                 })
                                 : null
@@ -141,8 +147,8 @@ class Service extends Component {
                     </Table>
                     </div>
                     <Pagination
-                        total={this.props.total}
-                        rowsPerPageOptions={this.props.rowsPerPageOptions}
+                        total={this.props.total || 0 }
+                        rowsPerPageOptions={this.props.rowsPerPageOptions || []}
                         label={locale.wording.label_rows_per_page}
                         value={this.state.category}
                         filterName="category"

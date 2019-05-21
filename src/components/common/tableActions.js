@@ -8,13 +8,13 @@ import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEyeOutlined'
 import CheckIcon from '@material-ui/icons/CheckOutlined'
 import ArchiveIcon from '@material-ui/icons/ArchiveOutlined'
 import HighlightOff from '@material-ui/icons/HighlightOffOutlined'
-import Tooltip from '@material-ui/core/Tooltip';
 import ModalSendMail from '../../pages/bookkeeping/common/modalSendMail'
+import Tooltips from './tooltips'
 
 
 const TableActions = (props) => {
 
-    const { classes, locale, reducer, handleAction, id, endpoint, loading,  edit, canceled, paid, item } = props;
+    const { locale, reducer, handleAction, id, endpoint, loading,  edit, canceled, paid, item } = props;
     const ok = () => {
       var x = "paid";
       if(reducer === "QUOTE"){
@@ -29,41 +29,29 @@ const TableActions = (props) => {
     return  <React.Fragment>
               {
                 edit ?
-                <Tooltip classes={{ tooltip: classes.lightTooltip }} title={locale.wording.edit} aria-label="edit">
-                  <IconButton style={{ minWidth: 5 }} disabled={!edit || loading} component={Link} to={`/${reducer.toLowerCase()}/edit/${id}`} color="primary"><EditIcon  style={{ fontSize: 18}}/></IconButton>
-                </Tooltip>
+                <Tooltips  title={locale.wording.edit} aria-label="edit">
+                  <IconButton style={{ minWidth: 0 }} disabled={!edit || loading} component={Link} to={`/${reducer.toLowerCase()}/edit/${id}`} color="primary"><EditIcon  style={{ fontSize: 18}}/></IconButton>
+                </Tooltips>
                 :
-                <Tooltip classes={{ tooltip: classes.lightTooltip }} title={locale.wording.preview} aria-label="edit">
-                  <IconButton style={{ minWidth: 5 }} disabled={loading} component={Link} to={`/${reducer.toLowerCase()}/view/${id}`} color="primary"><RemoveRedEyeIcon  style={{ fontSize: 18}}/></IconButton>
-                </Tooltip>
+                <Tooltips  title={locale.wording.preview} aria-label="edit">
+                  <IconButton style={{ minWidth: 0 }} disabled={loading} component={Link} to={`/${reducer.toLowerCase()}/view/${id}`} color="primary"><RemoveRedEyeIcon  style={{ fontSize: 18}}/></IconButton>
+                </Tooltips>
               }
-
-              <Tooltip classes={{ tooltip: classes.lightTooltip }} title={locale.wording.send} aria-label="send">
-                  <ModalSendMail loading={loading} reducer={reducer} item={item} />
-              </Tooltip>
-              <Tooltip classes={{ tooltip: classes.lightTooltip }} title={locale.wording[ok()]} aria-label="paid">
-                <IconButton style={{ minWidth: 5 }} disabled={ paid || loading} onClick={ () => { handleAction(reducer, {paid: true, _id: id}, endpoint ) }} color="primary"><CheckIcon style={{ fontSize: 18, color: paid ? "rgba(0, 0, 0, 0.26)" : "forestgreen" }} /></IconButton>
-              </Tooltip>
-              <Tooltip classes={{ tooltip: classes.lightTooltip }} title={locale.wording.cancel} aria-label="cancel">
-                <IconButton style={{ minWidth: 5 }} disabled={ canceled || loading} onClick={ () => { handleAction(reducer, {canceled: true, _id: id}, endpoint ) }} color="primary"><HighlightOff style={{ fontSize: 18,  color: canceled ? "rgba(0, 0, 0, 0.26)" : "crimson" }} /></IconButton>
-              </Tooltip>
-              <Tooltip classes={{ tooltip: classes.lightTooltip }} title={locale.wording.archive} aria-label="archive">
-                <IconButton style={{ minWidth: 5 }} disabled={ loading} onClick={ () => { handleAction(reducer, {archive: true, _id: id}, endpoint ) }} color="primary"><ArchiveIcon style={{ fontSize: 18, color: "grey" }} /></IconButton>
-              </Tooltip>
+              <ModalSendMail loading={loading} reducer={reducer} item={item} />
+              <Tooltips  title={locale.wording[ok()]} aria-label="paid">
+                <IconButton style={{ minWidth: 0 }} disabled={ paid || loading} onClick={ () => { handleAction(reducer, {paid: true, _id: id}, endpoint ) }} color="primary"><CheckIcon style={{ fontSize: 18, color: paid ? "rgba(0, 0, 0, 0.26)" : "forestgreen" }} /></IconButton>
+              </Tooltips>
+              <Tooltips  title={locale.wording.cancel} aria-label="cancel">
+                <IconButton style={{ minWidth: 0 }} disabled={ canceled || loading} onClick={ () => { handleAction(reducer, {canceled: true, _id: id}, endpoint ) }} color="primary"><HighlightOff style={{ fontSize: 18,  color: canceled ? "rgba(0, 0, 0, 0.26)" : "crimson" }} /></IconButton>
+              </Tooltips>
+              <Tooltips  title={locale.wording.archive} aria-label="archive">
+                <IconButton style={{ minWidth: 0 }} disabled={ loading} onClick={ () => { handleAction(reducer, {archive: true, _id: id}, endpoint ) }} color="primary"><ArchiveIcon style={{ fontSize: 18, color: "grey" }} /></IconButton>
+              </Tooltips>
           </React.Fragment>
 
 }
 const styles  = theme => ({
-  lightTooltip: {
-    color: 'white',
-    fontWeight: 400,
-    maxWidth: 500,
-    textAlign: 'center',
-    padding: '5px 5px 5px 5px',
-    fontSize: 12,
-    width: '100%',
-    backgroundColor: 'rgba(0,0,0,1)',
-}
+
 })
 
 const ApxTableActions = withStyles(styles)(TableActions)

@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid'
 import EditInput from '../../../lib/editInput'
 import Button from '@material-ui/core/Button';
 import Phone from '../../../lib/phone'
+import {resizeFile} from '../../../utils/resizeFile'
 
 
 
@@ -76,6 +77,16 @@ class User extends Component {
     }
   }
 
+  handleUpload = (file) => {
+    if(!file){ return }
+    resizeFile(file, this.callback)
+  }
+
+  // Callback when img is resized
+  callback = (file) => {
+      this.props.uploadFileToServer("USER", file, 'avatar', this.props.user.avatar )
+  }
+
   render() {
     const {  user, locale, classes, requestPW, isUploading, progress  } = this.props;
     const {showEdit, reducer} = this.state
@@ -95,7 +106,7 @@ class User extends Component {
                 <Grid item  xs={12}>
                 <UploadImg
                     field="avatar"
-                    _handleUploadFile={ (e) => { this.props.uploadFileToServer("USER", e.target.files[0], 'avatar', user.avatar ) }}
+                    _handleUploadFile={ (e) => { this.handleUpload( e.target.files[0] ) }}
                     progress={progress}
                     isUploading={isUploading}
                     image={

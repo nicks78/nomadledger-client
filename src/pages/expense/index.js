@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import {downloadFile} from '../../redux/download/actions'
 import { createItem, getItemList, getItem, createState , resetState, deleteElement} from '../../redux/library/actions'
 import {connect} from 'react-redux'
-import { TableCell, TableRow, Table, TableHead, TableBody, withStyles, Paper} from '@material-ui/core';
+import { TableCell, TableRow, Table, TableHead, TableBody, withStyles, Paper, IconButton} from '@material-ui/core';
 import ApxTableToolBar from '../../components/common/tableToolBar'
 import AddExpense from './addExpense'
 import Pagination from '../../lib/pagination'
@@ -13,6 +13,9 @@ import DeleteIcon from '@material-ui/icons/DeleteOutlined'
 import { cvtNumToUserPref } from '../../utils/help_function'
 import MobileView from './mobileView'
 import RenderImage from '../../components/common/renderImage'
+import EditIcon from '@material-ui/icons/EditOutlined'
+import Tooltips from '../../components/common/tooltips';
+
 
 // STYLES
 const styles = theme =>  ({
@@ -142,7 +145,11 @@ class Expense extends Component {
                                                 <TableCell><Link to={`/${reducer.toLowerCase()}/view/${expense._id.toLowerCase()}`}><span style={{textTransform: "capitalize"}}  className="link">{expense.name}</span></Link></TableCell>
                                                 <TableCell style={{textTransform: 'capitalize'}}>{ expense.category[localStorage.getItem('locale')] }</TableCell>
                                                 <TableCell className="tableNumber">{ cvtNumToUserPref(expense.price) } { expense.currency.value }</TableCell>
-                                                <TableCell align="center" onClick={() => { this.props.deleteElement( reducer, `delete/${expense._id}`) } }><DeleteIcon style={{color: 'red', cursor: 'pointer', fontSize: 18}}  /></TableCell>
+
+                                                <TableCell  align="center"  style={{display: "flex", justifyContent: "center"}}>
+                                                  <Tooltips title={locale.wording.edit}><IconButton component={Link} to={`/${reducer.toLowerCase()}/view/${expense._id.toLowerCase()}`} style={{ minWidth: 5 }} color="primary"><EditIcon style={{fontSize: 18}} /></IconButton></Tooltips>
+                                                  <Tooltips title={locale.wording.delete}><IconButton onClick={() => { this.props.deleteElement( reducer, `delete/${expense._id}`) } } style={{ minWidth: 5 }}><DeleteIcon style={{color: 'red', fontSize: 18}}  /></IconButton></Tooltips>
+                                                </TableCell>
                                             </TableRow>
                                 })
                                 : null
@@ -151,8 +158,8 @@ class Expense extends Component {
                     </Table>
                     </div>
                     <Pagination
-                        total={this.props.total}
-                        rowsPerPageOptions={this.props.rowsPerPageOptions}
+                        total={this.props.total || 0}
+                        rowsPerPageOptions={this.props.rowsPerPageOptions || []}
                         label={locale.wording.label_rows_per_page}
                         value={this.state.category}
                         filterName="category"

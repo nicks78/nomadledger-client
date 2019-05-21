@@ -33,7 +33,8 @@ export function authUser(data){
         })
         .then( res => {
 
-            if( res.isMembershipEnd ){
+            // Check if user has confirm his email
+             if( res.isMembershipEnd ){
                 /**
                  * Redirect to payment-gateway/:token
                  */
@@ -57,10 +58,7 @@ export function authUser(data){
                 }else{
                     history.push('/dashboard')
                 }
-
             }
-
-
         })
         .catch(function (error) {
             dispatch(setError(error));

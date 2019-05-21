@@ -227,7 +227,7 @@ export function convertToOtherDocument( actionType, id, newType ){
 export function sendEmailWithPdf( actionType, endPoint, data){
 
   return async (dispatch, getState) => {
-      
+
       var list = getState().library[actionType.toLowerCase()].list;
 
       try{
@@ -288,7 +288,8 @@ export function getBookTotal( actionType, endPoint ){
             return response.data
         })
         .then( res => {
-            dispatch(setTotal(actionType, res.total ))
+
+            dispatch(setTotal(actionType, res ))
         })
         .catch(function (error) {
             dispatch(setError(error));

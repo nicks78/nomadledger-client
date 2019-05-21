@@ -15,7 +15,8 @@ import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
 import MobileView from '../common/mobileView'
 import LinearProgress from '@material-ui/core/LinearProgress';
-
+import Tooltips from '../../../components/common/tooltips'
+import WarningIcon from '@material-ui/icons/WarningOutlined'
 
 class Invoice extends Component {
 
@@ -29,7 +30,6 @@ class Invoice extends Component {
 
     componentDidMount(){
         this.props.getBookList(this.state.reducer, "list?limit=10&skip=0");
-        // this.props.getItemList("CONTACT", `list?limit=10&skip=0`);
         window.addEventListener('resize', this.getWindowWidth);
     }
 
@@ -107,10 +107,8 @@ class Invoice extends Component {
                             <TableCell>{locale.wording.status}</TableCell>
                             <TableCell align="center">{locale.wording.repay}</TableCell>
                             <TableCell align="center">PDF</TableCell>
-                            <TableCell align="center">Actions<br />
-                            <span style={{fontSize: 8, color: "red"}}>{locale.helperText.action_table}</span><br />
-                          { actionLoading ? <LinearProgress color="secondary" variant="query" /> : null }
-
+                            <TableCell align="center">Actions&nbsp;&nbsp;<Tooltips title={locale.helperText.action_table}><WarningIcon style={{color: 'red'}}/></Tooltips><br />
+                            { actionLoading ? <LinearProgress color="secondary" variant="query" /> : null }
                             </TableCell>
 
                         </TableRow>
@@ -127,7 +125,7 @@ class Invoice extends Component {
                                                 <TableCell><span style={{color: invoice.status.color, fontWeight: 400}}>{ invoice.status[localStorage.getItem('locale')] }</span></TableCell>
                                                 <TableCell align="center"><Link to={`/refund/create/${invoice._id}`}><img alt="convert-to-refund" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link></TableCell>
                                                 <TableCell align="center"><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, invoice._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
-                                                <TableCell align="center" style={{ whiteSpace: "nowrap", width: "0%"}}>
+                                                <TableCell align="center" style={{ display: 'flex', justifyContent: "center"}}>
                                                       <ApxTableActions
                                                         reducer={reducer}
                                                         id={invoice._id}
@@ -152,8 +150,8 @@ class Invoice extends Component {
                     </Table>
                     </div>
                     <Pagination
-                        total={this.props.total}
-                        rowsPerPageOptions={this.props.rowsPerPageOptions}
+                        total={this.props.total || 0}
+                        rowsPerPageOptions={this.props.rowsPerPageOptions || []}
                         label={locale.wording.label_rows_per_page}
                         label2={locale.wording.of}
                         reducer={reducer}

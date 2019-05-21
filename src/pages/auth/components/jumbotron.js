@@ -40,7 +40,10 @@ const styles = theme => ({
   title: {
     color: theme.palette.secondary.main,
     fontWeight: 100,
-    fontSize: 52
+    fontSize: 52,
+    [theme.breakpoints.down("xs")]: {
+      fontSize: 42,
+    }
   },
   subtitle: {
     fontSize: 20,
@@ -48,6 +51,9 @@ const styles = theme => ({
     textTransform: "none",
     lineHeight: "1.46429em",
     fontWeight: 300,
+    [theme.breakpoints.down("xs")]: {
+      fontSize: 16,
+    }
   },
   jumbotron: {
       display: "flex",
@@ -61,7 +67,7 @@ const styles = theme => ({
     marginTop: 150,
     [theme.breakpoints.down("xs")]: {
       width: "100%",
-      marginTop: 0,
+      marginTop: 80,
       textAlign: "center"
     }
   },

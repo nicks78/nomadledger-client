@@ -27,8 +27,6 @@ class ShowService extends Component {
       this.props.resetState(this.state.reducer)
     }
 
-
-
     render() {
       const {classes, service, isFetching, locale, category, isUpdating, currency, service_type} = this.props
       const {reducer} = this.state

@@ -12,7 +12,7 @@ import AddCategory from './addCategory'
 import AddVat from './addVat'
 import AddContactGroup from './addContactGroup'
 import HelpIcon from '@material-ui/icons/HelpOutlined'
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltips from '../../components/common/tooltips';
 
 
 const styles = theme => ({
@@ -35,12 +35,7 @@ const styles = theme => ({
   titleBar: {
     padding: 15,
     borderRadius: 4,
-    backgroundColor: 'rgb(238,238,238)',
-    // border: `1px solid ${theme.palette.secondary.light}`
-  },
-  iconHelp: {
-    fontSize: 15,
-    marginLeft: 10
+    backgroundColor: 'rgb(238,238,238)'
   },
   paddingContent: {
     padding: 24,
@@ -48,16 +43,6 @@ const styles = theme => ({
       padding: 12
     }
   },
-  lightTooltip: {
-    color: 'white',
-    fontWeight: 400,
-    maxWidth: 500,
-    textAlign: 'center',
-    padding: '5px 5px 5px 5px',
-    fontSize: 12,
-    width: '100%',
-    backgroundColor: 'rgba(0,0,0,1)',
-}
 })
 
 
@@ -125,8 +110,8 @@ class Account extends Component {
                           <Grid container spacing={24}>
 
                               <Grid item xs={12} md={6}>
-                                <Typography variant="subtitle2"  >
-                                    {locale.subheading.my_vat}<Tooltip classes={{ tooltip: classes.lightTooltip }} title={locale.helperText.account_vat} className={ classes.iconHelp } aria-label="setting"><HelpIcon /></Tooltip>
+                                  <Typography variant="subtitle2"  >
+                                    {locale.subheading.my_vat}&nbsp;<Tooltips title={locale.helperText.account_vat}  aria-label="setting"><HelpIcon /></Tooltips>
                                   </Typography>
                                   <Divider className={ classes.divider }/>
                                   <AddVat />
@@ -134,7 +119,7 @@ class Account extends Component {
                               <br />
                               <Grid item xs={12} md={6}>
                               <Typography variant="subtitle2"  >
-                              {locale.subheading.contact_group}<Tooltip classes={{ tooltip: classes.lightTooltip }} title={locale.helperText.account_group} className={ classes.iconHelp } aria-label="setting"><HelpIcon /></Tooltip>
+                              {locale.subheading.contact_group}&nbsp;<Tooltips title={locale.helperText.account_group}  aria-label="setting"><HelpIcon /></Tooltips>
                                 </Typography>
                                 <Divider className={ classes.divider }/>
                                   <AddContactGroup />
@@ -143,7 +128,7 @@ class Account extends Component {
 
 
                                 <Typography variant="subtitle2"  >
-                                {locale.subheading.my_categories}<Tooltip classes={{ tooltip: classes.lightTooltip }} title={locale.helperText.account_category} className={ classes.iconHelp } aria-label="setting"><HelpIcon /></Tooltip>
+                                {locale.subheading.my_categories}&nbsp;<Tooltips title={locale.helperText.account_category}  aria-label="setting"><HelpIcon /></Tooltips>
                                 </Typography>
                                 <Divider className={ classes.divider }/>
                                 <AddCategory />

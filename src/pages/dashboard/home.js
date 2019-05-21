@@ -12,27 +12,12 @@ import {cvtNumToUserPref} from '../../utils/help_function'
 import Spinner from '../../components/common/spinner'
 import StatusTask from '../task/statusTask'
 
-// Calculate total net profit
-function calNetProfit(mainStat){
-  var total = 0;
-  if(mainStat){
-      var obj = mainStat.datasets.find(obj => obj.id === 4);
-
-      function getSum(total, num) {
-        return total + num;
-      }
-
-      total = obj.data.reduce(getSum,0)
-  }
-
-  return total;
-}
-
 class Home extends Component {
 
     state = {
         reducer: 'STAT',
         net_profit: 0,
+        width: window.innerWidth
     }
 
     componentDidMount(){
@@ -40,6 +25,12 @@ class Home extends Component {
         this.props.getData( "pieQuote", "compare/quote/success-onhold-rejected" );
         this.props.getData( "expensesBy", "sum/expenses/bycategory" );
         this.props.getAllTask("daily", "dailyTask");
+
+        window.addEventListener("resize", this.catchWidth)
+    }
+
+    catchWidth = () => {
+      this.setState({width: window.innerWidth})
     }
 
     componentWillUnmount(){
@@ -49,17 +40,30 @@ class Home extends Component {
     render() {
 
         const {classes, tasks, isFetching, pieQuote, mainStat, expensesBy, locale, currency, isFetchingTask} = this.props
+        const {width} = this.state
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-
+        const isMobile = width <= 500
         if(isFetching || isFetchingTask ){
             return <Spinner />
         }
 
         return (
             <div>
+              <Grid container spacing={isMobile ? 4 : 24} className={classes.gridContainer}>
+                <Grid item xs={6} md={6} sm={6}>
+                    <Paper className={classes.paperHeader}>
+                      <Typography variant="h2" align="center" style={{color: "#00b500", marginBottom: 10, fontWeight: 600}} >  { cvtNumToUserPref( mainStat ? mainStat.turnover : 0 ) }  { currency.value } </Typography>
+                      <Typography variant={isMobile ? "body2" : "h3"} align="center" style={{fontWeight: 300}}>{locale.subheading.label_revenue} - { mainStat && mainStat.fiscal_year  }</Typography>
 
-            <Typography variant="h1" align="center" style={{fontWeight: 600}}>  { cvtNumToUserPref( calNetProfit(mainStat)) }  { currency.value } </Typography>
-            <Typography variant="caption" align="center" style={{ marginTop: 5, paddingBottom: 24 }}>{locale.subheading.label_revenue} - { mainStat && mainStat.fiscal_year  }</Typography>
+                    </Paper>
+                </Grid>
+                <Grid item xs={6} md={6} sm={6}>
+                    <Paper className={classes.paperHeader}>
+                      <Typography variant="h2" align="center" style={{color: "#ff6a00", marginBottom: 10, fontWeight: 600}}>  { cvtNumToUserPref( mainStat ? mainStat.sumExpenses : 0 ) }  { currency.value } </Typography>
+                      <Typography variant={isMobile ? "body2" : "h3"} align="center" style={{fontWeight: 300}}>{locale.wording.expense} - { mainStat && mainStat.fiscal_year  }</Typography>
+                    </Paper>
+                </Grid>
+              </Grid>
 
             <Grid container spacing={24} className={ classes.charts }>
 
@@ -140,7 +144,7 @@ class Home extends Component {
 const styles = theme => ({
 
     charts: {
-        padding: 10,
+        // padding: 10,
     },
     devis: {
         padding: 12
@@ -180,6 +184,21 @@ const styles = theme => ({
     tableHead: {
         backgroundColor: "rgb(238,238,238)"
     },
+    paperHeader: {
+      padding: 24,
+      marginBottom: 12,
+      [theme.breakpoints.down('sm')]: {
+          boxShadow: 'none',
+          padding: 12,
+          marginBottom: 0,
+          borderRadius: 0
+      },
+    },
+    gridContainer: {
+      [theme.breakpoints.down('sm')]: {
+        marginBottom: 24
+      },
+    }
 })
 
 

@@ -67,7 +67,7 @@ class Add extends Component {
         this.setState({
           [side]: open,
         });
-    };
+    }
 
      handleChange = async (event) => {
         var fieldName = event.target.name;
@@ -84,6 +84,7 @@ class Add extends Component {
         if(fieldName === 'doc'){ // If input file
             // Resize file before upload
             var file = event.target.files[0];
+            if(!file){return;}
             resizeFile( file, this.callback )
 
             return;

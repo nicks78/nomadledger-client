@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {  updateDocument, uploadFileToServer } from '../../../redux/account/actions'
 import { DEFAULT_IMG} from '../../../redux/constant'
-import { withStyles, TextField, Checkbox, Typography } from '@material-ui/core'
+import { withStyles, TextField, Typography } from '@material-ui/core'
 import ApxButtonEdit from '../../../components/common/buttonEdit'
 import ApxtextIndexValue from '../../../components/common/textIndexValue'
 import UploadImg from '../../../lib/uploadImg'
@@ -13,6 +13,9 @@ import EditSelect from '../../../lib/editSelect'
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid'
 import { cvtNumToUserPref } from '../../../utils/help_function'
+import {resizeFile} from '../../../utils/resizeFile'
+
+
 
 const styles = theme => ({
 
@@ -65,6 +68,16 @@ class Company extends Component {
     this.props.updateDocument(this.state.reducer)
   }
 
+  handleUpload = (file) => {
+    if(!file){return;}
+    resizeFile(file, this.callback)
+  }
+
+  // Callback when img is resized
+  callback = (file) => {
+      this.props.uploadFileToServer("COMPANY", file, 'logo_company', this.props.company.logo_company )
+  }
+
   render() {
     const {company, progress, isUploading, locale, classes, company_type, country, currency, months, user} = this.props;
     const {showEdit, reducer} = this.state;
@@ -77,7 +90,7 @@ class Company extends Component {
             <Grid item xs={12} md={3} sm={3}>
                   <UploadImg
                     field="logo_company"
-                    _handleUploadFile={ (e) => { this.props.uploadFileToServer("COMPANY", e.target.files[0], 'logo_company', company.logo_company ) }}
+                    _handleUploadFile={ (e) => { this.handleUpload( e.target.files[0] ) }}
                     progress={progress}
                     oldFile={company.logo_company}
                     isUploading={isUploading}
@@ -225,18 +238,6 @@ class Company extends Component {
                     />
 
                 </div>
-                  {
-                    showEdit ?
-                    <p style={{display: "inline-flex", alignItems: "center"}}>
-                      <Checkbox style={{paddingLeft: 0}} name="autoRenewal" checked={ user.autoRenewal } onChange={(e) => { this.props.handleFormEdit(e, "USER") }} />
-                      <Typography component="span" variant="body2">{ locale.wording.auto_renewal }</Typography>
-                    </p>
-
-                    : <ApxtextIndexValue
-                          value={ user.autoRenewal ? locale.wording.yes : locale.wording.no }
-                          label={locale.wording.renewal}
-                      />
-                  }
 
                   </Grid>
 
@@ -266,3 +267,16 @@ const mapStateToProps = (state) => {
 const styledCompany = withStyles(styles)(Company);
 
 export default connect(mapStateToProps, { updateDocument, uploadFileToServer })(styledCompany);
+
+// {
+//   showEdit ?
+//   <p style={{display: "inline-flex", alignItems: "center"}}>
+//     <Checkbox style={{paddingLeft: 0}} name="autoRenewal" checked={ user.autoRenewal } onChange={(e) => { this.props.handleFormEdit(e, "USER") }} />
+//     <Typography component="span" variant="body2">{ locale.wording.auto_renewal }</Typography>
+//   </p>
+//
+//   : <ApxtextIndexValue
+//         value={ user.autoRenewal ? locale.wording.yes : locale.wording.no }
+//         label={locale.wording.renewal}
+//     />
+// }
