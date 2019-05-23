@@ -25,3 +25,13 @@ export function getListBooks(actionType, endPoint, stateName) {
       }
     }
 }
+
+
+/**
+* CREATE A DOC
+*
+* @param actionType String
+* @param endPoint String
+* @param stateName String
+*
+*/

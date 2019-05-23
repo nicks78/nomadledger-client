@@ -160,7 +160,7 @@ class View extends Component {
             </Typography>
             <Typography variant="body1" className={ classes.sum } style={{backgroundColor: "white"}}>
               <b style={{ marginLeft: 24 }}>{locale.wording.vat}&nbsp;{ item.vat ? item.vat.value : "0%" }</b>
-              <span className={ classes.sumSpan }><b>{ this.totalHT(item.list_items).vat } { item.currency && item.currency.value }</b></span>
+              <span className={ classes.sumSpan }><b>{ this.totalHT(item.list_items).vat } { item.currency && item.currency.value }</b></span><br />
               <span style={{ marginLeft: 24, fontSize: 10 }}>{ item.vat && item.vat["vat_terms_" + localStorage.getItem('locale')] }</span>
             </Typography>
             <Typography variant="body1" className={ classes.sum }>
@@ -173,7 +173,7 @@ class View extends Component {
         <Typography variant="body1">
           { item.terms }
         </Typography>
-        <Fab color="primary" className={classes.fab}>
+        <Fab color="primary" size="medium"  className={classes.fab}>
             <CloudDownloadIcon onClick={ () => {this.props.downloadPdf(this.state.reducer, item._id)} } />
         </Fab>
       </Paper>
@@ -226,6 +226,7 @@ const styles = theme => ({
         marginLeft: 12
       }
     },
+
     infos: {
       paddingLeft: 0,
       border: `1px solid ${theme.palette.lightGrey}`,
@@ -238,11 +239,14 @@ const styles = theme => ({
         position: 'fixed',
         bottom: 10,
         right: 10
+    },
+    tableRow: {
+      whiteSpace: "nowrap"
     }
 })
 
 const mapStateToProps = (state, ownProps) => {
-  console.log()
+
     return {
         isFetching: state.book[ownProps.match.params.reducer].isFetching,
         isError: state.book[ownProps.match.params.reducer].isError,
