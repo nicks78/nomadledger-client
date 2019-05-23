@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {STRIPE_PUBLIC_KEY} from './redux/constant'
 import Routes from './routes'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css'
@@ -117,7 +118,7 @@ class App extends Component {
 
     return (
       <React.Fragment>
-        <StripeProvider apiKey="pk_test_GblxUSlJYaYq5b3dU2GIoPql00wt6XzrAC">
+        <StripeProvider apiKey={STRIPE_PUBLIC_KEY}>
           <MuiThemeProvider theme={theme}>
               <Routes />
           </MuiThemeProvider>

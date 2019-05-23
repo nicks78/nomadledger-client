@@ -42,12 +42,8 @@ class SimpleModal extends React.Component {
         ${this.props.user.email}<br />
           (${this.props.user.phone_code.dial_code})${this.props.user.phone}<br />
     </p>`,
-    isLoading: false
   }
 
-  componentWillReceiveProps(nextProps){
-      this.setState({ isLoading: false })
-  }
 
   handleOpen = () => {
     this.setState({ open: true });
@@ -65,7 +61,6 @@ class SimpleModal extends React.Component {
 
   sendEmail = (e) => {
     e.preventDefault();
-    this.setState({isLoading: true})
     var data = {
       email: this.state.email,
       subject: this.state.subject,
@@ -75,7 +70,7 @@ class SimpleModal extends React.Component {
   }
 
   render() {
-    const { classes, loading , reducer, item, locale } = this.props;
+    const { classes, loading , reducer, item, locale, actionLoading } = this.props;
     const {email, subject, content, isLoading} = this.state
 
     return (
@@ -124,9 +119,9 @@ class SimpleModal extends React.Component {
               <Button
                   type="submit"
                   variant="contained"
-                  disabled={isLoading}
+                  disabled={actionLoading}
                   color="primary">
-                  {isLoading ? locale.wording.loading : locale.wording.send}</Button>
+                  {actionLoading ? locale.wording.loading : locale.wording.send}</Button>
             </div>
             </form>
           </div>
@@ -142,6 +137,8 @@ const mapStateToProps = (state) => {
     return {
         locale: state.locale.locale,
         company: state.account.company.item,
+        isError: state.book.invoice.isError,
+        actionLoading: state.book.invoice.actionLoading,
         user: state.account.user.item
     }
 }

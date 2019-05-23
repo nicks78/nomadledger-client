@@ -229,7 +229,7 @@ export function sendEmailWithPdf( actionType, endPoint, data){
   return async (dispatch, getState) => {
 
       var list = getState().library[actionType.toLowerCase()].list;
-
+      dispatch(requestAction(actionType));
       try{
           const request = await axios.post(`${API_ENDPOINT}/${actionType.toLowerCase()}/${endPoint}`, {data})
           const res = request.data;
@@ -240,8 +240,8 @@ export function sendEmailWithPdf( actionType, endPoint, data){
           dispatch(receiveDocuments(actionType, newList )) ;
 
       }catch(error){
-          dispatch(setError(error));
           dispatch(requestFailed(actionType));
+          dispatch(setError(error));
       }
     }
 }
@@ -356,6 +356,7 @@ export function requestAction( actionType ) {
         type: `REQUEST_ACTION`,
         subtype: actionType,
         actionLoading: true,
+        isError: false,
     }
 }
 
