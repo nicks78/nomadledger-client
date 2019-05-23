@@ -71,7 +71,7 @@ class SimpleModal extends React.Component {
 
   render() {
     const { classes, loading , reducer, item, locale, actionLoading } = this.props;
-    const {email, subject, content, isLoading} = this.state
+    const {email, subject, content} = this.state
 
     return (
       <React.Fragment>
