@@ -6,8 +6,9 @@ import { initLocale } from '../locale/actions'
 import {setNotification} from '../notification/actions'
 import { setError } from '../error/actions'
 
-// GET A SINGLE ITEM
+
 /**
+ * GET A SINGLE ITEM
  * @param actionType
  *
  */
@@ -17,54 +18,45 @@ export function getAccount(actionType){
 
     dispatch(requestData(actionType))
 
-    axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/infos-${actionType.toLowerCase()}`, {
-      method: 'GET',
-      mode: 'cors',
-    })
-    .then(function (response) {
-        return response.data
-    })
-    .then( res => {
+    try{
+        const request = await axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/infos-${actionType.toLowerCase()}`);
+        const res = request.data;
         if(actionType === "COMPANY"){
             dispatch(initLocale(res.payload.locale || "fr"))
         }
 
         dispatch(setAccount( actionType, res.payload ))
-    })
-    .catch(  (error) => {
-        dispatch(setError(error));
-        dispatch(requestFailed(actionType));
-    })
+    }catch(error){
+      dispatch(setError(error));
+      dispatch(requestFailed(actionType));
+    }
   }
 }
 
-// UPDATE DOCUMENT
 /**
+ * UPDATE DOCUMENT
  * @param actionType
  *
  */
 export function updateDocument(actionType){
 
-    return (dispatch, getState) => {
+    return async (dispatch, getState) => {
 
       var data = getState().account[actionType.toLowerCase()].tmp_state;
 
         if(Object.keys(data).length > 0 ){
 
-            axios.put(`${API_ENDPOINT}${actionType.toLowerCase()}/update/infos/${actionType.toLowerCase()}`, {
-                    data: data
-            })
-            .then(function (response) {
-                return response.data
-            })
-            .then( res => {
-                dispatch(setNotification("success_update", "success"))
-                dispatch(setAccount( actionType, res.payload ))
-            })
-            .catch(function (error) {
-                dispatch(setError(error));
-                dispatch(requestFailed(actionType));
-            })
+          try{
+              const request = await axios.put(`${API_ENDPOINT}${actionType.toLowerCase()}/update/infos/${actionType.toLowerCase()}`, {data});
+              const res = request.data;
+
+              dispatch(setNotification("success_update", "success"))
+              dispatch(setAccount( actionType, res.payload ))
+
+          }catch(error){
+              dispatch(setError(error));
+              dispatch(requestFailed(actionType));
+          }
         }else{
             return null
         }

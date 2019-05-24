@@ -60,6 +60,7 @@ class View extends Component {
           return <p>Not data found !</p>
         }
 
+
         return (
             <Paper className={classes.paper}>
               <ApxBackBtn />
@@ -119,9 +120,7 @@ class View extends Component {
 
 
               <Typography variant="caption" align="left">{ locale.subheading.info_comp }</Typography>
-              <Typography className={classes.infos} variant="body2" dangerouslySetInnerHTML={{__html: item.infos }}>
-
-              </Typography>
+              <Typography className={classes.infos} variant="body2" dangerouslySetInnerHTML={{__html: item.infos }} />
 
               <div className={ classes.wrapTable }>
               <Table className={classes.table}>
@@ -169,10 +168,16 @@ class View extends Component {
             </Typography>
         </div>
 
-        <Typography variant="caption" align="left">{ locale.message.terms }</Typography>
-        <Typography variant="body1">
-          { item.terms }
-        </Typography>
+        {
+          item.terms ?
+          <div style={{clear: "both"}}>
+            <Typography style={{clear: "both"}} className={classes.infos} variant="body2">{ item.terms }</Typography>
+          </div>
+          : null
+        }
+
+
+
         <Fab color="primary" size="medium"  className={classes.fab}>
             <CloudDownloadIcon onClick={ () => {this.props.downloadPdf(this.state.reducer, item._id)} } />
         </Fab>
@@ -228,7 +233,8 @@ const styles = theme => ({
     },
 
     infos: {
-      paddingLeft: 0,
+      paddingLeft: 10,
+      paddingTop: 10,
       border: `1px solid ${theme.palette.lightGrey}`,
       minHeight: 80
     },

@@ -74,13 +74,14 @@ class ShowProduct extends React.Component {
                           images={product.img}
                           removeImageFromArray={this.props.removeImageFromArray}
                           reducer={reducer}
+                          locale={locale}
                           productId={product._id}
                         />
 
                         <div className={classes.button}>
                             <input
                                 accept="image/*"
-                                disabled={ product.img.length >= 19 ? true : false }
+                                disabled={ product.img.length >= 3 || isUploading? true : false }
                                 className={classes.input}
                                 id="upload"
                                 name="img"
@@ -88,7 +89,7 @@ class ShowProduct extends React.Component {
                                 type="file"
                             />
                             <label htmlFor="upload">
-                              <IconButton component="p" color="primary" disabled={product.img.length >= 3 ? true : false }>
+                              <IconButton component="p" color="primary" disabled={product.img.length >= 3 || isUploading ? true : false }>
                                 <CameraAltIcon />
                               </IconButton>
                             </label>

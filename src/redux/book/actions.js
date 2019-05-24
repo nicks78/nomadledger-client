@@ -45,7 +45,7 @@ function receiveDocuments( actionType, items ) {
 }
 
 /**
- * // CREATE A NEW DOCUMENT
+ * CREATE A NEW DOCUMENT
  * @param  actionType
  */
 export function createDocument (actionType) {
@@ -72,7 +72,7 @@ export function createDocument (actionType) {
 }
 
 /**
- * // UPDATE DOCUMENT
+ * UPDATE DOCUMENT
  * @param  actionType
  */
 export function updateDocument (actionType) {
@@ -114,37 +114,27 @@ export function requestUpdate( actionType ) {
  */
 export function updateField (actionType, data, endpoint) {
 
-    return (dispatch, getState) => {
-
-        dispatch(requestAction(actionType));
+    return async (dispatch, getState) => {
 
         // Set withCredentials
         axios.defaults.withCredentials = true;
+
+        dispatch(requestAction(actionType));
+
         var list = getState().library[actionType.toLowerCase()].list;
 
-        axios.put(`${API_ENDPOINT}${actionType.toLowerCase()}/${endpoint}`,
-            {
-                data,
-                mode: 'cors'
-            },
-            { headers: {
-                    'Content-Type': 'application/json'
-            }
-        })
-        .then(function (response) {
-            return response.data
-        })
-        .then( res => {
+        try{
+            const request = await axios.put(`${API_ENDPOINT}${actionType.toLowerCase()}/${endpoint}`, {data});
+            const res = request.data;
 
             var newList = updateArrayOfObject(list, res.item);
             dispatch(receiveDocuments(actionType, newList )) ;
             dispatch(setNotification("success_update", "success"))
-        })
-        .catch(function (error) {
-            console.log(error)
-            dispatch(setError(error));
-            dispatch(requestFailed(actionType));
-        })
+
+        }catch(error){
+          dispatch(setError(error));
+          dispatch(requestFailed(actionType))
+        }
     }
 }
 
@@ -156,24 +146,20 @@ export function updateField (actionType, data, endpoint) {
  */
 export function getDocument( actionType, id ){
 
-    return dispatch => {
+    return async dispatch => {
 
         dispatch(requestData(actionType))
 
-        axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${id}`, {
-          method: 'GET',
-          mode: 'cors'
-        })
-        .then(function (response) {
-            return response.data
-        })
-        .then( res => {
+        try{
+            const request = await axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${id}`);
+            const res = request.data;
+
             dispatch(setDocument(actionType, res.payload ))
-        })
-        .catch(function (error) {
+
+        }catch(error){
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
-        })
+        }
     }
 }
 
@@ -185,19 +171,15 @@ export function getDocument( actionType, id ){
  */
 export function convertToOtherDocument( actionType, id, newType ){
 
-    return (dispatch, getState) => {
+    return async (dispatch, getState) => {
 
         dispatch(requestData(actionType));
         const locale = getState().locale.locale
 
-        axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${id}`, {
-          method: 'GET',
-          mode: 'cors'
-        })
-        .then(function (response) {
-            return response.data
-        })
-        .then( res => {
+        try{
+            const request = await axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${id}`);
+            const res = request.data;
+
             var item = {
                 list_items: res.payload.list_items,
                 infos:  res.payload.infos,
@@ -210,16 +192,16 @@ export function convertToOtherDocument( actionType, id, newType ){
             }
 
             dispatch(setDocument(newType, item ))
-        })
-        .catch(function (error) {
+
+        }catch(error){
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
-        })
+        }
     }
 }
 
 /**
-* Send email with PDF
+* SEND EMAIL WITH PDF
 * @param actionType String
 * @param endPoint String
 * @param data Object
@@ -228,8 +210,10 @@ export function sendEmailWithPdf( actionType, endPoint, data){
 
   return async (dispatch, getState) => {
 
-      var list = getState().library[actionType.toLowerCase()].list;
       dispatch(requestAction(actionType));
+
+      var list = getState().library[actionType.toLowerCase()].list;
+
       try{
           const request = await axios.post(`${API_ENDPOINT}/${actionType.toLowerCase()}/${endPoint}`, {data})
           const res = request.data;
@@ -270,31 +254,26 @@ export function createState ( actionType, fieldName, value ){
 
 
 /**
- * // GET SUM OF DOCUMENT
+ * GET SUM OF DOCUMENT
  * @param  actionType
  * @param  id
  */
 export function getBookTotal( actionType, endPoint ){
 
-    return dispatch => {
+    return async dispatch => {
 
         dispatch(requestData(actionType))
 
-        axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${endPoint}`, {
-          method: 'GET',
-          mode: 'cors'
-        })
-        .then(function (response) {
-            return response.data
-        })
-        .then( res => {
+        try{
+          const request = await axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${endPoint}`);
+          const res = request.data;
 
-            dispatch(setTotal(actionType, res ))
-        })
-        .catch(function (error) {
-            dispatch(setError(error));
-            dispatch(requestFailed(actionType));
-        })
+          dispatch(setTotal(actionType, res ))
+
+        }catch(error){
+          dispatch(setError(error));
+          dispatch(requestFailed(actionType));
+        }
     }
 }
 
@@ -309,28 +288,24 @@ export function setTotal ( actionType, res ){
 
 
 /**
- * // GET SINGLE DOCUMENT
+ * DOWNLOAD PDF
  * @param  actionType
  * @param  id
  */
 export function downloadPdf( actionType, id ){
 
-    return dispatch => {
+    return async dispatch => {
 
-        axios.get(`${API_ENDPOINT}common/create-pdf/${id}?model=${actionType.toLowerCase()}`, {
-          method: 'GET',
-          mode: 'cors'
-        })
-        .then(function (response) {
-            return response.data
-        })
-        .then( res => {
-            window.open(res, "_blank");
-        })
-        .catch(function (error) {
-            dispatch(setError(error));
-            dispatch(requestFailed(actionType));
-        })
+        try{
+          const request = await axios.get(`${API_ENDPOINT}common/create-pdf/${id}?model=${actionType.toLowerCase()}`);
+          const res = request.data;
+
+          window.open(res, "_blank");
+
+        }catch(error){
+          dispatch(setError(error));
+          dispatch(requestFailed(actionType));
+        }
     }
 }
 

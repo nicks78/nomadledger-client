@@ -132,7 +132,7 @@ class Quote extends Component {
                                                     loading={actionLoading}
                                                     locale={locale}
                                                     edit={quote.edit}
-                                                    canceled={quote.canceled}
+                                                    canceled={quote.rejected}
                                                     paid={quote.approved}
                                                   />
                                               </TableCell>

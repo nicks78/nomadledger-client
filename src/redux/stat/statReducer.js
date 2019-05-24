@@ -9,25 +9,25 @@ const initialState = {
 
 
 const statReducer = (state = initialState, action) => {
-    
+
 
     switch (action.type) {
-        case `REQUEST_DATA`:
-            return  { 
+        case `REQUEST_STAT`:
+            return  {
                 ...state,
                 isFetching: action.isFetching,
                 isError: action.isError
             }
         case `FAILED_DATA`:
-            return  { 
+            return  {
                 ...state,
                 isFetching: action.isFetching,
                 isError: action.isError,
                 message: action.message
             }
         case `GET_DATA`:
-            return  { 
-                ...state, 
+            return  {
+                ...state,
                 isFetching: false,
                 [action.fieldName]: action.data,
             }

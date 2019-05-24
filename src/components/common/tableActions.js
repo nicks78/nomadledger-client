@@ -18,13 +18,12 @@ const TableActions = (props) => {
     const ok = () => {
       var x = "paid";
       if(reducer === "QUOTE"){
-        x = "approved"
+        x = "approve"
       }else if(reducer === "REFUND"){
         x = "refund"
       }
       return x
     }
-
 
     return  <React.Fragment>
               {

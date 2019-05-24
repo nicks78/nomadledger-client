@@ -13,7 +13,7 @@ import { setError} from '../error/actions'
  * @param item
  */
 export function getListItem( actionType, name, item ) {
-    return (dispatch, getState) => {
+    return async (dispatch, getState) => {
 
         var currency = getState().book[actionType.toLowerCase()].item.currency;
         var price = item.onModel === "product" ? item.selling_price : item.price;
@@ -27,8 +27,9 @@ export function getListItem( actionType, name, item ) {
             return
         }
 
-        currencyConvertorApi( item.currency.en, price, currency.en )
-        .then( (unit_price) => {
+        try{
+            const unit_price = await currencyConvertorApi( item.currency.en, price, currency.en );
+
             var tmp = {
                     quantity: 1,
                     ref: item.ref,
@@ -41,12 +42,11 @@ export function getListItem( actionType, name, item ) {
                     item_id: item._id
                     // item_id: item
                 }
-            dispatch(setListItem(actionType, name, tmp))
-        })
-        .catch(function (error) {
-            dispatch(setError(error));
-            dispatch(requestFailed(actionType));
-        })
+                dispatch(setListItem(actionType, name, tmp))
+        }catch(error){
+          dispatch(setError(error));
+          dispatch(requestFailed(actionType));
+        }
     }
 }
 

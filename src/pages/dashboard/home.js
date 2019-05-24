@@ -43,7 +43,10 @@ class Home extends Component {
         const {width} = this.state
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         const isMobile = width <= 500
-        if(isFetching || isFetchingTask ){
+        if( isFetching || isFetchingTask ){
+            return <Spinner />
+        }
+        if( !pieQuote || !mainStat || !expensesBy){
             return <Spinner />
         }
 
@@ -206,7 +209,6 @@ const mapStateToProps = (state) => {
 
     return {
         locale: state.locale.locale,
-        isFetching: state.stat.isFetching,
         isFetchingTask: state.task.isFetching,
         mainStat: state.stat.mainStat || null,
         expensesBy: state.stat.expensesBy || null,

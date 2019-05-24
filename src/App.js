@@ -5,6 +5,8 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css'
 import {StripeProvider} from 'react-stripe-elements';
 
+
+
 // #33B3A9 == green
 // #1F2A3F == darck green
 // '#008489'

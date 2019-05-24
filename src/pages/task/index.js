@@ -178,7 +178,7 @@ const mapStateToProps = (state) => {
       itemToUpdate: state.task.item,
       locale: state.locale.locale,
       newTask: state.task.item || {},
-      status: state.helper.items.status_task,
+      status: state.helper.items.status_task || [],
   }
 }
 
