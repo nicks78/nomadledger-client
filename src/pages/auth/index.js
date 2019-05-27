@@ -13,7 +13,7 @@ import RegisterForm from './components/registerForm'
 import {setNotification} from '../../redux/notification/actions'
 import Footer from './components/footer'
 import ExitToAppIcon from '@material-ui/icons/ExitToAppOutlined'
-
+import GoogleSignUp from './components/googleSignUp';
 
 const styles = theme => ({
     root: {
@@ -131,7 +131,7 @@ class Auth extends Component {
 
     onSubmitForm = (e) => {
         e.preventDefault();
-        if(this.state.agreedTerms){
+        if(!this.state.agreedTerms){
             this.props.setNotification("error_agreed_terms", "error")
             return;
         }else{
@@ -139,6 +139,20 @@ class Auth extends Component {
           this.props.createUser()
         }
 
+    }
+
+    responseGoogle = (response) => {
+      if(response.error){
+          this.props.setNotification("error_sign_up_google", "error")
+      }else{
+        // const profile = response.profileObj;
+        console.log(response)
+        // this.props.createStateUser( "email", profile.email )
+        // this.props.createStateUser( "lastname", profile.familyName )
+        // this.props.createStateUser( "firstname", profile.givenName )
+        // this.props.createStateUser( "googleId", profile.googleId )
+        // this.props.createStateUser( "avatar", { full_path: profile.imageUrl, path: "" } )
+      }
     }
 
 
@@ -200,6 +214,12 @@ class Auth extends Component {
           <Paper className={ classes.paper }>
             <Typography variant="h3" align="center">{locale.helperText.trial_30}</Typography><br />
             <Typography variant="caption">{locale.home_page.form_title}</Typography>
+            <br />
+
+            <GoogleSignUp responseGoogle={this.responseGoogle} locale={locale} />
+
+            <br />
+
             <form onSubmit={ this.onSubmitForm }>
               <RegisterForm updateState={ this.handleChange } state={ newUser } locale={locale} onAgreedToTerms={ (e) => { this.setState({agreedTerms: e.target.checked}) } }/>
               <br />
@@ -210,11 +230,6 @@ class Auth extends Component {
 
         <div className={ classes.partners }>
           <Typography variant="h2" align="center">Partners</Typography>
-          <div className={ classes.partnersImgWrapper }>
-            <img src="http://myassistantonline.fr/wp-content/uploads/2018/06/MyAssistantOnLine-e1535366190455.png" width="100"  alt="logo-1"/>
-            <img src="https://acte-solutions.com/storage/app/media/acte_solutions_white_text_full.png" width="100"  alt="logo-2"/>
-            <img src="https://3ct.fr/images/ico/3CT-icon-300.png" width="100" alt="logo-3" />
-          </div>
 
         </div>
 

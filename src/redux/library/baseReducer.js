@@ -16,6 +16,7 @@ class BaseState {
     message = '';
     total = 0;
     rowsPerPageOptions = [];
+    uploadingContact = false;
     list = []
 }
 
@@ -38,6 +39,13 @@ const baseReducer = (state = new BaseState(), action) => {
                 isCreating: action.isCreating,
                 isError: action.isError
             }
+        case `UPLOAD_CONTACT`:
+            return  {
+                ...state,
+                uploadingContact: action.uploadingContact,
+                isError: action.isError
+            }
+
         case `REQUEST_UPLOAD`:
             return  {
                 ...state,
@@ -58,7 +66,8 @@ const baseReducer = (state = new BaseState(), action) => {
                 receivedAt: action.receivedAt,
                 isUpdating: action.isUpdating,
                 isError: action.isError,
-                isCreating: action.isCreating
+                isCreating: action.isCreating,
+                uploadingContact: false
             }
 
         case `RECEIVE`:
@@ -66,7 +75,9 @@ const baseReducer = (state = new BaseState(), action) => {
                 ...state,
                 isFetching: action.isFetching,
                 list: action.payload,
-                receivedAt: action.receivedAt
+                receivedAt: action.receivedAt,
+                isCreating: false,
+                uploadingContact: false
             }
 
         case `GET`:

@@ -29,7 +29,7 @@ const Form = (props) => {
     return  <div>
 
                 <Paper className={classes.paper}>
-                  <div style={{display: "flex", padding: 12}}>
+                  <div style={{display: "flex"}}>
                       <ApxBackBtn styled={{ marginBottom: 0 }}/>
                   </div>
                 <Typography variant="h1" className={classes.title} align="center">
@@ -245,6 +245,7 @@ const styles = theme => ({
         overflow: 'hidden',
         [theme.breakpoints.down("sm")]: {
             paddingLeft: 12,
+            paddingTop: 0,
             paddingRight: 12,
             boxShadow: 'none',
             borderRadius: 0

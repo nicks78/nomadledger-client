@@ -25,6 +25,13 @@ const statReducer = (state = initialState, action) => {
                 isError: action.isError,
                 message: action.message
             }
+        case `RESET_STAT`:
+            return  {
+                ...state,
+                isFetching: action.isFetching,
+                isError: action.isError,
+                [action.fieldName]: null
+            }
         case `GET_DATA`:
             return  {
                 ...state,

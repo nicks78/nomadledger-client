@@ -128,21 +128,11 @@ class ContactInfo extends Component {
                 field="lastname"
                 handleAction={this.handleFormEdit}
             />
-            <EditSelect
-                arrayField={country}
-                field="phone_code"
-                helperText="select_phone_code"
-                handleAction={ this.handleFormEdit }
-                locale={locale}
-                showEdit={showEdit}
-                label={locale.wording.phone_code }
-                value={  contact.phone_code && contact.phone_code[localStorage.getItem("locale")] }
-            />
             <EditInput
-                label={locale.wording.phone}
-                value={tmp_state.phone || contact.phone}
+                label={locale.wording.phoneNumber}
+                value={tmp_state.phoneNumber || contact.phoneNumber}
                 showEdit={showEdit}
-                field="phone"
+                field="phoneNumber"
                 handleAction={this.handleFormEdit}
             />
             <EditInput

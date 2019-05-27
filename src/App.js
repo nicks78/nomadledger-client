@@ -4,7 +4,7 @@ import Routes from './routes'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css'
 import {StripeProvider} from 'react-stripe-elements';
-
+// import ChatBox from './public_pages/chat'
 
 
 // #33B3A9 == green

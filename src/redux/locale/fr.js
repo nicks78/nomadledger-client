@@ -213,6 +213,7 @@ const fr =  {
         label_rows_per_page: "Colonnes par page:",
         full_name: "Nom complet",
         phone: "Téléphone",
+        phoneNumber: "Téléphone",
         statistics: "Statistiques",
 
         of: "à",
@@ -250,6 +251,8 @@ const fr =  {
         delete_img: "Supprimer l'image",
         register: "S'enregistrer",
         sign_up: "S'enregistrer",
+        google_sign_up: "Pre-remplir avec Google",
+        google_import: "Import Google contacts",
         login: "Se connecter",
         logout: "Déconnexion",
         reset_pwd: "Réinitialiser mon mot de passe",
@@ -285,6 +288,7 @@ const fr =  {
         renewal: "Renouvellement (automatique)",
         yes: "Oui",
         no: "Non",
+        or: "OU",
         designation: "Désignation"
 
     },
@@ -315,7 +319,8 @@ const fr =  {
         header_medium: "entête moyenne",
         need_help: "Besoin d'aide ? Contacter nous directement <a href='mailto:support@nomadledger.com'>support@nomadledger.com</a>",
         member_end: "Votre abonnement actuel prend fin le",
-        cannot_change_email: "L'adresse email n'est modifiable que sur demande."
+        cannot_change_email: "L'adresse email n'est modifiable que sur demande.",
+        import_contact: "Cette opération peut prendre quelques minutes, veuillez patientez merci..."
 
     },
     message: {
@@ -369,6 +374,7 @@ const fr =  {
         error_422_selling_price: "Le champs prix de vente est obligatoire",
         error_422_indice: "Taux de TVA doit être un chiffre (ex: 19,60 ou 19.60)",
         error_422_name: "Veuillez indiquer un nom",
+        error_sign_up_google: "Inscription via Google n'a pas fonctionner, veuillez recommencer ou contacter notre service support@nomadledger.com",
 
         // Stripe err
         incomplete_zip: "Votre code postal est incomplet.",

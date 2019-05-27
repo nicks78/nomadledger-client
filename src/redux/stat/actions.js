@@ -42,6 +42,15 @@ function requestStat( fieldName) {
     }
 }
 
+export function resetStat( fieldName) {
+    return {
+        type: "RESET_STAT",
+        fieldName,
+        isFetching: true,
+        isError: true,
+    }
+}
+
 function requestFailed() {
     return {
         type: "FAILED_STAT",

@@ -58,7 +58,7 @@ a:hover {
 
 .link:hover:after {
   width: 100%;
-}
+} 
 
 @media(max-width: 480px){
   .Layout-content-7{

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { resetTask} from '../../redux/task/actions'
-import { getData } from '../../redux/stat/actions'
+import { getData, resetStat } from '../../redux/stat/actions'
 import { getAllTask, updateStatus } from '../../redux/task/actions'
 import {Grid, Typography, withStyles, Paper } from '@material-ui/core'
 import BarCharts from '../../components/common/barCharts'
@@ -34,7 +34,10 @@ class Home extends Component {
     }
 
     componentWillUnmount(){
-        this.props.resetTask()
+        this.props.resetTask();
+        this.props.resetStat("mainStat")
+        this.props.resetStat("pieQuote")
+        this.props.resetStat("expensesBy")
     }
 
     render() {
@@ -222,4 +225,4 @@ const mapStateToProps = (state) => {
 
 const StyledHome = withStyles(styles)(Home)
 
-export default connect(mapStateToProps, { getData, getAllTask, resetTask, updateStatus })(StyledHome);
+export default connect(mapStateToProps, { getData, resetStat, getAllTask, resetTask, updateStatus })(StyledHome);

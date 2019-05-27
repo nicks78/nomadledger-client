@@ -13,6 +13,7 @@ const RegisterForm = (props) =>  {
 
     return (
       <div>
+
           <Grid container spacing={8}>
 
                 <Grid item xs={12} sm={6} md={6}>

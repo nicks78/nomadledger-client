@@ -2,10 +2,10 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {Table, TableHead, TableBody, Paper, TableCell, TableRow, withStyles, IconButton} from '@material-ui/core';
+import {Table, TableHead, TableBody, Paper, TableCell, TableRow, withStyles, IconButton, Typography} from '@material-ui/core';
 import {connect} from 'react-redux'
 import {downloadFile} from '../../redux/download/actions'
-import { createItem, getItemList, getItem, createState, resetState, deleteElement} from '../../redux/library/actions'
+import { createItem, getItemList, getItem, createState, resetState, deleteElement, importGoogleContact} from '../../redux/library/actions'
 import ApxTableToolBar from '../../components/common/tableToolBar'
 import AddContact from './addContact'
 import Pagination from '../../lib/pagination'
@@ -13,6 +13,7 @@ import MobileView from './mobileView'
 import DeleteIcon from '@material-ui/icons/DeleteOutlined'
 import EditIcon from '@material-ui/icons/EditOutlined'
 import Tooltips from '../../components/common/tooltips';
+import GoogleContacts from './googleContacts'
 
 
 const styles =  theme => ({
@@ -33,10 +34,7 @@ const styles =  theme => ({
 })
 
 
-
-
 class Contact extends Component {
-
 
     state = {
         reducer: 'CONTACT',
@@ -89,25 +87,41 @@ class Contact extends Component {
         this.props.getItemList(this.state.reducer, `list?limit=10&skip=0&group=${value.code}`)
     }
 
+    responseGoogle = (res) => {
+      console.log("RES", res)
+      // this.props.importGoogleContact(this.state.reducer, res)
+    }
+
 
     render() {
 
-    const { isFetching,  locale, createItem, createState, newContact, isCreating, progress, classes, contactGroup, rowsPerPageOptions, total, country} = this.props
+    const { isFetching, uploadingContact, locale, createItem, createState, newContact, isCreating, progress, classes, contactGroup, rowsPerPageOptions, total, country} = this.props
     const {reducer, width, listContacts } = this.state
     const isMobile = width <= 500;
 
 
+    if(uploadingContact){
+      return <Typography variant="body2">{locale.helperText.import_contact}...</Typography>
+    }
+
     return (
         <div className={classes.container}>
-                  <AddContact progress={progress}
-                        country={country}
-                        contactGroup={contactGroup}
-                        locale={ locale }
-                        createContact={ createItem }
-                        createContactState={  createState }
-                        newData={newContact}
-                        isCreating={ isCreating  }/>
-
+          {
+            !isMobile ?
+            <div style={{display: "flex", justifyContent: "flex-start", marginBottom: 24, alignItems: 'center'}}>
+              <AddContact progress={progress}
+                    country={country}
+                    contactGroup={contactGroup}
+                    locale={ locale }
+                    createContact={ createItem }
+                    createContactState={  createState }
+                    newData={newContact}
+                    isCreating={ isCreating  }/>
+                  <Typography variant="caption" style={{marginRight: 10}}>{locale.wording.or}</Typography>
+                  <GoogleContacts isCreating={uploadingContact} responseGoogle={this.responseGoogle} locale={locale}/>
+            </div>
+            : null
+          }
               { !isMobile  ?
                 <Paper className={classes.paper}>
                     <ApxTableToolBar
@@ -147,7 +161,7 @@ class Contact extends Component {
                                                 <TableCell><Link to={`/${reducer.toLowerCase()}/view/${contact._id.toLowerCase()}`}><span style={{textTransform: "capitalize"}}  className="link">{contact.company_name}</span></Link></TableCell>
                                                 <TableCell style={{textTransform: "capitalize"}}>{contact.contact_group[localStorage.getItem('locale') || 'fr']}</TableCell>
                                                 <TableCell style={{textTransform: "capitalize"}}>{ contact.firstname } {contact.lastname}</TableCell>
-                                                <TableCell><a href={`tel:${contact.phone_code.dial_code}${contact.phone.replace('0', '')}`}><span  className="link">({contact.phone_code.dial_code}) {contact.phone.replace('0', '')}</span></a></TableCell>
+                                                <TableCell style={{whiteSpace: "nowrap"}}><span>{contact.phoneNumber}</span></TableCell>
                                                 <TableCell><a href={`mailto:${contact.email}`}><span className="link">{contact.email}</span></a></TableCell>
                                                 <TableCell  align="center"  style={{display: "flex", justifyContent: "center"}}>
                                                   <Tooltips title={locale.wording.edit}><IconButton component={Link} to={`/${reducer.toLowerCase()}/view/${contact._id.toLowerCase()}`} style={{ minWidth: 5 }} color="primary"><EditIcon style={{fontSize: 18}} /></IconButton></Tooltips>
@@ -196,6 +210,7 @@ const mapStateToProps = (state) => {
     return {
         isFetching: state.library.contact.isFetching,
         isCreating: state.library.contact.isCreating,
+        uploadingContact: state.library.contact.uploadingContact,
         listContacts: state.library.contact.list,
         receivedAt: state.library.contact.receivedAt,
         locale: state.locale.locale,
@@ -210,4 +225,4 @@ const mapStateToProps = (state) => {
 
 const StyledContact = withStyles(styles)(Contact)
 
-export default connect(mapStateToProps, { downloadFile, createItem, getItemList, getItem, createState, resetState , deleteElement})(StyledContact);
+export default connect(mapStateToProps, { downloadFile, createItem, getItemList, getItem, createState, resetState , deleteElement, importGoogleContact})(StyledContact);

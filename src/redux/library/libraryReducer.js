@@ -14,6 +14,7 @@ class BaseState {
     isUploading = false;
     isError = false;
     list = [];
+    uploadingContact = false ;
     total = 0;
     rowsPerPageOptions = [];
 }
@@ -32,51 +33,51 @@ class InitialState {
     invoice   = new BaseState();
     refund   = new BaseState();
 }
-  
+
 export default (state = new InitialState(), action) => {
- 
+
     switch (action.subtype) {
       case 'CONTACT':
         return {
           ...state,
           contact: baseReducer(state.contact, action)
         }
-      case 'EXPENSE': 
+      case 'EXPENSE':
         return {
           ...state,
           expense: baseReducer(state.expense, action)
         }
-      case 'SERVICE': 
+      case 'SERVICE':
         return {
           ...state,
           service: baseReducer(state.service, action)
         }
-      case 'PRODUCT': 
+      case 'PRODUCT':
         return {
           ...state,
           product: baseReducer(state.product, action)
         }
-      case 'STAT': 
+      case 'STAT':
         return {
           ...state,
           stat: baseReducer(state.stat, action)
         }
-      case 'TASK': 
+      case 'TASK':
         return {
           ...state,
           task: baseReducer(state.task, action)
         }
-      case 'QUOTE': 
+      case 'QUOTE':
         return {
           ...state,
           quote: baseReducer(state.quote, action)
         }
-      case 'INVOICE': 
+      case 'INVOICE':
         return {
           ...state,
           invoice: baseReducer(state.invoice, action)
         }
-      case 'REFUND': 
+      case 'REFUND':
         return {
           ...state,
           refund: baseReducer(state.refund, action)
@@ -84,6 +85,3 @@ export default (state = new InitialState(), action) => {
       default: return state;
     }
 }
-
-
-  

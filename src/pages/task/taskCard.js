@@ -8,13 +8,13 @@ const TaskCard = (props) => {
     const {task, id, classes, isFetching} = props
     return (
       <div>
-          <span className={classes.subtitle}>{task.subject} - <span style={{fontSize: 11, color: 'rgb(185,185,185)'}}>{ new Date(task.due_date.date).toLocaleDateString('fr') }</span></span>
+          <span className={classes.subtitle}>{task.subject} - <span className={ classes.span }>{ new Date(task.due_date.date).toLocaleDateString('fr') }</span></span>
             {
                 id !== task._id && !isFetching
                   ?  <EditIcon onClick={ () => { props.onEdit(task) }} className={classes.icon} />
                   : null
             }
-            <Typography variant="body1" style={{maxWidth: '90%', textAlign: 'justify'}}>{task.short_desc}</Typography>
+            <Typography variant="body2" style={{maxWidth: '90%', textAlign: 'justify'}}>{task.short_desc}</Typography>
             <br />
             {
                 id !== task._id ?
@@ -47,6 +47,10 @@ const styles = theme => ({
         fontSize: 18,
         cursor: "pointer",
         marginTop: 5
+    },
+    span: {
+      fontSize: 11,
+      color: 'rgb(185,185,185)'
     }
 })
 

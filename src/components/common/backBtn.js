@@ -2,24 +2,24 @@
 
 import React from 'react'
 import {history} from '../../routes/history'
-import { withStyles } from '@material-ui/core';
+import { withStyles, IconButton } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 
 
 const BackBtn = (props) => {
     const { classes, styled } = props;
 
-    return <ArrowBackIcon onClick={ () => { history.goBack() } } style={styled} className={ classes.backBtn }/>
+    return <IconButton  variant="outline" onClick={ () => { history.goBack() } } ><ArrowBackIcon style={styled} className={ classes.backBtn }/></IconButton>
 }
 
 const styles = theme => ({
     backBtn: {
         fontSize: '20px',
         cursor: 'pointer',
-        marginBottom: 15,
+        // marginBottom: 15,
         transition: 'all .2s ease',
         '&:hover': {
-            color: theme.palette.secondary.main
+            // color: theme.palette.secondary.main
         }
     },
 })

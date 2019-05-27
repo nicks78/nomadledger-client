@@ -205,6 +205,7 @@ const en = {
         label_rows_per_page: "Rows per page:",
         full_name: "Full name",
         phone: "Phone",
+        phoneNumber: "Phone number",
         statistics: "Statistics",
 
         of: "of",
@@ -243,6 +244,8 @@ const en = {
         delete_img: "Delete picture",
         register: "Register",
         sign_up: "Sign up",
+        google_sign_up: "Pre-fill with Google",
+        google_import: "Import Google contacts",
         login: "Log in",
         logout: "Log out",
         reset_pwd: "Reset password",
@@ -278,6 +281,7 @@ const en = {
         renewal: "Auto renewal",
         yes: "Yes",
         no: "No",
+        or: "OR",
         designation: "Designation"
     },
     helperText: {
@@ -307,6 +311,8 @@ const en = {
         need_help: "Need help ? Contact us at <a href='mailto:support@nomadledger.com'>support@nomadledger.com</a>",
         member_end: "Your current membership end",
         cannot_change_email: "Email address can be changed on demand.",
+        import_contact: "This operation might take a few minutes, please wait thanks"
+
 
     },
     message: {
@@ -359,6 +365,7 @@ const en = {
         error_422_selling_price: "Sell price field is required",
         error_422_indice: "VAT rate must be a number (ex:19.60)",
         error_422_name: "Must contain a name",
+        error_sign_up_google: "Google sign Up did not work, please try again or contact us at support@nomadledger.com",
 
         // Stripe err
         incomplete_zip: "Your postal code is incomplete.",

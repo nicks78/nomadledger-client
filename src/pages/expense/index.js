@@ -127,9 +127,9 @@ class Expense extends Component {
                     <Table>
                     <TableHead className={classes.tableHead}>
                         <TableRow>
+                            <TableCell>{ locale.wording.name }</TableCell>
                             <TableCell>{ locale.wording.date }</TableCell>
                             <TableCell>{ locale.wording.receipt }</TableCell>
-                            <TableCell>{ locale.wording.name }</TableCell>
                             <TableCell>{ locale.wording.category }</TableCell>
                             <TableCell>{ locale.wording.price }</TableCell>
                             <TableCell align="center">Actions</TableCell>
@@ -140,9 +140,9 @@ class Expense extends Component {
                             {   !isFetching ?
                                 this.props.listExpenses.map(( expense, index) => {
                                     return  <TableRow key={index}>
+                                                <TableCell><Link to={`/${reducer.toLowerCase()}/view/${expense._id.toLowerCase()}`}><span style={{textTransform: "capitalize"}}  className="link">{expense.name}</span></Link></TableCell>
                                                 <TableCell>{ new Date(expense.receipt_date.date).toLocaleDateString(localStorage.getItem('locale')) }</TableCell>
                                                 <TableCell> <RenderImage img={ expense.receipt } /></TableCell>
-                                                <TableCell><Link to={`/${reducer.toLowerCase()}/view/${expense._id.toLowerCase()}`}><span style={{textTransform: "capitalize"}}  className="link">{expense.name}</span></Link></TableCell>
                                                 <TableCell style={{textTransform: 'capitalize'}}>{ expense.category[localStorage.getItem('locale')] }</TableCell>
                                                 <TableCell className="tableNumber">{ cvtNumToUserPref(expense.price) } { expense.currency.value }</TableCell>
 
