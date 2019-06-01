@@ -37,6 +37,7 @@ const Phone = (props) => {
         }
         return props.handleAction(event, reducer)
     }
+    
     if(showEdit){
         return  <Grid container spacing={8}>
                     <Grid item xs={5}>

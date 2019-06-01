@@ -320,7 +320,8 @@ const fr =  {
         need_help: "Besoin d'aide ? Contacter nous directement <a href='mailto:support@nomadledger.com'>support@nomadledger.com</a>",
         member_end: "Votre abonnement actuel prend fin le",
         cannot_change_email: "L'adresse email n'est modifiable que sur demande.",
-        import_contact: "Cette opération peut prendre quelques minutes, veuillez patientez merci..."
+        import_contact: "Cette opération peut prendre quelques minutes, veuillez patientez merci...",
+        edit_receiver_contact: "Editer les informations du destinataire"
 
     },
     message: {
@@ -348,6 +349,7 @@ const fr =  {
         error_404: "Aucun élément trouvé, veuillez recommencer ou contacter notre service support@nomadledger.com",
         error_4044: "Fichier non trouvé, veuillez recommencer ou contacter notre service support@nomadledger.com",
         error_403_delete: "Cette donnée ne peux être supprimée. Cela signifie qu'elle est associée à un autre document.",
+        error_403: "Error de connexion, veuillez recommencer ou contacter notre service support@nomadledger.com",
         error_membership_end: "Votre période d'essai vient de se terminer, vous pouvez renouveler votre abonnement ou nous faire une demande pour récupérer vos données",
         error_409: "Cette email existe déjà dans notre base de donnée",
         error_wrong_token: "Erreur d'authentification, veuillez recommencer ou contacter notre service support@nomadledger.com",

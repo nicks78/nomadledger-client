@@ -311,7 +311,8 @@ const en = {
         need_help: "Need help ? Contact us at <a href='mailto:support@nomadledger.com'>support@nomadledger.com</a>",
         member_end: "Your current membership end",
         cannot_change_email: "Email address can be changed on demand.",
-        import_contact: "This operation might take a few minutes, please wait thanks"
+        import_contact: "This operation might take a few minutes, please wait thanks",
+        edit_receiver_contact: "Edit recipient contact informations"
 
 
     },
@@ -340,7 +341,8 @@ const en = {
         error_404: "Element not found, please try again or contact us at support@nomadledger.com",
         error_4044: "File not found, please try again or contact us at support@nomadledger.com",
         error_403_delete: "This element cannot be deleted. This mean it has a relation with another element",
-        error_membership_end: "Your membership just ended, you can renew or request all your data (takes up to 14 business days)",
+        error_403: "Connexion error, please try again or contact us at support@nomadledger.com",
+        error_membership_end: "Your membership just ended, you can renew or request all your data to support@nomadledger.com",
         error_409: "This email is already in our database",
         error_wrong_token: "Authentication error, please try again or contact us at support@nomadledger.com",
         error_session_token: "Session expired, go to login page",

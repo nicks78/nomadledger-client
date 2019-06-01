@@ -233,7 +233,7 @@ class Company extends Component {
                 <Divider className={ classes.divider }/>
                 <div>
                   <ApxtextIndexValue
-                        value={new Date(user.membership_end).toLocaleDateString("fr")}
+                        value={new Date(user.internalInfos_id.membership_end).toLocaleDateString("fr")}
                         label={locale.wording.end}
                     />
 

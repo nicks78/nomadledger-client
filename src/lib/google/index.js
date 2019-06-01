@@ -1,5 +1,4 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable better-mutation/no-mutating-methods */
+//src/lib/google/index.js
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
@@ -7,7 +6,7 @@ import xml from 'xml-js'
 import {Button} from '@material-ui/core';
 import Tooltips from '../../components/common/tooltips'
 import Icon from './icon'
-// import ButtonContent from './button-content'
+
 
 import { extractTitleFromEntry,
 extractEmailFromEntry,
@@ -16,8 +15,7 @@ extractOrganizationFromEntry,
 extractFamilyNameFromEntry,
 extractGivenNameFromEntry } from './utils'
 
-const SCOPE = 'https://www.googleapis.com/auth/contacts.readonly https://www.googleapis.com/auth/user.addresses.read'
-// const SCOPE = "https://www.googleapis.com/auth/user.addresses.read"
+const SCOPE = 'https://www.googleapis.com/auth/contacts.readonly'
 const MAX_RESULTS = '999' // TODO Make this parametable or paginate
 
 class GoogleContacts extends Component {

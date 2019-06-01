@@ -1,4 +1,4 @@
-/* eslint-disable no-underscore-dangle */
+//src/lib/google/utils.js
 
 function titleize(string) {
   return string.toLowerCase().replace(/(?:^|\s|-)\S/g, x => x.toUpperCase())

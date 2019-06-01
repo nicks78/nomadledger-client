@@ -11,6 +11,7 @@ import { withStyles, TextField, Paper, MenuItem } from '@material-ui/core'
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    zIndex: -9
   },
   container: {
     flexGrow: 1,
@@ -65,6 +66,7 @@ class AutoComplete extends React.Component {
 
   renderSuggestion = ({ suggestion, index, itemProps, highlightedIndex }) => {
     const isHighlighted = highlightedIndex === index;
+    const name = this.props.field === "company_name" ? "("+suggestion.firstname +" "+ suggestion.lastname +")" : ""
     return (
       <MenuItem
         {...itemProps}
@@ -76,14 +78,14 @@ class AutoComplete extends React.Component {
           fontWeight: 400,
         }}
       >
-        {suggestion[this.props.field]}
+        {suggestion[this.props.field]} {name}
       </MenuItem>
     );
   }
 
   // Set selected value to the store
   downshiftOnChange = (selected) => {
-    console.log(selected)
+
       this.props.setSelectedObject(this.props.reducer, this.props.state, selected)
       this.setState({value: ""})
   }

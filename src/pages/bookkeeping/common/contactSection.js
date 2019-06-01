@@ -1,21 +1,21 @@
 //manager/src/pages/bookkeeping/contactSection.js
 
 import React from 'react'
-import { Link } from "react-router-dom"
 import {connect} from 'react-redux'
 import { createState } from '../../../redux/book/actions'
 import ApxtextIndexValue from '../../../components/common/textIndexValue'
 import AutoComplete from '../../../lib/autoComplete'
+import ModalEditContact from './modalEditContact'
 
 
 const ContactSection = (props) => {
 
         const { locale, contact, reducer } = props;
 
-        var infoContact = [ "firstname", "lastname", "email"];
-
         return (
+          <div>
             <div style={{padding: 10,}}>
+
                 <AutoComplete
                     field="company_name"
                     state="contact_id"
@@ -26,27 +26,31 @@ const ContactSection = (props) => {
                 />
                 <br />
                 <ApxtextIndexValue
-                    value={contact.contact_id ? <Link to={{ pathname: `/contact/view/${contact.contact_id._id}`, state: { reducer: "CONTACT" } }}>{contact.contact_id.company_name}</Link> : ''}
+                    value={contact.contact_id ? <ModalEditContact item={contact.contact_id} reducer={props.reducer} />  : ''}
                     label={locale.wording.company_name}
                 />
-                {
-                    infoContact.map((name, index) => {
-                        return  <ApxtextIndexValue
-                                    key={index}
-                                    value={contact.contact_id ? contact.contact_id[name] : ''}
-                                    label={locale.wording[name]}
-                                />
-                    })
-                }
+                  <ApxtextIndexValue
+                      value={contact.contact_id ? contact.contact_id.firstname : ''}
+                      label={locale.wording.firstname}
+                  />
+                  <ApxtextIndexValue
+                      value={contact.contact_id ? contact.contact_id.lastname : ''}
+                      label={locale.wording.lastname}
+                  />
+                  <ApxtextIndexValue
+                      value={contact.contact_id ? contact.contact_id.email.toLowerCase() : ''}
+                      label={locale.wording.email}
+                  />
                     <ApxtextIndexValue
-                        value={contact.contact_id ? contact.contact_id.phone_code.dial_code +" "+ contact.contact_id.phone : ''}
+                        value={contact.contact_id ? contact.contact_id.phoneNumber : ''}
                         label={locale.wording.phone}
                     />
                     <ApxtextIndexValue
-                        value={contact.contact_id ? contact.contact_id.addresses_street +" "+ contact.contact_id.addresses_zip  + " " + contact.contact_id.addresses_city + " " + contact.contact_id.addresses_country[localStorage.getItem('locale')] : ''}
+                        value={contact.contact_id ? contact.contact_id.addresses_street +" "+ contact.contact_id.addresses_zip  + " " + contact.contact_id.addresses_city + " " + (contact.contact_id.addresses_country ? contact.contact_id.addresses_country[localStorage.getItem('locale')] : "") : ''}
                         label={locale.wording.addresses_street}
                     />
                     <br />
+            </div>
             </div>
         )
 }

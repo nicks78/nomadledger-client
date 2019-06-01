@@ -2,19 +2,20 @@
 
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { withStyles, Paper, Table, TableRow, TableBody, TableHead, TableCell , Typography, Fab} from '@material-ui/core';
-import { getDocument, resetState, downloadPdf} from '../../../redux/book/actions'
+import { withStyles, Paper, Table, TableRow, TableBody, TableHead, TableCell , Typography, Fab, TextField, IconButton} from '@material-ui/core';
+import { getDocument, resetState, downloadPdf, updateDocument, createState} from '../../../redux/book/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import Spinner from '../../../components/common/spinner'
 import ApxBackBtn from '../../../components/common/backBtn'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownloadOutlined'
-
+import CheckIcon from '@material-ui/icons/Check'
 
 class View extends Component {
 
     state = {
       id: "",
-      reducer: ""
+      reducer: "",
+      transaction_number: this.props.item.transaction_number
     }
 
     componentDidMount(){
@@ -50,7 +51,7 @@ class View extends Component {
     render() {
 
         const {item, classes, locale, company, isFetching } = this.props
-        const {reducer} = this.state
+        const {reducer, transaction_number} = this.state
         const options = {  day: 'numeric',  month: 'short', year: 'numeric'};
 
         if(isFetching){
@@ -118,7 +119,24 @@ class View extends Component {
 
             </div>
 
+            <div style={{ display: "flex", alignItems: "center",  }}>
+            <TextField
+                label={ locale.wording.transaction_number }
+                id="transaction_number"
+                margin="dense"
+                onChange={ (e) => { this.props.createState(reducer.toUpperCase(), "transaction_number",  e.target.value ) }}
+                style={{ fontWeight: 300, width: "100%"}}
+                value={ item.transaction_number ||  ""}
+                variant="outlined"
+            />
+            &nbsp;
+            <IconButton color="primary" onClick={ () => { this.props.updateDocument(reducer.toUpperCase(), transaction_number, `update`) } } >
+                <CheckIcon style={{color: 'green'}} />
+            </IconButton>
 
+            </div>
+
+            <br />
               <Typography variant="caption" align="left">{ locale.subheading.info_comp }</Typography>
               <Typography className={classes.infos} variant="body2" dangerouslySetInnerHTML={{__html: item.infos }} />
 
@@ -265,4 +283,4 @@ const mapStateToProps = (state, ownProps) => {
 
 const StyledView = withStyles(styles)(View)
 
-export default connect(mapStateToProps, {  getDocument, resetState, downloadPdf  })(StyledView);
+export default connect(mapStateToProps, {  getDocument, resetState, downloadPdf, updateDocument, createState  })(StyledView);
