@@ -1,6 +1,5 @@
 import React from 'react';
 import { withStyles, Fab } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton'
 import EditIcon from '@material-ui/icons/EditOutlined'
 import CheckIcon from '@material-ui/icons/CheckOutlined'
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -54,7 +53,7 @@ const ButtonEdit = (props) => {
 
   return (
     <Tooltips title={text}>
-      <Fab size="small" className={ !showEdit ? classes.edit : classes.check }   onClick={ showEdit ? updateDocument :  openEdit} style={style} >
+      <Fab size="small" color="primary" className={ !showEdit ? classes.edit : classes.check }   onClick={ showEdit ? updateDocument :  openEdit} style={style} >
         {
             !isUpdating ?
             showEdit ? <CheckIcon className={ classes.checkicon }/> : <EditIcon className={ classes.editicon }/>

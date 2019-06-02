@@ -49,7 +49,7 @@ class ContactInfo extends Component {
     }
 
     render() {
-        const {locale, contact, isUpdating, showEdit, tmp_state, classes, contactGroup, country, company_type} = this.props
+        const {locale, contact, showEdit, tmp_state, classes, contactGroup, country, company_type} = this.props
 
         return (
             <div className={ classes.root }>

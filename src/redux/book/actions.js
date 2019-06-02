@@ -153,8 +153,7 @@ export function updateSingle (actionType, data, endpoint) {
         axios.defaults.withCredentials = true;
 
         try{
-            const request = await axios.put(`${API_ENDPOINT}${endpoint}`, {data});
-            const res = request.data;
+            await axios.put(`${API_ENDPOINT}${endpoint}`, {data});
 
             dispatch(setNotification("success_update", "success"))
 

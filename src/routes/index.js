@@ -59,7 +59,7 @@ import Archive from '../pages/archive'
 class Routes extends React.Component {
 
     componentDidMount(){
-        this.props.initLocale(this.props.company.locale || "fr")
+        this.props.initLocale(this.props.authUser.locale || "fr")
     }
 
     handleChangeLocale = (locale) => {

@@ -100,23 +100,25 @@ class Company extends Component {
             </Grid>
 
             <Grid item  xs={12} md={9} sm={9}>
-              <ApxButtonEdit
-                  updateDocument={this.updateDocument}
-                  openEdit={this.openEdit}
-                  showEdit={showEdit}
-              />
-              <Typography variant="h1">
-              { showEdit ?
-                <TextField
-                    value={ company.company_name || ""}
-                    label={ locale.wording.company_name }
-                    onChange={ (event) => { this.props.handleFormEdit(event, reducer) }}
-                    name="company_name"
-                    fullWidth
-                    variant="outlined"
-                    className={ classes.input }
-                />  : company.company_name }
-              </Typography>
+            <div style={{ display: 'flex', alignItems: "center", justifyContent: "space-between" }}>
+
+                { showEdit ?
+                  <TextField
+                      value={ company.company_name || ""}
+                      label={ locale.wording.company_name }
+                      onChange={ (event) => { this.props.handleFormEdit(event, reducer) }}
+                      name="company_name"
+                      fullWidth
+                      variant="outlined"
+                      className={ classes.input }
+                  />  : <Typography variant="h1" > { company.company_name}</Typography>}
+
+                <ApxButtonEdit
+                    updateDocument={this.updateDocument}
+                    openEdit={this.openEdit}
+                    showEdit={showEdit}
+                />
+              </div>
               <br />
               <Grid container spacing={24}>
 

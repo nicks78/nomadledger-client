@@ -10,7 +10,7 @@ import {fr, en } from './index'
 export function getLocale( locale ){
     return dispatch => {
 
-        axios.get(`${API_ENDPOINT}company/update/locale/${locale}`, {
+        axios.get(`${API_ENDPOINT}user/update/locale/${locale}`, {
             method: 'GET',
             mode: 'cors',
         })

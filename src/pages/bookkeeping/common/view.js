@@ -15,7 +15,6 @@ class View extends Component {
     state = {
       id: "",
       reducer: "",
-      transaction_number: this.props.item.transaction_number
     }
 
     componentDidMount(){
@@ -73,7 +72,7 @@ class View extends Component {
     render() {
 
         const {item, classes, locale, company, isFetching } = this.props
-        const {reducer, transaction_number} = this.state
+        const {reducer} = this.state
         const options = {  day: 'numeric',  month: 'short', year: 'numeric'};
 
         if(isFetching){

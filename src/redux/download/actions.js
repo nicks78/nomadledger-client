@@ -8,7 +8,7 @@ import {setError} from '../error/actions'
 
 
 /**
- * // DOWNLOAD DOCUMENT
+ * DOWNLOAD DOCUMENT
  * @param  actionType
  * @param  id
  */
@@ -18,7 +18,7 @@ export function downloadFile( actionType, endPoint, query = "" ){
 
         dispatch(requestDownload())
 
-        axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${endPoint}`, {
+        axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${endPoint}?locale=${localStorage.getItem('locale') || "fr"}`, {
           method: 'GET',
           mode: 'cors'
         })
