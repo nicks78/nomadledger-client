@@ -2,14 +2,15 @@
 
 import React  from 'react'
 import {connect} from 'react-redux'
-import { withStyles } from '@material-ui/core';
+import { withStyles, Button } from '@material-ui/core';
 import { DEFAULT_IMG} from '../../../redux/constant'
 import ApxBackBtn from '../../../components/common/backBtn'
 import Spinner from '../../../components/common/spinner'
+import ApxButtonEdit from '../../../components/common/buttonEdit'
 import ApxAlert from '../../../components/common/alert'
 import UploadImg from '../../../lib/uploadImg'
 import Paper from '@material-ui/core/Paper'
-import { getItem, createState, uploadFileToServer } from '../../../redux/library/actions'
+import { getItem, createState, uploadFileToServer, updateItem } from '../../../redux/library/actions'
 import { getBookTotal, resetState } from '../../../redux/book/actions'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography';
@@ -39,7 +40,8 @@ class ShowContact extends React.Component {
 
     state = {
       value: 0,
-      reducer: 'CONTACT'
+      reducer: 'CONTACT',
+      showEdit: false
     }
 
     componentDidMount(){
@@ -56,6 +58,19 @@ class ShowContact extends React.Component {
         this.props.resetState("REFUND");
     }
 
+    openEdit = (e) => {
+        this.setState({showEdit: !this.state.showEdit})
+    }
+
+
+    // Update database
+    updateDocument = (e) => {
+        this.setState({showEdit: false});
+
+        // Save the data to database
+        this.props.updateItem("CONTACT", `update`)
+    }
+
     handleChange = (event, value) => {
       this.setState({ value });
     }
@@ -70,7 +85,10 @@ class ShowContact extends React.Component {
               total_quote ,
               total_invoice,
               currency,
+              isUpdating,
               total_refund} = this.props
+
+      const {showEdit} = this.state
 
       if(isFetching){
         return <Spinner />
@@ -84,20 +102,19 @@ class ShowContact extends React.Component {
         <Paper className={ classes.root }>
         <ApxBackBtn/>
           <Typography variant="h1" align="center">{ contact.company_name }</Typography>
+          <div className={ classes.iconBtn }>
+
+              <ApxButtonEdit
+                  updateDocument={this.updateDocument}
+                  openEdit={this.openEdit}
+                  showEdit={showEdit}
+                  isUpdating={isUpdating}
+            />
+          </div>
           <br />
-            <div className={ classes.statWrapper}>
-                <StatContact
-                  total_quote={total_quote}
-                  total_invoice={total_invoice}
-                  total_refund={total_refund}
-                  currency={currency}
-                  locale={locale}
-                />
-            </div>
         <Grid container spacing={8}>
+
           <Grid item xs={12} md={12}>
-
-
           <div style={{textAlign:'center'}}>
             <UploadImg
               field="logo_contact"
@@ -110,8 +127,30 @@ class ShowContact extends React.Component {
             />
           </div>
           </Grid>
+          <Grid item xs={12}>
+          <div className={ classes.statWrapper}>
+              <StatContact
+                total_quote={total_quote}
+                total_invoice={total_invoice}
+                total_refund={total_refund}
+                currency={currency}
+
+                locale={locale}
+              />
+          </div>
+          </Grid>
           <Grid item xs={12} md={12}>
-           <ContactInfo  locale={locale} contact={ contact } createState={this.props.createState} id={contact._id}/>
+           <ContactInfo
+                showEdit={showEdit}
+                locale={locale}
+                contact={ contact }
+                createState={this.props.createState} id={contact._id}/>
+
+          {
+            showEdit ?
+            <Button style={{float: "right"}} disabled={isUpdating} color="primary" variant="contained" onClick={ this.updateDocument }>{ isUpdating ? locale.wording.loading :  locale.wording.update }</Button>
+            : null
+          }
 
          </Grid>
 
@@ -128,6 +167,7 @@ console.log(state.book)
       isFetching: state.library.contact.isFetching,
       receivedAt: state.library.contact.receivedAt,
       locale: state.locale.locale,
+      isUpdating: state.library.contact.isUpdating,
       contact: state.library.contact.item,
       newContact: state.library.contact.tmp_state,
       progress: state.library.contact.progress,
@@ -141,4 +181,4 @@ console.log(state.book)
 
 const StyledShowContact = withStyles(styles)(ShowContact)
 
-export default connect( mapStateToProps, { getItem, resetState, createState , uploadFileToServer, getBookTotal})(StyledShowContact);
+export default connect( mapStateToProps, { getItem, resetState, createState , uploadFileToServer, getBookTotal, updateItem})(StyledShowContact);

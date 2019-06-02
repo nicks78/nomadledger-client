@@ -109,8 +109,8 @@ export function requestUpdate( actionType ) {
 /**
  * UPDATE SINGLE FIELD IN DOCUMENT
  * @param  actionType
- * @param  data to be update
- * @param  id of document
+ * @param  data Object
+ * @param  endPoint String
  */
 export function updateField (actionType, data, endpoint) {
 
@@ -127,8 +127,35 @@ export function updateField (actionType, data, endpoint) {
             const request = await axios.put(`${API_ENDPOINT}${actionType.toLowerCase()}/${endpoint}`, {data});
             const res = request.data;
 
+
             var newList = updateArrayOfObject(list, res.item);
             dispatch(receiveDocuments(actionType, newList )) ;
+            dispatch(setNotification("success_update", "success"))
+
+        }catch(error){
+          dispatch(setError(error));
+          dispatch(requestFailed(actionType))
+        }
+    }
+}
+
+/**
+ * UPDATE SINGLE FIELD IN DOCUMENT
+ * @param  actionType
+ * @param  data Object
+ * @param  endPoint String
+ */
+export function updateSingle (actionType, data, endpoint) {
+
+    return async (dispatch, getState) => {
+
+        // Set withCredentials
+        axios.defaults.withCredentials = true;
+
+        try{
+            const request = await axios.put(`${API_ENDPOINT}${endpoint}`, {data});
+            const res = request.data;
+
             dispatch(setNotification("success_update", "success"))
 
         }catch(error){

@@ -33,9 +33,9 @@ const styles = theme => ({
     color: 'rgba(0,0,0,.54)'
   },
   titleBar: {
-    padding: 15,
-    borderRadius: 4,
-    backgroundColor: 'rgb(238,238,238)'
+    // padding: 15,
+    // borderRadius: 4,
+    // backgroundColor: 'rgb(238,238,238)'
   },
   paddingContent: {
     padding: 24,
@@ -103,14 +103,14 @@ class Account extends Component {
                       <Grid item xs={12}>
                           <Paper className={classes.paper} elevation={1}>
                           <div className={classes.paddingContent}>
-                          <Typography variant="overline" className={classes.titleBar}>
+                          <Typography variant="overline">
                               {locale.subheading.param_company}
                           </Typography>
                           <br />
                           <Grid container spacing={24}>
 
                               <Grid item xs={12} md={6}>
-                                  <Typography variant="subtitle2"  >
+                                  <Typography variant="subtitle2">
                                     {locale.subheading.my_vat}&nbsp;<Tooltips title={locale.helperText.account_vat}  aria-label="setting"><HelpIcon /></Tooltips>
                                   </Typography>
                                   <Divider className={ classes.divider }/>
@@ -118,7 +118,7 @@ class Account extends Component {
                               </Grid>
                               <br />
                               <Grid item xs={12} md={6}>
-                              <Typography variant="subtitle2"  >
+                              <Typography variant="subtitle2">
                               {locale.subheading.contact_group}&nbsp;<Tooltips title={locale.helperText.account_group}  aria-label="setting"><HelpIcon /></Tooltips>
                                 </Typography>
                                 <Divider className={ classes.divider }/>

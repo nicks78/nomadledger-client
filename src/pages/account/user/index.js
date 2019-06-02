@@ -3,9 +3,9 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {DEFAULT_IMG} from '../../../redux/constant'
-import { withStyles } from '@material-ui/core';
+import { withStyles , Typography} from '@material-ui/core';
 import UploadImg from '../../../lib/uploadImg'
-import ApxTitleBar from '../../../components/common/titleBar'
+import ApxButtonEdit from '../../../components/common/buttonEdit'
 import { uploadFileToServer , updateDocument, updatePassword} from '../../../redux/account/actions'
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid'
@@ -44,6 +44,12 @@ const styles = theme => ({
       [theme.breakpoints.down("sm")]: {
           height: "auto",
       }
+  },
+  titleWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: "space-between",
+    marginBottom: 24
   }
 })
 
@@ -94,12 +100,18 @@ class User extends Component {
 
     return (
       <div>
-          <ApxTitleBar
-            text={locale.subheading.info_profile }
-            showEdit={showEdit}
-            openAction={ this.openEdit }
-            editAction={ this.updateDocument }
-          />
+          <div className={classes.titleWrapper} >
+            <Typography variant="overline">
+                {locale.subheading.info_profile }
+
+            </Typography>
+            <ApxButtonEdit
+                updateDocument={this.updateDocument}
+                openEdit={this.openEdit}
+                showEdit={showEdit}
+            />
+
+          </div>
 
           <div className={ classes.wrapper }>
           <Grid container className={classes.root} spacing={16}>
@@ -123,14 +135,14 @@ class User extends Component {
                 <Grid item xs={12}>
                       <EditInput
                           label={ locale.wording.firstname }
-                          value={  user.firstname }
+                          value={  user.firstname || ""}
                           showEdit={showEdit}
                           locale={locale}
                           field="firstname"
                           handleAction={ (event) => { this.props.handleFormEdit(event, reducer) } }
                       />
                       <EditInput
-                          label={ locale.wording.lastname }
+                          label={ locale.wording.lastname || ""}
                           value={ user.lastname }
                           showEdit={showEdit}
                           locale={locale}
@@ -146,8 +158,8 @@ class User extends Component {
                         helperText="select_phone_code"
                         labelCode={locale.wording.phone_code }
                         label={ locale.wording.phone }
-                        valueCode={user.phone_code}
-                        value={user.phone}
+                        valueCode={user.phone_code || {}}
+                        value={user.phone || ""}
                         reducer="USER"
                       />
 
@@ -155,7 +167,7 @@ class User extends Component {
                           html_tag="a"
                           href={`mailto:${user.email}`}
                           label={ locale.wording.email }
-                          value={ user.email }
+                          value={ user.email || "" }
                           showEdit={showEdit}
                           locale={locale}
                           disabled={true}

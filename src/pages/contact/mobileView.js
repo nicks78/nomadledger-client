@@ -73,7 +73,12 @@ class MobileView extends React.Component {
                       {contact.company_name}
                     </Typography>
                     <span style={{position: "absolute", right: 24, fontWeight: 700, marginTop: -15}}>
-                        <a href={`tel:${contact.phone_code.value}${contact.phone.replace("0", "")}`}><CallIcon style={{color: "green"}} /></a>
+                        {
+                          contact.phoneNumber !== "" ?
+                          <a href={`tel:${contact.phoneNumber}`}><CallIcon style={{color: "green"}} /></a>
+                          : <CallIcon style={{color: "grey"}} />
+                        }
+
                       </span>
 
                       <Typography variant="body2" color="textSecondary">

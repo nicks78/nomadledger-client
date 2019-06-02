@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { withStyles, Paper, Table, TableRow, TableBody, TableHead, TableCell , Typography, Fab, TextField, IconButton} from '@material-ui/core';
-import { getDocument, resetState, downloadPdf, updateDocument, createState} from '../../../redux/book/actions'
+import { getDocument, resetState, downloadPdf, updateSingle, createState} from '../../../redux/book/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import Spinner from '../../../components/common/spinner'
 import ApxBackBtn from '../../../components/common/backBtn'
@@ -45,6 +45,28 @@ class View extends Component {
         total.ttc = ttc;
 
         return  total;
+    }
+
+    renderTransactionNumber = () => {
+      const {locale, item } = this.props
+      const reducer = this.state.reducer
+        return <div style={{ display: "flex", alignItems: "center",  }}>
+            <TextField
+                label={ locale.wording.transaction_number }
+                id="transaction_number"
+                margin="dense"
+                onFocus={ () => {console.log("IN")} }
+                onBlur={ () => { this.props.updateSingle(reducer.toUpperCase(), {transaction_number: item.transaction_number },  `common/update-field/${reducer.toLowerCase()}/${item._id}` ) }}
+                onChange={ (e) => { this.props.createState(reducer.toUpperCase(), "transaction_number",  e.target.value ) }}
+                style={{ fontWeight: 300, maxWidth: 400, width: "100%"}}
+                value={ item.transaction_number ||  ""}
+                variant="outlined"
+            />
+            &nbsp;
+            <IconButton color="primary" onClick={ () => {  this.props.updateSingle(reducer.toUpperCase(), {transaction_number: item.transaction_number },  `common/update-field/${reducer.toLowerCase()}/${item._id}` ) } } >
+                <CheckIcon style={{color: 'green'}} />
+            </IconButton>
+            </div>
     }
 
 
@@ -118,23 +140,13 @@ class View extends Component {
                 }
 
             </div>
+            {
+              reducer === "invoice" || reducer === "refund" ?
 
-            <div style={{ display: "flex", alignItems: "center",  }}>
-            <TextField
-                label={ locale.wording.transaction_number }
-                id="transaction_number"
-                margin="dense"
-                onChange={ (e) => { this.props.createState(reducer.toUpperCase(), "transaction_number",  e.target.value ) }}
-                style={{ fontWeight: 300, width: "100%"}}
-                value={ item.transaction_number ||  ""}
-                variant="outlined"
-            />
-            &nbsp;
-            <IconButton color="primary" onClick={ () => { this.props.updateDocument(reducer.toUpperCase(), transaction_number, `update`) } } >
-                <CheckIcon style={{color: 'green'}} />
-            </IconButton>
+              this.renderTransactionNumber()
 
-            </div>
+            : null
+          }
 
             <br />
               <Typography variant="caption" align="left">{ locale.subheading.info_comp }</Typography>
@@ -283,4 +295,4 @@ const mapStateToProps = (state, ownProps) => {
 
 const StyledView = withStyles(styles)(View)
 
-export default connect(mapStateToProps, {  getDocument, resetState, downloadPdf, updateDocument, createState  })(StyledView);
+export default connect(mapStateToProps, {  getDocument, resetState, downloadPdf, updateSingle, createState  })(StyledView);

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { withStyles, Grid } from '@material-ui/core';
 import { createState, updateItem } from '../../../redux/library/actions'
-import ApxButtonEdit from '../../../components/common/buttonEdit'
 import EditInput from '../../../lib/editInput'
 import EditSelect from '../../../lib/editSelect'
 import Typography from '@material-ui/core/Typography';
@@ -38,49 +37,22 @@ const styles = theme => ({
 class ContactInfo extends Component {
 
     state = {
-        value: 0,
-        showEdit: false
+        value: 0
     }
 
     // Store change data reducer
     handleFormEdit = (e) => {
         var fieldName =  e.target.name
         var value =  e.target.value
-
         // Temporary save data into redux store
         this.props.createState("CONTACT", fieldName, value)
     }
 
-
-    openEdit = (e) => {
-        this.setState({showEdit: !this.state.showEdit})
-    }
-
-    // Update database
-    updateDocument = (e) => {
-        this.setState({showEdit: false});
-
-        // Save the data to database
-        this.props.updateItem("CONTACT", `update`)
-    }
-
     render() {
-        const {locale, contact, isUpdating, tmp_state, classes, contactGroup, country, company_type} = this.props
-        const { showEdit } = this.state;
-
+        const {locale, contact, isUpdating, showEdit, tmp_state, classes, contactGroup, country, company_type} = this.props
 
         return (
             <div className={ classes.root }>
-                <div className={ classes.iconBtn }>
-
-                    <ApxButtonEdit
-                        updateDocument={this.updateDocument}
-                        openEdit={this.openEdit}
-                        showEdit={showEdit}
-                        isUpdating={isUpdating}
-                  />
-                </div>
-
           <Grid container spacing={24}>
             <Grid item xs={12}>
               { !showEdit ?
@@ -218,6 +190,7 @@ class ContactInfo extends Component {
           </Grid>
 </Grid>
         <br />
+
         </div>
     )
   }
@@ -225,7 +198,6 @@ class ContactInfo extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isUpdating: state.library.contact.isUpdating,
         tmp_state: state.library.contact.tmp_state,
         contactGroup: state.account.company.item ?  state.account.company.item.contact_group : [],
         company_type: state.helper.items.company_type,

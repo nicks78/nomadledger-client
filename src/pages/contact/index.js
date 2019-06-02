@@ -139,7 +139,7 @@ class Contact extends Component {
                         searchBar={true}
                         onSearchByName={ this.handleSearchByName }
                     />
-                    <div style={{ overflowY: "auto" }}>
+                    <div style={{ overflowY: "auto", minHeight: 300 }}>
                     <Table>
                     <TableHead className={classes.tableHead}>
                         <TableRow>

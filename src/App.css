@@ -41,7 +41,8 @@ a:hover {
 .link {
   text-decoration: none;
   position: relative;
-  color: #5A6899;
+  color: #303030;
+  font-weight: 400;
   padding-bottom: 3px;
   cursor: pointer;
 }
@@ -58,7 +59,7 @@ a:hover {
 
 .link:hover:after {
   width: 100%;
-} 
+}
 
 @media(max-width: 480px){
   .Layout-content-7{
@@ -137,47 +138,7 @@ a:hover {
         ANIMATION
 *****************************************************/
 
-#textIntro {
-  background-color: rgba(70,40,15,0.8);
-  animation-name: introText;
-  animation-duration: 1.5s;
-  animation-timing-function: ease-out;
-  padding: 24px;
-  width: 125%;
-  position: relative;
-  left: 5rem;
-  overflow: hidden;
-}
 
-#textIntro p {
-  color: white;
-  animation-name: introTextSpan;
-  animation-duration: 2s;
-  animation-timing-function: ease;
-}
-
-@keyframes introText {
-  0%{ left: -35rem;  padding: 24px; }
-  100% { left: 5rem;  padding: 24px;  }
-}
-
-@keyframes introTextSpan {
-  0%{ color: transparent }
-  100% { color: white }
-}
-
-
-.curve-container__curve {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    position: relative;
-    display: block;
-  }
-
-
-.day-picker .DayPicker-wrapper{
-  box-shadow: none;
-}
 /*****************************************
   STRIPE
 ********************************************/

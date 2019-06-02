@@ -29,6 +29,8 @@ const Styles = theme => ({
     },
     active: {
         color: theme.palette.secondary.main,
+        borderRadius: "0px 50px 50px 0px",
+        backgroundColor: '#dfdedf',
         '& span': {
             color: `${theme.palette.secondary.main} !important`,
             fontWeight: '700 !important'
@@ -42,7 +44,7 @@ const Styles = theme => ({
         borderRadius: "0px 50px 50px 0px",
        '& span': {
            color: '#303030',
-           fontWeight: 300,
+           fontWeight: 400,
        },
        '& svg': {
           color: '#303030',
@@ -52,6 +54,7 @@ const Styles = theme => ({
         },
         '& :hover': {
             borderRadius: "0px 50px 50px 0px",
+            // backgroundColor: theme.palette.secondary.light,
         }
     },
     icon: {

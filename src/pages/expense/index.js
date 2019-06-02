@@ -123,7 +123,7 @@ class Expense extends Component {
                       tooltipTitle={locale.wording.filter_category}
                     />
 
-                    <div style={{overflowY: "auto"}}>
+                    <div style={{overflowY: "auto", minHeight: 300}}>
                     <Table>
                     <TableHead className={classes.tableHead}>
                         <TableRow>

@@ -91,7 +91,7 @@ class Refund extends Component {
                 onDownload={ () => { this.props.downloadFile(reducer, `export/excel-file`) } }
                 refresh={ this.refresh }
             />
-            <div style={{ overflowY: "auto" }}>
+            <div style={{ overflowY: "auto", minHeight: 300 }}>
                     <Table padding="dense">
                     <TableHead className={classes.tableHead}>
                         <TableRow>

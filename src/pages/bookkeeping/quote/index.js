@@ -93,7 +93,7 @@ class Quote extends Component {
                         tooltipTitle={locale.wording.filter_status}
                         refresh={ this.refresh }
                     />
-                    <div style={{overflowY: "auto"}}>
+                    <div style={{overflowY: "auto", minHeight: 300}}>
                     <Table  padding="dense">
                     <TableHead className={classes.tableHead}>
                         <TableRow>

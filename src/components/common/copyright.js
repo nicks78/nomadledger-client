@@ -32,7 +32,7 @@ const Copyright = (props) => {
                 &copy;Copyright {new Date().getFullYear()} by&nbsp;
                 <span className={ classes.span } onClick={ () => { window.open('https://apx-dev.com', '_blank') }}>
                   APX Development Limited</span>. All right reserved.&nbsp;
-                  <span className={ classes.span } onClick={() => { window.open('https://api.nomadledger.com/terms.pdf') }}>Terms & Conditions</span>
+                  <span className={ classes.span } onClick={() => { window.open(`https://api.nomadledger.com/termsandconditions_${localStorage.getItem('locale')}.pdf`) }}>Terms & Conditions</span>
         </Typography>
   );
 }
