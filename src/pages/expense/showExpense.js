@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import UploadImg from '../../lib/uploadImg'
+import {setNotification} from '../../redux/notification/actions'
 import { getItem, createState, updateItem, resetState, uploadFileToServer } from '../../redux/library/actions'
 import { withStyles, TextField, Grid, Button, InputAdornment} from '@material-ui/core';
 import ApxAlert from '../../components/common/alert'
@@ -131,7 +132,7 @@ class ShowExpense extends Component {
                       value={ cvtToLocale(expense.price)}
                       onChange={ (e) => {
                           if(checkNumFormatRegex(e.target.value) === false){
-                             alert(locale.message.error_422_price)
+                             this.props.setNotification("error_422_price", "warning")
                           }else{
                             this.props.createState(reducer, "price", e.target.value)
                           }
@@ -236,4 +237,4 @@ const mapStateToProps = (state) => {
 
 const StyledShowExpense = withStyles(styles)(ShowExpense)
 
-export default connect(mapStateToProps, {  getItem, createState, updateItem, resetState, uploadFileToServer })(StyledShowExpense);
+export default connect(mapStateToProps, {  getItem, createState, updateItem, resetState, uploadFileToServer, setNotification })(StyledShowExpense);

@@ -3,6 +3,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { cvtToLocale, checkNumFormatRegex } from '../../utils/help_function'
+import {setNotification} from '../../redux/notification/actions'
 import { getItem, resetState, updateItem, createState, removeImageFromArray, uploadProductFileToServer } from '../../redux/library/actions'
 import { withStyles, Typography, Grid, TextField, IconButton, Button } from '@material-ui/core';
 import ApxBackBtn from '../../components/common/backBtn'
@@ -146,7 +147,7 @@ class ShowProduct extends React.Component {
                             value={ cvtToLocale(product.buying_price) }
                             onChange={ (e) => {
                                 if(checkNumFormatRegex(e.target.value) === false){
-                                   alert(locale.message.error_422_price)
+                                    this.props.setNotification("error_422_price", "warning")
                                 }else{
                                   this.props.createState(reducer, "buying_price", e.target.value)
                                 }
@@ -173,7 +174,7 @@ class ShowProduct extends React.Component {
                             value={ cvtToLocale(product.selling_price)}
                             onChange={ (e) => {
                                 if(checkNumFormatRegex(e.target.value) === false){
-                                   alert(locale.message.error_422_price)
+                                   this.props.setNotification("error_422_price", "warning")
                                 }else{
                                   this.props.createState(reducer, "selling_price", e.target.value)
                                 }
@@ -263,4 +264,4 @@ const mapStateToProps = (state) => {
 
 const StyledShowProduct = withStyles(styles)(ShowProduct)
 
-export default connect(mapStateToProps, { getItem , resetState, updateItem, createState, removeImageFromArray, uploadProductFileToServer })(StyledShowProduct);
+export default connect(mapStateToProps, { getItem , resetState, updateItem, createState, removeImageFromArray, uploadProductFileToServer, setNotification })(StyledShowProduct);

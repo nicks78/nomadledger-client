@@ -58,8 +58,21 @@ import Archive from '../pages/archive'
 
 class Routes extends React.Component {
 
+    state = {
+      mountedAt: null
+    }
+
     componentDidMount(){
+        if(this.props.authUser)
         this.props.initLocale(this.props.authUser.locale || "fr")
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(this.state.mountedAt){
+            nextProps.initLocale(nextProps.authUser.locale || "fr");
+            this.setState({ mountedAt: Date.now() })
+        }
+
     }
 
     handleChangeLocale = (locale) => {

@@ -1,6 +1,7 @@
 //manager/src/components/lib/addItem.js
 
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import ApxExpanded from '../components/common/expanded'
@@ -13,7 +14,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Hidden from '@material-ui/core/Hidden';
 import {checkNumFormatRegex} from '../utils/help_function'
 import {resizeFile} from '../utils/resizeFile'
-
+import {setNotification} from '../redux/notification/actions'
 
 
 const styles = theme => ({
@@ -76,7 +77,7 @@ class Add extends Component {
         if(fieldName === "price" || fieldName === "selling_price" || fieldName === "buying_price"){
 
           if(checkNumFormatRegex(value) === false){
-            alert(this.props.locale.message.error_422_price);
+            this.props.setNotification("error_422_price", 'warning');
             return
           }
         }
@@ -102,13 +103,14 @@ class Add extends Component {
 
     handleFile (file) {
         var imagesArray = this.props.newData.doc ?  this.props.newData.doc : [];
-        if(file)
+        if(file){
             if(file.type === 'image/png' || file.type === 'image/jpeg' ){ // Check file format
                 file.blob = URL.createObjectURL(file)
                 imagesArray.push(file)
             }else{
-                alert(this.props.locale.message.error_file_not_allowed)
+                this.props.setNotification("error_file_not_allowed", 'warning');
             }
+        }
         return imagesArray
     }
 
@@ -205,4 +207,4 @@ class Add extends Component {
 
 const AddItem = withStyles(styles)(Add)
 
-export default AddItem;
+export default connect(null, {setNotification})(AddItem);

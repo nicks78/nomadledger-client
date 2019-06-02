@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { getItem, createState, updateItem, resetState } from '../../redux/library/actions'
+import {setNotification} from '../../redux/notification/actions'
 import { withStyles, Typography, TextField, Grid, Button} from '@material-ui/core';
 import ApxAlert from '../../components/common/alert'
 import Spinner from '../../components/common/spinner'
@@ -84,7 +85,7 @@ class ShowService extends Component {
                     value={  cvtToLocale( service.price  ) }
                     onChange={ (e) => {
                         if(checkNumFormatRegex(e.target.value) === false){
-                           alert(locale.message.error_422_price)
+                           this.props.setNotification("error_422_price", "warning")
                         }else{
                           this.props.createState(reducer, "price", e.target.value)
                         }
@@ -174,4 +175,4 @@ const mapStateToProps = (state) => {
 
 const StyledShowService = withStyles(styles)(ShowService)
 
-export default connect(mapStateToProps, {  getItem, createState, updateItem, resetState })(StyledShowService);
+export default connect(mapStateToProps, {  getItem, createState, updateItem, resetState , setNotification})(StyledShowService);
