@@ -5,47 +5,65 @@ const en = {
     company_name: "NomadLedger",
     home:{
         name: "Dashboard",
-        url: "home"
+        url: "/dashboard",
+        h1: ""
     },
     contact:{
         name: "Contacts",
-        url: "contact"
-    },
-    bookkeeping: {
-        name: "Bookkeeping",
-        url: "compta"
+        url: "/contact",
+        h1: ""
     },
     invoice:{
         name: "Invoices",
-        url: "factures"
+        url: "/invoice",
+        h1: ""
     },
     quote:{
         name: "Quotes",
-        url: "factures"
+        url: "/quote",
+        h1: ""
     },
     refund:{
         name: "Refunds",
-        url: "refund"
+        url: "/refund",
+        h1: ""
     },
     product:{
         name: "Products",
-        url: "factures"
+        url: "/product",
+        h1: ""
     },
     service:{
         name: "Services",
-        url: "factures"
+        url: "/service",
+        h1: ""
     },
     expense:{
         name: "Expenses",
-        url: "factures"
+        url: "/expense",
+        h1: ""
     },
     task:{
         name: "Tasks",
-        url: "tache"
+        url: "/task",
+        h1: ""
     },
     archive:{
         name: "Archive",
-        url: "archive"
+        url: "/archive",
+        h1: ""
+    },
+    template:{
+        name: "Template",
+        url: "/template",
+        h1: "Use Our Document Examples",
+        subtitle: `You can send us your own template at <a href='mailto:contact@nomadledger.com'>contact@nomadledger.com<a/>.
+        After our team validation it will be shared with <strong>NomadLegder</strong> community.`,
+        rule: `The documents is provided "as is", without warranty of any kind, express or implied, including but not limited
+        to the warranties of merchantability, fitness for a particular purpose and noninfringement.
+        In no event shall the authors or copyright holders be liable for any claim,
+        damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with
+        the documents or the use or other dealings in the documents.`
     },
     titles: {
 
@@ -100,6 +118,7 @@ const en = {
     },
     wording: {
         exportcsv: "Export as csv",
+        locale: "Select the documents language",
         create: "Create",
         save: "Save",
         edit: 'Edit',
@@ -299,7 +318,7 @@ const en = {
         type_message: "Type your message...",
         payment_terms: "Membership gives you full access to NomadLegder for 365 days",
         add_tags: "Once you create your tag, you can edit in two languages FR - EN ",
-        trial_30: "Free 14-Day Trial",
+        trial_30: "Free 7-Day Trial",
         account_vat: "List all your VAT rates, you will need them to create your accounting documents",
         account_group: "Easily create contact groups to aid search filter",
         account_category: "Categorize your products/services/expenses, you can add a color for each category to use in your dashboard",
@@ -367,6 +386,7 @@ const en = {
         error_422_selling_price: "Sell price field is required",
         error_422_indice: "VAT rate must be a number (ex:19.60)",
         error_422_name: "Must contain a name",
+        error_422_access_member: "Only NomadLedger member have access to this function",
         error_sign_up_google: "Google sign Up did not work, please try again or contact us at support@nomadledger.com",
 
         // Stripe err
@@ -400,8 +420,8 @@ const en = {
     home_page: {
         title_01: "The invoicing software <br />for digital nomad",
         paragraphe_01: `NomadLedger is an easy to use software to manage your invoicing document and keep track of your tasks in just a few click.`,
-        agreed_terms: `* By signing up, you agree to the <a href="https://api.nomadledger.com/termsandconditions_en.pdf">Terms and Conditions</a> and <a href="https://api.nomadledger.com/privacypolicy_en.pdf">Privacy Policy</a>.`,
-        footer_paragraphe: `All rights reserved.&nbsp;<a href="https://api.nomadledger.com/termsandconditions_en.pdf" rel="noopener noreferrer" target="_blank">Terms and Conditions</a>,&nbsp;
+        agreed_terms: `* By signing up, you agree to the <a target="_blank" href="https://api.nomadledger.com/termsandconditions_en.pdf">Terms and Conditions</a> and <a href="https://api.nomadledger.com/privacypolicy_en.pdf">Privacy Policy</a>.`,
+        footer_paragraphe: `All rights reserved.&nbsp;<a target="_blank" href="https://api.nomadledger.com/termsandconditions_en.pdf" rel="noopener noreferrer" target="_blank">Terms and Conditions</a>,&nbsp;
         features, support, pricing, and service options subject to change without notice.`
     }
 }

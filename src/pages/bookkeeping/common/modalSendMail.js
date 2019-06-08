@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SendIcon from '@material-ui/icons/SendOutlined'
 import CloseIcon from '@material-ui/icons/CloseOutlined'
 import Tooltips from '../../../components/common/tooltips'
-
+import ApxSelect from '../../../components/common/select'
 
 
 function getModalStyle() {
@@ -32,10 +32,13 @@ const styles = theme => ({
   },
 });
 
+
+
 class SimpleModal extends React.Component {
   state = {
     open: false,
     email: this.props.item.contact_id.email,
+    locale: localStorage.getItem("locale") === "fr" ? {fr: "Francais", en:"French"} : {fr: "Anglais", en:"English"},
     subject: "",
     content: `<p><br /><br />${this.props.company.company_name}<br />
           ${this.props.user.lastname} ${this.props.user.firstname}<br />
@@ -50,9 +53,7 @@ class SimpleModal extends React.Component {
   }
 
   handleClose = () => {
-    this.setState({
-      open: false,
-    });
+    this.setState({ open: false })
   }
 
   handleRichEditor = (reducer, fieldName, value) => {
@@ -61,17 +62,31 @@ class SimpleModal extends React.Component {
 
   sendEmail = (e) => {
     e.preventDefault();
+    var langue = this.state.locale.en === "French" ? "fr" : "en"
     var data = {
       email: this.state.email,
       subject: this.state.subject,
       content: this.state.content
     }
-    this.props.sendEmailWithPdf(this.props.reducer, `/send-document/${this.props.item._id}`, data)
+    this.props.sendEmailWithPdf(this.props.reducer, `/send-document/${this.props.item._id}?locale=${langue}`, data)
+  }
+
+  renderTextField = (fieldName) => {
+    return <TextField
+              type={fieldName}
+              value={this.state[fieldName]}
+              label={this.props.locale.wording[fieldName]}
+              fullWidth
+              required
+              variant="outlined"
+              onChange={ (e) => { this.setState({[fieldName]: e.target.value}) } }
+              margin="dense"
+            />
   }
 
   render() {
     const { classes, loading , reducer, item, locale, actionLoading } = this.props;
-    const {email, subject, content} = this.state
+    const { content} = this.state
 
     return (
       <React.Fragment>
@@ -88,32 +103,27 @@ class SimpleModal extends React.Component {
 
             <Typography variant="h2" align="center">{item.contact_id.company_name}</Typography><br />
             <Typography variant="h3" align="center">{locale.wording[reducer.toLowerCase()]}&nbsp;{item.ref_add +"-"+item.ref}</Typography>
-            <TextField
-                  type="email"
-                  value={email}
-                  label={locale.wording.email}
-                  fullWidth
-                  required
-                  variant="outlined"
-                  onChange={ (e) => { this.setState({email: e.target.value}) } }
-                  margin="dense"/>
+            {this.renderTextField("email")}
+            {this.renderTextField("subject")}
+            <div style={{marginTop: 8}}>
+              <ApxSelect
+                arrayField={[{fr: "Francais", en:"French"}, {fr: "Anglais", en:"English"}]}
+                field="locale"
+                locale={locale}
+                value={this.state.locale ? this.state.locale[localStorage.getItem("locale")] : ""}
+                handleAction={ (e) => { this.setState({locale: e.target.value}) } }
+                />
+            </div>
 
-            <TextField
-                  type="text"
-                  onChange={ (e) => { this.setState({subject: e.target.value}) } }
-                  value={subject}
-                  label={locale.wording.subject}
-                  required
-                  fullWidth
-                  variant="outlined"
-                  margin="dense"/>
-
+            <div style={{marginTop: 8}}>
             <ApxRichEditor
                 reducer={reducer}
                 field="content"
                 initText={content || ""}
+
                 handleAction={ this.handleRichEditor }
             />
+            </div>
             <br />
             <div style={{float: "right"}}>
               <Button

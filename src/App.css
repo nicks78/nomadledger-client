@@ -97,7 +97,8 @@ a:hover {
 }
 
 .DayPicker-Day--today {
-  color: #a40000;
+  /* color: white; */
+  font-weight: 600;
 }
 
 /****************************************************

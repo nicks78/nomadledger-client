@@ -96,7 +96,8 @@ class AddCategory extends Component {
                         onKeyPress={(e) => { e.key === "Enter" && this._pushToDoc() }}
                         name="category_name"
                         onChange={this._handleFormEdit}
-                        margin="normal"
+                        margin="dense"
+                        
                     />
 
                 <AddIcon  className={ classes.addBtn} onClick={ this._pushToDoc }/>

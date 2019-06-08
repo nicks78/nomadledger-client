@@ -188,12 +188,12 @@ class View extends Component {
             </Typography>
             <Typography variant="body1" className={ classes.sum } style={{backgroundColor: "white"}}>
               <b style={{ marginLeft: 24 }}>{locale.wording.vat}&nbsp;{ item.vat ? item.vat.value : "0%" }</b>
-              <span className={ classes.sumSpan }><b>{ this.totalHT(item.list_items).vat } { item.currency && item.currency.value }</b></span><br />
+              <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(this.totalHT(item.list_items).vat || 0) } { item.currency && item.currency.value }</b></span><br />
               <span style={{ marginLeft: 24, fontSize: 10 }}>{ item.vat && item.vat["vat_terms_" + localStorage.getItem('locale')] }</span>
             </Typography>
             <Typography variant="body1" className={ classes.sum }>
               <b style={{ marginLeft: 24 }}>{locale.wording.total_ttc}</b>
-              <span className={ classes.sumSpan }><b>{ this.totalHT(item.list_items).ttc } { item.currency && item.currency.value }</b></span>
+              <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(this.totalHT(item.list_items).ttc || 0) } { item.currency && item.currency.value }</b></span>
             </Typography>
         </div>
 

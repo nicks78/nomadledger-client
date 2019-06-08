@@ -234,7 +234,7 @@ class Layout extends React.Component {
             </Drawer>
             </Hidden>
 
-            <main className={classes.content} id="scrollable">
+            <main className={classes.content} id="scrollable" >
                 <div className={classes.toolbar} />
                     {this.props.children}
             </main>

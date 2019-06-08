@@ -30,15 +30,29 @@ const Styles = theme => ({
     active: {
         color: theme.palette.secondary.main,
         borderRadius: "0px 50px 50px 0px",
-        backgroundColor: '#dfdedf',
+        backgroundColor:'#dfdedf',
         '& span': {
             color: `${theme.palette.secondary.main} !important`,
+
+            fontWeight: '700 !important'
+        },
+        '& svg': {
+            color: `${theme.palette.secondary.main} !important`,
+
+        },
+
+    },
+    _active: {
+        color: theme.palette.secondary.main,
+        backgroundColor:'#dfdedf',
+        '& span': {
+            color: `${theme.palette.secondary.main} !important`,
+
             fontWeight: '700 !important'
         },
         '& svg': {
             color: `${theme.palette.secondary.main} !important`,
         },
-
     },
     listText: {
         borderRadius: "0px 50px 50px 0px",
@@ -92,6 +106,29 @@ class MainMenu extends React.Component {
         this.setState( state => ({ open: !this.state.open }));
     }
 
+    components = {
+        InsertChartIcon: InsertChartIcon,
+        AccountBalanceIcon: AccountBalanceIcon,
+        ListAltIcon: ListAltIcon,
+        CachedIcon: CachedIcon,
+        ReceiptIcon: ReceiptIcon,
+        HeadsetMicIcon: HeadsetMicIcon,
+        StoreIcon: StoreIcon,
+        GroupIcon: GroupIcon,
+        AssignmentIcon: AssignmentIcon,
+    }
+
+    renderMenuBar = (menuName, iconName ) => {
+      const TagName = this.components[iconName] ;
+      const {classes, closeDrawer, locale } = this.props
+      return <ListItem button component={NavLink} className={classes.listText} onClick={ closeDrawer } to={ locale[menuName].url } activeClassName={classes.active}>
+                <ListItemIcon >
+                    <TagName />
+                </ListItemIcon>
+                <ListItemText className={ classes.listText } primary={ locale[menuName].name } />
+            </ListItem>
+    }
+
     render() {
     const { classes, locale, company } = this.props;
 
@@ -104,78 +141,34 @@ class MainMenu extends React.Component {
                 </div>
             </Hidden>
             <List component="nav" disablePadding className={classes.listText}>
-                <ListItem button component={NavLink} className={classes.listText} onClick={ this.props.closeDrawer } to="/dashboard" activeClassName={classes.active}>
-                    <ListItemIcon >
-                        <InsertChartIcon />
-                    </ListItemIcon>
-                    <ListItemText className={ classes.listText } primary={ locale.home.name } />
-                </ListItem>
-
-                <Divider className={classes.divider}/>
-
-                    <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/invoice" activeClassName={classes.active}>
-                        <ListItemIcon>
-                            <AccountBalanceIcon  />
-                        </ListItemIcon>
-                        <ListItemText className={ classes.listText } primary={ locale.invoice.name } />
-                    </ListItem>
-                    <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/quote" activeClassName={classes.active}>
-                        <ListItemIcon>
-                            <AssignmentIcon  />
-                        </ListItemIcon>
-                        <ListItemText className={ classes.listText } primary={ locale.quote.name } />
-                    </ListItem>
-                    <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/refund" activeClassName={classes.active}>
-                        <ListItemIcon>
-                            <CachedIcon  />
-                        </ListItemIcon>
-                        <ListItemText className={ classes.listText } primary={ locale.refund.name } />
-                    </ListItem>
+                  { this.renderMenuBar('home', "InsertChartIcon") }
 
               <Divider className={classes.divider}/>
-
-                <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/expense" activeClassName={classes.active}>
-                    <ListItemIcon>
-                        <ReceiptIcon  />
-                    </ListItemIcon>
-                    <ListItemText className={ classes.listText } primary={ locale.expense.name } />
-                </ListItem>
-
+                  { this.renderMenuBar('invoice', "AccountBalanceIcon") }
+                  { this.renderMenuBar('quote', "ListAltIcon") }
+                  { this.renderMenuBar('refund', "CachedIcon") }
 
               <Divider className={classes.divider}/>
-
-                <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/service" activeClassName={classes.active}>
-                    <ListItemIcon>
-                        <HeadsetMicIcon  />
-                    </ListItemIcon>
-                    <ListItemText className={ classes.listText } primary={ locale.service.name } />
-                </ListItem>
-                <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/product" activeClassName={classes.active}>
-                    <ListItemIcon>
-                        <StoreIcon  />
-                    </ListItemIcon>
-                    <ListItemText className={ classes.listText } primary={ locale.product.name } />
-                </ListItem>
+                  { this.renderMenuBar('expense', "ReceiptIcon") }
 
               <Divider className={classes.divider}/>
+                  { this.renderMenuBar('service', "HeadsetMicIcon") }
+                  { this.renderMenuBar('product', "StoreIcon") }
 
-                <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/contact" activeClassName={classes.active}>
-                    <ListItemIcon>
-                        <GroupIcon  />
-                    </ListItemIcon>
-                    <ListItemText className={ classes.listText } primary={ locale.contact.name } />
-                </ListItem>
+              <Divider className={classes.divider}/>
+                  { this.renderMenuBar('contact', "GroupIcon") }
+                  { this.renderMenuBar('task', "AssignmentIcon") }
 
-                <ListItem button component={NavLink} className={classes.listText}  onClick={ this.props.closeDrawer } to="/task" activeClassName={classes.active}>
-                    <ListItemIcon>
-                        <ListAltIcon  />
-                    </ListItemIcon>
-                    <ListItemText className={ classes.listText } primary={ locale.task.name } />
-                </ListItem>
             </List>
             <Divider style={{backgroundColor: "rgba(0, 0, 0, 0.12)"}}/>
-            <List component="nav">
-                <ListItem button component={NavLink}  className={classes.listTextSecondary}  onClick={ this.props.closeDrawer } to="/archive" activeClassName={classes.active}>
+              <List component="nav" style={{ paddingTop: 0, paddingBottom: 0 }}>
+                  <ListItem button component={NavLink}  className={classes.listTextSecondary}  onClick={ this.props.closeDrawer } to="/template" activeClassName={classes._active}>
+                      <ListItemText  primary={ locale.template.name } />
+                  </ListItem>
+              </List>
+
+            <List component="nav" style={{ paddingTop: 0, paddingBottom: 0 }}>
+                <ListItem button component={NavLink}  className={classes.listTextSecondary}  onClick={ this.props.closeDrawer } to="/archive" activeClassName={classes._active}>
                     <ListItemText  primary={ locale.archive.name } />
                 </ListItem>
             </List>

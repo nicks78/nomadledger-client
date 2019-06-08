@@ -66,7 +66,7 @@ const ProductCard = (props) => {
                 />
           <CardContent>
             <Typography variant="caption">{locale.wording.buying_price}:
-              <span className={classes.span }>{product.buying_price} {product.currency.value}</span>
+              <span className={classes.span }>{cvtNumToUserPref(product.buying_price || 0)} {product.currency.value}</span>
             </Typography>
             <Typography variant="caption">{locale.wording.stock}:
               <span className={classes.span }>{product.stock}</span>

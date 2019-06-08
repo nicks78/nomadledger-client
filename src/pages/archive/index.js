@@ -67,7 +67,7 @@ class Archive extends Component {
                 tooltipTitle={locale.wording.filter_doc_type}
             />
 
-                 <div style={{overflowY: "auto"}}>
+          <div style={{overflowY: "auto", minHeight: 300}} >
                     <Table  padding="dense">
                     <TableHead className={classes.tableHead}>
                         <TableRow>

@@ -6,51 +6,65 @@ const fr =  {
     company_name: "NomadLedger",
     home:{
         name: "Tableau de bord",
-        url: "accueil"
+        url: "/dashboard",
+        h1: ""
     },
     contact:{
         name: "Contacts",
-        url: "contact"
-    },
-    bookkeeping: {
-        name: "Compta",
-        url: "compta"
+        url: "/contact",
+        h1: ""
     },
     invoice:{
         name: "Factures",
-        url: "factures"
+        url: "/invoice",
+        h1: ""
     },
     quote:{
         name: "Devis",
-        url: "factures"
+        url: "/quote",
+        h1: ""
     },
     refund:{
         name: "Avoirs",
-        url: "factures"
+        url: "/refund",
+        h1: ""
     },
     product:{
         name: "Produits",
-        url: "factures"
+        url: "/product",
+        h1: ""
     },
     service:{
         name: "Services",
-        url: "factures"
+        url: "/service",
+        h1: ""
     },
     expense:{
         name: "Dépenses",
-        url: "factures"
-    },
-    vat:{
-        name: "Tva",
-        url: "factures"
+        url: "/expense",
+        h1: ""
     },
     task:{
         name: "Tâches",
-        url: "tache"
+        url: "/task",
+        h1: ""
     },
     archive:{
         name: "Archive",
-        url: "archive"
+        url: "/archive",
+        h1: ""
+    },
+    template:{
+        name: "Template",
+        url: "/template",
+        h1: "Utiliser nos exemples de documents",
+        subtitle: `Vous pouvez nous envoyer vos exemples de contrat à
+          l'adresse <a href="mailto:contact@nomadledger.com">contact@nomadledger.com</a>. Après validation de notre équipe, ils seront disponibles pour toute la communauté <strong>NomadLegder</strong>.`,
+        rule: `Les documents sont fournis "en l’etat", sans aucune garantie, expresse ou implicite, y compris, mais sans s'y limiter,
+         les garanties de qualité marchande, aptitude à un usage particulier et à l’absence de violation. En aucun cas, le les auteurs
+         ou les titulaires de copyright sont responsables de toute réclamation, de dommages ou d'autres responsabilité,
+         qu'il soit dans une action de contrat, de tort ou autrement, résultant de, hors ou en lien avec le documents ou l’utilisation
+         ou d’autres transactions dans le documents.`
     },
     titles: {
 
@@ -107,6 +121,7 @@ const fr =  {
     },
     wording: {
         exportcsv: "Export au format csv",
+        locale: "Choisissez la langue du documents",
         create: "Créer",
         save: "Enregistrer",
         edit: 'Editer',
@@ -307,7 +322,7 @@ const fr =  {
         type_message: "Taper votre message...",
         payment_terms: "Cet abonnement vous donne un accès total à la plateforme pendant 365 jours",
         add_tags: "Une fois l'élément créé, vous aurez la possibilité d'éditer en 2 langues FR - EN ",
-        trial_30: "14 jours d'essai gratuit",
+        trial_30: "7 jours d'essai gratuit",
         account_setting: " Vous pouvez ajouter initialiser vos paramètres, afin d'optimiser vos documents comptables et filtre de recherche",
         account_vat: "Lister vos taux de TVA, ils vous seront utile pour la redaction de vos documents comptables",
         account_group: "Créer vos propres groupes de contact afin de facilité, vos recherches dans la sections contacts",
@@ -321,7 +336,8 @@ const fr =  {
         member_end: "Votre abonnement actuel prend fin le",
         cannot_change_email: "L'adresse email n'est modifiable que sur demande.",
         import_contact: "Cette opération peut prendre quelques minutes, veuillez patientez merci...",
-        edit_receiver_contact: "Editer les informations du destinataire"
+        edit_receiver_contact: "Editer les informations du destinataire",
+
 
     },
     message: {
@@ -376,6 +392,7 @@ const fr =  {
         error_422_selling_price: "Le champs prix de vente est obligatoire",
         error_422_indice: "Taux de TVA doit être un chiffre (ex: 19,60 ou 19.60)",
         error_422_name: "Veuillez indiquer un nom",
+        error_422_access_member: "Seule les membres NomadLedger ont accès à cette fonction.",
         error_sign_up_google: "Inscription via Google n'a pas fonctionner, veuillez recommencer ou contacter notre service support@nomadledger.com",
 
         // Stripe err
@@ -407,8 +424,8 @@ const fr =  {
     home_page: {
         title_01: "Logiciel de facturation <br />pour digital nomade",
         paragraphe_01: `NomadLedger est un logiciel de facturation simple et rapide a prendre en main, il vous aidera a suivre votre business en quelque clique.`,
-        agreed_terms: ` * En m'inscrivant, j'accepte les <a href="https://api.nomadledger.com/termsandconditions_fr.pdf">Conditions générales</a>  et la  <a href="https://api.nomadledger.com/privacypolicy_fr.pdf">Politique de protection de la vie privée</a>.`,
-        footer_paragraphe: `Tous droits réservés.&nbsp;<a href="https://api.nomadledger.com/termsandconditions_fr.pdf" rel="noopener noreferrer" target="_blank">Conditions Générales</a>,&nbsp;
+        agreed_terms: ` * En m'inscrivant, j'accepte les <a target="_blank" href="https://api.nomadledger.com/termsandconditions_fr.pdf">Conditions générales</a>  et la  <a href="https://api.nomadledger.com/privacypolicy_fr.pdf">Politique de protection de la vie privée</a>.`,
+        footer_paragraphe: `Tous droits réservés.&nbsp;<a target="_blank" href="https://api.nomadledger.com/termsandconditions_fr.pdf" rel="noopener noreferrer" target="_blank">Conditions Générales</a>,&nbsp;
         les fonctionnalités, l'assistance, la tarification et les options sont susceptibles d'être modifiées sans préavis.`
     }
 };

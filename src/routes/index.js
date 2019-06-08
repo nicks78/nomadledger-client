@@ -56,6 +56,9 @@ import Layout from '../components/layout/layout'
 // Archive
 import Archive from '../pages/archive'
 
+// Template
+import Template from '../pages/template'
+
 class Routes extends React.Component {
 
     state = {
@@ -128,6 +131,8 @@ class Routes extends React.Component {
                                 <PrivateRoute exact path="/archive" component={Archive}  auth={isLoggedIn}/>
 
                                 <PrivateRoute exact path="/email-content" component={Email}  auth={isLoggedIn}/>
+
+                                <PrivateRoute exact path="/template" component={Template}  auth={isLoggedIn}/>
 
                                 <BookkeepingRoute isLoggedIn={isLoggedIn}/>
 

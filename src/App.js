@@ -19,6 +19,7 @@ const theme = createMuiTheme({
       contrastText: '#fff',
     },
     secondary: {
+      thinlight: "rgba(242, 103, 103, 0.1)",
       // light: '#38CC24', // '#ff6666', //'#ff9d3f',
       main: "#F26767", // rgba(239, 108, 0, 1)',
       // dark:  '#38CC24',
@@ -54,14 +55,14 @@ const theme = createMuiTheme({
     fontWeight: 300,
     h1:{
       fontSize: '1.8rem',
-      fontWeight: 300,
+      fontWeight: 400,
       color: 'rgb(48, 48, 48)',
       textTransform: "capitalize"
     },
     h2: {
       fontSize: '1.3rem',
       color: 'rgb(48, 48, 48)',
-      fontWeight: 300,
+      fontWeight: 400,
       textTransform: "capitalize"
     },
     h3: {
