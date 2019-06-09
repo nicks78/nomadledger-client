@@ -70,6 +70,7 @@ class EditQuote extends React.Component {
                     date_1="created_at"
                     date_2="expired_at"
                 />
+
                 <Fab size="medium" color="primary" className={classes.icon}>
                     <CloudDownloadIcon onClick={ () => {this.props.downloadPdf("QUOTE", quote._id)} } />
                 </Fab>

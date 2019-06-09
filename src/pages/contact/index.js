@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import {Table, TableHead, TableBody, Paper, TableCell, TableRow, withStyles, IconButton, Typography} from '@material-ui/core';
+import {Table, TableHead, TableBody, TableCell, TableRow, IconButton, Typography} from '@material-ui/core';
 import {connect} from 'react-redux'
 import {downloadFile} from '../../redux/download/actions'
 import { createItem, getItemList, getItem, createState, resetState, deleteElement, importGoogleContact} from '../../redux/library/actions'
@@ -13,25 +13,9 @@ import MobileView from './mobileView'
 import DeleteIcon from '@material-ui/icons/DeleteOutlined'
 import EditIcon from '@material-ui/icons/EditOutlined'
 import Tooltips from '../../components/common/tooltips';
+import ApxPaper from '../../components/common/paper';
 import GoogleContacts from './googleContacts'
 
-
-const styles =  theme => ({
-    container: {
-    },
-    tableHead: {
-        backgroundColor: "rgb(238,238,238)"
-    },
-    paper: {
-        position: 'relative',
-        padding: 0,
-        overflow: "hidden",
-        [theme.breakpoints.down('sm')]: {
-            boxShadow: 'none',
-            borderRadius: 0
-        },
-    }
-})
 
 
 class Contact extends Component {
@@ -95,7 +79,7 @@ class Contact extends Component {
 
     render() {
 
-    const { isFetching, uploadingContact, locale, createItem, createState, newContact, isCreating, progress, classes, contactGroup, rowsPerPageOptions, total, country} = this.props
+    const { isFetching, uploadingContact, locale, createItem, createState, newContact, isCreating, progress, contactGroup, rowsPerPageOptions, total, country} = this.props
     const {reducer, width, listContacts } = this.state
     const isMobile = width <= 500;
 
@@ -105,7 +89,7 @@ class Contact extends Component {
     }
 
     return (
-        <div className={classes.container}>
+        <div>
           {
             !isMobile ?
             <div style={{display: "flex", justifyContent: "flex-start", marginBottom: 24, alignItems: 'center'}}>
@@ -123,7 +107,7 @@ class Contact extends Component {
             : null
           }
               { !isMobile  ?
-                <Paper className={classes.paper}>
+                <ApxPaper>
                     <ApxTableToolBar
                         numSelected={0}
                         title={isFetching ? locale.wording.loading : locale.wording.search_contacts}
@@ -139,9 +123,9 @@ class Contact extends Component {
                         searchBar={true}
                         onSearchByName={ this.handleSearchByName }
                     />
-                    <div style={{ overflowY: "auto", minHeight: 300 }}>
+                  <div className="table-wrapper">
                     <Table>
-                    <TableHead className={classes.tableHead}>
+                    <TableHead>
                         <TableRow>
                             <TableCell>{ locale.wording.company }</TableCell>
                             <TableCell>{ locale.wording.group }</TableCell>
@@ -187,7 +171,7 @@ class Contact extends Component {
                     />
 
 
-            </Paper>
+            </ApxPaper>
 
             : <MobileView
                   contacts={listContacts}
@@ -223,6 +207,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-const StyledContact = withStyles(styles)(Contact)
 
-export default connect(mapStateToProps, { downloadFile, createItem, getItemList, getItem, createState, resetState , deleteElement, importGoogleContact})(StyledContact);
+export default connect(mapStateToProps, { downloadFile, createItem, getItemList, getItem, createState, resetState , deleteElement, importGoogleContact})(Contact);

@@ -7,7 +7,6 @@ import {Grid, Typography, withStyles, Paper } from '@material-ui/core'
 import BarCharts from '../../components/common/barCharts'
 import BarHorizontal from '../../components/common/barHorizontal'
 import PieCharts from '../../components/common/pie'
-import ApxPaper from '../../components/common/paper'
 import {cvtNumToUserPref} from '../../utils/help_function'
 import Spinner from '../../components/common/spinner'
 import StatusTask from '../task/statusTask'
@@ -74,7 +73,7 @@ class Home extends Component {
             <Grid container spacing={24} className={ classes.charts }>
 
                 <Grid  item xs={12} sm={8} md={8}>
-                  <ApxPaper>
+                  <Paper className={classes.paper}>
                   <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px", color: "#303030" }}>
                       { locale.wording.statistics }
                   </Typography>
@@ -83,9 +82,9 @@ class Home extends Component {
                             <BarCharts chartData={ mainStat } id="mainStat" currency={ currency.value || "-" }/>
                         : null
                     }
-                    </ApxPaper>
+                    </Paper>
                     <Paper className={classes.paper}>
-                        <Typography variant="caption" className={ classes.taskHeader }>{locale.subheading.label_daily_task}&nbsp;
+                        <Typography variant="h2" align="center">{locale.subheading.label_daily_task}&nbsp;
                             <span style={{textTransform: "capitalize"}}>{ new Date().toLocaleDateString(localStorage.getItem("locale"), options)  }</span>
                         </Typography>
                         <div>
@@ -104,7 +103,7 @@ class Home extends Component {
 
                                             </div>
                                 })
-                                :   <Typography variant="body1" style={{padding: 10}} align="center">
+                                :   <Typography variant="caption" style={{padding: 10}} align="center">
                                         {locale.subheading.label_not_task_found}
                                     </Typography>
                             }
@@ -114,7 +113,7 @@ class Home extends Component {
 
                 <Grid item xs={12} sm={4} md={4} >
 
-                  <ApxPaper>
+                  <Paper className={classes.paper}>
                     <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px", color: "#303030" }}>
                         { locale.wording.conversions } &nbsp;({ locale.wording.quote })
                     </Typography>
@@ -128,8 +127,8 @@ class Home extends Component {
                           : null
                       }
                       </div>
-                    </ApxPaper>
-                    <ApxPaper>
+                    </Paper>
+                    <Paper className={classes.paper}>
                       <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px", color: "#303030" }}>
                           { locale.subheading.label_graph_expense }
                       </Typography>
@@ -138,7 +137,7 @@ class Home extends Component {
                                 <BarHorizontal chartData={ expensesBy }  id="expensesBy" currency={ currency.value || "-" }/>
                             : null
                         }
-                    </ApxPaper>
+                    </Paper>
                 </Grid>
             </Grid>
         </div>
@@ -182,6 +181,7 @@ const styles = theme => ({
     paper: {
       minHeight: 150,
       marginBottom: 24,
+      padding: 24,
       [theme.breakpoints.down('sm')]: {
           boxShadow: 'none',
           borderRadius: 0
@@ -205,6 +205,7 @@ const styles = theme => ({
         marginBottom: 24
       },
     }
+
 })
 
 

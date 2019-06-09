@@ -70,6 +70,24 @@ a:hover {
   }
 }
 
+.table-wrapper{
+  overflow-y: auto;
+  min-height: 300px;
+}
+
+thead{
+  background-color: rgb(238,238,238) !important;
+}
+
+tr th {
+  color: #757575 !important;
+}
+
+tr td {
+  color: #303030 !important;
+  font-weight: 600 !important;
+}
+
 /****************************************************
         DATE PICKER
 *****************************************************/

@@ -36,7 +36,7 @@ const Form = (props) => {
                     {locale.subheading[formTitle] }
                     {
                         data.onRef ?
-                        <span style={{fontWeight: 700}}> { locale.wording.on }  { data.onRef}</span>
+                        <span> { locale.wording.on }  { data.onRef}</span>
                         : null
                     }
 
@@ -164,12 +164,19 @@ const Form = (props) => {
                                 }
 
                             </Grid>
-
-
                         </Grid>
-
                     </Grid>
                     <br/>
+                    {
+                      data.response ?
+                      <div className={classes.responseWrap}>
+
+                        <Typography variant="h3" align="center" style={{marginBottom: 10, color: "black"}}>{locale.subheading.label_client_feedback}</Typography>
+                        <Typography className={classes.response}  variant="body2" dangerouslySetInnerHTML={{__html: data.response }} />
+                      </div>
+                      : null
+                    }
+                  <br />
                 <ApxTitleBar
                   text={locale.subheading.info_comp }
                   hideEdit={true}
@@ -261,12 +268,22 @@ const styles = theme => ({
       },
       '& label':  {
         color: `${theme.palette.caption} !important`,
-        fontWeight: 300
+        fontWeight: 400
       },
       '& span':  {
         color: theme.palette.secondary.main
       }
-    }
+    },
+    responseWrap: {
+      backgroundColor: theme.palette.grey.main,
+      padding: 10
+    },
+    response: {
+      border: `1px solid rgba(0, 0, 0, 0.24)`,
+      minHeight: 80,
+      paddingLeft: 5,
+      backgroundColor: "white"
+    },
 })
 
 const ApxForm = withStyles(styles)(Form)

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import {downloadFile} from '../../redux/download/actions'
 import { createItem, getItemList, getItem, createState , resetState, deleteElement} from '../../redux/library/actions'
 import {connect} from 'react-redux'
-import { TableCell, TableRow, Table, TableHead, TableBody, withStyles, Paper, IconButton} from '@material-ui/core';
+import { TableCell, TableRow, Table, TableHead, TableBody, IconButton} from '@material-ui/core';
 import ApxTableToolBar from '../../components/common/tableToolBar'
 import AddExpense from './addExpense'
 import Pagination from '../../lib/pagination'
@@ -15,26 +15,7 @@ import MobileView from './mobileView'
 import RenderImage from '../../components/common/renderImage'
 import EditIcon from '@material-ui/icons/EditOutlined'
 import Tooltips from '../../components/common/tooltips';
-
-
-// STYLES
-const styles = theme =>  ({
-    tableHead: {
-        backgroundColor: "rgb(238,238,238)"
-    },
-    customWidth: {
-        maxWidth: 300,
-    },
-    paper: {
-        position: 'relative',
-        padding: 0,
-        overflow: "hidden",
-        [theme.breakpoints.down('sm')]: {
-            boxShadow: 'none',
-            borderRadius: 0
-        },
-    }
-})
+import ApxPaper from '../../components/common/paper';
 
 class Expense extends Component {
 
@@ -87,13 +68,13 @@ class Expense extends Component {
 
     render() {
 
-    const {isFetching, locale, newExpense, createItem, createState, isCreating, progress, category, classes, currency, vat, total} = this.props
+    const {isFetching, locale, newExpense, createItem, createState, isCreating, progress, category, currency, vat, total} = this.props
     const {reducer, width, listExpenses } = this.state
     const isMobile = width <= 500;
 
 
     return (
-        <div className={ classes.container }>
+        <div>
 
             <AddExpense
                 locale={ locale }
@@ -108,7 +89,7 @@ class Expense extends Component {
             />
 
           { !isMobile ?
-            <Paper className={classes.paper}>
+            <ApxPaper>
 
                   <ApxTableToolBar
                       numSelected={0}
@@ -123,9 +104,9 @@ class Expense extends Component {
                       tooltipTitle={locale.wording.filter_category}
                     />
 
-                    <div style={{overflowY: "auto", minHeight: 300}}>
+                    <div  className="table-wrapper">
                     <Table>
-                    <TableHead className={classes.tableHead}>
+                    <TableHead>
                         <TableRow>
                             <TableCell>{ locale.wording.name }</TableCell>
                             <TableCell>{ locale.wording.date }</TableCell>
@@ -167,7 +148,7 @@ class Expense extends Component {
                         label2={locale.wording.of}
                         onGetItemList={ this.props.getItemList }
                     />
-            </Paper>
+            </ApxPaper>
 
             : <MobileView
                   expenses={listExpenses}
@@ -206,6 +187,4 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 
-const StyledExpense = withStyles(styles)(Expense)
-
-export default connect(mapStateToProps, { downloadFile, createItem, getItemList, getItem, createState, resetState , deleteElement })(StyledExpense);
+export default connect(mapStateToProps, { downloadFile, createItem, getItemList, getItem, createState, resetState , deleteElement })(Expense);

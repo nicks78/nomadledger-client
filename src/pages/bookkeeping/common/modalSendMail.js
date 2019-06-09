@@ -63,7 +63,11 @@ class SimpleModal extends React.Component {
     this.setState({ open: true });
   }
 
-  handleClose = () => {
+  handleClose = (e, reason) => {
+    console.log(reason)
+    // if (reason === 'backdropClick') {
+    //   return;
+    // }
     this.setState({ open: false })
   }
 
@@ -82,6 +86,8 @@ class SimpleModal extends React.Component {
     this.props.sendEmailWithPdf(this.props.reducer, `/send-document/${this.props.item._id}?locale=${langue}`, data)
   }
 
+
+
   renderTextField = (fieldName) => {
     return <TextField
               type={fieldName}
@@ -96,12 +102,12 @@ class SimpleModal extends React.Component {
   }
 
   render() {
-    const { classes, loading , reducer, item, locale, actionLoading } = this.props;
+    const { classes, reducer, item, locale, actionLoading } = this.props;
     const { content} = this.state
 
     return (
       <React.Fragment>
-        <Tooltips title={locale.wording.send}><IconButton onClick={this.handleOpen} style={{ minWidth: 5 }} disabled={loading}  color="primary"><SendIcon style={{ fontSize: 18, color:  "darkorange" }} /></IconButton></Tooltips>
+        <Tooltips title={locale.wording.send}><IconButton onClick={this.handleOpen} style={{ minWidth: 5 }} disabled={actionLoading}  color="primary"><SendIcon style={{ fontSize: 18, color:  "darkorange" }} /></IconButton></Tooltips>
         <Modal
           aria-labelledby={item._id}
           aria-describedby="simple-modal-description"
@@ -153,13 +159,13 @@ class SimpleModal extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
 
     return {
         locale: state.locale.locale,
         company: state.account.company.item,
-        isError: state.book.invoice.isError,
-        actionLoading: state.book.invoice.actionLoading,
+        isError: state.book[ownProps.reducer.toLowerCase()].isError,
+        actionLoading: state.book[ownProps.reducer.toLowerCase()].actionLoading,
         user: state.account.user.item
     }
 }

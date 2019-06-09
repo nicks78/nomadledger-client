@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { createItem, getItemList, getItem, createState , resetState, deleteElement} from '../../redux/library/actions'
 import {connect} from 'react-redux'
-import { TableCell, TableRow, Table, TableHead, TableBody, withStyles, Paper, IconButton} from '@material-ui/core';
+import { TableCell, TableRow, Table, TableHead, TableBody, IconButton} from '@material-ui/core';
 import ApxTableToolBar from '../../components/common/tableToolBar'
 import Tooltips from '../../components/common/tooltips'
 import AddService from './addService'
@@ -13,24 +13,7 @@ import Pagination from '../../lib/pagination'
 import DeleteIcon from '@material-ui/icons/DeleteOutlined'
 import MobileView from './mobileView'
 import EditIcon from '@material-ui/icons/EditOutlined'
-
-
-// STYLES
-const styles = theme =>  ({
-    tableHead: {
-        backgroundColor: "rgb(238,238,238)"
-    },
-    paper: {
-        position: 'relative',
-        padding: 0,
-        overflow: "hidden",
-        [theme.breakpoints.down('sm')]: {
-            boxShadow: 'none',
-            borderRadius: 0
-        },
-    }
-})
-
+import ApxPaper from '../../components/common/paper'
 
 
 class Service extends Component {
@@ -79,13 +62,13 @@ class Service extends Component {
 
     render() {
 
-    const {isFetching,  locale, newService, createItem, createState, isCreating, progress, category, classes, currency, service_type, total} = this.props
+    const {isFetching,  locale, newService, createItem, createState, isCreating, progress, category, currency, service_type, total} = this.props
     const {reducer, listServices, width } = this.state;
     const isMobile = width <= 500;
 
 
     return (
-        <div className={ classes.container }>
+        <div>
 
             <AddService
                 locale={ locale }
@@ -99,7 +82,7 @@ class Service extends Component {
                 service_type={service_type}
             />
           { !isMobile ?
-            <Paper className={classes.paper}>
+            <ApxPaper>
 
                     <ApxTableToolBar
                         numSelected={0}
@@ -112,9 +95,9 @@ class Service extends Component {
                         refresh={this.refresh}
                         tooltipTitle={locale.wording.filter_category}
                     />
-                    <div style={{overflowY: "auto", minHeight: 300}}>
+                  <div className="table-wrapper">
                     <Table>
-                    <TableHead className={classes.tableHead}>
+                    <TableHead>
                         <TableRow>
                             <TableCell>{locale.wording.service_name}</TableCell>
                             <TableCell align="right">{locale.wording.price}</TableCell>
@@ -156,7 +139,7 @@ class Service extends Component {
                         label2={locale.wording.of}
                         onGetItemList={ this.props.getItemList }
                     />
-            </Paper>
+            </ApxPaper>
             : <MobileView
                   services={listServices}
                   getMoreData={this.props.getItemList }
@@ -194,6 +177,4 @@ const mapStateToProps = (state) => {
 }
 
 
-const StyledService = withStyles(styles)(Service)
-
-export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, resetState, deleteElement })(StyledService);
+export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, resetState, deleteElement })(Service);

@@ -117,7 +117,8 @@ const fr =  {
         label_forgot_pwd_body1: "Mot de passe oublié ?",
         label_terms: "Ajouter des conditions de payment etc...",
         label_comp_member: "Votre abonnement",
-        label_reply_quote: "Envoyez-nous vos commentaires"
+        label_reply_quote: "Envoyez-nous vos commentaires",
+        label_client_feedback: "Commentaire du client"
 
     },
     wording: {

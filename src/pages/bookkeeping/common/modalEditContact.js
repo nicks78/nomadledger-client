@@ -61,6 +61,19 @@ class SimpleModal extends React.Component {
 
   }
 
+  renderTextField = (fieldName) => {
+    return <TextField
+              type="text"
+              value={this.props.item[fieldName]}
+              label={this.props.locale.wording[fieldName]}
+              fullWidth
+              name={fieldName}
+              variant="outlined"
+              onChange={ this.handleForm }
+              margin="dense"
+            />
+  }
+
   updateContact = (e) => {
     e.preventDefault();
     this.props.updateItem("CONTACT", `update`);
@@ -69,7 +82,7 @@ class SimpleModal extends React.Component {
 
   render() {
     const { classes, item, locale, actionLoading, country } = this.props;
-    const { lastname, firstname, addresses_zip, addresses_city, addresses_street, addresses_country, company_name} = item
+    const { addresses_country , company_name } = item
 
     return (
       <React.Fragment>
@@ -92,72 +105,21 @@ class SimpleModal extends React.Component {
               {locale.helperText.edit_receiver_contact }
             </Typography>
             <br />
-            <TextField
-                  type="text"
-                  value={company_name}
-                  label={locale.wording.company_name}
-                  fullWidth
-                  name="company_name"
-                  variant="outlined"
-                  onChange={ this.handleForm }
-                  margin="dense"/>
+            {this.renderTextField("company_name")}
+
             <Grid container spacing={8}>
-
                 <Grid item xs={12} sm={6} md={6}>
-                <TextField
-                      type="text"
-                      value={firstname}
-                      label={locale.wording.firstname}
-                      fullWidth
-                      name="firstname"
-                      variant="outlined"
-                      onChange={ this.handleForm }
-                      margin="dense"/>
+                  {this.renderTextField("firstname")}
                 </Grid>
                 <Grid item xs={12} sm={6} md={6}>
-                <TextField
-                      type="text"
-                      value={lastname}
-                      label={locale.wording.lastname}
-                      fullWidth
-                      name="lastname"
-                      variant="outlined"
-                      onChange={ this.handleForm }
-                      margin="dense"/>
+                  {this.renderTextField("lastname")}
                 </Grid>
-
             </Grid>
 
+            {this.renderTextField("addresses_street")}
+            {this.renderTextField("addresses_zip")}
+            {this.renderTextField("addresses_city")}
 
-
-            <TextField
-                  type="text"
-                  value={addresses_street}
-                  label={locale.wording.addresses_street}
-                  fullWidth
-                  name="addresses_street"
-                  variant="outlined"
-                  onChange={ this.handleForm }
-                  margin="dense"/>
-
-            <TextField
-                  type="text"
-                  value={addresses_zip}
-                  label={locale.wording.addresses_zip}
-                  fullWidth
-                  name="addresses_zip"
-                  variant="outlined"
-                  onChange={ this.handleForm }
-                  margin="dense"/>
-            <TextField
-                  type="text"
-                  value={addresses_city}
-                  label={locale.wording.addresses_city}
-                  fullWidth
-                  name="addresses_city"
-                  variant="outlined"
-                  onChange={ this.handleForm }
-                  margin="dense"/>
             <div style={{marginTop: 10}}>
             <ApxSelect
                 arrayField={country}

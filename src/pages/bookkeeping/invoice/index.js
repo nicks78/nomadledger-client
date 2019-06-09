@@ -7,9 +7,10 @@ import {downloadFile} from '../../../redux/download/actions'
 import {connect} from 'react-redux'
 import {  getBookList, updateField, createState, downloadPdf , resetState} from '../../../redux/book/actions'
 import {  getItemList} from '../../../redux/library/actions'
+import ApxPaper from '../../../components/common/paper'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import AddIcon from '@material-ui/icons/AddOutlined'
-import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, TableCell, TableRow, Fab} from '@material-ui/core';
+import { withStyles, Button, Hidden ,Table, TableHead, TableBody, TableCell, TableRow, Fab} from '@material-ui/core';
 import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
@@ -82,7 +83,7 @@ class Invoice extends Component {
                 </Button>
             </Hidden>
             { !isMobile ?
-            <Paper className={classes.paper}>
+            <ApxPaper className={classes.paper}>
 
             <ApxTableToolBar
                 title={isFetching ? locale.wording.loading :  locale.wording.invoice}
@@ -96,9 +97,9 @@ class Invoice extends Component {
                 tooltipTitle={locale.wording.filter_status}
                 refresh={ this.refresh }
             />
-            <div style={{ overflowY: "auto", minHeight: 300 }}>
+          <div className="table-wrapper">
                     <Table padding="dense">
-                    <TableHead className={classes.tableHead}>
+                    <TableHead>
                         <TableRow>
                             <TableCell>{locale.wording.date}</TableCell>
                             <TableCell>{locale.wording.reference}</TableCell>
@@ -160,7 +161,7 @@ class Invoice extends Component {
                         onGetItemList={ this.props.getBookList }
                     />
 
-            </Paper>
+            </ApxPaper>
             : <MobileView
                   items={listInvoice}
                   getMoreData={this.props.getBookList }
@@ -184,10 +185,6 @@ class Invoice extends Component {
 }
 
 const styles = theme => ({
-
-    tableHead: {
-        backgroundColor: 'rgb(238,238,238)'
-    },
     button: {
         color: 'white !important',
         marginRight: 10,
@@ -195,15 +192,6 @@ const styles = theme => ({
         '& :hover': {
             color: 'white !important',
         }
-    },
-    paper: {
-        position: 'relative',
-        padding: 0,
-        overflow: "hidden",
-        [theme.breakpoints.down('sm')]: {
-            boxShadow: 'none',
-            borderRadius: 0
-        },
     }
 })
 

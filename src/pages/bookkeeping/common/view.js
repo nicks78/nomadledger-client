@@ -144,12 +144,30 @@ class View extends Component {
 
               this.renderTransactionNumber()
 
-            : null
-          }
+              : null
+            }
+
+            {
+              item.response ?
+              <div className={classes.responseWrap}>
+
+                <Typography variant="h3" align="center" style={{marginBottom: 10, color: "black"}}>{locale.subheading.label_client_feedback}</Typography>
+                <Typography className={classes.response}  variant="body2" dangerouslySetInnerHTML={{__html: item.response }} />
+              </div>
+              : null
+            }
 
             <br />
-              <Typography variant="caption" align="left">{ locale.subheading.info_comp }</Typography>
-              <Typography className={classes.infos} variant="body2" dangerouslySetInnerHTML={{__html: item.infos }} />
+
+            {
+              item.info_comp ?
+              <div>
+                <Typography variant="body1" align="left">{ locale.subheading.info_comp }</Typography>
+                <Typography className={classes.infos} variant="body2" dangerouslySetInnerHTML={{__html: item.infos }} />
+              </div>
+              : null
+            }
+
 
               <div className={ classes.wrapTable }>
               <Table className={classes.table}>
@@ -200,6 +218,7 @@ class View extends Component {
         {
           item.terms ?
           <div style={{clear: "both"}}>
+            <Typography variant="body1">{locale.wording.tandc}</Typography>
             <Typography style={{clear: "both"}} className={classes.infos} variant="body2">{ item.terms }</Typography>
           </div>
           : null
@@ -262,9 +281,9 @@ const styles = theme => ({
     },
 
     infos: {
-      paddingLeft: 10,
+      paddingLeft: 5,
       paddingTop: 10,
-      border: `1px solid ${theme.palette.lightGrey}`,
+      border: `1px solid rgba(0, 0, 0, 0.24)`,
       minHeight: 80
     },
     tableHead: {
@@ -277,7 +296,17 @@ const styles = theme => ({
     },
     tableRow: {
       whiteSpace: "nowrap"
-    }
+    },
+    responseWrap: {
+      backgroundColor: theme.palette.grey.main,
+      padding: 10
+    },
+    response: {
+      border: `1px solid rgba(0, 0, 0, 0.24)`,
+      minHeight: 80,
+      paddingLeft: 5,
+      backgroundColor: "white"
+    },
 })
 
 const mapStateToProps = (state, ownProps) => {

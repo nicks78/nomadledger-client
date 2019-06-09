@@ -56,7 +56,7 @@ class Items extends Component {
       <div>
         <div style={{overflowX: "auto"}}>
         <Table className={classes.table}>
-        <TableHead className={classes.tableHead}>
+        <TableHead>
         <TableRow>
             <TableCell>{locale.wording.ref}</TableCell>
             <TableCell style={{ width: "60%" }} variant="head" className={classes.contentEditable}>{locale.wording.designation}&nbsp;<EditIcon className={classes.icon} /></TableCell>
@@ -129,10 +129,6 @@ const styles = theme => ({
         "& th": {
           padding: "4px 20px 4px 26px"
         }
-    },
-    tableHead: {
-        backgroundColor: "rgb(238,238,238)",
-
     },
     tablenoWrap: {
         whiteSpace: "nowrap",

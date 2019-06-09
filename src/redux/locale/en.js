@@ -115,7 +115,8 @@ const en = {
         label_forgot_pwd_body1: "Forgot password ?", // check duplicate
         label_terms: "Specific payment terms and conditions :",
         label_comp_member: "Your membership",
-        label_reply_quote: "Give us your feeback"
+        label_reply_quote: "Give us your feeback",
+        label_client_feedback: "Client's feedback"
     },
     wording: {
         exportcsv: "Export as csv",

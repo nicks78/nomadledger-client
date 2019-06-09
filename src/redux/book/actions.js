@@ -202,6 +202,20 @@ export function convertToOtherDocument( actionType, id, newType ){
         dispatch(requestData(actionType));
         const locale = getState().locale.locale
 
+        // Set date object
+        var date = new Date();
+        var month = ("0" + (date.getMonth() + 1)).slice(-2);
+        var dayOfMonth = ("0" + date.getDate()).slice(-2);
+        var obj = {
+            date: date,
+            year: date.getFullYear(),
+            month: parseInt(month, 10),
+            dayOfMonth: parseInt(dayOfMonth, 10),
+            label: dayOfMonth +'/'+ month +'/'+ date.getFullYear(),
+            intl_format: date.getFullYear() +'-'+ month +'-'+ dayOfMonth,
+            timestamp: date.getTime()
+        }
+
         try{
             const request = await axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${id}`);
             const res = request.data;
@@ -211,10 +225,11 @@ export function convertToOtherDocument( actionType, id, newType ){
                 infos:  res.payload.infos,
                 terms: res.payload.terms,
                 vat: res.payload.vat,
+                created_at: obj,
                 currency: res.payload.currency,
                 contact_id: res.payload.contact_id,
                 [actionType.toLowerCase() + "_id"]: res.payload._id,
-                onRef: locale.wording[actionType.toLowerCase()] +"-"+res.payload.ref
+                onRef: locale.wording[actionType.toLowerCase()] +"#"+ res.payload.ref_add +"-"+res.payload.ref
             }
 
             dispatch(setDocument(newType, item ))

@@ -8,9 +8,10 @@ import {connect} from 'react-redux'
 import {  getBookList, updateField, createState, downloadPdf, resetState } from '../../../redux/book/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import AddIcon from '@material-ui/icons/AddOutlined'
-import { withStyles, Button, Hidden ,Table, TableHead, Paper, TableBody, TableCell, TableRow, Fab} from '@material-ui/core';
+import { withStyles, Button, Hidden ,Table, TableHead, TableBody, TableCell, TableRow, Fab} from '@material-ui/core';
 import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxTableActions from '../../../components/common/tableActions'
+import ApxPaper from '../../../components/common/paper'
 import Pagination from '../../../lib/pagination'
 import MobileView from '../common/mobileView'
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -78,7 +79,7 @@ class Refund extends Component {
                 </Button>
             </Hidden>
             { !isMobile ?
-            <Paper className={classes.paper}>
+            <ApxPaper>
 
             <ApxTableToolBar
                 title={ isFetching ? locale.wording.loading : locale.wording.refund}
@@ -91,9 +92,9 @@ class Refund extends Component {
                 onDownload={ () => { this.props.downloadFile(reducer, `export/excel-file`) } }
                 refresh={ this.refresh }
             />
-            <div style={{ overflowY: "auto", minHeight: 300 }}>
+          <div className="table-wrapper">
                     <Table padding="dense">
-                    <TableHead className={classes.tableHead}>
+                    <TableHead>
                         <TableRow>
                             <TableCell>{locale.wording.date}</TableCell>
                             <TableCell>{locale.wording.reference}</TableCell>
@@ -151,7 +152,7 @@ class Refund extends Component {
                         onGetItemList={ this.props.getBookList }
                     />
 
-            </Paper>
+            </ApxPaper>
             : <MobileView
                   items={listRefund}
                   getMoreData={this.props.getBookList }
@@ -175,10 +176,6 @@ class Refund extends Component {
 }
 
 const styles = theme => ({
-
-    tableHead: {
-        backgroundColor: 'rgb(238,238,238)'
-    },
     button: {
         color: 'white !important',
         marginRight: 10,
@@ -186,16 +183,7 @@ const styles = theme => ({
         '& :hover': {
             color: 'white !important',
         }
-    },
-    paper: {
-        position: 'relative',
-        padding: 0,
-        overflow: "hidden",
-        [theme.breakpoints.down('sm')]: {
-            boxShadow: 'none',
-            borderRadius: 0
-        },
-    },
+    }
 })
 
 const mapStateToProps = (state) => {

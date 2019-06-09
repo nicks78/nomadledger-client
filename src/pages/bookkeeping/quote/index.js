@@ -6,7 +6,8 @@ import {DEFAULT_URL} from "../../../redux/constant"
 import {connect} from 'react-redux'
 import {  getBookList, updateField, createState, downloadPdf, resetState } from '../../../redux/book/actions'
 import AddIcon from '@material-ui/icons/AddOutlined'
-import { withStyles, Button, Hidden,  Paper, Table, TableHead, TableBody, TableCell, TableRow , Fab} from '@material-ui/core';
+import ApxPaper from '../../../components/common/paper'
+import { withStyles, Button, Hidden, Table, TableHead, TableBody, TableCell, TableRow , Fab, Avatar} from '@material-ui/core';
 import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
@@ -77,25 +78,24 @@ class Quote extends Component {
             <Hidden only={['xs', 'sm']}>
                 <Button component={Link} to="/quote/create" variant="contained" color="primary"  className={  classes.button }>
                 { newQuote.contact_id ? locale.wording.progress : locale.wording.create}
-
                 </Button>
             </Hidden>
 
             { !isMobile ?
-            <Paper className={classes.paper}>
+            <ApxPaper>
 
                   <ApxTableToolBar
                         title={isFetching ? locale.wording.loading : locale.wording.quote}
                         selected={locale.wording.selected}
                         locale={locale}
-                        menus={ status && [...status, {fr: "Tous", en: "All", code: "none"}]  }
+                        menus={ status && [...status, {en: "Replied", fr: "Repondus", code: "", color: "green"}, {fr: "Tous", en: "All", code: "none"}]  }
                         onChangeQuery={ this.handleFilterRequest }
                         tooltipTitle={locale.wording.filter_status}
                         refresh={ this.refresh }
                     />
-                    <div style={{overflowY: "auto", minHeight: 300}}>
+                  <div className="table-wrapper">
                     <Table  padding="dense">
-                    <TableHead className={classes.tableHead}>
+                    <TableHead>
                         <TableRow>
                             <TableCell>{locale.wording.date}</TableCell>
                             <TableCell>{locale.wording.reference}</TableCell>
@@ -114,9 +114,10 @@ class Quote extends Component {
                         <TableBody className={classes.tableBody}>
                             {   !isFetching ?
                                 this.props.listQuote.map(( quote, index) => {
+
                                     return  <TableRow key={index}>
                                                 <TableCell>{new Date(quote.createAt.date).toLocaleDateString(localStorage.getItem('locale'))}</TableCell>
-                                                <TableCell><Link className="link" to={`/quote/view/${quote._id}`}>{quote.ref_add}-{quote.ref}</Link></TableCell>
+                                                <TableCell><div  style={{display: 'flex', alignItems: "center"}}><Link className="link" to={`/quote/view/${quote._id}`}>{quote.ref_add}-{quote.ref}</Link>{ quote.response  ? <Avatar className={classes.bullet}> </Avatar> : null  }</div></TableCell>
                                                 <TableCell><Link className="link" to={{ pathname: `/contact/view/${quote.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{quote.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell className="tableNumber">{cvtNumToUserPref(quote.subtotal)} {quote.currency.value}</TableCell>
                                                 <TableCell><span style={{color: quote.status.color, fontWeight: 400 }}>{ quote.status[localStorage.getItem('locale')] }</span></TableCell>
@@ -155,7 +156,7 @@ class Quote extends Component {
                         filterName="status"
                         onGetItemList={ this.props.getBookList }
                     />
-            </Paper>
+            </ApxPaper>
             : <MobileView
                   items={listQuote}
                   getMoreData={this.props.getBookList }
@@ -183,9 +184,6 @@ class Quote extends Component {
 
 const styles = theme => ({
 
-    tableHead: {
-        backgroundColor: 'rgb(238,238,238)'
-    },
     button: {
         color: 'white !important',
         marginRight: 10,
@@ -194,14 +192,13 @@ const styles = theme => ({
             color: 'white !important',
         }
     },
-    paper: {
-        position: 'relative',
-        padding: 0,
-        overflow: "hidden",
-        [theme.breakpoints.down('sm')]: {
-            boxShadow: 'none',
-            borderRadius: 0
-        },
+    bullet: {
+      fontSize: 15,
+      height: 10,
+      marginLeft: 5,
+      width: 10,
+      backgroundColor: 'green',
+
     }
 })
 

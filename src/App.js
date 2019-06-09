@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {STRIPE_PUBLIC_KEY} from './redux/constant'
 import Routes from './routes'
+// import { Typography } from '@material-ui/core';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css'
 import {StripeProvider} from 'react-stripe-elements';
-// import ChatBox from './public_pages/chat'
+import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 
 // #33B3A9 == green
@@ -112,8 +113,8 @@ const theme = createMuiTheme({
 });
 
 
-/** TODO
- *
+/**
+ * TODO
  *
  */
 class App extends Component {
@@ -121,15 +122,37 @@ class App extends Component {
 
     return (
       <React.Fragment>
+
         <StripeProvider apiKey={STRIPE_PUBLIC_KEY}>
           <MuiThemeProvider theme={theme}>
+
               <Routes />
+                <div>
+                    <MessengerCustomerChat
+                      pageId="2385240291708965"
+                      appId="733037490462839"
+                      htmlRef={window.location.pathname}
+                    />
+                  </div>
           </MuiThemeProvider>
         </StripeProvider>
       </React.Fragment>
+
 
     )
   }
 }
 
 export default App;
+//
+// <div>
+//     <Typography variant="h1">Test TEST</Typography>
+//     <Typography variant="h2">Test TEST</Typography>
+//     <Typography variant="h3">Test TEST</Typography>
+//     <Typography variant="subtitle1">Test TEST</Typography>
+//     <Typography variant="subtitle2">Test TEST</Typography>
+//     <Typography variant="body1">Test TEST</Typography>
+//     <Typography variant="body2">Test TEST</Typography>
+//     <Typography variant="caption">Test TEST</Typography>
+//     <Typography variant="overline">Test TEST</Typography>
+// </div>
