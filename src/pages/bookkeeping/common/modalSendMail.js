@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
+import {ORIGIN_URL} from '../../../redux/constant'
 import {  sendEmailWithPdf } from '../../../redux/book/actions'
 import { withStyles, TextField, Button } from '@material-ui/core';
 import ApxRichEditor from '../../../components/common/richEditor'
@@ -35,17 +36,27 @@ const styles = theme => ({
 
 
 class SimpleModal extends React.Component {
-  state = {
-    open: false,
-    email: this.props.item.contact_id.email,
-    locale: localStorage.getItem("locale") === "fr" ? {fr: "Francais", en:"French"} : {fr: "Anglais", en:"English"},
-    subject: "",
-    content: `<p><br /><br />${this.props.company.company_name}<br />
-          ${this.props.user.lastname} ${this.props.user.firstname}<br />
-        ${this.props.user.email}<br />
-          (${this.props.user.phone_code.dial_code})${this.props.user.phone}<br />
-    </p>`,
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+      open: false,
+      email: this.props.item.contact_id.email,
+      locale: localStorage.getItem("locale") === "fr" ? {fr: "Francais", en:"French"} : {fr: "Anglais", en:"English"},
+      subject: "",
+      content: `<p>
+            <br /><br />
+            ${this.props.reducer === "QUOTE" ? `<a href=${ORIGIN_URL}public/quote/${this.props.item.token}>${this.props.locale.wording.quote_link}</a>` : ""}
+            <br /><br />
+            ${this.props.company.company_name}<br />
+            ${this.props.user.lastname} ${this.props.user.firstname}<br />
+            ${this.props.user.email}<br />
+            (${this.props.user.phone_code.dial_code})${this.props.user.phone}<br />
+      </p>`,
+    }
   }
+
 
 
   handleOpen = () => {

@@ -11,6 +11,7 @@ import SnackBar from '../lib/snackBar'
 
 // Public Pages
 import ContactUs from '../public_pages/contactUs'
+import Quote from '../public_pages/quote'
 
 // Login
 import Auth from '../pages/auth'
@@ -104,6 +105,7 @@ class Routes extends React.Component {
                         <Route path="/public/reset-password/:token" component={ResetPassword} />
                         <Route path="/public/payment-gateway/:token_id" component={Payment} />
                         <Route path="/public/contact-us" component={ContactUs} />
+                        <Route path="/public/quote/:token" component={Quote} />
 
                         {
                             isLoggedIn && authUser !== null  ?

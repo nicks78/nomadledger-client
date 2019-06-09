@@ -116,7 +116,8 @@ const fr =  {
         label_confirm_email: "Demande d'un nouveau courriel de confirmation",
         label_forgot_pwd_body1: "Mot de passe oublié ?",
         label_terms: "Ajouter des conditions de payment etc...",
-        label_comp_member: "Votre abonnement"
+        label_comp_member: "Votre abonnement",
+        label_reply_quote: "Envoyez-nous vos commentaires"
 
     },
     wording: {
@@ -132,6 +133,7 @@ const fr =  {
         loading:"Chargement...",
         send: "Envoyer",
         delete: "Supprimer",
+        reply: "Repondre",
         contact_us: "Contactez-nous",
         confirm_payment: "Confirmer le paiement",
         payment_progress: "Paiement en cours...",
@@ -247,9 +249,10 @@ const fr =  {
         remove: "Supprimer",
         draft: "Brouillon",
         pending: 'En attente',
-        approved: 'Approuver',
+        approved: 'Approuvé',
         approve: 'Approuver',
         rejected: "Rejeté",
+        rejecte: "Rejeter",
         paid: "Payer",
         cancel: "Annuler",
         invoicer: "Facturateur",
@@ -304,7 +307,9 @@ const fr =  {
         yes: "Oui",
         no: "Non",
         or: "OU",
-        designation: "Désignation"
+        designation: "Désignation",
+        tandc: "Conditions générales",
+        quote_link: "Voir le devis"
 
     },
     helperText: {
@@ -317,6 +322,7 @@ const fr =  {
         select_contact_group: "Sélectionner un groupe",
         textarea_quote: "Taper une description de votre devis",
         textarea_terms: "Taper un court texte de conditions générales",
+        textarea_comment: "Taper un commentaire...",
         expend_contact_info: "Cliquer pour afficher/editer les informations du contact",
         infos_status: "<span style='color: red;font-weight: 700'>ATTENTION *</span> - Seule les statuts < Brouillion & En Attente > sont modifiable",
         type_message: "Taper votre message...",
@@ -352,6 +358,7 @@ const fr =  {
         success_payment: "Paiement accepté, vous allez recevoir un reçu par courriel",
         success_send_email_confirm: "Un courriel de confirmation vous à été envoyé, veuillez suivre les instructions",
         success_sent_document: "Document envoyé au destinataire",
+        success_reply: "Votre réponse a été enregistrée, nous reviendrons vers vous dans les meilleurs délais.",
 
         error_payment: "Erreur lors du paiement, veuillez recommencer ou contacter notre service support@nomadledger.com",
         error_email_not_sent: "Erreur - message non envoyé, veuillez recommencer ou prendre contact avec notre support@nomadledger.com",

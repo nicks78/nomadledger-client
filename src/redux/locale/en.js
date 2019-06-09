@@ -114,7 +114,8 @@ const en = {
         label_confirm_email: "Request a new email confirmation",
         label_forgot_pwd_body1: "Forgot password ?", // check duplicate
         label_terms: "Specific payment terms and conditions :",
-        label_comp_member: "Your membership"
+        label_comp_member: "Your membership",
+        label_reply_quote: "Give us your feeback"
     },
     wording: {
         exportcsv: "Export as csv",
@@ -129,6 +130,7 @@ const en = {
         loading: "Loading...",
         send: "Send",
         delete: "Delete",
+        reply: "Reply",
         contact_us: "Contact us",
         confirm_payment: "Confirm payment",
         payment_progress: "Payment in progress...",
@@ -247,6 +249,7 @@ const en = {
         approved: 'Approved',
         approve: 'Approve',
         rejected: "Rejected",
+        rejecte: "To reject",
         paid: "Paid",
         cancel: "Cancel",
         invoicer: "Convert to invoice",
@@ -301,7 +304,9 @@ const en = {
         yes: "Yes",
         no: "No",
         or: "OR",
-        designation: "Designation"
+        designation: "Designation",
+        tandc: "Termes & conditions",
+        quote_link: "View quotation"
     },
     helperText: {
         select_phone_code: "Phone code",
@@ -313,6 +318,7 @@ const en = {
         select_contact_group: "Group",
         textarea_quote: "Type a description",
         textarea_terms: "Add a short Terms & Conditions",
+        textarea_comment: "Type a comment...",
         expend_contact_info: "Expand to view full contact information",
         infos_status: "<span style='color: red;font-weight: 700'>CAUTIOUS *</span> - Only status < Draft & Pending > are editable",
         type_message: "Type your message...",
@@ -347,6 +353,7 @@ const en = {
         success_payment: "Payment successful, you can now log in to your account",
         success_send_email_confirm: "A confirmation email has been sent, please follow the instructions",
         success_sent_document: "Document sent",
+        success_reply: "Your reply has been saved, we will get back to your as soon as possible",
 
         error_payment: "Payment error, please try again or contact us at support@nomadledger.com",
         error_email_not_sent: "Error - message not sent, please try again or contact us at support@nomadledger.com",
