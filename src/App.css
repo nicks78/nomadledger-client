@@ -88,6 +88,7 @@ tr td {
   font-weight: 600 !important;
 }
 
+
 /****************************************************
         DATE PICKER
 *****************************************************/
@@ -150,13 +151,22 @@ tr td {
   border-radius: 1px;
 }
 
-.RichTextEditor__root___2QXK-
-
 
 /****************************************************
         ANIMATION
 *****************************************************/
 
+
+.fb_dialog  .fb_dialog_advanced .fb_customer_chat_bubble_animated_no_badge .fb_customer_chat_bubble_pop_in {
+  left: 10px;
+}
+
+.fb_reset>div {
+    left: 10px;
+}
+.fb_iframe_widget iframe {
+  left: 0;
+}
 
 /*****************************************
   STRIPE
