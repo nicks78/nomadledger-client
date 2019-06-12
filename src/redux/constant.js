@@ -3,8 +3,8 @@
 var contant = "https://api.nomadledger.com"
 // var contant = "http://localhost:8080"
 
-export const STRIPE_PUBLIC_KEY = "pk_test_GblxUSlJYaYq5b3dU2GIoPql00wt6XzrAC"
-// export const STRIPE_PUBLIC_KEY = "pk_live_UOsYUxwgIa6iEx2YZ3ZpzeUD00Z66V2uQV"
+// export const STRIPE_PUBLIC_KEY = "pk_test_GblxUSlJYaYq5b3dU2GIoPql00wt6XzrAC"
+export const STRIPE_PUBLIC_KEY = "pk_live_UOsYUxwgIa6iEx2YZ3ZpzeUD00Z66V2uQV"
 
 export const GOOGLE_CLIENTID = '512558974297-eea9f5jr16ll91d4n1567uotnq7jha7d.apps.googleusercontent.com'
 export const GOOGLE_ICON = `${contant}/img/google-icon.png`

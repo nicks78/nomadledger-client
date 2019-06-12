@@ -7,6 +7,7 @@ import VisibilityIcon from '@material-ui/icons/VisibilityOutlined'
 import {cvtNumToUserPref} from '../../utils/help_function'
 import DeleteIcon from '@material-ui/icons/DeleteOutlined'
 import FileCopyIcon from '@material-ui/icons/FileCopyOutlined'
+import Tooltips from '../../components/common/tooltips'
 
 
 const styles = theme =>  ({
@@ -53,9 +54,9 @@ const ProductCard = (props) => {
                 </Avatar>
             }
             action={
-                <IconButton component={Link} color="primary" to={`product/view/${product._id}`}>
+                <Tooltips title={locale.wording.preview} ><IconButton component={Link} color="primary" to={`product/view/${product._id}`}>
                     <VisibilityIcon />
-                </IconButton>
+                </IconButton></Tooltips>
             }
             title={product.name}
             subheader={ cvtNumToUserPref(product.selling_price) + ' ' + product.currency.value}
@@ -75,12 +76,12 @@ const ProductCard = (props) => {
           </CardContent>
 
         <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton aria-label="Delete product" onClick={ () => { props.onDeleteProduct(product._id) } } >
+          <Tooltips title={locale.wording.delete}><IconButton aria-label="Delete product" onClick={ () => { props.onDeleteProduct(product._id) } } >
             <DeleteIcon style={{ color: "red", fontSize: 18 }} />
-          </IconButton>
-          <IconButton aria-label="Duplicate product" onClick={ () => { props.duplicateItem( product) } } >
+          </IconButton></Tooltips>
+          <Tooltips title={locale.wording.duplicate}><IconButton aria-label="Duplicate product" onClick={ () => { props.duplicateItem( product) } } >
             <FileCopyIcon style={{ color: "grey", fontSize: 18 }}  />
-          </IconButton>
+          </IconButton></Tooltips>
         </CardActions>
         </Card>
     )
