@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { createItem, getItemList, getItem, createState , resetState, deleteElement} from '../../redux/library/actions'
+import { createItem, getItemList, getItem, createState , resetState, deleteElement, duplicateItem} from '../../redux/library/actions'
 import {connect} from 'react-redux'
 import { TableCell, TableRow, Table, TableHead, TableBody, IconButton} from '@material-ui/core';
 import ApxTableToolBar from '../../components/common/tableToolBar'
@@ -14,6 +14,7 @@ import DeleteIcon from '@material-ui/icons/DeleteOutlined'
 import MobileView from './mobileView'
 import EditIcon from '@material-ui/icons/EditOutlined'
 import ApxPaper from '../../components/common/paper'
+import FileCopyIcon from '@material-ui/icons/FileCopyOutlined'
 
 
 class Service extends Component {
@@ -60,12 +61,16 @@ class Service extends Component {
         this.props.getItemList(this.state.reducer, `list?limit=10&skip=0&category=${value._id}`);
     }
 
+    handleDuplicateItem = (service) => {
+      this.props.duplicateItem(this.state.reducer, service)
+    }
+
+
     render() {
 
     const {isFetching,  locale, newService, createItem, createState, isCreating, progress, category, currency, service_type, total} = this.props
     const {reducer, listServices, width } = this.state;
     const isMobile = width <= 500;
-
 
     return (
         <div>
@@ -104,6 +109,7 @@ class Service extends Component {
                             <TableCell align="right">{locale.wording.type}</TableCell>
                             <TableCell>{locale.wording.category}</TableCell>
                             <TableCell>{locale.wording.description}</TableCell>
+                            <TableCell>{locale.wording.duplicate}</TableCell>
                             <TableCell align="center">Actions</TableCell>
                         </TableRow>
                         </TableHead>
@@ -111,12 +117,20 @@ class Service extends Component {
                         <TableBody>
                             {   !isFetching ?
                                 this.props.listServices.map(( service, index) => {
+
                                     return  <TableRow key={index}>
                                                 <TableCell><Link to={ `/${reducer.toLowerCase()}/view/${service._id.toLowerCase()}`}><span style={{textTransform: "capitalize"}}  className="link">{service.name}</span></Link></TableCell>
                                                 <TableCell className="tableNumber" align="right">{cvtNumToUserPref(service.price)} {service.currency.value}</TableCell>
                                                 <TableCell align="right">{ service.service_type[localStorage.getItem('locale')] }</TableCell>
                                                 <TableCell style={{textTransform: 'capitalize'}}>{service.category[localStorage.getItem('locale')]}</TableCell>
                                                 <Tooltips title={service.description} ><TableCell>{service.description.slice(0,5)}...</TableCell></Tooltips>
+
+                                                  <TableCell>
+                                                    <IconButton aria-label="Duplicate item" onClick={ () => { this.handleDuplicateItem( service ) } } >
+                                                      <FileCopyIcon style={{ color: "grey", fontSize: 18 }}  />
+                                                    </IconButton>
+                                                  </TableCell>
+
 
                                                   <TableCell  align="center"  style={{display: "flex", justifyContent: "center"}}>
                                                     <Tooltips title={locale.wording.edit}><IconButton component={Link} to={`/${reducer.toLowerCase()}/view/${service._id.toLowerCase()}`} style={{ minWidth: 5 }} color="primary"><EditIcon style={{fontSize: 18}} /></IconButton></Tooltips>
@@ -177,4 +191,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, resetState, deleteElement })(Service);
+export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, resetState, deleteElement, duplicateItem })(Service);

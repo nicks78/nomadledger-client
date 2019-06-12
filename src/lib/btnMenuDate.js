@@ -46,7 +46,7 @@ class BtnMenuDate extends React.Component {
     const { fontSize, locale } = this.props
 
     return (
-      <div style={{ display: "inline-flex" }}>
+      <div  style={{ display: "inline-flex" }}>
 
         <Tooltips title={locale.wording.filter_date}><IconButton
           aria-owns={anchorEl ? 'menu-list-grow' : undefined}
@@ -64,7 +64,7 @@ class BtnMenuDate extends React.Component {
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
-        <div style={{height: 280, width: 260, padding: 10}}>
+        <div id="btnMenuDate" style={{height: 280, width: 270, padding: 10}}>
           <Typography variant="caption" align="center">{locale.wording.pick_date}</Typography>
           <DayPicker
               selectedDay={selectedDay}

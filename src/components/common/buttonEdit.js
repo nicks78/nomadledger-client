@@ -16,7 +16,7 @@ const styles = theme => ({
     checkicon: {
         color: "white",
         width: '0.8em !important',
-        height: '0.8em !important',
+        height: '0.8em !important'
     },
     edit: {
       backgroundColor: theme.palette.primary.main,
@@ -25,6 +25,7 @@ const styles = theme => ({
     check: {
       backgroundColor: theme.palette.green,
       float: 'right',
+
     },
     circular: {
         width: '15px !important',
@@ -57,7 +58,7 @@ const ButtonEdit = (props) => {
         {
             !isUpdating ?
             showEdit ? <CheckIcon className={ classes.checkicon }/> : <EditIcon className={ classes.editicon }/>
-            :  <CircularProgress className={ classes.circular }color="secondary" />
+            :  <CircularProgress className={ classes.circular } color="secondary" />
         }
     </Fab>
     </Tooltips>

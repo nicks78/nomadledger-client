@@ -62,7 +62,7 @@ class ShowProduct extends React.Component {
     }
 
       return (
-        <ApxPaper>
+        <ApxPaper styled={{padding: 24}}>
 
           <ApxBackBtn/>
           <Typography variant="h1" align="center">{product.name}</Typography>
@@ -204,7 +204,6 @@ class ShowProduct extends React.Component {
                   onClick={ () => { this.props.updateItem(this.state.reducer, `update`) } }>
                   { !isUpdating ?  locale.wording.update : locale.wording.loading }
               </Button><br />
-
 
         </ApxPaper>
       )

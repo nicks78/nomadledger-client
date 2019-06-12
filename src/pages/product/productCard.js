@@ -6,6 +6,7 @@ import { withStyles, CardHeader, Card, IconButton, CardMedia, Avatar, CardConten
 import VisibilityIcon from '@material-ui/icons/VisibilityOutlined'
 import {cvtNumToUserPref} from '../../utils/help_function'
 import DeleteIcon from '@material-ui/icons/DeleteOutlined'
+import FileCopyIcon from '@material-ui/icons/FileCopyOutlined'
 
 
 const styles = theme =>  ({
@@ -74,8 +75,11 @@ const ProductCard = (props) => {
           </CardContent>
 
         <CardActions className={classes.actions} disableActionSpacing>
-          <IconButton aria-label="Add to favorites" onClick={ () => { props.onDeleteProduct(product._id) } } >
+          <IconButton aria-label="Delete product" onClick={ () => { props.onDeleteProduct(product._id) } } >
             <DeleteIcon style={{ color: "red", fontSize: 18 }} />
+          </IconButton>
+          <IconButton aria-label="Duplicate product" onClick={ () => { props.duplicateItem( product) } } >
+            <FileCopyIcon style={{ color: "grey", fontSize: 18 }}  />
           </IconButton>
         </CardActions>
         </Card>

@@ -1,7 +1,7 @@
 //manager/src/pages/product/index.js
 
 import React, { Component } from 'react'
-import { createItem, getItemList, getItem, createState, resetState , deleteElement} from '../../redux/library/actions'
+import { createItem, getItemList, getItem, createState, resetState , deleteElement, duplicateItem} from '../../redux/library/actions'
 import {connect} from 'react-redux'
 import { withStyles, Grid, Button} from '@material-ui/core';
 import Spinner from '../../components/common/spinner'
@@ -95,6 +95,10 @@ class Product extends Component {
         }
     }
 
+    handleDuplicateItem = (product) => {
+      this.props.duplicateItem(this.state.reducer, product)
+    }
+
     render() {
 
     const {listProducts, isFetching,total,  locale, newProduct, createState, createItem, isCreating, category, classes, currency } = this.props
@@ -121,7 +125,12 @@ class Product extends Component {
             {
                 listProducts.map((product, index) => {
                     return <Grid item xs={12} sm={6} md={3}  key={index}>
-                                <ProductCard  product={product} locale={locale} onDeleteProduct={ this.handleDelete }/>
+                                <ProductCard
+                                    product={product}
+                                    locale={locale}
+                                    onDeleteProduct={ this.handleDelete }
+                                    duplicateItem={ this.handleDuplicateItem }
+                                    />
                             </Grid>
                 })
 
@@ -164,4 +173,4 @@ const mapStateToProps = (state) => {
 
 const StyledProduct = withStyles(styles)(Product)
 
-export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, resetState, deleteElement  })(StyledProduct);
+export default connect(mapStateToProps, { createItem, getItemList, getItem, createState, resetState, deleteElement, duplicateItem  })(StyledProduct);

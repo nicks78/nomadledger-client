@@ -310,7 +310,8 @@ const fr =  {
         or: "OU",
         designation: "Désignation",
         tandc: "Conditions générales",
-        quote_link: "Voir le devis"
+        quote_link: "Voir le devis",
+        duplicate: "Dupliquer"
 
     },
     helperText: {
@@ -378,7 +379,7 @@ const fr =  {
         error_409: "Cette email existe déjà dans notre base de donnée",
         error_wrong_token: "Erreur d'authentification, veuillez recommencer ou contacter notre service support@nomadledger.com",
         error_session_token: "Session expiré, veuillez vous reconnecter",
-        error_no_token: "Erreur aucun jeton, veuillez recommencer ou contacter notre service support@nomadledger.com",
+        error_no_token: "Session expiré, veuillez vous reconnecter ou contacter notre service support@nomadledger.com",
         error_file_not_allowed: "Ce type de fichier n'est pas autorisé",
         error_pw_not_match: "Mot de passe non identique",
         error_pw_min_8: "Votre mot de passe doit faire au minimum 8 caractères",

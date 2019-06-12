@@ -93,6 +93,10 @@ tr td {
         DATE PICKER
 *****************************************************/
 
+#btnMenuDate .DayPicker-wrapper {
+    box-shadow: none !important;
+}
+
 .DayPicker-wrapper {
     font-size: 14px;
     background-color: white;

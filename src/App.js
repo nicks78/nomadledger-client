@@ -162,6 +162,7 @@ class App extends Component {
                         htmlRef={window.location.pathname}
                       />
                     </div>
+
           </MuiThemeProvider>
         </StripeProvider>
       </React.Fragment>

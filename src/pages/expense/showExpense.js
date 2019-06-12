@@ -58,7 +58,7 @@ class ShowExpense extends Component {
       }
 
       return (
-        <ApxPaper>
+        <ApxPaper  styled={{padding: 24}}>
           <ApxBackBtn/>
             <br />
 

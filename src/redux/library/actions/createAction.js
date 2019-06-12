@@ -53,7 +53,45 @@ export const createItem = ( actionType ) => {
             dispatch(requestFailed(actionType));
         })
     }
-  }
+}
+
+export const duplicateItem = (actionType, item) => {
+    return (dispatch, getState) => {
+
+      dispatch(requestCreation(actionType));
+      // Set action name
+      var type = actionType.toLowerCase();
+      let data = Object.assign({}, item);
+      delete data._id
+
+      const formData = new FormData();
+
+      formData.append('state', JSON.stringify(data));
+
+      axios.post(`${API_ENDPOINT}${type}/create`,
+          formData,
+          {
+            headers: {
+              'content-type': 'application/form-data'
+          },
+          onUploadProgress: progressEvent => { // Check progression for upload
+              var p =  ( progressEvent.loaded / progressEvent.total ) * 100
+              dispatch(progress(actionType, parseInt(p, 10)))
+          }
+      })
+      .then(function (response) {
+          return response.data
+      })
+      .then( res => {
+          dispatch(setNotification("success_create", "success"))
+          dispatch(setCreateItem( actionType, res.item ))
+      })
+      .catch(function (error) {
+          dispatch(setError(error));
+          dispatch(requestFailed(actionType));
+      })
+    }
+}
 
 function setCreateItem(actionType, item){
     return {

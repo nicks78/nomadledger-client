@@ -307,7 +307,8 @@ const en = {
         or: "OR",
         designation: "Designation",
         tandc: "Termes & conditions",
-        quote_link: "View quotation"
+        quote_link: "View quotation",
+        duplicate: "Duplicate"
     },
     helperText: {
         select_phone_code: "Phone code",
@@ -373,7 +374,7 @@ const en = {
         error_409: "This email is already in our database",
         error_wrong_token: "Authentication error, please try again or contact us at support@nomadledger.com",
         error_session_token: "Session expired, go to login page",
-        error_no_token: "Error, no token provided, please try again or contact us at support@nomadledger.com",
+        error_no_token: "Session expired, please log in or contact us at support@nomadledger.com",
         error_file_not_allowed: "This type of file is not allowed",
         error_pw_not_match: "Password does not match",
         error_pw_min_8: "Your password must have at least 8 characters",

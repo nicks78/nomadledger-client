@@ -16,10 +16,10 @@ const styles = theme => ({
 
 const Papers = (props) => {
 
-    const {classes} = props
+    const {classes, styled} = props
 
     return (
-        <Paper className={ classes.root } >
+        <Paper className={ classes.root } style={styled} >
             {props.children}
         </Paper>
   );
