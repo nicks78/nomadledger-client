@@ -83,10 +83,11 @@ class Home extends Component {
                         : null
                     }
                     </Paper>
-                    <Paper className={classes.paper}>
+                    <Paper className={classes.paper} style={{paddingLeft: 0, paddingRight: 0}}>
                         <Typography variant="h2" align="center">{locale.subheading.label_daily_task}&nbsp;
                             <span style={{textTransform: "capitalize"}}>{ new Date().toLocaleDateString(localStorage.getItem("locale"), options)  }</span>
                         </Typography>
+                        <br />
                         <div>
                             {
                                 tasks.tasks ?
@@ -113,7 +114,7 @@ class Home extends Component {
 
                 <Grid item xs={12} sm={4} md={4} >
 
-                  <Paper className={classes.paper}>
+                  <Paper className={classes.paper} >
                     <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px", color: "#303030" }}>
                         { locale.wording.conversions } &nbsp;({ locale.wording.quote })
                     </Typography>
@@ -159,6 +160,7 @@ const styles = theme => ({
         overflow: 'hidden',
         padding: "15px 12px 15px 12px",
         borderBottom: `1px solid rgba(58,58,58,.22)`,
+        backgroundColor: "rgba(58,58,58,.12)",
         [theme.breakpoints.down('sm')]: {
             borderBottom: "none"
         },

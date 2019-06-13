@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { createItem, getItemList, getItem, createState, resetState , deleteElement, duplicateItem} from '../../redux/library/actions'
 import {connect} from 'react-redux'
-import { withStyles, Grid, Button} from '@material-ui/core';
+import { withStyles, Grid, Button, Typography, Hidden} from '@material-ui/core';
 import Spinner from '../../components/common/spinner'
 import AddProduct from './addProduct'
 import ProductCard from './productCard'
@@ -30,7 +30,11 @@ const styles = theme =>  ({
     },
     button: {
         width: '100%'
-    }
+    },
+    title: {
+      marginTop: 24,
+      marginBottom: 24
+    },
 })
 
 
@@ -111,7 +115,7 @@ class Product extends Component {
 
     return (
         <div style={styles.container}>
-
+            <Hidden smUp><Typography variant="h1" align="center" className={classes.title}>{locale.product.name}</Typography></Hidden>
             <AddProduct
                 category={category}
                 locale={ locale }

@@ -19,6 +19,7 @@ const styles = theme =>  ({
     },
     media: {
         height: 140,
+        backgroundSize: 'contain'
       },
       actions: {
     display: 'flex',
