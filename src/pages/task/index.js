@@ -71,7 +71,7 @@ class Task extends Component {
               newData={newTask}
               createTaskState={ createStateTask }
               createTask={ createTask }
-              isCreating={isCreating}
+              isCreating={isFetching}
               status={status}
           />
           : <Button disabled variant="contained">{ locale.wording.progress }</Button>
@@ -173,7 +173,6 @@ const mapStateToProps = (state) => {
 
   return {
       isFetching: state.task.isFetching,
-      isCreating: state.task.isCreating,
       listTask: state.task.taskList || [],
       itemToUpdate: state.task.item,
       locale: state.locale.locale,

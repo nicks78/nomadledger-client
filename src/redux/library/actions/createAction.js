@@ -3,7 +3,7 @@
 
 import axios from 'axios';
 import { API_ENDPOINT } from '../../constant'
-import { requestCreation, requestFailed, progress  } from './'
+import { requestCreation, requestFailed, progress  } from './initAction'
 import {setNotification} from '../../notification/actions'
 import {setError} from '../../error/actions'
 
@@ -12,14 +12,14 @@ export const createItem = ( actionType ) => {
 
     return (dispatch, getState) => {
 
+        // Set loading time
+        dispatch(requestCreation(actionType));
+
         // Set action name
         var type = actionType.toLowerCase()
 
         // Get current state
         var state = getState().library[type].tmp_state
-
-        // // Set loading time
-        dispatch(requestCreation(actionType));
 
         const formData = new FormData();
         // Set file

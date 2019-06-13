@@ -32,8 +32,11 @@ export const createTask = () => {
 
     return (dispatch, getState) => {
 
+        dispatch(requestTask());
+
         // Get current state
-        var state = getState().task.item
+        var state = getState().task.item;
+        
 
         const formData = new FormData();
         // Set file

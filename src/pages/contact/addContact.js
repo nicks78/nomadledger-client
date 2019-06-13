@@ -48,6 +48,7 @@ const AddContact = (props) => {
             headerText={ locale.subheading.add_contact }
             limitUploadFile={1}
             isUploading={ props.isUploading }
+            isCreating={ props.isCreating }
             progress={ props.progress }
             reducer="CONTACT"
             createItem={ props.createContact }

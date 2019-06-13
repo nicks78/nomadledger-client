@@ -3,26 +3,9 @@
 import React from 'react'
 import AddItem from '../../lib/addItem'
 
-class AddService extends React.Component {
-
-  state = {
-      reducer: "SERVICE"
-  };
-
-  toggleDrawer = (side, open) => () => {
-      this.setState({
-        [side]: open,
-      });
-  }
-
-  handleChange = name => (event) => {
-        var fieldName = name;
-        var value = event.target.value
-        this.props.createServiceState( this.state.reducer, fieldName, value )
-  }
-
-  render(){
-    const {locale, newData, category, currency, service_type} = this.props
+const AddService = (props) => {
+  
+    const {locale, newData, category, currency, service_type} = props
 
     const fields = [
       {
@@ -48,14 +31,13 @@ class AddService extends React.Component {
             addBtnTitle={ locale.wording.create }
             headerText={ locale.subheading.add_service }
             limitUploadFile={0}
-            isCreating={ this.props.isCreating }
-            progress={ this.props.progress }
+            isCreating={ props.isCreating }
+            progress={ props.progress }
             reducer="SERVICE"
-            createItem={ this.props.createService || null  }
-            createItemState={ this.props.createServiceState }
+            createItem={ props.createService || null  }
+            createItemState={ props.createServiceState }
             />
     )
-  }
 }
 
 export default AddService;

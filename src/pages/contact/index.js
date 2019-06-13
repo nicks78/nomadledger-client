@@ -45,7 +45,7 @@ class Contact extends Component {
 
     handleSearchByName = (e) => {
       this.setState({ search_name: e.target.value.replace("&", "") })
-      if( this.state.search_name.length > 2 ){
+      if( this.state.search_name.length > 1 ){
           this.props.getItemList(this.state.reducer, `search/query?value=${this.state.search_name}&limit=10&skip=0`);
       }else if( e.target.value === "" ){
           this.props.getItemList(this.state.reducer, `list?limit=10&skip=0`);
@@ -72,8 +72,7 @@ class Contact extends Component {
     }
 
     responseGoogle = (res) => {
-      console.log("RES", res)
-      // this.props.importGoogleContact(this.state.reducer, res)
+      this.props.importGoogleContact(this.state.reducer, res)
     }
 
 
@@ -82,7 +81,6 @@ class Contact extends Component {
     const { isFetching, uploadingContact, locale, createItem, createState, newContact, isCreating, progress, contactGroup, rowsPerPageOptions, total, country} = this.props
     const {reducer, width, listContacts } = this.state
     const isMobile = width <= 500;
-
 
     if(uploadingContact){
       return <Typography variant="body2">{locale.helperText.import_contact}...</Typography>

@@ -161,17 +161,7 @@ class ShowExpense extends Component {
                        locale={locale}
                      />
 
-                     <TextField
-                       id="quantity"
-                       variant="outlined"
-                       className={classes.textField}
-                       margin="dense"
-                       fullWidth
-                       required
-                       label={locale.wording.quantity}
-                       value={expense.quantity}
-                       onChange={ (e) => { this.props.createState(reducer, "quantity", e.target.value) } }
-                     />
+                     
                   </Grid>
               </Grid>
               <br />
@@ -238,3 +228,15 @@ const mapStateToProps = (state) => {
 const StyledShowExpense = withStyles(styles)(ShowExpense)
 
 export default connect(mapStateToProps, {  getItem, createState, updateItem, resetState, uploadFileToServer, setNotification })(StyledShowExpense);
+
+{/* <TextField
+                       id="quantity"
+                       variant="outlined"
+                       className={classes.textField}
+                       margin="dense"
+                       fullWidth
+                       required
+                       label={locale.wording.quantity}
+                       value={expense.quantity}
+                       onChange={ (e) => { this.props.createState(reducer, "quantity", e.target.value) } }
+                     /> */}

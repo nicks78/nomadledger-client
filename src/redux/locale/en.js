@@ -227,7 +227,7 @@ const en = {
         label_rows_per_page: "Rows per page:",
         full_name: "Full name",
         phone: "Phone",
-        phoneNumber: "Phone number",
+        phoneNumber: "Phone number (ex: +1...)",
         statistics: "Statistics",
 
         of: "of",

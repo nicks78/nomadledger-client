@@ -231,7 +231,7 @@ const fr =  {
         label_rows_per_page: "Colonnes par page:",
         full_name: "Nom complet",
         phone: "Téléphone",
-        phoneNumber: "Téléphone",
+        phoneNumber: "Téléphone (ex: +33...)",
         statistics: "Statistiques",
 
         of: "à",
