@@ -117,12 +117,18 @@ class Items extends Component {
     </Table>
     </div>
     <div className={ classes.sumWrapper}>
-      
-        <Checkbox 
+      {
+        reducer === "invoice" ?
+        <React.Fragment>
+          <Checkbox 
             checked={newData.deposit || false} 
             style={{ marginRight: 5}} 
             onChange={(e) => { this.props.createState(this.props.reducer, "deposit", e.target.checked )}} />
-        {locale.wording.invoice_deposit}
+          {locale.wording.invoice_deposit}
+        </React.Fragment>
+        : null 
+      }
+
 
       <div>
         <Typography variant="body1" className={ classes.sum }>
