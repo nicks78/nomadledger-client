@@ -35,6 +35,12 @@ class CreateRefund extends React.Component {
                 this.props.convertToCurrency(this.state.reducer, value, this.props.listItems[i])
             }
         }
+
+        if(name === "vat" && this.props.newRefund.vat){
+            var vat_value =  (this.props.newRefund.subtotal / 100) * value.indice ;
+            this.props.createState(this.state.reducer, "vat_value", vat_value )
+        }
+
         this.props.createState( this.state.reducer, name, value)
     }
 

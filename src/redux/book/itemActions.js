@@ -103,7 +103,8 @@ export function updateListItems( actionType, item ) {
 
 
 /**
- * Call API and convert each amount
+ * 
+ * Call API and convert each amount 
  * @param  from
  * @param  price
  * @param  to
@@ -138,6 +139,7 @@ async function currencyConvertorApi(from, amount, to){
 }
 
 export function addRemoveQuantity ( actionType, id, move ){
+    
     return  {
       type: `UP_DOWN_QUANTITY`,
       subtype: actionType,

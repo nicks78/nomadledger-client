@@ -32,7 +32,7 @@ const styles = theme => ({
  */
 const Select = (props) => {
 
-    const {classes, arrayField, field, helperText, required, variant} = props
+    const {classes, arrayField, field, helperText, required, variant, disabled} = props
 
     const selected = (event) => {
 
@@ -52,7 +52,7 @@ const Select = (props) => {
             select
             label={props.locale.wording[field]}
             className={classes.textField}
-
+            disabled={disabled || false }
             name={field}
             required={ required || false }
             value={ props.value || ''}
@@ -79,7 +79,7 @@ const Select = (props) => {
                         </span>
                     </MenuItem>
                 ))
-                : null
+                : []
             }
             </TextField>
     )

@@ -116,7 +116,8 @@ const en = {
         label_terms: "Specific payment terms and conditions :",
         label_comp_member: "Your membership",
         label_reply_quote: "Give us your feeback",
-        label_client_feedback: "Client's feedback"
+        label_client_feedback: "Client's feedback",
+        event_history: "Event history"
     },
     wording: {
         exportcsv: "Export as csv",
@@ -130,6 +131,7 @@ const en = {
         upload: "Upload",
         loading: "Loading...",
         send: "Send",
+        sent: "Sent",
         delete: "Delete",
         reply: "Reply",
         contact_us: "Contact us",
@@ -308,7 +310,11 @@ const en = {
         designation: "Designation",
         tandc: "Termes & conditions",
         quote_link: "View quotation",
-        duplicate: "Duplicate"
+        duplicate: "Duplicate",
+        invoice_deposit: "Partial invoice",
+        net_to_pay: "Net to pay",
+        balance_due: "Balance due",
+        deposit: "Advance payment in % (on balance due)"
     },
     helperText: {
         select_phone_code: "Phone code",

@@ -122,7 +122,7 @@ class Invoice extends Component {
                                                 <TableCell>{new Date(invoice.created_at.date).toLocaleDateString(localStorage.getItem('locale'))}</TableCell>
                                                 <TableCell><Link className="link" to={`/invoice/view/${invoice._id}`}>{invoice.ref_add}-{invoice.ref}</Link></TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${invoice.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{invoice.contact_id.company_name}</span></Link></TableCell>
-                                                <TableCell className="tableNumber">{cvtNumToUserPref(invoice.subtotal)} {invoice.currency.value}</TableCell>
+                                                <TableCell className="tableNumber">{cvtNumToUserPref(invoice.net_to_pay)} {invoice.currency.value}</TableCell>
                                                 <TableCell><span style={{color: invoice.status.color, fontWeight: 400}}>{ invoice.status[localStorage.getItem('locale')] }</span></TableCell>
                                                 <TableCell align="center"><Link to={`/refund/create/${invoice._id}`}><img alt="convert-to-refund" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link></TableCell>
                                                 <TableCell align="center"><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, invoice._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>

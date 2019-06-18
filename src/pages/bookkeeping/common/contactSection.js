@@ -14,7 +14,7 @@ const ContactSection = (props) => {
 
         return (
           <div>
-            <div style={{padding: 10,}}>
+            <div style={{padding: 10}}>
 
                 <AutoComplete
                     field="company_name"

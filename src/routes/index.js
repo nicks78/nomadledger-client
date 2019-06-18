@@ -72,11 +72,10 @@ class Routes extends React.Component {
     }
 
     componentWillReceiveProps(nextProps){
-        if(this.state.mountedAt){
+        if(this.state.mountedAt === null && nextProps.authUser ){
             nextProps.initLocale(nextProps.authUser.locale || "fr");
             this.setState({ mountedAt: Date.now() })
         }
-
     }
 
     handleChangeLocale = (locale) => {

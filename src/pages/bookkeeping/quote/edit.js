@@ -4,7 +4,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { createState , updateDocument, getDocument, resetState, downloadPdf} from '../../../redux/book/actions'
 import { convertToCurrency, getListItem} from '../../../redux/book/itemActions'
-import { withStyles, Fab } from '@material-ui/core';
+import { withStyles, Fab, Typography } from '@material-ui/core';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownloadOutlined'
 import Form from '../common/form'
 import Spinner from '../../../components/common/spinner'
@@ -47,11 +47,14 @@ class EditQuote extends React.Component {
     }
 
     if( quote === null ){
-        return <p>Error</p>
+        return <Typography variant="h3" align="center">Error 404 </Typography>
     }
 
     return (
             <div className={ classes.root}>
+
+
+
                 <Form
                     formTitle="edit_quote"
                     data={quote}
@@ -69,7 +72,9 @@ class EditQuote extends React.Component {
                     btnLabel={locale.wording.update}
                     date_1="created_at"
                     date_2="expired_at"
-                />
+                >
+
+                </Form>
 
                 <Fab size="medium" color="primary" className={classes.icon}>
                     <CloudDownloadIcon onClick={ () => {this.props.downloadPdf("QUOTE", quote._id)} } />

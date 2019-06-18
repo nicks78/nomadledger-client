@@ -6,6 +6,8 @@ import {history} from '../../routes/history'
 import {updateArrayOfObject} from '../../utils/help_function'
 import {setNotification} from '../notification/actions'
 import {setError} from '../error/actions'
+import {sumCharges, sumItem, calculVat} from './helper'
+
 
 /**
  * GET FULL LIST OF DOCUMENT
@@ -179,10 +181,23 @@ export function getDocument( actionType, id ){
         try{
             const request = await axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${id}`);
             const res = request.data;
+            var item = res.payload;
 
-            dispatch(setDocument(actionType, res.payload ))
+            if(res.payload.quote_id){
+                const total = sumItem( res.payload.list_items );
+                const sum = sumCharges(res.payload.charges)
+                const net = total - sum ;
+    
+                item.balance = net;
+                item.charges = sum;
+                item.net_to_pay = net ;
+                item.vat_value = calculVat(net, res.payload.vat ) ;
+            }
+
+            dispatch(setDocument(actionType, item ))
 
         }catch(error){
+            
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
         }
@@ -219,12 +234,21 @@ export function convertToOtherDocument( actionType, id, newType ){
         try{
             const request = await axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${id}`);
             const res = request.data;
+            const total = sumItem( res.payload.list_items );
+            const sum = sumCharges(res.payload.charges)
+            const net = total - sum
 
             var item = {
                 list_items: res.payload.list_items,
                 infos:  res.payload.infos,
                 terms: res.payload.terms,
                 vat: res.payload.vat,
+                subtotal: total, // Sum of all items excl taxes (from full total based on quote)
+
+                balance: net,
+                net_to_pay: net, // Price to be paid excluding taxes
+                vat_value: calculVat(net, res.payload.vat ), // Amount taxes in money
+                charges: sum, // Sum has been charges and saved in quote database
                 created_at: obj,
                 currency: res.payload.currency,
                 contact_id: res.payload.contact_id,
@@ -399,3 +423,5 @@ export function requestFailed( actionType ) {
         actionLoading: false,
     }
 }
+
+

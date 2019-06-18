@@ -3,9 +3,11 @@ import { withStyles, TextField } from '@material-ui/core';
 
 const styles = theme => ({
     textField: {
+      margin: 0,
       '& div input': {
         paddingTop: 5,
-        paddingBottom: 5
+        paddingBottom: 5,
+        
       }
 
     }
@@ -13,15 +15,18 @@ const styles = theme => ({
 
 const ContenEditable = (props) => {
 
-  const { value, actionInput, id, name, classes, length } = props;
+  const { value, actionInput, id, name, classes, length, placeholder } = props;
+
+ 
   return (
 
         <TextField
           id={name}
+          placeholder={placeholder || ""}
           autoComplete="off"
           margin="dense"
           inputProps={{
-            maxLength: length || 256
+            maxLength: length || "144",
           }}
           fullWidth
           className={classes.textField}

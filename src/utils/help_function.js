@@ -26,8 +26,12 @@ export const checkNumFormatRegex = (num) => {
 
     var fr = new RegExp(regex);
     if( fr.test(num) ){
-        var tmp = num.replace(',', '.');
+        var tmp = num.replace(',', '.').replace(/ /g, "");
         var x = parseFloat(tmp)
+        
+        if(x === 0){
+            return true
+        }
 
         return x
     }

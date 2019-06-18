@@ -25,6 +25,8 @@ import ApxTitleBar from '../../../components/common/titleBar'
 const Form = (props) => {
 
     const { data, list, reducer, locale, classes, vat, btnLabel, date_1, date_2, formTitle, isUpdating, currency } = props
+    const canBeUpdated = data.quote_id || data.refund_id ? false : true
+
 
     return  <div>
 
@@ -41,6 +43,8 @@ const Form = (props) => {
                     }
 
                 </Typography>
+
+                {props.children}
                 <Typography variant="caption">{locale.message.required}</Typography>
                     <Grid container spacing={24}>
 
@@ -109,6 +113,7 @@ const Form = (props) => {
                                     <ApxSelect
                                         arrayField={currency}
                                         field="currency"
+                                        disabled={!canBeUpdated}
                                         required={true}
                                         value={data.currency && data.currency[localStorage.getItem('locale')]}
                                         helperText={locale.helperText.select_currency}
@@ -121,6 +126,7 @@ const Form = (props) => {
                                         arrayField={vat || []}
                                         field="vat"
                                         required={true}
+                                        disabled={!canBeUpdated}
                                         value={data.vat && data.vat[localStorage.getItem('locale')]}
                                         helperText={locale.helperText.select_currency}
                                         handleAction={ props.handleDropDown }
@@ -194,7 +200,7 @@ const Form = (props) => {
                     <Grid container spacing={24}>
                             <Grid item xs={12}>
                                 <AutoComplete
-                                    disabled={ data.currency && data.contact_id && data.vat ? false : true }
+                                    disabled={ data.currency && canBeUpdated && data.contact_id && data.vat ? false : true }
                                     field="name"
                                     state="name"
                                     model="service"
@@ -209,11 +215,12 @@ const Form = (props) => {
                     </Grid>
 
                     <br />
-                    <Items
-                        listItems={list}
-                        newData={data}
-                        reducer={reducer}
-                    />
+ 
+                        <Items
+                            listItems={list}
+                            newData={data}
+                            reducer={reducer}
+                        />
 
                     <TextField
                         label={ locale.helperText.textarea_terms }
@@ -234,7 +241,7 @@ const Form = (props) => {
                             color="primary"
                             disabled={ isUpdating || !data.currency || !data.vat || !data.contact_id ? true : false }
                             onClick={ () => { props.handleSubmit(reducer)} }>
-                            { isUpdating ? locale.wording.loading : btnLabel}
+                            { isUpdating ? locale.wording.loading : btnLabel }
                         </Button>
                     </div>
                 </Paper>

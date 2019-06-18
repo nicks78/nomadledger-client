@@ -57,7 +57,7 @@ class Task extends Component {
 
   render() {
 
-    const { classes , createTask, isFetching, createStateTask, isCreating, locale, newTask, listTask, status, itemToUpdate} = this.props;
+    const { classes , createTask, isFetching, createStateTask, locale, newTask, listTask, status, itemToUpdate} = this.props;
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const {id} = this.state
 

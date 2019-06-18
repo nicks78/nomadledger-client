@@ -3,13 +3,17 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { addRemoveQuantity, removeItem, editItem, discountPrice} from '../../../redux/book/itemActions'
+import { createState } from '../../../redux/book/actions'
 import {
     IconButton,
     withStyles,
     Table,
     TableBody,
     TableHead,
+    TextField,
     TableCell,
+    Checkbox,
+    InputAdornment,
     TableRow, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/DeleteOutlined'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
@@ -31,29 +35,32 @@ class Items extends Component {
         this.props.discountPrice( this.props.reducer, id, fieldName, value)
     }
 
-    // Calcul all VAT / Total / Total HT
-    totalHT = (listItems) => {
-        var vat = this.props.newData.vat ? this.props.newData.vat.indice : 0
-        var total = { vat : 0, ht: 0, ttc: 0 };
+    setDeposit = (e) => {
+      var vat = this.props.newData.vat ? this.props.newData.vat.indice : 0;
+      var value = parseInt(e.target.value || 0, 10)
+      var total = this.props.newData.subtotal - this.props.newData.charges;
 
-        total.ht = listItems.reduce((accumulator, currentValue) => { return accumulator + currentValue.total  }, 0)
+      this.props.createState(this.props.reducer, "deposit_amount", value)
+      this.props.createState(this.props.reducer, "deposit", true)
 
-        var vat_value =  parseFloat((total.ht /100 * vat ).toFixed(2))
-        total.vat = vat_value;
+      var net = (total / 100) * parseInt(value , 10) ;
+      var vat_value =  (net /100) * vat 
 
-        var ttc = parseFloat((total.ht + total.vat ).toFixed(2));
-        total.ttc = ttc;
-
-        return  total;
+      this.props.createState(this.props.reducer, "balance", parseFloat((total).toFixed(2)) - parseFloat((net).toFixed(2))   )
+      this.props.createState(this.props.reducer, "net_to_pay", net)
+      this.props.createState(this.props.reducer, "vat_value", vat_value )
     }
 
 
     render() {
 
-    const { newData, listItems, reducer, classes, locale } = this.props
+    const { newData, listItems, reducer, classes, locale } = this.props;
+    const vat_terms =  newData.vat && newData.vat.vat_terms_en ? <span style={{ fontSize: 10 }}><br />{ newData.vat && newData.vat["vat_terms_" + localStorage.getItem('locale')] }</span> : null
+    const canBeUpdated = newData.quote_id || newData.refund_id ? false : true
 
     return (
       <div>
+        
         <div style={{overflowX: "auto"}}>
         <Table className={classes.table}>
         <TableHead>
@@ -64,7 +71,7 @@ class Items extends Component {
             <TableCell variant="head" className={classes.tablenoWrap}>{locale.wording.quantity}&nbsp;<EditIcon className={classes.icon} /></TableCell>
             <TableCell variant="head" className={classes.tablenoWrap}>{locale.wording.discount_unit}&nbsp;<EditIcon className={classes.icon} /></TableCell>
             <TableCell variant="head" className={classes.tablenoWrap}>{locale.wording.total} { newData.currency && newData.currency.value }</TableCell>
-            <TableCell>{locale.wording.remove}</TableCell>
+            { canBeUpdated ? <TableCell>{locale.wording.remove}</TableCell> : null }
         </TableRow>
         </TableHead>
         <TableBody>
@@ -72,22 +79,36 @@ class Items extends Component {
             listItems.map(( item, index) => {
                 return  <TableRow key={index} className={classes.tableRow}>
                             <TableCell>{locale.wording[item.onModel].toUpperCase()}-{ item.ref}</TableCell>
-                            <TableCell className={ classes.contentEditable }><ApxContenEditable value={ item.desc || "" } length="40"  id={item.item_id} actionInput={(event) => { this.props.editItem(reducer, item, 'desc' , event.target.value ) }} name="desc" /></TableCell>
+                            <TableCell className={ classes.contentEditable }>
+                            {
+                              canBeUpdated ?
+                                <ApxContenEditable value={ item.desc || "" } length="40"  id={item.item_id} actionInput={(event) => { this.props.editItem(reducer, item, 'desc' , event.target.value ) }} name="desc" />
+                              : item.desc
+                            }
+                            </TableCell>
                             <TableCell>{ cvtNumToUserPref(item.unit_price)}</TableCell>
                             <TableCell className={classes.tablenoWrap}>
 
-                            <div className={ classes.quantity }>
-                                <ArrowDropDownIcon className={ classes.btnArrow} onClick={ () => { this.props.addRemoveQuantity(reducer, item.item_id, "down")}} />
-                                    <span>{ item.quantity }</span>
-                                <ArrowDropUpIcon className={ classes.btnArrow} onClick={ () => { this.props.addRemoveQuantity(reducer, item.item_id, "up")}} />
-                            </div>
+                            {
+                              canBeUpdated ?
+                              <div className={ classes.quantity }>
+                                  <ArrowDropDownIcon className={ classes.btnArrow} onClick={ () => { this.props.addRemoveQuantity(reducer, item.item_id, "down")}} />
+                                      <span>{ item.quantity }</span>
+                                  <ArrowDropUpIcon className={ classes.btnArrow} onClick={ () => { this.props.addRemoveQuantity(reducer, item.item_id, "up")}} />
+                              </div>
+                              : <span>{ item.quantity }</span>
+                            }
 
                             </TableCell>
                             <TableCell>
-                              <ApxContenEditable value={item.discount} length="10" id={item.item_id} actionInput={this.getInput} name="discount" />
+                              {
+                                canBeUpdated ?
+                              <ApxContenEditable placeholder="0" value={item.discount  || ""} length="5" id={item.item_id} actionInput={this.getInput} name="discount" />
+                                : item.discount || cvtNumToUserPref(0)
+                              }
                             </TableCell>
                             <TableCell className={classes.tablenoWrap}>{ cvtNumToUserPref(item.total) }</TableCell>
-                            <TableCell ><IconButton onClick={ () => { this.props.removeItem(reducer, item)}} ><DeleteIcon style={{ color: 'red' }}/></IconButton></TableCell>
+                            { canBeUpdated ? <TableCell ><IconButton onClick={ () => { this.props.removeItem(reducer, item)}} ><DeleteIcon style={{ color: 'red' }}/></IconButton></TableCell> : null }
                         </TableRow>
 
             })
@@ -96,20 +117,59 @@ class Items extends Component {
     </Table>
     </div>
     <div className={ classes.sumWrapper}>
+      
+        <Checkbox 
+            checked={newData.deposit || false} 
+            style={{ marginRight: 5}} 
+            onChange={(e) => { this.props.createState(this.props.reducer, "deposit", e.target.checked )}} />
+        {locale.wording.invoice_deposit}
 
+      <div>
         <Typography variant="body1" className={ classes.sum }>
           <b style={{ marginLeft: 24 }}>{locale.wording.subtotal}</b>
-          <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(this.totalHT(listItems).ht) } { newData.currency && newData.currency.value }</b></span>
+          <span className={ classes.sumSpan }><b>{  cvtNumToUserPref(newData.subtotal || 0 ) } { newData.currency && newData.currency.value }</b></span>
         </Typography>
+      </div>
+        {
+          newData.deposit ?
+              <Typography variant="body1" component="div" className={ classes.sum } style={{backgroundColor: "white"}}>
+                <b style={{ marginLeft: 24 }}>{locale.wording.balance_due}</b>
+                <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(newData.balance) } { newData.currency && newData.currency.value }  </b></span>
+              </Typography>
+          : null 
+        }
+        {
+          newData.deposit ? 
+          <Typography variant="body1" component="div"  className={ classes.sum }>
+                <b style={{ marginLeft: 24 }}>{locale.wording.deposit}</b>
+                <span className={ classes.sumSpan }><b>
+                  <TextField  
+                      placeholder="100" 
+                      value={newData.deposit_amount || "" }  
+                      disabled={!newData.deposit}
+                      id="deposit_amount" 
+                      InputProps={{
+                        maxLength: 3,
+                        endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                      }}
+                      style={{ width: 120 }}
+                      onChange={ this.setDeposit } 
+                      variant="outlined"
+                      margin="dense"
+                      name="deposit_amount" /></b></span>
+              </Typography>
+              : null 
+        }
+              
         <Typography variant="body1" className={ classes.sum } style={{backgroundColor: "white"}}>
-          <b style={{ marginLeft: 24 }}>{locale.wording.vat}&nbsp;{ newData.vat ? newData.vat.value : "0%" }</b>
-          <span className={ classes.sumSpan }><b>{ this.totalHT(listItems).vat } { newData.currency && newData.currency.value }</b></span><br />
-          <span style={{ marginLeft: 24, fontSize: 10 }}>{ newData.vat && newData.vat["vat_terms_" + localStorage.getItem('locale')] }</span>
+          <b style={{ marginLeft: 24 }}>{locale.wording.vat}&nbsp;{ newData.vat ? newData.vat.value : "0%" } { vat_terms}</b>
+          <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(newData.vat_value || 0) } { newData.currency && newData.currency.value }</b></span>
         </Typography>
-        <Typography variant="body1" className={ classes.sum }>
-          <b style={{ marginLeft: 24 }}>{locale.wording.total_ttc}</b>
-          <span className={ classes.sumSpan }><b>{ this.totalHT(listItems).ttc } { newData.currency && newData.currency.value }</b></span>
+        <Typography variant="body1" component="div" className={ classes.sum }>
+          <b style={{ marginLeft: 24 }}>{locale.wording.net_to_pay}</b>
+          <span className={ classes.sumSpan }><b>{ cvtNumToUserPref( newData.net_to_pay + newData.vat_value || 0 ) } { newData.currency && newData.currency.value }  </b></span>
         </Typography>
+
     </div>
   </div>
 
@@ -135,7 +195,7 @@ const styles = theme => ({
 
     },
     tableRow: {
-        height: 28,
+        // height: 28,
     },
     contentEditable: {
         whiteSpace: "nowrap",
@@ -159,6 +219,9 @@ const styles = theme => ({
     sum: {
         backgroundColor: "rgb(238,238,238)",
         width: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
         paddingTop: 15,
         paddingBottom: 15
     },
@@ -184,4 +247,4 @@ const mapStateToProps = (state) => {
 }
 const StyledItems = withStyles(styles)(Items)
 
-export default connect(mapStateToProps, {  addRemoveQuantity, removeItem, editItem, discountPrice })(StyledItems);
+export default connect(mapStateToProps, {  addRemoveQuantity, removeItem, editItem, discountPrice, createState })(StyledItems);

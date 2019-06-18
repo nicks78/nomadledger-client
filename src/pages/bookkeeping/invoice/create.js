@@ -21,6 +21,7 @@ class CreateInvoice extends React.Component {
         }
     }
 
+
     // componentWillUnmount(){
     //     this.props.resetState(this.state.reducer);
     // }
@@ -35,6 +36,12 @@ class CreateInvoice extends React.Component {
                 this.props.convertToCurrency(this.state.reducer, value, this.props.listItems[i])
             }
         }
+
+        if(name === "vat" && this.props.newInvoice.vat){
+            var vat_value =  (this.props.newInvoice.subtotal / 100) * value.indice ;
+            this.props.createState(this.state.reducer, "vat_value", vat_value )
+        }
+
         this.props.createState( this.state.reducer, name, value)
     }
 
@@ -42,6 +49,7 @@ class CreateInvoice extends React.Component {
 
     const { isFetching, locale, classes, newInvoice, listItems, vat, currency, status } = this.props;
     const {reducer} = this.state;
+
 
     if(isFetching){
         return <Spinner/>
@@ -83,7 +91,7 @@ const mapStateToProps = (state) => {
     return {
         isFetching: state.book.invoice.isFetching,
         locale: state.locale.locale,
-        newInvoice: state.book.invoice.item || {},
+        newInvoice: state.book.invoice.item || null,
         listItems: state.book.invoice.item.list_items,
         vat: state.account.company.item ? state.account.company.item.vat : [],
         status: state.helper.items.status_invoice,

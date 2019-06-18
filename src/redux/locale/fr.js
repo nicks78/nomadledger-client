@@ -118,7 +118,8 @@ const fr =  {
         label_terms: "Ajouter des conditions de payment etc...",
         label_comp_member: "Votre abonnement",
         label_reply_quote: "Envoyez-nous vos commentaires",
-        label_client_feedback: "Commentaire du client"
+        label_client_feedback: "Commentaire du client",
+        event_history: "Historique des evenements"
 
     },
     wording: {
@@ -133,6 +134,7 @@ const fr =  {
         upload: "Uploader",
         loading:"Chargement...",
         send: "Envoyer",
+        sent: "Envoyé",
         delete: "Supprimer",
         reply: "Repondre",
         contact_us: "Contactez-nous",
@@ -311,7 +313,11 @@ const fr =  {
         designation: "Désignation",
         tandc: "Conditions générales",
         quote_link: "Voir le devis",
-        duplicate: "Dupliquer"
+        duplicate: "Dupliquer",
+        invoice_deposit: "Facture d'acompte",
+        net_to_pay: "Net à payer",
+        balance_due: "Restant dû",
+        deposit: "Acompte en % (sur restant dû)"
 
     },
     helperText: {

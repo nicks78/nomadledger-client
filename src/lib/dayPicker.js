@@ -44,9 +44,7 @@ class DatePickers extends React.Component {
         if(this.props.value){
             this.setState({ selectedDay: new Date(this.props.value) })
         }
-        console.log(this.props.field)
         if(this.props.field === "created_at"){
-            console.log("IN", this.props.field)
           this.handleDayChange(new Date())
         }
     }
@@ -97,18 +95,18 @@ class DatePickers extends React.Component {
             <div className={classes.root}>
                 <DateRangeIcon className={ classes.icon } onClick={this.handleShow} />
                 {   this.state.show ?
-                            <DayPicker
-                                id={this.props.field}
-                                onDayClick={  this.handleDayChange }
-                                weekdaysLong={ date[locale].week_long}
-                                selectedDay={selectedDay}
-                                weekdaysShort={ date[locale].week_short}
-                                months={ date[locale].month}
-                                month={new Date(selectedDay.getFullYear(), selectedDay.getMonth())}
-                                modifiers={modifiers}
-                                modifiersStyles={{ position: 'absolute' }}
-                                firstDayOfWeek={1}
-                            />
+                    <DayPicker
+                        id={this.props.field}
+                        onDayClick={  this.handleDayChange }
+                        weekdaysLong={ date[locale].week_long}
+                        selectedDay={selectedDay}
+                        weekdaysShort={ date[locale].week_short}
+                        months={ date[locale].month}
+                        month={new Date(selectedDay.getFullYear(), selectedDay.getMonth())}
+                        modifiers={modifiers}
+                        modifiersStyles={{ position: 'absolute' }}
+                        firstDayOfWeek={1}
+                    />
                     : null
                 }
             </div>

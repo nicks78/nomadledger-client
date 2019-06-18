@@ -7,6 +7,9 @@ manageQuantity,
 editObjectInArray,
 replaceObjectInArray } from '../../utils/help_function'
 
+import { sumItem, calculVat} from './helper'
+
+
 const initialState = {
     item : {list_items: []},
     total: 0,
@@ -22,6 +25,8 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
 
+    var items ,totalItems, balance
+    
 
     switch (action.type) {
         case `REQUEST`:
@@ -75,39 +80,103 @@ const authReducer = (state = initialState, action) => {
                 item: { ...state.item, [ action.payload.fieldName ] : action.payload.value },
             }
         case `STATE_ITEM`:
+                items = removeDuplicateAndAddQuantity(state.item.list_items || [], action);
+                totalItems = sumItem(items);
+                balance = totalItems - (state.item.charges || 0); 
+                
             return  {
                 ...state,
                 isFetching: action.isFetching,
                 isError: action.isError,
-                item: {...state.item, list_items :  removeDuplicateAndAddQuantity(state.item.list_items || [], action)},
+                item: {...state.item, 
+                    list_items :  items,
+                    subtotal: totalItems,
+                    balance: balance,
+                    net_to_pay: balance,
+                    vat_value: calculVat(totalItems, state.item.vat ),
+                    deposit_amount: 100  
+                },
             }
         case `UPDATE_LIST_ITEM`:
+                items = replaceObjectInArray(state.item.list_items, action.payload);
+                totalItems = sumItem(items);
+                balance = totalItems - (state.item.charges || 0); 
+
             return {
                 ...state,
-                item: { ...state.item, list_items: replaceObjectInArray(state.item.list_items, action.payload) },
+                item: { ...state.item, 
+                    list_items : items,
+                    subtotal: totalItems,
+                    balance: balance,
+                    net_to_pay: balance,
+                    vat_value: calculVat(totalItems, state.item.vat ),
+                    deposit_amount: 100 
+                },
             }
 
         case `UP_DOWN_QUANTITY`:
+                items = manageQuantity(state.item.list_items, action);
+                totalItems = sumItem(items);
+                balance = totalItems - (state.item.charges || 0); 
+
             return {
                 ...state,
-                item: { ...state.item, list_items : manageQuantity(state.item.list_items, action)},
+                item: { ...state.item, 
+                        list_items : items,
+                        subtotal: totalItems,
+                        balance: balance,
+                        net_to_pay: balance,
+                        vat_value: calculVat(totalItems, state.item.vat ),
+                        deposit_amount: 100
+                    },
             }
 
         case `DISCOUNT`:
+                items = discountPrice(state.item.list_items, action);
+                totalItems = sumItem(items);
+                balance = totalItems - (state.item.charges || 0);
             return {
                 ...state,
-                item: { ...state.item, list_items : discountPrice(state.item.list_items, action)},
+                item: { ...state.item, 
+                    list_items : items,
+                    subtotal: totalItems,
+                    balance: balance,
+                    net_to_pay: balance,
+                    vat_value: calculVat(totalItems, state.item.vat ),
+                    deposit_amount: 100
+                },
             }
         case `EDIT_SINGLE_ITEM`:
+                items = editObjectInArray(state.item.list_items, action.item, action.payload.fieldName, action.payload.value);
+                totalItems = sumItem(items);
+                balance = totalItems - (state.item.charges || 0);
             return {
                 ...state,
-                item: { ...state.item, list_items : editObjectInArray(state.item.list_items, action.item, action.payload.fieldName, action.payload.value)},
+                item: { ...state.item, 
+                    list_items : items,
+                    subtotal: totalItems,
+                    balance: balance,
+                    net_to_pay: balance,
+                    vat_value: calculVat(totalItems, state.item.vat ),
+                    deposit_amount: 100 
+                },
             }
 
         case `REMOVE_ITEM`:
+                items = state.item.list_items.filter((el) => { return el.item_id !== action.payload.item_id });
+                totalItems = sumItem(items);
+                balance = totalItems - (state.item.charges || 0);
+
             return {
                 ...state,
-                item: { ...state.item, list_items : state.item.list_items.filter((el) => { return el.item_id !== action.payload.item_id }) },
+                item: { ...state.item, 
+                    list_items : items,
+                    subtotal: totalItems,
+                    balance: balance,
+                    net_to_pay: balance,
+                    vat_value: calculVat(totalItems, state.item.vat ),
+                    deposit_amount: 100 
+                },
             }
 
 

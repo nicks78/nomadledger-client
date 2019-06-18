@@ -11,6 +11,11 @@ import Form from '../common/form'
 
 class CreateQuote extends React.Component {
 
+    state = {
+        reducer: "QUOTE"
+    }
+
+
     handleDropDown = (event) => {
         var name = event.target.name;
         var value = event.target.value;
@@ -18,10 +23,17 @@ class CreateQuote extends React.Component {
         if(name === "currency") {
             // Update each items with the correct currency rate
             for (let i = 0; i < this.props.listItems.length; i++) {
-                this.props.convertToCurrency("QUOTE", value, this.props.listItems[i])
+                this.props.convertToCurrency(this.state.reducer, value, this.props.listItems[i])
             }
         }
-        this.props.createState( "QUOTE", name, value)
+
+        if(name === "vat" && this.props.newQuote.vat){
+            var vat_value =  (this.props.newQuote.subtotal / 100) * value.indice ;
+            this.props.createState(this.state.reducer, "vat_value", vat_value )
+        }
+
+
+        this.props.createState( this.state.reducer, name, value)
     }
 
     render(){
@@ -46,7 +58,7 @@ class CreateQuote extends React.Component {
                     handleDropDown={ this.handleDropDown }
                     getListItem={this.props.getListItem}
                     createState={this.props.createState}
-                    reducer="QUOTE"
+                    reducer={this.state.reducer}
                     btnLabel={locale.wording.save}
                     date_1="created_at"
                     date_2="expired_at"

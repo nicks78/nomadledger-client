@@ -9,6 +9,11 @@ import Spinner from '../../../components/common/spinner'
 import ApxBackBtn from '../../../components/common/backBtn'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownloadOutlined'
 import CheckIcon from '@material-ui/icons/Check'
+import History from './history'
+import StatusStep from './statusStep'
+import ApxtextIndexValue from '../../../components/common/textIndexValue'
+
+
 
 class View extends Component {
 
@@ -54,7 +59,6 @@ class View extends Component {
                 label={ locale.wording.transaction_number }
                 id="transaction_number"
                 margin="dense"
-                onFocus={ () => {console.log("IN")} }
                 onBlur={ () => { this.props.updateSingle(reducer.toUpperCase(), {transaction_number: item.transaction_number },  `common/update-field/${reducer.toLowerCase()}/${item._id}` ) }}
                 onChange={ (e) => { this.props.createState(reducer.toUpperCase(), "transaction_number",  e.target.value ) }}
                 style={{ fontWeight: 300, maxWidth: 400, width: "100%"}}
@@ -75,13 +79,13 @@ class View extends Component {
         const {reducer} = this.state
         const options = {  day: 'numeric',  month: 'short', year: 'numeric'};
 
+
         if(isFetching){
           return <Spinner />
         }
         if(!item || !company){
           return <p>Not data found !</p>
         }
-
 
         return (
             <Paper className={classes.paper}>
@@ -90,28 +94,42 @@ class View extends Component {
                 <img src={ company && company.logo_company.full_path } width="80" alt={company.company_name}/>
               </div>
 
+            <StatusStep item={item} locale={locale} />
+
             <div className={classes.header}>
                 {
                   item.contact_id ?
-                    <div style={{marginBottom: 24}}>
-                        <Typography variant="caption">{ locale.wording.bill_to }</Typography>
-                        <Typography variant="body1" align="left">{ item.contact_id.company_name }</Typography>
-                        <Typography variant="body1" align="left">{ item.contact_id.addresses_street }</Typography>
-                        <Typography variant="body1" align="left">{ item.contact_id.addresses_zip +" " }{ item.contact_id.addresses_city }</Typography>
-                        <Typography variant="body1" align="left">{ item.contact_id.addresses_country && item.contact_id.addresses_country[localStorage.getItem("locale")] }</Typography>
+                  <div className={classes.blockContact}>
+                        <ApxtextIndexValue
+                            value={ item.contact_id.company_name }
+                            label={locale.wording.company_name}
+                        />
+                          <ApxtextIndexValue
+                              value={ item.contact_id.firstname}
+                              label={locale.wording.firstname}
+                          />
+                          <ApxtextIndexValue
+                              value={ item.contact_id.lastname}
+                              label={locale.wording.lastname}
+                          />
+                          <ApxtextIndexValue
+                              value={ item.contact_id.email.toLowerCase()}
+                              label={locale.wording.email}
+                          />
+                            <ApxtextIndexValue
+                                value={ item.contact_id.phoneNumber}
+                                label={locale.wording.phone}
+                            />
+                            <ApxtextIndexValue
+                                value={ item.contact_id.addresses_street +" "+ item.contact_id.addresses_zip  + " " + item.contact_id.addresses_city + " " + (item.contact_id.addresses_country ? item.contact_id.addresses_country[localStorage.getItem('locale')] : "") }
+                                label={locale.wording.addresses_street}
+                            />
                     </div>
                   : <div></div>
                 }
                 {
                   item ?
                     <div>
-                      {
-                        item.status ?
-                        <p style={{backgroundColor: item.status.color, color: "white", borderRadius: 4, textAlign: 'center', marginTop: 0}}>
-                          {item.status[localStorage.getItem("locale")]}
-                        </p>
-                        : null
-                      }
                       <Typography variant="caption" align="left">{locale.wording[reducer]}&nbsp;
                         <span className={ classes.span }>Nº{ item.ref_add +"-"+item.ref }</span>
                       </Typography>
@@ -214,18 +232,26 @@ class View extends Component {
               <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(this.totalHT(item.list_items).ttc || 0) } { item.currency && item.currency.value }</b></span>
             </Typography>
         </div>
-
+        
+        <div style={{clear: "both"}}>
         {
           item.terms ?
-          <div style={{clear: "both"}}>
+          <div >
             <Typography variant="body1">{locale.wording.tandc}</Typography>
             <Typography style={{clear: "both"}} className={classes.infos} variant="body2">{ item.terms }</Typography>
           </div>
           : null
         }
+        
 
+        </div>
 
-
+        {
+          reducer === 'quote' ?
+            <History item={item} locale={locale} />
+          : null 
+        }
+      
         <Fab color="primary" size="medium"  className={classes.fab}>
             <CloudDownloadIcon onClick={ () => {this.props.downloadPdf(this.state.reducer, item._id)} } />
         </Fab>
@@ -238,7 +264,9 @@ const styles = theme => ({
     paper: {
         padding: 24,
         marginBottom: 24,
-        overflow: 'hidden',
+        [theme.breakpoints.down('sm')]: {
+          padding: 12,
+      }
     },
     header: {
       display: "flex",
@@ -307,6 +335,16 @@ const styles = theme => ({
       paddingLeft: 5,
       backgroundColor: "white"
     },
+    blockContact: {
+      border: '1px solid rgb(238,238,238)', 
+      borderRadius: 1, 
+      marginTop: 8,
+      minWidth: 400,
+      padding: 10,
+      [theme.breakpoints.down('sm')]: {
+        width: '100%'
+      }
+  }
 })
 
 const mapStateToProps = (state, ownProps) => {
