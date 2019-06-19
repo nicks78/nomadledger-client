@@ -314,7 +314,8 @@ const en = {
         invoice_deposit: "Partial invoice",
         net_to_pay: "Net to pay",
         balance_due: "Balance due",
-        deposit: "Advance payment in % (on balance due)"
+        deposit: "Advance payment",
+        already_paid: "Amount paid"
     },
     helperText: {
         select_phone_code: "Phone code",

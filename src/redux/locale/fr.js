@@ -316,8 +316,9 @@ const fr =  {
         duplicate: "Dupliquer",
         invoice_deposit: "Facture d'acompte",
         net_to_pay: "Net à payer",
-        balance_due: "Restant dû",
-        deposit: "Acompte en % (sur restant dû)"
+        balance_due: "Solde dû",
+        deposit: "Acompte",
+        already_paid: "Montant déja versées"
 
     },
     helperText: {

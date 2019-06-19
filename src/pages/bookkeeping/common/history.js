@@ -28,7 +28,7 @@ const History = (props) => {
                     item.charges.map((x, index) => {
                       balance = balance - x.subtotal
                       return  <TableRow key={index}>
-                                  <TableCell>{x.ref}</TableCell>
+                                  <TableCell><Link className="link" to={`/invoice/view/${x.invoice_id}`}>{x.ref}</Link></TableCell>
                                   <TableCell>{x.currency.en}</TableCell>
                                   <TableCell>{ cvtNumToUserPref(x.subtotal || 0) }</TableCell>
                               </TableRow>

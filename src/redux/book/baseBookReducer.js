@@ -25,7 +25,7 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
 
-    var items ,totalItems, balance
+    var items ,totalItems, balance_due
     
 
     switch (action.type) {
@@ -82,7 +82,7 @@ const authReducer = (state = initialState, action) => {
         case `STATE_ITEM`:
                 items = removeDuplicateAndAddQuantity(state.item.list_items || [], action);
                 totalItems = sumItem(items);
-                balance = totalItems - (state.item.charges || 0); 
+                balance_due = totalItems - (state.item.charges || 0); 
                 
             return  {
                 ...state,
@@ -91,8 +91,8 @@ const authReducer = (state = initialState, action) => {
                 item: {...state.item, 
                     list_items :  items,
                     subtotal: totalItems,
-                    balance: balance,
-                    net_to_pay: balance,
+                    balance_due: balance_due,
+                    net_to_pay: balance_due,
                     vat_value: calculVat(totalItems, state.item.vat ),
                     deposit_amount: 100  
                 },
@@ -100,15 +100,15 @@ const authReducer = (state = initialState, action) => {
         case `UPDATE_LIST_ITEM`:
                 items = replaceObjectInArray(state.item.list_items, action.payload);
                 totalItems = sumItem(items);
-                balance = totalItems - (state.item.charges || 0); 
+                balance_due = totalItems - (state.item.charges || 0); 
 
             return {
                 ...state,
                 item: { ...state.item, 
                     list_items : items,
                     subtotal: totalItems,
-                    balance: balance,
-                    net_to_pay: balance,
+                    balance_due: balance_due,
+                    net_to_pay: balance_due,
                     vat_value: calculVat(totalItems, state.item.vat ),
                     deposit_amount: 100 
                 },
@@ -117,15 +117,15 @@ const authReducer = (state = initialState, action) => {
         case `UP_DOWN_QUANTITY`:
                 items = manageQuantity(state.item.list_items, action);
                 totalItems = sumItem(items);
-                balance = totalItems - (state.item.charges || 0); 
+                balance_due = totalItems - (state.item.charges || 0); 
 
             return {
                 ...state,
                 item: { ...state.item, 
                         list_items : items,
                         subtotal: totalItems,
-                        balance: balance,
-                        net_to_pay: balance,
+                        balance_due: balance_due,
+                        net_to_pay: balance_due,
                         vat_value: calculVat(totalItems, state.item.vat ),
                         deposit_amount: 100
                     },
@@ -134,14 +134,14 @@ const authReducer = (state = initialState, action) => {
         case `DISCOUNT`:
                 items = discountPrice(state.item.list_items, action);
                 totalItems = sumItem(items);
-                balance = totalItems - (state.item.charges || 0);
+                balance_due = totalItems - (state.item.charges || 0);
             return {
                 ...state,
                 item: { ...state.item, 
                     list_items : items,
                     subtotal: totalItems,
-                    balance: balance,
-                    net_to_pay: balance,
+                    balance_due: balance_due,
+                    net_to_pay: balance_due,
                     vat_value: calculVat(totalItems, state.item.vat ),
                     deposit_amount: 100
                 },
@@ -149,14 +149,14 @@ const authReducer = (state = initialState, action) => {
         case `EDIT_SINGLE_ITEM`:
                 items = editObjectInArray(state.item.list_items, action.item, action.payload.fieldName, action.payload.value);
                 totalItems = sumItem(items);
-                balance = totalItems - (state.item.charges || 0);
+                balance_due = totalItems - (state.item.charges || 0);
             return {
                 ...state,
                 item: { ...state.item, 
                     list_items : items,
                     subtotal: totalItems,
-                    balance: balance,
-                    net_to_pay: balance,
+                    balance_due: balance_due,
+                    net_to_pay: balance_due,
                     vat_value: calculVat(totalItems, state.item.vat ),
                     deposit_amount: 100 
                 },
@@ -165,15 +165,15 @@ const authReducer = (state = initialState, action) => {
         case `REMOVE_ITEM`:
                 items = state.item.list_items.filter((el) => { return el.item_id !== action.payload.item_id });
                 totalItems = sumItem(items);
-                balance = totalItems - (state.item.charges || 0);
+                balance_due = totalItems - (state.item.charges || 0);
 
             return {
                 ...state,
                 item: { ...state.item, 
                     list_items : items,
                     subtotal: totalItems,
-                    balance: balance,
-                    net_to_pay: balance,
+                    balance_due: balance_due,
+                    net_to_pay: balance_due,
                     vat_value: calculVat(totalItems, state.item.vat ),
                     deposit_amount: 100 
                 },

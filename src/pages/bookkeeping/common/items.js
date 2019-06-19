@@ -18,7 +18,7 @@ import {
 import DeleteIcon from '@material-ui/icons/DeleteOutlined'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
-import { cvtNumToUserPref } from '../../../utils/help_function'
+import { cvtNumToUserPref, checkNumFormatRegex } from '../../../utils/help_function'
 import ApxContenEditable from '../../../components/common/contentEditable'
 import EditIcon from '@material-ui/icons/EditOutlined'
 
@@ -37,18 +37,37 @@ class Items extends Component {
 
     setDeposit = (e) => {
       var vat = this.props.newData.vat ? this.props.newData.vat.indice : 0;
-      var value = parseInt(e.target.value || 0, 10)
-      var total = this.props.newData.subtotal - this.props.newData.charges;
+      
+      var value = parseFloat(e.target.value.replace(",", ".") || 0)
+     
+      var total = this.props.newData.subtotal;
 
-      this.props.createState(this.props.reducer, "deposit_amount", value)
+      this.props.createState(this.props.reducer, "deposit_amount", e.target.value)
       this.props.createState(this.props.reducer, "deposit", true)
 
-      var net = (total / 100) * parseInt(value , 10) ;
-      var vat_value =  (net /100) * vat 
+      var vat_value =  (value /100) * vat 
 
-      this.props.createState(this.props.reducer, "balance", parseFloat((total).toFixed(2)) - parseFloat((net).toFixed(2))   )
-      this.props.createState(this.props.reducer, "net_to_pay", net)
+      this.props.createState(this.props.reducer, "balance_due", parseFloat((total).toFixed(2)) - parseFloat((value).toFixed(2))   )
+      this.props.createState(this.props.reducer, "net_to_pay", value)
       this.props.createState(this.props.reducer, "vat_value", vat_value )
+    }
+
+    handleCheckBox = (e) => {
+      var name = e.target.name;
+
+      if(name === "deposit"){
+        this.props.createState(this.props.reducer, "deposit", e.target.checked )
+        this.props.createState(this.props.reducer, "balance", false )
+      }
+
+      if(name === "balance"){
+        var total = this.props.newData.subtotal - this.props.newData.charges
+        this.props.createState(this.props.reducer, "balance", e.target.checked)
+        this.props.createState(this.props.reducer, "deposit", false )
+        this.props.createState(this.props.reducer, "net_to_pay", total)
+      }
+
+      
     }
 
 
@@ -118,14 +137,29 @@ class Items extends Component {
     </div>
     <div className={ classes.sumWrapper}>
       {
-        reducer === "invoice" ?
-        <React.Fragment>
+        reducer === "INVOICE" && newData.quote_id ?
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div>
           <Checkbox 
             checked={newData.deposit || false} 
             style={{ marginRight: 5}} 
-            onChange={(e) => { this.props.createState(this.props.reducer, "deposit", e.target.checked )}} />
+            name="deposit"
+            disabled={canBeUpdated}
+            onChange={ this.handleCheckBox } />
           {locale.wording.invoice_deposit}
-        </React.Fragment>
+          </div>
+
+          <div>
+          <Checkbox 
+            checked={newData.balance || false} 
+            style={{ marginRight: 5}} 
+            name="balance"
+            disabled={canBeUpdated}
+            onChange={ this.handleCheckBox } />
+            Solde
+          </div>
+          
+        </div>
         : null 
       }
 
@@ -140,7 +174,15 @@ class Items extends Component {
           newData.deposit ?
               <Typography variant="body1" component="div" className={ classes.sum } style={{backgroundColor: "white"}}>
                 <b style={{ marginLeft: 24 }}>{locale.wording.balance_due}</b>
-                <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(newData.balance) } { newData.currency && newData.currency.value }  </b></span>
+                <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(newData.balance_due) } { newData.currency && newData.currency.value }  </b></span>
+              </Typography>
+          : null 
+        }
+         {
+          newData.balance ?
+              <Typography variant="body1" component="div" className={ classes.sum } style={{backgroundColor: "white"}}>
+                <b style={{ marginLeft: 24 }}>{locale.wording.already_paid}</b>
+                <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(newData.charges) } { newData.currency && newData.currency.value }  </b></span>
               </Typography>
           : null 
         }
@@ -150,16 +192,19 @@ class Items extends Component {
                 <b style={{ marginLeft: 24 }}>{locale.wording.deposit}</b>
                 <span className={ classes.sumSpan }><b>
                   <TextField  
-                      placeholder="100" 
+                      placeholder="1000" 
                       value={newData.deposit_amount || "" }  
                       disabled={!newData.deposit}
                       id="deposit_amount" 
                       InputProps={{
-                        maxLength: 3,
-                        endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                        endAdornment: <InputAdornment position="end">{ newData.currency && newData.currency.value }</InputAdornment>,
                       }}
                       style={{ width: 120 }}
-                      onChange={ this.setDeposit } 
+                      onChange={ (e) => {
+                          if(checkNumFormatRegex(e.target.value)){
+                            this.setDeposit(e)
+                          }
+                         }}
                       variant="outlined"
                       margin="dense"
                       name="deposit_amount" /></b></span>

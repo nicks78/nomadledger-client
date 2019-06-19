@@ -23,6 +23,7 @@ class View extends Component {
     }
 
     componentDidMount(){
+      
       this.setState({
           id: this.props.match.params.id,
           reducer: this.props.match.params.reducer
@@ -34,21 +35,20 @@ class View extends Component {
       this.props.resetState(this.state.reducer.toUpperCase())
     }
 
-    // Calcul all VAT / Total / Total HT
-    totalHT = (listItems) => {
-        var vat = this.props.item.vat ? this.props.item.vat.indice : 0
-        var total = { vat : 0, ht: 0, ttc: 0 };
+    componentDidUpdate(){
+      // this.setState({
+      //   id: this.props.match.params.id,
+      //   reducer: this.props.match.params.reducer
+      // })
+      // this.props.getDocument(this.props.match.params.reducer.toUpperCase(), this.props.match.params.id);
+    }
 
-        for(var i = 0; i < listItems.length; i++){
-            total.ht = parseFloat( (total.ht + listItems[i].total).toFixed(2))
-        }
-        var vat_value =  parseFloat((total.ht /100 * vat ).toFixed(2))
-        total.vat = vat_value;
 
-        var ttc = parseFloat((total.ht + total.vat ).toFixed(2));
-        total.ttc = ttc;
+    calculVat = (amount, vat) => {
+      var vat = vat ? vat.indice : 0;
+      var vat_value =  (amount /100) * vat 
 
-        return  total;
+      return vat_value
     }
 
     renderTransactionNumber = () => {
@@ -220,16 +220,32 @@ class View extends Component {
 
             <Typography variant="body1" className={ classes.sum }>
               <b style={{ marginLeft: 24 }}>{locale.wording.subtotal}</b>
-              <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(this.totalHT(item.list_items).ht) } { item.currency && item.currency.value }</b></span>
+              <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(item.subtotal) } { item.currency && item.currency.value }</b></span>
             </Typography>
+            {
+              item.deposit ?
+                  <Typography variant="body1" component="div" className={ classes.sum } style={{backgroundColor: "white"}}>
+                    <b style={{ marginLeft: 24 }}>{locale.wording.balance_due}</b>
+                    <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(item.balance_due) } { item.currency && item.currency.value }  </b></span>
+                  </Typography>
+              : null 
+            }
+            {
+              item.balance ?
+                  <Typography variant="body1" component="div" className={ classes.sum } style={{backgroundColor: "white"}}>
+                    <b style={{ marginLeft: 24 }}>{locale.wording.already_paid}</b>
+                    <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(item.charges) } { item.currency && item.currency.value }  </b></span>
+                  </Typography>
+              : null 
+            }
             <Typography variant="body1" className={ classes.sum } style={{backgroundColor: "white"}}>
               <b style={{ marginLeft: 24 }}>{locale.wording.vat}&nbsp;{ item.vat ? item.vat.value : "0%" }</b>
-              <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(this.totalHT(item.list_items).vat || 0) } { item.currency && item.currency.value }</b></span><br />
+              <span className={ classes.sumSpan }><b>{ cvtNumToUserPref( this.calculVat(item.net_to_pay, item.vat )) } { item.currency && item.currency.value }</b></span><br />
               <span style={{ marginLeft: 24, fontSize: 10 }}>{ item.vat && item.vat["vat_terms_" + localStorage.getItem('locale')] }</span>
             </Typography>
             <Typography variant="body1" className={ classes.sum }>
               <b style={{ marginLeft: 24 }}>{locale.wording.total_ttc}</b>
-              <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(this.totalHT(item.list_items).ttc || 0) } { item.currency && item.currency.value }</b></span>
+              <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(item.net_to_pay || 0) } { item.currency && item.currency.value }</b></span>
             </Typography>
         </div>
         

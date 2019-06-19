@@ -90,8 +90,20 @@ export function updateDocument (actionType) {
         try{
             const request = await axios.put(`${API_ENDPOINT}/${actionType.toLowerCase()}/update`, {data})
             const res = request.data;
+            var item = res.item;
+
+            if(res.item.quote_id){
+                const total = sumItem( res.item.list_items );
+                const sum = sumCharges(res.item.quote_id.charges)
+                const net = total - sum ;
+    
+                item.balance_due = net;
+                item.charges = sum;
+                item.vat_value = calculVat(net, res.item.vat ) ;
+            }
+
             dispatch(setNotification("success_update", "success"))
-            dispatch( setDocument(actionType, res.item) )
+            dispatch( setDocument(actionType, item) )
         }catch(error){
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
@@ -182,15 +194,15 @@ export function getDocument( actionType, id ){
             const request = await axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${id}`);
             const res = request.data;
             var item = res.payload;
+            item.net_to_pay = item.subtotal
 
             if(res.payload.quote_id){
                 const total = sumItem( res.payload.list_items );
-                const sum = sumCharges(res.payload.charges)
+                const sum = sumCharges(res.payload.quote_id.charges)
                 const net = total - sum ;
-    
-                item.balance = net;
+ 
+                item.balance_due = net;
                 item.charges = sum;
-                item.net_to_pay = net ;
                 item.vat_value = calculVat(net, res.payload.vat ) ;
             }
 
@@ -243,9 +255,11 @@ export function convertToOtherDocument( actionType, id, newType ){
                 infos:  res.payload.infos,
                 terms: res.payload.terms,
                 vat: res.payload.vat,
+                deposit: false,
+                balance: false,
                 subtotal: total, // Sum of all items excl taxes (from full total based on quote)
 
-                balance: net,
+                balance_due: net,
                 net_to_pay: net, // Price to be paid excluding taxes
                 vat_value: calculVat(net, res.payload.vat ), // Amount taxes in money
                 charges: sum, // Sum has been charges and saved in quote database

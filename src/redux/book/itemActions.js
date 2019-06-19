@@ -85,7 +85,6 @@ export function convertToCurrency( actionType, currency, item ) {
             dispatch(updateListItems(actionType,  item ))
         })
         .catch(function (error) {
-            console.log(error)
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
 
