@@ -195,7 +195,8 @@ export function getDocument( actionType, id ){
             const res = request.data;
             var item = res.payload;
             item.net_to_pay = item.subtotal
-
+            item.vat_value = calculVat(res.payload.net_to_pay, res.payload.vat ) ;
+            
             if(res.payload.quote_id){
                 const total = sumItem( res.payload.list_items );
                 const sum = sumCharges(res.payload.quote_id.charges)
@@ -203,7 +204,8 @@ export function getDocument( actionType, id ){
  
                 item.balance_due = net;
                 item.charges = sum;
-                item.vat_value = calculVat(net, res.payload.vat ) ;
+                item.onRef = item.quote_id.ref_add +"-"+ item.ref
+                
             }
 
             dispatch(setDocument(actionType, item ))
@@ -227,7 +229,6 @@ export function convertToOtherDocument( actionType, id, newType ){
     return async (dispatch, getState) => {
 
         dispatch(requestData(actionType));
-        const locale = getState().locale.locale
 
         // Set date object
         var date = new Date();
@@ -256,7 +257,7 @@ export function convertToOtherDocument( actionType, id, newType ){
                 terms: res.payload.terms,
                 vat: res.payload.vat,
                 deposit: false,
-                balance: false,
+                balance: actionType === "QUOTE" ? true : false,
                 subtotal: total, // Sum of all items excl taxes (from full total based on quote)
 
                 balance_due: net,
@@ -267,7 +268,7 @@ export function convertToOtherDocument( actionType, id, newType ){
                 currency: res.payload.currency,
                 contact_id: res.payload.contact_id,
                 [actionType.toLowerCase() + "_id"]: res.payload._id,
-                onRef: locale.wording[actionType.toLowerCase()] +"#"+ res.payload.ref_add +"-"+res.payload.ref
+                onRef: res.payload.ref_add +"-"+res.payload.ref
             }
 
             dispatch(setDocument(newType, item ))

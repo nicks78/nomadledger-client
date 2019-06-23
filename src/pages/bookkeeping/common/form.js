@@ -38,7 +38,7 @@ const Form = (props) => {
                     {locale.subheading[formTitle] }
                     {
                         data.onRef ?
-                        <span> { locale.wording.on }  { data.onRef}</span>
+                        <span> { locale.wording.on } { data.quote_id ? locale.wording.quote : locale.wording.invoice } #{ data.onRef}</span>
                         : null
                     }
 

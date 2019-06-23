@@ -21,9 +21,9 @@ class CreateRefund extends React.Component {
         }
     }
 
-    // componentWillUnmount(){
-    //     this.props.resetState(this.state.reducer);
-    // }
+    componentWillUnmount(){
+        this.props.resetState(this.state.reducer);
+    }
 
     handleDropDown = (event) => {
         var name = event.target.name;

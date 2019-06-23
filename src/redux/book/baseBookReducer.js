@@ -7,7 +7,7 @@ manageQuantity,
 editObjectInArray,
 replaceObjectInArray } from '../../utils/help_function'
 
-import { sumItem, calculVat} from './helper'
+import { sumItem, calculVat, sumCharges} from './helper'
 
 
 const initialState = {
@@ -117,15 +117,17 @@ const authReducer = (state = initialState, action) => {
         case `UP_DOWN_QUANTITY`:
                 items = manageQuantity(state.item.list_items, action);
                 totalItems = sumItem(items);
-                balance_due = totalItems - (state.item.charges || 0); 
-
+                if(state.item.quote_id){
+                    balance_due = totalItems - (sumCharges(state.item.charges) || 0); 
+                }
+            
             return {
                 ...state,
                 item: { ...state.item, 
                         list_items : items,
                         subtotal: totalItems,
                         balance_due: balance_due,
-                        net_to_pay: balance_due,
+                        net_to_pay: state.item.quote_id ? balance_due : totalItems,
                         vat_value: calculVat(totalItems, state.item.vat ),
                         deposit_amount: 100
                     },
@@ -134,14 +136,17 @@ const authReducer = (state = initialState, action) => {
         case `DISCOUNT`:
                 items = discountPrice(state.item.list_items, action);
                 totalItems = sumItem(items);
-                balance_due = totalItems - (state.item.charges || 0);
+                if(state.item.quote_id){
+                    balance_due = totalItems - (sumCharges(state.item.charges) || 0); 
+                }
+
             return {
                 ...state,
                 item: { ...state.item, 
                     list_items : items,
                     subtotal: totalItems,
                     balance_due: balance_due,
-                    net_to_pay: balance_due,
+                    net_to_pay: state.item.quote_id ? balance_due : totalItems,
                     vat_value: calculVat(totalItems, state.item.vat ),
                     deposit_amount: 100
                 },
@@ -149,14 +154,16 @@ const authReducer = (state = initialState, action) => {
         case `EDIT_SINGLE_ITEM`:
                 items = editObjectInArray(state.item.list_items, action.item, action.payload.fieldName, action.payload.value);
                 totalItems = sumItem(items);
-                balance_due = totalItems - (state.item.charges || 0);
+                if(state.item.quote_id){
+                    balance_due = totalItems - (sumCharges(state.item.charges) || 0); 
+                }
             return {
                 ...state,
                 item: { ...state.item, 
                     list_items : items,
                     subtotal: totalItems,
                     balance_due: balance_due,
-                    net_to_pay: balance_due,
+                    net_to_pay: state.item.quote_id ? balance_due : totalItems,
                     vat_value: calculVat(totalItems, state.item.vat ),
                     deposit_amount: 100 
                 },
@@ -165,15 +172,16 @@ const authReducer = (state = initialState, action) => {
         case `REMOVE_ITEM`:
                 items = state.item.list_items.filter((el) => { return el.item_id !== action.payload.item_id });
                 totalItems = sumItem(items);
-                balance_due = totalItems - (state.item.charges || 0);
-
+                if(state.item.quote_id){
+                    balance_due = totalItems - (sumCharges(state.item.charges) || 0); 
+                }
             return {
                 ...state,
                 item: { ...state.item, 
                     list_items : items,
                     subtotal: totalItems,
                     balance_due: balance_due,
-                    net_to_pay: balance_due,
+                    net_to_pay: state.item.quote_id ? balance_due : totalItems,
                     vat_value: calculVat(totalItems, state.item.vat ),
                     deposit_amount: 100 
                 },

@@ -256,7 +256,8 @@ const fr =  {
         approve: 'Approuver',
         rejected: "Rejeté",
         rejecte: "Rejeter",
-        paid: "Payer",
+        pay: "Payer",
+        paid: "Payé",
         cancel: "Annuler",
         invoicer: "Facturateur",
         all: "Tous",
@@ -317,8 +318,9 @@ const fr =  {
         invoice_deposit: "Facture d'acompte",
         net_to_pay: "Net à payer",
         balance_due: "Solde dû",
+        balance: "Solde",
         deposit: "Acompte",
-        already_paid: "Montant déja versées"
+        amount_paid: "Montant déja versées"
 
     },
     helperText: {
@@ -409,6 +411,7 @@ const fr =  {
         error_422_indice: "Taux de TVA doit être un chiffre (ex: 19,60 ou 19.60)",
         error_422_name: "Veuillez indiquer un nom",
         error_422_access_member: "Seule les membres NomadLedger ont accès à cette fonction.",
+        error_422_cannot_be_edited: "Ne peut etre editer",
         error_sign_up_google: "Inscription via Google n'a pas fonctionner, veuillez recommencer ou contacter notre service support@nomadledger.com",
 
         // Stripe err
@@ -430,7 +433,39 @@ const fr =  {
         required: "Tous les champs marqués d'un * sont obligatoires",
         request_reset_pw: "Votre demande a bien été prise en compte. Veuillez consulter votre email et suivre les instructions",
         beta_1: "Beta 1 - Toutes les données enregistrées seront perdues",
-        confirm_delete: "Voulez-vous vraiment supprimer cette élément ?"
+        confirm_delete: "Voulez-vous vraiment supprimer cette élément ?",
+
+        status_devis: `
+            <p>Il est important de bien comprendre chacun des statuts de vos devis.</p>
+            <p>Ceci <span class="bullet"></span> indique q'une reponse a été reçu. </p>
+            <ul>
+                <li><strong>Brouillon</strong> : Peuvent être edité.</li>
+                <li><strong>Envoyé</strong> : Peuvent être edité.</li>
+                <li><strong>Payé</strong> : Une facture payé ne peut plus être edité: Elle peut être annulé ou renvoyé.</li>
+                <li><strong>Annulé</strong> : Une facture annulé ne peut plus être modifié.</li>
+            </ul>
+            <p>Vous pouvez créer un avoir base sur une facture, la creation d'un avoir mettra automatiquement la facture au statut "annulé".</p>
+        `,
+        status_invoice: `
+            <p>Il est important de bien comprendre chacun des statuts de vos factures.</p>
+            <ul>
+                <li><strong>Brouillon</strong> : Seule ses factures peuvent être edité.</li>
+                <li><strong>Envoyé</strong> : Une facture envoyé ne peut plus être edité.</li>
+                <li><strong>Payé</strong> : Une facture payé ne peut plus être edité: Elle peut être annulé ou renvoyé.</li>
+                <li><strong>Annulé</strong> : Une facture annulé ne peut plus être modifié.</li>
+            </ul>
+            <p>Vous pouvez créer un avoir base sur une facture, la creation d'un avoir mettra automatiquement la facture au statut "annulé".</p>
+        `,
+        status_refund: `
+            <p>Il est important de bien comprendre chacun des statuts de vos factures.</p>
+            <ul>
+                <li><strong>Brouillon</strong> : Seule ses factures peuvent être edité.</li>
+                <li><strong>Envoyé</strong> : Une facture envoyé ne peut plus être edité.</li>
+                <li><strong>Payé</strong> : Une facture payé ne peut plus être edité: Elle peut être annulé ou renvoyé.</li>
+                <li><strong>Annulé</strong> : Une facture annulé ne peut plus être modifié.</li>
+            </ul>
+            <p>Vous pouvez créer un avoir base sur une facture, la creation d'un avoir mettra automatiquement la facture au statut "annulé".</p>
+        `
     },
     days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
     month : ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],

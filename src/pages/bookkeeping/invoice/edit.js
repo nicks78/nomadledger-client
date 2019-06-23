@@ -4,7 +4,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { createState , updateDocument, getDocument, resetState, downloadPdf} from '../../../redux/book/actions'
 import { convertToCurrency, getListItem} from '../../../redux/book/itemActions'
-import { withStyles, Fab } from '@material-ui/core';
+import { withStyles, Fab  } from '@material-ui/core';
 import Form from '../common/form'
 import Spinner from '../../../components/common/spinner'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownloadOutlined'
@@ -69,7 +69,9 @@ class EditInvoice extends React.Component {
                     btnLabel={locale.wording.update}
                     date_1="created_at"
                     date_2="due_at"
-                />
+                >
+
+                </Form>
                 <Fab size="medium" color="primary" className={classes.icon}>
                     <CloudDownloadIcon onClick={ () => {this.props.downloadPdf("INVOICE", invoice._id)} } />
                 </Fab>

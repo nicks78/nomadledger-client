@@ -23,7 +23,6 @@ import ApxContenEditable from '../../../components/common/contentEditable'
 import EditIcon from '@material-ui/icons/EditOutlined'
 
 
-
 class Items extends Component {
 
 
@@ -39,15 +38,13 @@ class Items extends Component {
       var vat = this.props.newData.vat ? this.props.newData.vat.indice : 0;
       
       var value = parseFloat(e.target.value.replace(",", ".") || 0)
-     
-      var total = this.props.newData.subtotal;
 
       this.props.createState(this.props.reducer, "deposit_amount", e.target.value)
       this.props.createState(this.props.reducer, "deposit", true)
 
       var vat_value =  (value /100) * vat 
 
-      this.props.createState(this.props.reducer, "balance_due", parseFloat((total).toFixed(2)) - parseFloat((value).toFixed(2))   )
+      // this.props.createState(this.props.reducer, "balance_due", parseFloat((total).toFixed(2)) - parseFloat((value).toFixed(2))   )
       this.props.createState(this.props.reducer, "net_to_pay", value)
       this.props.createState(this.props.reducer, "vat_value", vat_value )
     }
@@ -56,6 +53,8 @@ class Items extends Component {
       var name = e.target.name;
 
       if(name === "deposit"){
+        this.props.createState(this.props.reducer, "net_to_pay", 0)
+        this.props.createState(this.props.reducer, "vat_value", 0 )
         this.props.createState(this.props.reducer, "deposit", e.target.checked )
         this.props.createState(this.props.reducer, "balance", false )
       }
@@ -63,6 +62,7 @@ class Items extends Component {
       if(name === "balance"){
         var total = this.props.newData.subtotal - this.props.newData.charges
         this.props.createState(this.props.reducer, "balance", e.target.checked)
+        this.props.createState(this.props.reducer, "deposit_amount", 0)
         this.props.createState(this.props.reducer, "deposit", false )
         this.props.createState(this.props.reducer, "net_to_pay", total)
       }
@@ -76,6 +76,8 @@ class Items extends Component {
     const { newData, listItems, reducer, classes, locale } = this.props;
     const vat_terms =  newData.vat && newData.vat.vat_terms_en ? <span style={{ fontSize: 10 }}><br />{ newData.vat && newData.vat["vat_terms_" + localStorage.getItem('locale')] }</span> : null
     const canBeUpdated = newData.quote_id || newData.refund_id ? false : true
+
+      console.log("BALANCE", newData)
 
     return (
       <div>
@@ -138,13 +140,13 @@ class Items extends Component {
     <div className={ classes.sumWrapper}>
       {
         reducer === "INVOICE" && newData.quote_id ?
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", justifyContent: "space-around" }}>
           <div>
           <Checkbox 
             checked={newData.deposit || false} 
             style={{ marginRight: 5}} 
             name="deposit"
-            disabled={canBeUpdated}
+            disabled={ newData._id ? true : false   }
             onChange={ this.handleCheckBox } />
           {locale.wording.invoice_deposit}
           </div>
@@ -154,9 +156,9 @@ class Items extends Component {
             checked={newData.balance || false} 
             style={{ marginRight: 5}} 
             name="balance"
-            disabled={canBeUpdated}
+            disabled={ newData._id ? true : false }
             onChange={ this.handleCheckBox } />
-            Solde
+            {locale.wording.balance}
           </div>
           
         </div>
@@ -178,10 +180,10 @@ class Items extends Component {
               </Typography>
           : null 
         }
-         {
-          newData.balance ?
-              <Typography variant="body1" component="div" className={ classes.sum } style={{backgroundColor: "white"}}>
-                <b style={{ marginLeft: 24 }}>{locale.wording.already_paid}</b>
+        {
+          newData.balance && !newData._id ?
+              <Typography variant="body1" component="div" className={ classes.sum } style={{backgroundColor: "white", opacity: 0.4}}>
+                <b style={{ marginLeft: 24 }}>{locale.wording.amount_paid}</b>
                 <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(newData.charges) } { newData.currency && newData.currency.value }  </b></span>
               </Typography>
           : null 

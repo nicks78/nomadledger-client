@@ -254,6 +254,7 @@ const en = {
         rejected: "Rejected",
         rejecte: "To reject",
         paid: "Paid",
+        pay: "Pay",
         cancel: "Cancel",
         invoicer: "Convert to invoice",
         all: "All",
@@ -314,8 +315,9 @@ const en = {
         invoice_deposit: "Partial invoice",
         net_to_pay: "Net to pay",
         balance_due: "Balance due",
+        balance: "Balance",
         deposit: "Advance payment",
-        already_paid: "Amount paid"
+        amount_paid: "Amount paid"
     },
     helperText: {
         select_phone_code: "Phone code",
@@ -403,6 +405,7 @@ const en = {
         error_422_indice: "VAT rate must be a number (ex:19.60)",
         error_422_name: "Must contain a name",
         error_422_access_member: "Only NomadLedger member have access to this function",
+        error_422_cannot_be_edited: "Cannot be edited",
         error_sign_up_google: "Google sign Up did not work, please try again or contact us at support@nomadledger.com",
 
         // Stripe err
@@ -425,7 +428,40 @@ const en = {
         email_confirmed: "Thank you ! Your email has been confirmed",
         email_not_confirm: "Your email has not been confirmed yet. If you did not receive your confirmation email, please follow the steps below",
         beta_1: "Beta 1 - All data will be lost",
-        confirm_delete: "Do you really want to delete this element ?"
+        confirm_delete: "Do you really want to delete this element ?",
+
+        
+        status_devis: `
+            <p>Its important to understand all different quotation status</p>
+            <p>This <span class="bullet"></span> indicate an response from your client</p>
+            <ul>
+                <li><strong>Draft</strong> : Can be edited</li>
+                <li><strong>Sent</strong> : Once an invoices is sent, it cannot be edited.</li>
+                <li><strong>Paid</strong> : Once an invoices is paid, it can be cancled or resend.</li>
+                <li><strong>Canceled</strong> : Once an invoices is paid cancled, it cannot be modify.</li>
+            </ul>
+            <p>Vous pouvez créer un avoir base sur une facture, la creation d'un avoir mettra automatiquement la facture au statut "annulé".</p>
+        `,
+        status_invoice: `
+            <p>Its important to understand all different invoice status</p>
+            <ul>
+                <li><strong>Draft</strong> : Can be edited</li>
+                <li><strong>Sent</strong> : Once an invoices is sent, it cannot be edited.</li>
+                <li><strong>Paid</strong> : Once an invoices is paid, it can be cancled or resend.</li>
+                <li><strong>Canceled</strong> : Once an invoices is paid cancled, it cannot be modify.</li>
+            </ul>
+            <p>Vous pouvez créer un avoir base sur une facture, la creation d'un avoir mettra automatiquement la facture au statut "annulé".</p>
+        `,
+        status_refund: `
+            <p>Its important to understand all different refund status.</p>
+            <ul>
+                <li><strong>Draft</strong> : Can be edited</li>
+                <li><strong>Sent</strong> : Once an invoices is sent, it cannot be edited.</li>
+                <li><strong>Paid</strong> : Once an invoices is paid, it can be cancled or resend.</li>
+                <li><strong>Canceled</strong> : Once an invoices is paid cancled, it cannot be modify.</li>
+            </ul>
+            <p>Vous pouvez créer un avoir base sur une facture, la creation d'un avoir mettra automatiquement la facture au statut "annulé".</p>
+        `
 
     },
     days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],

@@ -15,6 +15,10 @@ class CreateQuote extends React.Component {
         reducer: "QUOTE"
     }
 
+    componentWillUnmount(){
+        this.props.resetState(this.state.reducer);
+    }
+
 
     handleDropDown = (event) => {
         var name = event.target.name;

@@ -16,8 +16,7 @@ import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
 import MobileView from '../common/mobileView'
 import LinearProgress from '@material-ui/core/LinearProgress';
-import Tooltips from '../../../components/common/tooltips'
-import WarningIcon from '@material-ui/icons/WarningOutlined'
+import BoxHint from '../../../components/common/boxHint'
 
 class Invoice extends Component {
 
@@ -75,6 +74,7 @@ class Invoice extends Component {
 
     return (
       <div className={classes.root}>
+
             <Hidden only={['xs', 'sm']}>
                 <Button component={Link} to="/invoice/create"
                         variant="contained" color="primary"
@@ -108,7 +108,7 @@ class Invoice extends Component {
                             <TableCell>{locale.wording.status}</TableCell>
                             <TableCell align="center">{locale.wording.repay}</TableCell>
                             <TableCell align="center">PDF</TableCell>
-                            <TableCell align="center">Actions&nbsp;&nbsp;<Tooltips title={locale.helperText.action_table}><WarningIcon style={{color: 'red'}}/></Tooltips><br />
+                            <TableCell align="center">Actions<br />
                             { actionLoading ? <LinearProgress color="secondary" variant="query" /> : null }
                             </TableCell>
 
@@ -160,7 +160,7 @@ class Invoice extends Component {
                         filterName="status"
                         onGetItemList={ this.props.getBookList }
                     />
-
+            
             </ApxPaper>
             : <MobileView
                   items={listInvoice}
@@ -170,6 +170,7 @@ class Invoice extends Component {
                   locale={locale}
                   reducer={reducer}/>
           }
+          <BoxHint content={locale.message.status_invoice} />
           <Hidden only={['lg', 'xl', 'md']}>
               <Fab
                   color="primary"
@@ -179,6 +180,9 @@ class Invoice extends Component {
                   <AddIcon />
               </Fab>
           </Hidden>
+
+
+          
       </div>
     )
   }

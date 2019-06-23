@@ -13,8 +13,8 @@ export function calculVat(sum, vatObject){
 }
 
 export function sumCharges(charges){
-    var sum = 0;
-    if(charges)
+    var sum = charges || 0;
+    if(typeof charges === "array")
     for (let i = 0; i < charges.length; i++) {
         sum += charges[i].subtotal;
     }

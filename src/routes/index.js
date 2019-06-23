@@ -66,6 +66,10 @@ class Routes extends React.Component {
       mountedAt: null
     }
 
+    componentWillMount(){
+        localStorage.setItem('locale', "fr")
+    }
+
     componentDidMount(){
         if(this.props.authUser)
         this.props.initLocale(this.props.authUser.locale || "fr")

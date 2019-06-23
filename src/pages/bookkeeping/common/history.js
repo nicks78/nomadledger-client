@@ -6,7 +6,8 @@ import { cvtNumToUserPref } from '../../../utils/help_function'
 const History = (props) => {
 
     const {item, locale } = props;
-    var balance = item.subtotal || 0
+    var balance = item.subtotal || 0;
+    const lang = localStorage.getItem('locale')
 
     return (
         <div style={{clear: "both"}}>
@@ -20,6 +21,7 @@ const History = (props) => {
                   <TableCell>{locale.wording.ref}</TableCell>
                   <TableCell>{locale.wording.currency}</TableCell>
                   <TableCell>{locale.wording.subtotal}</TableCell>
+                  <TableCell>{locale.wording.date}</TableCell>
                 </TableRow>
               </TableHead>
                
@@ -31,6 +33,7 @@ const History = (props) => {
                                   <TableCell><Link className="link" to={`/invoice/view/${x.invoice_id}`}>{x.ref}</Link></TableCell>
                                   <TableCell>{x.currency.en}</TableCell>
                                   <TableCell>{ cvtNumToUserPref(x.subtotal || 0) }</TableCell>
+                                  <TableCell>{ new Date(x.date).toLocaleDateString(lang) }</TableCell>
                               </TableRow>
                     })
                   }

@@ -89,7 +89,7 @@ export const cvtNumToUserPref = (num) => {
     var result = '0';
 
     // Set to number
-    num = parseFloat(num);
+    num = parseFloat(Math.round(num * 100) / 100);
 
     if(num !== undefined){
         var numberToString = num.toFixed(2)

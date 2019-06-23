@@ -35,18 +35,11 @@ class View extends Component {
       this.props.resetState(this.state.reducer.toUpperCase())
     }
 
-    componentDidUpdate(){
-      // this.setState({
-      //   id: this.props.match.params.id,
-      //   reducer: this.props.match.params.reducer
-      // })
-      // this.props.getDocument(this.props.match.params.reducer.toUpperCase(), this.props.match.params.id);
-    }
 
 
     calculVat = (amount, vat) => {
-      var vat = vat ? vat.indice : 0;
-      var vat_value =  (amount /100) * vat 
+      var _vat = vat ? vat.indice : 0;
+      var vat_value =  (amount /100) * _vat 
 
       return vat_value
     }
@@ -93,8 +86,9 @@ class View extends Component {
               <div style={{textAlign: "center"}}>
                 <img src={ company && company.logo_company.full_path } width="80" alt={company.company_name}/>
               </div>
+              <Typography variant="h1" align="center">{locale.wording[reducer]}</Typography>
 
-            <StatusStep item={item} locale={locale} />
+            <StatusStep item={item} locale={locale} reducer={reducer}/>
 
             <div className={classes.header}>
                 {
@@ -150,7 +144,20 @@ class View extends Component {
                         </Typography>
                         : null
                       }
-
+                      {
+                        item.quote_id ?
+                        <Typography variant="caption" align="left">{locale.wording.on +" "+locale.wording.quote}&nbsp;
+                          <span className={ classes.span }>{ "Nº"+ item.quote_id.ref + "-"+item.quote_id.ref_add }</span>
+                        </Typography>
+                        : null 
+                      }
+                      {
+                        item.refund_id ?
+                        <Typography variant="caption" align="left">{locale.wording.on +" "+locale.wording.quote}&nbsp;
+                          <span className={ classes.span }>{ "Nº"+ item.invoice_id.ref + "-"+item.invoice_id.ref_add }</span>
+                        </Typography>
+                        : null 
+                      }
 
                     </div>
                     : <div></div>
@@ -233,7 +240,7 @@ class View extends Component {
             {
               item.balance ?
                   <Typography variant="body1" component="div" className={ classes.sum } style={{backgroundColor: "white"}}>
-                    <b style={{ marginLeft: 24 }}>{locale.wording.already_paid}</b>
+                    <b style={{ marginLeft: 24 }}>{locale.wording.amount_paid}</b>
                     <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(item.charges) } { item.currency && item.currency.value }  </b></span>
                   </Typography>
               : null 

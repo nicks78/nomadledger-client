@@ -5,9 +5,21 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 
 
-function getSteps() {
-    return ['draft', 'sent', 'approved'];
-  }
+function getSteps(reducer) {
+    var res = []
+    switch(reducer){
+      case "invoice": 
+        res = ['draft', 'sent', 'paid']
+      break
+      case "refund": 
+        res = ['draft', 'sent', 'refunded']
+      break
+      default: 
+        res = ['draft', 'sent', 'approved']
+    }
+
+    return res
+}
   
   function getActiveStep(status){
     if(status){
@@ -16,19 +28,19 @@ function getSteps() {
         }else if(status.code === "2"){
             return 1
         }else if(status.code === "6"){
-            return 2
+            return 3
         }else if(status.code === "7"){
-            return 2
+            return 3
         }else if(status.code === "8"){
-            return 2
+            return 3
         }
     }
   }
 
 const StatusStep = (props) => {
 
-    const { item, locale } = props
-    const steps = getSteps();
+    const { item, locale, reducer } = props
+    const steps = getSteps(reducer);
     const activeStep = getActiveStep(item.status)
 
     return (

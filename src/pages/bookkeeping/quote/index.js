@@ -7,15 +7,14 @@ import {connect} from 'react-redux'
 import {  getBookList, updateField, createState, downloadPdf, resetState } from '../../../redux/book/actions'
 import AddIcon from '@material-ui/icons/AddOutlined'
 import ApxPaper from '../../../components/common/paper'
-import { withStyles, Button, Hidden, Table, TableHead, TableBody, TableCell, TableRow , Fab, Avatar} from '@material-ui/core';
+import { withStyles, Button, Hidden, Table, TableHead, TableBody, TableCell, TableRow , Fab} from '@material-ui/core';
 import ApxTableToolBar from '../../../components/common/tableToolBar'
 import ApxTableActions from '../../../components/common/tableActions'
 import Pagination from '../../../lib/pagination'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import MobileView from '../common/mobileView'
 import LinearProgress from '@material-ui/core/LinearProgress';
-import Tooltips from '../../../components/common/tooltips'
-import WarningIcon from '@material-ui/icons/WarningOutlined'
+import BoxHint from '../../../components/common/boxHint'
 
 class Quote extends Component {
 
@@ -104,7 +103,7 @@ class Quote extends Component {
                             <TableCell>{locale.wording.status}</TableCell>
                             <TableCell align="center">{locale.wording.invoicer}</TableCell>
                             <TableCell align="center">PDF</TableCell>
-                            <TableCell align="center">Actions&nbsp;&nbsp;<Tooltips title={locale.helperText.action_table_quote}><WarningIcon style={{color: 'red'}}/></Tooltips><br />
+                            <TableCell align="center">Actions<br />
                             { actionLoading ? <LinearProgress color="secondary" variant="query" /> : null }
                             </TableCell>
 
@@ -117,7 +116,7 @@ class Quote extends Component {
 
                                     return  <TableRow key={index}>
                                                 <TableCell>{new Date(quote.createAt.date).toLocaleDateString(localStorage.getItem('locale'))}</TableCell>
-                                                <TableCell><div  style={{display: 'flex', alignItems: "center"}}><Link className="link" to={`/quote/view/${quote._id}`}>{quote.ref_add}-{quote.ref}</Link>{ quote.response  ? <Avatar className={classes.bullet}> </Avatar> : null  }</div></TableCell>
+                                                <TableCell><div  style={{display: 'flex', alignItems: "center"}}><Link className="link" to={`/quote/view/${quote._id}`}>{quote.ref_add}-{quote.ref}</Link>{ quote.response  ? <span className="bullet"> </span> : null  }</div></TableCell>
                                                 <TableCell><Link className="link" to={{ pathname: `/contact/view/${quote.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{quote.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell className="tableNumber">{cvtNumToUserPref(quote.subtotal)} {quote.currency.value}</TableCell>
                                                 <TableCell><span style={{color: quote.status.color, fontWeight: 400 }}>{ quote.status[localStorage.getItem('locale')] }</span></TableCell>
@@ -165,7 +164,7 @@ class Quote extends Component {
                   locale={locale}
                   reducer={reducer}/>
           }
-
+          <BoxHint content={locale.message.status_devis} />
             <Hidden only={['lg', 'xl', 'md']}>
                 <Fab
                     color="primary"
@@ -191,14 +190,6 @@ const styles = theme => ({
         '& :hover': {
             color: 'white !important',
         }
-    },
-    bullet: {
-      fontSize: 15,
-      height: 10,
-      marginLeft: 5,
-      width: 10,
-      backgroundColor: 'green',
-
     }
 })
 

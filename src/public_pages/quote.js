@@ -9,6 +9,8 @@ import { withStyles, Paper, Table, TableRow, TableBody, TableHead, TableCell , T
 import { cvtNumToUserPref } from '../utils/help_function'
 import Spinner from '../components/common/spinner'
 import ApxRichEditor from '../components/common/richEditor'
+import {initLocale} from '../redux/locale/actions'
+
 
 // "XI7ROsEUFOwx6T9Qaza8eBUnmsec30IkZ63MaRGHiheiHk76Hg"
 
@@ -90,23 +92,30 @@ class View extends Component {
         const { classes, locale } = this.props
         const {reducer, user, quote, loading, response} = this.state
         const options = {  day: 'numeric',  month: 'short', year: 'numeric'};
+        const lang = localStorage.getItem("locale")
+
+       
 
         if(loading){
           return <Spinner />
         }
         if(!user || !quote){
+
           return <div style={{ paddingTop: "10%" }}>
                     <Typography variant="h3" align="center">{ locale.message.error_404 }<br />
                       <a href="https://nomadledger.com">NomadLedger</a>
                     </Typography>
-                </div>
+                  </div>
         }
-
 
         return (
             <Paper className={classes.paper}>
               <div style={{textAlign: "center"}}>
                 <img src={ user && user.company_id.logo_company.full_path } width="150" alt={user.company_id.company_name}/>
+              </div>
+
+              <div style={{position: "absolute", top: 20, right: 20}}>
+                <Button onClick={() => { this.props.initLocale(lang === "fr" ? "en" : "fr") }} color="primary" >{ lang === "fr" ? "FR" : "EN"}</Button>
               </div>
 
 
@@ -119,9 +128,8 @@ class View extends Component {
                         <Typography variant="body1" align="left">{ user.phone_code.dial_code +""+user.phone } </Typography>
                         <Typography variant="body1" align="left">{ user.email }</Typography>
                         <Typography variant="body1" align="left">{ user.company_id.web_page }</Typography>
-                        <Typography variant="caption" align="left">{ user.company_id.addresses_street }</Typography>
-                        <Typography variant="caption" align="left">{ user.company_id.addresses_zip +" " }{ user.company_id.addresses_city }</Typography>
-                        <Typography variant="caption" align="left">{ user.company_id.addresses_country && user.company_id.addresses_country[localStorage.getItem("locale")] }</Typography>
+                        <Typography variant="caption" align="left">{ user.company_id.addresses_street } { user.company_id.addresses_zip +" " }{ user.company_id.addresses_city }</Typography>
+                        <Typography variant="caption" align="left">{ user.company_id.addresses_country && user.company_id.addresses_country[lang] }</Typography>
                     </div>
                   : <div></div>
                 }
@@ -132,11 +140,11 @@ class View extends Component {
                         <span className={ classes.span }>Nº{ quote.ref_add +"-"+quote.ref }</span>
                       </Typography>
                       <Typography variant="caption" align="left">{locale.wording.created_at}&nbsp;
-                        <span className={ classes.span }>{ quote.created_at && new Date(quote.created_at.date).toLocaleDateString(localStorage.getItem("locale"), options) }</span>
+                        <span className={ classes.span }>{ quote.created_at ? new Date(quote.created_at.date).toLocaleDateString(lang, options) : null  }</span>
                       </Typography>
 
                       <Typography variant="caption" align="left">{locale.wording.expired_at}&nbsp;
-                        <span className={ classes.span }>{ quote.expired_at && new Date(quote.expired_at.date).toLocaleDateString(localStorage.getItem("locale"), options) }</span>
+                        <span className={ classes.span }>{ quote.expired_at && new Date(quote.expired_at.date).toLocaleDateString(lang, options) }</span>
                       </Typography>
                     </div>
                     : <div></div>
@@ -150,7 +158,6 @@ class View extends Component {
             {
               quote.contact_id ?
                 <div style={{marginBottom: 24, marginTop: 24}}>
-                    <Typography variant="caption">{ locale.wording.of.toUpperCase() } :</Typography>
                     <Typography variant="h3" align="left">{ quote.contact_id.company_name }</Typography>
                     <Typography variant="body1" align="left">{ quote.contact_id.firstname + " "+ quote.contact_id.lastname }</Typography>
                     <Typography variant="body1" align="left">{ quote.contact_id.email }</Typography>
@@ -315,8 +322,10 @@ const styles = theme => ({
       width: 100
     },
     comment: {
+      clear: 'both',
       backgroundColor: theme.palette.grey.main,
-      padding: 18
+      padding: 18,
+      borderRadius: 4
     }
 })
 
@@ -330,4 +339,4 @@ const mapStateToProps = (state, ownProps) => {
 
 const StyledView = withStyles(styles)(View)
 
-export default connect( mapStateToProps , { setNotification })(StyledView);
+export default connect( mapStateToProps , { setNotification, initLocale })(StyledView);
