@@ -21,6 +21,7 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
 import { cvtNumToUserPref, checkNumFormatRegex } from '../../../utils/help_function'
 import ApxContenEditable from '../../../components/common/contentEditable'
 import EditIcon from '@material-ui/icons/EditOutlined'
+import { calculVat } from '../../../redux/book/helper';
 
 
 class Items extends Component {
@@ -61,10 +62,12 @@ class Items extends Component {
 
       if(name === "balance"){
         var total = this.props.newData.subtotal - this.props.newData.charges
+        var vat_value = calculVat(total, this.props.newData.vat)
         this.props.createState(this.props.reducer, "balance", e.target.checked)
-        this.props.createState(this.props.reducer, "deposit_amount", 0)
+        this.props.createState(this.props.reducer, "deposit_amount", null )
         this.props.createState(this.props.reducer, "deposit", false )
         this.props.createState(this.props.reducer, "net_to_pay", total)
+        this.props.createState(this.props.reducer, "vat_value", vat_value)
       }
 
       
@@ -76,8 +79,6 @@ class Items extends Component {
     const { newData, listItems, reducer, classes, locale } = this.props;
     const vat_terms =  newData.vat && newData.vat.vat_terms_en ? <span style={{ fontSize: 10 }}><br />{ newData.vat && newData.vat["vat_terms_" + localStorage.getItem('locale')] }</span> : null
     const canBeUpdated = newData.quote_id || newData.refund_id ? false : true
-
-      console.log("BALANCE", newData)
 
     return (
       <div>
@@ -220,7 +221,7 @@ class Items extends Component {
         </Typography>
         <Typography variant="body1" component="div" className={ classes.sum }>
           <b style={{ marginLeft: 24 }}>{locale.wording.net_to_pay}</b>
-          <span className={ classes.sumSpan }><b>{ cvtNumToUserPref( newData.net_to_pay + newData.vat_value || 0 ) } { newData.currency && newData.currency.value }  </b></span>
+          <span className={ classes.sumSpan }><b>{ reducer === "REFUND" ? "- " : "" }{ cvtNumToUserPref( newData.net_to_pay + newData.vat_value || 0 ) } { newData.currency && newData.currency.value }  </b></span>
         </Typography>
 
     </div>

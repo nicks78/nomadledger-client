@@ -106,7 +106,6 @@ class Invoice extends Component {
                             <TableCell>{locale.wording.client}</TableCell>
                             <TableCell>{locale.wording.subtotal}</TableCell>
                             <TableCell>{locale.wording.status}</TableCell>
-                            <TableCell align="center">{locale.wording.repay}</TableCell>
                             <TableCell align="center">PDF</TableCell>
                             <TableCell align="center">Actions<br />
                             { actionLoading ? <LinearProgress color="secondary" variant="query" /> : null }
@@ -124,7 +123,6 @@ class Invoice extends Component {
                                                 <TableCell><Link to={{ pathname: `/contact/view/${invoice.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{invoice.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell className="tableNumber">{cvtNumToUserPref(invoice.net_to_pay)} {invoice.currency.value}</TableCell>
                                                 <TableCell><span style={{color: invoice.status.color, fontWeight: 400}}>{ invoice.status[localStorage.getItem('locale')] }</span></TableCell>
-                                                <TableCell align="center"><Link to={`/refund/create/${invoice._id}`}><img alt="convert-to-refund" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link></TableCell>
                                                 <TableCell align="center"><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, invoice._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
                                                 <TableCell align="center" style={{ display: 'flex', justifyContent: "center"}}>
                                                       <ApxTableActions

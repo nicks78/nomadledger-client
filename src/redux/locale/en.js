@@ -169,6 +169,7 @@ const en = {
         num_format: "Number format",
         receipt_date: "Receipt date",
         repay: "Repay",
+        refunded: "Refunded",
         transaction_number: "Transaction number",
         my_account: "My account",
         archive: "Archive",

@@ -37,7 +37,7 @@ const BookkeepingRoute = (props) => {
 
 
             <PrivateRoute exact path="/refund" component={Refund}  auth={isLoggedIn}/>
-            <PrivateRoute path="/refund/create/:id?" component={CreateRefund}  auth={isLoggedIn}/>
+            <PrivateRoute path="/refund/create" component={CreateRefund}  auth={isLoggedIn}/>
             <PrivateRoute path="/refund/edit/:id" component={EditRefund}  auth={isLoggedIn}/>
 
             <PrivateRoute path="/:reducer/view/:id" component={View}  auth={isLoggedIn}/>

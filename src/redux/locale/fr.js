@@ -172,6 +172,7 @@ const fr =  {
         num_format: "Format des chiffres",
         receipt_date: "Date du reçu",
         repay: "Rembourser",
+        refunded: "Remboursé",
         transaction_number: "Référence du virement",
         my_account: "Mon Profil",
         archive: "Archiver",
@@ -441,17 +442,17 @@ const fr =  {
             <ul>
                 <li><strong>Brouillon</strong> : Peuvent être edité.</li>
                 <li><strong>Envoyé</strong> : Peuvent être edité.</li>
-                <li><strong>Payé</strong> : Une facture payé ne peut plus être edité: Elle peut être annulé ou renvoyé.</li>
-                <li><strong>Annulé</strong> : Une facture annulé ne peut plus être modifié.</li>
+                <li><strong>Approuvé</strong> : Un devis approuvé ne peut plus être edité. Il peut être annulé ou renvoyé.</li>
+                <li><strong>Annulé</strong> : Un devis annulé ne peut plus être modifié.</li>
             </ul>
-            <p>Vous pouvez créer un avoir base sur une facture, la creation d'un avoir mettra automatiquement la facture au statut "annulé".</p>
+            <p>Dès que vous créer un facture attacher au devis, celui-ci prendra le statut "approuvé" et ne sera donc plus modifiable.</p>
         `,
         status_invoice: `
             <p>Il est important de bien comprendre chacun des statuts de vos factures.</p>
             <ul>
-                <li><strong>Brouillon</strong> : Seule ses factures peuvent être edité.</li>
+                <li><strong>Brouillon</strong> : Peuvent être edité.</li>
                 <li><strong>Envoyé</strong> : Une facture envoyé ne peut plus être edité.</li>
-                <li><strong>Payé</strong> : Une facture payé ne peut plus être edité: Elle peut être annulé ou renvoyé.</li>
+                <li><strong>Payé</strong> : Une facture payé ne peut plus être edité. Elle peut être annulé ou renvoyé.</li>
                 <li><strong>Annulé</strong> : Une facture annulé ne peut plus être modifié.</li>
             </ul>
             <p>Vous pouvez créer un avoir base sur une facture, la creation d'un avoir mettra automatiquement la facture au statut "annulé".</p>
@@ -459,12 +460,11 @@ const fr =  {
         status_refund: `
             <p>Il est important de bien comprendre chacun des statuts de vos factures.</p>
             <ul>
-                <li><strong>Brouillon</strong> : Seule ses factures peuvent être edité.</li>
-                <li><strong>Envoyé</strong> : Une facture envoyé ne peut plus être edité.</li>
-                <li><strong>Payé</strong> : Une facture payé ne peut plus être edité: Elle peut être annulé ou renvoyé.</li>
-                <li><strong>Annulé</strong> : Une facture annulé ne peut plus être modifié.</li>
+                <li><strong>Brouillon</strong> : Peuvent être edité.</li>
+                <li><strong>Envoyé</strong> : Un avoir envoyé ne peut plus être edité.</li>
+                <li><strong>Remboursé</strong> : Un avoir remboursé ne peut plus être edité. Il peut être annulé ou renvoyé.</li>
+                <li><strong>Annulé</strong> : Un avoir annulé ne peut plus être modifié.</li>
             </ul>
-            <p>Vous pouvez créer un avoir base sur une facture, la creation d'un avoir mettra automatiquement la facture au statut "annulé".</p>
         `
     },
     days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],

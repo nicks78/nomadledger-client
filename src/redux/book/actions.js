@@ -88,18 +88,24 @@ export function updateDocument (actionType) {
         axios.defaults.withCredentials = true;
 
         try{
-            const request = await axios.put(`${API_ENDPOINT}/${actionType.toLowerCase()}/update`, {data})
+            const request = await axios.put(`${API_ENDPOINT}${actionType.toLowerCase()}/update`, {data})
             const res = request.data;
             var item = res.item;
 
-            if(res.item.quote_id){
-                const total = sumItem( res.item.list_items );
-                const sum = sumCharges(res.item.quote_id.charges)
-                const net = total - sum ;
+            if(item.quote_id){
+                const total = sumItem(  item.list_items );
+                const sum = sumCharges( item.quote_id.charges); 
+                const net = total - sum ; 
     
                 item.balance_due = net;
+                item.net_to_pay = item.deposit_amount || net;
                 item.charges = sum;
-                item.vat_value = calculVat(net, res.item.vat ) ;
+                item.vat_value = calculVat(item.net_to_pay, item.vat ) ;
+
+                console.log(net)
+                console.log(sum)
+                console.log(item.vat_value)
+                console.log(item)
             }
 
             dispatch(setNotification("success_update", "success"))
@@ -194,9 +200,9 @@ export function getDocument( actionType, id ){
             const request = await axios.get(`${API_ENDPOINT}${actionType.toLowerCase()}/${id}`);
             const res = request.data;
             var item = res.payload;
-            item.net_to_pay = item.subtotal
-            item.vat_value = calculVat(res.payload.net_to_pay, res.payload.vat ) ;
-            
+            item.net_to_pay = res.payload.net_to_pay || item.subtotal
+            item.vat_value = calculVat(item.net_to_pay, res.payload.vat ) ;
+
             if(res.payload.quote_id){
                 const total = sumItem( res.payload.list_items );
                 const sum = sumCharges(res.payload.quote_id.charges)
@@ -204,7 +210,7 @@ export function getDocument( actionType, id ){
  
                 item.balance_due = net;
                 item.charges = sum;
-                item.onRef = item.quote_id.ref_add +"-"+ item.ref
+                item.onRef = item.quote_id.ref_add +"-"+ item.quote_id.ref
                 
             }
 
@@ -279,6 +285,7 @@ export function convertToOtherDocument( actionType, id, newType ){
         }
     }
 }
+
 
 /**
 * SEND EMAIL WITH PDF

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
-import { createState, createDocument, resetState, convertToOtherDocument} from '../../../redux/book/actions'
+import { createState, createDocument, resetState} from '../../../redux/book/actions'
 import { convertToCurrency, getListItem } from '../../../redux/book/itemActions'
 import { withStyles } from '@material-ui/core';
 import Spinner from '../../../components/common/spinner'
@@ -12,13 +12,6 @@ class CreateRefund extends React.Component {
 
     state = {
         reducer: "REFUND"
-    }
-
-    componentDidMount(){
-        var id = this.props.match.params.id;
-        if(id){
-            this.props.convertToOtherDocument("INVOICE", id, "REFUND")
-        }
     }
 
     componentWillUnmount(){
@@ -98,4 +91,4 @@ const mapStateToProps = (state) => {
 
 const StyledCreateRefund = withStyles(styles)(CreateRefund)
 
-export default connect(mapStateToProps, { createState, getListItem, convertToCurrency, createDocument, resetState, convertToOtherDocument })(StyledCreateRefund);
+export default connect(mapStateToProps, { createState, getListItem, convertToCurrency, createDocument, resetState })(StyledCreateRefund);

@@ -81,8 +81,8 @@ class Archive extends Component {
                                   >
                             </TableSortLabel>
                             </TableCell>
-                            <TableCell>{locale.wording.date}</TableCell>
                             <TableCell>{locale.wording.reference}</TableCell>
+                            <TableCell>{locale.wording.date}</TableCell>
                             <TableCell>{locale.wording.client}</TableCell>
                             <TableCell>{locale.wording.subtotal}</TableCell>
                         </TableRow>
@@ -93,10 +93,11 @@ class Archive extends Component {
                                 results.map((item, index) => {
                                     return  <TableRow key={index}>
                                                 <TableCell>{item.fiscal_year}</TableCell>
+                                                
+                                                <TableCell><Link className="link" to={`/${reducer.toLowerCase()}/view/${item._id}`}>{item.ref_add}-{item.ref}</Link></TableCell>
                                                 <TableCell>{new Date(item.created_at.date).toLocaleDateString(localStorage.getItem('locale'))}</TableCell>
-                                                <TableCell>{locale.wording[reducer.toLowerCase()]}-{item.ref}</TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${item.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{item.contact_id.company_name}</span></Link></TableCell>
-                                                <TableCell className={classes.price}>{cvtNumToUserPref(item.subtotal)} {item.currency.value}</TableCell>
+                                                <TableCell className={classes.price}>{cvtNumToUserPref(item.net_to_pay || item.subtotal)} {item.currency.value}</TableCell>
                                             </TableRow>
                                 })
                                 : null

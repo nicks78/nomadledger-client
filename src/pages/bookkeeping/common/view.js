@@ -71,7 +71,7 @@ class View extends Component {
         const {item, classes, locale, company, isFetching } = this.props
         const {reducer} = this.state
         const options = {  day: 'numeric',  month: 'short', year: 'numeric'};
-
+        const vatValue = this.calculVat(item.net_to_pay, item.vat )
 
         if(isFetching){
           return <Spinner />
@@ -238,21 +238,37 @@ class View extends Component {
               : null 
             }
             {
+              item.deposit ?
+                  <Typography variant="body1" component="div" className={ classes.sum }>
+                    <b style={{ marginLeft: 24 }}>{locale.wording.deposit}</b>
+                    <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(item.deposit_amount) } { item.currency && item.currency.value }  </b></span>
+                  </Typography>
+              : null 
+            }
+            {
               item.balance ?
                   <Typography variant="body1" component="div" className={ classes.sum } style={{backgroundColor: "white"}}>
                     <b style={{ marginLeft: 24 }}>{locale.wording.amount_paid}</b>
-                    <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(item.charges) } { item.currency && item.currency.value }  </b></span>
+                    <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(item.subtotal - item.net_to_pay || 0) } { item.currency && item.currency.value }  </b></span>
+                  </Typography>
+              : null 
+            }
+            {
+              item.balance ?
+                  <Typography variant="body1" component="div" className={ classes.sum }>
+                    <b style={{ marginLeft: 24 }}>{locale.wording.balance_due}</b>
+                    <span className={ classes.sumSpan }><b>{ cvtNumToUserPref( item.net_to_pay || 0) } { item.currency && item.currency.value }  </b></span>
                   </Typography>
               : null 
             }
             <Typography variant="body1" className={ classes.sum } style={{backgroundColor: "white"}}>
               <b style={{ marginLeft: 24 }}>{locale.wording.vat}&nbsp;{ item.vat ? item.vat.value : "0%" }</b>
-              <span className={ classes.sumSpan }><b>{ cvtNumToUserPref( this.calculVat(item.net_to_pay, item.vat )) } { item.currency && item.currency.value }</b></span><br />
+              <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(vatValue ) } { item.currency && item.currency.value }</b></span><br />
               <span style={{ marginLeft: 24, fontSize: 10 }}>{ item.vat && item.vat["vat_terms_" + localStorage.getItem('locale')] }</span>
             </Typography>
             <Typography variant="body1" className={ classes.sum }>
-              <b style={{ marginLeft: 24 }}>{locale.wording.total_ttc}</b>
-              <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(item.net_to_pay || 0) } { item.currency && item.currency.value }</b></span>
+              <b style={{ marginLeft: 24 }}>{locale.wording.net_to_pay}</b>
+              <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(item.net_to_pay + vatValue || 0) } { item.currency && item.currency.value }</b></span>
             </Typography>
         </div>
         
@@ -274,6 +290,13 @@ class View extends Component {
             <History item={item} locale={locale} />
           : null 
         }
+
+        {
+          item.invoice_id ?
+            <History item={item} locale={locale} />
+          : null 
+        }
+
       
         <Fab color="primary" size="medium"  className={classes.fab}>
             <CloudDownloadIcon onClick={ () => {this.props.downloadPdf(this.state.reducer, item._id)} } />

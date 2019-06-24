@@ -15,6 +15,8 @@ import { cvtNumToUserPref } from '../../../utils/help_function'
 import MobileView from '../common/mobileView'
 import LinearProgress from '@material-ui/core/LinearProgress';
 import BoxHint from '../../../components/common/boxHint'
+import { sumCharges } from '../../../redux/book/helper';
+import NotInterestedIcon from '@material-ui/icons/NotInterestedOutlined'
 
 class Quote extends Component {
 
@@ -113,14 +115,25 @@ class Quote extends Component {
                         <TableBody className={classes.tableBody}>
                             {   !isFetching ?
                                 this.props.listQuote.map(( quote, index) => {
-
+                                    var isComplete =  sumCharges(quote.charges) >= quote.subtotal ? true : false ;
+                                    console.log(sumCharges(quote.charges))
+                                    console.log(quote.subtotal)
+                                    console.log(isComplete)
                                     return  <TableRow key={index}>
                                                 <TableCell>{new Date(quote.createAt.date).toLocaleDateString(localStorage.getItem('locale'))}</TableCell>
                                                 <TableCell><div  style={{display: 'flex', alignItems: "center"}}><Link className="link" to={`/quote/view/${quote._id}`}>{quote.ref_add}-{quote.ref}</Link>{ quote.response  ? <span className="bullet"> </span> : null  }</div></TableCell>
-                                                <TableCell><Link className="link" to={{ pathname: `/contact/view/${quote.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{quote.contact_id.company_name}</span></Link></TableCell>
+                                                <TableCell><Link className="link" to={{ pathname: `/contact/view/${quote.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{quote.contact_id.company_name}</span></Link>
+
+                                                </TableCell>
                                                 <TableCell className="tableNumber">{cvtNumToUserPref(quote.subtotal)} {quote.currency.value}</TableCell>
                                                 <TableCell><span style={{color: quote.status.color, fontWeight: 400 }}>{ quote.status[localStorage.getItem('locale')] }</span></TableCell>
-                                                <TableCell align="center"><Link to={`/invoice/create/${quote._id}`}><img alt="convert-to-invoice" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link></TableCell>
+                                                <TableCell align="center">
+                                                {  !isComplete ? 
+                                                  <Link to={`/invoice/create/${quote._id}`}><img alt="convert-to-invoice" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link>
+                                                  : <NotInterestedIcon style={{fontSize: 18, color: "#ccc"}} />
+                                                }  
+                                                </TableCell>
+                                                
                                                 <TableCell align="center"><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, quote._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
                                                 <TableCell align="center" style={{ display: 'flex', justifyContent: "center"}}>
                                                   <ApxTableActions

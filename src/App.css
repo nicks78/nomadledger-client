@@ -97,6 +97,9 @@ tr td {
   margin-left: 5px;
 }
 
+.disabled-link {
+  pointer-events: none;
+}
 
 /****************************************************
         DATE PICKER
