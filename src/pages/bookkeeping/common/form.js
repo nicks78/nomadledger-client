@@ -223,10 +223,10 @@ const Form = (props) => {
                         />
 
                     <TextField
-                        label={ locale.helperText.textarea_terms }
+                        
                         id="terms"
-                        style={{ backgroundColor: 'rgba(255,0,0,0.14)', clear: "both",  fontWeight: 300, marginTop: 24}}
-                        rows={2}
+                        style={{ backgroundColor: 'rgba(255,0,0,0.07)', clear: "both",  fontWeight: 300, marginTop: 24, color: "black"}}
+                        rows={5}
                         fullWidth
                         multiline
                         margin="dense"

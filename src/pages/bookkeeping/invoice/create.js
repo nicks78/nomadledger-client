@@ -8,6 +8,10 @@ import { withStyles } from '@material-ui/core';
 import Spinner from '../../../components/common/spinner'
 import Form from '../common/form'
 
+const text = `En cas de retard de paiement, uen pénalité égale à 3 fois le taux d'intérêt légal sera exigible (Décret 2009-138 du 9 février 2019).
+Pour les professionnels, une indemnité minimum forfaitaire de 40 euros pour frais de recouvrement sera exigible (Décret 2012-1115 du 9 octibre 2012).`
+
+
 class CreateInvoice extends React.Component {
 
     state = {
@@ -19,6 +23,8 @@ class CreateInvoice extends React.Component {
         if(id){
             this.props.convertToOtherDocument("QUOTE", id, "INVOICE")
         }
+
+        this.props.createState(this.state.reducer, "terms", text)
     }
 
     componentWillUnmount(){
