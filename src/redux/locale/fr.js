@@ -100,6 +100,7 @@ const fr =  {
         label_assets: "Photo(s)",
         label_currency_fav: "Votre devise",
         label_comp_info: "Informations compagnie",
+        label_comp_bank: "Informations bancaire",
         label_contact_info: "Informations contact",
         label_comp_address: "Adresse entreprise",
         label_annual_turnover: "Chiffre d'affaire annuel",
@@ -317,11 +318,15 @@ const fr =  {
         quote_link: "Voir le devis",
         duplicate: "Dupliquer",
         invoice_deposit: "Facture d'acompte",
-        net_to_pay: "Net à payer",
-        balance_due: "Solde dû",
+        net_to_pay: "Net à payer TTC",
+        balance_due: "Total HT restant dû",
         balance: "Solde",
-        deposit: "Acompte",
-        amount_paid: "Montant déja versées"
+        deposit: "Acompte (HT)",
+        amount_paid: "Montant déja versé",
+        bank_name: "Nom de la banque",
+        bank_account_name: "Compte bénéficiare",
+        iban: "IBAN",
+        bic: "BIC"
 
     },
     helperText: {
@@ -355,6 +360,7 @@ const fr =  {
         cannot_change_email: "L'adresse email n'est modifiable que sur demande.",
         import_contact: "Cette opération peut prendre quelques minutes, veuillez patientez merci...",
         edit_receiver_contact: "Editer les informations du destinataire",
+        payment_terms_invoice: `En cas de retard de paiement, une pénalité égale à 3 fois le taux d'intérêt légal sera exigible (Décret 2009-138 du 9 février 2019). Pour les professionnels, une indemnité minimum forfaitaire de 40 euros pour frais de recouvrement sera exigible (Décret 2012-1115 du 9 octibre 2012).`
 
 
     },
@@ -455,7 +461,6 @@ const fr =  {
                 <li><strong>Payé</strong> : Une facture payé ne peut plus être edité. Elle peut être annulé ou renvoyé.</li>
                 <li><strong>Annulé</strong> : Une facture annulé ne peut plus être modifié.</li>
             </ul>
-            <p>Vous pouvez créer un avoir base sur une facture, la creation d'un avoir mettra automatiquement la facture au statut "annulé".</p>
         `,
         status_refund: `
             <p>Il est important de bien comprendre chacun des statuts de vos factures.</p>

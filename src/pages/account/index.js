@@ -111,7 +111,7 @@ class Account extends Component {
 
                               <Grid item xs={12} md={6}>
                                   <Typography variant="subtitle2">
-                                    {locale.subheading.my_vat}&nbsp;<Tooltips title={locale.helperText.account_vat}  aria-label="setting"><HelpIcon /></Tooltips>
+                                    {locale.subheading.my_vat}&nbsp;<Tooltips title={locale.helperText.account_vat}  aria-label="setting"><HelpIcon style={{color: "#ffb555"}} /></Tooltips>
                                   </Typography>
                                   <Divider className={ classes.divider }/>
                                   <AddVat />
@@ -119,7 +119,7 @@ class Account extends Component {
                               <br />
                               <Grid item xs={12} md={6}>
                               <Typography variant="subtitle2">
-                              {locale.subheading.contact_group}&nbsp;<Tooltips title={locale.helperText.account_group}  aria-label="setting"><HelpIcon /></Tooltips>
+                              {locale.subheading.contact_group}&nbsp;<Tooltips title={locale.helperText.account_group}  aria-label="setting"><HelpIcon style={{color: "#ffb555"}} /></Tooltips>
                                 </Typography>
                                 <Divider className={ classes.divider }/>
                                   <AddContactGroup />

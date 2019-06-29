@@ -156,7 +156,7 @@ const styles = theme => ({
       marginRight: 10,
       width: '15px',
       marginLeft: -8,
-      backgroundColor: '#2ca01c',
+      backgroundColor: '#ffb555',
       borderRadius: '50%',
       display: 'inline-block',
       textAlign: 'center'

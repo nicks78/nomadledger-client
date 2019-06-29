@@ -16,9 +16,10 @@ const styles = theme => ({
       chip: {
         marginBottom: 5,
         marginRight: 5,
+        borderColor: "#ffb555"
       },
       avatar: {
-        backgroundColor: theme.palette.primary.light,
+        backgroundColor: theme.palette.primary.main,
         color: 'white',
         cursor: 'pointer',
         width: 24,
@@ -31,6 +32,7 @@ const styles = theme => ({
         color: 'red',
         cursor: 'pointer'
       }
+
 });
 
 const Tag = (props) => {
@@ -43,7 +45,7 @@ const Tag = (props) => {
             avatar={ edit ? <Avatar className={ classes.avatar } ><Modal obj={obj} type={type} /></Avatar> : null  }
             onDelete={canDelete ? actionTag : null}
             deleteIcon={ <DeleteIcon className={ classes.icon } />  }
-            color={ color || "primary" }
+            
             variant={variant || 'default'}
             className={classes.chip}
           />

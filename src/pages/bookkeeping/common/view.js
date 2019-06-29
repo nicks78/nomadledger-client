@@ -10,6 +10,7 @@ import ApxBackBtn from '../../../components/common/backBtn'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownloadOutlined'
 import CheckIcon from '@material-ui/icons/Check'
 import History from './history'
+import {history} from '../../../routes/history'
 import StatusStep from './statusStep'
 import ApxtextIndexValue from '../../../components/common/textIndexValue'
 
@@ -34,7 +35,6 @@ class View extends Component {
     componentWillUnmount(){
       this.props.resetState(this.state.reducer.toUpperCase())
     }
-
 
 
     calculVat = (amount, vat) => {
@@ -231,15 +231,7 @@ class View extends Component {
             </Typography>
             {
               item.deposit ?
-                  <Typography variant="body1" component="div" className={ classes.sum } style={{backgroundColor: "white"}}>
-                    <b style={{ marginLeft: 24 }}>{locale.wording.balance_due}</b>
-                    <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(item.balance_due) } { item.currency && item.currency.value }  </b></span>
-                  </Typography>
-              : null 
-            }
-            {
-              item.deposit ?
-                  <Typography variant="body1" component="div" className={ classes.sum }>
+                  <Typography variant="body1" component="div" className={ classes.sum } style={{backgroundColor: "white", borderBottom: "1px solid rgb(0, 0, 0, 0.24)"}}>
                     <b style={{ marginLeft: 24 }}>{locale.wording.deposit}</b>
                     <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(item.deposit_amount) } { item.currency && item.currency.value }  </b></span>
                   </Typography>
@@ -249,7 +241,7 @@ class View extends Component {
               item.balance ?
                   <Typography variant="body1" component="div" className={ classes.sum } style={{backgroundColor: "white"}}>
                     <b style={{ marginLeft: 24 }}>{locale.wording.amount_paid}</b>
-                    <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(item.subtotal - item.net_to_pay || 0) } { item.currency && item.currency.value }  </b></span>
+                    <span className={ classes.sumSpan }><b>-{ cvtNumToUserPref(item.subtotal - item.net_to_pay || 0) } { item.currency && item.currency.value }  </b></span>
                   </Typography>
               : null 
             }
@@ -287,7 +279,7 @@ class View extends Component {
 
         {
           reducer === 'quote' ?
-            <History item={item} locale={locale} />
+            <History item={item} locale={locale}/>
           : null 
         }
 
@@ -348,6 +340,7 @@ const styles = theme => ({
       marginBottom: 24,
       float: "right",
       width: "50%",
+      border: '1px solid rgb(0, 0, 0, 0.24)',
       [theme.breakpoints.down("sm")]: {
         width: "100%",
         marginLeft: 12

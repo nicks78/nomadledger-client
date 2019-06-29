@@ -8,22 +8,16 @@ import {StripeProvider} from 'react-stripe-elements';
 // import Messages from "./chat/messages";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 
-// #33B3A9 == green
-// #1F2A3F == darck green
-// '#008489'
+
 const theme = createMuiTheme({
   palette: {
     primary: {
-      // light:  '#009AFF',
-      main: '#1A67A3',//'#5A6899',
-      // dark:  'red',
+      main: '#04405d',
       contrastText: '#fff',
     },
     secondary: {
       thinlight: "rgba(242, 103, 103, 0.1)",
-      // light: '#38CC24', // '#ff6666', //'#ff9d3f',
-      main: "#F26767", // rgba(239, 108, 0, 1)',
-      // dark:  '#38CC24',
+      main: '#00888b', //'#ffb555'
       contrastText: '#fff',
     },
     green: "green",
@@ -33,7 +27,7 @@ const theme = createMuiTheme({
       dark: 'rgb(48, 48, 48)',
     },
     caption: "rgba(0, 0, 0, 0.54)",
-    lightGrey: 'rgba(243,243,243)',
+    lightGrey: '#F5F5F5',
     sideBar: "rgb(44,47,50)",
     error: {
       warning: 'yellow',
@@ -52,58 +46,58 @@ const theme = createMuiTheme({
   typography: {
     // Tell Material-UI what's the font-size on the html element is.
     htmlFontSize: 17,
-    fontFamily: "'Lato', sans-serif",
+    fontFamily: "'Quicksand', sans-serif",
     fontWeight: 300,
     h1:{
       fontSize: '1.8rem',
-      fontWeight: 400,
+      fontWeight: 500,
       color: 'rgb(48, 48, 48)',
       textTransform: "capitalize"
     },
     h2: {
       fontSize: '1.3rem',
       color: 'rgb(48, 48, 48)',
-      fontWeight: 400,
+      fontWeight: 500,
       textTransform: "capitalize"
     },
     h3: {
       fontSize: '1.1rem',
-      fontWeight: 600,
+      fontWeight: 700,
       color: 'rgb(48, 48, 48)',
       textTransform: "capitalize"
     },
     subtitle1: {
-      fontWeight: 600,
+      fontWeight: 700,
       color: '#303030',
       fontSize: '0.9rem'
     },
     subtitle2: {
-      fontWeight: 400,
+      fontWeight: 500,
       color: '#303030',
       fontSize: '0.9rem'
     },
     body1: {
       fontSize: '0.8rem',
-      fontWeight: 600,
+      fontWeight: 700,
       color: '#303030'
     },
     body2: {
-      fontWeight: 400,
+      fontWeight: 500,
       color: '#303030',
       fontSize: '0.8rem'
     },
     caption: {
-      fontWeight: 400,
+      fontWeight: 500,
       color: 'rgba(0, 0, 0, 0.54)',
       fontSize: '0.8rem'
     },
     overline: {
       fontSize: '0.8rem',
-      fontWeight: 600,
+      fontWeight: 700,
       color: '#303030',
       lineHeight: 1.6
     },
-    fontWeightMedium: 400,
+    fontWeightMedium: 500,
   },
   overrides: {
     tableHead: {

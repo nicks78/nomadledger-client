@@ -4,10 +4,10 @@ html, body {
 }
 body{
   background-color: rgba(251,251,251,1);
-  font-family: 'Lato', sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 html {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 .AppBar {
   border: 1px solid transparent;
@@ -18,7 +18,7 @@ tr th {
   font-weight: 700 !important;
 }
 tr td {
-  font-weight: 300 !important;
+  font-weight: 400 !important;
 }
 
 .tableNumber {
@@ -41,7 +41,7 @@ a:hover {
 .link {
   text-decoration: none;
   position: relative;
-  color: #1A67A3;
+  color: #04405d;
   font-weight: 400;
   padding-bottom: 3px;
   cursor: pointer;
@@ -53,7 +53,7 @@ a:hover {
   bottom: 0;
   left: 0;
   width: 0%;
-  border-bottom: 2px solid #F26767;
+  border-bottom: 2px solid #ffb555;
   transition: 0.4s;
 }
 

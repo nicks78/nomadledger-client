@@ -116,9 +116,6 @@ class Quote extends Component {
                             {   !isFetching ?
                                 this.props.listQuote.map(( quote, index) => {
                                     var isComplete =  sumCharges(quote.charges) >= quote.subtotal ? true : false ;
-                                    console.log(sumCharges(quote.charges))
-                                    console.log(quote.subtotal)
-                                    console.log(isComplete)
                                     return  <TableRow key={index}>
                                                 <TableCell>{new Date(quote.createAt.date).toLocaleDateString(localStorage.getItem('locale'))}</TableCell>
                                                 <TableCell><div  style={{display: 'flex', alignItems: "center"}}><Link className="link" to={`/quote/view/${quote._id}`}>{quote.ref_add}-{quote.ref}</Link>{ quote.response  ? <span className="bullet"> </span> : null  }</div></TableCell>
@@ -126,7 +123,7 @@ class Quote extends Component {
 
                                                 </TableCell>
                                                 <TableCell className="tableNumber">{cvtNumToUserPref(quote.subtotal)} {quote.currency.value}</TableCell>
-                                                <TableCell><span style={{color: quote.status.color, fontWeight: 400 }}>{ quote.status[localStorage.getItem('locale')] }</span></TableCell>
+                                                <TableCell><span style={{color: quote.status.color, fontWeight: 500 }}>{ quote.status[localStorage.getItem('locale')] }</span></TableCell>
                                                 <TableCell align="center">
                                                 {  !isComplete ? 
                                                   <Link to={`/invoice/create/${quote._id}`}><img alt="convert-to-invoice" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link>

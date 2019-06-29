@@ -56,16 +56,17 @@ class Home extends Component {
             <div>
               <Grid container spacing={isMobile ? 4 : 24} className={classes.gridContainer}>
                 <Grid item xs={6} md={6} sm={6}>
-                    <Paper className={classes.paperHeader}>
-                      <Typography variant="h2" align="center" style={{color: "#00b500", marginBottom: 10, fontWeight: 600}} >  { cvtNumToUserPref( mainStat ? mainStat.turnover : 0 ) }  { currency.value } </Typography>
-                      <Typography variant={isMobile ? "body2" : "h3"} align="center" style={{fontWeight: 300}}>{locale.subheading.label_revenue} - { mainStat && mainStat.fiscal_year  }</Typography>
-
+                    <Paper className={classes.paperHeader} style={{ background: 'linear-gradient(60deg, #3b78e7, #1930FF)'}}>
+                        <img className={classes.picto} src="http://localhost:8080/img/euro_sign.png" alt="euro" />
+                      <Typography variant="h2" align="center" style={{color: "white", marginBottom: 10, fontWeight: 600}} >  { cvtNumToUserPref( mainStat ? mainStat.turnover : 0 ) }  { currency.value } </Typography>
+                      <Typography variant={isMobile ? "body2" : "h3"} align="center" style={{fontWeight: 700, color: "white"}}>{locale.subheading.label_revenue} - { mainStat && mainStat.fiscal_year  }</Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={6} md={6} sm={6}>
-                    <Paper className={classes.paperHeader}>
-                      <Typography variant="h2" align="center" style={{color: "#ff6a00", marginBottom: 10, fontWeight: 600}}>  { cvtNumToUserPref( mainStat ? mainStat.sumExpenses : 0 ) }  { currency.value } </Typography>
-                      <Typography variant={isMobile ? "body2" : "h3"} align="center" style={{fontWeight: 300}}>{locale.wording.expense} - { mainStat && mainStat.fiscal_year  }</Typography>
+                    <Paper className={classes.paperHeader} style={{ background: 'linear-gradient(60deg, #AD3428, #d23f31)'}}>
+                    <img className={classes.picto} src="http://localhost:8080/img/line_graph.png" alt="euro" />
+                      <Typography variant="h2" align="center" style={{color: "white", marginBottom: 10, fontWeight: 600}}>  { cvtNumToUserPref( mainStat ? mainStat.sumExpenses : 0 ) }  { currency.value } </Typography>
+                      <Typography variant={isMobile ? "body2" : "h3"} align="center" style={{fontWeight: 700, color: "white"}}>{locale.wording.expense} - { mainStat && mainStat.fiscal_year  }</Typography>
                     </Paper>
                 </Grid>
               </Grid>
@@ -195,6 +196,8 @@ const styles = theme => ({
     paperHeader: {
       padding: 24,
       marginBottom: 12,
+      position: "relative",
+      overflow: "hidden",
       [theme.breakpoints.down('sm')]: {
           boxShadow: 'none',
           padding: 12,
@@ -206,6 +209,12 @@ const styles = theme => ({
       [theme.breakpoints.down('sm')]: {
         marginBottom: 24
       },
+    },
+    picto: {
+        position: "absolute",
+        width: 100,
+        right: 50,
+        opacity: 0.2
     }
 
 })

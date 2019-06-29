@@ -98,6 +98,7 @@ const en = {
         label_assets: "Photo(s)",
         label_currency_fav: "Your currency",
         label_comp_info: "Company information",
+        label_comp_bank: "Bank details",
         label_contact_info: "Contact information",
         label_comp_address: "Company address",
         label_annual_turnover: "Annual turnover",
@@ -314,11 +315,15 @@ const en = {
         quote_link: "View quotation",
         duplicate: "Duplicate",
         invoice_deposit: "Partial invoice",
-        net_to_pay: "Net to pay",
-        balance_due: "Balance due",
+        net_to_pay: "Net to pay (Incl. Tax)",
+        balance_due: "Balance due (Excl. Tax)",
         balance: "Balance",
-        deposit: "Advance payment",
-        amount_paid: "Amount paid"
+        deposit: "Advance payment (Excl. Tax)",
+        amount_paid: "Amount paid",
+        bank_name: "Bank name",
+        bank_account_name: "Beneficiary name",
+        iban: "IBAN",
+        bic: "BIC"
     },
     helperText: {
         select_phone_code: "Phone code",
@@ -349,7 +354,9 @@ const en = {
         member_end: "Your current membership end",
         cannot_change_email: "Email address can be changed on demand.",
         import_contact: "This operation might take a few minutes, please wait thanks",
-        edit_receiver_contact: "Edit recipient contact informations"
+        edit_receiver_contact: "Edit recipient contact informations",
+        payment_terms_invoice: `En cas de retard de paiement, une pénalité égale à 3 fois le taux d'intérêt légal sera exigible (Décret 2009-138 du 9 février 2019). Pour les professionnels, une indemnité minimum forfaitaire de 40 euros pour frais de recouvrement sera exigible (Décret 2012-1115 du 9 octibre 2012).`
+
 
 
     },
@@ -441,7 +448,6 @@ const en = {
                 <li><strong>Paid</strong> : Once an invoices is paid, it can be cancled or resend.</li>
                 <li><strong>Canceled</strong> : Once an invoices is paid cancled, it cannot be modify.</li>
             </ul>
-            <p>Vous pouvez créer un avoir base sur une facture, la creation d'un avoir mettra automatiquement la facture au statut "annulé".</p>
         `,
         status_invoice: `
             <p>Its important to understand all different invoice status</p>

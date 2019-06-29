@@ -15,27 +15,9 @@ class StatContact extends Component {
 
     return (
         <Grid container spacing={24}>
-        <Grid item xs={12} md={4} sm={4}>
-          <Paper style={{padding: 10, background: 'darkcyan'}} elevation={1}>
-                <Typography className={classes.typoTitle} variant="body1">
-                  {locale.wording.quote} ({locale.wording.subtotal})
-                </Typography>
-            <Grid container>
 
-                <Grid item xs={9}>
-                <Typography variant="subtitle1"></Typography>
-                </Grid>
-
-                <Grid item xs={3}>
-                <Typography className={ classes.typoValue } variant="body1">
-                  {cvtNumToUserPref(total_quote)} {currency}
-                </Typography>
-                </Grid>
-            </Grid>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={4} sm={4}>
-          <Paper style={{padding: 10, background: 'deepskyblue'}} elevation={1}>
+        <Grid item xs={12} md={6} sm={6}>
+          <Paper style={{padding: 10, background: '#3b78e7'}} elevation={1}>
               <Typography className={classes.typoTitle} variant="body1">
                 {locale.wording.invoice}
                 </Typography>
@@ -53,8 +35,8 @@ class StatContact extends Component {
             </Grid>
           </Paper>
         </Grid>
-        <Grid item xs={12} md={4} sm={4}>
-          <Paper style={{padding: 10, background: 'linear-gradient(60deg, #f55a4e, #f32c1e)'}} elevation={1}>
+        <Grid item xs={12} md={6} sm={6}>
+          <Paper style={{padding: 10, background: 'linear-gradient(60deg, #d23f31, #1930FF)'}} elevation={1}>
               <Typography className={classes.typoTitle} variant="body1">
                 {locale.wording.refund}
                 </Typography>

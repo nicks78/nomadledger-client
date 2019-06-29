@@ -199,7 +199,43 @@ class Company extends Component {
                         label={locale.subheading.label_currency_fav }
                         value={ company.currency[localStorage.getItem("locale")]}
                       />
-
+                <br /><br />
+                  <Typography variant="subtitle1">
+                      {locale.subheading.label_comp_bank}
+                    </Typography>
+                  <Divider className={ classes.divider }/>
+                  <EditInput
+                      label={ locale.wording.bank_name }
+                      value={ company.bank_name}
+                      showEdit={showEdit}
+                      locale={locale}
+                      field="bank_name"
+                      handleAction={(event) => { this.props.handleFormEdit(event, reducer) }}
+                  />
+                  <EditInput
+                      label={ locale.wording.bank_account_name }
+                      value={ company.bank_account_name}
+                      showEdit={showEdit}
+                      locale={locale}
+                      field="bank_account_name"
+                      handleAction={(event) => { this.props.handleFormEdit(event, reducer) }}
+                  />
+                  <EditInput
+                      label={ locale.wording.iban }
+                      value={ company.iban}
+                      showEdit={showEdit}
+                      locale={locale}
+                      field="iban"
+                      handleAction={(event) => { this.props.handleFormEdit(event, reducer) }}
+                  />
+                  <EditInput
+                      label={ locale.wording.bic }
+                      value={ company.bic}
+                      showEdit={showEdit}
+                      locale={locale}
+                      field="bic"
+                      handleAction={(event) => { this.props.handleFormEdit(event, reducer) }}
+                  />
                 </Grid>
                 <Grid item xs={12} sm={5} md={5}>
                   <Typography variant="subtitle1">
