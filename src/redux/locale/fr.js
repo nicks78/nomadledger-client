@@ -3,7 +3,7 @@
 const fr =  {
 
     lang: "fr",
-    company_name: "NomadLedger",
+    company_name: `<strong style="color:#04405d">Nomad</strong><span style="color:#00888b">Ledger</span>`,
     home:{
         name: "Tableau de bord",
         url: "/dashboard",
@@ -304,7 +304,6 @@ const fr =  {
         export_csv: "Exporter au format Excel",
         filter_doc_type: "Filtrer par type de document",
         hint_refresh: "Remise à zéro",
-        search_contacts: "Rechercher des Contacts",
         pick_date: "Cliquer sur une date pour filtrer vos recherches",
         month: "mois",
         card_lastname: "Nom sur la carte",
@@ -326,7 +325,8 @@ const fr =  {
         bank_name: "Nom de la banque",
         bank_account_name: "Compte bénéficiare",
         iban: "IBAN",
-        bic: "BIC"
+        bic: "BIC",
+        bank_detail: "Afficher mes coordonnées bancaires"
 
     },
     helperText: {
@@ -360,7 +360,7 @@ const fr =  {
         cannot_change_email: "L'adresse email n'est modifiable que sur demande.",
         import_contact: "Cette opération peut prendre quelques minutes, veuillez patientez merci...",
         edit_receiver_contact: "Editer les informations du destinataire",
-        payment_terms_invoice: `En cas de retard de paiement, une pénalité égale à 3 fois le taux d'intérêt légal sera exigible (Décret 2009-138 du 9 février 2019). Pour les professionnels, une indemnité minimum forfaitaire de 40 euros pour frais de recouvrement sera exigible (Décret 2012-1115 du 9 octibre 2012).`
+        payment_terms_invoice: `En cas de retard de paiement, une pénalité égale à 3 fois le taux d'intérêt légal sera exigible (Décret 2009-138 du 9 février 2019). Pour les professionnels, une indemnité minimum forfaitaire de 40 euros pour frais de recouvrement sera exigible (Décret 2012-1115 du 9 octobre 2012).`
 
 
     },

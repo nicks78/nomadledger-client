@@ -8,6 +8,8 @@ Grid,
 Typography,
 Button,
 TextField,
+Checkbox,
+FormControlLabel,
 InputAdornment
  } from '@material-ui/core';
 
@@ -164,6 +166,23 @@ const Form = (props) => {
                                             style={{width: '100%', fontWeight: 300}}
                                             value={ data.transaction_number ||  ""}
                                             variant="outlined"
+                                        />
+                                        </Grid>
+                                    : null
+                                }
+                                {
+                                    reducer === "INVOICE" ?
+                                        <Grid item xs={12}>
+                                         <FormControlLabel
+                                            control={
+                                            <Checkbox
+                                                checked={data.bank_detail || false}
+                                                onChange={ (e) => { props.createState( reducer, "bank_detail", e.target.checked ) } }
+                                                value={ locale.wording.bank_detail }
+                                                color="primary"
+                                            />
+                                            }
+                                            label={ locale.wording.bank_detail || "ok"}
                                         />
                                         </Grid>
                                     : null

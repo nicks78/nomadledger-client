@@ -169,7 +169,7 @@ class Auth extends Component {
           <div id="appBar" className={classes.appBar}>
               <div style={{display: "flex", alignItems:"center"}} >
                 <img src={`${DEFAULT_URL}img/logo.png`} width="50"  alt="logo"/>
-                { !isMobile ? <span style={{ fontSize: 25, fontWeight: 300 }}>NomadLedger</span> : null }
+                { !isMobile ? <span style={{ fontSize: 25, fontWeight: 300 }}><span dangerouslySetInnerHTML={{__html: locale.company_name}}></span></span> : null }
               </div>
               <div className={ classes.buttonLogin }>
                 <Button component={Link} to="/login"  color="primary" variant="contained" >
@@ -177,8 +177,6 @@ class Auth extends Component {
                 </Button>&nbsp;
                 <Button onClick={() => { this.props.initLocale(langue === "fr" ? "en" : "fr") }} color="primary" >{ langue === "fr" ? "FR" : "EN"}</Button>
               </div>
-
-
           </div>
         </div>
 

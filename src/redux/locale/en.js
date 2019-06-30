@@ -2,7 +2,7 @@
 
 const en = {
     lang: "en",
-    company_name: "NomadLedger",
+    company_name: `<strong style="color:#00888b">Nomad</strong><span style="color:#04405d">Ledger</span>`,
     home:{
         name: "Dashboard",
         url: "/dashboard",
@@ -301,7 +301,6 @@ const en = {
         export_csv: "Export to Excel",
         filter_doc_type: "Filter by document type",
         hint_refresh: "Reinitialize result",
-        search_contacts: "Search Contacts",
         pick_date: "Pick a date",
         month: "month",
         card_lastname: "Lastname on card",
@@ -323,7 +322,8 @@ const en = {
         bank_name: "Bank name",
         bank_account_name: "Beneficiary name",
         iban: "IBAN",
-        bic: "BIC"
+        bic: "BIC",
+        bank_detail: "Display the bank on invoice"
     },
     helperText: {
         select_phone_code: "Phone code",

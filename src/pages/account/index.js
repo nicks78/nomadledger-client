@@ -128,7 +128,7 @@ class Account extends Component {
 
 
                                 <Typography variant="subtitle2"  >
-                                {locale.subheading.my_categories}&nbsp;<Tooltips title={locale.helperText.account_category}  aria-label="setting"><HelpIcon /></Tooltips>
+                                {locale.subheading.my_categories}&nbsp;<Tooltips title={locale.helperText.account_category}  aria-label="setting"><HelpIcon style={{color: "#ffb555"}}  /></Tooltips>
                                 </Typography>
                                 <Divider className={ classes.divider }/>
                                 <AddCategory />
