@@ -37,7 +37,7 @@ const styles = theme => ({
 
 const Tag = (props) => {
 
-  const {classes, actionTag, label, variant, color, obj, type, edit, canDelete } = props
+  const {classes, actionTag, label, variant, obj, type, edit, canDelete } = props
 
   return (
           <Chip

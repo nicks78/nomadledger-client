@@ -11,13 +11,13 @@ class StatContact extends Component {
 
   render() {
 
-    const {total_quote, total_invoice, total_refund, currency, classes, locale} = this.props;
+    const { total_invoice, total_refund, currency, classes, locale} = this.props;
 
     return (
         <Grid container spacing={24}>
 
         <Grid item xs={12} md={6} sm={6}>
-          <Paper style={{padding: 10, background: '#3b78e7'}} elevation={1}>
+          <Paper style={{padding: 10, background: 'linear-gradient(60deg, #3b78e7, #1930FF)'}} elevation={1}>
               <Typography className={classes.typoTitle} variant="body1">
                 {locale.wording.invoice}
                 </Typography>
@@ -36,7 +36,7 @@ class StatContact extends Component {
           </Paper>
         </Grid>
         <Grid item xs={12} md={6} sm={6}>
-          <Paper style={{padding: 10, background: 'linear-gradient(60deg, #d23f31, #1930FF)'}} elevation={1}>
+          <Paper style={{padding: 10, background: 'linear-gradient(60deg, #AD3428, #d23f31)'}} elevation={1}>
               <Typography className={classes.typoTitle} variant="body1">
                 {locale.wording.refund}
                 </Typography>

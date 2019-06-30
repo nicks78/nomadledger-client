@@ -10,7 +10,6 @@ import ApxBackBtn from '../../../components/common/backBtn'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownloadOutlined'
 import CheckIcon from '@material-ui/icons/Check'
 import History from './history'
-import {history} from '../../../routes/history'
 import StatusStep from './statusStep'
 import ApxtextIndexValue from '../../../components/common/textIndexValue'
 
