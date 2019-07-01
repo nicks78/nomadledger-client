@@ -15,7 +15,7 @@ const AddService = (props) => {
         fields: [
             { name: 'name', type:"text", required: true, length: 50},
             { name: 'currency', type:"select", selections: currency, required: true },
-            { name: 'price', type:"text", required: true },
+            { name: 'price', type:"number", required: true },
             { name: 'service_type', type:"select", selections: service_type, required: true },
             { name: 'category', type:"select", selections: category, required: true  },
             { name: 'description', type:"longtext", multiline: true, rowsMax:"4" },

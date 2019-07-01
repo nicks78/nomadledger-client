@@ -12,8 +12,7 @@ import ApxPaper from '../../components/common/paper'
 import ApxBackBtn from '../../components/common/backBtn'
 import EditSelect from '../../lib/editSelect'
 import DatePickers from '../../lib/dayPicker'
-import { DEFAULT_IMG } from '../../redux/constant';
-import {checkNumFormatRegex, cvtToLocale} from '../../utils/help_function'
+import { DEFAULT_IMG } from '../../redux/constant'
 import {resizeFile} from '../../utils/resizeFile'
 
 
@@ -128,15 +127,10 @@ class ShowExpense extends Component {
                       className={classes.textField}
                       fullWidth
                       required
+                      type="number"
                       label={locale.wording.price}
-                      value={ cvtToLocale(expense.price)}
-                      onChange={ (e) => {
-                          if(checkNumFormatRegex(e.target.value) === false){
-                             this.props.setNotification("error_422_price", "warning")
-                          }else{
-                            this.props.createState(reducer, "price", e.target.value)
-                          }
-                        }}
+                      value={ expense.price || 0}
+                      onChange={ (e) => { this.props.createState(reducer, "price", e.target.value) }}
                     />
                   </Grid>
                   <Grid item xs={12} md={6}>

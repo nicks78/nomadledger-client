@@ -20,6 +20,7 @@ export function getItem( actionType, id ){
         return response.data
     }) 
     .then( res => {
+
         dispatch(setItem(actionType, res.payload ))  
     })
     .catch(function (error) {

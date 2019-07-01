@@ -10,7 +10,6 @@ import Spinner from '../../components/common/spinner'
 import ApxPaper from '../../components/common/paper'
 import ApxBackBtn from '../../components/common/backBtn'
 import EditSelect from '../../lib/editSelect'
-import { cvtToLocale, checkNumFormatRegex } from '../../utils/help_function'
 
 
 class ShowService extends Component {
@@ -80,16 +79,11 @@ class ShowService extends Component {
                     style={{ wapInputFormat: 'N'}}
                     margin="dense"
                     fullWidth
+                    type="number"
                     required
                     label={locale.wording.price}
-                    value={  cvtToLocale( service.price  ) }
-                    onChange={ (e) => {
-                        if(checkNumFormatRegex(e.target.value) === false){
-                           this.props.setNotification("error_422_price", "warning")
-                        }else{
-                          this.props.createState(reducer, "price", e.target.value)
-                        }
-                      }}
+                    value={  service.price  || 0 }
+                    onChange={ (e) => { this.props.createState(reducer, "price", e.target.value) }}
                   />
               </Grid>
 

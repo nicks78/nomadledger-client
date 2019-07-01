@@ -57,14 +57,14 @@ class Home extends Component {
               <Grid container spacing={isMobile ? 4 : 24} className={classes.gridContainer}>
                 <Grid item xs={6} md={6} sm={6}>
                     <Paper className={classes.paperHeader} style={{ background: 'linear-gradient(60deg, #ffb555, #ffb555)'}}>
-                        <img className={classes.picto} src="http://localhost:8080/img/euro_sign.png" alt="euro" />
+                        <img className={classes.picto} src="https://api.nomadledger.com/img/euro_sign.png" alt="euro" />
                       <Typography variant="h2" align="center" style={{color: "white", marginBottom: 10, fontWeight: 600}} >  { cvtNumToUserPref( mainStat ? mainStat.turnover : 0 ) }  { currency.value } </Typography>
                       <Typography variant={isMobile ? "body2" : "h3"} align="center" style={{fontWeight: 700, color: "white"}}>{locale.subheading.label_revenue} - { mainStat && mainStat.fiscal_year  }</Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={6} md={6} sm={6}>
                     <Paper className={classes.paperHeader} style={{ background: 'linear-gradient(60deg, #00888b, #00888b)'}}>
-                    <img className={classes.picto} src="http://localhost:8080/img/line_graph.png" alt="euro" />
+                    <img className={classes.picto} src="https://api.nomadledger.com/img/line_graph.png" alt="euro" />
                       <Typography variant="h2" align="center" style={{color: "white", marginBottom: 10, fontWeight: 600}}>  { cvtNumToUserPref( mainStat ? mainStat.sumExpenses : 0 ) }  { currency.value } </Typography>
                       <Typography variant={isMobile ? "body2" : "h3"} align="center" style={{fontWeight: 700, color: "white"}}>{locale.wording.expense}s - { mainStat && mainStat.fiscal_year  }</Typography>
                     </Paper>

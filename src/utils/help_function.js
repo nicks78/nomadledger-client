@@ -22,42 +22,26 @@ export const updateArrayOfObject = (list, obj) => {
  * @param {*} num
  */
 export const checkNumFormatRegex = (num) => {
-    
-    // var regex = /^[0-9]{0,}([,.])?([0-9]{1,2})?$/gm;
 
-    // var fr = new RegExp(regex);
-    // if( fr.test(num) ){
-    //     console.log(fr.test(num))
-    //     var tmp = num.replace(',', '.').replace(/ /g, "");
-    //     var x = parseFloat(tmp)
-        
-    //     if(x === 0){
-    //         return true
-    //     }
+    var regex = /^(-)?[0-9]{0,}([,.])?([0-9]{1,2})?$/gm;
 
-    //     return x
-    // }
-
-    // return false
-
-    var regex = /^[0-9]{0,}([,.])?([0-9]{1,2})?$/gm;
-
+    if(num === "-" || num === ""){
+      return true
+    }
+    var n = num.toLocaleString("en");
+    console.log(n.replace(/ /g, ""))
     var fr = new RegExp(regex);
     var test = fr.test(num.replace(/ /g, ""))
 
-    if(num === ""){
-        return true
-    }
-    
     if( test === true ){
         var tmp = num.replace(',', '.');
-        var x = parseFloat(tmp)
+        var x = parseFloat(tmp || 0)
 
         if(x === 0){
           return true
         }
 
-        return x
+        return x || 0
     }else{
 
       return test
@@ -87,6 +71,9 @@ export const cvtNumToUserPref = (num) => {
 
     var locale = localStorage.getItem('locale');
     var result = '0';
+    if(num === ""){
+        return num
+    }
 
     // Set to number
     num = parseFloat(Math.round(num * 100) / 100);

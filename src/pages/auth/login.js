@@ -142,7 +142,9 @@ class Login extends Component {
                         </Button>
                         </form>
                         <br />
-                        <Link className={classes.link} to="/public/forgot-password" >{locale.subheading.link_forgot_pwd}</Link>
+                        <div  className={classes.link}>
+                            <Link className="link" to="/public/forgot-password" >{locale.subheading.link_forgot_pwd}</Link>
+                        </div>
                 </Paper>
 
             </div>

@@ -2,7 +2,6 @@
 
 import React from 'react'
 import {connect} from 'react-redux'
-import { cvtToLocale, checkNumFormatRegex } from '../../utils/help_function'
 import {setNotification} from '../../redux/notification/actions'
 import { getItem, resetState, updateItem, createState, removeImageFromArray, uploadProductFileToServer } from '../../redux/library/actions'
 import { withStyles, Typography, Grid, TextField, IconButton, Button } from '@material-ui/core';
@@ -144,14 +143,9 @@ class ShowProduct extends React.Component {
                             required
                             style={{  marginTop: -4, fontWeight: 300 }}
                             margin="dense"
-                            value={ cvtToLocale(product.buying_price) }
-                            onChange={ (e) => {
-                                if(checkNumFormatRegex(e.target.value) === false){
-                                    this.props.setNotification("error_422_price", "warning")
-                                }else{
-                                  this.props.createState(reducer, "buying_price", e.target.value)
-                                }
-                              }}
+                            type="number"
+                            value={product.buying_price || 0 }
+                            onChange={ (e) => { this.props.createState(reducer, "buying_price", e.target.value) }}
                             />
                       </Grid>
                       <Grid item xs={12} sm={4} md={4}>
@@ -168,17 +162,12 @@ class ShowProduct extends React.Component {
                       <TextField variant="outlined"
                             label={locale.wording.selling_price +' ('+ product.currency.value +')' }
                             fullWidth
+                            type="number"
                             required
                             style={{  marginTop: 0, fontWeight: 300 }}
                             margin="dense"
-                            value={ cvtToLocale(product.selling_price)}
-                            onChange={ (e) => {
-                                if(checkNumFormatRegex(e.target.value) === false){
-                                   this.props.setNotification("error_422_price", "warning")
-                                }else{
-                                  this.props.createState(reducer, "selling_price", e.target.value)
-                                }
-                              }}
+                            value={ product.selling_price || 0 }
+                            onChange={ (e) => { this.props.createState(reducer, "selling_price", e.target.value) }}
                             />
                       </Grid>
 

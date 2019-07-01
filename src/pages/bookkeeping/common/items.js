@@ -18,7 +18,7 @@ import {
 import DeleteIcon from '@material-ui/icons/DeleteOutlined'
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown'
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp'
-import { cvtNumToUserPref, checkNumFormatRegex } from '../../../utils/help_function'
+import { cvtNumToUserPref } from '../../../utils/help_function'
 import ApxContenEditable from '../../../components/common/contentEditable'
 import EditIcon from '@material-ui/icons/EditOutlined'
 import { calculVat } from '../../../redux/book/helper';
@@ -195,7 +195,8 @@ class Items extends Component {
                 <b style={{ marginLeft: 24 }}>{locale.wording.deposit}</b>
                 <span className={ classes.sumSpan }><b>
                   <TextField  
-                      placeholder="1000" 
+                      placeholder={`ex: 1000${newData.currency.value}`}
+                      type="number" 
                       value={newData.deposit_amount || "" }  
                       disabled={!newData.deposit}
                       id="deposit_amount" 
@@ -203,11 +204,7 @@ class Items extends Component {
                         endAdornment: <InputAdornment position="end">{ newData.currency && newData.currency.value }</InputAdornment>,
                       }}
                       style={{ width: 120 }}
-                      onChange={ (e) => {
-                          if(checkNumFormatRegex(e.target.value)){
-                            this.setDeposit(e)
-                          }
-                         }}
+                      onChange={ (e) => { this.setDeposit(e) }}
                       variant="outlined"
                       margin="dense"
                       name="deposit_amount" /></b></span>

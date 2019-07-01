@@ -2,7 +2,7 @@
 
 const en = {
     lang: "en",
-    company_name: `<strong style="color:#00888b">Nomad</strong><span style="color:#04405d">Ledger</span>`,
+    company_name: `<strong style="color:#04405d">Nomad</strong><span style="color:#00888b">Ledger</span>`,
     home:{
         name: "Dashboard",
         url: "/dashboard",

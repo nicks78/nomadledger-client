@@ -129,7 +129,7 @@ class AddVat extends Component {
 
                             <TextField
                                 id="vat"
-                                type="text"
+                                type="number"
                                 label={locale.wording.add_vat}
                                 className={classes.textField}
                                 value={this.state.value}

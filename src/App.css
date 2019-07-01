@@ -76,11 +76,12 @@ a:hover {
 }
 
 thead{
-  background-color: rgb(238,238,238) !important;
+  /* background-color: #F5F5F5 !important; */
+  background: linear-gradient(160deg, #ffb555, #ffd05a)
 }
 
 tr th {
-  color: #757575 !important;
+  color: black !important;
 }
 
 tr td {

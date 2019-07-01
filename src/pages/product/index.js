@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import { createItem, getItemList, getItem, createState, resetState , deleteElement, duplicateItem} from '../../redux/library/actions'
 import {connect} from 'react-redux'
-import { withStyles, Grid, Button, Typography, Hidden} from '@material-ui/core';
+import { withStyles, Grid, Typography, Hidden} from '@material-ui/core';
 import Spinner from '../../components/common/spinner'
 import AddProduct from './addProduct'
 import ProductCard from './productCard'
@@ -65,11 +65,12 @@ class Product extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-      if(this.state.receivedAt !== nextProps.receivedAt )
+      if(this.state.receivedAt !== nextProps.receivedAt ){
         this.setState({
           listProducts: [...this.state.listProducts, ...nextProps.listProducts],
           receivedAt: nextProps.receivedAt
         })
+        }
     }
 
     handleScroll = (event) => {
@@ -88,7 +89,7 @@ class Product extends Component {
     }
 
     hanldeLoadMore = () => {
-        this.props.getItemList(this.state.reducer, `list?limit=${this.skip.limit}&skip=${this.state.skip}`);
+        this.props.getItemList(this.state.reducer, `list?limit=${this.state.limit}&skip=${this.state.skip + 8}`);
         this.setState({ skip: this.state.skip + 8 });
     }
 
@@ -105,13 +106,8 @@ class Product extends Component {
 
     render() {
 
-    const {listProducts, isFetching,total,  locale, newProduct, createState, createItem, isCreating, category, classes, currency } = this.props
-
-    if( isFetching ){
-        return <Spinner />
-    }
-
-
+    const { isFetching, locale, newProduct, createState, createItem, isCreating, category, classes, currency } = this.props
+    const {listProducts} = this.state
 
     return (
         <div style={styles.container}>
@@ -126,7 +122,7 @@ class Product extends Component {
                 isCreating={ isCreating  }/>
 
             <Grid container spacing={24}>
-            {
+            {   listProducts.length > 0 && 
                 listProducts.map((product, index) => {
                     return <Grid item xs={12} sm={6} md={3}  key={index}>
                                 <ProductCard
@@ -141,12 +137,8 @@ class Product extends Component {
             }
             </Grid>
             {
-                total > 10 ?
-                <div className={ classes.loadMore }>
-                    <Button variant="outlined" color="secondary" className={classes.button} onClick={ this.hanldeLoadMore }>
-                        {locale.wording.load_more_product}
-                    </Button>
-                </div>
+                isFetching ?
+                <Spinner />
                 : null
             }
 
