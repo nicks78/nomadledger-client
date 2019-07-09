@@ -3,7 +3,7 @@ html, body {
   margin: 0;
 }
 body{
-  background-color: #F5F5F5;
+  /* background-color: #F5F5F5; */
   font-family: 'Quicksand', sans-serif;
 }
 html {
@@ -53,7 +53,7 @@ a:hover {
   bottom: 0;
   left: 0;
   width: 0%;
-  border-bottom: 2px solid #ffb555;
+  border-bottom: 2px solid #fab746;
   transition: 0.4s;
 }
 
@@ -77,7 +77,7 @@ a:hover {
 
 thead{
   /* background-color: #F5F5F5 !important; */
-  background: linear-gradient(160deg, #ffb555, #ffd05a)
+  background: linear-gradient(160deg, #fab746, #ffd05a)
 }
 
 tr th {

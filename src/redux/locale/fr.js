@@ -3,7 +3,7 @@
 const fr =  {
 
     lang: "fr",
-    company_name: `<strong style="color:#04405d">Nomad</strong><span style="color:#00888b">Ledger</span>`,
+    company_name: `<strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span>`,
     home:{
         name: "Tableau de bord",
         url: "/dashboard",
@@ -478,11 +478,32 @@ const fr =  {
     week_short: ["Dim","Lun","Mar","Mer","Jeu","Ven","Sam"],
     placeholder: 'JJ/MM/AAAA',
     home_page: {
-        title_01: "Logiciel de facturation <br />pour digital nomade",
+        title_01: "Logiciel de facturation en ligne pour digital nomade",
         paragraphe_01: `NomadLedger est un logiciel de facturation simple et rapide a prendre en main, il vous aidera a suivre votre business en quelque clique.`,
         agreed_terms: ` * En m'inscrivant, j'accepte les <a target="_blank" href="https://api.nomadledger.com/termsandconditions_fr.pdf">Conditions générales</a>  et la  <a href="https://api.nomadledger.com/privacypolicy_fr.pdf">Politique de protection de la vie privée</a>.`,
         footer_paragraphe: `Tous droits réservés.&nbsp;<a target="_blank" href="https://api.nomadledger.com/termsandconditions_fr.pdf" rel="noopener noreferrer" target="_blank">Conditions Générales</a>,&nbsp;
-        les fonctionnalités, l'assistance, la tarification et les options sont susceptibles d'être modifiées sans préavis.`
+        les fonctionnalités, l'assistance, la tarification et les options sont susceptibles d'être modifiées sans préavis.`,
+        blocDesc: {
+            title: `Qu'est ce que <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> fait pour vous ?`,
+            bloc_1_title: `Multi-currency support`, 
+            bloc_1_para: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+            It was popularised in the 1960s with the release of Letraset sheets containing
+            Lorem Ipsum passages, and more recently with desktop pu`, 
+            bloc_2_title: `Process invoices & quotes`,  
+            bloc_2_para: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+            It was popularised in the 1960s with the release of Letraset sheets containing
+            Lorem Ipsum passages, and more recently with desktop pu`, 
+            bloc_3_title: `Manage your tasks`, 
+            bloc_3_para: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+            It was popularised in the 1960s with the release of Letraset sheets containing
+            Lorem Ipsum passages, and more recently with desktop pu`, 
+        }
     }
 };
 

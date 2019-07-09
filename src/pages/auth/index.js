@@ -12,74 +12,11 @@ import Jumbotron from './components/jumbotron'
 import RegisterForm from './components/registerForm'
 import {setNotification} from '../../redux/notification/actions'
 import Footer from './components/footer'
+import BlocDesc from './components/blocDesc'
+import Expanded from './components/expanded'
 import ExitToAppIcon from '@material-ui/icons/ExitToAppOutlined'
 import GoogleSignUp from './components/googleSignUp';
 
-const styles = theme => ({
-    root: {
-
-    },
-    appBarWrapper: {
-      position: "fixed",
-      zIndex: 9,
-      width: "100%",
-      transition: "all 0.2s ease"
-    },
-    appBar: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      padding: 12,
-      flexGrow: 1,
-      overflow: "hidden"
-    },
-
-    buttonLogin: {
-      float: "right",
-    },
-
-    features: {
-      display: 'flex',
-      justifyContent: "space-between",
-      textAlign: "center",
-      padding: 48
-    },
-
-    formRegister: {
-      display: "flex",
-      justifyContent: 'center',
-      marginTop: 48,
-      paddingBottom: 48,
-    },
-    paper: {
-      width: "50%",
-      padding: 24,
-      [theme.breakpoints.down("sm")]: {
-        width: "100%"
-      }
-    },
-    partners: {
-      padding: 48,
-      backgroundColor: theme.palette.lightGrey,
-      // minHeight: 300,
-
-      "& h2": {
-        marginBottom: 48,
-      }
-    },
-    partnersImgWrapper: {
-      display: 'flex',
-      alignItems: "center",
-      justifyContent: "space-around",
-      '& img' : {
-        filter: "grayscale(50%)",
-        webkitFilter: "grayscale(100%)",
-        mozFilter: "grayscale(100%)",
-        oFilter: "grayscale(100%)",
-        msFilter: "grayscale(100%)",
-      }
-    }
-})
 
 class Auth extends Component {
 
@@ -161,85 +98,114 @@ class Auth extends Component {
     const { classes, locale, newUser, isFetching } = this.props;
     const {appBarBackground, appBarBoxShadow, agreedTerms, width} = this.state
     const isMobile = width <= 500
-    const langue = localStorage.getItem("locale")
+    const lang = localStorage.getItem("locale")
 
     return (
       <div id="main" className={ classes.root}>
-        <div className={ classes.appBarWrapper } style={{ backgroundColor: appBarBackground, boxShadow: appBarBoxShadow }}>
-          <div id="appBar" className={classes.appBar}>
-              <div style={{display: "flex", alignItems:"center"}} >
-                <img src={`${DEFAULT_URL}img/logo.png`} width="50"  alt="logo"/>
-                { !isMobile ? <span style={{ fontSize: 25, fontWeight: 300 }}><span dangerouslySetInnerHTML={{__html: locale.company_name}}></span></span> : null }
+
+        <section>
+
+          <Jumbotron locale={locale} isMobile={isMobile}/>
+        </section>
+
+        <section className={  isMobile ? classes.marginMobile : classes.margin}>
+          <Grid container className={classes.intro} spacing={24}>
+            <Grid item xs={12} sm={6} md={6}>
+              <div style={{textAlign: 'center'}}>
+                <img src={`${DEFAULT_URL}img/element/intro-picture.jpg`} height="300" alt="intro"/>
               </div>
-              <div className={ classes.buttonLogin }>
-                <Button component={Link} to="/login"  color="primary" variant="contained" >
-                  {isMobile ? <ExitToAppIcon/> : locale.wording.login}
-                </Button>&nbsp;
-                <Button onClick={() => { this.props.initLocale(langue === "fr" ? "en" : "fr") }} color="primary" >{ langue === "fr" ? "FR" : "EN"}</Button>
-              </div>
-          </div>
-        </div>
+            </Grid>
+          <Grid item xs={12} sm={6} md={6}>
+              <Typography variant="body1" align="center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                    when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                    It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+                    It was popularised in the 1960s with the release of Letraset sheets containing
+                    Lorem Ipsum passages, and more recently with desktop publishing software 
+                    like Aldus PageMaker including versions of Lorem Ipsum.
+            </Typography>
 
-        <Jumbotron locale={locale} />
-
-        <Grid container spacing={24} align="center">
-
-          <Grid item xs={12} sm={4} md={4}>
-            <img src={`${DEFAULT_URL}img/1.png`} width="150" alt="img-1" /><br />
-            <div style={{marginTop: 24}}>
-              <Typography variant="h3">Multi-currency support</Typography>
-            </div>
           </Grid>
 
-          <Grid item xs={12} sm={4} md={4}>
-            <img src={`${DEFAULT_URL}img/1.png`} width="150" alt="img-1" /><br />
-              <div style={{marginTop: 24}}>
-                <Typography variant="h3">Process invoices & quotes</Typography>
-              </div>
           </Grid>
+          
+        </section>
+        <section style={{marginBottom: 50}} className={  isMobile ? classes.marginMobile : classes.margin}>
+          <BlocDesc locale={locale} isMobile={isMobile}/>
+        </section>
 
-          <Grid item xs={12} sm={4} md={4}>
-            <img src={`${DEFAULT_URL}img/1.png`} width="150" alt="img-1" /><br />
-              <div style={{marginTop: 24}}>
-                <Typography variant="h3">Manager your tasks</Typography>
+        <section className={  isMobile ? classes.marginMobile : classes.margin} style={{backgroundColor: '#edf7f8', paddingTop: 50, paddingBottom: 50}} >
+          <Typography variant="h2" align="center" style={{marginBottom: 24}}>Try it for free for 7 days</Typography>
+          <Grid container spacing={24}>
+            <Grid item xs={12} md={6} sm={6}>
+              <form onSubmit={this.onSubmitForm}>
+              <RegisterForm state={this.state} onAgreedToTerms={ () => this.setState({agreedTerms: !this.state.agreedTerms}) } updateState={this.handleChange} locale={locale} isMobile={isMobile}/>
+                <div className={classes.buttonLogin}><Button disabled={!agreedTerms} variant="contained" className={classes.btn} type="submit">Register</Button></div>
+              </form>
+            </Grid>
+            <Grid item xs={12} md={6} sm={6}>
+              <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <img src={`${DEFAULT_URL}img/element/Screen-HP-mockup.png`} height="300" alt="intro"/>
               </div>
+              
+            </Grid>
           </Grid>
-
-        </Grid>
-
-
-        <div className={ classes.formRegister }>
-          <Paper className={ classes.paper }>
-            <Typography variant="h3" align="center">{locale.helperText.trial_30}</Typography><br />
-            <Typography variant="caption">{locale.home_page.form_title}</Typography>
-            <br />
-
-            <GoogleSignUp responseGoogle={this.responseGoogle} locale={locale} />
-
-            <br />
-
-            <form onSubmit={ this.onSubmitForm }>
-              <RegisterForm updateState={ this.handleChange } state={ newUser } locale={locale} onAgreedToTerms={ (e) => { this.setState({agreedTerms: e.target.checked}) } }/>
-              <br />
-              <Button fullWidth disabled={isFetching || !agreedTerms} type="submit" color="primary" variant="contained">{ isFetching ? locale.wording.loading : locale.wording.register }</Button>
-            </form>
-          </Paper>
-        </div>
-
-        <div className={ classes.partners }>
-          <Typography variant="h2" align="center">Partners</Typography>
-
-        </div>
-
-        <div className={ classes.infosBlock }>
-
-        </div>
+          
+        </section>
+          
+        <section className={  isMobile ? classes.marginMobile : classes.margin} style={{ width: isMobile ? "90%" : "60%", margin: "0 auto", paddingTop: 50, paddingBottom: 50 }}>
+        <Typography variant="h2" align="center" style={{marginBottom: 24}}>Question</Typography>
+            <Expanded locale={locale} />
+        </section>
 
         <Footer locale={locale} />
       </div>
     )
   }
 }
+
+const styles = theme => ({
+
+  marginMobile: {
+    paddingRight: 0,
+    paddingLeft: 0
+  },
+  margin: {
+    paddingRight: 100,
+    paddingLeft: 100
+  },
+  appBarWrapper: {
+    position: "fixed",
+    zIndex: 9,
+    width: "100%",
+    transition: "all 0.2s ease"
+  },
+  appBar: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 12,
+    flexGrow: 1,
+    overflow: "hidden"
+  },
+  intro: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  buttonLogin: {
+    float: "right",
+  },
+  btn: {
+    backgroundColor: theme.palette.yellow.dark,
+    color: 'white',
+    width: 150
+  },
+  formBloc: {
+    backgroundColor: theme.palette.thinBlue,
+    marginTop: 100,
+  }
+})
+
 
 const mapStateToProps = (state) => {
 

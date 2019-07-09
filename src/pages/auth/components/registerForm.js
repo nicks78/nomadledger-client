@@ -1,6 +1,6 @@
 //src/pages/auth/components/registerForm.js
 import React from 'react'
-import { TextField, Grid, Checkbox, Typography } from '@material-ui/core';
+import { TextField, Grid, Checkbox, Typography, withStyles } from '@material-ui/core';
 
 
 /*
@@ -9,7 +9,7 @@ import { TextField, Grid, Checkbox, Typography } from '@material-ui/core';
 */
 const RegisterForm = (props) =>  {
 
-    const {state, updateState, locale} = props
+    const {state, updateState, locale, classes} = props
 
     return (
       <div>
@@ -24,6 +24,7 @@ const RegisterForm = (props) =>  {
                         onChange={ updateState }
                         fullWidth
                         required
+                        className={classes.textField}
                         label={ locale.wording.firstname }
                         margin="dense"
                         variant="outlined"
@@ -36,6 +37,7 @@ const RegisterForm = (props) =>  {
                         onChange={ updateState }
                         fullWidth
                         required
+                        className={classes.textField}
                         label={ locale.wording.lastname }
                         value={ state.lastname || "" }
                         margin="dense"
@@ -49,6 +51,7 @@ const RegisterForm = (props) =>  {
                         onChange={ updateState }
                         fullWidth
                         required
+                        className={classes.textField}
                         label={ locale.wording.company_name }
                         value={ state.company_name || "" }
                         margin="dense"
@@ -63,6 +66,7 @@ const RegisterForm = (props) =>  {
                         onChange={ updateState }
                         fullWidth
                         required
+                        className={classes.textField}
                         label={ locale.wording.email }
                         value={ state.email || "" }
                         margin="dense"
@@ -77,6 +81,7 @@ const RegisterForm = (props) =>  {
                         onChange={ updateState }
                         fullWidth
                         required
+                        className={classes.textField}
                         inputProps={{ minLength: 8 }}
                         label={ locale.wording.password }
                         value={ state.password || "" }
@@ -87,7 +92,6 @@ const RegisterForm = (props) =>  {
                 <Grid item xs={12}>
                     <p style={{display: "inline-flex", alignItems: "center"}}>
                       <Checkbox onChange={props.onAgreedToTerms} /><Typography variant="body1" component="span" dangerouslySetInnerHTML={{__html: locale.home_page.agreed_terms }} />
-
                     </p>
                 </Grid>
 
@@ -98,5 +102,17 @@ const RegisterForm = (props) =>  {
 }
 
 
+const styles = theme => ({
+    textField: {
+        '& fieldset': {
+            borderRadius: 24,
+        },
 
-export default RegisterForm;
+        '& input': {
+            backgroundColor: 'white',
+            borderRadius: 24
+        }
+    }
+})
+
+export default withStyles(styles)(RegisterForm);

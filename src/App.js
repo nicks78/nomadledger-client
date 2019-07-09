@@ -12,23 +12,34 @@ import MessengerCustomerChat from 'react-messenger-customer-chat';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#04405d',
+      // light: "#50b9bc",
+      main: '#0c3c5e',
+      // dark: `#005b5f`,
       contrastText: '#fff',
     },
     secondary: {
-      thinlight: "rgba(242, 103, 103, 0.1)",
-      main: '#00888b', //'#ffb555'
+      // light: "#41668b",
+      main: '#01898c',
+      // dark: "#001634",
       contrastText: '#fff',
     },
+    lightBlue: "#63c1c5",
+    lightGreen: "#b0d9c8",
+    thinDarkBlue: "#d4ebf9",
+    thinBlue: "#edf7f8",
+    yellow: {
+      dark: "#fab746",
+      light: "#ffd247"
+    },
+
     green: "green",
     grey: {
       light: 'rgba(251,251,251,1)',
       main: 'rgb(128, 128, 128)',
-      dark: 'rgb(48, 48, 48)',
+      dark: '#484848',
     },
     caption: "rgba(0, 0, 0, 0.54)",
     lightGrey: '#F5F5F5',
-    sideBar: "rgb(44,47,50)",
     error: {
       warning: 'yellow',
       light: '#FFEBEE',
@@ -51,19 +62,19 @@ const theme = createMuiTheme({
     h1:{
       fontSize: '1.8rem',
       fontWeight: 500,
-      color: 'rgb(48, 48, 48)',
+      color: '#484848',
       textTransform: "capitalize"
     },
     h2: {
       fontSize: '1.3rem',
-      color: 'rgb(48, 48, 48)',
+      color: '#484848',
       fontWeight: 500,
       textTransform: "capitalize"
     },
     h3: {
       fontSize: '1.1rem',
       fontWeight: 700,
-      color: 'rgb(48, 48, 48)',
+      color: '#484848',
       textTransform: "capitalize"
     },
     subtitle1: {
