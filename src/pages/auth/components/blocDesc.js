@@ -15,43 +15,48 @@ const BlocDesc = (props) => {
                     <Paper className={classes.paper}>
                         <img src={`${DEFAULT_URL}img/svg/Nomad-Ledger_mulit-currency.svg`} alt="" width="200"/>
                         <Typography variant="h3" className={classes.blocTitle} align="center">{locale.home_page.blocDesc.bloc_1_title}</Typography>
-                        <Typography variant="body2" className={classes.blocTitle} align="center">{locale.home_page.blocDesc.bloc_1_para}</Typography>
+                        <Typography variant="body2" className={classes.blocPara} align="justify">{locale.home_page.blocDesc.bloc_1_para}</Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4} sm={4}>
                     <Paper className={classes.paper} style={{marginTop: -24}}>
                         <img src={`${DEFAULT_URL}img/svg/Nomad-Ledger_invoice-quote.svg`} alt="" width="200"/>
                         <Typography variant="h3" className={classes.blocTitle} align="center">{locale.home_page.blocDesc.bloc_2_title}</Typography>
-                        <Typography variant="body2" className={classes.blocTitle} align="center">{locale.home_page.blocDesc.bloc_2_para}</Typography>
+                        <Typography variant="body2" className={classes.blocPara} align="justify">{locale.home_page.blocDesc.bloc_2_para}</Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4} sm={4}>
                     <Paper className={classes.paper}>
                         <img src={`${DEFAULT_URL}img/svg/Nomad-Ledger_task.svg`} alt="" width="200"/>
                         <Typography variant="h3" className={classes.blocTitle} align="center">{locale.home_page.blocDesc.bloc_3_title}</Typography>
-                        <Typography variant="body2" className={classes.blocTitle} align="center">{locale.home_page.blocDesc.bloc_3_para}</Typography>
+                        <Typography variant="body2" className={classes.blocPara} align="justify">{locale.home_page.blocDesc.bloc_3_para}</Typography>
                     </Paper>
                 </Grid>
-
+                
         </Grid>
+        <div id="formAnchor"></div>
         </div>
     )
 }
 
 const styles = theme => ({
     blocDesc: {
-        marginTop: 100,  
+        marginTop: 50, 
+        marginBottom: 70,  
     },
     mobile: {
         marginTop: 0,
     },
     title: {
-        marginBottom: 72,
+        marginBottom: 100,
         color: theme.palette.primary.main,
     },
     blocTitle: {
+        marginTop: 24
+    },
+    blocPara: {
         marginTop: 24,
-
+        fontWeight: 400
     },
     paper: {
         textAlign: 'center',

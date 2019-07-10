@@ -7,7 +7,7 @@ import {injectStripe, CardElement} from 'react-stripe-elements';
 import { Button, Typography, TextField } from '@material-ui/core'
 import WarningIcon from '@material-ui/icons/WarningOutlined'
 import {cvtNumToUserPref} from '../../utils/help_function'
-
+import Spinner from '../../components/common/spinner'
 
 class Checkout extends React.Component {
 
@@ -21,6 +21,7 @@ class Checkout extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
+    if(nextProps.payment)
     this.setState({
       lastname: nextProps.payment.lastname,
       firstname: nextProps.payment.firstname
@@ -38,7 +39,6 @@ class Checkout extends React.Component {
 
     try{
       let {token} = await this.props.stripe.createToken({name: lastname + " " + firstname  });
-          console.log(token)
           var data = {
             stripe_token: token,
             email: this.props.payment.email,
@@ -53,7 +53,7 @@ class Checkout extends React.Component {
       }
     }
 
-  };
+  }
 
   render() {
 
@@ -61,12 +61,12 @@ class Checkout extends React.Component {
     const { lastname, firstname } = this.state;
 
     if(!payment){
-      return null
+      return <Spinner/>
     }
 
     return (
       <div>
-        <Typography variant="h1" style={{fontWeight: 600}} align="center">{cvtNumToUserPref(4.95)} € / <span style={{fontWeight: 300, fontSize: 20}}>{locale.wording.month}</span></Typography>
+        <Typography variant="h1" style={{fontWeight: 600}} align="center">{cvtNumToUserPref(3.95)} € /<span style={{fontWeight: 300, fontSize: 20}}>{locale.wording.month}</span></Typography>
         <Typography variant="body1" align="center">{locale.helperText.payment_terms}</Typography><br />
         <Typography variant="caption" align="center">{locale.helperText.member_end} { new Date(payment.membership_end).toLocaleDateString(localStorage.getItem("locale")) } </Typography><br />
         <Typography variant="caption" style={{color: "red", display: 'inline-flex', alignItems: 'center' }}>

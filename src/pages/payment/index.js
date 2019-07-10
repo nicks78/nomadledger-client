@@ -39,7 +39,7 @@ class Payment extends Component {
                 <div>
                     <Typography className={classes.companyName} variant="h1" align="center">
                     <Link to="/"><img src={`${DEFAULT_URL}img/logo.png`} alt="logo" height="80" width="auto" /></Link><br />
-                        <span>{locale.company_name}</span>
+                        <span dangerouslySetInnerHTML={{__html: locale.company_name}}></span>
                     </Typography><br />
                 </div>
                 <MyStoreCheckout {...this.props}/>

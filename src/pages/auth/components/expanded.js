@@ -1,7 +1,7 @@
 //src/pages/auth/jumbotron.js
 
 import React from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -31,7 +31,8 @@ class Expanded extends React.Component {
       <ExpansionPanel expanded={expanded === 'panel1'} className={classes.panel} onChange={() => this.handleChange('panel1')}>
         <ExpansionPanelSummary
             className={ classes.expand }
-            expandIcon={<ExpandMoreIcon />}
+            style={{ backgroundColor: expanded === "panel1" ? "#188A8D" : "#62C1C5" , borderRadius: 4}}
+            expandIcon={<ExpandMoreIcon className={ classes.icon } />}
             aria-controls="panel1bh-content"
             id="panel1bh-header"
             >
@@ -46,8 +47,9 @@ class Expanded extends React.Component {
       </ExpansionPanel>
       <ExpansionPanel expanded={expanded === 'panel2'} className={classes.panel}  onChange={() => this.handleChange('panel2')}>
         <ExpansionPanelSummary
-            className={ classes.expand }
-          expandIcon={<ExpandMoreIcon />}
+          className={ classes.expand }
+          style={{ backgroundColor: expanded === "panel2" ? "#188A8D" : "#62C1C5" , borderRadius: 4}}
+          expandIcon={<ExpandMoreIcon className={ classes.icon } />}
           aria-controls="panel2bh-content"
           id="panel2bh-header"
         >
@@ -62,8 +64,9 @@ class Expanded extends React.Component {
       </ExpansionPanel>
       <ExpansionPanel expanded={expanded === 'panel3'} className={classes.panel}  onChange={() => this.handleChange('panel3')}>
         <ExpansionPanelSummary
-        className={ classes.expand }
-          expandIcon={<ExpandMoreIcon />}
+          className={ classes.expand }
+          style={{ backgroundColor: expanded === "panel3" ? "#188A8D" : "#62C1C5" , borderRadius: 4}}
+          expandIcon={<ExpandMoreIcon className={ classes.icon } />}
           aria-controls="panel3bh-content"
           id="panel3bh-header"
         >
@@ -87,8 +90,6 @@ const styles = theme => ({
       width: '100%',
     },
     panel: {
-        marginBottom: 0,
-        marginTop: 0,
         boxShadow: "none"
     },
     heading: {
@@ -96,6 +97,9 @@ const styles = theme => ({
         color: 'white',
         flexBasis: '33.33%',
         flexShrink: 0,
+    },
+    icon: {
+      color: 'white'
     },
     expand: {
         backgroundColor: theme.palette.secondary.light,

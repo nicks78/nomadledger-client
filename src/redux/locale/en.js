@@ -481,7 +481,28 @@ const en = {
         paragraphe_01: `NomadLedger is an easy to use software to manage your invoicing document and keep track of your tasks in just a few click.`,
         agreed_terms: `* By signing up, you agree to the <a target="_blank" href="https://api.nomadledger.com/termsandconditions_en.pdf">Terms and Conditions</a> and <a href="https://api.nomadledger.com/privacypolicy_en.pdf">Privacy Policy</a>.`,
         footer_paragraphe: `All rights reserved.&nbsp;<a target="_blank" href="https://api.nomadledger.com/termsandconditions_en.pdf" rel="noopener noreferrer" target="_blank">Terms and Conditions</a>,&nbsp;
-        features, support, pricing, and service options subject to change without notice.`
+        features, support, pricing, and service options subject to change without notice.`,
+        blocDesc: {
+            title: `Qu'est ce que <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> fait pour vous ?`,
+            bloc_1_title: `Multi-currency support`, 
+            bloc_1_para: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+            It was popularised in the 1960s with the release of Letraset sheets containing
+            Lorem Ipsum passages, and more recently with desktop pu`, 
+            bloc_2_title: `Process invoices & quotes`,  
+            bloc_2_para: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+            It was popularised in the 1960s with the release of Letraset sheets containing
+            Lorem Ipsum passages, and more recently with desktop pu`, 
+            bloc_3_title: `Manage your tasks`, 
+            bloc_3_para: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+            It was popularised in the 1960s with the release of Letraset sheets containing
+            Lorem Ipsum passages, and more recently with desktop pu`, 
+        }
     }
 }
 

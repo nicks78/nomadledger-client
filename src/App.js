@@ -137,27 +137,43 @@ function randomColor() {
  */
 class App extends Component {
 
-  state = {
-  messages: [
-    {
-      text: "This is a test message!",
+  constructor() {
+    super();
+    this.state = {
+      stripe: null,
+      messages: [
+        {
+          text: "This is a test message!",
+          member: {
+            color: "blue",
+            username: "bluemoon"
+          }
+        }
+      ],
       member: {
-        color: "blue",
-        username: "bluemoon"
+        username: randomName(),
+        color: randomColor()
       }
     }
-  ],
-  member: {
-    username: randomName(),
-    color: randomColor()
   }
-}
+
+  componentDidMount() {
+    if (window.Stripe) {
+      this.setState({stripe: window.Stripe(STRIPE_PUBLIC_KEY)});
+    } else {
+      document.querySelector('#stripe-js').addEventListener('load', () => {
+        // Create Stripe instance once Stripe.js loads
+        this.setState({stripe: window.Stripe(STRIPE_PUBLIC_KEY)});
+      });
+    }
+  }
+
   render() {
 
     return (
       <React.Fragment>
 
-        <StripeProvider apiKey={STRIPE_PUBLIC_KEY}>
+        <StripeProvider stripe={this.state.stripe}>
           <MuiThemeProvider theme={theme}>
               <Routes />
                   <div>

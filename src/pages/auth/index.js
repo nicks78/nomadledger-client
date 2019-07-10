@@ -14,6 +14,9 @@ import {setNotification} from '../../redux/notification/actions'
 import Footer from './components/footer'
 import BlocDesc from './components/blocDesc'
 import Expanded from './components/expanded'
+import Offer from './components/offer'
+import AppBar from './components/appBar'
+import Partners from './components/partners'
 import ExitToAppIcon from '@material-ui/icons/ExitToAppOutlined'
 import GoogleSignUp from './components/googleSignUp';
 
@@ -24,8 +27,7 @@ class Auth extends Component {
         showLogin: true,
         openSnack: true,
         width: window.innerWidth,
-        appBarBackground: "rgba(243,243,243)",
-        appBarBoxShadow: "none",
+        showAppbar: false,
         agreedTerms: false,
 
     }
@@ -46,15 +48,13 @@ class Auth extends Component {
 
     handleScroll = () => {
       var scrollTop = document.documentElement.scrollTop;
-      if( scrollTop > 55){
+      if( scrollTop > 250){
         this.setState({
-          appBarBackground: "white",
-          appBarBoxShadow: "0px -1px 3px 0px grey"
+          showAppbar: true
         })
       }else{
         this.setState({
-          appBarBackground: "rgba(243,243,243)",
-          appBarBoxShadow: "none"
+          showAppbar: false
         })
       }
     }
@@ -96,19 +96,20 @@ class Auth extends Component {
     render() {
 
     const { classes, locale, newUser, isFetching } = this.props;
-    const {appBarBackground, appBarBoxShadow, agreedTerms, width} = this.state
-    const isMobile = width <= 500
+    const {showAppbar, agreedTerms, width} = this.state
     const lang = localStorage.getItem("locale")
+    const isMobile = width <= 500
 
     return (
       <div id="main" className={ classes.root}>
-
+        <section >
+          <AppBar locale={locale} showAppbar={showAppbar} initLocale={this.props.initLocale} lang={lang} isMobile={isMobile} />
+        </section>
         <section>
-
           <Jumbotron locale={locale} isMobile={isMobile}/>
         </section>
 
-        <section className={  isMobile ? classes.marginMobile : classes.margin}>
+        <section className={  isMobile ? classes.marginMobile : classes.margin} style={{marginTop: -20}}>
           <Grid container className={classes.intro} spacing={24}>
             <Grid item xs={12} sm={6} md={6}>
               <div style={{textAlign: 'center'}}>
@@ -116,7 +117,7 @@ class Auth extends Component {
               </div>
             </Grid>
           <Grid item xs={12} sm={6} md={6}>
-              <Typography variant="body1" align="center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+              <Typography variant="body2" align="center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
                     when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
                     It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
@@ -133,8 +134,9 @@ class Auth extends Component {
         <section style={{marginBottom: 50}} className={  isMobile ? classes.marginMobile : classes.margin}>
           <BlocDesc locale={locale} isMobile={isMobile}/>
         </section>
-
-        <section className={  isMobile ? classes.marginMobile : classes.margin} style={{backgroundColor: '#edf7f8', paddingTop: 50, paddingBottom: 50}} >
+        
+        <section  className={  isMobile ? classes.marginMobile : classes.margin} style={{backgroundColor: '#edf7f8', paddingTop: 50, paddingBottom: 50}} >
+          <div id="formAnchor"></div>
           <Typography variant="h2" align="center" style={{marginBottom: 24}}>Try it for free for 7 days</Typography>
           <Grid container spacing={24}>
             <Grid item xs={12} md={6} sm={6}>
@@ -154,9 +156,25 @@ class Auth extends Component {
         </section>
           
         <section className={  isMobile ? classes.marginMobile : classes.margin} style={{ width: isMobile ? "90%" : "60%", margin: "0 auto", paddingTop: 50, paddingBottom: 50 }}>
-        <Typography variant="h2" align="center" style={{marginBottom: 24}}>Question</Typography>
+        <Typography variant="h2" align="center" style={{marginBottom: 24}}>Questions</Typography>
             <Expanded locale={locale} />
         </section>
+
+        <section className={  isMobile ? classes.marginMobile : classes.margin} style={{ backgroundColor: "#0C3C5E", paddingTop: 50, paddingBottom: 50 }}>
+        <Typography variant="h2" align="center" style={{marginBottom: 24, color: "white"}}>OUR OFFER</Typography>
+        <Offer locale={locale}  isMobile={isMobile} />
+        </section>
+
+        <section className={  isMobile ? classes.marginMobile : classes.margin} style={{ paddingTop: 50, paddingBottom: 50 }}>
+          <Typography variant="h2" align="center" style={{marginBottom: 24}}>OUR PARTNERS</Typography>
+          <Partners locale={locale} />
+        </section>
+
+        <section className={  isMobile ? classes.marginMobile : classes.margin} style={{ paddingTop: 50, paddingBottom: 50, backgroundColor: "#edf7f8" }}>
+          
+        </section>
+
+
 
         <Footer locale={locale} />
       </div>
@@ -178,7 +196,8 @@ const styles = theme => ({
     position: "fixed",
     zIndex: 9,
     width: "100%",
-    transition: "all 0.2s ease"
+    transition: "all 0.2s ease",
+    backgroundColor: 'red'
   },
   appBar: {
     display: "flex",

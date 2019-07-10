@@ -12,11 +12,16 @@ const Jumbotron = (props) => {
     return (
       <div className={classes.root}>
           <div id="jumbotron" className={classes.jumbotron}>
-            <div className={classes.title}>
+            <div className={classes.title} style={{ marginTop: isMobile ? 0 : -100 }}>
               <img src={`${DEFAULT_URL}img/logo.png`} alt="logo" width="100"/>
               <Typography variant="h1" style={{ fontSize: 40 }} dangerouslySetInnerHTML={{__html: locale.company_name}}></Typography>
               <Typography variant="h3" style={{ fontSize: 20, fontWeight: 400, lineHeight: 1.6 }} dangerouslySetInnerHTML={{__html: locale.home_page.title_01}}></Typography>
-              <Button component={Link} to="/login" variant="contained" className={classes.btn} type="submit">Try it for free</Button>
+              <div className={classes.btnWrapper}>
+                <Button component="a" href="#formAnchor" variant="contained" className={classes.btn} type="submit">Try it for free</Button>
+                <p style={{ marginRight: 10 }}>Ou</p>
+                <Link className="link" style={{marginTop: 4}} to="/login">Sign In</Link>
+              </div>
+              
             </div>
             {
               !isMobile ?
@@ -39,7 +44,7 @@ const styles = theme => ({
     root: {
       backgroundImage: `url(${DEFAULT_URL}img/element/Vague1.png)`,
       backgroundRepeat: ' no-repeat',
-      backgroundSize: "contain"
+      backgroundSize: "cover"
     },
     jumbotron: {
       display: "flex",
@@ -56,10 +61,15 @@ const styles = theme => ({
       backgroundPosition: "0px -90px",
       backgroundSize: "contain"
     },
-    btn: {
+    btnWrapper: {
+      display: 'flex',
+      alignItems: 'center',
       marginTop: 24,
+    },
+    btn: {
       backgroundColor: theme.palette.yellow.dark,
       color: 'white',
+      marginRight: 10,
       width: 150
     },
 })
