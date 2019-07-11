@@ -484,7 +484,7 @@ const fr =  {
         footer_paragraphe: `Tous droits réservés.&nbsp;<a target="_blank" href="https://api.nomadledger.com/termsandconditions_fr.pdf" rel="noopener noreferrer" target="_blank">Conditions Générales</a>,&nbsp;
         les fonctionnalités, l'assistance, la tarification et les options sont susceptibles d'être modifiées sans préavis.`,
         blocDesc: {
-            title: `Qu'est ce que <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> fait pour vous ?`,
+            title: `    QU'EST CE QUE <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> FAIT POUR VOUS ?`,
             bloc_1_title: `Multi-currency support`, 
             bloc_1_para: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
             when an unknown printer took a galley of type and scrambled it to make a type specimen book. 

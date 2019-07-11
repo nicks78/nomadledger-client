@@ -2,12 +2,11 @@
 
 import React  from 'react'
 import {DEFAULT_URL} from '../../../redux/constant'
-import {Link} from 'react-router-dom'
 import {Typography, withStyles, Grid, Button, ListItem, List, ListItemText, ListItemIcon} from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/CheckOutlined'
 
 
-const listItem = ["Create invoice", "create Quotes", "", "", "", "", "", ""];
+const listItem = ["Create invoice", "Create Quotes", "Tasks", "Item", "Item", "Item", "Item", "Item"];
 
 
 const Offer = (props) => {
@@ -25,7 +24,7 @@ const Offer = (props) => {
               </div>
             </Grid>
           <Grid item xs={12} sm={6} md={6}>
-              <div  style={{marginLeft: isMobile ? 10 : 0}}>
+              <div>
                 <Typography variant="body2" align="left" style={{color: "white"}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                       Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
                       when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
@@ -37,7 +36,7 @@ const Offer = (props) => {
               </div>
               
              <br />
-            <Typography variant="body2" align="left" style={{color: "white", marginLeft: isMobile ? 10 : 0}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</Typography>
+            <Typography variant="body2" align="left" style={{color: "white"}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</Typography>
             <List margin="dense" style={{marginLeft: 30}}>
                 {
                 listItem.map((x, index) => {

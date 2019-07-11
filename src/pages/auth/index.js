@@ -2,11 +2,10 @@
 import React, { Component } from 'react'
 import {DEFAULT_URL} from '../../redux/constant'
 import {initLocale} from '../../redux/locale/actions'
-import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import { createStateUser, createUser } from '../../redux/auth/createActions'
 import { resetUser } from '../../redux/auth/actions'
-import {Typography, withStyles, Paper, Grid, Button} from '@material-ui/core';
+import {Typography, withStyles, Grid, Button} from '@material-ui/core';
 import withWidth from '@material-ui/core/withWidth';
 import Jumbotron from './components/jumbotron'
 import RegisterForm from './components/registerForm'
@@ -17,8 +16,9 @@ import Expanded from './components/expanded'
 import Offer from './components/offer'
 import AppBar from './components/appBar'
 import Partners from './components/partners'
-import ExitToAppIcon from '@material-ui/icons/ExitToAppOutlined'
-import GoogleSignUp from './components/googleSignUp';
+import Contact from './components/contact'
+// import ExitToAppIcon from '@material-ui/icons/ExitToAppOutlined'
+// import GoogleSignUp from './components/googleSignUp';
 
 
 class Auth extends Component {
@@ -109,7 +109,7 @@ class Auth extends Component {
           <Jumbotron locale={locale} isMobile={isMobile}/>
         </section>
 
-        <section className={  isMobile ? classes.marginMobile : classes.margin} style={{marginTop: -20}}>
+        <section className={ classes.margin} style={{marginTop: -20}}>
           <Grid container className={classes.intro} spacing={24}>
             <Grid item xs={12} sm={6} md={6}>
               <div style={{textAlign: 'center'}}>
@@ -117,27 +117,30 @@ class Auth extends Component {
               </div>
             </Grid>
           <Grid item xs={12} sm={6} md={6}>
-              <Typography variant="body2" align="center">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+              <Typography variant="body2" align="left">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
                     when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
                     It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
                     It was popularised in the 1960s with the release of Letraset sheets containing
-                    Lorem Ipsum passages, and more recently with desktop publishing software 
-                    like Aldus PageMaker including versions of Lorem Ipsum.
-            </Typography>
+                    Lorem Ipsum passages, and more recently with desktop publishing software.
+              </Typography><br />
+              <Typography variant="body2" align="left">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                    when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+              </Typography>
 
           </Grid>
 
           </Grid>
           
         </section>
-        <section style={{marginBottom: 50}} className={  isMobile ? classes.marginMobile : classes.margin}>
+        <section style={{marginBottom: 50}} className={ classes.margin}>
           <BlocDesc locale={locale} isMobile={isMobile}/>
         </section>
         
-        <section  className={  isMobile ? classes.marginMobile : classes.margin} style={{backgroundColor: '#edf7f8', paddingTop: 50, paddingBottom: 50}} >
+        <section  className={ classes.margin} style={{backgroundColor: '#edf7f8', paddingTop: 50, paddingBottom: 50}} >
           <div id="formAnchor"></div>
-          <Typography variant="h2" align="center" style={{marginBottom: 24}}>Try it for free for 7 days</Typography>
+          <Typography variant="h2" align="center" style={{marginBottom: 24, color: "#0c3c5e"}}>FREE 7 DAYS TRIAL</Typography>
           <Grid container spacing={24}>
             <Grid item xs={12} md={6} sm={6}>
               <form onSubmit={this.onSubmitForm}>
@@ -155,23 +158,23 @@ class Auth extends Component {
           
         </section>
           
-        <section className={  isMobile ? classes.marginMobile : classes.margin} style={{ width: isMobile ? "90%" : "60%", margin: "0 auto", paddingTop: 50, paddingBottom: 50 }}>
-        <Typography variant="h2" align="center" style={{marginBottom: 24}}>Questions</Typography>
+        <section className={ classes.margin} style={{ width: isMobile ? "90%" : "60%", margin: "0 auto", paddingTop: 50, paddingBottom: 50 }}>
+        <Typography variant="h2" align="center" style={{marginBottom: 24, color: "#0c3c5e"}}>QUESTIONS</Typography>
             <Expanded locale={locale} />
         </section>
 
-        <section className={  isMobile ? classes.marginMobile : classes.margin} style={{ backgroundColor: "#0C3C5E", paddingTop: 50, paddingBottom: 50 }}>
+        <section className={ classes.margin} style={{ backgroundColor: "#0C3C5E", paddingTop: 50, paddingBottom: 50 }}>
         <Typography variant="h2" align="center" style={{marginBottom: 24, color: "white"}}>OUR OFFER</Typography>
         <Offer locale={locale}  isMobile={isMobile} />
         </section>
 
-        <section className={  isMobile ? classes.marginMobile : classes.margin} style={{ paddingTop: 50, paddingBottom: 50 }}>
-          <Typography variant="h2" align="center" style={{marginBottom: 24}}>OUR PARTNERS</Typography>
+        <section className={ classes.margin} style={{ paddingTop: 50, paddingBottom: 50 }}>
+          <Typography variant="h2" align="center" style={{marginBottom: 24, color: "#0c3c5e"}}>OUR PARTNERS</Typography>
           <Partners locale={locale} />
         </section>
 
-        <section className={  isMobile ? classes.marginMobile : classes.margin} style={{ paddingTop: 50, paddingBottom: 50, backgroundColor: "#edf7f8" }}>
-          
+        <section className={ classes.margin} style={{ paddingTop: 50, paddingBottom: 50, backgroundColor: "#edf7f8" }}>
+            <Contact locale={locale} isMobile={isMobile} />
         </section>
 
 
@@ -184,13 +187,13 @@ class Auth extends Component {
 
 const styles = theme => ({
 
-  marginMobile: {
-    paddingRight: 0,
-    paddingLeft: 0
-  },
   margin: {
     paddingRight: 100,
-    paddingLeft: 100
+    paddingLeft: 100,
+    [theme.breakpoints.down("md")]: {
+      paddingRight: 10,
+      paddingLeft: 10
+    }
   },
   appBarWrapper: {
     position: "fixed",

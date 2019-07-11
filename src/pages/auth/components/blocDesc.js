@@ -8,7 +8,11 @@ const BlocDesc = (props) => {
     const { locale, classes, isMobile } = props
     return (
         <div className={ isMobile ? classes.mobile : classes.blocDesc}>
-            <Typography variant="h2" align="center" className={ classes.title } dangerouslySetInnerHTML={{__html: locale.home_page.blocDesc.title}}></Typography>
+        <Typography 
+            variant="h2" align="center" 
+            className={ classes.title } 
+            style={{  marginBottom: isMobile ? 10 : 100, marginTop: isMobile ? 50 : 0 }}
+            dangerouslySetInnerHTML={{__html: locale.home_page.blocDesc.title}}/>
         <Grid container spacing={24}>
 
                 <Grid item xs={12} md={4} sm={4}>
@@ -19,7 +23,7 @@ const BlocDesc = (props) => {
                     </Paper>
                 </Grid>
                 <Grid item xs={12} md={4} sm={4}>
-                    <Paper className={classes.paper} style={{marginTop: -24}}>
+                    <Paper className={classes.paper} style={{marginTop: isMobile ? 0 : -48}}>
                         <img src={`${DEFAULT_URL}img/svg/Nomad-Ledger_invoice-quote.svg`} alt="" width="200"/>
                         <Typography variant="h3" className={classes.blocTitle} align="center">{locale.home_page.blocDesc.bloc_2_title}</Typography>
                         <Typography variant="body2" className={classes.blocPara} align="justify">{locale.home_page.blocDesc.bloc_2_para}</Typography>
@@ -48,7 +52,7 @@ const styles = theme => ({
         marginTop: 0,
     },
     title: {
-        marginBottom: 100,
+ 
         color: theme.palette.primary.main,
     },
     blocTitle: {

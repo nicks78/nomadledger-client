@@ -90,7 +90,8 @@ const styles = theme => ({
       width: '100%',
     },
     panel: {
-        boxShadow: "none"
+        boxShadow: "none",
+        marginTop: 10
     },
     heading: {
         fontSize: theme.typography.pxToRem(15),
