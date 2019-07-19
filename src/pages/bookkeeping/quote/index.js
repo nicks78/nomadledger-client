@@ -196,6 +196,7 @@ const styles = theme => ({
     button: {
         color: 'white !important',
         marginRight: 10,
+        backgroundColor: theme.palette.yellow.dark,
         marginBottom: theme.margin.unit,
         '& :hover': {
             color: 'white !important',

@@ -2,7 +2,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {DEFAULT_URL} from '../../../redux/constant'
-import {withStyles, Typography, IconButton} from '@material-ui/core'
+import {withStyles, Typography, IconButton, Button} from '@material-ui/core'
 
 const  AppBar = (props) => {
 
@@ -17,9 +17,9 @@ const  AppBar = (props) => {
             {!isMobile &&  <Typography variant="h1" style={{ fontSize: 25 }} dangerouslySetInnerHTML={{__html: locale.company_name}}></Typography> }
             </div>
             <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                <a className="link" href="#formAnchor">Try it</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <Link className="link" to="/login"><strong>Sign In</strong></Link>&nbsp;
-                <IconButton onClick={ () => { initLocale(lang === 'fr' ? 'en' : 'fr') }}>&nbsp;
+                <Button color="primary" variant="contained" className={classes.btn} component="a" href="#formAnchor">{locale.home_page.try_it}</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Link className="link" to="/login"><strong>{locale.home_page.sign_in}</strong></Link>&nbsp;
+                <IconButton onClick={ () => { initLocale(lang === 'fr' ? 'en' : 'fr') }}>
                 {
                     lang === "fr" ?
                     <img src={`${DEFAULT_URL}img/element/flag-french.png`} alt="flag-french" width="20"/>
@@ -53,6 +53,11 @@ const styles = theme => ({
       padding: 12,
       flexGrow: 1,
       overflow: "hidden"
+    },
+    btn: {
+      backgroundColor: theme.palette.yellow.dark,
+      color: "white",
+      width: 100
     }
   })
   

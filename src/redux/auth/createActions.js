@@ -11,11 +11,11 @@ export const createUser = ( ) => {
 
     return (dispatch, getState) => {
 
+        // Set loading time
+        dispatch(requestUser());
+
         // Get current state
         var state = getState().auth.state_user
-
-        // // Set loading time
-        dispatch(requestUser());
 
         axios.post(`${API_ENDPOINT}public/create-new-account?locale=${localStorage.getItem("locale") || "fr"}`,
             {

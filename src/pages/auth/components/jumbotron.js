@@ -8,7 +8,7 @@ import {Typography, withStyles, Button} from '@material-ui/core';
 const Jumbotron = (props) => {
 
     const {locale, classes, isMobile} = props
-
+    
     return (
       <div className={classes.root}>
           <div id="jumbotron" className={classes.jumbotron}>
@@ -17,9 +17,9 @@ const Jumbotron = (props) => {
               <Typography variant="h1" style={{ fontSize: 40 }} dangerouslySetInnerHTML={{__html: locale.company_name}}></Typography>
               <Typography variant="h3" style={{ fontSize: 20, fontWeight: 400, lineHeight: 1.6 }} dangerouslySetInnerHTML={{__html: locale.home_page.title_01}}></Typography>
               <div className={classes.btnWrapper}>
-                <Button component="a" href="#formAnchor" variant="contained" className={classes.btn} type="submit">Try it for free</Button>
-                <p style={{ marginRight: 10 }}>Ou</p>
-                <Link className="link" style={{marginTop: 4}} to="/login">Sign In</Link>
+                <Button color="primary" component="a" href="#formAnchor" variant="contained" className={classes.btn} type="submit">{locale.home_page.try_it_free}</Button>
+                <p style={{ marginRight: 10 }}>{locale.wording.or.toLowerCase()}</p>
+                <Link className="link" style={{marginTop: 4}} to="/login"><strong>{locale.home_page.sign_in}</strong></Link>
               </div>
               
             </div>
@@ -39,12 +39,12 @@ const Jumbotron = (props) => {
     )
 }
 
-
 const styles = theme => ({
     root: {
       backgroundImage: `url(${DEFAULT_URL}img/element/Vague1.png)`,
       backgroundRepeat: ' no-repeat',
-      backgroundSize: "cover"
+      backgroundSize: "100% 100%",
+      order: 1
     },
     jumbotron: {
       display: "flex",

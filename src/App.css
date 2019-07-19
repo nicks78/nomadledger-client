@@ -78,7 +78,8 @@ a:hover {
 
 thead{
   /* background-color: #F5F5F5 !important; */
-  background: linear-gradient(160deg, #fab746, #ffd05a)
+  background-color: #edf7f8;
+  /* background: linear-gradient(160deg, #fab746, #ffd05a) */
 }
 
 tr th {
@@ -101,6 +102,10 @@ tr td {
 
 .disabled-link {
   pointer-events: none;
+}
+
+.hint {
+  font-size: 10px;
 }
 
 /****************************************************

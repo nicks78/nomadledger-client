@@ -5,7 +5,7 @@ import {withStyles } from '@material-ui/core'
 
 const  Partners = (props) => {
 
-    const { classes, locale, isMobile } = props
+    const { classes } = props
 
     return (
         <div className={classes.PartnersWrapper}>

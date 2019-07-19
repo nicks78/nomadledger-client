@@ -17,7 +17,7 @@ const Footer = (props) => {
 const styles = theme => ({
   footer: {
       padding: 48,
-      backgroundColor: theme.palette.darkGrey
+      backgroundColor: theme.palette.lightGrey
   }
 })
 

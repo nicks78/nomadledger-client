@@ -19,13 +19,14 @@ const Tooltips = (props) => {
 const styles = theme => ({
     lightTooltip: {
       color: 'white',
-      fontWeight: 400,
+      fontWeight: 500,
       maxWidth: 500,
       textAlign: 'center',
       padding: '5px 5px 5px 5px',
       fontSize: 12,
       width: '100%',
       backgroundColor: 'rgba(0,0,0,1)',
+      fontFamily: "Quicksand"
   },
   iconHelp: {
     fontSize: 18

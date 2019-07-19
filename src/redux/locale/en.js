@@ -77,6 +77,7 @@ const en = {
         my_vat: "My VAT",
         items: "Select a service or product",
         load_more_product: "Load more products",
+        previous_task: "Previous tasks",
         add_contact: "Add new contact",
         add_product: "Add new product",
         add_service: "Add new service",
@@ -323,7 +324,8 @@ const en = {
         bank_account_name: "Beneficiary name",
         iban: "IBAN",
         bic: "BIC",
-        bank_detail: "Display the bank on invoice"
+        bank_detail: "Display the bank on invoice",
+        invoice_ref: "Invoice reference"
     },
     helperText: {
         select_phone_code: "Phone code",
@@ -440,34 +442,33 @@ const en = {
 
         
         status_devis: `
-            <p>Its important to understand all different quotation status</p>
-            <p>This <span class="bullet"></span> indicate an response from your client</p>
-            <ul>
+            <p class="hint">Its important to understand all differents quote status</p>
+            <p class="hint">This <span class="bullet"></span> indicate a response from your client</p>
+            <ul class="hint">
                 <li><strong>Draft</strong> : Can be edited</li>
-                <li><strong>Sent</strong> : Once an invoices is sent, it cannot be edited.</li>
-                <li><strong>Paid</strong> : Once an invoices is paid, it can be cancled or resend.</li>
-                <li><strong>Canceled</strong> : Once an invoices is paid cancled, it cannot be modify.</li>
+                <li><strong>Sent</strong> : Once a quote is sent, it cannot be edited.</li>
+                <li><strong>Paid</strong> : Once a quote is paid, it can be canceled or resend.</li>
+                <li><strong>Canceled</strong> : Once a quote is canceled, it cannot be modify.</li>
             </ul>
+            <p class="hint">When you create an invoice based on quote, this quote will not be editable.</p>
         `,
         status_invoice: `
-            <p>Its important to understand all different invoice status</p>
-            <ul>
+            <p class="hint">Its important to understand all differents invoice status</p>
+            <ul class="hint">
                 <li><strong>Draft</strong> : Can be edited</li>
-                <li><strong>Sent</strong> : Once an invoices is sent, it cannot be edited.</li>
-                <li><strong>Paid</strong> : Once an invoices is paid, it can be cancled or resend.</li>
-                <li><strong>Canceled</strong> : Once an invoices is paid cancled, it cannot be modify.</li>
+                <li><strong>Sent</strong> : Once an invoice is sent, it cannot be edited.</li>
+                <li><strong>Paid</strong> : Once an invoice is paid, it can be canceled or resend.</li>
+                <li><strong>Canceled</strong> : Once an invoice is canceled, it cannot be modify.</li>
             </ul>
-            <p>Vous pouvez créer un avoir base sur une facture, la creation d'un avoir mettra automatiquement la facture au statut "annulé".</p>
         `,
         status_refund: `
-            <p>Its important to understand all different refund status.</p>
-            <ul>
+            <p class="hint">Its important to understand all differents refund status.</p>
+            <ul class="hint">
                 <li><strong>Draft</strong> : Can be edited</li>
-                <li><strong>Sent</strong> : Once an invoices is sent, it cannot be edited.</li>
-                <li><strong>Paid</strong> : Once an invoices is paid, it can be cancled or resend.</li>
-                <li><strong>Canceled</strong> : Once an invoices is paid cancled, it cannot be modify.</li>
+                <li><strong>Sent</strong> : Once a refund is sent, it cannot be edited.</li>
+                <li><strong>Paid</strong> : Once a refund is paid, it can be canceled or resend.</li>
+                <li><strong>Canceled</strong> : Once a refunds is canceled, it cannot be modify.</li>
             </ul>
-            <p>Vous pouvez créer un avoir base sur une facture, la creation d'un avoir mettra automatiquement la facture au statut "annulé".</p>
         `
 
     },
@@ -477,11 +478,19 @@ const en = {
     week_short: ["Sun", "Mon","Tue","Wed","Thu","Fri","Sat"],
     placeholder: 'DD/MM/YYYY',
     home_page: {
-        title_01: "The invoicing software <br />for digital nomad",
-        paragraphe_01: `NomadLedger is an easy to use software to manage your invoicing document and keep track of your tasks in just a few click.`,
+        title_01: "The invoicing software for digital nomad",
+        paragraphe_01: ` is an easy to use software to manage your invoicing document and keep track of your tasks in just a few click.`,
+        paragraphe_02: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+        It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop pu`,
         agreed_terms: `* By signing up, you agree to the <a target="_blank" href="https://api.nomadledger.com/termsandconditions_en.pdf">Terms and Conditions</a> and <a href="https://api.nomadledger.com/privacypolicy_en.pdf">Privacy Policy</a>.`,
         footer_paragraphe: `All rights reserved.&nbsp;<a target="_blank" href="https://api.nomadledger.com/termsandconditions_en.pdf" rel="noopener noreferrer" target="_blank">Terms and Conditions</a>,&nbsp;
         features, support, pricing, and service options subject to change without notice.`,
+        sing_in: "Sign In",
+        try_it_free: "Try it for free",
+        try_it: "Try it",
         blocDesc: {
             title: `Qu'est ce que <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> fait pour vous ?`,
             bloc_1_title: `Multi-currency support`, 
@@ -502,6 +511,38 @@ const en = {
             It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
             It was popularised in the 1960s with the release of Letraset sheets containing
             Lorem Ipsum passages, and more recently with desktop pu`, 
+        },
+        form: {
+            title: "Free 7 days trial",
+            btn: "Sign Up"
+        },
+        questions: {
+            title: "Questions",
+            q_1: "Why using an online invoice software ?",
+            r_1: `An invoicing online software will bring you flexibility and efficiency. You can keep track of your actions and simplify your annual audit. 
+            In one click, export your accounting documents and stay focused on your main activity.`,
+            q_2: "To whom this software is for ?",
+            r_2: `This software has been made for solo-entrepreneurs, freelancer or small businesses that need something easy to use.`,
+            q_3: "What advantage ?",
+            r_3: `Online invoicing software will secure your data, gain in productivity, track your 
+            finance and have access to your information from any type of device.`
+        },
+        offer: {
+            title: "Our offer",
+            price: `<span>One price Only<br /><strong>3,95 €</strong><br />per month</span>`,
+            paragraphe: `Unlimited everything, enjoy a fully-fledged solution to manage your company's business documents and more, 
+            whether you are operating on your own or within startup. Our current account 
+            offers everything you need from leads follow up to invoice management. `,
+            title_list: "No hidden fees, one price only for full access.",
+            listItem: ["Process invoices","Process quotes","Process repay","Manage contact","Manage services/products", "Task manager", "VAT auto calculation", "Import Google contact"],
+            btn: "Create an account"
+        },
+        partners: {
+            title: "Partners"
+        },
+        contact: {
+            contact_us: "CONTACT US",
+            follow_us: "FOLLOW US"
         }
     }
 }

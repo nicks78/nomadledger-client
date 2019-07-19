@@ -6,40 +6,32 @@ import {Typography, withStyles, Grid, Button, ListItem, List, ListItemText, List
 import CheckIcon from '@material-ui/icons/CheckOutlined'
 
 
-const listItem = ["Create invoice", "Create Quotes", "Tasks", "Item", "Item", "Item", "Item", "Item"];
-
 
 const Offer = (props) => {
 
-    const {locale, classes, isMobile} = props
+    const {locale, classes, isMobile } = props
 
     return (
       <div className={classes.root}>
          <Grid container className={classes.intro} spacing={24}>
             <Grid item xs={12} sm={6} md={6}>
               <div className={classes.left}>
-                  <Typography variant="h1" align="center" className={classes.priceText}>One price Only<br /><strong>3,95 €</strong><br />per Month</Typography>
+                  <Typography variant="h1" align="center" className={classes.priceText} dangerouslySetInnerHTML={{__html: locale.home_page.offer.price}} />
                   <br />
-                  <Button component="a" href="#formAnchor" className={classes.btn} variant="contained" color="primary" align="center">Create an account</Button>
+                  <Button style={{ width: isMobile ? "auto" : 200, height: isMobile ? "auto" : 50 }} component="a" href="#formAnchor" className={classes.btn} variant="contained" color="primary" align="center">{locale.home_page.offer.btn}</Button>
               </div>
             </Grid>
           <Grid item xs={12} sm={6} md={6}>
               <div>
-                <Typography variant="body2" align="left" style={{color: "white"}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                      when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                      It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-                      It was popularised in the 1960s with the release of Letraset sheets containing
-                      Lorem Ipsum passages, and more recently with desktop publishing software 
-                      like Aldus PageMaker including versions of Lorem Ipsum.
+                <Typography variant="body2" align="left" style={{color: "white"}}>{locale.home_page.offer.paragraphe}
               </Typography>
               </div>
               
              <br />
-            <Typography variant="body2" align="left" style={{color: "white"}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</Typography>
+            <Typography variant="body2" align="left" style={{color: "white"}}>{locale.home_page.offer.title_list}</Typography>
             <List margin="dense" style={{marginLeft: 30}}>
                 {
-                listItem.map((x, index) => {
+                locale.home_page.offer.listItem.map((x, index) => {
                   return <ListItem className={classes.list} key={index}>
                       <ListItemIcon style={{marginRight: 0}}>
                         <CheckIcon className={classes.icon} />

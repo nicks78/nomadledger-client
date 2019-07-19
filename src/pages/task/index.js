@@ -13,11 +13,12 @@ class Task extends Component {
 
   state = {
     reducer: "TASK",
+    day: new Date().getTime(),
     id: null
   }
 
   componentDidMount(){
-    this.props.getAllTask(`list?day=0`, "taskList");
+    this.props.getAllTask(`list?day=${this.state.day}`, "taskList");
   }
 
   getDrop = ( ev, due ) => {
@@ -33,6 +34,13 @@ class Task extends Component {
     // Register to database
     this.props.setTask(task)
     this.props.updateTask();
+  }
+
+  getPreviousTask = () => {
+    // Add one day to timestamp
+    var dateInMilisecond = 86400000
+    this.setState({ day: this.state.day - dateInMilisecond })
+    this.props.getAllTask(`list?day=${this.state.day - dateInMilisecond}`, "taskList");
   }
 
   drag = ( ev, task ) => {
@@ -77,8 +85,17 @@ class Task extends Component {
           : <Button disabled variant="contained">{ locale.wording.progress }</Button>
           }
 
-      <div className={classes.step}>
+      <div style={{ textAlign: "center" }}>
+        <Button 
+          size="small" 
+          variant="outlined" 
+          color="secondary"
+          onClick={ this.getPreviousTask }
+          >{ locale.subheading.previous_task }</Button>
+      </div>
 
+      <div className={classes.step}>
+      
       {
           listTask.map((label, index) => {
               return  <div id={label.date.date} key={index} onDrop={ (e) => {this.getDrop(e, label.date.due_date)  } } onDragOver={this.dragOver}>

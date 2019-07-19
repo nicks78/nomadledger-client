@@ -22,7 +22,7 @@ class Expanded extends React.Component {
     }
 
     render(){
-    const {classes} = this.props
+    const {classes, locale} = this.props
     const {expanded} = this.state
     
 
@@ -36,12 +36,11 @@ class Expanded extends React.Component {
             aria-controls="panel1bh-content"
             id="panel1bh-header"
             >
-          <Typography className={classes.heading}>General settings</Typography>
+          <Typography className={classes.heading}>{locale.home_page.questions.q_1}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography className={classes.para} variant="body2" >
-            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-            maximus est, id dignissim quam.
+            {locale.home_page.questions.r_1}
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -53,12 +52,11 @@ class Expanded extends React.Component {
           aria-controls="panel2bh-content"
           id="panel2bh-header"
         >
-          <Typography className={classes.heading}>Users</Typography>
+          <Typography className={classes.heading}>{locale.home_page.questions.q_2}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography className={classes.para} variant="body2" >
-            Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
-            diam eros in elit. Pellentesque convallis laoreet laoreet.
+          {locale.home_page.questions.r_2}
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -70,12 +68,11 @@ class Expanded extends React.Component {
           aria-controls="panel3bh-content"
           id="panel3bh-header"
         >
-          <Typography className={classes.heading}>Advanced settings</Typography>
+          <Typography className={classes.heading}>{locale.home_page.questions.q_3}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography className={classes.para} variant="body2" >
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit amet egestas eros,
-            vitae egestas augue. Duis vel est augue.
+          {locale.home_page.questions.r_3}.
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -96,7 +93,7 @@ const styles = theme => ({
     heading: {
         fontSize: theme.typography.pxToRem(15),
         color: 'white',
-        flexBasis: '33.33%',
+        flexBasis: '90%',
         flexShrink: 0,
     },
     icon: {

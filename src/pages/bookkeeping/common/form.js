@@ -188,6 +188,22 @@ const Form = (props) => {
                                     : null
                                 }
 
+                                {
+                                    reducer === "REFUND" ?
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                label={ locale.wording.invoice_ref }
+                                                id="invoice_ref"
+                                                margin="dense"
+                                                onChange={ (e) => { props.createState( reducer, "invoice_ref", e.target.value ) } }
+                                                style={{width: '100%', fontWeight: 300}}
+                                                value={ data.invoice_ref ||  ""}
+                                                variant="outlined"
+                                            />
+                                        </Grid>
+                                    : null
+                                }
+
                             </Grid>
                         </Grid>
                     </Grid>

@@ -189,6 +189,7 @@ class Invoice extends Component {
 const styles = theme => ({
     button: {
         color: 'white !important',
+        backgroundColor: theme.palette.yellow.dark,
         marginRight: 10,
         marginBottom: theme.margin.unit,
         '& :hover': {

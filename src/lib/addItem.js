@@ -36,6 +36,7 @@ const styles = theme => ({
     },
     button: {
         color: 'white',
+        backgroundColor: '#FAB745',
         marginRight: 10
     },
     container: {
@@ -50,7 +51,8 @@ const styles = theme => ({
         float: 'right',
         marginTop: '24px',
         marginBottom: '24px',
-        color: 'white'
+        color: 'white',
+        backgroundColor: theme.palette.yellow.dark,
     },
     loading: {
         margin: 10

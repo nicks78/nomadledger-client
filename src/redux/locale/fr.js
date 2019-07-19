@@ -78,6 +78,7 @@ const fr =  {
         my_vat: "Mes TVA",
         items: "Sélectionner un service ou produit",
         load_more_product: "Voir plus de produits",
+        previous_task: "Taches précédente",
         add_contact: "Enregistrer un nouveau contact",
         add_product: "Enregistrer un nouveau produit",
         add_service: "Enregistrer un service",
@@ -326,7 +327,8 @@ const fr =  {
         bank_account_name: "Compte bénéficiare",
         iban: "IBAN",
         bic: "BIC",
-        bank_detail: "Afficher mes coordonnées bancaires"
+        bank_detail: "Afficher mes coordonnées bancaires",
+        invoice_ref: "Référence facture"
 
     },
     helperText: {
@@ -443,19 +445,19 @@ const fr =  {
         confirm_delete: "Voulez-vous vraiment supprimer cette élément ?",
 
         status_devis: `
-            <p>Il est important de bien comprendre chacun des statuts de vos devis.</p>
-            <p>Ceci <span class="bullet"></span> indique q'une reponse a été reçu. </p>
-            <ul>
+            <p class="hint">Il est important de bien comprendre chacun des statuts de vos devis.</p>
+            <p class="hint">Ceci <span class="bullet"></span> indique q'une reponse a été reçu. </p>
+            <ul class="hint">
                 <li><strong>Brouillon</strong> : Peuvent être edité.</li>
                 <li><strong>Envoyé</strong> : Peuvent être edité.</li>
                 <li><strong>Approuvé</strong> : Un devis approuvé ne peut plus être edité. Il peut être annulé ou renvoyé.</li>
                 <li><strong>Annulé</strong> : Un devis annulé ne peut plus être modifié.</li>
             </ul>
-            <p>Dès que vous créer un facture attacher au devis, celui-ci prendra le statut "approuvé" et ne sera donc plus modifiable.</p>
+            <p class="hint">Dès que vous créez une facture attacher au devis, celui-ci prendra le statut "approuvé" et ne sera donc plus modifiable.</p>
         `,
         status_invoice: `
-            <p>Il est important de bien comprendre chacun des statuts de vos factures.</p>
-            <ul>
+            <p class="hint">Il est important de bien comprendre chacun des statuts de vos factures.</p>
+            <ul class="hint">
                 <li><strong>Brouillon</strong> : Peuvent être edité.</li>
                 <li><strong>Envoyé</strong> : Une facture envoyé ne peut plus être edité.</li>
                 <li><strong>Payé</strong> : Une facture payé ne peut plus être edité. Elle peut être annulé ou renvoyé.</li>
@@ -463,8 +465,8 @@ const fr =  {
             </ul>
         `,
         status_refund: `
-            <p>Il est important de bien comprendre chacun des statuts de vos factures.</p>
-            <ul>
+            <p class="hint">Il est important de bien comprendre chacun des statuts de vos factures.</p>
+            <ul class="hint">
                 <li><strong>Brouillon</strong> : Peuvent être edité.</li>
                 <li><strong>Envoyé</strong> : Un avoir envoyé ne peut plus être edité.</li>
                 <li><strong>Remboursé</strong> : Un avoir remboursé ne peut plus être edité. Il peut être annulé ou renvoyé.</li>
@@ -479,32 +481,75 @@ const fr =  {
     placeholder: 'JJ/MM/AAAA',
     home_page: {
         title_01: "Logiciel de facturation en ligne pour digital nomade",
-        paragraphe_01: `NomadLedger est un logiciel de facturation simple et rapide a prendre en main, il vous aidera a suivre votre business en quelque clique.`,
+        paragraphe_01: ` est un logiciel de facturation simple et rapide a prendre en main, il vous aidera a suivre votre business en quelque clique.`,
+        paragraphe_02: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+        It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop pu`,
         agreed_terms: ` * En m'inscrivant, j'accepte les <a target="_blank" href="https://api.nomadledger.com/termsandconditions_fr.pdf">Conditions générales</a>  et la  <a href="https://api.nomadledger.com/privacypolicy_fr.pdf">Politique de protection de la vie privée</a>.`,
         footer_paragraphe: `Tous droits réservés.&nbsp;<a target="_blank" href="https://api.nomadledger.com/termsandconditions_fr.pdf" rel="noopener noreferrer" target="_blank">Conditions Générales</a>,&nbsp;
         les fonctionnalités, l'assistance, la tarification et les options sont susceptibles d'être modifiées sans préavis.`,
+        sign_in: "Se Connecter",
+        try_it_free: "Essai gratuit",
+        try_it: "L'essayer",
         blocDesc: {
             title: `    QU'EST CE QUE <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> FAIT POUR VOUS ?`,
-            bloc_1_title: `Multi-currency support`, 
+            bloc_1_title: `Support multiple devise`, 
             bloc_1_para: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
             when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
             It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
             It was popularised in the 1960s with the release of Letraset sheets containing
             Lorem Ipsum passages, and more recently with desktop pu`, 
-            bloc_2_title: `Process invoices & quotes`,  
+            bloc_2_title: `Editer factures & devis`,  
             bloc_2_para: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
             when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
             It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
             It was popularised in the 1960s with the release of Letraset sheets containing
             Lorem Ipsum passages, and more recently with desktop pu`, 
-            bloc_3_title: `Manage your tasks`, 
+            bloc_3_title: `Gérer vos tâches`, 
             bloc_3_para: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
             when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
             It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
             It was popularised in the 1960s with the release of Letraset sheets containing
             Lorem Ipsum passages, and more recently with desktop pu`, 
+        },
+        form: {
+            title: "7 jours d'essai gratuit",
+            btn: "S'enregistrer"
+        },
+        questions: {
+            title: "Questions",
+            q_1: "Pourquoi utiliser un logiciel de facturation en ligne ?",
+            r_1: `Un logiciel de facturation en ligne vous apporte plus de souplesse et d'efficacité. 
+            Il vous permet de garder une trace de vos actions et facilite vos déclarations fiscale annuelle. 
+            Exporter en un clic vos documents comptable et rester focaliser sur votre activité. `,
+            q_2: "Pour qui est créé ce logiciel ?",
+            r_2: `Ce logiciel est destine au auto-entrepreneurs, freelance  micro-entreprise qui on besoin d’un logiciel simple d’utilisation.`,
+            q_3: "Quel avantage ?",
+            r_3: `Les logiciels de facturation en ligne vous permet de sécuriser vos données, gagner en productivité, suivre votre 
+            trésorerie et avoir un accès à vos informations sur n’importe quel ordinateur, tablette ou smartphone.`
+        },
+        offer: {
+            title: "Notre offre",
+            price: `<span>Un seul prix<br /><strong>3,95 €</strong><br />par mois</span>`,
+            paragraphe: `Sans limitation de données, profiter d’une solution à part entière pour gérer vos documents commerciaux et plus, 
+            que vous opérer en solitaire ou dans une startup. Notre compte courant vous offre tout ce dont vous avez besoin, depuis suivi des prospects jusqu’à la facturation.`,
+            title_list: "Pas de frais caché, un seul prix pour un accès complet.",
+            listItem: [ "Edition de factures", "Editions de devis", "Editions d’avoirs", "Gestionnaire de contact", "Gestionnaire de services/produits", "Task manager", "Calcule automatique des tva","Importer contact Google"],
+            btn: "Créer un compte"
+        },
+        partners: {
+            title: "Partenaires"
+        },
+        contact: {
+            contact_us: "CONTACTEZ NOUS",
+            follow_us: "SUIVEZ NOUS"
         }
     }
 };
 
 export {fr}
+
+
+

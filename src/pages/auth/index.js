@@ -4,6 +4,7 @@ import {DEFAULT_URL} from '../../redux/constant'
 import {initLocale} from '../../redux/locale/actions'
 import {connect} from 'react-redux'
 import { createStateUser, createUser } from '../../redux/auth/createActions'
+import * as actions from '../../redux/auth/createActions'
 import { resetUser } from '../../redux/auth/actions'
 import {Typography, withStyles, Grid, Button} from '@material-ui/core';
 import withWidth from '@material-ui/core/withWidth';
@@ -109,7 +110,7 @@ class Auth extends Component {
           <Jumbotron locale={locale} isMobile={isMobile}/>
         </section>
 
-        <section className={ classes.margin} style={{marginTop: -20}}>
+        <section className={ classes.margin} style={{ marginTop: isMobile ? 20 : -20 }}>
           <Grid container className={classes.intro} spacing={24}>
             <Grid item xs={12} sm={6} md={6}>
               <div style={{textAlign: 'center'}}>
@@ -117,67 +118,53 @@ class Auth extends Component {
               </div>
             </Grid>
           <Grid item xs={12} sm={6} md={6}>
-              <Typography variant="body2" align="left">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                    when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                    It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-                    It was popularised in the 1960s with the release of Letraset sheets containing
-                    Lorem Ipsum passages, and more recently with desktop publishing software.
-              </Typography><br />
-              <Typography variant="body2" align="left">Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                    when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-              </Typography>
-
+              <Typography  variant="body2" align="left" dangerouslySetInnerHTML={{__html: locale.company_name + locale.home_page.paragraphe_01}}/><br />
+              <Typography variant="body2" align="left">{locale.home_page.paragraphe_02}</Typography>
           </Grid>
-
           </Grid>
-          
         </section>
+
+
         <section style={{marginBottom: 50}} className={ classes.margin}>
           <BlocDesc locale={locale} isMobile={isMobile}/>
         </section>
         
         <section  className={ classes.margin} style={{backgroundColor: '#edf7f8', paddingTop: 50, paddingBottom: 50}} >
           <div id="formAnchor"></div>
-          <Typography variant="h2" align="center" style={{marginBottom: 24, color: "#0c3c5e"}}>FREE 7 DAYS TRIAL</Typography>
+          <Typography variant="h2" align="center" style={{marginBottom: 24, color: "#0c3c5e"}}>{locale.home_page.form.title.toUpperCase()}</Typography>
           <Grid container spacing={24}>
             <Grid item xs={12} md={6} sm={6}>
               <form onSubmit={this.onSubmitForm}>
-              <RegisterForm state={this.state} onAgreedToTerms={ () => this.setState({agreedTerms: !this.state.agreedTerms}) } updateState={this.handleChange} locale={locale} isMobile={isMobile}/>
-                <div className={classes.buttonLogin}><Button disabled={!agreedTerms} variant="contained" className={classes.btn} type="submit">Register</Button></div>
+              <RegisterForm state={newUser} onAgreedToTerms={ () => this.setState({agreedTerms: !this.state.agreedTerms}) } updateState={this.handleChange} locale={locale} isMobile={isMobile}/>
+                <div className={classes.buttonLogin}><Button disabled={!agreedTerms || isFetching} variant="contained" className={classes.btn} type="submit">{ isFetching ? locale.wording.loading : locale.home_page.form.btn}</Button></div>
               </form>
             </Grid>
             <Grid item xs={12} md={6} sm={6}>
               <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                 <img src={`${DEFAULT_URL}img/element/Screen-HP-mockup.png`} height="300" alt="intro"/>
               </div>
-              
             </Grid>
           </Grid>
-          
         </section>
           
         <section className={ classes.margin} style={{ width: isMobile ? "90%" : "60%", margin: "0 auto", paddingTop: 50, paddingBottom: 50 }}>
-        <Typography variant="h2" align="center" style={{marginBottom: 24, color: "#0c3c5e"}}>QUESTIONS</Typography>
+        <Typography variant="h2" align="center" style={{marginBottom: 24, color: "#0c3c5e"}}>{locale.home_page.questions.title.toUpperCase()}</Typography>
             <Expanded locale={locale} />
         </section>
 
         <section className={ classes.margin} style={{ backgroundColor: "#0C3C5E", paddingTop: 50, paddingBottom: 50 }}>
-        <Typography variant="h2" align="center" style={{marginBottom: 24, color: "white"}}>OUR OFFER</Typography>
-        <Offer locale={locale}  isMobile={isMobile} />
+          <Typography variant="h2" align="center" style={{marginBottom: 24, color: "white"}}>{locale.home_page.offer.title.toUpperCase()}</Typography>
+          <Offer locale={locale}  isMobile={isMobile} />
         </section>
 
         <section className={ classes.margin} style={{ paddingTop: 50, paddingBottom: 50 }}>
-          <Typography variant="h2" align="center" style={{marginBottom: 24, color: "#0c3c5e"}}>OUR PARTNERS</Typography>
+          <Typography variant="h2" align="center" style={{marginBottom: 24, color: "#0c3c5e"}}>{locale.home_page.partners.title.toUpperCase()}</Typography>
           <Partners locale={locale} />
         </section>
 
         <section className={ classes.margin} style={{ paddingTop: 50, paddingBottom: 50, backgroundColor: "#edf7f8" }}>
             <Contact locale={locale} isMobile={isMobile} />
         </section>
-
-
 
         <Footer locale={locale} />
       </div>
@@ -242,4 +229,4 @@ const auth = withWidth()(Auth)
 const StyledAuth = withStyles(styles)(auth)
 
 
-export default connect(mapStateToProps, {createStateUser, createUser, resetUser, initLocale, setNotification})(StyledAuth);
+export default connect(mapStateToProps, {createStateUser, createUser, resetUser, initLocale, setNotification, actions })(StyledAuth);

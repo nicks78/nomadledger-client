@@ -7,7 +7,7 @@ import './App.css'
 import {StripeProvider} from 'react-stripe-elements';
 // import Messages from "./chat/messages";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
-
+import CacheBuster from './CacheBuster';
 
 const theme = createMuiTheme({
   palette: {
@@ -88,14 +88,14 @@ const theme = createMuiTheme({
       fontSize: '0.9rem'
     },
     body1: {
-      fontSize: '0.8rem',
+      fontSize: '14px', //0.8rem',
       fontWeight: 700,
       color: '#303030'
     },
     body2: {
       fontWeight: 500,
       color: '#303030',
-      fontSize: '0.8rem'
+      fontSize: '14px' // '0.8rem'
     },
     caption: {
       fontWeight: 500,
@@ -171,39 +171,35 @@ class App extends Component {
   render() {
 
     return (
-      <React.Fragment>
+      <CacheBuster>
+      {({ loading, isLatestVersion, refreshCacheAndReload }) => {
+        if (loading) return null;
+        if (!loading && !isLatestVersion) {
+          refreshCacheAndReload();
+        }
 
-        <StripeProvider stripe={this.state.stripe}>
-          <MuiThemeProvider theme={theme}>
-              <Routes />
-                  <div>
-                      <MessengerCustomerChat
-                        pageId="2385240291708965"
-                        appId="733037490462839"
-                        htmlRef={window.location.pathname}
-                      />
-                    </div>
-
-          </MuiThemeProvider>
-        </StripeProvider>
-      </React.Fragment>
-
-
+        return (
+          <React.Fragment>
+          <StripeProvider stripe={this.state.stripe}>
+            <MuiThemeProvider theme={theme}>
+                <Routes />
+                    <div>
+                        <MessengerCustomerChat
+                          pageId="2385240291708965"
+                          appId="733037490462839"
+                          htmlRef={window.location.pathname}
+                        />
+                      </div>
+  
+            </MuiThemeProvider>
+          </StripeProvider>
+        </React.Fragment>
+        );
+      }}
+    </CacheBuster>
     )
   }
 }
 
 
 export default App;
-//
-// <div>
-//     <Typography variant="h1">Test TEST</Typography>
-//     <Typography variant="h2">Test TEST</Typography>
-//     <Typography variant="h3">Test TEST</Typography>
-//     <Typography variant="subtitle1">Test TEST</Typography>
-//     <Typography variant="subtitle2">Test TEST</Typography>
-//     <Typography variant="body1">Test TEST</Typography>
-//     <Typography variant="body2">Test TEST</Typography>
-//     <Typography variant="caption">Test TEST</Typography>
-//     <Typography variant="overline">Test TEST</Typography>
-// </div>

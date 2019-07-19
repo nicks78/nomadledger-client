@@ -16,7 +16,8 @@ const styles = theme => ({
       chip: {
         marginBottom: 5,
         marginRight: 5,
-        borderColor: "#ffb555"
+        borderColor: "#ffb555",
+        backgroundColor: theme.palette.thinBlue,
       },
       avatar: {
         backgroundColor: theme.palette.primary.main,
@@ -37,7 +38,7 @@ const styles = theme => ({
 
 const Tag = (props) => {
 
-  const {classes, actionTag, label, variant, obj, type, edit, canDelete } = props
+  const {classes, actionTag, label, obj, type, edit, canDelete } = props
 
   return (
           <Chip
@@ -46,7 +47,7 @@ const Tag = (props) => {
             onDelete={canDelete ? actionTag : null}
             deleteIcon={ <DeleteIcon className={ classes.icon } />  }
             
-            variant={variant || 'default'}
+            variant="contained"
             className={classes.chip}
           />
   );

@@ -28,7 +28,6 @@ store.dispatch(getHelpers());
 var auth =   document.cookie.replace('auth=', '')
 var confirm =   document.cookie.replace('confirm=', '');
 
-
 if(parseInt(confirm, 10) === 1){
     store.dispatch(setNotification("email_confirmed", "success"))
 }
