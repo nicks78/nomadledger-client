@@ -1,5 +1,11 @@
 #deployment script
 
+read -p "Commit message ? " message
+
+git add .
+git commit -m "$message"
+git push origin master --tags
+
 read -p "Build version patch ? (Y|n) " patch
 
 if [ "$patch" == "" -o "$patch" == "y" -o "$patch" == "Y" ]; then
@@ -19,16 +25,13 @@ if [ "$major" == "" -o "$major" == "y" -o "$major" == "Y" ]; then
 fi
 
 
-read -p "Commit message ? " message
+
 
 read -p "Build and send to server manager-client ? (Y|n) " client
 
 if [ "$client" == "" -o "$client" == "y" -o "$client" == "Y" ]; then
 	rm -R build
     rm -R build.zip
-    git add .
-	git commit -m "$message"
-	git push origin master --tags
 	npm run prebuild
 	npm run build
 	tar zcvf build.zip build/
