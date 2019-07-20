@@ -6,6 +6,7 @@ import { getLocale, initLocale } from '../redux/locale/actions'
 import { getLogout } from '../redux/auth/actions'
 import PrivateRoute from './privateRoute'
 import CacheBuster from '../CacheBuster';
+import packageJson from '../../package.json';
 
 // Common
 import SnackBar from '../lib/snackBar'
@@ -97,9 +98,10 @@ class Routes extends React.Component {
             <Router base history={history}>
             <CacheBuster>
                 {({ loading, isLatestVersion, refreshCacheAndReload }) => {
-                    console.log("LOAD", isLatestVersion)
+                    console.log("LOAD", packageJson.version)
                 if (loading) return null;
                 if (!loading && !isLatestVersion) {
+                    console.log("TEST")
                     refreshCacheAndReload();
                 }
 
