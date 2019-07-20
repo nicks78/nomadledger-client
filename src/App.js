@@ -7,7 +7,7 @@ import './App.css'
 import {StripeProvider} from 'react-stripe-elements';
 // import Messages from "./chat/messages";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
-import CacheBuster from './CacheBuster';
+
 
 const theme = createMuiTheme({
   palette: {
@@ -171,14 +171,6 @@ class App extends Component {
   render() {
 
     return (
-      <CacheBuster>
-      {({ loading, isLatestVersion, refreshCacheAndReload }) => {
-        if (loading) return null;
-        if (!loading && !isLatestVersion) {
-          refreshCacheAndReload();
-        }
-
-        return (
           <React.Fragment>
           <StripeProvider stripe={this.state.stripe}>
             <MuiThemeProvider theme={theme}>
@@ -194,9 +186,6 @@ class App extends Component {
             </MuiThemeProvider>
           </StripeProvider>
         </React.Fragment>
-        );
-      }}
-    </CacheBuster>
     )
   }
 }
