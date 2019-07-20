@@ -1,12 +1,12 @@
 //src/pages/auth/resetPassword.js
 import React, { Component } from 'react'
-import {DEFAULT_URL} from '../../redux/constant'
 import {initLocale} from '../../redux/locale/actions'
-import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import Header from './components/header'
+import WrapForm from './components/wrapFrom'
 import {resetPassword, verifyToken} from '../../redux/auth/actions'
 import {setNotification} from '../../redux/notification/actions'
-import {TextField, withStyles, Typography, Button, Paper } from '@material-ui/core'
+import {TextField, withStyles, Typography, Button } from '@material-ui/core'
 
 class ResetPassword extends Component {
 
@@ -56,14 +56,8 @@ class ResetPassword extends Component {
         <div style={{position: "absolute", top: 10, right: 10}}>
           <Button onClick={() => { this.props.initLocale(langue === "fr" ? "en" : "fr") }} color="primary" >{ langue === "fr" ? "FR" : "EN"}</Button>
         </div>
-            <Paper className={classes.paper}>
-
-            <div>
-                    <Typography className={classes.companyName} variant="h1" align="center">
-                    <Link to="/"><img src={`${DEFAULT_URL}img/logo.png`} alt="logo" height="80" width="auto" /></Link><br />
-                        <span dangerouslySetInnerHTML={{__html: locale.company_name}}></span>
-                    </Typography><br />
-                </div>
+            <WrapForm>
+            <Header locale={locale} />
             <Typography variant="caption">
                 { locale.subheading.label_reset_pwd }
             </Typography>
@@ -88,7 +82,7 @@ class ResetPassword extends Component {
                     margin="dense"
                     onChange={ (e) => { this.setState({[e.target.name]: e.target.value }) } }
                     variant="outlined"
-                /><br /><br />
+                />
                 <Button
                     type="submit"
                     color="primary"
@@ -97,7 +91,7 @@ class ResetPassword extends Component {
                     variant="contained">{ isFetching ? locale.wording.loading :  locale.wording.reset_pwd  }</Button>
             </form>
 
-            </Paper>
+            </WrapForm>
 
       </div>
     )
@@ -110,22 +104,10 @@ const styles = theme => ({
         alignItems: "center",
         justifyContent: "center",
     },
-    paper: {
-        width: '25%',
-        margin: '0 auto',
-        padding: 24,
-        overflow: 'hidden',
-        [theme.breakpoints.down('sm')]: {
-            padding: 12,
-            width: '100%',
-            boxShadow: 'none',
-            borderRadius: 0,
-
-        }
-    },
     button: {
-        float: 'right',
-        width: "100%"
+        width: "100%",
+        marginTop: 24,
+        backgroundColor: theme.palette.yellow.dark,
     }
 })
 

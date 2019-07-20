@@ -8,17 +8,27 @@ import { Button, Typography, TextField } from '@material-ui/core'
 import WarningIcon from '@material-ui/icons/WarningOutlined'
 import {cvtNumToUserPref} from '../../utils/help_function'
 import Spinner from '../../components/common/spinner'
+import {history} from '../../routes/history'
+import {setNotification} from '../../redux/notification/actions'
 
 class Checkout extends React.Component {
 
+  
   constructor(props) {
     super(props);
     this.state = {
       autoRenewal: false,
       lastname: "",
-      firstname: ""
+      firstname: ""    
     }
   }
+  
+
+
+  componentWillUnmount(){
+    clearTimeout(this.timer);
+  }
+
 
   componentWillReceiveProps(nextProps){
     if(nextProps.payment)
@@ -60,7 +70,12 @@ class Checkout extends React.Component {
     const { payment, locale, isFetching } = this.props
     const { lastname, firstname } = this.state;
 
-    if(!payment){
+    setTimeout(() => {
+      this.props.setNotification("error_payment_no_found", "error");
+      history.push("/")
+    }, 10000)
+
+    if( !payment ){
       return <Spinner/>
     }
 
@@ -104,7 +119,7 @@ const mapStateToProps = (state) => {
 }
 
 
-const CheckoutForm = connect( mapStateToProps, {submitPayment, requestPayment} )(Checkout);
+const CheckoutForm = connect( mapStateToProps, {submitPayment, requestPayment, setNotification} )(Checkout);
 
 
 export default injectStripe(CheckoutForm);

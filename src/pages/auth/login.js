@@ -1,48 +1,14 @@
 import React, { Component } from 'react'
-import {DEFAULT_URL} from '../../redux/constant'
 import {initLocale} from '../../redux/locale/actions'
 import {Link}  from 'react-router-dom'
 import {connect} from 'react-redux'
+import Header from './components/header'
+import WrapForm from './components/wrapFrom'
 import { authUser } from '../../redux/auth/actions'
-import {withStyles, Paper, Typography, Button} from '@material-ui/core'
+import {withStyles, Typography, Button} from '@material-ui/core'
 import ApxForm from '../../components/common/form'
 import Spinner from '../../components/common/spinner'
 
-
-const styles = theme => ({
-    container: {
-        display: 'flex',
-        alignItems: "center",
-        justifyContent: "center",
-    },
-
-    paper: {
-        position: "relative",
-        width: '25%',
-        margin: '0 auto',
-        padding: 24,
-        overflow: 'hidden',
-        [theme.breakpoints.down('sm')]: {
-            padding: 12,
-            width: '100%',
-            boxShadow: 'none',
-            borderRadius: 0,
-
-        }
-    },
-    button: {
-        // float: "right",
-        width: "100%"
-    },
-    link: {
-        clear: "right",
-        marginTop: 15,
-        float: 'right',
-        '& span': {
-            fontSize: "16 !important",
-        }
-    }
-})
 
 class Login extends Component {
     state = {
@@ -111,14 +77,8 @@ class Login extends Component {
                     <Button onClick={() => { this.props.initLocale(langue === "fr" ? "en" : "fr") }} color="primary" >{ langue === "fr" ? "FR" : "EN"}</Button>
                   </div>
 
-                <Paper className={ classes.paper }>
-
-                <div>
-                    <Typography className={classes.companyName} variant="h1" align="center">
-                        <Link to="/"><img src={`${DEFAULT_URL}img/logo.png`} alt="logo" height="80" width="auto" /></Link><br />
-                        <span dangerouslySetInnerHTML={{__html: locale.company_name}}></span>
-                    </Typography><br />
-                </div>
+                <WrapForm>
+                    <Header locale={locale} />
                         <Typography variant="caption"  style={{marginBottom: 10}}>
                           { locale.subheading.label_login}&nbsp;<span dangerouslySetInnerHTML={{__html: locale.company_name}}></span>
                         </Typography>
@@ -131,7 +91,7 @@ class Login extends Component {
                             xs={12}
                             md={12}
                             objData={ this.state }/>
-                        <br />
+                        
                         <Button
                             variant="contained"
                             color="primary"
@@ -145,7 +105,7 @@ class Login extends Component {
                         <div  className={classes.link}>
                             <Link className="link" to="/public/forgot-password" >{locale.subheading.link_forgot_pwd}</Link>
                         </div>
-                </Paper>
+                </WrapForm>
 
             </div>
             </div>
@@ -153,6 +113,27 @@ class Login extends Component {
         )
   }
 }
+
+const styles = theme => ({
+    container: {
+        display: 'flex',
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    button: {
+        backgroundColor: theme.palette.yellow.dark,
+        width: "100%",
+        marginTop: 24
+    },
+    link: {
+        clear: "right",
+        marginTop: 15,
+        float: 'right',
+        '& span': {
+            fontSize: "16 !important",
+        }
+    }
+})
 
 const mapStateToProps = (state) => {
 

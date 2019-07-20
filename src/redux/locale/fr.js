@@ -381,6 +381,7 @@ const fr =  {
         success_reply: "Votre réponse a été enregistrée, nous reviendrons vers vous dans les meilleurs délais.",
 
         error_payment: "Erreur lors du paiement, veuillez recommencer ou contacter notre service support@nomadledger.com",
+        error_payment_no_found: "Erreur paiement informations non trouvé, veuillez recommencer ou contacter notre service support@nomadledger.com",
         error_email_not_sent: "Erreur - message non envoyé, veuillez recommencer ou prendre contact avec notre support@nomadledger.com",
         error_create: "Erreur donnée non créé",
         error_update: "Erreur donnée non mise à jour",

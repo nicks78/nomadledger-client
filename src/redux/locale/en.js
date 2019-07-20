@@ -377,6 +377,7 @@ const en = {
         success_reply: "Your reply has been saved, we will get back to your as soon as possible",
 
         error_payment: "Payment error, please try again or contact us at support@nomadledger.com",
+        error_payment_no_found: "Error information payment not found, please try again or contact us at support@nomadledger.com",
         error_email_not_sent: "Error - message not sent, please try again or contact us at support@nomadledger.com",
         error_create: "Element created successfully",
         error_update: "Element updated successfully",

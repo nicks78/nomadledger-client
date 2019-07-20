@@ -7,7 +7,7 @@ import { initLocale } from '../../redux/locale/actions'
 import {DEFAULT_URL} from '../../redux/constant'
 import MyStoreCheckout from '../payment/MyStoreCheckout';
 import {Paper, withStyles, Typography, Button} from '@material-ui/core'
-
+import Header from '../auth/components/header'
 
 
 class Payment extends Component {
@@ -16,11 +16,11 @@ class Payment extends Component {
         height: window.innerHeight 
     }
 
-    componentDidMount(){
-        var user_token = this.props.match.params.token_id;
-        this.props.getPaymentInfo(user_token)
-        window.addEventListener("resize", this.changeHeight)
-    }
+    // componentDidMount(){
+    //     var user_token = this.props.match.params.token_id;
+    //     this.props.getPaymentInfo(user_token)
+    //     window.addEventListener("resize", this.changeHeight)
+    // }
 
     changeHeight = () => {
         this.setState({height: window.innerHeight})
@@ -36,12 +36,7 @@ class Payment extends Component {
                 <div>
                   <Button color="primary" className={ classes.btn } onClick={() => { this.props.initLocale( localStorage.getItem("locale") === "en" ? "fr" : "en" ) }}  >{ localStorage.getItem("locale") }</Button>
                 </div>
-                <div>
-                    <Typography className={classes.companyName} variant="h1" align="center">
-                    <Link to="/"><img src={`${DEFAULT_URL}img/logo.png`} alt="logo" height="80" width="auto" /></Link><br />
-                        <span dangerouslySetInnerHTML={{__html: locale.company_name}}></span>
-                    </Typography><br />
-                </div>
+                <Header locale={locale} />
                 <MyStoreCheckout {...this.props}/>
             </Paper>
         </div>
