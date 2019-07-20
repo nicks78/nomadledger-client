@@ -7,8 +7,8 @@ import './App.css'
 import {StripeProvider} from 'react-stripe-elements';
 // import Messages from "./chat/messages";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
-import CacheBuster from '../CacheBuster';
-import packageJson from '../../package.json';
+import CacheBuster from './CacheBuster';
+import packageJson from '../package.json';
 
 const theme = createMuiTheme({
   palette: {
