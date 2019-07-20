@@ -91,13 +91,12 @@ class Routes extends React.Component {
     render(){
 
         const { isLoggedIn, locale, authUser, company, text, status, openSnack } = this.props
-console.log("YEAH")
+
         return (
 
             <Router base history={history}>
                             <CacheBuster>
                 {({ loading, isLatestVersion, refreshCacheAndReload }) => {
-                    console.log("LOAD", loading)
                 if (loading) return null;
                 if (!loading && !isLatestVersion) {
                     refreshCacheAndReload();
