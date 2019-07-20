@@ -21,6 +21,10 @@ export const updateItem = ( actionType, endPoint ) => {
         // Get current state
         var state = getState().library[model].item
 
+        if(state.contact_id){
+            state = state.contact_id
+        }
+
         axios.put(`${API_ENDPOINT}${model}/${endPoint}`,
             {data: state},
             { headers: {

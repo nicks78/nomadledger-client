@@ -67,11 +67,10 @@ class Expense extends Component {
 
 
     render(t) {
-console.log("TTTT", t)
+
     const {isFetching, locale, newExpense, createItem, createState, isCreating, progress, category, currency, vat, total} = this.props
     const {reducer, width, listExpenses } = this.state
     const isMobile = width <= 500;
-
 
     return (
         <div>

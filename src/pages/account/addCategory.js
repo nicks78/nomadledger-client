@@ -92,7 +92,7 @@ class AddCategory extends Component {
                         id="category_name"
                         label={locale.wording.category}
                         className={classes.textField}
-                        value={this.state.value}
+                        value={this.state.value || ""}
                         onKeyPress={(e) => { e.key === "Enter" && this._pushToDoc() }}
                         name="category_name"
                         onChange={this._handleFormEdit}

@@ -7,7 +7,7 @@ import { withStyles, TextField } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddOutlined'
 import ApxTag  from '../../components/common/tag'
 import Spinner from '../../components/common/spinner'
-import { checkNumFormatRegex } from '../../utils/help_function'
+import { cvtNumToUserPref } from '../../utils/help_function'
 
 
 
@@ -47,7 +47,6 @@ class AddVat extends Component {
 
 
   state = {
-    value: '',
     name: '',
     vat_terms_fr: "",
     vat_terms_en: "",
@@ -71,12 +70,7 @@ class AddVat extends Component {
     }
 
     _pushToDoc = () => {
-        var num = checkNumFormatRegex( this.state.value )
 
-        if(num === false ){
-            alert(this.props.locale.message.error_422_indice)
-            return ;
-        }
         if(this.state.name === ''){
             alert(this.props.locale.message.error_422_name)
             return ;
@@ -87,13 +81,12 @@ class AddVat extends Component {
             vat: {
                 en: this.state.name,
                 fr: this.state.name,
-                value: this.state.value + " %",
-                indice: num || 0,
+                indice: this.state.indice || 0,
                 vat_terms_fr: this.state.vat_terms_fr,
                 vat_terms_en: this.state.vat_terms_en
             }
         }
-        this.setState({value: "", name: '', indice: 0, vat_terms_fr: "", vat_terms_en: "" })
+        this.setState({ name: '', indice: 0, vat_terms_fr: "", vat_terms_en: "" })
         this.props.pushToDocument(this.state.reducer, data, this.state.addApi )
     }
 
@@ -109,7 +102,7 @@ class AddVat extends Component {
         const {locale, classes, company, isFetching } = this.props
 
         if( isFetching  || company === null ){
-        return <Spinner />
+            return <Spinner />
         }
 
 
@@ -132,8 +125,8 @@ class AddVat extends Component {
                                 type="number"
                                 label={locale.wording.add_vat}
                                 className={classes.textField}
-                                value={this.state.value}
-                                name="value"
+                                value={ this.state.indice }
+                                name="indice"
                                 onKeyPress={(e) => { e.key === "Enter" && this._pushToDoc() }}
                                 onChange={this._handleFormEdit}
                                 margin="normal"
@@ -168,7 +161,7 @@ class AddVat extends Component {
                                   color="secondary"
                                   variant="outlined"
                                   actionTag={ () => { this.deleteCategory(vat._id) } }
-                                  label={ vat[localStorage.getItem('locale')] + ' ('+ vat.value +")"}
+                                  label={ vat[localStorage.getItem('locale')] + ' ('+ cvtNumToUserPref(vat.indice || 0) +")"}
                                 />
                         })
                     }
