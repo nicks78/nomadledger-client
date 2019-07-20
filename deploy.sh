@@ -4,24 +4,27 @@ read -p "Commit message ? " message
 
 git add .
 git commit -m "$message"
-git push origin master --tags
+
 
 read -p "Build version patch ? (Y|n) " patch
 
 if [ "$patch" == "" -o "$patch" == "y" -o "$patch" == "Y" ]; then
 		npm version patch
+		git push origin master --tags
 fi
 
 read -p "Build version minor ? (Y|n) " minor
 
 if [ "$minor" == "" -o "$minor" == "y" -o "$minor" == "Y" ]; then
 		npm version minor
+		git push origin master --tags
 fi
 
 read -p "Build version major ? (Y|n) " major
 
 if [ "$major" == "" -o "$major" == "y" -o "$major" == "Y" ]; then
 		npm version major
+		git push origin master --tags
 fi
 
 
