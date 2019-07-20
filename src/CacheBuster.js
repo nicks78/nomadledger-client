@@ -33,7 +33,6 @@ class CacheBuster extends React.Component {
             for (let name of names) caches.delete(name);
           });
         }
-
         // delete browser cache and hard reload
         window.location.reload(true);
       }
