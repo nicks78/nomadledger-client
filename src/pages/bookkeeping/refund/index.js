@@ -160,7 +160,7 @@ class Refund extends Component {
                   locale={locale}
                   reducer={reducer}/>
           }
-          <BoxHint content={locale.message.status_refund} />
+          <Hidden only={['xs']}><BoxHint content={locale.message.status_refund} /></Hidden>
           <Hidden only={['lg', 'xl', 'md']}>
               <Fab
                   color="primary"

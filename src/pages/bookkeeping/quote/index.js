@@ -174,7 +174,7 @@ class Quote extends Component {
                   locale={locale}
                   reducer={reducer}/>
           }
-          <BoxHint content={locale.message.status_devis} />
+          <Hidden only={['xs']}><BoxHint content={locale.message.status_devis} /></Hidden>
             <Hidden only={['lg', 'xl', 'md']}>
                 <Fab
                     color="primary"

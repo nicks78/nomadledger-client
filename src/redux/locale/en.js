@@ -489,7 +489,7 @@ const en = {
         agreed_terms: `* By signing up, you agree to the <a target="_blank" href="https://api.nomadledger.com/termsandconditions_en.pdf">Terms and Conditions</a> and <a href="https://api.nomadledger.com/privacypolicy_en.pdf">Privacy Policy</a>.`,
         footer_paragraphe: `All rights reserved.&nbsp;<a target="_blank" href="https://api.nomadledger.com/termsandconditions_en.pdf" rel="noopener noreferrer" target="_blank">Terms and Conditions</a>,&nbsp;
         features, support, pricing, and service options subject to change without notice.`,
-        sing_in: "Sign In",
+        sign_in: "Sign In",
         try_it_free: "Try it for free",
         try_it: "Try it",
         blocDesc: {

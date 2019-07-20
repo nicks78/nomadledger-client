@@ -168,7 +168,7 @@ class Invoice extends Component {
                   locale={locale}
                   reducer={reducer}/>
           }
-          <BoxHint content={locale.message.status_invoice} />
+          <Hidden only={['xs']}><BoxHint content={locale.message.status_invoice} /></Hidden>
           <Hidden only={['lg', 'xl', 'md']}>
               <Fab
                   color="primary"

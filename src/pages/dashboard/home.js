@@ -215,7 +215,10 @@ const styles = theme => ({
         position: "absolute",
         width: 100,
         right: 50,
-        opacity: 0.5
+        opacity: 0.5,
+        [theme.breakpoints.down("sm")]: {
+            display: "none"
+        }
     }
 
 })
