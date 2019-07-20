@@ -8,12 +8,12 @@ import {history} from '../routes/history'
 import thunk from 'redux-thunk';
 import reducers from './reducers';
 
-// const logger = (store) => (next) => (action) => {
-//     if(typeof action !== "function"){
-//         console.log('DISPATCHING:', action);
-//     }
-//     return next(action);
-// }
+const logger = (store) => (next) => (action) => {
+    if(typeof action !== "function"){
+        
+    }
+    return next(action);
+}
 
 const store = createStore(reducers,
     compose(
