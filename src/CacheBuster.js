@@ -14,6 +14,7 @@ const semverGreaterThan = (versionA, versionB) => {
     // eslint-disable-next-line no-continue
     if (a === b) continue;
     // eslint-disable-next-line no-restricted-globals
+
     return a > b || isNaN(b);
   }
   return false;
@@ -27,6 +28,7 @@ class CacheBuster extends React.Component {
       isLatestVersion: false,
       refreshCacheAndReload: () => {
         console.log('Clearing cache and hard reloading...')
+        console.log("caches", caches)
         if (caches) {
           // Service worker cache should be cleared with caches.delete()
           caches.keys().then(function(names) {
