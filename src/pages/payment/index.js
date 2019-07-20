@@ -1,12 +1,10 @@
 //src/pages/payment/index.js
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getPaymentInfo} from '../../redux/payment/actions'
 import { initLocale } from '../../redux/locale/actions'
-import {DEFAULT_URL} from '../../redux/constant'
 import MyStoreCheckout from '../payment/MyStoreCheckout';
-import {Paper, withStyles, Typography, Button} from '@material-ui/core'
+import {Paper, withStyles, Button} from '@material-ui/core'
 import Header from '../auth/components/header'
 
 
@@ -16,11 +14,11 @@ class Payment extends Component {
         height: window.innerHeight 
     }
 
-    // componentDidMount(){
-    //     var user_token = this.props.match.params.token_id;
-    //     this.props.getPaymentInfo(user_token)
-    //     window.addEventListener("resize", this.changeHeight)
-    // }
+    componentDidMount(){
+        var user_token = this.props.match.params.token_id;
+        this.props.getPaymentInfo(user_token)
+        window.addEventListener("resize", this.changeHeight)
+    }
 
     changeHeight = () => {
         this.setState({height: window.innerHeight})

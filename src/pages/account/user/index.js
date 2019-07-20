@@ -45,6 +45,11 @@ const styles = theme => ({
           height: "auto",
       }
   },
+  btn: {
+    backgroundColor: theme.palette.yellow.dark,
+    marginTop: 48,
+    width: "100%"
+  },
   titleWrapper: {
     display: 'flex',
     alignItems: 'center',
@@ -180,10 +185,10 @@ class User extends Component {
 
 
                     <div className={classes.btnChangePassword}>
-                      <br /><br />
                       <Button color="primary"
                               disabled={requestPW}
                               variant="contained"
+                              className={classes.btn}
                               onClick={ this.requestNewPassword }>
                               { requestPW ? locale.wording.loading :  locale.wording.save_password }
                       </Button>

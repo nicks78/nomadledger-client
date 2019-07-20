@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import Header from '../pages/auth/components/header'
 import WrapForm from '../pages/auth/components/wrapFrom'
 import {setNotification} from '../redux/notification/actions'
-import {TextField, withStyles, Typography, Button, Paper } from '@material-ui/core'
+import {TextField, withStyles, Typography, Button } from '@material-ui/core'
 
 class ContactUs extends Component {
 

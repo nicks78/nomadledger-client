@@ -57,7 +57,7 @@ const en = {
         name: "Template",
         url: "/template",
         h1: "Use Our Document Examples",
-        subtitle: `You can send us your own template at <a href='mailto:contact@nomadledger.com'>contact@nomadledger.com<a/>.
+        subtitle: `You can send us your own template at <a  class="link" href='mailto:contact@nomadledger.com'>contact@nomadledger.com<a/>.
         After our team validation it will be shared with <strong>NomadLegder</strong> community.`,
         rule: `The documents is provided "as is", without warranty of any kind, express or implied, including but not limited
         to the warranties of merchantability, fitness for a particular purpose and noninfringement.

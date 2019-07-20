@@ -54,7 +54,7 @@ const ButtonEdit = (props) => {
 
   return (
     <Tooltips title={text}>
-      <Fab size="small" color="primary" className={ !showEdit ? classes.edit : classes.check }   onClick={ showEdit ? updateDocument :  openEdit} style={style} >
+      <Fab size="small" color="secondary" className={ !showEdit ? classes.edit : classes.check }   onClick={ showEdit ? updateDocument :  openEdit} style={style} >
         {
             !isUpdating ?
             showEdit ? <CheckIcon className={ classes.checkicon }/> : <EditIcon className={ classes.editicon }/>

@@ -59,7 +59,7 @@ const fr =  {
         url: "/template",
         h1: "Utiliser nos exemples de documents",
         subtitle: `Vous pouvez nous envoyer vos exemples de contrat à
-          l'adresse <a href="mailto:contact@nomadledger.com">contact@nomadledger.com</a>. Après validation de notre équipe, ils seront disponibles pour toute la communauté <strong>NomadLegder</strong>.`,
+          l'adresse <a class="link" href="mailto:contact@nomadledger.com">contact@nomadledger.com</a>. Après validation de notre équipe, ils seront disponibles pour toute la communauté <strong>NomadLegder</strong>.`,
         rule: `Les documents sont fournis "en l’etat", sans aucune garantie, expresse ou implicite, y compris, mais sans s'y limiter,
          les garanties de qualité marchande, aptitude à un usage particulier et à l’absence de violation. En aucun cas, le les auteurs
          ou les titulaires de copyright sont responsables de toute réclamation, de dommages ou d'autres responsabilité,

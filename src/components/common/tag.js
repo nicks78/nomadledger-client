@@ -17,7 +17,7 @@ const styles = theme => ({
         marginBottom: 5,
         marginRight: 5,
         borderColor: "#ffb555",
-        backgroundColor: theme.palette.thinBlue,
+        backgroundColor: theme.palette.thinBlue
       },
       avatar: {
         backgroundColor: theme.palette.primary.main,
@@ -46,8 +46,7 @@ const Tag = (props) => {
             avatar={ edit ? <Avatar className={ classes.avatar } ><Modal obj={obj} type={type} /></Avatar> : null  }
             onDelete={canDelete ? actionTag : null}
             deleteIcon={ <DeleteIcon className={ classes.icon } />  }
-            
-            variant="contained"
+            variant="default"
             className={classes.chip}
           />
   );

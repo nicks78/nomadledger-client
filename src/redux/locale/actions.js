@@ -28,11 +28,10 @@ export function getLocale( locale ){
 }
 
 export function initLocale( locale ){
-    console.log("LOCALE", locale)
+
     return dispatch => {
         
         var localeObject = locale === 'fr' ? fr : en;
-        console.log("LOCALE", localeObject)
         dispatch(setLocale(localeObject))
 
         localStorage.setItem('locale', locale)
