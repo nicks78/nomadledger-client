@@ -11,6 +11,7 @@ const  Partners = (props) => {
         <div className={classes.PartnersWrapper}>
             <img src={`${DEFAULT_URL}/img/partners/whatzhat.png`} width="120" alt="whatzhat" />
             <img src={`${DEFAULT_URL}/img/partners/apx.png`} width="90" alt="apx-dev" />
+            <img src={`${DEFAULT_URL}/img/partners/Iheartcanna.png`} width="110" alt="Iheartcanna"/>
             <img src={`${DEFAULT_URL}/img/partners/acte.png`} width="140" alt="acte-solution"/>
             <img src={`${DEFAULT_URL}/img/partners/MyAssistantOnLine.png`} width="120" alt="myassistant"/>
 
@@ -26,7 +27,7 @@ const styles = theme => ({
         WebkitFilter: "grayscale(1)",
         filter: "grayscale(1)",
         maxWidth: "100%",
-        overflow: 'scroll' 
+        overflow: 'auto' 
     }
 })
   

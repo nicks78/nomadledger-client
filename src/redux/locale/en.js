@@ -479,13 +479,11 @@ const en = {
     week_short: ["Sun", "Mon","Tue","Wed","Thu","Fri","Sat"],
     placeholder: 'DD/MM/YYYY',
     home_page: {
-        title_01: "The invoicing software for digital nomad",
-        paragraphe_01: ` is an easy to use software to manage your invoicing document and keep track of your tasks in just a few click.`,
-        paragraphe_02: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-        It was popularised in the 1960s with the release of Letraset sheets containing
-        Lorem Ipsum passages, and more recently with desktop pu`,
+        title_01: "The invoicing software for digital nomads",
+        paragraphe_01: ` is an easy- to- use online software to manage your invoices and keep track of your tasks with just a few clicks.`,
+        paragraphe_02: `We are a group of digital nomads working around the globe, who wanted a simple and secure way to invoice our international clients. 
+        Thus NomadLedger was born. Our software allows you to easily create, send, or print business documents, accessible from any device and any location. 
+        So you can spend less time on billing, and more time on the work that matters to you.`,
         agreed_terms: `* By signing up, you agree to the <a target="_blank" href="https://api.nomadledger.com/termsandconditions_en.pdf">Terms and Conditions</a> and <a href="https://api.nomadledger.com/privacypolicy_en.pdf">Privacy Policy</a>.`,
         footer_paragraphe: `All rights reserved.&nbsp;<a target="_blank" href="https://api.nomadledger.com/termsandconditions_en.pdf" rel="noopener noreferrer" target="_blank">Terms and Conditions</a>,&nbsp;
         features, support, pricing, and service options subject to change without notice.`,
@@ -493,53 +491,43 @@ const en = {
         try_it_free: "Try it for free",
         try_it: "Try it",
         blocDesc: {
-            title: `Qu'est ce que <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> fait pour vous ?`,
+            title: `WHAT <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> CAN DO FOR YOU ?`,
             bloc_1_title: `Multi-currency support`, 
-            bloc_1_para: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-            It was popularised in the 1960s with the release of Letraset sheets containing
-            Lorem Ipsum passages, and more recently with desktop pu`, 
-            bloc_2_title: `Process invoices & quotes`,  
-            bloc_2_para: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-            It was popularised in the 1960s with the release of Letraset sheets containing
-            Lorem Ipsum passages, and more recently with desktop pu`, 
+            bloc_1_para: `It’s important to juggle multiple currencies when you work internationally. 
+            NomadLedger saves all currencies you use when creating or updating documents, 
+            with the current rates. You can select your preferred currency to display on your dashboard.`, 
+            bloc_2_title: `Process invoices & quotations`,  
+            bloc_2_para: `For efficient processing, set up your application by inputting your services, products, contacts, and configurations. 
+            Then creating an invoice or quotation is just a few clicks away.`, 
             bloc_3_title: `Manage your tasks`, 
-            bloc_3_para: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-            It was popularised in the 1960s with the release of Letraset sheets containing
-            Lorem Ipsum passages, and more recently with desktop pu`, 
+            bloc_3_para: `Never miss a task again. Just add it to our simple task manager, which guides you throughout the day and lets you track the progress of each task.`, 
         },
         form: {
             title: "Free 7 days trial",
             btn: "Sign Up"
         },
         questions: {
-            title: "Questions",
-            q_1: "Why using an online invoice software ?",
-            r_1: `An invoicing online software will bring you flexibility and efficiency. You can keep track of your actions and simplify your annual audit. 
-            In one click, export your accounting documents and stay focused on your main activity.`,
-            q_2: "To whom this software is for ?",
-            r_2: `This software has been made for solo-entrepreneurs, freelancer or small businesses that need something easy to use.`,
-            q_3: "What advantage ?",
-            r_3: `Online invoicing software will secure your data, gain in productivity, track your 
-            finance and have access to your information from any type of device.`
+            title: "FAQs",
+            q_1: "Why use an online invoicing software ?",
+            r_1: `Invoicing software brings you flexibility and efficiency. Keep track of all your activities, simplify your annual audits, and export your accounting files in a single click.`,
+            q_2: "Whom this software is for ?",
+            r_2: `This software was made for entrepreneurs, freelancer or small businesses that need a program that’easy to use.`,
+            q_3: "What are the benefits ?",
+            r_3: `Our software will secure your data, increase productivity, let you track your 
+            finances and provide easy access to your information from any device.`
         },
         offer: {
-            title: "Our offer",
-            price: `<span>One price Only<br /><strong>3,95 €</strong><br />per month</span>`,
-            paragraphe: `Unlimited everything, enjoy a fully-fledged solution to manage your company's business documents and more, 
-            whether you are operating on your own or within startup. Our current account 
-            offers everything you need from leads follow up to invoice management. `,
-            title_list: "No hidden fees, one price only for full access.",
-            listItem: ["Process invoices","Process quotes","Process repay","Manage contact","Manage services/products", "Task manager", "VAT auto calculation", "Import Google contact"],
+            title: "What we provide",
+            price: `<span>A flat rate of<br /><strong>3,95 €</strong><br />per month</span>`,
+            paragraphe: `Enjoy unlimited access to a full-fledged solution to manage your company’s business documents and more, 
+            whether you’re operating on your own or within a startup. Our software offers everything you need, from following up on 
+            leads to managing invoices. Get started now and get your business growing.  `,
+            title_list: "No hidden fees, just a flat monthly rate.",
+            listItem: ["Edit commercial documents","Generate PDFs","Export in Excel format","Manage your contacts","Manage your services/products", "Task manager", "Auto calculate VAT", "Import Ggoogle contacts", "Track your revenues", "Manage your expenses"],
             btn: "Create an account"
         },
         partners: {
-            title: "Partners"
+            title: "Partners & Customers"
         },
         contact: {
             contact_us: "CONTACT US",
