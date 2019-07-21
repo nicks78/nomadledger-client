@@ -6,7 +6,6 @@ import { getLocale, initLocale } from '../redux/locale/actions'
 import { getLogout } from '../redux/auth/actions'
 import PrivateRoute from './privateRoute'
 import CacheBuster from '../CacheBuster';
-import packageJson from '../../package.json';
 
 // Common
 import SnackBar from '../lib/snackBar'

@@ -2,10 +2,10 @@
   "short_name": "NomadLedger",
   "name": "NomadLedger",
   "lang": "fr",
-  "description": "NomadLedger - Facturation simplifié !",
+  "description": "NomadLedger est un logiciel en ligne facile à utiliser pour gérer vos factures et suivre vos tâches en quelques clics.",
   "icons": [
     {
-      "src": "https://api.nomadledger.com/img/logo.png",
+      "src": "https://api.nomadledger.com/img/favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     }
