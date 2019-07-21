@@ -14,10 +14,8 @@ const semverGreaterThan = (versionA, versionB) => {
     const a = Number(versionsA.shift());
 
     const b = Number(versionsB.shift());
-    console.log('Clearing cache ', a === b)
     // eslint-disable-next-line no-continue
     if (a === b) continue;
-    console.log('Clearing ', isNaN(b))
     // eslint-disable-next-line no-restricted-globals
 
     return a > b || isNaN(b);
@@ -33,19 +31,21 @@ class CacheBuster extends React.Component {
       isLatestVersion: false,
       refreshCacheAndReload: () => {
         console.log('Clearing cache and hard reloading...')
-        if (caches) {
-          // Service worker cache should be cleared with caches.delete()
-          caches.keys().then(function(names) {
-            for (let name of names) caches.delete(name);
-          });
+        // if (caches) {
+        //   // Service worker cache should be cleared with caches.delete()
+        //   caches.keys().then(function(names) {
+        //     for (let name of names) caches.delete(name);
+        //   });
+          // delete browser cache and hard reload
+          window.location.reload(true);
         }
-        // delete browser cache and hard reload
-        window.location.reload(true);
+        
       }
     };
   }
 
   componentDidMount() {
+    console.log("POP-2")
     fetch('/meta.json')
       .then((response) => response.json())
       .then((meta) => {
@@ -55,7 +55,7 @@ class CacheBuster extends React.Component {
         console.log("currentVersion", currentVersion)
 
         const shouldForceRefresh = semverGreaterThan(latestVersion, currentVersion);
-        if (currentVersion !== latestVersion) {
+        if (shouldForceRefresh) {
           console.log(`We have a new version - ${latestVersion}. Should force refresh`);
           this.setState({ loading: false, isLatestVersion: false });
         } else {
@@ -65,6 +65,7 @@ class CacheBuster extends React.Component {
       });
   }
   render() {
+    console.log("POP")
     const { loading, isLatestVersion, refreshCacheAndReload } = this.state;
     return this.props.children({ loading, isLatestVersion, refreshCacheAndReload });
   }

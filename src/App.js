@@ -172,7 +172,6 @@ class App extends Component {
 
     return (
           <React.Fragment>
-            <h1>TEST CACHED</h1>
           <StripeProvider stripe={this.state.stripe}>
             <MuiThemeProvider theme={theme}>
                 <Routes />
