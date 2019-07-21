@@ -6,21 +6,21 @@ global.appVersion = packageJson.version;
 
 // version from `meta.json` - first param
 // version in bundle file - second param
-// const semverGreaterThan = (versionA, versionB) => {
-//   const versionsA = versionA.split(/\./g);
+const semverGreaterThan = (versionA, versionB) => {
+  const versionsA = versionA.split(/\./g);
 
-//   const versionsB = versionB.split(/\./g);
-//   while (versionsA.length || versionsB.length) {
-//     const a = Number(versionsA.shift());
+  const versionsB = versionB.split(/\./g);
+  while (versionsA.length || versionsB.length) {
+    const a = Number(versionsA.shift());
 
-//     const b = Number(versionsB.shift());
+    const b = Number(versionsB.shift());
 
-//     if (a === b) continue;
+    if (a === b) continue;
 
-//     return a > b || isNaN(b);
-//   }
-//   return false;
-// };
+    return a > b || isNaN(b);
+  }
+  return false;
+};
 
 class CacheBuster extends React.Component {
   constructor(props) {
@@ -54,8 +54,8 @@ class CacheBuster extends React.Component {
        
         const currentVersion = global.appVersion;
 
-        // const shouldForceRefresh = semverGreaterThan(latestVersion, currentVersion);
-        if (currentVersion !== latestVersion ) {
+        const shouldForceRefresh = semverGreaterThan(latestVersion, currentVersion);
+        if (shouldForceRefresh ) {
           console.log(`We have a new version - ${latestVersion}. Should force refresh`);
           this.setState({ loading: false, isLatestVersion: false });
         } else {
