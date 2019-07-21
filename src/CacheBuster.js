@@ -46,7 +46,7 @@ class CacheBuster extends React.Component {
   }
 
   componentDidMount() {
-    console.log("componentDidMount")
+    console.log("componentDidMount - new update = " + new Date())
     fetch('/meta.json')
       .then((response) => response.json())
       .then((meta) => {
