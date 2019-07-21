@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import {STRIPE_PUBLIC_KEY} from './redux/constant'
 import Routes from './routes'
-// import { Typography } from '@material-ui/core';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css'
 import {StripeProvider} from 'react-stripe-elements';
-// import Messages from "./chat/messages";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 
@@ -172,6 +170,7 @@ class App extends Component {
 
     return (
           <React.Fragment>
+            <h1>Test cache !</h1>
           <StripeProvider stripe={this.state.stripe}>
             <MuiThemeProvider theme={theme}>
                 <Routes />
