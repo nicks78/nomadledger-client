@@ -3,6 +3,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {DEFAULT_URL} from '../../../redux/constant'
 import {withStyles, Typography, IconButton, Button} from '@material-ui/core'
+import InputIcon from '@material-ui/icons/InputOutlined'
 
 const  AppBar = (props) => {
 
@@ -17,8 +18,14 @@ const  AppBar = (props) => {
             {!isMobile &&  <Typography variant="h1" style={{ fontSize: 25 }} dangerouslySetInnerHTML={{__html: locale.company_name}}></Typography> }
             </div>
             <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                <Button color="primary" variant="contained" className={classes.btn} component="a" href="#formAnchor">{locale.home_page.try_it}</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <Link className="link" to="/login"><strong>{locale.home_page.sign_in}</strong></Link>&nbsp;
+                <Button size={isMobile ? "small" : "default"} color="primary" variant="contained" className={classes.btn} component="a" href="#formAnchor">{locale.home_page.try_it}</Button>
+          
+                {
+                  isMobile ? 
+                  <IconButton component={Link} to="/login" ><InputIcon size="small" /></IconButton>
+                  : 
+                  <Link className="link" to="/login"><strong>{ locale.home_page.sign_in }</strong>&nbsp;</Link>
+                }
                 <IconButton onClick={ () => { initLocale(lang === 'fr' ? 'en' : 'fr') }}>
                 {
                     lang === "fr" ?
@@ -57,7 +64,12 @@ const styles = theme => ({
     btn: {
       backgroundColor: theme.palette.yellow.dark,
       color: "white",
-      width: 100
+      width: 130,
+      marginRight: 25,
+      [theme.breakpoints.down("sm")]: {
+        marginRight: 10,
+        width: 100,
+      }
     }
   })
   

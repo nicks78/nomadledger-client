@@ -24,7 +24,9 @@ const styles = theme => ({
         justifyContent: "space-around",
         alignItems: "center",
         WebkitFilter: "grayscale(1)",
-        filter: "grayscale(1)" 
+        filter: "grayscale(1)",
+        maxWidth: "100%",
+        overflow: 'scroll' 
     }
 })
   

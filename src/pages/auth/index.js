@@ -103,9 +103,9 @@ class Auth extends Component {
 
     return (
       <div id="main" className={ classes.root}>
-        <section >
-          <AppBar locale={locale} showAppbar={showAppbar} initLocale={this.props.initLocale} lang={lang} isMobile={isMobile} />
-        </section>
+          <section>
+            <AppBar locale={locale} showAppbar={showAppbar} initLocale={this.props.initLocale} lang={lang} isMobile={isMobile} />
+          </section>
         <section>
           <Jumbotron locale={locale} isMobile={isMobile}/>
         </section>
@@ -114,7 +114,7 @@ class Auth extends Component {
           <Grid container className={classes.intro} spacing={24}>
             <Grid item xs={12} sm={6} md={6}>
               <div style={{textAlign: 'center'}}>
-                <img src={`${DEFAULT_URL}img/element/intro-picture.jpg`} height="300" alt="intro"/>
+                <img src={`${DEFAULT_URL}img/element/intro-picture.jpg`} height={isMobile ? "200" : "300"} alt="intro"/>
               </div>
             </Grid>
           <Grid item xs={12} sm={6} md={6}>
@@ -141,7 +141,7 @@ class Auth extends Component {
             </Grid>
             <Grid item xs={12} md={6} sm={6}>
               <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                <img src={`${DEFAULT_URL}img/element/Screen-HP-mockup.png`} height="300" alt="intro"/>
+                <img src={`${DEFAULT_URL}img/element/Screen-HP-mockup.png`} height={isMobile ? "200" : "300"} alt="intro"/>
               </div>
             </Grid>
           </Grid>

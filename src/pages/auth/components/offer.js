@@ -17,7 +17,7 @@ const Offer = (props) => {
             <Grid item xs={12} sm={6} md={6}>
               <div className={classes.left}>
                   <Typography variant="h1" align="center" className={classes.priceText} dangerouslySetInnerHTML={{__html: locale.home_page.offer.price}} />
-                  <br />
+                  
                   <Button style={{ width: isMobile ? "auto" : 200, height: isMobile ? "auto" : 50 }} component="a" href="#formAnchor" className={classes.btn} variant="contained" color="primary" align="center">{locale.home_page.offer.btn}</Button>
               </div>
             </Grid>
@@ -27,8 +27,8 @@ const Offer = (props) => {
               </Typography>
               </div>
               
-             <br />
-            <Typography variant="body2" align="left" style={{color: "white"}}>{locale.home_page.offer.title_list}</Typography>
+             
+            <Typography variant="body2" align="left" style={{color: "white", marginTop: 24}}>{locale.home_page.offer.title_list}</Typography>
             <List margin="dense" style={{marginLeft: 30}}>
                 {
                 locale.home_page.offer.listItem.map((x, index) => {
@@ -72,7 +72,11 @@ const styles = theme => ({
     priceText: {
       fontSize: 40,
       fontWeight: 400,
-      color: "white"
+      color: "white",
+      marginBottom: 24,
+      [theme.breakpoints.down("sm")]: {
+        marginTop: 24
+      }
     },
     btn: {
       height: 50,
