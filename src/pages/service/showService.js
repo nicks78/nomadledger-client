@@ -39,7 +39,7 @@ class ShowService extends Component {
       }
 
       return (
-        <ApxPaper styled={{padding: 24}}>
+        <ApxPaper styled={{padding: window.innerWidth <= 500 ? 12 : 24}}>
           <ApxBackBtn/>
             <Typography variant="h2" align="center">
               { service.name}

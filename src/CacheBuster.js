@@ -28,6 +28,7 @@ class CacheBuster extends React.Component {
     this.state = {
       loading: true,
       isLatestVersion: false,
+      reloadedAt: null,
       refreshCacheAndReload: () => {
         console.log('Clearing cache and hard reloading...')
         // if (caches) {

@@ -21,7 +21,7 @@ const styles = theme => ({
   root: {
       padding: 24,
       [theme.breakpoints.down('sm')]: {
-        padding: "24px 12px 24px 12px",
+        padding: "12px 12px 24px 12px",
         boxShadow: "none"
       }
   },
@@ -102,15 +102,6 @@ class ShowContact extends React.Component {
         <Paper className={ classes.root }>
         <ApxBackBtn/>
           <Typography variant="h1" align="center">{ contact.company_name }</Typography>
-          <div className={ classes.iconBtn }>
-
-              <ApxButtonEdit
-                  updateDocument={this.updateDocument}
-                  openEdit={this.openEdit}
-                  showEdit={showEdit}
-                  isUpdating={isUpdating}
-            />
-          </div>
           <br />
         <Grid container spacing={8}>
 
@@ -126,6 +117,7 @@ class ShowContact extends React.Component {
               style={{ maxWidth: '100%', maxHeight: '70px'}} />}
             />
           </div>
+          
           </Grid>
           <Grid item xs={12}>
           <div className={ classes.statWrapper}>
@@ -140,6 +132,13 @@ class ShowContact extends React.Component {
           </div>
           </Grid>
           <Grid item xs={12} md={12}>
+
+          <ApxButtonEdit
+              updateDocument={this.updateDocument}
+              openEdit={this.openEdit}
+              showEdit={showEdit}
+              isUpdating={isUpdating}
+          />
            <ContactInfo
                 showEdit={showEdit}
                 locale={locale}
@@ -162,7 +161,7 @@ class ShowContact extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-console.log(state.book)
+
   return {
       isFetching: state.library.contact.isFetching,
       receivedAt: state.library.contact.receivedAt,

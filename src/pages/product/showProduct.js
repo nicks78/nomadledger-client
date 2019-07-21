@@ -61,7 +61,7 @@ class ShowProduct extends React.Component {
     }
 
       return (
-        <ApxPaper styled={{padding: 24}}>
+        <ApxPaper styled={{padding: window.innerWidth <= 500 ? 12 : 24}}>
 
           <ApxBackBtn/>
           <Typography variant="h1" align="center">{product.name}</Typography>

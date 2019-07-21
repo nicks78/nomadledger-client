@@ -57,7 +57,7 @@ class ShowExpense extends Component {
       }
 
       return (
-        <ApxPaper  styled={{padding: 24}}>
+        <ApxPaper  styled={{padding: window.innerWidth <= 500 ? 12 : 24}}>
           <ApxBackBtn/>
             <br />
 
@@ -188,10 +188,6 @@ class ShowExpense extends Component {
 }
 
 const styles = theme => ({
-    paper: {
-      padding: 24,
-      overflow: 'hidden'
-    },
     btnSave: {
       float: 'right'
     },

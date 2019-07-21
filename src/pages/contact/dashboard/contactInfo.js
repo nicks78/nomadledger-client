@@ -10,23 +10,6 @@ import TextField from '@material-ui/core/TextField';
 
 
 const styles = theme => ({
-    root: {
-    },
-    iconBtn: {
-        // float: 'right',
-    },
-    icon: {
-        top: '-12px',
-        right: '-12px'
-    },
-    editIcon: {
-        width: '0.7em !important',
-        height: '0.7em !important',
-        transition: '1s ease',
-    },
-    checkicon: {
-        color: theme.palette.green
-    },
     divider: {
         clear: 'both',
         marginBottom: 10
