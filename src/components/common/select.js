@@ -76,6 +76,7 @@ const Select = (props) => {
                           {option[props.locale.lang]}
                           {field === "phone_code" && ' (' + option.dial_code +')'}
                           {option.value && ' (' + option.value +')'}
+                          {option.indice && ' ( ' + option.indice +' % )'}
                         </span>
                     </MenuItem>
                 ))

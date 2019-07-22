@@ -92,7 +92,7 @@ export const updateTask = () => {
         }) 
         .then( res => {
             dispatch(setNotification("success_update", "success"))
-            dispatch(getAllTask( `list`, "taskList" ))  
+            dispatch(getAllTask( `list?day=${new Date().getTime()}`, "taskList" ))  
         }) 
         .catch(function (error) {
             dispatch(setError(error));

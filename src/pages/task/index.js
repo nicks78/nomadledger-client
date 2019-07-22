@@ -3,11 +3,11 @@
 import React, { Component } from 'react'
 import { getAllTask , createTask, createStateTask, setTask, updateTask} from '../../redux/task/actions'
 import {connect} from 'react-redux'
-import {Paper, withStyles, Button} from '@material-ui/core'
+import {Paper, withStyles, Button, Fab} from '@material-ui/core'
 import AddTask from './addTask'
 import TaskCard from './taskCard'
 import EditTask from './editTask'
-
+import HistoryIcon from '@material-ui/icons/HistoryOutlined'
 
 class Task extends Component {
 
@@ -54,7 +54,7 @@ class Task extends Component {
 
   handleUpdateTask = () => {
     this.setState({id: null });
-      this.props.updateTask();
+    this.props.updateTask();
   }
 
   handleEdit = (task) => {
@@ -86,12 +86,11 @@ class Task extends Component {
           }
 
       <div style={{ textAlign: "center" }}>
-        <Button 
-          size="small" 
-          variant="outlined" 
-          color="secondary"
-          onClick={ this.getPreviousTask }
-          >{ locale.subheading.previous_task }</Button>
+        <Fab size="small" color="default" variant="extended" aria-label="previous" className={classes.margin}>
+          <HistoryIcon onClick={ this.getPreviousTask } />&nbsp;
+          { locale.subheading.previous_task }
+        </Fab>
+
       </div>
 
       <div className={classes.step}>
@@ -141,9 +140,7 @@ class Task extends Component {
 }
 
 const styles = theme => ({
-    root: {
 
-    },
     paper: {
       padding: '10px 15px 10px 15px',
       position: 'relative',
@@ -173,7 +170,7 @@ const styles = theme => ({
       marginRight: 10,
       width: '15px',
       marginLeft: -8,
-      backgroundColor: '#ffb555',
+      backgroundColor: theme.palette.primary.main,
       borderRadius: '50%',
       display: 'inline-block',
       textAlign: 'center'

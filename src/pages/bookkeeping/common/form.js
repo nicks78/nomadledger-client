@@ -29,7 +29,6 @@ const Form = (props) => {
     const { data, list, reducer, locale, classes, vat, btnLabel, date_1, date_2, formTitle, isUpdating, currency } = props
     const canBeUpdated = data.quote_id || data.refund_id ? false : true
 
-
     return  <div>
 
                 <Paper className={classes.paper}>
