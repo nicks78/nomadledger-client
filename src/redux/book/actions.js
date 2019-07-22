@@ -101,11 +101,6 @@ export function updateDocument (actionType) {
                 item.net_to_pay = item.deposit_amount || net;
                 item.charges = sum;
                 item.vat_value = calculVat(item.net_to_pay, item.vat ) ;
-
-                console.log(net)
-                console.log(sum)
-                console.log(item.vat_value)
-                console.log(item)
             }
 
             dispatch(setNotification("success_update", "success"))
@@ -302,7 +297,7 @@ export function sendEmailWithPdf( actionType, endPoint, data){
       var list = getState().library[actionType.toLowerCase()].list;
 
       try{
-          const request = await axios.post(`${API_ENDPOINT}/${actionType.toLowerCase()}/${endPoint}`, {data})
+          const request = await axios.post(`${API_ENDPOINT}${actionType.toLowerCase()}/${endPoint}`, {data})
           const res = request.data;
 
           dispatch(setNotification("success_sent", "success"));

@@ -31,6 +31,9 @@ const styles = theme => ({
     margin: '0 auto',
     outline: 'none',
   },
+  btn: {
+    backgroundColor: theme.palette.yellow.dark
+  }
 });
 
 
@@ -64,14 +67,14 @@ class SimpleModal extends React.Component {
   }
 
   handleClose = (e, reason) => {
-    console.log(reason)
-    // if (reason === 'backdropClick') {
-    //   return;
-    // }
     this.setState({ open: false })
+    if (reason === 'backdropClick') {
+      return;
+    }
+    
   }
 
-  handleRichEditor = (reducer, fieldName, value) => {
+  handleRichEditor = ( value) => {
     this.setState({content: value})
   }
 
@@ -83,7 +86,7 @@ class SimpleModal extends React.Component {
       subject: this.state.subject,
       content: this.state.content
     }
-    this.props.sendEmailWithPdf(this.props.reducer, `/send-document/${this.props.item._id}?locale=${langue}`, data)
+    this.props.sendEmailWithPdf(this.props.reducer, `send-document/${this.props.item._id}?locale=${langue}`, data)
   }
 
 
@@ -137,7 +140,6 @@ class SimpleModal extends React.Component {
                 reducer={reducer}
                 field="content"
                 initText={content || ""}
-
                 handleAction={ this.handleRichEditor }
             />
             </div>
@@ -147,6 +149,7 @@ class SimpleModal extends React.Component {
                   type="submit"
                   variant="contained"
                   disabled={actionLoading}
+                  className={classes.btn}
                   color="primary">
                   {actionLoading ? locale.wording.loading : locale.wording.send}</Button>
             </div>
@@ -171,7 +174,6 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 
-// We need an intermediary variable for handling the recursive nesting.
 const ModalSendMail = withStyles(styles)(SimpleModal);
 
 export default connect(mapStateToProps, { sendEmailWithPdf  })(ModalSendMail);
