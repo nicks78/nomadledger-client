@@ -329,7 +329,8 @@ const fr =  {
         iban: "IBAN",
         bic: "BIC",
         bank_detail: "Afficher mes coordonnées bancaires (sur PDF)",
-        invoice_ref: "Référence facture"
+        invoice_ref: "Référence facture",
+        refresh: "Recharger"
 
     },
     helperText: {

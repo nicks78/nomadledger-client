@@ -1,5 +1,6 @@
 import React from 'react'
 import { Router, Route, Switch } from 'react-router-dom'
+import Button from '@material-ui/core/Button'
 import {history} from './history'
 import {connect} from 'react-redux'
 import { getLocale, initLocale } from '../redux/locale/actions'
@@ -98,7 +99,7 @@ class Routes extends React.Component {
                 {({ loading, isLatestVersion, refreshCacheAndReload }) => {
                     console.log("LOADED", loading)
                     console.log("isLatestVersion", isLatestVersion)
-                if (loading){ console.log("isLatestVersion", isLatestVersion); return null }
+                if (loading){ console.log("isLatestVersion", isLatestVersion); return <div style={{ textAlign: "center", marginTop: "20%" }}><Button variant="contained" color="primary" onClick={() => { window.location.reload(true) }}>{locale.wording.refresh}</Button></div> }
                 if (!loading && !isLatestVersion) {
                     refreshCacheAndReload();
                 }

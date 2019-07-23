@@ -326,7 +326,8 @@ const en = {
         iban: "IBAN",
         bic: "BIC",
         bank_detail: "Display the bank on invoice (on PDF)",
-        invoice_ref: "Invoice reference"
+        invoice_ref: "Invoice reference",
+        refresh: "Reload"
     },
     helperText: {
         select_phone_code: "Phone code",
