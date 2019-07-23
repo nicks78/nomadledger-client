@@ -98,7 +98,7 @@ class Routes extends React.Component {
                 {({ loading, isLatestVersion, refreshCacheAndReload }) => {
                     console.log("LOADED", loading)
                     console.log("isLatestVersion", isLatestVersion)
-                if (loading) return null;
+                if (loading){ console.log("isLatestVersion", isLatestVersion); return null }
                 if (!loading && !isLatestVersion) {
                     refreshCacheAndReload();
                 }
