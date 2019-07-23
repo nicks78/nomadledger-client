@@ -177,7 +177,6 @@ class App extends Component {
                         <MessengerCustomerChat
                           pageId="2385240291708965"
                           appId="733037490462839"
-                          htmlRef={window.location.pathname}
                         />
                       </div>
   

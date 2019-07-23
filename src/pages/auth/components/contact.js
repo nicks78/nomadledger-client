@@ -23,7 +23,7 @@ const  AppBar = (props) => {
                 <Grid item xs={12} md={4} sm={4}>
                 <Typography variant="body1">{locale.home_page.contact.follow_us}</Typography>
                 <div className={ classes.socialContainer }>
-                    <a target="_blank" href="https://www.facebook.com/NomadLedger-2385240291708965" rel="noopener noreferrer"><img src={`${DEFAULT_URL}img/facebook-512.png`} alt="logo-facebook" width="15" /></a>
+                    <a target="_blank" href="https://www.facebook.com/NomadLedger/" rel="noopener noreferrer"><img src={`${DEFAULT_URL}img/facebook-512.png`} alt="logo-facebook" width="15" /></a>
                 </div>
                 </Grid>
 
