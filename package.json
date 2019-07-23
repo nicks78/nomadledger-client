@@ -1,6 +1,6 @@
 {
   "name": "manager",
-  "version": "2.0.15",
+  "version": "2.0.16",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.9.2",
