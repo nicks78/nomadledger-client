@@ -18,7 +18,7 @@ const  AppBar = (props) => {
             {!isMobile &&  <Typography variant="h1" style={{ fontSize: 25 }} dangerouslySetInnerHTML={{__html: locale.company_name}}></Typography> }
             </div>
             <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                <Button size={isMobile ? "small" : "default"} color="primary" variant="contained" className={classes.btn} component="a" href="#formAnchor">{locale.home_page.try_it}</Button>
+                <Button size={isMobile ? "small" : "medium"} color="primary" variant="contained" className={classes.btn} component="a" href="#formAnchor">{locale.home_page.try_it}</Button>
           
                 {
                   isMobile ? 

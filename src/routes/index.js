@@ -96,9 +96,9 @@ class Routes extends React.Component {
             <Router base history={history}>
             <CacheBuster>
                 {({ loading, isLatestVersion, refreshCacheAndReload }) => {
-                    console.log("YEAH", loading)
+                    console.log("LOADED", loading)
                     console.log("isLatestVersion", isLatestVersion)
-                // if (loading) return null;
+                if (loading) return null;
                 if (!loading && !isLatestVersion) {
                     refreshCacheAndReload();
                 }
