@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {DEFAULT_IMG} from '../../../redux/constant'
+import {DEFAULT_URL } from '../../../redux/constant'
 import { withStyles , Typography} from '@material-ui/core';
 import UploadImg from '../../../lib/uploadImg'
 import ApxButtonEdit from '../../../components/common/buttonEdit'
@@ -130,7 +130,7 @@ class User extends Component {
                       <Avatar
                         component="p"
                         alt={user.firstname}
-                        src={`${ user.avatar.full_path || DEFAULT_IMG }`}
+                        src={`${ user.avatar.full_path || DEFAULT_URL +"img/default_logo.jpg" }`}
                         className={ classes.avatar }
                     />
                     }

@@ -486,8 +486,8 @@ const en = {
         paragraphe_02: `We are a group of digital nomads working around the globe, who wanted a simple and secure way to invoice our international clients. 
         Thus NomadLedger was born. Our software allows you to easily create, send, or print business documents, accessible from any device and any location. 
         So you can spend less time on billing, and more time on the work that matters to you.`,
-        agreed_terms: `* By signing up, you agree to the <a target="_blank" href="https://api.nomadledger.com/termsandconditions_en.pdf">Terms and Conditions</a> and <a href="https://api.nomadledger.com/privacypolicy_en.pdf">Privacy Policy</a>.`,
-        footer_paragraphe: `All rights reserved.&nbsp;<a target="_blank" href="https://api.nomadledger.com/termsandconditions_en.pdf" rel="noopener noreferrer" target="_blank">Terms and Conditions</a>,&nbsp;
+        agreed_terms: `* By signing up, you agree to the <a target="_blank" href="https://d2cxa8ns3xxkg9.cloudfront.net/static/termsandconditions_en.pdf">Terms and Conditions</a> and <a href="https://d2cxa8ns3xxkg9.cloudfront.net/static/privacypolicy_en.pdf">Privacy Policy</a>.`,
+        footer_paragraphe: `All rights reserved.&nbsp;<a target="_blank" href="https://d2cxa8ns3xxkg9.cloudfront.net/static/termsandconditions_en.pdf" rel="noopener noreferrer" target="_blank">Terms and Conditions</a>,&nbsp;
         features, support, pricing, and service options subject to change without notice.`,
         sign_in: "Sign In",
         try_it_free: "Try it for free",

@@ -1,6 +1,6 @@
 import React  from 'react'
 import { withStyles } from '@material-ui/core/styles';
-import {DEFAULT_AVATAR, DEFAULT_IMG} from '../../redux/constant'
+import {DEFAULT_URL} from '../../redux/constant'
 import { Link } from "react-router-dom";
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -109,7 +109,7 @@ const styles = theme => ({
         }
     },
     img: {
-        maxHeight:"40px",
+        maxHeight:"50px",
         maxWidth:"100px",
         width:"auto"
     }
@@ -162,7 +162,7 @@ class Layout extends React.Component {
                 </IconButton>
                 <Hidden smDown>
                     <Typography >
-                        <img src={company.logo_company && company.logo_company.full_path !== "" ? company.logo_company.full_path :  DEFAULT_IMG } alt="logo" className={classes.img} />
+                        <img src={company.logo_company && company.logo_company.full_path !== "" ? company.logo_company.full_path :  `${DEFAULT_URL}img/default_logo.png` } alt="logo" className={classes.img} />
                     </Typography>
                 </Hidden>
 
@@ -175,7 +175,7 @@ class Layout extends React.Component {
                     component="span"
                     onClick={ this.handleMenu }
                     alt={user.firstname || "firstname"}
-                    src={`${ user.avatar.full_path ||  DEFAULT_AVATAR }`}
+                    src={`${ user.avatar.full_path ||  `${DEFAULT_URL}img/default_avatar.png` }`}
                     className={ this.props.location.pathname === "/account" ? classes.avatarActive : classes.avatar  }
                     style={{  }}
                 />

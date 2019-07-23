@@ -485,9 +485,9 @@ const fr =  {
     home_page: {
         title_01: "Logiciel de facturation en ligne pour nomades numériques",
         paragraphe_01: ` est un logiciel en ligne facile à utiliser pour gérer vos factures et suivre vos tâches en quelques clics.`,
-        paragraphe_02: `Nous sommes un groupe de nomades numériques travaillant dans le monde entier, qui voulions un moyen simple et sécurisé pour facturer nos clients internationaux. C'est ainsi que NomadLedger est né. Notre logiciel vous permet de créer, d’envoyer ou d’imprimer facilement des documents professionnels accessibles depuis n’importe quel appareil et n’importe où. Vous pouvez ainsi consacrer moins de temps à la facturation et plus de temps au travail qui vous importe.`,
-        agreed_terms: ` * En m'inscrivant, j'accepte les <a target="_blank" href="https://api.nomadledger.com/termsandconditions_fr.pdf">Conditions générales</a>  et la  <a href="https://api.nomadledger.com/privacypolicy_fr.pdf">Politique de protection de la vie privée</a>.`,
-        footer_paragraphe: `Tous droits réservés.&nbsp;<a target="_blank" href="https://api.nomadledger.com/termsandconditions_fr.pdf" rel="noopener noreferrer" target="_blank">Conditions Générales</a>,&nbsp;
+        paragraphe_02: `Nous sommes un groupe de nomades numériques travaillant dans le monde entier, et voulions un moyen simple et sécurisé pour facturer nos clients internationaux. C'est ainsi que NomadLedger est né. Notre logiciel vous permet de créer, d’envoyer ou d’imprimer facilement des documents professionnels accessibles depuis n’importe quel appareil et de n’importe où. Vous pouvez ainsi consacrer moins de temps à la facturation et plus de temps au travail qui vous importe.`,
+        agreed_terms: ` * En m'inscrivant, j'accepte les <a target="_blank" href="https://d2cxa8ns3xxkg9.cloudfront.net/static/termsandconditions_fr.pdf">Conditions générales</a>  et la  <a href="https://d2cxa8ns3xxkg9.cloudfront.net/static/privacypolicy_fr.pdf">Politique de protection de la vie privée</a>.`,
+        footer_paragraphe: `Tous droits réservés.&nbsp;<a target="_blank" href="https://d2cxa8ns3xxkg9.cloudfront.net/static/termsandconditions_fr.pdf" rel="noopener noreferrer" target="_blank">Conditions Générales</a>,&nbsp;
         les fonctionnalités, l'assistance, la tarification et les options sont susceptibles d'être modifiées sans préavis.`,
         sign_in: "Se Connecter",
         try_it_free: "Essai gratuit",
