@@ -29,19 +29,19 @@ const TableActions = (props) => {
               {
                 edit ?
                 <Tooltips  title={locale.wording.edit} aria-label="edit">
-                  <div><IconButton style={{ minWidth: 0 }} disabled={!edit || loading} component={Link} to={`/${reducer.toLowerCase()}/edit/${id}`} color="primary"><EditIcon  style={{ fontSize: 18}}/></IconButton></div>
+                  <div><IconButton style={{ minWidth: 0 }} disabled={!edit || loading } component={Link} to={`/${reducer.toLowerCase()}/edit/${id}`} color="primary"><EditIcon  style={{ fontSize: 18}}/></IconButton></div>
                 </Tooltips>
                 :
-                <Tooltips  title={locale.wording.preview} aria-label="edit">
-                  <div><IconButton style={{ minWidth: 0 }} disabled={loading} component={Link} to={`/${reducer.toLowerCase()}/view/${id}`} color="primary"><RemoveRedEyeIcon  style={{ fontSize: 18}}/></IconButton></div>
+                <Tooltips  title={locale.wording.preview} aria-label="preview">
+                  <div><IconButton style={{ minWidth: 0 }} disabled={loading } component={Link} to={`/${reducer.toLowerCase()}/view/${id}`} color="primary"><RemoveRedEyeIcon  style={{ fontSize: 18}}/></IconButton></div>
                 </Tooltips>
               }
-              <ModalSendMail loading={loading} reducer={reducer} item={item} />
+              <ModalSendMail loading={loading} reducer={reducer} item={item} canceled={canceled}/>
               <Tooltips  title={locale.wording[ok()]} aria-label="paid">
                 <div><IconButton style={{ minWidth: 0 }} disabled={ canceled || paid || loading} onClick={ () => { handleAction(reducer, {paid: true, _id: id}, endpoint ) }} color="primary"><CheckIcon style={{ fontSize: 18, color: paid || canceled ? "rgba(0, 0, 0, 0.26)" : "forestgreen" }} /></IconButton></div>
               </Tooltips>
               <Tooltips  title={locale.wording.cancel} aria-label="cancel">
-                <div><IconButton style={{ minWidth: 0 }} disabled={ canceled || loading} onClick={ () => { handleAction(reducer, {canceled: true, _id: id}, endpoint ) }} color="primary"><HighlightOff style={{ fontSize: 18,  color: canceled ? "rgba(0, 0, 0, 0.26)" : "crimson" }} /></IconButton></div>
+                <div><IconButton style={{ minWidth: 0 }} disabled={ canceled || loading } onClick={ () => { handleAction(reducer, {canceled: true, _id: id}, endpoint ) }} color="primary"> <HighlightOff style={{ fontSize: 18,  color: canceled ? "rgba(0, 0, 0, 0.26)" : "crimson" }} /></IconButton></div>
               </Tooltips>
               <Tooltips  title={locale.wording.archive} aria-label="archive">
                 <div><IconButton style={{ minWidth: 0 }} disabled={ loading} onClick={ () => { handleAction(reducer, {archive: true, _id: id}, endpoint ) }} color="primary"><ArchiveIcon style={{ fontSize: 18, color: "grey" }} /></IconButton></div>

@@ -180,6 +180,7 @@ const styles = theme => ({
     button: {
         color: 'white !important',
         marginRight: 10,
+        width: 120,
         backgroundColor: theme.palette.yellow.dark,
         marginBottom: theme.margin.unit,
         '& :hover': {

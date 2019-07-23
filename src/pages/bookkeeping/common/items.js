@@ -213,7 +213,7 @@ class Items extends Component {
         }
               
         <Typography variant="body1" className={ classes.sum } style={{backgroundColor: "white"}}>
-          <b style={{ marginLeft: 24 }}>{locale.wording.vat}&nbsp;{ newData.vat ? newData.vat.value : "0%" } { vat_terms}</b>
+          <b style={{ marginLeft: 24 }}>{locale.wording.vat}&nbsp;{ newData.vat ? cvtNumToUserPref( newData.vat.indice || 0 ) + "%" : "0%" } { vat_terms}</b>
           <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(newData.vat_value || 0) } { newData.currency && newData.currency.value }</b></span>
         </Typography>
         <Typography variant="body1" component="div" className={ classes.sum }>

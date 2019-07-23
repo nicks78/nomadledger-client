@@ -9,13 +9,13 @@ function getSteps(reducer) {
     var res = []
     switch(reducer){
       case "invoice": 
-        res = ['draft', 'sent', 'paid']
+        res = ['draft', 'sent', 'paid', "canceled"]
       break
       case "refund": 
-        res = ['draft', 'sent', 'refunded']
+        res = ['draft', 'sent', 'refunded', "canceled"]
       break
       default: 
-        res = ['draft', 'sent', 'approved']
+        res = ['draft', 'sent', 'approved', "rejected"]
     }
 
     return res
@@ -33,7 +33,10 @@ function getSteps(reducer) {
             return 3
         }else if(status.code === "8"){
             return 3
-        }
+        }else if(status.code === "9" || status.code === "10" ){
+            return 4
+      }
+        
     }
   }
 

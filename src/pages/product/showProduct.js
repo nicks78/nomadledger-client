@@ -189,7 +189,7 @@ class ShowProduct extends React.Component {
                   variant="contained"
                   color="primary"
                   disabled={ isUpdating }
-                  style={{ float: "right" }}
+                  className={ classes.btn }
                   onClick={ () => { this.props.updateItem(this.state.reducer, `update`) } }>
                   { !isUpdating ?  locale.wording.update : locale.wording.loading }
               </Button><br />
@@ -231,6 +231,11 @@ const styles = theme => ({
     color: "white",
     backgroundColor: theme.palette.secondary.light,
     borderRadius: 4
+  },
+  btn: {
+    float: 'right',
+    backgroundColor: theme.palette.yellow.dark,
+    minWidth: 120
   }
 })
 

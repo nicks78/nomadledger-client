@@ -191,6 +191,7 @@ const styles = theme => ({
         color: 'white !important',
         backgroundColor: theme.palette.yellow.dark,
         marginRight: 10,
+        width: 120,
         marginBottom: theme.margin.unit,
         '& :hover': {
             color: 'white !important',

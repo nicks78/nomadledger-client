@@ -7,7 +7,8 @@ const History = (props) => {
 
     const {item, locale } = props;
     var balance = item.subtotal || 0;
-    const lang = localStorage.getItem('locale')
+    const lang = localStorage.getItem('locale');
+    const canceled = item.rejected || item.canceled
 
     return (
         <div style={{clear: "both"}}>
@@ -40,7 +41,7 @@ const History = (props) => {
                   <TableRow>
                         <TableCell></TableCell>
                         <TableCell>{locale.wording.balance_due}</TableCell>
-                        <TableCell>{ cvtNumToUserPref(balance || 0)} <Link className="link" to={`/invoice/create/${item._id}`} style={{float: 'right'}} color="primary" size="small" variant="contained">Facturer</Link></TableCell>
+                        <TableCell>{ cvtNumToUserPref(balance || 0)} { canceled ? <Link className="link" to={`/invoice/create/${item._id}`} style={{float: 'right'}} color="primary" size="small" variant="contained">{locale.wording.invoicer}</Link> : null }</TableCell>
                     </TableRow>
               </TableBody>
             </Table>

@@ -258,6 +258,7 @@ const en = {
         rejecte: "To reject",
         paid: "Paid",
         pay: "Pay",
+        canceled: "Canceled",
         cancel: "Cancel",
         invoicer: "Convert to invoice",
         all: "All",
@@ -324,7 +325,7 @@ const en = {
         bank_account_name: "Beneficiary name",
         iban: "IBAN",
         bic: "BIC",
-        bank_detail: "Display the bank on invoice",
+        bank_detail: "Display the bank on invoice (on PDF)",
         invoice_ref: "Invoice reference"
     },
     helperText: {
@@ -417,6 +418,7 @@ const en = {
         error_422_name: "Must contain a name",
         error_422_access_member: "Only NomadLedger member have access to this function",
         error_422_cannot_be_edited: "Cannot be edited",
+        error_422_cannot_be_send: "This document cannot be send anymore",
         error_sign_up_google: "Google sign Up did not work, please try again or contact us at support@nomadledger.com",
 
         // Stripe err
@@ -449,7 +451,7 @@ const en = {
                 <li><strong>Draft</strong> : Can be edited</li>
                 <li><strong>Sent</strong> : Once a quote is sent, it cannot be edited.</li>
                 <li><strong>Paid</strong> : Once a quote is paid, it can be canceled or resend.</li>
-                <li><strong>Canceled</strong> : Once a quote is canceled, it cannot be modify.</li>
+                <li><strong>Canceled</strong> : No actions available</li>
             </ul>
             <p class="hint">When you create an invoice based on quote, this quote will not be editable.</p>
         `,
@@ -459,7 +461,7 @@ const en = {
                 <li><strong>Draft</strong> : Can be edited</li>
                 <li><strong>Sent</strong> : Once an invoice is sent, it cannot be edited.</li>
                 <li><strong>Paid</strong> : Once an invoice is paid, it can be canceled or resend.</li>
-                <li><strong>Canceled</strong> : Once an invoice is canceled, it cannot be modify.</li>
+                <li><strong>Canceled</strong> : No actions available</li>
             </ul>
         `,
         status_refund: `
@@ -468,7 +470,7 @@ const en = {
                 <li><strong>Draft</strong> : Can be edited</li>
                 <li><strong>Sent</strong> : Once a refund is sent, it cannot be edited.</li>
                 <li><strong>Paid</strong> : Once a refund is paid, it can be canceled or resend.</li>
-                <li><strong>Canceled</strong> : Once a refunds is canceled, it cannot be modify.</li>
+                <li><strong>Canceled</strong> : No actions available</li>
             </ul>
         `
 

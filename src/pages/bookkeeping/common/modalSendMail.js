@@ -32,7 +32,8 @@ const styles = theme => ({
     outline: 'none',
   },
   btn: {
-    backgroundColor: theme.palette.yellow.dark
+    backgroundColor: theme.palette.yellow.dark,
+    width: 120
   }
 });
 
@@ -105,12 +106,12 @@ class SimpleModal extends React.Component {
   }
 
   render() {
-    const { classes, reducer, item, locale, actionLoading } = this.props;
+    const { classes, reducer, item, locale, actionLoading, canceled } = this.props;
     const { content} = this.state
 
     return (
       <React.Fragment>
-        <Tooltips title={locale.wording.send}><IconButton onClick={this.handleOpen} style={{ minWidth: 5 }} disabled={actionLoading}  color="primary"><SendIcon style={{ fontSize: 18, color:  "darkorange" }} /></IconButton></Tooltips>
+        <Tooltips title={locale.wording.send}><div><IconButton onClick={this.handleOpen} style={{ minWidth: 5 }} disabled={actionLoading || canceled}  color="primary"><SendIcon style={{ fontSize: 18, color:  canceled ? "rgba(0, 0, 0, 0.26)" : "darkorange" }} /></IconButton></div></Tooltips>
         <Modal
           aria-labelledby={item._id}
           aria-describedby="simple-modal-description"

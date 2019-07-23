@@ -262,6 +262,7 @@ const fr =  {
         pay: "Payer",
         paid: "Payé",
         cancel: "Annuler",
+        canceled: "Annulé",
         invoicer: "Facturateur",
         all: "Tous",
         reference: "Référence",
@@ -327,7 +328,7 @@ const fr =  {
         bank_account_name: "Compte bénéficiare",
         iban: "IBAN",
         bic: "BIC",
-        bank_detail: "Afficher mes coordonnées bancaires",
+        bank_detail: "Afficher mes coordonnées bancaires (sur PDF)",
         invoice_ref: "Référence facture"
 
     },
@@ -422,6 +423,7 @@ const fr =  {
         error_422_name: "Veuillez indiquer un nom",
         error_422_access_member: "Seule les membres NomadLedger ont accès à cette fonction.",
         error_422_cannot_be_edited: "Ne peut etre editer",
+        error_422_cannot_be_send: "Ce document ne peut plus être envoyé",
         error_sign_up_google: "Inscription via Google n'a pas fonctionner, veuillez recommencer ou contacter notre service support@nomadledger.com",
 
         // Stripe err
@@ -452,7 +454,7 @@ const fr =  {
                 <li><strong>Brouillon</strong> : Peuvent être edité.</li>
                 <li><strong>Envoyé</strong> : Peuvent être edité.</li>
                 <li><strong>Approuvé</strong> : Un devis approuvé ne peut plus être edité. Il peut être annulé ou renvoyé.</li>
-                <li><strong>Annulé</strong> : Un devis annulé ne peut plus être modifié.</li>
+                <li><strong>Annulé</strong> : Aucune action possible</li>
             </ul>
             <p class="hint">Dès que vous créez une facture attacher au devis, celui-ci prendra le statut "approuvé" et ne sera donc plus modifiable.</p>
         `,
@@ -462,7 +464,7 @@ const fr =  {
                 <li><strong>Brouillon</strong> : Peuvent être edité.</li>
                 <li><strong>Envoyé</strong> : Une facture envoyé ne peut plus être edité.</li>
                 <li><strong>Payé</strong> : Une facture payé ne peut plus être edité. Elle peut être annulé ou renvoyé.</li>
-                <li><strong>Annulé</strong> : Une facture annulé ne peut plus être modifié.</li>
+                <li><strong>Annulé</strong> : Aucune action possible</li>
             </ul>
         `,
         status_refund: `
@@ -471,7 +473,7 @@ const fr =  {
                 <li><strong>Brouillon</strong> : Peuvent être edité.</li>
                 <li><strong>Envoyé</strong> : Un avoir envoyé ne peut plus être edité.</li>
                 <li><strong>Remboursé</strong> : Un avoir remboursé ne peut plus être edité. Il peut être annulé ou renvoyé.</li>
-                <li><strong>Annulé</strong> : Un avoir annulé ne peut plus être modifié.</li>
+                <li><strong>Annulé</strong> : Aucune action possible</li>
             </ul>
         `
     },

@@ -175,7 +175,7 @@ class ShowExpense extends Component {
                   variant="contained"
                   color="primary"
                   disabled={ isUpdating }
-                  className={ classes.btnSave }
+                  className={ classes.btn }
                   onClick={ () => { this.props.updateItem(reducer, `update`)} }>
                   { !isUpdating ?  locale.wording.update : locale.wording.loading }</Button>
 
@@ -188,8 +188,10 @@ class ShowExpense extends Component {
 }
 
 const styles = theme => ({
-    btnSave: {
-      float: 'right'
+    btn: {
+      float: 'right',
+      backgroundColor: theme.palette.yellow.dark,
+      minWidth: 120
     },
     textField: {
         fontWeight: 300,

@@ -37,7 +37,8 @@ const styles = theme => ({
     button: {
         color: 'white',
         backgroundColor: '#FAB745',
-        marginRight: 10
+        marginRight: 10,
+        width: 120
     },
     container: {
         // display: 'flex',
@@ -53,6 +54,7 @@ const styles = theme => ({
         marginBottom: '24px',
         color: 'white',
         backgroundColor: theme.palette.yellow.dark,
+        width: 120
     },
     loading: {
         margin: 10

@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import { withStyles, Paper, Table, TableRow, TableBody, TableHead, TableCell , Typography, Fab, TextField, IconButton} from '@material-ui/core';
+import { withStyles, Paper, Table, TableRow, TableBody, TableHead, TableCell , Typography, Fab, TextField, IconButton, FormControlLabel, Checkbox} from '@material-ui/core';
 import { getDocument, resetState, downloadPdf, updateSingle, createState} from '../../../redux/book/actions'
 import { cvtNumToUserPref } from '../../../utils/help_function'
 import Spinner from '../../../components/common/spinner'
@@ -64,6 +64,28 @@ class View extends Component {
             </div>
     }
 
+    updateItem = (val) => {
+      const { item } = this.props
+      const reducer = this.state.reducer 
+      this.props.createState(reducer.toUpperCase(), "bank_detail", val )
+      this.props.updateSingle( reducer.toUpperCase(), { bank_detail: val }, `common/update-field/${reducer.toLowerCase()}/${item._id}` )
+    }
+
+    renderDisplayBank = () => {
+      const {locale, item } = this.props
+      return <FormControlLabel
+                control={
+                <Checkbox
+                    checked={ item.bank_detail || false }
+                    onChange={ (e) => { this.updateItem(e.target.checked) }}
+                    value={ locale.wording.bank_detail }
+                    color="primary"
+                />
+                }
+                label={ locale.wording.bank_detail || ""}
+            />
+    }
+
 
     render() {
 
@@ -88,7 +110,6 @@ class View extends Component {
               <Typography variant="h1" align="center">{locale.wording[reducer]}</Typography>
 
             <StatusStep item={item} locale={locale} reducer={reducer}/>
-
             <div className={classes.header}>
                 {
                   item.contact_id ?
@@ -143,6 +164,7 @@ class View extends Component {
                         </Typography>
                         : null
                       }
+
                       {
                         item.quote_id ?
                         <Typography variant="caption" align="left">{locale.wording.on +" "+locale.wording.quote}&nbsp;
@@ -170,6 +192,14 @@ class View extends Component {
 
               : null
             }
+            {
+              reducer === "invoice" ?
+
+              this.renderDisplayBank()
+
+              : null
+            }
+
 
             {
               item.response ?
@@ -253,7 +283,7 @@ class View extends Component {
               : null 
             }
             <Typography variant="body1" className={ classes.sum } style={{backgroundColor: "white"}}>
-              <b style={{ marginLeft: 24 }}>{locale.wording.vat}&nbsp;{ item.vat ? item.vat.value : "0%" }</b>
+              <b style={{ marginLeft: 24 }}>{locale.wording.vat}&nbsp;{ item.vat ? cvtNumToUserPref(item.vat.indice || 0) + " %" : "0%" }</b>
               <span className={ classes.sumSpan }><b>{ cvtNumToUserPref(vatValue ) } { item.currency && item.currency.value }</b></span><br />
               <span style={{ marginLeft: 24, fontSize: 10 }}>{ item.vat && item.vat["vat_terms_" + localStorage.getItem('locale')] }</span>
             </Typography>

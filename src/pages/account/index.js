@@ -32,10 +32,8 @@ const styles = theme => ({
     right: '5px',
     color: 'rgba(0,0,0,.54)'
   },
-  titleBar: {
-    // padding: 15,
-    // borderRadius: 4,
-    // backgroundColor: 'rgb(238,238,238)'
+  iconHelp: {
+    color: theme.palette.yellow.light
   },
   paddingContent: {
     padding: 24,
@@ -110,16 +108,16 @@ class Account extends Component {
                           <Grid container spacing={24}>
 
                               <Grid item xs={12} md={6}>
-                                  <Typography variant="subtitle2">
-                                    {locale.subheading.my_vat}&nbsp;<Tooltips title={locale.helperText.account_vat}  aria-label="setting"><HelpIcon style={{color: "#ffb555"}} /></Tooltips>
+                                  <Typography variant="body1">
+                                    {locale.subheading.my_vat}&nbsp;<Tooltips title={locale.helperText.account_vat}  aria-label="vat"><HelpIcon className={ classes.iconHelp } /></Tooltips>
                                   </Typography>
                                   <Divider className={ classes.divider }/>
                                   <AddVat />
                               </Grid>
                               <br />
                               <Grid item xs={12} md={6}>
-                              <Typography variant="subtitle2">
-                              {locale.subheading.contact_group}&nbsp;<Tooltips title={locale.helperText.account_group}  aria-label="setting"><HelpIcon style={{color: "#ffb555"}} /></Tooltips>
+                              <Typography variant="body1">
+                              {locale.subheading.contact_group}&nbsp;<Tooltips title={locale.helperText.account_group}  aria-label="group"><HelpIcon className={ classes.iconHelp } /></Tooltips>
                                 </Typography>
                                 <Divider className={ classes.divider }/>
                                   <AddContactGroup />
@@ -127,8 +125,8 @@ class Account extends Component {
                               <Grid item xs={12}>
 
 
-                                <Typography variant="subtitle2"  >
-                                {locale.subheading.my_categories}&nbsp;<Tooltips title={locale.helperText.account_category}  aria-label="setting"><HelpIcon style={{color: "#ffb555"}}  /></Tooltips>
+                                <Typography variant="body1"  >
+                                {locale.subheading.my_categories}&nbsp;<Tooltips title={locale.helperText.account_category}  aria-label="category"><HelpIcon className={ classes.iconHelp }  /></Tooltips>
                                 </Typography>
                                 <Divider className={ classes.divider }/>
                                 <AddCategory />

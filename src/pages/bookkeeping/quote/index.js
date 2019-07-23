@@ -125,7 +125,7 @@ class Quote extends Component {
                                                 <TableCell className="tableNumber">{cvtNumToUserPref(quote.subtotal)} {quote.currency.value}</TableCell>
                                                 <TableCell><span style={{color: quote.status.color, fontWeight: 500 }}>{ quote.status[localStorage.getItem('locale')] }</span></TableCell>
                                                 <TableCell align="center">
-                                                {  !isComplete ? 
+                                                {  !isComplete && !quote.rejected ? 
                                                   <Link to={`/invoice/create/${quote._id}`}><img alt="convert-to-invoice" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link>
                                                   : <NotInterestedIcon style={{fontSize: 18, color: "#ccc"}} />
                                                 }  
@@ -196,6 +196,7 @@ const styles = theme => ({
     button: {
         color: 'white !important',
         marginRight: 10,
+        width: 120,
         backgroundColor: theme.palette.yellow.dark,
         marginBottom: theme.margin.unit,
         '& :hover': {

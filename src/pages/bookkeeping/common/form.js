@@ -181,7 +181,7 @@ const Form = (props) => {
                                                 color="primary"
                                             />
                                             }
-                                            label={ locale.wording.bank_detail || "ok"}
+                                            label={ locale.wording.bank_detail || ""}
                                         />
                                         </Grid>
                                     : null
@@ -273,6 +273,7 @@ const Form = (props) => {
                         <Button
                             variant="contained"
                             color="primary"
+                            className={classes.btn}
                             disabled={ isUpdating || !data.currency || !data.vat || !data.contact_id ? true : false }
                             onClick={ () => { props.handleSubmit(reducer)} }>
                             { isUpdating ? locale.wording.loading : btnLabel }
@@ -301,6 +302,10 @@ const styles = theme => ({
     },
     btnSave: {
         float: 'right'
+    },
+    btn: {
+        backgroundColor: theme.palette.yellow.dark,
+        minWidth: 120
     },
     inputDate: {
       width: '100%',

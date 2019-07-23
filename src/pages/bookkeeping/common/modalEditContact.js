@@ -30,6 +30,10 @@ const styles = theme => ({
     margin: '0 auto',
     outline: 'none',
   },
+  btn: {
+    backgroundColor: theme.palette.yellow.dark,
+    width: 120
+  }
 });
 
 class SimpleModal extends React.Component {
@@ -137,6 +141,7 @@ class SimpleModal extends React.Component {
                   type="submit"
                   variant="contained"
                   disabled={actionLoading}
+                  className={classes.btn}
                   color="primary">
                   {actionLoading ? locale.wording.loading : locale.wording.edit}</Button>
             </div>

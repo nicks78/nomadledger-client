@@ -21,7 +21,7 @@ const styles = theme => ({
         borderRadius: 4,
         border: `1px solid #b8daff`,
           color: "#004085",
-          backgroundColor: "#cce5ff"
+          backgroundColor: theme.palette.thinDarkBlue,//  "#cce5ff"
       },
 })
 
