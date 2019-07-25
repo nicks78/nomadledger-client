@@ -30,6 +30,7 @@ class CacheBuster extends React.Component {
       isLatestVersion: false,
       reloadedAt: null,
       refreshCacheAndReload: () => {
+        this.props.setNotification("new_avalaible_update", "warning")
         // console.log('Clearing cache and hard reloading...')
         // if (caches) {
         //   // Service worker cache should be cleared with caches.delete()

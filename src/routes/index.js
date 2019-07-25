@@ -97,11 +97,11 @@ class Routes extends React.Component {
 
             <Router base history={history}>
                 <h1>Test cached</h1>
-            <CacheBuster>
+            <CacheBuster setNotification={setNotification}>
                 {({ loading, isLatestVersion, refreshCacheAndReload }) => {
                 if (loading){ return null }
                 if (!loading && !isLatestVersion) {
-                    this.props.setNotification("new_avalaible_update", "warmning")
+                    refreshCacheAndReload()
                 }
 
                 return (
