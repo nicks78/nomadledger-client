@@ -96,7 +96,7 @@ class Routes extends React.Component {
         return (
 
             <Router base history={history}>
-                <h1>Test cached</h1>
+                
             <CacheBuster setNotification={setNotification}>
                 {({ loading, isLatestVersion, refreshCacheAndReload }) => {
                 if (loading){ return null }
@@ -106,6 +106,7 @@ class Routes extends React.Component {
 
                 return (
                     <React.Fragment>
+                        <h1>Test cached</h1>
                         <SnackBar
                             text={text}
                             openSnack={ openSnack }
