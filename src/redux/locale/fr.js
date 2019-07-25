@@ -407,6 +407,7 @@ const fr =  {
         error_500_upload: "Erreur téléchargement du fichier, veuillez recommencer ou contacter support@nomadledger.com",
         error_agreed_terms: "Vous devez accepter les Conditions générales",
         error_date_expense: "La date doit être inférieur ou égale a la date du jour.",
+        new_avalaible_update: "Une nouvelle version de NomadLedger est disponible, merci de rafraichir la page",
 
 
         // Bad value

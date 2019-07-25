@@ -403,6 +403,7 @@ const en = {
         error_500_upload: "File upload error, please try again or contact us at support@nomadledger.com",
         error_agreed_terms: "You must agreed with our Terms and Conditions",
         error_date_expense: "The receipt date must be equal or inferior to today's date.",
+        new_avalaible_update: "A new update is available, please reload your page",
 
         // Bad value
         error_422: "Bad value",

@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button'
 import {history} from './history'
 import {connect} from 'react-redux'
 import { getLocale, initLocale } from '../redux/locale/actions'
+import { setNotification } from '../redux/notification/actions'
 import { getLogout } from '../redux/auth/actions'
 import PrivateRoute from './privateRoute'
 import CacheBuster from '../CacheBuster';
@@ -97,9 +98,9 @@ class Routes extends React.Component {
             <Router base history={history}>
             <CacheBuster>
                 {({ loading, isLatestVersion, refreshCacheAndReload }) => {
-                if (loading){ return <div style={{ textAlign: "center", marginTop: "20%" }}><Button variant="contained" color="primary" onClick={() => { window.location.reload(true) }}>{locale.wording.refresh}</Button></div> }
+                if (loading){ return null }
                 if (!loading && !isLatestVersion) {
-                    refreshCacheAndReload();
+                    this.props.setNotification("new_avalaible_update", "warmning")
                 }
 
                 return (
@@ -188,4 +189,6 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, {getLocale, getLogout, initLocale})(Routes);
+export default connect(mapStateToProps, {getLocale, getLogout, initLocale, setNotification})(Routes);
+
+// return <div style={{ textAlign: "center", marginTop: "20%" }}><Button variant="contained" color="primary" onClick={() => { window.location.reload(true) }}>{locale.wording.refresh}</Button></div> 
