@@ -100,6 +100,7 @@ const baseReducer = (state = new BaseState(), action) => {
                 isCreating: action.isCreating,
                 total: state.total + 1,
                 progress: action.value,
+                receivedAt: Date.now(),
                 tmp_state: {},
                 item: null,
                 list: [ ...state.list, action.item ]
@@ -118,6 +119,7 @@ const baseReducer = (state = new BaseState(), action) => {
                 ...state,
                 list:  state.list.filter( (element) => { return element._id !== action.id }),
                 total: state.total -1,
+                receivedAt: Date.now(),
             }
 
         case `PROGRESS`:

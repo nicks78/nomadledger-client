@@ -406,6 +406,7 @@ const fr =  {
         error_pw_min_8: "Votre mot de passe doit faire au minimum 8 caractères",
         error_500_upload: "Erreur téléchargement du fichier, veuillez recommencer ou contacter support@nomadledger.com",
         error_agreed_terms: "Vous devez accepter les Conditions générales",
+        error_date_expense: "La date doit être inférieur ou égale a la date du jour.",
 
 
         // Bad value

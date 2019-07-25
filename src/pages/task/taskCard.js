@@ -3,6 +3,8 @@
 import React from 'react'
 import { withStyles, Typography } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/EditOutlined'
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 
 const TaskCard = (props) => {
     const {task, id, classes, isFetching} = props
@@ -12,7 +14,7 @@ const TaskCard = (props) => {
             {
                 id !== task._id && !isFetching
                   ?  <EditIcon onClick={ () => { props.onEdit(task) }} className={classes.icon} />
-                  : null
+                  : <CircularProgress className={ classes.circular } color="secondary" /> 
             }
             <Typography variant="body2" style={{maxWidth: '90%', textAlign: 'justify'}}>{task.short_desc}</Typography>
             <br />
@@ -51,7 +53,12 @@ const styles = theme => ({
     span: {
       fontSize: 11,
       color: 'rgb(185,185,185)'
-    }
+    },
+    circular: {
+      float: 'right',
+      width: '15px !important',
+      height: '15px !important'
+    },
 })
 
 

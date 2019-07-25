@@ -32,6 +32,11 @@ const styles = theme => ({
       marginLeft: 0,
       marginTop: 24
     }
+  },
+  btn: {
+    float: "right",
+    backgroundColor: theme.palette.yellow.dark,
+    minWidth: 120
   }
 
 })
@@ -147,7 +152,7 @@ class ShowContact extends React.Component {
 
           {
             showEdit ?
-            <Button style={{float: "right"}} disabled={isUpdating} color="primary" variant="contained" onClick={ this.updateDocument }>{ isUpdating ? locale.wording.loading :  locale.wording.update }</Button>
+            <Button className={classes.btn} disabled={isUpdating} color="primary" variant="contained" onClick={ this.updateDocument }>{ isUpdating ? locale.wording.loading :  locale.wording.update }</Button>
             : null
           }
 

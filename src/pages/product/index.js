@@ -47,7 +47,7 @@ class Product extends Component {
         limit: 8,
         skip: 0,
         height: window.innerHeight,
-        receivedAt: "",
+        receivedAt: null,
         listProducts: []
     }
 
@@ -67,10 +67,19 @@ class Product extends Component {
     componentWillReceiveProps(nextProps){
       if(this.state.receivedAt !== nextProps.receivedAt ){
         this.setState({
-          listProducts: [...this.state.listProducts, ...nextProps.listProducts],
+          listProducts: this.removeDuplicate(nextProps.listProducts),
           receivedAt: nextProps.receivedAt
         })
         }
+    }
+
+    removeDuplicate = (items) => {
+        
+        const uniqueAddresses = Array.from(new Set(items.map(a => a._id)))
+            .map(id => {
+            return items.find(a => a._id === id)
+        })
+        return uniqueAddresses
     }
 
     handleScroll = (event) => {
@@ -101,6 +110,7 @@ class Product extends Component {
     }
 
     handleDuplicateItem = (product) => {
+        this.setState({ receivedAt: null })
       this.props.duplicateItem(this.state.reducer, product)
     }
 
@@ -108,7 +118,7 @@ class Product extends Component {
 
     const { isFetching, locale, newProduct, createState, createItem, isCreating, category, classes, currency } = this.props
     const {listProducts} = this.state
-
+console.log(listProducts)
     return (
         <div style={styles.container}>
             <Hidden smUp><Typography variant="h1" align="center" className={classes.title}>{locale.product.name}</Typography></Hidden>

@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper'
 
 function header(classes, locale, currency, total, color, label){
   return <Paper className={classes[color]} elevation={1}>
-          <Typography className={classes.typoTitle} variant="body1">
+          <Typography className={classes.typoTitle} variant="h3">
             {locale.wording[label]}
             </Typography>
         <Grid container>
@@ -19,7 +19,7 @@ function header(classes, locale, currency, total, color, label){
             </Grid>
 
             <Grid item xs={3}>
-            <Typography className={ classes.typoValue } variant="body1">
+            <Typography className={ classes.typoValue } variant="h3">
               { cvtNumToUserPref(total)} {currency}
             </Typography>
             </Grid>
@@ -61,12 +61,14 @@ const styles = theme => ({
     whiteSpace: 'nowrap'
   },
   revenues: {
-    padding: 10, 
-    background: 'linear-gradient(60deg, #3b78e7, #1930FF)'
+    padding: 15, 
+    // background: 'linear-gradient(60deg, #3b78e7, #1930FF)'
+    backgroundColor: theme.palette.primary.main
   },
   refunds: {
-    padding: 10,
-    background: 'linear-gradient(60deg, #AD3428, #d23f31)'
+    padding: 15,
+    // background: 'linear-gradient(60deg, #AD3428, #d23f31)'
+    backgroundColor: theme.palette.secondary.main
   }
 
 })

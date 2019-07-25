@@ -402,6 +402,7 @@ const en = {
         error_pw_min_8: "Your password must have at least 8 characters",
         error_500_upload: "File upload error, please try again or contact us at support@nomadledger.com",
         error_agreed_terms: "You must agreed with our Terms and Conditions",
+        error_date_expense: "The receipt date must be equal or inferior to today's date.",
 
         // Bad value
         error_422: "Bad value",

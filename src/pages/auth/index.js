@@ -7,7 +7,6 @@ import { createStateUser, createUser } from '../../redux/auth/createActions'
 import * as actions from '../../redux/auth/createActions'
 import { resetUser } from '../../redux/auth/actions'
 import {Typography, withStyles, Grid, Button} from '@material-ui/core';
-import withWidth from '@material-ui/core/withWidth';
 import Jumbotron from './components/jumbotron'
 import RegisterForm from './components/registerForm'
 import {setNotification} from '../../redux/notification/actions'
@@ -225,8 +224,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-const auth = withWidth()(Auth)
-const StyledAuth = withStyles(styles)(auth)
+
+const StyledAuth = withStyles(styles)(Auth)
 
 
 export default connect(mapStateToProps, {createStateUser, createUser, resetUser, initLocale, setNotification, actions })(StyledAuth);

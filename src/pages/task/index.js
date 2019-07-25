@@ -179,6 +179,12 @@ const styles = theme => ({
       marginTop: 10,
       fontWeight: 400,
       textTransform: "capitalize"
+    },
+    margin: {
+      [theme.breakpoints.down("sm")]:{
+        marginTop: 24,
+        marginBottom: 20
+      }
     }
 })
 

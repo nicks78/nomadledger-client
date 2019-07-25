@@ -1,18 +1,17 @@
 //src/pages/task/taskCard.js
 
 import React  from 'react'
-import { withStyles, TextField, Grid, InputAdornment} from '@material-ui/core'
-import CheckIcon from '@material-ui/icons/CheckOutlined'
+import { withStyles, TextField, Grid, InputAdornment, Button} from '@material-ui/core'
+// import CheckIcon from '@material-ui/icons/CheckOutlined'
 import DayPickers from '../../lib/dayPicker'
 import ApxSelect from '../../components/common/select'
 
 
 const EditTask = (props) => {
-    const { itemToUpdate , classes, status, task, locale, isFetching} = props
+    const { itemToUpdate , classes, status, task, locale} = props
 
     return (
-      <div>
-        { !isFetching ? <CheckIcon onClick={ () => { props.onUpdateTask(task) } } style={{float: 'right', color: 'green', fontSize: 18, cursor: "pointer", marginTop: 5}} /> : null }
+      <div style={{marginTop: 24}}>
         <Grid container spacing={8}>
 
             <Grid item xs={12} sm={4} md={4}>
@@ -58,17 +57,24 @@ const EditTask = (props) => {
                   variant="filled"
               />
             </Grid>
+            <Grid item xs={12}>
+            <TextField
+                variant="filled"
+                value={itemToUpdate.short_desc || ""}
+                label={locale.wording.short_desc}
+                margin="dense"
+                fullWidth
+                multiline
+                rows={4}
+                onChange={(e) => { props.onCreateStateTask(null, 'short_desc', e.target.value) }}
+              />
+              
+                <Button color="primary" onClick={ () => props.onUpdateTask(task) } className={classes.btn} variant="contained">{ locale.wording.update }</Button>
+
+            </Grid>
         </Grid>
-          <TextField
-            variant="filled"
-            value={itemToUpdate.short_desc || ""}
-            label={locale.wording.short_desc}
-            margin="dense"
-            fullWidth
-            multiline
-            rows={4}
-            onChange={(e) => { props.onCreateStateTask(null, 'short_desc', e.target.value) }}
-          />
+          
+        
       </div>
     )
 }
@@ -78,9 +84,17 @@ const EditTask = (props) => {
 const styles = theme => ({
   textField: {
     marginTop: 0,
-  }
-
+  },
+  btn: {
+    backgroundColor: theme.palette.yellow.dark,
+    minWidth: 120,
+    float: 'right',
+    marginTop: 24,
+    marginBottom: 20
+  },
 })
 
 
 export default withStyles(styles)(EditTask);
+
+// { isFetching ? <CheckIcon onClick={ () => { props.onUpdateTask(task) } } style={{float: 'right', color: 'green', fontSize: 18, cursor: "pointer", marginTop: 5}} /> : null }
