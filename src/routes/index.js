@@ -7,7 +7,7 @@ import { getLocale, initLocale } from '../redux/locale/actions'
 import { setNotification } from '../redux/notification/actions'
 import { getLogout } from '../redux/auth/actions'
 import PrivateRoute from './privateRoute'
-import CacheBuster from '../CacheBuster';
+// import CacheBuster from '../CacheBuster';
 
 // Common
 import SnackBar from '../lib/snackBar'
@@ -96,17 +96,8 @@ class Routes extends React.Component {
         return (
 
             <Router base history={history}>
-                
-            <CacheBuster setNotification={setNotification}>
-                {({ loading, isLatestVersion, refreshCacheAndReload }) => {
-                if (loading){ return null }
-                if (!loading && !isLatestVersion) {
-                    refreshCacheAndReload()
-                }
-
-                return (
                     <React.Fragment>
-                        <h1>Test cached -0002</h1>
+                        <h1>Test cached -0003</h1>
                         <SnackBar
                             text={text}
                             openSnack={ openSnack }
@@ -167,11 +158,7 @@ class Routes extends React.Component {
 
                     </Switch>
                 </React.Fragment>
-                    );
-                }}
-            </CacheBuster>
             </Router>
-
        )
     }
 }
