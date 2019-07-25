@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import Spinner from '../components/common/spinner'
+import {Button} from '@material-ui/core'
 
 
 class NotFound extends Component {
@@ -30,7 +31,8 @@ class NotFound extends Component {
         {
           !timeout ?
             <div><Spinner /></div>
-          : <h2>"404 - Page not found !"</h2>
+            : <div><h2>"404 - Page not found !"</h2><br /><Button variant="contained" color="primary" onClick={() => { window.location.reload(true) }}>Reload</Button></div>
+          
         }
 
       </div>

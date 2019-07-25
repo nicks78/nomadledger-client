@@ -173,7 +173,6 @@ const en = {
         repay: "Repay",
         refunded: "Refunded",
         transaction_number: "Transaction number",
-        my_account: "My account",
         archive: "Archive",
 
         contact_group: "Group",
@@ -327,7 +326,8 @@ const en = {
         bic: "BIC",
         bank_detail: "Display the bank on invoice (on PDF)",
         invoice_ref: "Invoice reference",
-        refresh: "Reload"
+        refresh: "Reload",
+        my_account: "My account"
     },
     helperText: {
         select_phone_code: "Phone code",

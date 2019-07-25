@@ -176,7 +176,6 @@ const fr =  {
         repay: "Rembourser",
         refunded: "Remboursé",
         transaction_number: "Référence du virement",
-        my_account: "Mon Profil",
         archive: "Archiver",
 
         contact_group: "Groupe",
@@ -330,7 +329,8 @@ const fr =  {
         bic: "BIC",
         bank_detail: "Afficher mes coordonnées bancaires (sur PDF)",
         invoice_ref: "Référence facture",
-        refresh: "Recharger"
+        refresh: "Recharger",
+        my_account: "Mon compte"
 
     },
     helperText: {

@@ -92,6 +92,7 @@ class Routes extends React.Component {
     render(){
 
         const { isLoggedIn, locale, authUser, company, text, status, openSnack } = this.props
+        console.log("NULL", isLoggedIn && authUser)
         return (
 
             <Router base history={history}>

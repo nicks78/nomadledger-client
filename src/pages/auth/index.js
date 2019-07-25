@@ -216,7 +216,7 @@ const styles = theme => ({
 
 
 const mapStateToProps = (state) => {
-
+console.log(state)
     return {
         isFetching: state.auth.isFetching,
         locale: state.locale.locale,

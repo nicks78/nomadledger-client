@@ -54,6 +54,7 @@ class Login extends Component {
 
     const {isError, locale, message, isFetching, classes } = this.props
     const langue = localStorage.getItem("locale");
+    const auth = parseInt(localStorage.getItem("auth") || 0, 10)
 
     const formLogin = {
             title: locale.subheading.add_contact,
@@ -83,28 +84,36 @@ class Login extends Component {
                           { locale.subheading.label_login}&nbsp;<span dangerouslySetInnerHTML={{__html: locale.company_name}}></span>
                         </Typography>
                         {   isError ? <p> {locale.message[message]}</p> : null }
-                        <form onSubmit={ this.onSubmitForm }>
-                        <ApxForm
-                            formField={formLogin.fields}
-                            formHandler={ this.handleLogin }
-                            locale={ locale }
-                            xs={12}
-                            md={12}
-                            objData={ this.state }/>
-                        
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            type="submit"
-                            className={  classes.button }
-                            >
-                            { locale.wording.login }
-                        </Button>
-                        </form>
+                        {
+                            auth ? 
+                            <div><br /><br /><Button fullWidth onClick={ () => {window.open("/dashboard", "_self")} } variant="contained" color="primary">{locale.wording.login}</Button></div>
+                            : <form onSubmit={ this.onSubmitForm }>
+                                <ApxForm
+                                    formField={formLogin.fields}
+                                    formHandler={ this.handleLogin }
+                                    locale={ locale }
+                                    xs={12}
+                                    md={12}
+                                    objData={ this.state }/>
+                                
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    type="submit"
+                                    className={  classes.button }
+                                    >
+                                    { locale.wording.login }
+                                </Button>
+                                </form>
+                        }
                         <br />
-                        <div  className={classes.link}>
-                            <Link className="link" to="/public/forgot-password" >{locale.subheading.link_forgot_pwd}</Link>
-                        </div>
+                        {
+                            auth ? 
+                             <div  className={classes.link}>
+                                <Link className="link" to="/public/forgot-password" >{locale.subheading.link_forgot_pwd}</Link>
+                            </div>
+                            : null 
+                        }
                 </WrapForm>
 
             </div>
@@ -141,7 +150,7 @@ const mapStateToProps = (state) => {
         message: state.auth.message,
         isError: state.auth.isError,
         isFetching: state.auth.isFetching,
-        locale: state.locale.locale,
+        locale: state.locale.locale
     }
 }
 
