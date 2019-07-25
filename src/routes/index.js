@@ -97,7 +97,6 @@ class Routes extends React.Component {
 
             <Router base history={history}>
                     <React.Fragment>
-                        <h1>Test cached -0004</h1>
                         <SnackBar
                             text={text}
                             openSnack={ openSnack }
