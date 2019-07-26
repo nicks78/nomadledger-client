@@ -422,6 +422,7 @@ const en = {
         error_422_access_member: "Only NomadLedger member have access to this function",
         error_422_cannot_be_edited: "Cannot be edited",
         error_422_cannot_be_send: "This document cannot be send anymore",
+        error_422_outstock: "Please check your products stocks", 
         error_sign_up_google: "Google sign Up did not work, please try again or contact us at support@nomadledger.com",
 
         // Stripe err
@@ -486,26 +487,26 @@ const en = {
     home_page: {
         title_01: "The invoicing software for digital nomads",
         paragraphe_01: ` is an easy- to- use online software to manage your invoices and keep track of your tasks with just a few clicks.`,
-        paragraphe_02: `We are a group of digital nomads working around the globe, who wanted a simple and secure way to invoice our international clients. 
-        Thus NomadLedger was born. Our software allows you to easily create, send, or print business documents, accessible from any device and any location. 
-        So you can spend less time on billing, and more time on the work that matters to you.`,
+        paragraphe_02: `We are a group of <strong>digital nomads</strong> working around the globe, who wanted a simple and <strong>secure way to invoice our international clients</strong>.<br />
+        Thus <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> was born. Our software allows you to easily create, send, or print business documents, accessible from any device and any location. 
+        So you can <strong>spend less time on billing</strong>, and more time on the work that matters to you.`,
         agreed_terms: `* By signing up, you agree to the <a target="_blank" href="https://d2cxa8ns3xxkg9.cloudfront.net/static/termsandconditions_en.pdf">Terms and Conditions</a> and <a href="https://d2cxa8ns3xxkg9.cloudfront.net/static/privacypolicy_en.pdf">Privacy Policy</a>.`,
-        footer_paragraphe: `All rights reserved.&nbsp;<a target="_blank" href="https://d2cxa8ns3xxkg9.cloudfront.net/static/termsandconditions_en.pdf" rel="noopener noreferrer" target="_blank">Terms and Conditions</a>,&nbsp;
+        footer_paragraphe: `All rights reserved.&nbsp;<a style="color: #8B8B8B; font-weight: 600" target="_blank" href="https://d2cxa8ns3xxkg9.cloudfront.net/static/termsandconditions_en.pdf" rel="noopener noreferrer" target="_blank">Terms and Conditions</a>,&nbsp;
         features, support, pricing, and service options subject to change without notice.`,
         sign_in: "Sign In",
         try_it_free: "Try it for free",
         try_it: "Try it",
         blocDesc: {
-            title: `WHAT <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> CAN DO FOR YOU ?`,
-            bloc_1_title: `Multi-currency support`, 
-            bloc_1_para: `It’s important to juggle multiple currencies when you work internationally. 
-            NomadLedger saves all currencies you use when creating or updating documents, 
-            with the current rates. You can select your preferred currency to display on your dashboard.`, 
-            bloc_2_title: `Process invoices & quotations`,  
-            bloc_2_para: `For efficient processing, set up your application by inputting your services, products, contacts, and configurations. 
-            Then creating an invoice or quotation is just a few clicks away.`, 
-            bloc_3_title: `Manage your tasks`, 
-            bloc_3_para: `Never miss a task again. Just add it to our simple task manager, which guides you throughout the day and lets you track the progress of each task.`, 
+            title: `WHAT CAN WE DO FOR YOU ?`,
+            bloc_1_title: `Multi-Currency Support`, 
+            bloc_1_para: `It’s important to <strong>juggle multiple currencies</strong> when you work internationally. 
+            <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> saves all currencies you use when creating or updating documents, 
+            with the current rates. You can select your preferred currency to display on your <strong>dashboard</strong>.`, 
+            bloc_2_title: `Process Invoices & Quotations`,  
+            bloc_2_para: `For <strong>efficient</strong> processing, set up your application by inputting your services, products, contacts, and configurations. 
+            Then <strong>creating an invoice or quotation</strong> is just a few clicks away.`, 
+            bloc_3_title: `Manage your Tasks`, 
+            bloc_3_para: `Never miss a task again. Just add it to our simple <strong>task manager</strong>, which guides you throughout the day and lets you track the progress of each task.`, 
         },
         form: {
             title: "Free 7 days trial",
@@ -514,19 +515,20 @@ const en = {
         questions: {
             title: "FAQs",
             q_1: "Why use an online invoicing software ?",
-            r_1: `Invoicing software brings you flexibility and efficiency. Keep track of all your activities, simplify your annual audits, and export your accounting files in a single click.`,
+            r_1: `<strong>Invoicing software</strong> brings you flexibility and efficiency. Keep track of all your activities, simplify your annual audits, and export your accounting files in a single click.`,
             q_2: "Whom this software is for ?",
-            r_2: `This software was made for entrepreneurs, freelancer or small businesses that need a program that’easy to use.`,
+            r_2: `This software was made for <strong>entrepreneurs, freelancer or small businesses</strong> that need a program that’easy to use.`,
             q_3: "What are the benefits ?",
-            r_3: `Our software will secure your data, increase productivity, let you track your 
+            r_3: `Our software will secure your data, <strong>increase productivity</strong>, let you track your 
             finances and provide easy access to your information from any device.`
         },
         offer: {
             title: "What we provide",
-            price: `<span>A flat rate of<br /><strong>3,95 €</strong><br />per month</span>`,
-            paragraphe: `Enjoy unlimited access to a full-fledged solution to manage your company’s business documents and more, 
+            price: `A flat rate of<br /><strong>3,95 €</strong>`,
+            price_sub: `par mois`,
+            paragraphe: `Enjoy <strong>unlimited access</strong> to a full-fledged solution to manage your company’s business documents and more, 
             whether you’re operating on your own or within a startup. Our software offers everything you need, from following up on 
-            leads to managing invoices. Get started now and get your business growing.  `,
+            leads to <strong>managing invoices</strong>. Get started now and get your <strong>business growing</strong>.  `,
             title_list: "No hidden fees, just a flat monthly rate.",
             listItem: ["Edit commercial documents","Generate PDFs","Export in Excel format","Manage your contacts","Manage your services/products", "Task manager", "Auto calculate VAT", "Import Ggoogle contacts", "Track your revenues", "Manage your expenses"],
             btn: "Create an account"

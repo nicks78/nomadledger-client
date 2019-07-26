@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {DEFAULT_URL} from '../../redux/constant'
 import { resetTask} from '../../redux/task/actions'
 import { getData, resetStat } from '../../redux/stat/actions'
 import { getAllTask, updateStatus } from '../../redux/task/actions'
@@ -57,17 +56,15 @@ class Home extends Component {
             <div>
               <Grid container spacing={isMobile ? 4 : 24} className={classes.gridContainer}>
                 <Grid item xs={6} md={6} sm={6}>
-                    <Paper className={classes.paperHeader}>
-                        <img className={classes.picto} src={`${DEFAULT_URL}img/currency_sign.png`} alt="euro" />
-                      <Typography variant="h2" align="center" style={{color: "#0c3c5e", marginBottom: 10, fontWeight: 600}} >  { cvtNumToUserPref( mainStat ? mainStat.turnover : 0 ) }  { currency.value } </Typography>
-                      <Typography variant={isMobile ? "body2" : "h3"} align="center" style={{fontWeight: 700, color: "#0c3c5e"}}>{locale.subheading.label_revenue}  { mainStat && mainStat.fiscal_year  }</Typography>
+                    <Paper className={classes.paperHeader} style={{backgroundColor: "#fab746"}}>
+                      <Typography variant="h2" align="center" style={{color: "white", marginBottom: 10, fontWeight: 600}} >  { cvtNumToUserPref( mainStat ? mainStat.turnover : 0 ) }  { currency.value } </Typography>
+                      <Typography variant={isMobile ? "body2" : "h3"} align="center" style={{fontWeight: 700, color: "white"}}>{locale.subheading.label_revenue}  { mainStat && mainStat.fiscal_year  }</Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={6} md={6} sm={6}>
-                    <Paper className={classes.paperHeader}>
-                    <img className={classes.picto} src={`${DEFAULT_URL}img/line_graph.png`} alt="euro" />
-                      <Typography variant="h2" align="center" style={{color: "#01898c", marginBottom: 10, fontWeight: 600}}>  { cvtNumToUserPref( mainStat ? mainStat.sumExpenses : 0 ) }  { currency.value } </Typography>
-                      <Typography variant={isMobile ? "body2" : "h3"} align="center" style={{fontWeight: 700, color: "#01898c"}}>{locale.wording.expense}s  { mainStat && mainStat.fiscal_year  }</Typography>
+                    <Paper className={classes.paperHeader} style={{backgroundColor: "#0c3c5e"}}>
+                      <Typography variant="h2" align="center" style={{color: "white", marginBottom: 10, fontWeight: 600}}>  { cvtNumToUserPref( mainStat ? mainStat.sumExpenses : 0 ) }  { currency.value } </Typography>
+                      <Typography variant={isMobile ? "body2" : "h3"} align="center" style={{fontWeight: 700, color: "white"}}>{locale.wording.expense}s  { mainStat && mainStat.fiscal_year  }</Typography>
                     </Paper>
                 </Grid>
               </Grid>

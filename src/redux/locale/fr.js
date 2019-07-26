@@ -427,6 +427,7 @@ const fr =  {
         error_422_access_member: "Seule les membres NomadLedger ont accès à cette fonction.",
         error_422_cannot_be_edited: "Ne peut etre editer",
         error_422_cannot_be_send: "Ce document ne peut plus être envoyé",
+        error_422_outstock: "Verifier les stocks disponible des produits", 
         error_sign_up_google: "Inscription via Google n'a pas fonctionner, veuillez recommencer ou contacter notre service support@nomadledger.com",
 
         // Stripe err
@@ -488,21 +489,21 @@ const fr =  {
     home_page: {
         title_01: "Logiciel de facturation en ligne pour nomades numériques",
         paragraphe_01: ` est un logiciel en ligne facile à utiliser pour gérer vos factures et suivre vos tâches en quelques clics.`,
-        paragraphe_02: `Nous sommes un groupe de nomades numériques travaillant dans le monde entier, et voulions un moyen simple et sécurisé pour facturer nos clients internationaux. C'est ainsi que NomadLedger est né. Notre logiciel vous permet de créer, d’envoyer ou d’imprimer facilement des documents professionnels accessibles depuis n’importe quel appareil et de n’importe où. Vous pouvez ainsi consacrer moins de temps à la facturation et plus de temps au travail qui vous importe.`,
+        paragraphe_02: `Nous sommes un groupe de <strong>nomades numériques</strong> travaillant dans le monde entier, et voulions un moyen <strong>simple et sécurisé</strong> pour <strong>facturer nos clients internationaux</strong>.<br />C'est ainsi que <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> est né. Notre logiciel vous permet de créer, d’envoyer ou d’imprimer facilement des <strong>documents professionnels</strong> accessibles depuis n’importe quel appareil et de n’importe où. Vous pouvez ainsi consacrer moins de temps à la facturation et plus de temps au travail qui vous importe.`,
         agreed_terms: ` * En m'inscrivant, j'accepte les <a target="_blank" href="https://d2cxa8ns3xxkg9.cloudfront.net/static/termsandconditions_fr.pdf">Conditions générales</a>  et la  <a href="https://d2cxa8ns3xxkg9.cloudfront.net/static/privacypolicy_fr.pdf">Politique de protection de la vie privée</a>.`,
-        footer_paragraphe: `Tous droits réservés.&nbsp;<a target="_blank" href="https://d2cxa8ns3xxkg9.cloudfront.net/static/termsandconditions_fr.pdf" rel="noopener noreferrer" target="_blank">Conditions Générales</a>,&nbsp;
+        footer_paragraphe: `Tous droits réservés.&nbsp;<a style="color: #8B8B8B; font-weight: 600" target="_blank" href="https://d2cxa8ns3xxkg9.cloudfront.net/static/termsandconditions_fr.pdf" rel="noopener noreferrer" target="_blank">Conditions Générales</a>,&nbsp;
         les fonctionnalités, l'assistance, la tarification et les options sont susceptibles d'être modifiées sans préavis.`,
         sign_in: "Se Connecter",
         try_it_free: "Essai gratuit",
         try_it: "L'essayer",
         blocDesc: {
-            title: `    QU'EST CE QUE <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> FAIT POUR VOUS ?`,
-            bloc_1_title: `Support multiple devise`, 
-            bloc_1_para: `Il est important de jongler avec plusieurs devises lorsque vous travaillez à l’international. NomadLedger enregistre toutes les devises que vous utilisez lors de la création ou de la mise à jour de documents, avec les tarifs en vigueur. Vous pouvez sélectionner votre devise préférée à afficher sur votre tableau de bord.`, 
-            bloc_2_title: `Editer factures & devis`,  
-            bloc_2_para: `Pour un traitement efficace, configurer votre application en entrant vos services, produits, contacts et configurations. Créez ensuite une facture et/ou un devis en quelques clics.`, 
-            bloc_3_title: `Gérer vos tâches`, 
-            bloc_3_para: `Ne manquez jamais une tâche. Ajoutez-la simplement à notre gestionnaire de tâches, qui vous guidera tout au long de la journée et vous permettra de suivre la progression de chaque tâche.`, 
+            title: `QU'EST CE QU'ON FAIT POUR VOUS ?`,
+            bloc_1_title: `Support Multiple Devise`, 
+            bloc_1_para: `Il est important de <strong>jongler avec plusieurs devises</strong> lorsque vous travaillez à l’international. <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> enregistre toutes les devises que vous utilisez lors de la création ou de la mise à jour de documents, avec les tarifs en vigueur. Vous pouvez sélectionner votre devise préférée à afficher sur votre <strong>tableau de bord</strong>.`, 
+            bloc_2_title: `Editer Factures & Devis`,  
+            bloc_2_para: `Pour un traitement <strong>efficace</strong>, configurer votre application en entrant vos services, produits, contacts et configurations. Vous pourrez ensuite <strong>créer vos factures et/ou devis</strong> en quelques clics.`, 
+            bloc_3_title: `Gérer vos Tâches`, 
+            bloc_3_para: `Ne manquez jamais une tâche. Ajoutez-la simplement à notre <strong>gestionnaire de tâches</strong>, qui vous guidera tout au long de la journée et vous permettra de suivre la progression de chaque tâche.`, 
         },
         form: {
             title: "7 jours d'essai gratuit",
@@ -511,16 +512,18 @@ const fr =  {
         questions: {
             title: "FAQ",
             q_1: "Pourquoi utiliser un logiciel de facturation en ligne ?",
-            r_1: `Le logiciel de facturation vous apporte souplesse et efficacité. Gardez une trace de toutes vos activités, simplifiez vos audits annuels et exportez vos fichiers de comptabilité en un seul clic.`,
+            r_1: `Le <strong>logiciel de facturation</strong> vous apporte souplesse et efficacité. Gardez une trace de toutes vos activités, simplifiez vos audits annuels et exportez vos fichiers de comptabilité en un seul clic.`,
             q_2: "A qui s'adresse ce logiciel ?",
-            r_2: `Ce logiciel a été conçu pour les entrepreneurs, les pigistes et les petites entreprises qui ont besoin d’un programme facile à utiliser.`,
+            r_2: `Ce logiciel a été conçu pour <strong>les entrepreneurs, les freelances et les petites entreprises</strong> qui ont besoin d’un programme facile à utiliser.`,
             q_3: "Quels sont les avantages ?",
-            r_3: `Notre logiciel sécurisera vos données, augmentera votre productivité, vous permettra de suivre vos finances et vous donnera un accès facile à vos informations depuis n'importe quel appareil.`
+            r_3: `Notre logiciel sécurisera vos données, <strong>augmentera votre productivité</strong>, vous permettra de suivre vos finances et vous donnera un accès facile à vos informations depuis n'importe quel appareil.`
         },
         offer: {
             title: "Notre offre",
-            price: `<span>Un seul prix<br /><strong>3,95 €</strong><br />par mois</span>`,
-            paragraphe: `Profitez d’un accès illimité à une solution à part entière pour gérer les documents professionnels de votre entreprise et plus encore, que vous travailliez seul ou au sein d’une startup. Notre logiciel offre tout ce dont vous avez besoin, du suivi de vos prospects à la gestion des factures. Commencez dès maintenant et développez votre entreprise.`,
+            price: `Un seul prix<br /><strong style="line-height: 1.4">3,95 €</strong>`,
+            price_sub: `par mois`,
+            title_list: "Pas de frais cachés, juste un tarif mensuel fixe.",
+            paragraphe: `Profitez d’un <strong>accès illimité</strong> à une solution à part entière pour gérer les documents professionnels de votre entreprise et plus encore, que vous travailliez seul ou au sein d’une startup. Notre logiciel offre tout ce dont vous avez besoin, du suivi de vos prospects à la <strong>gestion des factures</strong>. Commencez dès maintenant et développez votre entreprise.`,
             listItem: [ "Edition de documents", "Creation de PDF", "Export format Excel", "Gérer vos contacts", "Gérer vos services/produits", "Task manager", "Calcule automatique des TVA", "Importer vos contacts Google", "Suivi de votre chiffre d’affaire", "Gérer vos dépenses"],
             btn: "Créer un compte"
         },

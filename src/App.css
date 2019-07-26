@@ -73,7 +73,7 @@ a:hover {
 
 .table-wrapper{
   overflow-y: auto;
-  min-height: 300px;
+  min-height: 400px;
 }
 
 thead{

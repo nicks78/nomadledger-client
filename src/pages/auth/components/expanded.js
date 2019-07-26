@@ -39,9 +39,7 @@ class Expanded extends React.Component {
           <Typography className={classes.heading}>{locale.home_page.questions.q_1}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography className={classes.para} variant="body2" >
-            {locale.home_page.questions.r_1}
-          </Typography>
+          <Typography className={classes.para} variant="body2" dangerouslySetInnerHTML={{ __html: locale.home_page.questions.r_1 }}/>
         </ExpansionPanelDetails>
       </ExpansionPanel>
       <ExpansionPanel expanded={expanded === 'panel2'} className={classes.panel}  onChange={() => this.handleChange('panel2')}>
@@ -55,9 +53,7 @@ class Expanded extends React.Component {
           <Typography className={classes.heading}>{locale.home_page.questions.q_2}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography className={classes.para} variant="body2" >
-          {locale.home_page.questions.r_2}
-          </Typography>
+          <Typography className={classes.para} variant="body2"  dangerouslySetInnerHTML={{ __html: locale.home_page.questions.r_2 }}/>
         </ExpansionPanelDetails>
       </ExpansionPanel>
       <ExpansionPanel expanded={expanded === 'panel3'} className={classes.panel}  onChange={() => this.handleChange('panel3')}>
@@ -71,9 +67,7 @@ class Expanded extends React.Component {
           <Typography className={classes.heading}>{locale.home_page.questions.q_3}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography className={classes.para} variant="body2" >
-          {locale.home_page.questions.r_3}.
-          </Typography>
+          <Typography className={classes.para} variant="body2"  dangerouslySetInnerHTML={{ __html: locale.home_page.questions.r_3 }}/>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </div>
@@ -101,6 +95,7 @@ const styles = theme => ({
     },
     expand: {
         backgroundColor: theme.palette.secondary.light,
+        height: 64
     },
     para: {
         margin: 24

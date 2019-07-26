@@ -115,7 +115,7 @@ class Refund extends Component {
                                                 <TableCell><Link className="link" to={`/refund/view/${refund._id}`}>{refund.ref_add}-{refund.ref}</Link></TableCell>
                                                 <TableCell><Link to={{ pathname: `/contact/view/${refund.contact_id._id}`, state: { reducer: "CONTACT" } }}><span  className="link">{refund.contact_id.company_name}</span></Link></TableCell>
                                                 <TableCell className="tableNumber">{cvtNumToUserPref(refund.subtotal)} {refund.currency.value}</TableCell>
-                                                <TableCell><span style={{color: refund.status.color, fontWeight: 500 }}>{ refund.status[localStorage.getItem('locale')] }</span></TableCell>
+                                                <TableCell><span style={{color: refund.status.color, fontWeight: 600 }}>{ refund.status[localStorage.getItem('locale')] }</span></TableCell>
                                                 <TableCell align="center"><img alt="pdf" onClick={ () => {this.props.downloadPdf(reducer, refund._id)} } style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/pdf-icon.png" } width="20" /></TableCell>
 
                                                 <TableCell align="center" style={{ display: 'flex', justifyContent: "center"}}>

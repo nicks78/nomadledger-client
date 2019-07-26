@@ -38,13 +38,13 @@ const TableActions = (props) => {
               }
               <ModalSendMail loading={loading} reducer={reducer} item={item} canceled={canceled}/>
               <Tooltips  title={locale.wording[ok()]} aria-label="paid">
-                <div><IconButton style={{ minWidth: 0 }} disabled={ canceled || paid || loading} onClick={ () => { handleAction(reducer, {paid: true, _id: id}, endpoint ) }} color="primary"><CheckIcon style={{ fontSize: 18, color: paid || canceled ? "rgba(0, 0, 0, 0.26)" : "forestgreen" }} /></IconButton></div>
+                <div><IconButton style={{ minWidth: 0 }} disabled={ canceled || paid || loading} onClick={ () => { handleAction(reducer, {paid: true, _id: id}, endpoint ) }} color="primary"><CheckIcon style={{ fontSize: 18, color: paid || canceled ? "rgba(0, 0, 0, 0.26)" : "#188a8d" }} /></IconButton></div>
               </Tooltips>
               <Tooltips  title={locale.wording.cancel} aria-label="cancel">
-                <div><IconButton style={{ minWidth: 0 }} disabled={ canceled || loading } onClick={ () => { handleAction(reducer, {canceled: true, _id: id}, endpoint ) }} color="primary"> <HighlightOff style={{ fontSize: 18,  color: canceled ? "rgba(0, 0, 0, 0.26)" : "crimson" }} /></IconButton></div>
+                <div><IconButton style={{ minWidth: 0 }} disabled={ canceled || loading } onClick={ () => { handleAction(reducer, {canceled: true, _id: id}, endpoint ) }} color="primary"> <HighlightOff style={{ fontSize: 18,  color: canceled ? "rgba(0, 0, 0, 0.26)" : "#cc1b1b" }} /></IconButton></div>
               </Tooltips>
               <Tooltips  title={locale.wording.archive} aria-label="archive">
-                <div><IconButton style={{ minWidth: 0 }} disabled={ loading} onClick={ () => { handleAction(reducer, {archive: true, _id: id}, endpoint ) }} color="primary"><ArchiveIcon style={{ fontSize: 18, color: "grey" }} /></IconButton></div>
+                <div><IconButton style={{ minWidth: 0 }} disabled={ loading} onClick={ () => { handleAction(reducer, {archive: true, _id: id}, endpoint ) }} color="primary"><ArchiveIcon style={{ fontSize: 18, color: "forestgreen" }} /></IconButton></div>
               </Tooltips>
           </React.Fragment>
 
@@ -58,3 +58,11 @@ const ApxTableActions = withStyles(styles)(TableActions)
 export default ApxTableActions;
 
 // <IconButton style={{ minWidth: 5 }} disabled={loading} onClick={ () => { handleAction(reducer, {pending: true, _id: id}, endpoint ) }} color="primary"><SendIcon style={{ fontSize: 18, color:  "darkorange" }} /></IconButton></div>
+
+// fab746 jaune
+// 0c3c5e bleu foncé
+// edf6f7 bleu clair background
+// 188a8d approuvé
+// 62c1c5 en attente
+// b7b7b7 brouillon
+// cc1b1b rejeté

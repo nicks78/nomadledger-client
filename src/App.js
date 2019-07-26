@@ -7,6 +7,14 @@ import {StripeProvider} from 'react-stripe-elements';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 
+// fab746 jaune
+// 0c3c5e bleu foncé
+// edf6f7 bleu clair background
+// 188a8d approuvé
+// 62c1c5 en attente
+// b7b7b7 brouillon
+// cc1b1b rejeté
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -61,49 +69,49 @@ const theme = createMuiTheme({
       fontSize: '1.8rem',
       fontWeight: 500,
       color: '#484848',
-      textTransform: "capitalize"
+      // textTransform: "capitalize"
     },
     h2: {
       fontSize: '1.3rem',
       color: '#484848',
       fontWeight: 500,
-      textTransform: "capitalize"
+      // textTransform: "capitalize"
     },
     h3: {
       fontSize: '1.1rem',
       fontWeight: 700,
       color: '#484848',
-      textTransform: "capitalize"
+      // textTransform: "capitalize"
     },
     subtitle1: {
       fontWeight: 700,
-      color: '#303030',
+      color: '#484848',
       fontSize: '0.9rem'
     },
     subtitle2: {
       fontWeight: 500,
-      color: '#303030',
+      color: '#484848',
       fontSize: '0.9rem'
     },
     body1: {
-      fontSize: '14px', //0.8rem',
+      fontSize: '0.875rem',
       fontWeight: 700,
-      color: '#303030'
+      color: '#484848'
     },
     body2: {
-      fontWeight: 500,
-      color: '#303030',
-      fontSize: '14px' // '0.8rem'
+      fontWeight: 400,
+      color: '#484848',
+      fontSize: '0.875rem'
     },
     caption: {
       fontWeight: 500,
       color: 'rgba(0, 0, 0, 0.54)',
-      fontSize: '0.8rem'
+      fontSize: '0.875rem'
     },
     overline: {
-      fontSize: '0.8rem',
+      fontSize: '0.875rem',
       fontWeight: 700,
-      color: '#303030',
+      color: '#484848',
       lineHeight: 1.6
     },
     fontWeightMedium: 500,

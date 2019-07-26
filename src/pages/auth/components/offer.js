@@ -17,18 +17,18 @@ const Offer = (props) => {
             <Grid item xs={12} sm={6} md={6}>
               <div className={classes.left}>
                   <Typography variant="h1" align="center" className={classes.priceText} dangerouslySetInnerHTML={{__html: locale.home_page.offer.price}} />
-                  
+                  <Typography component="span" align="center" className={classes.priceTextSub} dangerouslySetInnerHTML={{__html: locale.home_page.offer.price_sub}} />
+                  <br />
                   <Button style={{ width: isMobile ? "auto" : 200, height: isMobile ? "auto" : 50 }} component="a" href="#formAnchor" className={classes.btn} variant="contained" color="primary" align="center">{locale.home_page.offer.btn}</Button>
               </div>
             </Grid>
           <Grid item xs={12} sm={6} md={6}>
               <div>
-                <Typography variant="body2" align="left" style={{color: "white"}}>{locale.home_page.offer.paragraphe}
-              </Typography>
+                <Typography variant="body2" align="left" style={{color: "white"}} dangerouslySetInnerHTML={{__html: locale.home_page.offer.paragraphe}}/>
               </div>
               
              
-            <Typography variant="body2" align="left" style={{color: "white", marginTop: 24}}>{locale.home_page.offer.title_list}</Typography>
+            <Typography variant="body2" align="left" style={{color: "white", marginTop: 24}} dangerouslySetInnerHTML={{__html: locale.home_page.offer.title_list}}/>
             <List margin="dense" style={{marginLeft: 30}}>
                 {
                 locale.home_page.offer.listItem.map((x, index) => {
@@ -55,7 +55,7 @@ const Offer = (props) => {
 
 const styles = theme => ({
     left: {
-      backgroundImage: `url(${DEFAULT_URL}img/element/our-offer-img-1.png)`,
+      backgroundImage: `url(${DEFAULT_URL}img/element/our-offer-img.png)`,
       backgroundRepeat: "no-repeat",
       backgroundSize: "contain",
       backgroundPosition: "center",
@@ -70,17 +70,26 @@ const styles = theme => ({
       alignItems: "center",
     },
     priceText: {
-      fontSize: 40,
+      fontSize: "2.7rem",
       fontWeight: 400,
+      marginLeft: 50,
       color: "white",
-      marginBottom: 24,
+      marginBottom: 0,
       [theme.breakpoints.down("sm")]: {
         marginTop: 24
       }
     },
+    priceTextSub:{
+      marginLeft: 30,
+      fontSize: "1.6rem", 
+      fontWeight: 600,
+      color: "white"
+    },
     btn: {
       height: 50,
+      marginLeft: 50,
       width: 200,
+      boxShadow: "none"
     },
     list: {
       paddingTop: 0,

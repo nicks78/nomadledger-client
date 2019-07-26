@@ -72,7 +72,7 @@ const Select = (props) => {
 
 
                     <MenuItem key={index} value={ option[localStorage.getItem('locale')]}>
-                        <span style={{color: option.color || 'inherit', textTransform: "capitalize"}} >
+                        <span style={{color: option.color || 'inherit', textTransform: "capitalize", fontWeight: 600}} >
                           {option[props.locale.lang]}
                           {field === "phone_code" && ' (' + option.dial_code +')'}
                           {option.value && ' (' + option.value +')'}

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Router, Route, Switch } from 'react-router-dom'
-import Button from '@material-ui/core/Button'
 import {history} from './history'
 import {connect} from 'react-redux'
 import { getLocale, initLocale } from '../redux/locale/actions'

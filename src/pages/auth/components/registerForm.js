@@ -106,6 +106,10 @@ const styles = theme => ({
     textField: {
         '& fieldset': {
             borderRadius: 24,
+            border: "none"
+        },
+        "& label": {
+            marginLeft: 10
         },
 
         '& input': {

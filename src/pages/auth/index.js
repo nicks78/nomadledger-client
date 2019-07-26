@@ -40,6 +40,7 @@ class Auth extends Component {
     componentWillUnmount(){
         this.props.resetUser();
         window.removeEventListener("scroll", this.handleScroll);
+        window.removeEventListener("resize", this.handleResize);
     }
 
     handleResize = () => {
@@ -117,8 +118,10 @@ class Auth extends Component {
               </div>
             </Grid>
           <Grid item xs={12} sm={6} md={6}>
+            <div style={{ width: isMobile ? "100%" : "90%", marginLeft: isMobile ? "12px" : "4rem" }}>
               <Typography  variant="body2" align="left" dangerouslySetInnerHTML={{__html: locale.company_name + locale.home_page.paragraphe_01}}/><br />
-              <Typography variant="body2" align="left">{locale.home_page.paragraphe_02}</Typography>
+              <Typography variant="body2" align="left" dangerouslySetInnerHTML={{__html: locale.home_page.paragraphe_02 }}/>
+            </div>
           </Grid>
           </Grid>
         </section>
@@ -135,7 +138,7 @@ class Auth extends Component {
             <Grid item xs={12} md={6} sm={6}>
               <form onSubmit={this.onSubmitForm}>
               <RegisterForm state={newUser} onAgreedToTerms={ () => this.setState({agreedTerms: !this.state.agreedTerms}) } updateState={this.handleChange} locale={locale} isMobile={isMobile}/>
-                <div className={classes.buttonLogin}><Button disabled={!agreedTerms || isFetching} variant="contained" className={classes.btn} type="submit">{ isFetching ? locale.wording.loading : locale.home_page.form.btn}</Button></div>
+                <div className={classes.buttonLogin}><Button color="primary" disabled={!agreedTerms || isFetching} variant="contained" className={classes.btn} type="submit">{ isFetching ? locale.wording.loading : locale.home_page.form.btn}</Button></div>
               </form>
             </Grid>
             <Grid item xs={12} md={6} sm={6}>
@@ -174,8 +177,8 @@ class Auth extends Component {
 const styles = theme => ({
 
   margin: {
-    paddingRight: 100,
-    paddingLeft: 100,
+    paddingRight: 200,
+    paddingLeft: 200,
     [theme.breakpoints.down("md")]: {
       paddingRight: 10,
       paddingLeft: 10
@@ -206,7 +209,8 @@ const styles = theme => ({
   btn: {
     backgroundColor: theme.palette.yellow.dark,
     color: 'white',
-    width: 150
+    width: 150,
+    boxShadow: "none"
   },
   formBloc: {
     backgroundColor: theme.palette.thinBlue,
@@ -216,7 +220,7 @@ const styles = theme => ({
 
 
 const mapStateToProps = (state) => {
-console.log(state)
+
     return {
         isFetching: state.auth.isFetching,
         locale: state.locale.locale,

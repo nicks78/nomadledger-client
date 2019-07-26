@@ -1,10 +1,13 @@
 import React from 'react';
 import { withStyles, Paper } from '@material-ui/core';
 
+
+
 const styles = theme => ({
     root: {
         position: 'relative',
         overflow: "hidden",
+        // height: window.innerHeight -170,
         [theme.breakpoints.down('sm')]: {
             boxShadow: 'none',
             padding: 12,

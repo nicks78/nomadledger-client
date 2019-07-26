@@ -26,7 +26,7 @@ const Jumbotron = (props) => {
             {
               !isMobile ?
               <div className={classes.homeillu}>
-                  <img src={`${DEFAULT_URL}img/svg/Nomad-Ledger_home-illu.svg`} height="450" style={{ marginLeft: -20}} alt="elipse"/>
+                  <img src={`${DEFAULT_URL}img/element/Nomad-Ledger_home-illu.png`} height="450" style={{ marginLeft: -20}} alt="elipse"/>
               </div>
               : null 
             }
@@ -70,7 +70,8 @@ const styles = theme => ({
       backgroundColor: theme.palette.yellow.dark,
       color: 'white',
       marginRight: 10,
-      width: 150
+      width: 150,
+      boxShadow: "none"
     },
 })
 

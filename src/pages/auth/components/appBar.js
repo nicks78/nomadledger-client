@@ -66,6 +66,7 @@ const styles = theme => ({
       color: "white",
       width: 130,
       marginRight: 25,
+      boxShadow: "none",
       [theme.breakpoints.down("sm")]: {
         marginRight: 10,
         width: 100,

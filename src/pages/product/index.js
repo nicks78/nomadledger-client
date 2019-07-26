@@ -118,7 +118,7 @@ class Product extends Component {
 
     const { isFetching, locale, newProduct, createState, createItem, isCreating, category, classes, currency } = this.props
     const {listProducts} = this.state
-console.log(listProducts)
+
     return (
         <div style={styles.container}>
             <Hidden smUp><Typography variant="h1" align="center" className={classes.title}>{locale.product.name}</Typography></Hidden>

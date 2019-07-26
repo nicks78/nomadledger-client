@@ -111,7 +111,7 @@ class SimpleModal extends React.Component {
 
     return (
       <React.Fragment>
-        <Tooltips title={locale.wording.send}><div><IconButton onClick={this.handleOpen} style={{ minWidth: 5 }} disabled={actionLoading || canceled}  color="primary"><SendIcon style={{ fontSize: 18, color:  canceled ? "rgba(0, 0, 0, 0.26)" : "darkorange" }} /></IconButton></div></Tooltips>
+        <Tooltips title={locale.wording.send}><div><IconButton onClick={this.handleOpen} style={{ minWidth: 5 }} disabled={actionLoading || canceled}  color="primary"><SendIcon style={{ fontSize: 18, color:  canceled ? "rgba(0, 0, 0, 0.26)" : "#62c1c5" }} /></IconButton></div></Tooltips>
         <Modal
           aria-labelledby={item._id}
           aria-describedby="simple-modal-description"

@@ -61,7 +61,7 @@ class BtnMenu extends React.Component {
             menus.map(( menu, index) => {
                 return <MenuItem
                         key={index}
-                        style={{textTransform: 'capitalize', color: menu.color ||  "#303030", fontWeight: 400}}
+                        style={{textTransform: 'capitalize', color: menu.color ||  "#303030", fontWeight: 600}}
                         onClick={ () => this.handleAction( menu ) }>{menu[localStorage.getItem('locale')]}
                       </MenuItem>
             })

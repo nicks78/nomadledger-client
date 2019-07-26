@@ -99,6 +99,7 @@ class Items extends Component {
         <TableBody>
             {
             listItems.map(( item, index) => {
+              
                 return  <TableRow key={index} className={classes.tableRow}>
                             <TableCell>{locale.wording[item.onModel].toUpperCase()}-{ item.ref}</TableCell>
                             <TableCell className={ classes.contentEditable }>
