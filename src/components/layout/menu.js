@@ -57,11 +57,11 @@ const Styles = theme => ({
     listText: {
         borderRadius: "0px 50px 50px 0px",
        '& span': {
-           color: '#303030',
+           color: theme.palette.primary.main,
            fontWeight: 400,
        },
        '& svg': {
-          color: '#303030',
+          color: theme.palette.primary.main,
         },
         '& :focus': {
             color: theme.palette.secondary.main,

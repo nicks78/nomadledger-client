@@ -6,6 +6,7 @@ import { getAllTask, updateStatus } from '../../redux/task/actions'
 import {Grid, Typography, withStyles, Paper } from '@material-ui/core'
 import BarCharts from '../../components/common/barCharts'
 import BarHorizontal from '../../components/common/barHorizontal'
+import BarYear from '../../components/common/barYear'
 import PieCharts from '../../components/common/pie'
 import {cvtNumToUserPref} from '../../utils/help_function'
 import Spinner from '../../components/common/spinner'
@@ -23,6 +24,7 @@ class Home extends Component {
         this.props.getData( "mainStat", "" );
         this.props.getData( "pieQuote", "compare/quote/success-onhold-rejected" );
         this.props.getData( "expensesBy", "sum/expenses/bycategory" );
+        this.props.getData( "yearly", "sum/yearly-stat?locale="+localStorage.getItem('locale') );
         this.props.getAllTask("daily", "dailyTask");
 
         window.addEventListener("resize", this.catchWidth)
@@ -41,16 +43,16 @@ class Home extends Component {
 
     render() {
 
-        const {classes, tasks, isFetching, pieQuote, mainStat, expensesBy, locale, currency, isFetchingTask} = this.props
+        const {classes, tasks, isFetching, pieQuote, mainStat, expensesBy, yearly, locale, currency, isFetchingTask} = this.props
         const {width} = this.state
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         const isMobile = width <= 500
         if( isFetching || isFetchingTask ){
             return <Spinner />
         }
-        if( !pieQuote || !mainStat || !expensesBy){
-            return <Spinner />
-        }
+        // if( !pieQuote || !mainStat || !expensesBy){
+        //     return <Spinner />
+        // }
 
         return (
             <div>
@@ -73,7 +75,7 @@ class Home extends Component {
 
                 <Grid  item xs={12} sm={8} md={8}>
                   <Paper className={classes.paper}>
-                  <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px", color: "#303030" }}>
+                  <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px" }}>
                       { locale.wording.statistics }
                   </Typography>
                     {
@@ -112,9 +114,8 @@ class Home extends Component {
                 </Grid>
 
                 <Grid item xs={12} sm={4} md={4} >
-
-                  <Paper className={classes.paper} >
-                    <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px", color: "#303030" }}>
+                    <Paper className={classes.paper} >
+                    <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px" }}>
                         { locale.wording.conversions } &nbsp;({ locale.wording.quote })
                     </Typography>
                      <div style={{ marginTop: "20%" }}>
@@ -128,8 +129,19 @@ class Home extends Component {
                       }
                       </div>
                     </Paper>
+
+                    <Paper className={classes.paper} >
+                    <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px" }}>
+                        {locale.subheading.label_yearly_stat}
+                    </Typography>
+                        {
+                            yearly ?
+                                <BarYear chartData={ yearly }  id="yearly" currency={ currency.value || "-" }/>
+                            : null
+                        }
+                    </Paper>
                     <Paper className={classes.paper}>
-                      <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px", color: "#303030" }}>
+                      <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px" }}>
                           { locale.subheading.label_graph_expense }
                       </Typography>
                         {
@@ -229,6 +241,7 @@ const mapStateToProps = (state) => {
         mainStat: state.stat.mainStat || null,
         expensesBy: state.stat.expensesBy || null,
         pieQuote: state.stat.pieQuote || null,
+        yearly: state.stat.yearly || null,
         tasks: state.task.dailyTask || {},
         currency: state.account.company.item ? state.account.company.item.currency : {},
         status: state.helper.items.status_task

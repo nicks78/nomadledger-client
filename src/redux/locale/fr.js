@@ -107,6 +107,7 @@ const fr =  {
         label_annual_turnover: "Chiffre d'affaire annuel",
         label_revenue: "Recettes",
         label_daily_task: "Tâche(s) du ",
+        label_yearly_stat: "Rapport par année",
         label_forgot_pwd: "Nous enverrons un lien de récupération à",
         link_forgot_pwd: "Mot de passe oublié ?",
         label_reset_pwd: "Modifier votre mot de passe",

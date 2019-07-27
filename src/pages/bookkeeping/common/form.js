@@ -79,6 +79,7 @@ const Form = (props) => {
                                                         value={ data[date_1] ? data[date_1].intl_format : ""}
                                                         handleDate={ props.handleDropDown }
                                                         field={date_1}
+                                                        canNotEdit={true}
                                                     />
                                             </InputAdornment>,
                                         }}

@@ -73,14 +73,14 @@ const theme = createMuiTheme({
     },
     h2: {
       fontSize: '1.3rem',
-      color: '#484848',
+      color: '#0c3c5e',
       fontWeight: 500,
       // textTransform: "capitalize"
     },
     h3: {
       fontSize: '1.1rem',
       fontWeight: 700,
-      color: '#484848',
+      color: '#0c3c5e',
       // textTransform: "capitalize"
     },
     subtitle1: {
@@ -111,7 +111,7 @@ const theme = createMuiTheme({
     overline: {
       fontSize: '0.875rem',
       fontWeight: 700,
-      color: '#484848',
+      color: '#0c3c5e',
       lineHeight: 1.6
     },
     fontWeightMedium: 500,

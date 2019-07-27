@@ -83,7 +83,7 @@ class DatePickers extends React.Component {
 
 
     render() {
-    const { classes } = this.props
+    const { classes, canNotEdit } = this.props
     const { selectedDay} = this.state
     var locale = localStorage.getItem('locale');
 
@@ -93,7 +93,7 @@ class DatePickers extends React.Component {
 
       return (
             <div className={classes.root}>
-                <DateRangeIcon className={ classes.icon } onClick={this.handleShow} />
+                { canNotEdit ? null : <DateRangeIcon className={ classes.icon } onClick={this.handleShow} /> }
                 {   this.state.show ?
                     <DayPicker
                         id={this.props.field}
