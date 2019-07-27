@@ -328,7 +328,10 @@ const en = {
         bank_detail: "Display the bank on invoice (on PDF)",
         invoice_ref: "Invoice reference",
         refresh: "Reload",
-        my_account: "My account"
+        my_account: "My account",
+        weight: "Weight",
+        size: "Size",
+        color: "Colour"
     },
     helperText: {
         select_phone_code: "Phone code",

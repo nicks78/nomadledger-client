@@ -18,6 +18,9 @@ const AddProduct = (props) => {
           { name: 'stock', type:"number"},
           { name: 'currency', type:"select", selections: currency, required: true},
           { name: 'category', type:"select", selections: category, required: true  },
+          { name: 'weight', type:"text"},
+          { name: 'size', type:"text"},
+          { name: 'color', type:"text"},
           { name: 'description', type:"longtext", multiline: true, rowsMax:"4" },
         ]
       }

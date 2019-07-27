@@ -331,7 +331,10 @@ const fr =  {
         bank_detail: "Afficher mes coordonnées bancaires (sur PDF)",
         invoice_ref: "Référence facture",
         refresh: "Recharger",
-        my_account: "Mon compte"
+        my_account: "Mon compte",
+        weight: "Poids",
+        size: "Taille",
+        color: "Couleur"
 
     },
     helperText: {

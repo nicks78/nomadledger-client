@@ -9,7 +9,7 @@ const styles = theme => ({
         width: '100%',
         marginTop: '0px',
         marginBottom: '3px',
-        fontWeight: 400,
+        fontWeight: 600,
         '& span': {
             color: theme.palette.secondary.main,
 
@@ -72,7 +72,7 @@ const Select = (props) => {
 
 
                     <MenuItem key={index} value={ option[localStorage.getItem('locale')]}>
-                        <span style={{color: option.color || 'inherit', textTransform: "capitalize", fontWeight: 600}} >
+                        <span style={{color: option.color || 'inherit', textTransform: "capitalize", fontWeight: 400}} >
                           {option[props.locale.lang]}
                           {field === "phone_code" && ' (' + option.dial_code +')'}
                           {option.value && ' (' + option.value +')'}

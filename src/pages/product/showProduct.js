@@ -65,8 +65,8 @@ class ShowProduct extends React.Component {
 
           <ApxBackBtn/>
           <Typography variant="h1" align="center">{product.name}</Typography>
-          <br />
-          <Grid container>
+          <div style={{marginBottom: 48}}>
+          <Grid container >
               <Grid item xs={12} className={classes.thumbnail}>
 
                     <div className={classes.mainImgWrap}>
@@ -98,9 +98,8 @@ class ShowProduct extends React.Component {
                     </div>
 
               </Grid>
-
           </Grid>
-<br /><br /><br />
+          </div>
             <Grid container spacing={8}>
                       <Grid item xs={12} sm={4} md={4}>
                         <TextField variant="outlined"
@@ -124,6 +123,15 @@ class ShowProduct extends React.Component {
                             label={locale.wording.currency }
                             value={  product.currency && product.currency[localStorage.getItem("locale")] }
                         />
+                          <TextField variant="outlined"
+                            label={locale.wording.color }
+                            fullWidth
+                            type="color"
+                            style={{  marginTop: 10, fontcolor: 300 }}
+                            margin="dense"
+                            value={ product.color || "#01898c" }
+                            onChange={ (e) => { this.props.createState(reducer, "color", e.target.value) }}
+                          />
                       </Grid>
                       <Grid item xs={12} sm={4} md={4}>
                         <EditSelect
@@ -147,6 +155,16 @@ class ShowProduct extends React.Component {
                             value={product.buying_price || 0 }
                             onChange={ (e) => { this.props.createState(reducer, "buying_price", e.target.value) }}
                             />
+                        <TextField variant="outlined"
+                            label={locale.wording.weight }
+                            fullWidth
+                            type="text"
+                            style={{  marginTop: 10, fontWeight: 300 }}
+                            margin="dense"
+                            value={ product.weight || "" }
+                            onChange={ (e) => { this.props.createState(reducer, "weight", e.target.value) }}
+                            />
+                       
                       </Grid>
                       <Grid item xs={12} sm={4} md={4}>
                         <TextField  variant="outlined"
@@ -169,7 +187,17 @@ class ShowProduct extends React.Component {
                             value={ product.selling_price || 0 }
                             onChange={ (e) => { this.props.createState(reducer, "selling_price", e.target.value) }}
                             />
+                          <TextField variant="outlined"
+                            label={locale.wording.size }
+                            fullWidth
+                            type="text"
+                            style={{  marginTop: 10, fontsize: 300 }}
+                            margin="dense"
+                            value={ product.size || "" }
+                            onChange={ (e) => { this.props.createState(reducer, "size", e.target.value) }}
+                            />
                       </Grid>
+
 
                       <Grid item xs={12}>
                               <TextField variant="outlined"
