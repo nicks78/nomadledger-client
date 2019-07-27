@@ -123,7 +123,7 @@ class Quote extends Component {
 
                                                 </TableCell>
                                                 <TableCell className="tableNumber">{cvtNumToUserPref(quote.subtotal)} {quote.currency.value}</TableCell>
-                                                <TableCell><span style={{color: quote.status.color, fontWeight: 600 }}>{ quote.status[localStorage.getItem('locale')] }</span></TableCell>
+                                                <TableCell><span style={{backgroundColor: quote.status.color, color: "white", fontWeight: 600, padding: "3px 7px 3px 7px", borderRadius: 4 }}>{ quote.status[localStorage.getItem('locale')] }</span></TableCell>
                                                 <TableCell align="center">
                                                 {  !isComplete && !quote.rejected ? 
                                                   <Link to={`/invoice/create/${quote._id}`}><img alt="convert-to-invoice" style={{cursor: "pointer"}} src={ DEFAULT_URL + "img/convert-file.png" } width="34" /></Link>

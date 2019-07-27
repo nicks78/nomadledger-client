@@ -60,7 +60,7 @@ export function createDocument (actionType) {
         axios.defaults.withCredentials = true;
 
         try{
-            await axios.post(`${API_ENDPOINT}/${actionType.toLowerCase()}/create`, {data})
+            await axios.post(`${API_ENDPOINT}${actionType.toLowerCase()}/create`, {data})
 
             dispatch(setNotification("success_create", "success"))
             dispatch(resetState(actionType));
