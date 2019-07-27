@@ -23,12 +23,15 @@ class BarYear extends Component {
                 tooltips: {
                   callbacks: {
                     label: function(tooltipItem) {
-                      return tooltipItem.yLabel + ' : ' + cvtNumToUserPref(tooltipItem.xLabel) + ' ' + currency ;
+                      return  cvtNumToUserPref(tooltipItem.xLabel) + ' ' + currency ;
                     }
                   }
                 },
                 legend: {
-                  display: false,
+                  display: true,
+                  labels: {
+                    fontColor: '#484848'
+                  }
               }
               }
             })

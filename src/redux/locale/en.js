@@ -104,7 +104,7 @@ const en = {
         label_comp_address: "Company address",
         label_annual_turnover: "Annual turnover",
         label_revenue: "Revenues",
-        label_yearly_stat: "Yearly report",
+        label_yearly_stat: "Report by year",
         label_daily_task: "TODO",
         label_forgot_pwd: "We'll send a recovery link to",
         link_forgot_pwd: "Forgot password ?",

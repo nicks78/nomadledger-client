@@ -39,7 +39,7 @@ class BarCharts extends Component {
                 legend: {
                   display: true,
                   labels: {
-                      fontColor: '#303030'
+                      fontColor: '#484848'
                   }
               }
               }
