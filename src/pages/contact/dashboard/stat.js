@@ -62,13 +62,11 @@ const styles = theme => ({
   },
   revenues: {
     padding: 15, 
-    // background: 'linear-gradient(60deg, #3b78e7, #1930FF)'
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: theme.palette.yeallow.dark
   },
   refunds: {
     padding: 15,
-    // background: 'linear-gradient(60deg, #AD3428, #d23f31)'
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: theme.palette.primary.main
   }
 
 })
