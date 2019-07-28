@@ -62,7 +62,7 @@ const styles = theme => ({
   },
   revenues: {
     padding: 15, 
-    backgroundColor: theme.palette.yeallow.dark
+    backgroundColor: theme.palette.yellow.dark
   },
   refunds: {
     padding: 15,
