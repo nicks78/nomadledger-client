@@ -454,6 +454,7 @@ const fr =  {
         request_reset_pw: "Votre demande a bien été prise en compte. Veuillez consulter votre email et suivre les instructions",
         beta_1: "Beta 1 - Toutes les données enregistrées seront perdues",
         confirm_delete: "Voulez-vous vraiment supprimer cette élément ?",
+        cookie_track: `En poursuivant votre navigation sur ce site, vous en acceptez les conditions générales d'utilisation, et notamment l'utilisation des cookies afin de réaliser des statistiques d'audiences, vous proposer des services éditoriaux, une offre publicitaire adaptée à vos centres d'intérêts et la possibilité de partager des contenus sur les réseaux sociaux.`,
 
         status_devis: `
             <p class="hint">Il est important de bien comprendre chacun des statuts de vos devis.</p>
@@ -502,8 +503,8 @@ const fr =  {
         try_it: "L'essayer",
         blocDesc: {
             title: `QU'EST CE QU'ON FAIT POUR VOUS ?`,
-            bloc_1_title: `Support Multiple Devise`, 
-            bloc_1_para: `Il est important de <strong>jongler avec plusieurs devises</strong> lorsque vous travaillez à l’international. <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> enregistre toutes les devises que vous utilisez lors de la création ou de la mise à jour de documents, avec les tarifs en vigueur. Vous pouvez sélectionner votre devise préférée à afficher sur votre <strong>tableau de bord</strong>.`, 
+            bloc_1_title: `Support Devise Multiple`, 
+            bloc_1_para: `Il est important de <strong>jongler avec plusieurs devises</strong> lorsque vous travaillez à l’international.<br /><strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> enregistre toutes les devises que vous utilisez lors de la création ou de la mise à jour de documents, avec les tarifs en vigueur. Vous pouvez sélectionner votre devise préférée à afficher sur votre <strong>tableau de bord</strong>.`, 
             bloc_2_title: `Editer Factures & Devis`,  
             bloc_2_para: `Pour un traitement <strong>efficace</strong>, configurer votre application en entrant vos services, produits, contacts et configurations. Vous pourrez ensuite <strong>créer vos factures et/ou devis</strong> en quelques clics.`, 
             bloc_3_title: `Gérer vos Tâches`, 

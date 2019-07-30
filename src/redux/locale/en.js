@@ -450,6 +450,7 @@ const en = {
         email_not_confirm: "Your email has not been confirmed yet. If you did not receive your confirmation email, please follow the steps below",
         beta_1: "Beta 1 - All data will be lost",
         confirm_delete: "Do you really want to delete this element ?",
+        cookie_track: `By continuing your visit to this site, you accept the terms and conditions of use, including the use of cookies to achieve audience statistics, offer editorial services, an advertising offer tailored to your interests and the ability to share content on social networks.`,
 
         
         status_devis: `

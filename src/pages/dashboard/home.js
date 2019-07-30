@@ -24,7 +24,7 @@ class Home extends Component {
         this.props.getData( "mainStat", "" );
         this.props.getData( "pieQuote", "compare/quote/success-onhold-rejected" );
         this.props.getData( "expensesBy", "sum/expenses/bycategory" );
-        this.props.getData( "yearly", "sum/yearly-stat?locale="+localStorage.getItem('locale') );
+        this.props.getData( "yearly", "sum/yearly-stat?locale="+localStorage.getItem('locale') )
         this.props.getAllTask("daily", "dailyTask");
 
         window.addEventListener("resize", this.catchWidth)
@@ -50,9 +50,9 @@ class Home extends Component {
         if( isFetching || isFetchingTask ){
             return <Spinner />
         }
-        // if( !pieQuote || !mainStat || !expensesBy){
-        //     return <Spinner />
-        // }
+        if( !pieQuote || !mainStat || !expensesBy || !yearly){
+            return <Spinner />
+        }
 
         return (
             <div>

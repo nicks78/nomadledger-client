@@ -5,7 +5,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css'
 import {StripeProvider} from 'react-stripe-elements';
 import MessengerCustomerChat from 'react-messenger-customer-chat';
-
+import Cookie from './lib/cookie'
 
 // fab746 jaune
 // 0c3c5e bleu foncé
@@ -176,6 +176,8 @@ class App extends Component {
 
   render() {
 
+    const cookie = localStorage.getItem("cookie")
+
     return (
           <React.Fragment>
           <StripeProvider stripe={this.state.stripe}>
@@ -190,6 +192,8 @@ class App extends Component {
   
             </MuiThemeProvider>
           </StripeProvider>
+          {  cookie !== "1" ? <Cookie /> : null  }
+          
         </React.Fragment>
     )
   }
