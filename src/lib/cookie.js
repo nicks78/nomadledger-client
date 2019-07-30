@@ -28,7 +28,7 @@ export default class Cookie extends Component {
                 <Typography style={{color:"white"}} variant="caption">{text[localStorage.getItem("locale")]} 
                    
                 </Typography>
-                <Button variant="contained" onClick={() => this.acceptCookie()}>Agreed</Button>
+                <Button variant="contained" onClick={() => this.acceptCookie()}>Ok</Button>
                 </div>
 
             </div>
