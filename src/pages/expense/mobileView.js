@@ -58,16 +58,15 @@ class MobileView extends React.Component {
               <div className={this.props.classes.details}>
                 <CardContent className={this.props.classes.content}>
                   <Typography variant="body1" style={{textTransform: "capitalize"}}>
-                    <span style={{ fontSize: 8 }}>{expense.receipt_date.label}</span><br />
-                    {expense.name}
-                  <span style={{position: "absolute", right: 24, fontWeight: 700}}>
-                      { cvtNumToUserPref(expense.price)} {expense.currency.en}
-                    </span>
+                    
+                      {expense.name}<br />
+                      <div>
+                        <span style={{ fontSize: 8 }}>{expense.receipt_date.label}</span>
+                        <span style={{position: "absolute", right: 24, fontWeight: 700}}>
+                          { cvtNumToUserPref(expense.price)} {expense.currency.en}
+                        </span>
+                      </div>
                   </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    {expense.description.slice(0, 30)}
-                  </Typography>
-
                 </CardContent>
 
               </div>

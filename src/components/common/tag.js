@@ -17,7 +17,7 @@ const styles = theme => ({
         marginBottom: 5,
         marginRight: 5,
         borderColor: "#ffb555",
-        backgroundColor: theme.palette.thinBlue
+        backgroundColor: theme.palette.lightGreen
       },
       avatar: {
         backgroundColor: theme.palette.primary.main,

@@ -63,7 +63,7 @@ class MobileView extends React.Component {
                           { cvtNumToUserPref( item.subtotal )} {item.currency.en}
                         </span>
                   </Typography>
-                  <Typography variant="body2" color="textSecondary">
+                  <Typography variant="subtitle2" color="textSecondary">
                     <span style={{ color: item.status.color }}>{item.status[localStorage.getItem('locale')]}</span>
                   </Typography>
 

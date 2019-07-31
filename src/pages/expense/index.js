@@ -92,7 +92,7 @@ class Expense extends Component {
 
                   <ApxTableToolBar
                       numSelected={0}
-                      menus={[...category, {fr: "Tous", en: "All", _id: "none"}]}
+                      menus={category}
                       title={ isFetching ? locale.wording.loading : locale.wording.expense}
                       selected={locale.wording.selected}
                       onChangeQuery={ this.handleFilterRequest }

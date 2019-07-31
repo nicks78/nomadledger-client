@@ -506,7 +506,7 @@ const en = {
             bloc_1_title: `Multi-Currency Support`, 
             bloc_1_para: `It’s important to <strong>juggle multiple currencies</strong> when you work internationally. 
             <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> saves all currencies you use when creating or updating documents, 
-            with the current rates. You can select your preferred currency to display on your <strong>dashboard</strong>.`, 
+            with the current rates.`, 
             bloc_2_title: `Process Invoices & Quotations`,  
             bloc_2_para: `For <strong>efficient</strong> processing, set up your application by inputting your services, products, contacts, and configurations. 
             Then <strong>creating an invoice or quotation</strong> is just a few clicks away.`, 

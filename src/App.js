@@ -68,7 +68,7 @@ const theme = createMuiTheme({
     h1:{
       fontSize: '1.8rem',
       fontWeight: 500,
-      color: '#484848',
+      color: '#0c3c5e',
       // textTransform: "capitalize"
     },
     h2: {
@@ -86,30 +86,31 @@ const theme = createMuiTheme({
     subtitle1: {
       fontWeight: 700,
       color: '#484848',
-      fontSize: '0.9rem'
+      fontSize: '1em',
     },
     subtitle2: {
       fontWeight: 500,
       color: '#484848',
-      fontSize: '0.9rem'
+      fontSize: '0.875em',
     },
     body1: {
-      fontSize: '0.875rem',
+      fontSize: '1em',
       fontWeight: 700,
       color: '#484848'
     },
     body2: {
       fontWeight: 400,
+      fontStyle: "normal",
       color: '#484848',
-      fontSize: '0.875rem'
+      fontSize: '1em',
     },
     caption: {
       fontWeight: 500,
       color: 'rgba(0, 0, 0, 0.54)',
-      fontSize: '0.875rem'
+      fontSize: '1em',
     },
     overline: {
-      fontSize: '0.875rem',
+      fontSize: '1em', 
       fontWeight: 700,
       color: '#0c3c5e',
       lineHeight: 1.6

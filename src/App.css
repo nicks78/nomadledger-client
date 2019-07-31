@@ -83,12 +83,16 @@ thead{
 }
 
 tr th {
-  color: black !important;
+  color: #484848 !important;
+  font-size: 0.8em !important;
+  font-weight: 600 !important;
+  opacity: 0.8;
 }
 
 tr td {
   color: #484848 !important;
   font-weight: 600 !important;
+  font-size: 0.8em !important;
 }
 
 .bullet {

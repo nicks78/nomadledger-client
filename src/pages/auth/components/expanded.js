@@ -85,7 +85,7 @@ const styles = theme => ({
         marginTop: 10
     },
     heading: {
-        fontSize: theme.typography.pxToRem(15),
+        fontSize: "1.000em",
         color: 'white',
         flexBasis: '90%',
         flexShrink: 0,
@@ -98,7 +98,10 @@ const styles = theme => ({
         height: 64
     },
     para: {
-        margin: 24
+        margin: 24,
+        [theme.breakpoints.down("sm")]: {
+          margin: 0
+        }
     }
 })
 

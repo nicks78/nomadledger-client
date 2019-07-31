@@ -118,7 +118,7 @@ class Auth extends Component {
               </div>
             </Grid>
           <Grid item xs={12} sm={6} md={6}>
-            <div style={{ width: isMobile ? "100%" : "90%", marginLeft: isMobile ? "12px" : "4rem" }}>
+            <div style={{ width: isMobile ? "100%" : "100%", marginLeft: isMobile ? "12px" : "2rem" }}>
               <Typography  variant="body2" align="left" dangerouslySetInnerHTML={{__html: locale.company_name + locale.home_page.paragraphe_01}}/><br />
               <Typography variant="body2" align="left" dangerouslySetInnerHTML={{__html: locale.home_page.paragraphe_02 }}/>
             </div>

@@ -515,9 +515,7 @@ const fr =  {
             travaillez à l’international.<br />
             <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> enregistre toutes les devises que vous utilisez lors de
             la création, ou la mise à jour de documents, et ce,
-            avec les tarifs en vigueur.<br />
-            Vous pouvez également sélectionner votre devise préférée, et
-            l'afficher directement sur votre <strong>tableau de bord</strong>.`, 
+            avec les tarifs en vigueur.`, 
             bloc_2_title: `Edition de Factures et Devis`,  
             bloc_2_para: `Pour un traitement <strong>efficace</strong>, configurer votre application en entrant vos services, produits, contacts et configurations. Vous pourrez ensuite <strong>créer vos factures et/ou devis</strong> en quelques clics seulement.`, 
             bloc_3_title: `Gestionnaire de Taches intégré`, 
