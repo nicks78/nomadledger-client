@@ -19,6 +19,7 @@ import Quote from '../public_pages/quote'
 import Auth from '../pages/auth'
 import Login from '../pages/auth/login'
 import ForgotPassword from '../pages/auth/forgotPassword'
+import ValidateAccount from '../pages/auth/validateAccount'
 import ResetPassword from '../pages/auth/resetPassword'
 import ConfirmEmail from '../pages/auth/confirmEmail'
 import Payment from '../pages/payment'
@@ -106,6 +107,7 @@ class Routes extends React.Component {
                         <Route path="/login" component={Login} />
                         <Route exact path="/public" component={NotFound} />
                         <Route path="/public/confirm-email" component={ConfirmEmail} />
+                        <Route path="/public/validate-account/:token" component={ValidateAccount} />
                         <Route path="/public/forgot-password" component={ForgotPassword} />
                         <Route path="/public/reset-password/:token" component={ResetPassword} />
                         <Route path="/public/payment-gateway/:token_id" component={Payment} />
