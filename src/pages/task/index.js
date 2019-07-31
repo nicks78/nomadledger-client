@@ -177,8 +177,9 @@ const styles = theme => ({
     },
     spanDate: {
       marginTop: 10,
-      fontWeight: 400,
-      textTransform: "capitalize"
+      fontWeight: 500,
+      textTransform: "capitalize",
+      color: theme.palette.primary.main
     },
     margin: {
       [theme.breakpoints.down("sm")]:{
