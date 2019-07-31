@@ -494,7 +494,14 @@ const fr =  {
     home_page: {
         title_01: "Logiciel de facturation en ligne pour nomades numériques",
         paragraphe_01: ` est un logiciel en ligne facile à utiliser pour gérer vos factures et suivre vos tâches en quelques clics.`,
-        paragraphe_02: `Nous sommes un groupe de <strong>nomades numériques</strong> travaillant dans le monde entier, et voulions un moyen <strong>simple et sécurisé</strong> pour <strong>facturer nos clients internationaux</strong>.<br />C'est ainsi que <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> est né. Notre logiciel vous permet de créer, d’envoyer ou d’imprimer facilement des <strong>documents professionnels</strong> accessibles depuis n’importe quel appareil et de n’importe où. Vous pouvez ainsi consacrer moins de temps à la facturation et plus de temps au travail qui vous importe.`,
+        paragraphe_02: `Nous sommes un groupe de nomades numériques travaillant dans le monde entier, et nous voulions 
+        un moyen simple et sécurisé pour <strong>facturer nos clients </strong> internationaux.
+        c'est ainsi que <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> est né.<br /> 
+        Notre logiciel vous permet de créer, d’envoyer ou d’imprimer
+        facilement des documents professionnels accessibles depuis
+        n’importe quel appareil, et de n’importe où.<br /> 
+        Vous pouvez ainsi <strong>consacrer moins de temps à la facturation</strong>, et plus de temps au
+        travail qui vous importe.`,
         agreed_terms: ` * En m'inscrivant, j'accepte les <a target="_blank" href="https://d2cxa8ns3xxkg9.cloudfront.net/static/termsandconditions_fr.pdf">Conditions générales</a>  et la  <a href="https://d2cxa8ns3xxkg9.cloudfront.net/static/privacypolicy_fr.pdf">Politique de protection de la vie privée</a>.`,
         footer_paragraphe: `Tous droits réservés.&nbsp;<a style="color: #8B8B8B; font-weight: 600" target="_blank" href="https://d2cxa8ns3xxkg9.cloudfront.net/static/termsandconditions_fr.pdf" rel="noopener noreferrer" target="_blank">Conditions Générales</a>,&nbsp;
         les fonctionnalités, l'assistance, la tarification et les options sont susceptibles d'être modifiées sans préavis.`,
@@ -503,12 +510,18 @@ const fr =  {
         try_it: "L'essayer",
         blocDesc: {
             title: `QU'EST CE QU'ON FAIT POUR VOUS ?`,
-            bloc_1_title: `Support Devise Multiple`, 
-            bloc_1_para: `Il est important de <strong>jongler avec plusieurs devises</strong> lorsque vous travaillez à l’international.<br /><strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> enregistre toutes les devises que vous utilisez lors de la création ou de la mise à jour de documents, avec les tarifs en vigueur. Vous pouvez sélectionner votre devise préférée à afficher sur votre <strong>tableau de bord</strong>.`, 
-            bloc_2_title: `Editer Factures & Devis`,  
-            bloc_2_para: `Pour un traitement <strong>efficace</strong>, configurer votre application en entrant vos services, produits, contacts et configurations. Vous pourrez ensuite <strong>créer vos factures et/ou devis</strong> en quelques clics.`, 
-            bloc_3_title: `Gérer vos Tâches`, 
-            bloc_3_para: `Ne manquez jamais une tâche. Ajoutez-la simplement à notre <strong>gestionnaire de tâches</strong>, qui vous guidera tout au long de la journée et vous permettra de suivre la progression de chaque tâche.`, 
+            bloc_1_title: `Support de Devises Multiples`, 
+            bloc_1_para: `Il est important de jongler avec <strong>plusieurs devises</strong> lorsque vous
+            travaillez à l’international.<br />
+            <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> enregistre toutes les devises que vous utilisez lors de
+            la création, ou la mise à jour de documents, et ce,
+            avec les tarifs en vigueur.<br />
+            Vous pouvez également sélectionner votre devise préférée, et
+            l'afficher directement sur votre <strong>tableau de bord</strong>.`, 
+            bloc_2_title: `Edition de Factures et Devis`,  
+            bloc_2_para: `Pour un traitement <strong>efficace</strong>, configurer votre application en entrant vos services, produits, contacts et configurations. Vous pourrez ensuite <strong>créer vos factures et/ou devis</strong> en quelques clics seulement.`, 
+            bloc_3_title: `Gestionnaire de Taches intégré`, 
+            bloc_3_para: `Ne manquez jamais une tâche : Ajoutez-la simplement à notre <strong>gestionnaire de tâches</strong>, qui vous guidera tout au long de la journée et vous permettra de suivre la progression de chaque tâche.`, 
         },
         form: {
             title: "7 jours d'essai gratuit",
@@ -518,10 +531,10 @@ const fr =  {
             title: "FAQ",
             q_1: "Pourquoi utiliser un logiciel de facturation en ligne ?",
             r_1: `Le <strong>logiciel de facturation</strong> vous apporte souplesse et efficacité. Gardez une trace de toutes vos activités, simplifiez vos audits annuels et exportez vos fichiers de comptabilité en un seul clic.`,
-            q_2: "A qui s'adresse ce logiciel ?",
-            r_2: `Ce logiciel a été conçu pour <strong>les entrepreneurs, les freelances et les petites entreprises</strong> qui ont besoin d’un programme facile à utiliser.`,
+            q_2: "A qui s'adress ce logiciel ?",
+            r_2: `Ce logiciel a été conçu pour <strong>la facturations des entrepreneurs, freelances et les petites ou moyennes entreprises</strong> qui ont besoin d’un programme facile à utiliser, et efficace.`,
             q_3: "Quels sont les avantages ?",
-            r_3: `Notre logiciel sécurisera vos données, <strong>augmentera votre productivité</strong>, vous permettra de suivre vos finances et vous donnera un accès facile à vos informations depuis n'importe quel appareil.`
+            r_3: `Notre logiciel sécurisera vos données, <strong>augmentera votre productivité de façon efficiente</strong>, et permettra de suivre vos finances.<br />De plus, il vous donnera un accès facile à vos informations, ou que vous vous trouviez, depuis n'importe quel appareil.`
         },
         offer: {
             title: "Notre offre",

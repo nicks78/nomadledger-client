@@ -62,7 +62,7 @@ export const createTask = () => {
             return response.data
         }) 
         .then( res => {
-            dispatch(getAllTask( `list`, "taskList" ))
+            dispatch(getAllTask( `list?day=${new Date().getTime()}`, "taskList" ))
         })
         .catch(function (error) {
             dispatch(setError(error));
