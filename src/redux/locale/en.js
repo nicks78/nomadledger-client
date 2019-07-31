@@ -340,7 +340,7 @@ const en = {
         select_num_format: "Number format",
         select_category: "Category",
         select_contact: "Client",
-        select_contact_group: "Group",
+        select_contact_group: "Contact group",
         textarea_quote: "Type a description",
         textarea_terms: "Add a short Terms & Conditions",
         textarea_comment: "Type a comment...",
