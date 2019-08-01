@@ -74,8 +74,11 @@ export function setListItem( actionType, name, item ) {
 export function convertToCurrency( actionType, currency, item ) {
 
     return (dispatch) => {
-        currencyConvertorApi( item.currency, item.total, currency.en )
+        currencyConvertorApi( item.currency, item.unit_price, currency.en )
         .then( (value) => {
+
+            console.log("TOTAL", item)
+
             item.total = parseFloat(((value * item.quantity) - item.discount).toFixed(2));
             item.unit_price = value;
             item.base_currency = item.currency;
