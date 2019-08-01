@@ -4,7 +4,7 @@ import Routes from './routes'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css'
 import {StripeProvider} from 'react-stripe-elements';
-import MessengerCustomerChat from 'react-messenger-customer-chat';
+// import MessengerCustomerChat from 'react-messenger-customer-chat';
 import Cookie from './lib/cookie'
 
 // fab746 jaune
@@ -183,14 +183,7 @@ class App extends Component {
           <React.Fragment>
           <StripeProvider stripe={this.state.stripe}>
             <MuiThemeProvider theme={theme}>
-                <Routes />
-                    <div>
-                        <MessengerCustomerChat
-                          pageId="2385240291708965"
-                          appId="733037490462839"
-                        />
-                      </div>
-  
+                <Routes /> 
             </MuiThemeProvider>
           </StripeProvider>
           {  cookie !== "1" ? <Cookie /> : null  }
@@ -202,3 +195,11 @@ class App extends Component {
 
 
 export default App;
+
+
+{/* <div>
+<MessengerCustomerChat
+  pageId="2385240291708965"
+  appId="733037490462839"
+/>
+</div> */}

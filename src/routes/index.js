@@ -152,8 +152,6 @@ class Routes extends React.Component {
                             :  null
 
                         }
-
-
                         <Route component={NotFound} />
 
                     </Switch>
