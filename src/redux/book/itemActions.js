@@ -36,7 +36,7 @@ export function getListItem( actionType, name, item ) {
                     onModel: item.onModel,
                     desc: item.name,
                     discount: 0,
-                    currency: currency.en || item.currency.en,
+                    currency: currency.en,
                     unit_price: unit_price,
                     total: unit_price,
                     item_id: item._id
@@ -76,7 +76,7 @@ export function convertToCurrency( actionType, currency, item ) {
     return (dispatch) => {
         currencyConvertorApi( item.currency, item.total, currency.en )
         .then( (value) => {
-            item.total = parseFloat((value * item.quantity).toFixed(2));
+            item.total = parseFloat(((value * item.quantity) - item.discount).toFixed(2));
             item.unit_price = value;
             item.base_currency = item.currency;
             item.currency = currency.en

@@ -104,6 +104,10 @@ tr td {
   margin-left: 5px;
 }
 
+text {
+  font-size: 0.675em !important;
+}
+
 .disabled-link {
   pointer-events: none;
 }

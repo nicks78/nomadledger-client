@@ -195,11 +195,3 @@ class App extends Component {
 
 
 export default App;
-
-
-{/* <div>
-<MessengerCustomerChat
-  pageId="2385240291708965"
-  appId="733037490462839"
-/>
-</div> */}

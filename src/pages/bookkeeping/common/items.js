@@ -80,6 +80,8 @@ class Items extends Component {
     const vat_terms =  newData.vat && newData.vat.vat_terms_en ? <span style={{ fontSize: 10 }}><br />{ newData.vat && newData.vat["vat_terms_" + localStorage.getItem('locale')] }</span> : null
     const canBeUpdated = newData.quote_id || newData.refund_id ? false : true
 
+console.log(listItems)
+
     return (
       <div>
         
