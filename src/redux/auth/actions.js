@@ -2,7 +2,6 @@
 
 import axios from 'axios';
 import { API_ENDPOINT } from '../constant'
-import { resetState } from '../library/actions/initAction'
 import {getAccount} from '../account/actions'
 import {history} from '../../routes/history'
 import {setNotification} from '../notification/actions'
@@ -113,29 +112,15 @@ export function getLogout(){
     axios.get(`${API_ENDPOINT}auth/logout`, {
         method: 'GET',
         mode: 'cors'
-      })
-      .then( res => {
-
-        // Empty redux state
-        dispatch(resetState('CONTACT'))
-        dispatch(resetState('SERVICE'))
-        dispatch(resetState('EXPENSE'))
-        dispatch(resetState('PRODUCT'))
-        dispatch(setLogout());
-        history.push('/')
-      })
-      .catch(function (error) {
-            // Do something when error
-            var message = error.response ? error.response.data.message : 'error_500';
-            // Empty redux state
-            dispatch(resetState('CONTACT'))
-            dispatch(resetState('SERVICE'))
-            dispatch(resetState('EXPENSE'))
-            dispatch(resetState('PRODUCT'))
-            dispatch(setLogout());
-            dispatch(requestFailed(message));
-            history.push('/')
-      })
+    })
+    .then( res => {
+        history.push('/');
+        window.location.reload(true)
+    })
+    .catch(function (error) {
+        history.push('/');
+        window.location.reload(true)
+    })
     }
 }
 
