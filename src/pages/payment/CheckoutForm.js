@@ -1,44 +1,44 @@
 // src/pages/payment/CheckoutForm.js
 
 import React from 'react';
-import {connect} from 'react-redux'
-import {submitPayment, requestPayment} from '../../redux/payment/actions'
-import {injectStripe, CardElement} from 'react-stripe-elements';
+import { connect } from 'react-redux'
+import { submitPayment, requestPayment } from '../../redux/payment/actions'
+import { injectStripe, CardElement } from 'react-stripe-elements';
 import { Button, Typography, TextField } from '@material-ui/core'
 import WarningIcon from '@material-ui/icons/WarningOutlined'
-import {cvtNumToUserPref} from '../../utils/help_function'
+import { cvtNumToUserPref } from '../../utils/help_function'
 import Spinner from '../../components/common/spinner'
-import {history} from '../../routes/history'
-import {setNotification} from '../../redux/notification/actions'
+import { history } from '../../routes/history'
+import { setNotification } from '../../redux/notification/actions'
 
 class Checkout extends React.Component {
 
-  
+
   constructor(props) {
     super(props);
     this.state = {
       autoRenewal: false,
       lastname: "",
-      firstname: ""    
+      firstname: ""
     }
   }
-  
 
 
-  componentWillUnmount(){
+
+  componentWillUnmount() {
     clearTimeout(this.timer);
   }
 
 
-  componentWillReceiveProps(nextProps){
-    if(nextProps.payment)
-    this.setState({
-      lastname: nextProps.payment.lastname,
-      firstname: nextProps.payment.firstname
-    })
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.payment)
+      this.setState({
+        lastname: nextProps.payment.lastname,
+        firstname: nextProps.payment.firstname
+      })
   }
 
-    handleSubmit = async (ev) => {
+  handleSubmit = async (ev) => {
     ev.preventDefault();
 
     // User information
@@ -47,18 +47,18 @@ class Checkout extends React.Component {
     var lastname = this.state.lastname || infos.lastname
     var firstname = this.state.firstname || infos.firstname
 
-    try{
-      let {token} = await this.props.stripe.createToken({name: lastname + " " + firstname  });
-          var data = {
-            stripe_token: token,
-            email: this.props.payment.email,
-            token_user: this.props.payment.token_user,
-            autoRenewal: this.state.autoRenewal
-          }
+    try {
+      let { token } = await this.props.stripe.createToken({ name: lastname + " " + firstname });
+      var data = {
+        stripe_token: token,
+        email: this.props.payment.email,
+        token_user: this.props.payment.token_user,
+        autoRenewal: this.state.autoRenewal
+      }
 
-          this.props.submitPayment(data)
-    }catch(err){
-      if(err.error){
+      this.props.submitPayment(data)
+    } catch (err) {
+      if (err.error) {
         this.props.setNotification(err.error.code, "error")
       }
     }
@@ -73,36 +73,36 @@ class Checkout extends React.Component {
     setTimeout(() => {
       this.props.setNotification("error_payment_no_found", "error");
       history.push("/")
-    }, 10000)
+    }, 300000)
 
-    if( !payment ){
-      return <Spinner/>
+    if (!payment) {
+      return <Spinner />
     }
 
     return (
       <div>
-        <Typography variant="h1" style={{fontWeight: 600}} align="center">{cvtNumToUserPref(3.95)} € /<span style={{fontWeight: 300, fontSize: 20}}>{locale.wording.month}</span></Typography>
+        <Typography variant="h1" style={{ fontWeight: 600 }} align="center">{cvtNumToUserPref(3.95)} € /<span style={{ fontWeight: 300, fontSize: 20 }}>{locale.wording.month}</span></Typography>
         <Typography variant="body1" align="center">{locale.helperText.payment_terms}</Typography><br />
-        <Typography variant="caption" align="center">{locale.helperText.member_end} { new Date(payment.membership_end).toLocaleDateString(localStorage.getItem("locale")) } </Typography><br />
-        <Typography variant="caption" style={{color: "red", display: 'inline-flex', alignItems: 'center' }}>
-          <WarningIcon style={{ fontSize: 18 }}/>&nbsp;{ locale.message.warning_not_refresh }</Typography>
+        <Typography variant="caption" align="center">{locale.helperText.member_end} {new Date(payment.membership_end).toLocaleDateString(localStorage.getItem("locale"))} </Typography><br />
+        <Typography variant="caption" style={{ color: "red", display: 'inline-flex', alignItems: 'center' }}>
+          <WarningIcon style={{ fontSize: 18 }} />&nbsp;{locale.message.warning_not_refresh}</Typography>
         <form onSubmit={this.handleSubmit}>
-          <TextField   value={ payment.email || "" } disabled  variant="outlined" margin="dense" fullWidth />
-          <TextField label={locale.wording.card_lastname} value={ lastname } onChange={ (e ) => { this.setState({ lastname : e.target.value }) }} variant="outlined" margin="dense" fullWidth />
-          <TextField label={locale.wording.card_firstname} value={ firstname } onChange={ (e ) => { this.setState({ firstname : e.target.value }) }} variant="outlined" margin="dense" fullWidth />
-          <CardElement  />
+          <TextField value={payment.email || ""} disabled variant="outlined" margin="dense" fullWidth />
+          <TextField label={locale.wording.card_lastname} value={lastname} onChange={(e) => { this.setState({ lastname: e.target.value }) }} variant="outlined" margin="dense" fullWidth />
+          <TextField label={locale.wording.card_firstname} value={firstname} onChange={(e) => { this.setState({ firstname: e.target.value }) }} variant="outlined" margin="dense" fullWidth />
+          <CardElement />
           <br />
           <Button
             variant="contained"
-            disabled={ payment === null || isFetching ? true : false }
-            style={{width: '100%'}}
+            disabled={payment === null || isFetching ? true : false}
+            style={{ width: '100%' }}
             type="submit"
             color="primary">
-            { isFetching ? locale.wording.payment_progress : locale.wording.confirm_payment } {payment && payment.amount.toFixed(2)} €
+            {isFetching ? locale.wording.payment_progress : locale.wording.confirm_payment} {payment && payment.amount.toFixed(2)} €
           </Button>
         </form>
         <br />
-        <Typography variant="body1" align="center" dangerouslySetInnerHTML={{__html: locale.helperText.need_help}}/>
+        <Typography variant="body1" align="center" dangerouslySetInnerHTML={{ __html: locale.helperText.need_help }} />
       </div>
 
     );
@@ -112,14 +112,14 @@ class Checkout extends React.Component {
 const mapStateToProps = (state) => {
 
   return {
-      locale: state.locale.locale,
-      payment: state.payment.payment,
-      isFetching: state.payment.isFetching
+    locale: state.locale.locale,
+    payment: state.payment.payment,
+    isFetching: state.payment.isFetching
   }
 }
 
 
-const CheckoutForm = connect( mapStateToProps, {submitPayment, requestPayment, setNotification} )(Checkout);
+const CheckoutForm = connect(mapStateToProps, { submitPayment, requestPayment, setNotification })(Checkout);
 
 
 export default injectStripe(CheckoutForm);
