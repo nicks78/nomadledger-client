@@ -1,7 +1,7 @@
 import React from 'react'
 import { Router, Route, Switch } from 'react-router-dom'
-import {history} from './history'
-import {connect} from 'react-redux'
+import { history } from './history'
+import { connect } from 'react-redux'
 import { getLocale, initLocale } from '../redux/locale/actions'
 import { setNotification } from '../redux/notification/actions'
 import { getLogout } from '../redux/auth/actions'
@@ -66,20 +66,20 @@ import Template from '../pages/template'
 class Routes extends React.Component {
 
     state = {
-      mountedAt: null
+        mountedAt: null
     }
 
-    componentWillMount(){
+    componentWillMount() {
         localStorage.setItem('locale', "fr")
     }
 
-    componentDidMount(){
-        if(this.props.authUser)
-        this.props.initLocale(this.props.authUser.locale || "fr")
+    componentDidMount() {
+        if (this.props.authUser)
+            this.props.initLocale(this.props.authUser.locale || "fr")
     }
 
-    componentWillReceiveProps(nextProps){
-        if(this.state.mountedAt === null && nextProps.authUser ){
+    componentWillReceiveProps(nextProps) {
+        if (this.state.mountedAt === null && nextProps.authUser) {
             nextProps.initLocale(nextProps.authUser.locale || "fr");
             this.setState({ mountedAt: Date.now() })
         }
@@ -90,19 +90,19 @@ class Routes extends React.Component {
     }
 
 
-    render(){
+    render() {
 
         const { isLoggedIn, locale, authUser, company, text, status, openSnack } = this.props
         return (
 
             <Router base history={history}>
-                    <React.Fragment>
-                        <SnackBar
-                            text={text}
-                            openSnack={ openSnack }
-                            status={status}
-                            locale={locale}/>
-                        <Switch>
+                <React.Fragment>
+                    <SnackBar
+                        text={text}
+                        openSnack={openSnack}
+                        status={status}
+                        locale={locale} />
+                    <Switch>
                         <Route exact path="/" component={Auth} />
                         <Route path="/login" component={Login} />
                         <Route exact path="/public" component={NotFound} />
@@ -115,41 +115,41 @@ class Routes extends React.Component {
                         <Route path="/public/quote/:token" component={Quote} />
 
                         {
-                            isLoggedIn && authUser !== null  ?
-                            <Layout company={company} _onChangeLocale={this.handleChangeLocale} user={authUser} logout={this.props.getLogout} locale={locale}>
+                            isLoggedIn && authUser !== null ?
+                                <Layout company={company} _onChangeLocale={this.handleChangeLocale} user={authUser} logout={this.props.getLogout} locale={locale}>
 
-                            <Switch>
-                                <PrivateRoute exact path="/dashboard" component={ Home } auth={isLoggedIn}/>
+                                    <Switch>
+                                        <PrivateRoute exact path="/dashboard" component={Home} auth={isLoggedIn} />
 
-                                <PrivateRoute exact path="/account" component={Account}  auth={isLoggedIn}/>
+                                        <PrivateRoute exact path="/account" component={Account} auth={isLoggedIn} />
 
-                                <PrivateRoute exact path="/contact" component={Contact}  auth={isLoggedIn}/>
-                                <PrivateRoute path="/contact/view/:id" component={ShowContact}  auth={isLoggedIn}/>
+                                        <PrivateRoute exact path="/contact" component={Contact} auth={isLoggedIn} />
+                                        <PrivateRoute path="/contact/view/:id" component={ShowContact} auth={isLoggedIn} />
 
-                                <PrivateRoute exact path="/product" component={Product}  auth={isLoggedIn}/>
-                                <PrivateRoute path="/product/view/:id" component={ShowProduct}  auth={isLoggedIn}/>
+                                        <PrivateRoute exact path="/product" component={Product} auth={isLoggedIn} />
+                                        <PrivateRoute path="/product/view/:id" component={ShowProduct} auth={isLoggedIn} />
 
-                                <PrivateRoute exact path="/service" component={Service}  auth={isLoggedIn}/>
-                                <PrivateRoute path="/service/view/:id" component={ShowService}  auth={isLoggedIn}/>
+                                        <PrivateRoute exact path="/service" component={Service} auth={isLoggedIn} />
+                                        <PrivateRoute path="/service/view/:id" component={ShowService} auth={isLoggedIn} />
 
-                                <PrivateRoute exact path="/expense" component={Expense}  auth={isLoggedIn}/>
-                                <PrivateRoute path="/expense/view/:id" component={ShowExpense}  auth={isLoggedIn}/>
+                                        <PrivateRoute exact path="/expense" component={Expense} auth={isLoggedIn} />
+                                        <PrivateRoute path="/expense/view/:id" component={ShowExpense} auth={isLoggedIn} />
 
-                                <PrivateRoute exact path="/task" component={Task}  auth={isLoggedIn}/>
+                                        <PrivateRoute exact path="/task" component={Task} auth={isLoggedIn} />
 
-                                <PrivateRoute exact path="/archive" component={Archive}  auth={isLoggedIn}/>
+                                        <PrivateRoute exact path="/archive" component={Archive} auth={isLoggedIn} />
 
-                                <PrivateRoute exact path="/email-content" component={Email}  auth={isLoggedIn}/>
+                                        <PrivateRoute exact path="/email-content" component={Email} auth={isLoggedIn} />
 
-                                <PrivateRoute exact path="/template" component={Template}  auth={isLoggedIn}/>
+                                        <PrivateRoute exact path="/template" component={Template} auth={isLoggedIn} />
 
-                                <BookkeepingRoute isLoggedIn={isLoggedIn}/>
+                                        <BookkeepingRoute isLoggedIn={isLoggedIn} />
 
-                              <PrivateRoute path="*" component={NotFound} auth={isLoggedIn}/>
+                                        <PrivateRoute path="*" component={NotFound} auth={isLoggedIn} />
 
-                            </Switch>
-                            </Layout>
-                            :  null
+                                    </Switch>
+                                </Layout>
+                                : null
 
                         }
                         <Route component={NotFound} />
@@ -157,7 +157,7 @@ class Routes extends React.Component {
                     </Switch>
                 </React.Fragment>
             </Router>
-       )
+        )
     }
 }
 
@@ -176,6 +176,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, {getLocale, getLogout, initLocale, setNotification})(Routes);
-
-// return <div style={{ textAlign: "center", marginTop: "20%" }}><Button variant="contained" color="primary" onClick={() => { window.location.reload(true) }}>{locale.wording.refresh}</Button></div> 
+export default connect(mapStateToProps, { getLocale, getLogout, initLocale, setNotification })(Routes);

@@ -3,57 +3,57 @@
 const en = {
     lang: "en",
     company_name: `<strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span>`,
-    home:{
+    home: {
         name: "Dashboard",
         url: "/dashboard",
         h1: ""
     },
-    contact:{
+    contact: {
         name: "Contacts",
         url: "/contact",
         h1: ""
     },
-    invoice:{
+    invoice: {
         name: "Invoices",
         url: "/invoice",
         h1: ""
     },
-    quote:{
+    quote: {
         name: "Quotes",
         url: "/quote",
         h1: ""
     },
-    refund:{
+    refund: {
         name: "Refunds",
         url: "/refund",
         h1: ""
     },
-    product:{
+    product: {
         name: "Products",
         url: "/product",
         h1: ""
     },
-    service:{
+    service: {
         name: "Services",
         url: "/service",
         h1: ""
     },
-    expense:{
+    expense: {
         name: "Expenses",
         url: "/expense",
         h1: ""
     },
-    task:{
+    task: {
         name: "Tasks",
         url: "/task",
         h1: ""
     },
-    archive:{
+    archive: {
         name: "Archive",
         url: "/archive",
         h1: ""
     },
-    template:{
+    template: {
         name: "Template",
         url: "/template",
         h1: "Use Our Document Examples",
@@ -104,7 +104,7 @@ const en = {
         label_comp_address: "Company address",
         label_annual_turnover: "Annual turnover",
         label_revenue: "Revenues",
-        label_yearly_stat: "Report by year",
+        label_yearly_stat: "Yearly report",
         label_daily_task: "TODO",
         label_forgot_pwd: "We'll send a recovery link to",
         link_forgot_pwd: "Forgot password ?",
@@ -164,7 +164,7 @@ const en = {
         vat_terms_fr: "VAT regulation (fr)",
         vat_terms_en: "VAT regulation (en)",
         rate: "Rate",
-        capital : "Capital", // check meaning in en
+        capital: "Capital", // check meaning in en
         addresses_street: "Address",
         addresses_zip: "Zip code",
         addresses_city: "City",
@@ -233,7 +233,8 @@ const en = {
         full_name: "Full name",
         phone: "Phone",
         phoneNumber: "Phone number (ex: +1...)",
-        statistics: "Statistics",
+        statistics: "Monthly statistics",
+        pending_invoice: "Pending invoices",
 
         of: "of",
         bill_to: "Bill to",
@@ -243,7 +244,7 @@ const en = {
         date: "Date",
         ref: "Reference",
         incl: "Include",
-        subtotal :  "Subtotal",
+        subtotal: "Subtotal",
         total_ttc: "Total incl VAT",
         ht: "Excl Tax",
         unit_price: "Unit price",
@@ -428,7 +429,7 @@ const en = {
         error_422_access_member: "Only NomadLedger member have access to this function",
         error_422_cannot_be_edited: "Cannot be edited",
         error_422_cannot_be_send: "This document cannot be send anymore",
-        error_422_outstock: "Please check your products stocks", 
+        error_422_outstock: "Please check your products stocks",
         error_sign_up_google: "Google sign Up did not work, please try again or contact us at support@nomadledger.com",
 
         // Stripe err
@@ -454,7 +455,7 @@ const en = {
         confirm_delete: "Do you really want to delete this element ?",
         cookie_track: `By continuing your visit to this site, you accept the terms and conditions of use, including the use of cookies to achieve audience statistics, offer editorial services, an advertising offer tailored to your interests and the ability to share content on social networks.`,
 
-        
+
         status_devis: `
             <p class="hint">Its important to understand all differents quote status</p>
             <p class="hint">This <span class="bullet"></span> indicate a response from your client</p>
@@ -487,9 +488,9 @@ const en = {
 
     },
     days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-    month : ["January", "February","March","April","May","June", "July","August","September", "October","November", "December"],
+    month: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
     week_long: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-    week_short: ["Sun", "Mon","Tue","Wed","Thu","Fri","Sat"],
+    week_short: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
     placeholder: 'DD/MM/YYYY',
     home_page: {
         title_01: "The invoicing software for digital nomads",
@@ -505,15 +506,15 @@ const en = {
         try_it: "Try it",
         blocDesc: {
             title: `WHAT CAN WE DO FOR YOU ?`,
-            bloc_1_title: `Multi-Currency Support`, 
+            bloc_1_title: `Multi-Currency Support`,
             bloc_1_para: `It’s important to <strong>juggle multiple currencies</strong> when you work internationally. 
             <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> saves all currencies you use when creating or updating documents, 
-            with the current rates.`, 
-            bloc_2_title: `Process Invoices & Quotations`,  
+            with the current rates.`,
+            bloc_2_title: `Process Invoices & Quotations`,
             bloc_2_para: `For <strong>efficient</strong> processing, set up your application by inputting your services, products, contacts, and configurations. 
-            Then <strong>creating an invoice or quotation</strong> is just a few clicks away.`, 
-            bloc_3_title: `Manage your Tasks`, 
-            bloc_3_para: `Never miss a task again. Just add it to our simple <strong>task manager</strong>, which guides you throughout the day and lets you track the progress of each task.`, 
+            Then <strong>creating an invoice or quotation</strong> is just a few clicks away.`,
+            bloc_3_title: `Manage your Tasks`,
+            bloc_3_para: `Never miss a task again. Just add it to our simple <strong>task manager</strong>, which guides you throughout the day and lets you track the progress of each task.`,
         },
         form: {
             title: "Free 7 days trial",
@@ -537,7 +538,7 @@ const en = {
             whether you’re operating on your own or within a startup. Our software offers everything you need, from following up on 
             leads to <strong>managing invoices</strong>. Get started now and get your <strong>business growing</strong>.  `,
             title_list: "No hidden fees, just a flat monthly rate.",
-            listItem: ["Edit commercial documents","Generate PDFs","Export in Excel format","Manage your contacts","Manage your services/products", "Task manager", "Auto calculate VAT", "Import Ggoogle contacts", "Track your revenues", "Manage your expenses"],
+            listItem: ["Edit commercial documents", "Generate PDFs", "Export in Excel format", "Manage your contacts", "Manage your services/products", "Task manager", "Auto calculate VAT", "Import Ggoogle contacts", "Track your revenues", "Manage your expenses"],
             btn: "Create an account"
         },
         partners: {
@@ -550,4 +551,4 @@ const en = {
     }
 }
 
-export {en}
+export { en }

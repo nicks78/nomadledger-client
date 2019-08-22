@@ -1,60 +1,60 @@
 // fr
 
-const fr =  {
+const fr = {
 
     lang: "fr",
     company_name: `<strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span>`,
-    home:{
+    home: {
         name: "Tableau de bord",
         url: "/dashboard",
         h1: ""
     },
-    contact:{
+    contact: {
         name: "Contacts",
         url: "/contact",
         h1: ""
     },
-    invoice:{
+    invoice: {
         name: "Factures",
         url: "/invoice",
         h1: ""
     },
-    quote:{
+    quote: {
         name: "Devis",
         url: "/quote",
         h1: ""
     },
-    refund:{
+    refund: {
         name: "Avoirs",
         url: "/refund",
         h1: ""
     },
-    product:{
+    product: {
         name: "Produits",
         url: "/product",
         h1: ""
     },
-    service:{
+    service: {
         name: "Services",
         url: "/service",
         h1: ""
     },
-    expense:{
+    expense: {
         name: "Dépenses",
         url: "/expense",
         h1: ""
     },
-    task:{
+    task: {
         name: "Tâches",
         url: "/task",
         h1: ""
     },
-    archive:{
+    archive: {
         name: "Archive",
         url: "/archive",
         h1: ""
     },
-    template:{
+    template: {
         name: "Template",
         url: "/template",
         h1: "Utiliser nos exemples de documents",
@@ -107,7 +107,7 @@ const fr =  {
         label_annual_turnover: "Chiffre d'affaire annuel",
         label_revenue: "Recettes",
         label_daily_task: "Tâche(s) du ",
-        label_yearly_stat: "Rapport par année",
+        label_yearly_stat: "Rapport annuelle",
         label_forgot_pwd: "Nous enverrons un lien de récupération à",
         link_forgot_pwd: "Mot de passe oublié ?",
         label_reset_pwd: "Modifier votre mot de passe",
@@ -135,7 +135,7 @@ const fr =  {
         updating: "Mise à jour...",
         progress: "En cours...",
         upload: "Uploader",
-        loading:"Chargement...",
+        loading: "Chargement...",
         send: "Envoyer",
         sent: "Envoyé",
         delete: "Supprimer",
@@ -167,7 +167,7 @@ const fr =  {
         vat_terms_fr: "Règle TVA (fr)",
         vat_terms_en: "Règle TVA (en)",
         rate: "Taux",
-        capital : "Capital",
+        capital: "Capital",
         addresses_street: "Adresse",
         addresses_zip: "Code postal",
         addresses_city: "Ville",
@@ -229,6 +229,7 @@ const fr =  {
         service_name: "Nom du service",
         product_name: "Nom du produit",
         expense_name: "Nom de la dépense",
+        pending_invoice: "Factures en attente",
 
         total: "Total",
 
@@ -237,7 +238,7 @@ const fr =  {
         full_name: "Nom complet",
         phone: "Téléphone",
         phoneNumber: "Téléphone (ex: +33...)",
-        statistics: "Statistiques",
+        statistics: "Statistiques mensuelle",
 
         of: "à",
         bill_to: "Facturer à",
@@ -246,7 +247,7 @@ const fr =  {
         date: "Date",
         ref: "Référence",
         incl: "inclus",
-        subtotal :  "Total HT",
+        subtotal: "Total HT",
         ht: "HT",
         total_ttc: "Total TTC",
         unit_price: "Prix unitaire",
@@ -433,7 +434,7 @@ const fr =  {
         error_422_access_member: "Seule les membres NomadLedger ont accès à cette fonction.",
         error_422_cannot_be_edited: "Ne peut etre editer",
         error_422_cannot_be_send: "Ce document ne peut plus être envoyé",
-        error_422_outstock: "Verifier les stocks disponible des produits", 
+        error_422_outstock: "Verifier les stocks disponible des produits",
         error_sign_up_google: "Inscription via Google n'a pas fonctionner, veuillez recommencer ou contacter notre service support@nomadledger.com",
 
         // Stripe err
@@ -489,9 +490,9 @@ const fr =  {
         `
     },
     days: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-    month : ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
-    week_long: ['Dimanche','Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-    week_short: ["Dim","Lun","Mar","Mer","Jeu","Ven","Sam"],
+    month: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+    week_long: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+    week_short: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
     placeholder: 'JJ/MM/AAAA',
     home_page: {
         title_01: "Logiciel de facturation en ligne pour nomades numériques",
@@ -512,16 +513,16 @@ const fr =  {
         try_it: "L'essayer",
         blocDesc: {
             title: `QU'EST CE QU'ON FAIT POUR VOUS ?`,
-            bloc_1_title: `Support de Devises Multiples`, 
+            bloc_1_title: `Support de Devises Multiples`,
             bloc_1_para: `Il est important de jongler avec <strong>plusieurs devises</strong> lorsque vous
             travaillez à l’international.<br />
             <strong style="color:#0c3c5e">Nomad</strong><span style="color:#01898c;font-weight: 400">Ledger</span> enregistre toutes les devises que vous utilisez lors de
             la création, ou la mise à jour de documents, et ce,
-            avec les tarifs en vigueur.`, 
-            bloc_2_title: `Edition de Factures et Devis`,  
-            bloc_2_para: `Pour un traitement <strong>efficace</strong>, configurer votre application en entrant vos services, produits, contacts et configurations. Vous pourrez ensuite <strong>créer vos factures et/ou devis</strong> en quelques clics seulement.`, 
-            bloc_3_title: `Gestionnaire de Taches intégré`, 
-            bloc_3_para: `Ne manquez jamais une tâche : Ajoutez-la simplement à notre <strong>gestionnaire de tâches</strong>, qui vous guidera tout au long de la journée et vous permettra de suivre la progression de chaque tâche.`, 
+            avec les tarifs en vigueur.`,
+            bloc_2_title: `Edition de Factures et Devis`,
+            bloc_2_para: `Pour un traitement <strong>efficace</strong>, configurer votre application en entrant vos services, produits, contacts et configurations. Vous pourrez ensuite <strong>créer vos factures et/ou devis</strong> en quelques clics seulement.`,
+            bloc_3_title: `Gestionnaire de Taches intégré`,
+            bloc_3_para: `Ne manquez jamais une tâche : Ajoutez-la simplement à notre <strong>gestionnaire de tâches</strong>, qui vous guidera tout au long de la journée et vous permettra de suivre la progression de chaque tâche.`,
         },
         form: {
             title: "7 jours d'essai gratuit",
@@ -542,7 +543,7 @@ const fr =  {
             price_sub: `par mois`,
             title_list: "Pas de frais cachés, juste un tarif mensuel fixe.",
             paragraphe: `Profitez d’un <strong>accès illimité</strong> à une solution à part entière pour gérer les documents professionnels de votre entreprise et plus encore, que vous travailliez seul ou au sein d’une startup. Notre logiciel offre tout ce dont vous avez besoin, du suivi de vos prospects à la <strong>gestion des factures</strong>. Commencez dès maintenant et développez votre entreprise.`,
-            listItem: [ "Edition de documents", "Creation de PDF", "Export format Excel", "Gérer vos contacts", "Gérer vos services/produits", "Task manager", "Calcule automatique des TVA", "Importer vos contacts Google", "Suivi de votre chiffre d’affaire", "Gérer vos dépenses"],
+            listItem: ["Edition de documents", "Creation de PDF", "Export format Excel", "Gérer vos contacts", "Gérer vos services/produits", "Task manager", "Calcule automatique des TVA", "Importer vos contacts Google", "Suivi de votre chiffre d’affaire", "Gérer vos dépenses"],
             btn: "Créer un compte"
         },
         partners: {
@@ -555,7 +556,7 @@ const fr =  {
     }
 };
 
-export {fr}
+export { fr }
 
 
 
