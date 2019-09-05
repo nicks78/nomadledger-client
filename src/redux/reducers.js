@@ -18,6 +18,7 @@ import paymentReducer from './payment/paymentReducer';
 import errorReducer from './error/errorReducer'
 import downloadReducer from './download/downloadReducer'
 import contractReducer from './contract/contractReducer'
+import marketingReducer from './marketing/marketingReducer'
 
 export default combineReducers({
     locale: localeReducer,
@@ -33,5 +34,6 @@ export default combineReducers({
     payment: paymentReducer,
     error: errorReducer,
     download: downloadReducer,
-    contract: contractReducer
+    contract: contractReducer,
+    marketing: marketingReducer
 })

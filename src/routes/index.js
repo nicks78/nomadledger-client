@@ -57,6 +57,9 @@ import BookkeepingRoute from './bookkeeping'
 import NotFound from './notFound'
 import Layout from '../components/layout/layout'
 
+// Marketing
+import Marketing from '../pages/marketing'
+
 // Archive
 import Archive from '../pages/archive'
 
@@ -140,6 +143,8 @@ class Routes extends React.Component {
                                         <PrivateRoute exact path="/archive" component={Archive} auth={isLoggedIn} />
 
                                         <PrivateRoute exact path="/email-content" component={Email} auth={isLoggedIn} />
+
+                                        <PrivateRoute exact path="/marketing" component={Marketing} auth={isLoggedIn} />
 
                                         <PrivateRoute exact path="/template" component={Template} auth={isLoggedIn} />
 

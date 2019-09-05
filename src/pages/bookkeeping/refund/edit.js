@@ -1,9 +1,9 @@
 //manager/src/pages/quote/editInvoice.js
 
 import React from 'react'
-import {connect} from 'react-redux'
-import { createState , updateDocument, getDocument, resetState, downloadPdf} from '../../../redux/book/actions'
-import { convertToCurrency, getListItem} from '../../../redux/book/itemActions'
+import { connect } from 'react-redux'
+import { createState, updateDocument, getDocument, resetState, downloadPdf } from '../../../redux/book/actions'
+import { convertToCurrency, getListItem } from '../../../redux/book/itemActions'
 import { withStyles, Fab } from '@material-ui/core';
 import Form from '../common/form'
 import Spinner from '../../../components/common/spinner'
@@ -16,11 +16,11 @@ class EditRefund extends React.Component {
         reducer: "REFUND"
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.props.resetState(this.state.reducer)
     }
 
-    componentDidMount(){
+    componentDidMount() {
         var id = this.props.match.params.id;
         this.props.getDocument(this.state.reducer, id);
     }
@@ -29,31 +29,36 @@ class EditRefund extends React.Component {
         var name = event.target.name;
         var value = event.target.value;
 
-        if(name === "currency") {
+        if (name === "currency") {
             // Update each items with the correct currency rate
             for (let i = 0; i < this.props.listItems.length; i++) {
                 this.props.convertToCurrency(this.state.reducer, value, this.props.listItems[i])
             }
         }
-        this.props.createState( this.state.reducer, name, value)
+        if (name === "vat" && this.props.refund.vat) {
+            var vat_value = (this.props.refund.subtotal / 100) * value.indice;
+            this.props.createState(this.state.reducer, "vat_value", vat_value)
+        }
+
+        this.props.createState(this.state.reducer, name, value)
     }
 
 
 
-    render(){
+    render() {
 
-    const { isFetching, locale, classes, refund, listItems, vat, currency, status , isUpdating} = this.props;
+        const { isFetching, locale, classes, refund, listItems, vat, currency, status, isUpdating } = this.props;
 
-    if( isFetching ){
-        return <Spinner />
-    }
+        if (isFetching) {
+            return <Spinner />
+        }
 
-    if( refund === null ){
-        return <p>Error</p>
-    }
+        if (refund === null) {
+            return <p>Error</p>
+        }
 
-    return (
-            <div className={ classes.root}>
+        return (
+            <div className={classes.root}>
                 <Form
                     formTitle="edit_refund"
                     data={refund}
@@ -63,7 +68,7 @@ class EditRefund extends React.Component {
                     currency={currency}
                     status={status}
                     handleSubmit={this.props.updateDocument}
-                    handleDropDown={ this.handleDropDown }
+                    handleDropDown={this.handleDropDown}
                     getListItem={this.props.getListItem}
                     createState={this.props.createState}
                     reducer={this.state.reducer}
@@ -74,7 +79,7 @@ class EditRefund extends React.Component {
                     date_2="due_at"
                 />
                 <Fab size="medium" color="primary" className={classes.icon}>
-                    <CloudDownloadIcon onClick={ () => {this.props.downloadPdf("REFUND", refund._id)} } />
+                    <CloudDownloadIcon onClick={() => { this.props.downloadPdf("REFUND", refund._id) }} />
                 </Fab>
             </div>
         )
@@ -108,4 +113,4 @@ const mapStateToProps = (state) => {
 
 const StyledEditRefund = withStyles(styles)(EditRefund)
 
-export default connect(mapStateToProps, { getListItem, convertToCurrency, updateDocument, getDocument, createState, resetState , downloadPdf})(StyledEditRefund);
+export default connect(mapStateToProps, { getListItem, convertToCurrency, updateDocument, getDocument, createState, resetState, downloadPdf })(StyledEditRefund);

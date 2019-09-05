@@ -1,25 +1,25 @@
 //manager/src/pages/quote/editInvoice.js
 
 import React from 'react'
-import {connect} from 'react-redux'
-import { createState , updateDocument, getDocument, resetState, downloadPdf} from '../../../redux/book/actions'
-import { convertToCurrency, getListItem} from '../../../redux/book/itemActions'
-import { withStyles, Fab  } from '@material-ui/core';
+import { connect } from 'react-redux'
+import { createState, updateDocument, getDocument, resetState, downloadPdf } from '../../../redux/book/actions'
+import { convertToCurrency, getListItem } from '../../../redux/book/itemActions'
+import { withStyles, Fab } from '@material-ui/core';
 import Form from '../common/form'
 import Spinner from '../../../components/common/spinner'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownloadOutlined'
 
 class EditInvoice extends React.Component {
 
-    state =  {
+    state = {
         reducer: "INVOICE"
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.props.resetState(this.state.reducer)
     }
 
-    componentDidMount(){
+    componentDidMount() {
         var id = this.props.match.params.id;
         this.props.getDocument(this.state.reducer, id);
     }
@@ -28,30 +28,35 @@ class EditInvoice extends React.Component {
         var name = event.target.name;
         var value = event.target.value;
 
-        if(name === "currency") {
+        if (name === "currency") {
             // Update each items with the correct currency rate
             for (let i = 0; i < this.props.listItems.length; i++) {
                 this.props.convertToCurrency(this.state.reducer, value, this.props.listItems[i])
             }
         }
-        this.props.createState( this.state.reducer, name, value)
+        if (name === "vat" && this.props.invoice.vat) {
+            var vat_value = (this.props.invoice.subtotal / 100) * value.indice;
+            this.props.createState(this.state.reducer, "vat_value", vat_value)
+        }
+
+        this.props.createState(this.state.reducer, name, value)
     }
 
 
 
-    render(){
+    render() {
 
-    const { isFetching, locale, classes, invoice, listItems, vat, currency, status, isUpdating } = this.props;
+        const { isFetching, locale, classes, invoice, listItems, vat, currency, status, isUpdating } = this.props;
 
-    if( isFetching ){
-        return <Spinner />
-    }
-    if( invoice === null ){
-        return <p>Error</p>
-    }
+        if (isFetching) {
+            return <Spinner />
+        }
+        if (invoice === null) {
+            return <p>Error</p>
+        }
 
-    return (
-            <div className={ classes.root}>
+        return (
+            <div className={classes.root}>
                 <Form
                     formTitle="edit_invoice"
                     data={invoice}
@@ -61,7 +66,7 @@ class EditInvoice extends React.Component {
                     currency={currency}
                     status={status}
                     handleSubmit={this.props.updateDocument}
-                    handleDropDown={ this.handleDropDown }
+                    handleDropDown={this.handleDropDown}
                     getListItem={this.props.getListItem}
                     createState={this.props.createState}
                     reducer={this.state.reducer}
@@ -73,7 +78,7 @@ class EditInvoice extends React.Component {
 
                 </Form>
                 <Fab size="medium" color="primary" className={classes.icon}>
-                    <CloudDownloadIcon onClick={ () => {this.props.downloadPdf("INVOICE", invoice._id)} } />
+                    <CloudDownloadIcon onClick={() => { this.props.downloadPdf("INVOICE", invoice._id) }} />
                 </Fab>
             </div>
         )

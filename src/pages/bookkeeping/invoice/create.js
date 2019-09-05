@@ -1,8 +1,8 @@
 //manager/src/pages/bookkeeping/invoice/create.js
 
 import React from 'react'
-import {connect} from 'react-redux'
-import { createState, createDocument, resetState, convertToOtherDocument} from '../../../redux/book/actions'
+import { connect } from 'react-redux'
+import { createState, createDocument, resetState, convertToOtherDocument } from '../../../redux/book/actions'
 import { convertToCurrency, getListItem } from '../../../redux/book/itemActions'
 import { withStyles } from '@material-ui/core';
 import Spinner from '../../../components/common/spinner'
@@ -15,60 +15,61 @@ class CreateInvoice extends React.Component {
         reducer: "INVOICE"
     }
 
-    componentDidMount(){
+    componentDidMount() {
         var id = this.props.match.params.id;
-        if(id){
+        if (id) {
             this.props.convertToOtherDocument("QUOTE", id, "INVOICE")
         }
 
         this.props.createState(this.state.reducer, "terms", this.props.locale.helperText.payment_terms_invoice)
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.props.resetState(this.state.reducer);
     }
 
     handleDropDown = (event) => {
         var name = event.target.name;
         var value = event.target.value;
+        var items = this.props.newInvoice.list_items
 
-        if(name === "currency") {
+        if (name === "currency") {
             // Update each items with the correct currency rate
-            for (let i = 0; i < this.props.listItems.length; i++) {
-                this.props.convertToCurrency(this.state.reducer, value, this.props.listItems[i])
+            for (let i = 0; i < items.length; i++) {
+                this.props.convertToCurrency(this.state.reducer, value, items[i])
             }
         }
 
-        if(name === "vat" && this.props.newInvoice.vat){
-            var vat_value =  (this.props.newInvoice.subtotal / 100) * value.indice ;
-            this.props.createState(this.state.reducer, "vat_value", vat_value )
+        if (name === "vat" && this.props.newInvoice.vat) {
+            var vat_value = (this.props.newInvoice.subtotal / 100) * value.indice;
+            this.props.createState(this.state.reducer, "vat_value", vat_value)
         }
 
-        this.props.createState( this.state.reducer, name, value)
+        this.props.createState(this.state.reducer, name, value)
     }
 
-    render(){
+    render() {
 
-    const { isFetching, locale, classes, newInvoice, listItems, vat, currency, status } = this.props;
-    const {reducer} = this.state;
+        const { isFetching, locale, classes, newInvoice, vat, currency, status } = this.props;
+        const { reducer } = this.state;
 
 
-    if(isFetching){
-        return <Spinner/>
-    }
+        if (isFetching) {
+            return <Spinner />
+        }
 
-    return (
-            <div className={ classes.root}>
+        return (
+            <div className={classes.root}>
                 <Form
                     formTitle="add_invoice"
                     data={newInvoice}
                     vat={vat}
-                    list={listItems}
+                    list={newInvoice.list_items}
                     currency={currency}
                     status={status}
                     locale={locale}
                     handleSubmit={this.props.createDocument}
-                    handleDropDown={ this.handleDropDown }
+                    handleDropDown={this.handleDropDown}
                     getListItem={this.props.getListItem}
                     createState={this.props.createState}
                     reducer={reducer}
@@ -94,7 +95,6 @@ const mapStateToProps = (state) => {
         isFetching: state.book.invoice.isFetching,
         locale: state.locale.locale,
         newInvoice: state.book.invoice.item || null,
-        listItems: state.book.invoice.item.list_items,
         vat: state.account.company.item ? state.account.company.item.vat : [],
         status: state.helper.items.status_invoice,
         currency: state.helper.items.currency

@@ -49,6 +49,12 @@ const fr = {
         url: "/task",
         h1: ""
     },
+    marketing: {
+        name: "Marketing",
+        h1: "Marketing",
+        url: "/marketing",
+        h3: "Accéder à "
+    },
     archive: {
         name: "Archive",
         url: "/archive",
@@ -122,7 +128,8 @@ const fr = {
         label_comp_member: "Votre abonnement",
         label_reply_quote: "Envoyez-nous vos commentaires",
         label_client_feedback: "Commentaire du client",
-        event_history: "Historique des evenements"
+        event_history: "Historique des evenements",
+        placeholder_search_leads: "Recherche par secteur (ex: designer)"
 
     },
     wording: {
@@ -335,7 +342,9 @@ const fr = {
         my_account: "Mon compte",
         weight: "Poids",
         size: "Taille",
-        color: "Couleur"
+        color: "Couleur",
+        not_provided: "Non renseigné",
+        leads: "prospects"
 
     },
     helperText: {
@@ -347,7 +356,7 @@ const fr = {
         select_contact: "Client",
         select_contact_group: "Groupe de contact",
         textarea_quote: "Taper une description de votre devis",
-        textarea_terms: "Taper un court texte de conditions générales",
+        textarea_terms: "Taper vos conditions générales / modalité de règlement",
         textarea_comment: "Taper un commentaire...",
         expend_contact_info: "Cliquer pour afficher/editer les informations du contact",
         infos_status: "<span style='color: red;font-weight: 700'>ATTENTION *</span> - Seule les statuts < Brouillion & En Attente > sont modifiable",
@@ -458,7 +467,7 @@ const fr = {
         beta_1: "Beta 1 - Toutes les données enregistrées seront perdues",
         confirm_delete: "Voulez-vous vraiment supprimer cette élément ?",
         cookie_track: `En poursuivant votre navigation sur ce site, vous en acceptez les conditions générales d'utilisation, et notamment l'utilisation des cookies afin de réaliser des statistiques d'audiences, vous proposer des services éditoriaux, une offre publicitaire adaptée à vos centres d'intérêts et la possibilité de partager des contenus sur les réseaux sociaux.`,
-
+        privateAccess: "Seuls les membres abonnés ont accès à la list complète.",
         status_devis: `
             <p class="hint">Il est important de bien comprendre chacun des statuts de vos devis.</p>
             <p class="hint">Ceci <span class="bullet"></span> indique q'une reponse a été reçu. </p>
@@ -543,7 +552,7 @@ const fr = {
             price_sub: `par mois`,
             title_list: "Pas de frais cachés, juste un tarif mensuel fixe.",
             paragraphe: `Profitez d’un <strong>accès illimité</strong> à une solution à part entière pour gérer les documents professionnels de votre entreprise et plus encore, que vous travailliez seul ou au sein d’une startup. Notre logiciel offre tout ce dont vous avez besoin, du suivi de vos prospects à la <strong>gestion des factures</strong>. Commencez dès maintenant et développez votre entreprise.`,
-            listItem: ["Edition de documents", "Creation de PDF", "Export format Excel", "Gérer vos contacts", "Gérer vos services/produits", "Task manager", "Calcule automatique des TVA", "Importer vos contacts Google", "Suivi de votre chiffre d’affaire", "Gérer vos dépenses"],
+            listItem: ["Edition de documents", "Creation de PDF", "Export format Excel", "Gérer vos contacts", "Gérer vos services/produits", "Task manager", "Calcule automatique des TVA", "Importer vos contacts Google", "Suivi de votre chiffre d’affaire", "Gérer vos dépenses", "Accéder à plus de 29 000 prospects (France)"],
             btn: "Créer un compte"
         },
         partners: {

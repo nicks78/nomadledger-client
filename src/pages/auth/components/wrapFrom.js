@@ -6,7 +6,7 @@ import { withStyles, Paper } from '@material-ui/core';
 
 const WrapForm = (props) => {
 
-    const {classes} = props
+    const { classes } = props
 
     return (
         <Paper className={classes.paper}>
@@ -19,6 +19,7 @@ const WrapForm = (props) => {
 const styles = theme => ({
     paper: {
         width: '35%',
+        maxWidth: 400,
         margin: '0 auto',
         padding: 24,
         overflow: 'hidden',

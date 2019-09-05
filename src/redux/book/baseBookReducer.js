@@ -1,55 +1,55 @@
 //src/redux/book/baseBookReducer.js
 
 import {
-removeDuplicateAndAddQuantity,
-discountPrice,
-manageQuantity,
-editObjectInArray,
-replaceObjectInArray } from '../../utils/help_function'
+    removeDuplicateAndAddQuantity,
+    discountPrice,
+    manageQuantity,
+    editObjectInArray
+} from '../../utils/help_function'
 
-import { sumItem, calculVat, sumCharges} from './helper'
+import { sumItem, calculVat, sumCharges } from './helper'
 
 
 const initialState = {
-    item : {list_items: []},
+    item: { list_items: [] },
     total: 0,
     rowsPerPageOptions: [],
     isUpdating: false,
-    receivedAt : null,
-    progress : 0,
-    isFetching : false,
-    isError : false,
-    list : [],
+    receivedAt: null,
+    progress: 0,
+    isFetching: false,
+    isError: false,
+    list: [],
     actionLoading: false
 }
 
 const authReducer = (state = initialState, action) => {
 
-    var items ,totalItems, balance_due
-    
+    var items, totalItems, balance_due
+
 
     switch (action.type) {
         case `REQUEST`:
-            return  {
+            return {
                 ...state,
                 isFetching: action.isFetching,
                 isError: action.isError,
                 isUpdating: action.isUpdating
             }
-      case `REQUEST_ACTION`:
-          return  {
-              ...state,
-              actionLoading: action.actionLoading,
-              isError: action.isError,
-          }
+        case `REQUEST_ACTION`:
+            return {
+                ...state,
+                actionLoading: action.actionLoading,
+                isError: action.isError,
+            }
         case `UPDATING`:
-            return  {
+            return {
                 ...state,
                 isError: action.isError,
                 isUpdating: action.isUpdating
             }
         case `FAILED`:
-            return  {
+            return {
                 ...state,
                 isFetching: action.isFetching,
                 isError: action.isError,
@@ -58,7 +58,7 @@ const authReducer = (state = initialState, action) => {
                 actionLoading: action.actionLoading
             }
         case `RECEIVE`:
-            return  {
+            return {
                 ...state,
                 isFetching: action.isFetching,
                 isUpdating: action.isUpdating,
@@ -67,7 +67,7 @@ const authReducer = (state = initialState, action) => {
                 actionLoading: action.actionLoading
             }
         case `GET`:
-            return  {
+            return {
                 ...state,
                 isFetching: action.isFetching,
                 isUpdating: action.isUpdating,
@@ -77,113 +77,147 @@ const authReducer = (state = initialState, action) => {
         case `STATE`:
             return {
                 ...state,
-                item: { ...state.item, [ action.payload.fieldName ] : action.payload.value },
+                item: { ...state.item, [action.payload.fieldName]: action.payload.value },
             }
         case `STATE_ITEM`:
-                items = removeDuplicateAndAddQuantity(state.item.list_items || [], action);
-                totalItems = sumItem(items);
-                balance_due = totalItems - (state.item.charges || 0); 
-                
-            return  {
-                ...state,
-                isFetching: action.isFetching,
-                isError: action.isError,
-                item: {...state.item, 
-                    list_items :  items,
-                    subtotal: totalItems,
-                    balance_due: balance_due,
-                    net_to_pay: balance_due,
-                    vat_value: calculVat(totalItems, state.item.vat ),
-                    deposit_amount: 100  
-                },
-            }
-        case `UPDATE_LIST_ITEM`:
-                items = replaceObjectInArray(state.item.list_items, action.payload);
-                totalItems = sumItem(items);
-                balance_due = totalItems - (state.item.charges || 0); 
+            items = removeDuplicateAndAddQuantity(state.item.list_items || [], action);
+            totalItems = sumItem(items);
+            balance_due = totalItems - (state.item.charges || 0);
 
             return {
                 ...state,
-                item: { ...state.item, 
-                    list_items : items,
+                isFetching: action.isFetching,
+                isError: action.isError,
+                item: {
+                    ...state.item,
+                    list_items: items,
                     subtotal: totalItems,
                     balance_due: balance_due,
                     net_to_pay: balance_due,
-                    vat_value: calculVat(totalItems, state.item.vat ),
-                    deposit_amount: 100 
+                    vat_value: calculVat(totalItems, state.item.vat),
+                    deposit_amount: 100
+                },
+            }
+        case `UPDATE_LIST_ITEM`:
+            // items = replaceObjectInArray(state.item.list_items, action.payload);
+            totalItems = sumItem(state.item.list_items);
+            balance_due = totalItems - (state.item.charges || 0);
+
+            return {
+                ...state,
+                item: {
+                    ...state.item,
+                    list_items: state.item.list_items,
+                    subtotal: totalItems,
+                    balance_due: balance_due,
+                    net_to_pay: balance_due,
+                    vat_value: calculVat(totalItems, state.item.vat),
+                    deposit_amount: 100
                 },
             }
 
         case `UP_DOWN_QUANTITY`:
-                items = manageQuantity(state.item.list_items, action);
-                totalItems = sumItem(items);
-                if(state.item.quote_id){
-                    balance_due = totalItems - (sumCharges(state.item.charges) || 0); 
-                }
-            
-            return {
-                ...state,
-                item: { ...state.item, 
-                        list_items : items,
-                        subtotal: totalItems,
-                        balance_due: balance_due,
-                        net_to_pay: state.item.quote_id ? balance_due : totalItems,
-                        vat_value: calculVat(totalItems, state.item.vat ),
-                        deposit_amount: 100
-                    },
+            items = manageQuantity(state.item.list_items, action);
+            totalItems = sumItem(items);
+            if (state.item.quote_id) {
+                balance_due = totalItems - (sumCharges(state.item.charges) || 0);
             }
 
-        case `DISCOUNT`:
-                items = discountPrice(state.item.list_items, action);
-                totalItems = sumItem(items);
-                if(state.item.quote_id){
-                    balance_due = totalItems - (sumCharges(state.item.charges) || 0); 
-                }
-
             return {
                 ...state,
-                item: { ...state.item, 
-                    list_items : items,
+                item: {
+                    ...state.item,
+                    list_items: items,
                     subtotal: totalItems,
                     balance_due: balance_due,
                     net_to_pay: state.item.quote_id ? balance_due : totalItems,
-                    vat_value: calculVat(totalItems, state.item.vat ),
+                    vat_value: calculVat(totalItems, state.item.vat),
                     deposit_amount: 100
                 },
             }
-        case `EDIT_SINGLE_ITEM`:
-                items = editObjectInArray(state.item.list_items, action.item, action.payload.fieldName, action.payload.value);
-                totalItems = sumItem(items);
-                if(state.item.quote_id){
-                    balance_due = totalItems - (sumCharges(state.item.charges) || 0); 
-                }
+
+        case `DISCOUNT`:
+            items = discountPrice(state.item.list_items, action);
+            totalItems = sumItem(items);
+            if (state.item.quote_id) {
+                balance_due = totalItems - (sumCharges(state.item.charges) || 0);
+            }
+
             return {
                 ...state,
-                item: { ...state.item, 
-                    list_items : items,
+                item: {
+                    ...state.item,
+                    list_items: items,
                     subtotal: totalItems,
                     balance_due: balance_due,
                     net_to_pay: state.item.quote_id ? balance_due : totalItems,
-                    vat_value: calculVat(totalItems, state.item.vat ),
-                    deposit_amount: 100 
+                    vat_value: calculVat(totalItems, state.item.vat),
+                    deposit_amount: 100
+                },
+            }
+        case `UPDATE_PRICE`:
+
+            var object = []
+            var val = action.value || 0
+            for (let i = 0; i < state.item.list_items.length; i++) {
+                if (state.item.list_items[i]._id === action._id) {
+                    state.item.list_items[i].unit_price = val;
+                    state.item.list_items[i].total = val * state.item.list_items[i].quantity;
+
+                }
+                object.push(state.item.list_items[i])
+            }
+
+            totalItems = sumItem(object);
+            balance_due = totalItems - (state.item.charges || 0);
+
+            return {
+                ...state,
+                item: {
+                    ...state.item,
+                    list_items: object,
+                    subtotal: totalItems,
+                    net_to_pay: balance_due,
+                    balance_due: balance_due,
+                    vat_value: calculVat(totalItems, state.item.vat),
+
+                }
+            }
+        case `EDIT_SINGLE_ITEM`:
+            items = editObjectInArray(state.item.list_items, action.item, action.payload.fieldName, action.payload.value);
+            totalItems = sumItem(items);
+            if (state.item.quote_id) {
+                balance_due = totalItems - (sumCharges(state.item.charges) || 0);
+            }
+            return {
+                ...state,
+                item: {
+                    ...state.item,
+                    list_items: items,
+                    subtotal: totalItems,
+                    balance_due: balance_due,
+                    net_to_pay: state.item.quote_id ? balance_due : totalItems,
+                    vat_value: calculVat(totalItems, state.item.vat),
+                    deposit_amount: 100
                 },
             }
 
         case `REMOVE_ITEM`:
-                items = state.item.list_items.filter((el) => { return el.item_id !== action.payload.item_id });
-                totalItems = sumItem(items);
-                if(state.item.quote_id){
-                    balance_due = totalItems - (sumCharges(state.item.charges) || 0); 
-                }
+            items = state.item.list_items.filter((el) => { return el._id !== action.payload._id });
+            totalItems = sumItem(items);
+            if (state.item.quote_id) {
+                balance_due = totalItems - (sumCharges(state.item.charges) || 0);
+            }
             return {
                 ...state,
-                item: { ...state.item, 
-                    list_items : items,
+                item: {
+                    ...state.item,
+                    list_items: items,
                     subtotal: totalItems,
                     balance_due: balance_due,
                     net_to_pay: state.item.quote_id ? balance_due : totalItems,
-                    vat_value: calculVat(totalItems, state.item.vat ),
-                    deposit_amount: 100 
+                    vat_value: calculVat(totalItems, state.item.vat),
+                    deposit_amount: 100
                 },
             }
 

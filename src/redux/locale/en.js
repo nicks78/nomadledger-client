@@ -48,6 +48,12 @@ const en = {
         url: "/task",
         h1: ""
     },
+    marketing: {
+        name: "Marketing",
+        h1: "",
+        url: "/marketing",
+        h3: "Access to "
+    },
     archive: {
         name: "Archive",
         url: "/archive",
@@ -120,7 +126,8 @@ const en = {
         label_comp_member: "Your membership",
         label_reply_quote: "Give us your feeback",
         label_client_feedback: "Client's feedback",
-        event_history: "Event history"
+        event_history: "Event history",
+        placeholder_search_leads: "Recherche par secteur (ex: designer)"
     },
     wording: {
         exportcsv: "Export as csv",
@@ -332,7 +339,9 @@ const en = {
         my_account: "My account",
         weight: "Weight",
         size: "Size",
-        color: "Colour"
+        color: "Colour",
+        not_provided: "Not provided",
+        leads: "Leads"
     },
     helperText: {
         select_phone_code: "Phone code",
@@ -343,7 +352,7 @@ const en = {
         select_contact: "Client",
         select_contact_group: "Contact group",
         textarea_quote: "Type a description",
-        textarea_terms: "Add a short Terms & Conditions",
+        textarea_terms: "Add a short Terms/Payment Conditions",
         textarea_comment: "Type a comment...",
         expend_contact_info: "Expand to view full contact information",
         infos_status: "<span style='color: red;font-weight: 700'>CAUTIOUS *</span> - Only status < Draft & Pending > are editable",
@@ -454,7 +463,7 @@ const en = {
         beta_1: "Beta 1 - All data will be lost",
         confirm_delete: "Do you really want to delete this element ?",
         cookie_track: `By continuing your visit to this site, you accept the terms and conditions of use, including the use of cookies to achieve audience statistics, offer editorial services, an advertising offer tailored to your interests and the ability to share content on social networks.`,
-
+        privateAccess: "Only subscribed members have access to the complete list.",
 
         status_devis: `
             <p class="hint">Its important to understand all differents quote status</p>
@@ -538,7 +547,7 @@ const en = {
             whether you’re operating on your own or within a startup. Our software offers everything you need, from following up on 
             leads to <strong>managing invoices</strong>. Get started now and get your <strong>business growing</strong>.  `,
             title_list: "No hidden fees, just a flat monthly rate.",
-            listItem: ["Edit commercial documents", "Generate PDFs", "Export in Excel format", "Manage your contacts", "Manage your services/products", "Task manager", "Auto calculate VAT", "Import Ggoogle contacts", "Track your revenues", "Manage your expenses"],
+            listItem: ["Edit commercial documents", "Generate PDFs", "Export in Excel format", "Manage your contacts", "Manage your services/products", "Task manager", "Auto calculate VAT", "Import Ggoogle contacts", "Track your revenues", "Manage your expenses", "Access to more than 29 000 leads (France)"],
             btn: "Create an account"
         },
         partners: {

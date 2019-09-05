@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {STRIPE_PUBLIC_KEY} from './redux/constant'
+import { STRIPE_PUBLIC_KEY } from './redux/constant'
 import Routes from './routes'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import './App.css'
-import {StripeProvider} from 'react-stripe-elements';
+import { StripeProvider } from 'react-stripe-elements';
 // import MessengerCustomerChat from 'react-messenger-customer-chat';
 import Cookie from './lib/cookie'
 
@@ -65,7 +65,7 @@ const theme = createMuiTheme({
     htmlFontSize: 17,
     fontFamily: "'Quicksand', sans-serif",
     fontWeight: 300,
-    h1:{
+    h1: {
       fontSize: '1.8rem',
       fontWeight: 500,
       color: '#0c3c5e',
@@ -110,7 +110,7 @@ const theme = createMuiTheme({
       fontSize: '1em',
     },
     overline: {
-      fontSize: '1em', 
+      fontSize: '1em',
       fontWeight: 700,
       color: '#0c3c5e',
       lineHeight: 1.6
@@ -166,11 +166,11 @@ class App extends Component {
 
   componentDidMount() {
     if (window.Stripe) {
-      this.setState({stripe: window.Stripe(STRIPE_PUBLIC_KEY)});
+      this.setState({ stripe: window.Stripe(STRIPE_PUBLIC_KEY) });
     } else {
       document.querySelector('#stripe-js').addEventListener('load', () => {
         // Create Stripe instance once Stripe.js loads
-        this.setState({stripe: window.Stripe(STRIPE_PUBLIC_KEY)});
+        this.setState({ stripe: window.Stripe(STRIPE_PUBLIC_KEY) });
       });
     }
   }
@@ -180,15 +180,15 @@ class App extends Component {
     const cookie = localStorage.getItem("cookie")
 
     return (
-          <React.Fragment>
-          <StripeProvider stripe={this.state.stripe}>
-            <MuiThemeProvider theme={theme}>
-                <Routes /> 
-            </MuiThemeProvider>
-          </StripeProvider>
-          {  cookie !== "1" ? <Cookie /> : null  }
-          
-        </React.Fragment>
+      <React.Fragment>
+        <StripeProvider stripe={this.state.stripe}>
+          <MuiThemeProvider theme={theme}>
+            <Routes />
+          </MuiThemeProvider>
+        </StripeProvider>
+        {cookie !== "1" ? <Cookie /> : null}
+
+      </React.Fragment>
     )
   }
 }

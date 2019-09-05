@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { requestFailed } from './actions'
 import { API_ENDPOINT } from '../constant';
-import { setError} from '../error/actions'
+import { setError } from '../error/actions'
 
 
 /**
@@ -12,46 +12,47 @@ import { setError} from '../error/actions'
  * @param name // database field name
  * @param item
  */
-export function getListItem( actionType, name, item ) {
+export function getListItem(actionType, name, item) {
     return async (dispatch, getState) => {
 
         var currency = getState().book[actionType.toLowerCase()].item.currency;
         var price = item.onModel === "product" ? item.selling_price : item.price;
 
-        if(!currency){
-          var error = {
-            response: { status: 422 , data: {message: "error_422_missing_currency"}}
-          }
+        if (!currency) {
+            var error = {
+                response: { status: 422, data: { message: "error_422_missing_currency" } }
+            }
             dispatch(setError(error));
             dispatch(requestFailed(actionType));
             return
         }
 
-        try{
-            const unit_price = await currencyConvertorApi( item.currency.en, price, currency.en );
+        try {
+            const unit_price = await currencyConvertorApi(item.currency.en, price, currency.en);
 
             var tmp = {
-                    quantity: 1,
-                    ref: item.ref,
-                    onModel: item.onModel,
-                    desc: item.name,
-                    discount: 0,
-                    currency: currency.en,
-                    unit_price: unit_price,
-                    total: unit_price,
-                    item_id: item._id
-                    // item_id: item
-                }
-                dispatch(setListItem(actionType, name, tmp))
-        }catch(error){
-          dispatch(setError(error));
-          dispatch(requestFailed(actionType));
+                quantity: 1,
+                ref: item.ref,
+                onModel: item.onModel,
+                desc: item.name,
+                discount: 0,
+                currency: currency.en,
+                unit_price: unit_price,
+                total: unit_price,
+                _id: item._id,
+                custom: item.custom || false
+                // item_id: item
+            }
+            dispatch(setListItem(actionType, name, tmp))
+        } catch (error) {
+            dispatch(setError(error));
+            dispatch(requestFailed(actionType));
         }
     }
 }
 
 // Add item to list (service/products)
-export function setListItem( actionType, name, item ) {
+export function setListItem(actionType, name, item) {
 
     return {
         type: `STATE_ITEM`,
@@ -59,7 +60,7 @@ export function setListItem( actionType, name, item ) {
         isFetching: false,
         isError: false,
         name: name,
-        payload:  item
+        payload: item
     }
 }
 
@@ -71,36 +72,35 @@ export function setListItem( actionType, name, item ) {
  * @param currency
  *
  */
-export function convertToCurrency( actionType, currency, item ) {
+export function convertToCurrency(actionType, currency, item) {
 
     return (dispatch) => {
-        currencyConvertorApi( item.currency, item.unit_price, currency.en )
-        .then( (value) => {
 
-            console.log("TOTAL", item)
+        currencyConvertorApi(item.currency, item.unit_price, currency.en)
+            .then((value) => {
 
-            item.total = parseFloat(((value * item.quantity) - item.discount).toFixed(2));
-            item.unit_price = value;
-            item.base_currency = item.currency;
-            item.currency = currency.en
-        })
-        .then(() => {
-            dispatch(updateListItems(actionType,  item ))
-        })
-        .catch(function (error) {
-            dispatch(setError(error));
-            dispatch(requestFailed(actionType));
+                item.total = parseFloat(((value * item.quantity) - item.discount).toFixed(2));
+                item.unit_price = value.toFixed(2);
+                item.base_currency = item.currency;
+                item.currency = currency.en
+            })
+            .then(() => {
+                dispatch(updateListItems(actionType, item))
+            })
+            .catch(function (error) {
+                dispatch(setError(error));
+                dispatch(requestFailed(actionType));
 
-        })
+            })
     }
 }
 
-export function updateListItems( actionType, item ) {
-    return  {
+export function updateListItems(actionType, item) {
+    return {
         type: `UPDATE_LIST_ITEM`,
         subtype: actionType,
         payload: item
-      }
+    }
 }
 
 
@@ -112,73 +112,84 @@ export function updateListItems( actionType, item ) {
  * @param  price
  * @param  to
  */
-async function currencyConvertorApi(from, amount, to){
+async function currencyConvertorApi(from, amount, to) {
 
     // Set real time currency convertor
-    return new Promise( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
         axios.post(`${API_ENDPOINT}common/convert-currency`,
-        {
-            data: {
-                from: from,
-                to: to,
-                amount: amount
+            {
+                data: {
+                    from: from,
+                    to: to,
+                    amount: amount
+                },
+                mode: 'cors'
             },
-            mode: 'cors'
-        },
-        { headers: {
-                'Content-Type': 'application/json'
-        }
-        })
-        .then(function (response) {
-            return response.data
-        })
-        .then( res => {
-            resolve(res);
-        })
-        .catch(function (error) {
-            reject(error)
-        })
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(function (response) {
+                return response.data
+            })
+            .then(res => {
+                resolve(res);
+            })
+            .catch(function (error) {
+                reject(error)
+            })
     })
 }
 
-export function addRemoveQuantity ( actionType, id, move ){
-    
-    return  {
-      type: `UP_DOWN_QUANTITY`,
-      subtype: actionType,
-      move: move,
-      id: id,
+export function addRemoveQuantity(actionType, id, move) {
+
+    return {
+        type: `UP_DOWN_QUANTITY`,
+        subtype: actionType,
+        move: move,
+        id: id,
     }
 }
 
-export function discountPrice ( actionType, id, fieldName, value ){
-    return  {
+export function discountPrice(actionType, id, fieldName, value) {
+    return {
         type: `DISCOUNT`,
         subtype: actionType,
         isError: false,
         _id: id,
-        payload: {fieldName, value},
+        payload: { fieldName, value },
+    }
+}
+
+export function updatePrice(actionType, id, value) {
+    return {
+        type: `UPDATE_PRICE`,
+        subtype: actionType,
+        isError: false,
+        _id: id,
+        value
     }
 }
 
 
 
-export function editItem ( actionType, item, fieldName, value ){
+export function editItem(actionType, item, fieldName, value) {
 
-    return  {
+    return {
         type: `EDIT_SINGLE_ITEM`,
         subtype: actionType,
         isError: false,
         item: item,
-        payload: {fieldName, value},
+        payload: { fieldName, value },
     }
 }
 
-export function removeItem ( actionType, item ){
-    return  {
-      type: `REMOVE_ITEM`,
-      subtype: actionType,
-      isError: false,
-      payload: item,
+export function removeItem(actionType, item) {
+    return {
+        type: `REMOVE_ITEM`,
+        subtype: actionType,
+        isError: false,
+        payload: item,
     }
 }

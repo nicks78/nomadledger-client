@@ -43,7 +43,7 @@ class Home extends Component {
 
     render() {
 
-        const { classes, tasks, isFetching, pieQuote, mainStat, expensesBy, yearly, locale, currency, isFetchingTask, pendingInvoices } = this.props
+        const { classes, tasks, isFetching, pieQuote, mainStat, expensesBy, yearly, locale, currency, isFetchingTask } = this.props
         const { width } = this.state
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         const isMobile = width <= 500

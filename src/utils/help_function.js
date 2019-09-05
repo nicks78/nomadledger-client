@@ -10,8 +10,8 @@
 export const updateArrayOfObject = (list, obj) => {
     for (var i in list) {
         if (list[i]._id === obj._id) {
-           list[i] = obj;
-           break; //Stop this loop, we found it!
+            list[i] = obj;
+            break; //Stop this loop, we found it!
         }
     }
     return list
@@ -25,26 +25,26 @@ export const checkNumFormatRegex = (num) => {
 
     var regex = /^(-)?[0-9]{0,}([,.])?([0-9]{1,2})?$/gm;
 
-    if(num === "-" || num === ""){
-      return true
+    if (num === "-" || num === "") {
+        return true
     }
     var n = num.toLocaleString("en");
     console.log(n.replace(/ /g, ""))
     var fr = new RegExp(regex);
     var test = fr.test(num.replace(/ /g, ""))
 
-    if( test === true ){
+    if (test === true) {
         var tmp = num.replace(',', '.');
         var x = parseFloat(tmp || 0)
 
-        if(x === 0){
-          return true
+        if (x === 0) {
+            return true
         }
 
         return x || 0
-    }else{
+    } else {
 
-      return test
+        return test
     }
 }
 
@@ -55,9 +55,9 @@ export const checkNumFormatRegex = (num) => {
  */
 export const convertToNumber = (num) => {
     var formatedNum = num;
-    if(typeof num !== 'number'){
-      var x = num.replace(',', '.');
-      formatedNum = parseFloat(x)
+    if (typeof num !== 'number') {
+        var x = num.replace(',', '.');
+        formatedNum = parseFloat(x)
     }
 
     return formatedNum
@@ -71,18 +71,18 @@ export const cvtNumToUserPref = (num) => {
 
     var locale = localStorage.getItem('locale');
     var result = '0';
-    if(num === ""){
+    if (num === "") {
         return num
     }
 
     // Set to number
     num = parseFloat(Math.round(num * 100) / 100);
 
-    if(num !== undefined){
+    if (num !== undefined) {
         var numberToString = num.toFixed(2)
-        if(locale === 'fr'){
+        if (locale === 'fr') {
             result = numberToString.replace('.', ',')
-        }else{
+        } else {
             result = numberToString
         }
     }
@@ -96,7 +96,7 @@ export const cvtNumToUserPref = (num) => {
  */
 export const cvtToLocale = (num) => {
     var locale = localStorage.getItem('locale');
-        num = num.toLocaleString(locale || "fr", {minimumFractionDigits: 2, maximumFractionDigits: 3})
+    num = num.toLocaleString(locale || "fr", { minimumFractionDigits: 2, maximumFractionDigits: 3 })
     return num;
 }
 
@@ -105,22 +105,22 @@ export const cvtToLocale = (num) => {
  * @param list  List of object
  * @param element Object
  */
-export function discountPrice(list, element){
-  // Get working object from array
-  var el = list.filter((item) => { return item.item_id === element._id });
+export function discountPrice(list, element) {
+    // Get working object from array
+    var el = list.filter((item) => { return item._id === element._id });
 
-  // Check != null array
-  if(el.length > 0){
-    el = el[0];
-    var x = element.payload.value === "" ? 0 : element.payload.value
-    el.discount = parseInt(x, 10);
-    el.total = (el.unit_price - el.discount) * el.quantity
+    // Check != null array
+    if (el.length > 0) {
+        el = el[0];
+        var x = element.payload.value === "" ? 0 : element.payload.value
+        el.discount = parseInt(x, 10);
+        el.total = (el.unit_price - el.discount) * el.quantity
 
-  }
-  // Update list items
-  var newList = [...list, ...el]
+    }
+    // Update list items
+    var newList = [...list, ...el]
 
-  return newList;
+    return newList;
 }
 
 /**
@@ -129,24 +129,24 @@ export function discountPrice(list, element){
  * @param element Object
  */
 export function removeDuplicateAndAddQuantity(list, element) {
-  var newList = [];
-  var newObj = list.filter((el) => { return el.item_id === element.payload.item_id })
+    var newList = [];
+    var newObj = list.filter((el) => { return el._id === element.payload._id })
 
-  // If existing element => update
-  if(newObj.length > 0){
+    // If existing element => update
+    if (newObj.length > 0) {
 
-    newObj = newObj[0];
-    newObj.quantity = newObj.quantity +1;
-    newObj.total = parseFloat((newObj.unit_price * newObj.quantity).toFixed(2))
-    newList = [...list, ...newObj];
+        newObj = newObj[0];
+        newObj.quantity = newObj.quantity + 1;
+        newObj.total = parseFloat((newObj.unit_price * newObj.quantity).toFixed(2))
+        newList = [...list, ...newObj];
 
-  }else{
-    // Update list with new element
-    newList = [...list, element.payload]
+    } else {
+        // Update list with new element
+        newList = [...list, element.payload]
 
-  }
+    }
 
-  return newList;
+    return newList;
 }
 
 /**
@@ -154,18 +154,18 @@ export function removeDuplicateAndAddQuantity(list, element) {
  * @param list List of object
  * @param element Object
  */
-export function manageQuantity(list, action){
+export function manageQuantity(list, action) {
     var newData = list.map(obj => {
-        if(obj.item_id === action.id){
-            if(obj.quantity !== 1 && action.move === "down"){
-                obj.quantity = obj.quantity -1;
-                obj.total = parseFloat(((obj.unit_price * obj.quantity) - obj.discount ).toFixed(2))
-            }else if(action.move === "up"){
-                obj.quantity = obj.quantity +1 ;
+        if (obj._id === action.id) {
+            if (obj.quantity !== 1 && action.move === "down") {
+                obj.quantity = obj.quantity - 1;
+                obj.total = parseFloat(((obj.unit_price * obj.quantity) - obj.discount).toFixed(2))
+            } else if (action.move === "up") {
+                obj.quantity = obj.quantity + 1;
                 obj.total = parseFloat(((obj.unit_price * obj.quantity) - obj.discount).toFixed(2))
             }
             return obj
-        }else{
+        } else {
             return obj
         }
     });
@@ -180,15 +180,15 @@ export function manageQuantity(list, action){
  * @param name field name in object
  * @param value new value
  */
-export function editObjectInArray (list, obj, name, value) {
+export function editObjectInArray(list, obj, name, value) {
 
     var newList = list;
-    var element = list.filter((el) => { return el.item_id === obj.item_id })
-    if(element.length > 0){
-      element = element[0];
-      element[name] = value;
+    var element = list.filter((el) => { return el._id === obj._id })
+    if (element.length > 0) {
+        element = element[0];
+        element[name] = value;
 
-      newList = [...list, ...element];
+        newList = [...list, ...element];
     }
 
     return newList
@@ -204,11 +204,12 @@ export function replaceObjectInArray(list, obj) {
 
     var newList = [];
     for (let i = 0; i < list.length; i++) {
-        if(list[i]._id !== obj._id){
+        if (list[i]._id !== obj._id) {
             list[i] = obj
         }
         newList.push(list[i])
     }
+
     return newList
 }
 
@@ -217,12 +218,12 @@ export function replaceObjectInArray(list, obj) {
  *
  * @param length of the string to be generated
  */
-export function  randomString(length) {
-   var result           = '';
-   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-   var charactersLength = characters.length;
-   for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-   }
-   return result;
+export function randomString(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
 }
