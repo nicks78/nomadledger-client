@@ -17,11 +17,13 @@ const fr = {
     invoice: {
         name: "Factures",
         url: "/invoice",
+        btn_create: "Creer une facture",
         h1: ""
     },
     quote: {
         name: "Devis",
         url: "/quote",
+        btn_create: "Creer un devis",
         h1: ""
     },
     refund: {
@@ -72,8 +74,9 @@ const fr = {
          qu'il soit dans une action de contrat, de tort ou autrement, résultant de, hors ou en lien avec le documents ou l’utilisation
          ou d’autres transactions dans le documents.`
     },
-    titles: {
-
+    dashboard: {
+        empty_stat: `Il semble que tu n'es pas encore de données.<br />Essaye de créer ta première facture ?`,
+        empty_quote: `Ou ton premier devis ?`
     },
     subheading: {
         info_profile: "Informations profil",

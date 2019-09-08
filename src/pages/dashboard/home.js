@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { resetTask } from '../../redux/task/actions'
 import { getData, resetStat } from '../../redux/stat/actions'
 import { getAllTask, updateStatus } from '../../redux/task/actions'
-import { Grid, Typography, withStyles, Paper } from '@material-ui/core'
+import { Grid, Typography, withStyles, Paper, Button } from '@material-ui/core'
 import BarCharts from '../../components/common/barCharts'
 import BarHorizontal from '../../components/common/barHorizontal'
 import BarYear from '../../components/common/barYear'
@@ -11,6 +12,7 @@ import PieCharts from '../../components/common/pie'
 import { cvtNumToUserPref } from '../../utils/help_function'
 import Spinner from '../../components/common/spinner'
 import StatusTask from '../task/statusTask'
+import EmptyChart from './components/emptyChart'
 
 class Home extends Component {
 
@@ -80,9 +82,9 @@ class Home extends Component {
                                 {locale.wording.statistics}
                             </Typography>
                             {
-                                mainStat ?
+                                mainStat && mainStat.count ?
                                     <BarCharts chartData={mainStat} id="mainStat" currency={currency.value || "-"} />
-                                    : null
+                                    : <EmptyChart user={this.props.user} locale={locale} />
                             }
                         </Paper>
                         <Paper className={classes.paper} style={{ paddingLeft: 0, paddingRight: 0 }}>
@@ -120,21 +122,30 @@ class Home extends Component {
                                 {locale.wording.pending_invoice}
                             </Typography>
                             <Typography variant="h1" align="center" style={{ padding: "0px 12px 12px 12px", fontSize: 30, fontWeight: 500, color: "rgb(98, 193, 197)" }}>
-                                {mainStat.sumPending !== 0 ? "(" + mainStat.currency + ")" : 0}&nbsp;{cvtNumToUserPref(mainStat.sumPending)}
+                                {cvtNumToUserPref(mainStat.sumPending)}&nbsp;{currency.value}
                             </Typography>
                         </Paper>
                         <Paper className={classes.paper} >
                             <Typography variant="h2" align="center" style={{ padding: "0px 12px 12px 12px" }}>
                                 {locale.wording.conversions} &nbsp;({locale.wording.quote})
                             </Typography>
-                            <div style={{ marginTop: "20%" }}>
+                            <div>
                                 {
-                                    pieQuote ?
+                                    pieQuote.total ?
                                         <PieCharts
                                             chartData={pieQuote}
                                             locale={locale}
                                         />
-                                        : null
+                                        : <div style={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: 24 }}>
+                                            <div style={{ textAlign: "center" }}>
+                                                <Typography variant="caption">{locale.dashboard.empty_quote}</Typography>
+                                                <Button component={Link} to="/quote/create"
+                                                    variant="contained" color="primary"
+                                                    className={classes.button}>
+                                                    {locale.quote.btn_create}
+                                                </Button>
+                                            </div>
+                                        </div>
                                 }
                             </div>
                         </Paper>
@@ -237,6 +248,16 @@ const styles = theme => ({
         [theme.breakpoints.down("sm")]: {
             display: "none"
         }
+    },
+    button: {
+        color: 'white !important',
+        backgroundColor: theme.palette.yellow.dark,
+        marginRight: 10,
+        marginTop: 12,
+        marginBottom: theme.margin.unit,
+        '& :hover': {
+            color: 'white !important',
+        }
     }
 
 })
@@ -253,7 +274,8 @@ const mapStateToProps = (state) => {
         yearly: state.stat.yearly || null,
         tasks: state.task.dailyTask || {},
         currency: state.account.company.item ? state.account.company.item.currency : {},
-        status: state.helper.items.status_task
+        status: state.helper.items.status_task,
+        user: state.account.user.item
     }
 }
 

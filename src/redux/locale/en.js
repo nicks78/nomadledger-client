@@ -16,11 +16,13 @@ const en = {
     invoice: {
         name: "Invoices",
         url: "/invoice",
+        btn_create: "Create an invoice",
         h1: ""
     },
     quote: {
         name: "Quotes",
         url: "/quote",
+        btn_create: "Create a quote",
         h1: ""
     },
     refund: {
@@ -71,8 +73,9 @@ const en = {
         damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with
         the documents or the use or other dealings in the documents.`
     },
-    titles: {
-
+    dashboard: {
+        empty_stat: `It looks like you have no data yet.<br />Why don't you create your first invoice ?`,
+        empty_quote: `Or your first quote ?`
     },
     subheading: {
         info_profile: "Profile information",
