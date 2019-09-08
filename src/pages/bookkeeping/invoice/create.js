@@ -7,12 +7,13 @@ import { convertToCurrency, getListItem } from '../../../redux/book/itemActions'
 import { withStyles } from '@material-ui/core';
 import Spinner from '../../../components/common/spinner'
 import Form from '../common/form'
-
+import Modal from '../common/modal'
 
 class CreateInvoice extends React.Component {
 
     state = {
-        reducer: "INVOICE"
+        reducer: "INVOICE",
+        openModal: false
     }
 
     componentDidMount() {
@@ -28,10 +29,19 @@ class CreateInvoice extends React.Component {
         this.props.resetState(this.state.reducer);
     }
 
+    closeModal = () => {
+        this.setState({ openModal: false })
+    }
+
     handleDropDown = (event) => {
         var name = event.target.name;
         var value = event.target.value;
         var items = this.props.newInvoice.list_items
+
+        if (name === "vat" && value.btn) {
+            this.setState({ openModal: true })
+            return;
+        }
 
         if (name === "currency") {
             // Update each items with the correct currency rate
@@ -60,6 +70,7 @@ class CreateInvoice extends React.Component {
 
         return (
             <div className={classes.root}>
+                <Modal type="vat" open={this.state.openModal} onCloseModal={this.closeModal} />
                 <Form
                     formTitle="add_invoice"
                     data={newInvoice}

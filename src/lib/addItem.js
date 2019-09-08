@@ -1,20 +1,20 @@
 //manager/src/components/lib/addItem.js
 
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import ApxExpanded from '../components/common/expanded'
 import ApxUpload from '../components/common/upload'
 import ApxForm from '../components/common/form'
-import ApxRightDrawer  from '../components/common/rightDrawer'
+import ApxRightDrawer from '../components/common/rightDrawer'
 import Spinner from '../components/common/spinner'
 import ApxButtonCircle from '../components/common/buttonCircle'
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Hidden from '@material-ui/core/Hidden';
-import {checkNumFormatRegex} from '../utils/help_function'
-import {resizeFile} from '../utils/resizeFile'
-import {setNotification} from '../redux/notification/actions'
+import { checkNumFormatRegex } from '../utils/help_function'
+import { resizeFile } from '../utils/resizeFile'
+import { setNotification } from '../redux/notification/actions'
 
 
 const styles = theme => ({
@@ -26,13 +26,13 @@ const styles = theme => ({
         },
     },
     formWindow: {
-      minWidth: '100px',
-      maxWidth: '500px',
-      paddingBottom: theme.padding.unit,
-      paddingRight: theme.padding.unit,
-      paddingLeft: theme.padding.unit,
-      height: '100%',
-      // clear: 'both'
+        minWidth: '100px',
+        maxWidth: '500px',
+        paddingBottom: theme.padding.unit,
+        paddingRight: theme.padding.unit,
+        paddingLeft: theme.padding.unit,
+        height: '100%',
+        // clear: 'both'
     },
     button: {
         color: 'white',
@@ -70,31 +70,37 @@ class Add extends Component {
 
     toggleDrawer = (side, open) => () => {
         this.setState({
-          [side]: open,
+            [side]: open,
         });
     }
 
-     handleChange = async (event) => {
+    componentDidMount() {
+        if (this.props.location) {
+            this.setState({ right: this.props.location.state ? this.props.location.state.right : false })
+        }
+    }
+
+    handleChange = async (event) => {
         var fieldName = event.target.name;
         var value = event.target.value;
 
-        if(fieldName === "price" || fieldName === "selling_price" || fieldName === "buying_price"){
+        if (fieldName === "price" || fieldName === "selling_price" || fieldName === "buying_price") {
 
-          if(checkNumFormatRegex(value) === false){
-            this.props.setNotification("error_422_price", 'warning');
-            return
-          }
+            if (checkNumFormatRegex(value) === false) {
+                this.props.setNotification("error_422_price", 'warning');
+                return
+            }
         }
 
-        if(fieldName === 'doc'){ // If input file
+        if (fieldName === 'doc') { // If input file
             // Resize file before upload
             var file = event.target.files[0];
-            if(!file){return;}
-            resizeFile( file, this.callback )
+            if (!file) { return; }
+            resizeFile(file, this.callback)
 
             return;
-        }else{
-            this.props.createItemState( this.props.reducer, fieldName, value )
+        } else {
+            this.props.createItemState(this.props.reducer, fieldName, value)
         }
 
     }
@@ -102,76 +108,76 @@ class Add extends Component {
     // Callback after resizing image
     callback = (file) => {
         var value = this.handleFile(file)
-        this.props.createItemState( this.props.reducer, "doc", value )
+        this.props.createItemState(this.props.reducer, "doc", value)
     }
 
-    handleFile (file) {
-        var imagesArray = this.props.newData.doc ?  this.props.newData.doc : [];
-        if(file){
-            if(file.type === 'image/png' || file.type === 'image/jpeg' ){ // Check file format
+    handleFile(file) {
+        var imagesArray = this.props.newData.doc ? this.props.newData.doc : [];
+        if (file) {
+            if (file.type === 'image/png' || file.type === 'image/jpeg') { // Check file format
                 file.blob = URL.createObjectURL(file)
                 imagesArray.push(file)
-            }else{
+            } else {
                 this.props.setNotification("error_file_not_allowed", 'warning');
             }
         }
         return imagesArray
     }
 
-    handleRemoveItem = ( id, field, fieldName ) => {
+    handleRemoveItem = (id, field, fieldName) => {
         var images = this.props.newData.doc;
         var newImages = [];
-        for(var i = 0 ; i < images.length ; i++){
-            if( images[i][field] !== id ){
+        for (var i = 0; i < images.length; i++) {
+            if (images[i][field] !== id) {
                 newImages.push(images[i]);
             }
         }
-        this.props.createItemState( this.props.reducer, fieldName, newImages )
+        this.props.createItemState(this.props.reducer, fieldName, newImages)
     }
 
 
     onFormSubmit = (e) => {
-      e.preventDefault();
+        e.preventDefault();
 
-      if(this.props.reducer === "EXPENSE"){
-          
-          var date_1 = new Date().toLocaleDateString("en");
-          var date_2 = new Date(this.props.newData.receipt_date.date).toLocaleDateString("en");
+        if (this.props.reducer === "EXPENSE") {
 
-          if(date_2 > date_1){
-              this.props.setNotification("error_date_expense", "error");
-              return;
-          }
-      }
+            var date_1 = new Date().toLocaleDateString("en");
+            var date_2 = new Date(this.props.newData.receipt_date.date).toLocaleDateString("en");
 
-      this.props.createItem(this.props.reducer, this.props.newData)
+            if (date_2 > date_1) {
+                this.props.setNotification("error_date_expense", "error");
+                return;
+            }
+        }
+
+        this.props.createItem(this.props.reducer, this.props.newData)
     }
 
     render() {
 
-        const { locale, newData, classes, formFields, addBtnTitle, headerText, limitUploadFile, isUploading, progress, isCreating} = this.props
-
+        const { locale, newData, classes, formFields, addBtnTitle, headerText, limitUploadFile, isUploading, progress, isCreating } = this.props
+        console.log(this.props)
         const formDrawer = (
-                <div className={ classes.formWindow}>
-                    <form className={ classes.container} onSubmit={ this.onFormSubmit } autoComplete="off">
-                        {
-                            formFields.map(( form, index) => {
-                                return  <div key={index} className={  classes.card }>
-                                            <ApxExpanded heading={ form.label }>
-                                                <ApxForm formField={form.fields} formHandler={ this.handleChange } locale={ locale } xs={12} md={6} objData={ newData }/>
-                                            </ApxExpanded>
-                                        </div>
-                            })
-                        }
-                        <div className={  classes.card }>
-                        { limitUploadFile > 0 ?
+            <div className={classes.formWindow}>
+                <form className={classes.container} onSubmit={this.onFormSubmit} autoComplete="off">
+                    {
+                        formFields.map((form, index) => {
+                            return <div key={index} className={classes.card}>
+                                <ApxExpanded heading={form.label}>
+                                    <ApxForm formField={form.fields} formHandler={this.handleChange} locale={locale} xs={12} md={6} objData={newData} />
+                                </ApxExpanded>
+                            </div>
+                        })
+                    }
+                    <div className={classes.card}>
+                        {limitUploadFile > 0 ?
                             <ApxExpanded heading={locale.subheading.label_assets}>
-                                    <ApxUpload  onChange={ (event) => { this.handleChange(event) } }
-                                                docType="all"
-                                                removeItem={this.handleRemoveItem}
-                                                images={ newData.doc || [] }
-                                                title={ locale.wording.upload }
-                                                limitUploadFile={limitUploadFile}/>
+                                <ApxUpload onChange={(event) => { this.handleChange(event) }}
+                                    docType="all"
+                                    removeItem={this.handleRemoveItem}
+                                    images={newData.doc || []}
+                                    title={locale.wording.upload}
+                                    limitUploadFile={limitUploadFile} />
                             </ApxExpanded>
                             : null
                         }
@@ -180,47 +186,47 @@ class Add extends Component {
                         variant="contained"
                         color="primary"
                         type="submit"
-                        disabled={ isCreating }
-                        className={ classes.btnSave }
-                        >
-                        { isCreating ? locale.wording.loading : locale.wording.save }
+                        disabled={isCreating}
+                        className={classes.btnSave}
+                    >
+                        {isCreating ? locale.wording.loading : locale.wording.save}
                     </Button>
-                    </form>
+                </form>
 
-                </div>
-          );
+            </div>
+        );
         return (
-            <div className={ classes.root}>
-            <Hidden only={['xs', 'sm']}>
-                <Button variant="contained" color="primary" disabled={ isCreating }  className={  classes.button } onClick={this.toggleDrawer('right', true)}>{ isCreating ? locale.wording.loading : addBtnTitle }</Button>
-            </Hidden>
-            <ApxRightDrawer toggleDrawer={ this.toggleDrawer }  side="right" open={ this.state.right} title={ headerText } requiredText={locale.message.error_400}>
+            <div className={classes.root}>
+                <Hidden only={['xs', 'sm']}>
+                    <Button variant="contained" color="primary" disabled={isCreating} className={classes.button} onClick={this.toggleDrawer('right', true)}>{isCreating ? locale.wording.loading : addBtnTitle}</Button>
+                </Hidden>
+                <ApxRightDrawer toggleDrawer={this.toggleDrawer} side="right" open={this.state.right} title={headerText} requiredText={locale.message.error_400}>
 
                     {
                         isUploading ?
-                        <div className={ classes.loading }>
-                            <Spinner /><br />
-                            <p>{progress} %</p>
-                            <LinearProgress color="primary" variant="determinate" value={ progress  } />
-                        </div>
-                        : formDrawer
+                            <div className={classes.loading}>
+                                <Spinner /><br />
+                                <p>{progress} %</p>
+                                <LinearProgress color="primary" variant="determinate" value={progress} />
+                            </div>
+                            : formDrawer
                     }
-            </ApxRightDrawer>
-            <Hidden only={['lg', 'xl', 'md']}>
-                <ApxButtonCircle
-                    handleAction={this.toggleDrawer}
-                    open={true}
-                    variant="contained"
-                    color="primary"
-                    side="right"
-                />
-            </Hidden>
+                </ApxRightDrawer>
+                <Hidden only={['lg', 'xl', 'md']}>
+                    <ApxButtonCircle
+                        handleAction={this.toggleDrawer}
+                        open={true}
+                        variant="contained"
+                        color="primary"
+                        side="right"
+                    />
+                </Hidden>
             </div>
-    )
-  }
+        )
+    }
 }
 
 
 const AddItem = withStyles(styles)(Add)
 
-export default connect(null, {setNotification})(AddItem);
+export default connect(null, { setNotification })(AddItem);

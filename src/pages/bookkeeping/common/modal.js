@@ -38,8 +38,8 @@ const styles = theme => ({
 class SimpleModal extends React.Component {
     state = {
         open: false,
-        id: "",
-        indice: 0,
+        load: false,
+        indice: "",
         fr: '',
         en: "",
         vat_terms_fr: "",
@@ -47,28 +47,11 @@ class SimpleModal extends React.Component {
     }
 
     componentDidMount() {
-
-        this.setState({
-            fr: this.props.obj.fr,
-            en: this.props.obj.en,
-            indice: this.props.obj.indice || 0,
-            color: this.props.obj.color,
-            id: this.props.obj._id,
-            vat_terms_fr: this.props.obj.vat_terms_fr,
-            vat_terms_en: this.props.obj.vat_terms_en
-        })
+        this.setState({ open: this.props.open })
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({
-            fr: nextProps.obj.fr,
-            en: nextProps.obj.en,
-            indice: nextProps.obj.indice || 0,
-            color: nextProps.obj.color,
-            id: nextProps.obj._id,
-            vat_terms_fr: nextProps.obj.vat_terms_fr,
-            vat_terms_en: nextProps.obj.vat_terms_en
-        })
+        this.setState({ open: nextProps.open })
     }
 
     handleOpen = () => {
@@ -78,7 +61,6 @@ class SimpleModal extends React.Component {
     handleClose = () => {
         this.setState({
             open: false,
-            id: "",
             fr: '',
             en: "",
             color: "",
@@ -92,43 +74,57 @@ class SimpleModal extends React.Component {
         this.setState({ [name]: value })
     }
 
-    updateElement = () => {
-        this.setState({ open: false })
+    renderTextField = (en, label, field) => {
+        return <TextField
+            value={en}
+            onChange={(e) => { this.handleForm(e.target.name, e.target.value || " ") }}
+            label={this.props.locale.wording[label]}
+            name={field}
+            type={field === "indice" ? "number" : "text"}
+            fullWidth
+            margin="dense"
+            variant="filled"
 
+        />
+    }
+
+    updateElement = async () => {
+        this.setState({ load: true })
         var data = {
-            _id: this.state.id,
-            fr: this.state.fr,
-            en: this.state.en,
-            color: this.state.color,
-            vat_terms_fr: this.state.vat_terms_fr,
-            vat_terms_en: this.state.vat_terms_en,
-            indice: this.state.indice || 0
+            vat: {
+                fr: this.state.fr,
+                en: this.state.en,
+                color: this.state.color,
+                vat_terms_fr: this.state.vat_terms_fr,
+                vat_terms_en: this.state.vat_terms_en,
+                indice: parseFloat(this.state.indice) || 0
+            }
         }
 
-        this.props.pushToDocument("COMPANY", data, `push-pull/modify/set/${this.props.type}/`);
+        await this.props.pushToDocument("COMPANY", data, `push-pull/update/push/`);
+        this.props.onCloseModal()
 
         this.setState({
-            id: "",
             indice: 0,
             fr: '',
             en: "",
             color: "",
             vat_terms_fr: "",
-            vat_terms_en: ""
+            vat_terms_en: "",
+            load: false
         })
 
     }
 
     render() {
-        const { classes, obj, type, locale } = this.props;
-        const { fr, en, vat_terms_fr, vat_terms_en, indice } = this.state
+        const { classes, locale } = this.props;
+        const { fr, en, vat_terms_fr, vat_terms_en, indice, load } = this.state
 
         return (
             <React.Fragment>
-                <Typography onClick={this.handleOpen}>Add VAT</Typography>
                 <Modal
-                    aria-labelledby={obj._id}
-                    aria-describedby={obj.en}
+                    aria-labelledby="add-vat"
+                    aria-describedby="add-vat"
                     open={this.state.open}
                     onClose={this.handleClose}
                 >
@@ -136,73 +132,19 @@ class SimpleModal extends React.Component {
                     <div className={classes.paper}>
                         <Typography variant="h3" align="center" color="primary">{locale.subheading.edit_tag}</Typography>
                         <br />
-                        <TextField
-                            value={en ? en : this.props.obj.en}
-                            onChange={(e) => { this.handleForm(e.target.name, e.target.value || " ") }}
-                            label={locale.wording.tag_name_en}
-                            name="en"
-                            fullWidth
-                            margin="dense"
-                            variant="filled"
 
-                        />
-                        <TextField
-                            value={fr ? fr : this.props.obj.fr}
-                            onChange={(e) => { this.handleForm(e.target.name, e.target.value || " ") }}
-                            label={locale.wording.tag_name_fr}
-                            name="fr"
-                            fullWidth
-                            margin="dense"
-                            variant="filled"
+                        {this.renderTextField(en, "tag_name_en", "en")}
 
-                        />
-                        {
-                            type === 'vat' ?
-                                <TextField
-                                    value={indice ? indice : this.props.obj.indice}
-                                    onChange={(e) => { this.handleForm(e.target.name, e.target.value || 0) }}
-                                    label={locale.wording.rate}
-                                    name="indice"
-                                    type="number"
-                                    fullWidth
-                                    margin="dense"
-                                    variant="filled"
+                        {this.renderTextField(fr, "tag_name_fr", "fr")}
 
-                                />
-                                : null
-                        }
-                        {
-                            type === 'vat' ?
-                                <TextField
-                                    value={vat_terms_fr ? vat_terms_fr : this.props.obj.vat_terms_fr}
-                                    onChange={(e) => { this.handleForm(e.target.name, e.target.value || " ") }}
-                                    label={locale.wording.vat_terms_fr}
-                                    name="vat_terms_fr"
-                                    type="text"
-                                    fullWidth
-                                    margin="dense"
-                                    variant="filled"
+                        {this.renderTextField(indice, "rate", "indice")}
 
-                                />
-                                : null
-                        }
-                        {
-                            type === 'vat' ?
-                                <TextField
-                                    value={vat_terms_en ? vat_terms_en : this.props.obj.vat_terms_en}
-                                    onChange={(e) => { this.handleForm(e.target.name, e.target.value || " ") }}
-                                    label={locale.wording.vat_terms_en}
-                                    name="vat_terms_en"
-                                    type="text"
-                                    fullWidth
-                                    margin="dense"
-                                    variant="filled"
+                        {this.renderTextField(vat_terms_fr, "vat_terms_fr", "vat_terms_fr")}
 
-                                />
-                                : null
-                        }
+                        {this.renderTextField(vat_terms_en, "vat_terms_en", "vat_terms_en")}
 
-                        <Button variant="contained" color="primary" className={classes.btn} onClick={this.updateElement}>{locale.wording.save}</Button>
+
+                        <Button variant="contained" color="primary" disabled={load} className={classes.btn} onClick={this.updateElement}>{load ? locale.wording.loading : locale.wording.save}</Button>
                     </div>
                 </Modal>
             </React.Fragment>
@@ -216,7 +158,6 @@ const mapStateToProps = (state) => {
         locale: state.locale.locale,
     }
 }
-
 
 
 const SimpleModalWrapped = withStyles(styles)(SimpleModal);

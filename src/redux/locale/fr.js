@@ -75,7 +75,7 @@ const fr = {
          ou d’autres transactions dans le documents.`
     },
     dashboard: {
-        empty_stat: `Il semble que tu n'es pas encore de données.<br />Essaye de créer ta première facture ?`,
+        empty_stat: `Il semble que tu n'es pas encore de données.<br />Essaye de créer ta première facture !`,
         empty_quote: `Ou ton premier devis ?`
     },
     subheading: {
@@ -366,6 +366,7 @@ const fr = {
         type_message: "Taper votre message...",
         payment_terms: "Cet abonnement vous donne un accès total à la plateforme pendant 365 jours",
         add_tags: "Une fois l'élément créé, vous aurez la possibilité d'éditer en 2 langues FR - EN ",
+        add_contact: "Ajouter un nouveau contact",
         trial_30: "7 jours d'essai gratuit",
         account_setting: " Vous pouvez ajouter initialiser vos paramètres, afin d'optimiser vos documents comptables et filtre de recherche",
         account_vat: "Lister vos taux de TVA, ils vous seront utile pour la redaction de vos documents comptables",

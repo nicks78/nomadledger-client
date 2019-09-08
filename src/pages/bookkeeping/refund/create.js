@@ -1,53 +1,66 @@
 //manager/src/pages/bookkeeping/refund/create.js
 
 import React from 'react'
-import {connect} from 'react-redux'
-import { createState, createDocument, resetState} from '../../../redux/book/actions'
+import { connect } from 'react-redux'
+import { createState, createDocument, resetState } from '../../../redux/book/actions'
 import { convertToCurrency, getListItem } from '../../../redux/book/itemActions'
 import { withStyles } from '@material-ui/core';
 import Spinner from '../../../components/common/spinner'
 import Form from '../common/form'
+import Modal from '../common/modal'
+
 
 class CreateRefund extends React.Component {
 
     state = {
-        reducer: "REFUND"
+        reducer: "REFUND",
+        openModal: false
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.props.resetState(this.state.reducer);
+    }
+
+    closeModal = () => {
+        this.setState({ openModal: false })
     }
 
     handleDropDown = (event) => {
         var name = event.target.name;
         var value = event.target.value;
 
-        if(name === "currency") {
+        if (name === "vat" && value.btn) {
+            this.setState({ openModal: true })
+            return;
+        }
+
+        if (name === "currency") {
             // Update each items with the correct currency rate
             for (let i = 0; i < this.props.listItems.length; i++) {
                 this.props.convertToCurrency(this.state.reducer, value, this.props.listItems[i])
             }
         }
 
-        if(name === "vat" && this.props.newRefund.vat){
-            var vat_value =  (this.props.newRefund.subtotal / 100) * value.indice ;
-            this.props.createState(this.state.reducer, "vat_value", vat_value )
+        if (name === "vat" && this.props.newRefund.vat) {
+            var vat_value = (this.props.newRefund.subtotal / 100) * value.indice;
+            this.props.createState(this.state.reducer, "vat_value", vat_value)
         }
 
-        this.props.createState( this.state.reducer, name, value)
+        this.props.createState(this.state.reducer, name, value)
     }
 
-    render(){
+    render() {
 
-    const { isFetching, locale, classes, newRefund, listItems, vat, currency, status } = this.props;
-    const {reducer} = this.state;
+        const { isFetching, locale, classes, newRefund, listItems, vat, currency, status } = this.props;
+        const { reducer } = this.state;
 
-    if(isFetching){
-        return <Spinner/>
-    }
+        if (isFetching) {
+            return <Spinner />
+        }
 
-    return (
-            <div className={ classes.root}>
+        return (
+            <div className={classes.root}>
+                <Modal type="vat" open={this.state.openModal} onCloseModal={this.closeModal} />
                 <Form
                     formTitle="add_refund"
                     data={newRefund}
@@ -57,7 +70,7 @@ class CreateRefund extends React.Component {
                     status={status}
                     locale={locale}
                     handleSubmit={this.props.createDocument}
-                    handleDropDown={ this.handleDropDown }
+                    handleDropDown={this.handleDropDown}
                     getListItem={this.props.getListItem}
                     createState={this.props.createState}
                     reducer={reducer}

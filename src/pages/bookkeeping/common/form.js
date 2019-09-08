@@ -1,6 +1,7 @@
 //manager/src/pages/bookkeeping/quote/form.js
 
 import React from 'react'
+import { Link } from 'react-router-dom'
 import {
     Paper,
     withStyles,
@@ -12,7 +13,7 @@ import {
     FormControlLabel,
     InputAdornment
 } from '@material-ui/core';
-
+import AddIcon from '@material-ui/icons/AddOutlined'
 import ApxSelect from '../../../components/common/select'
 import ApxRichEditor from '../../../components/common/richEditor'
 import AutoComplete from '../../../lib/autoComplete'
@@ -21,7 +22,7 @@ import Items from './items'
 import DatePickers from '../../../lib/dayPicker'
 import ApxBackBtn from '../../../components/common/backBtn'
 import ApxTitleBar from '../../../components/common/titleBar'
-
+import Tooltips from '../../../components/common/tooltips';
 
 
 const Form = (props) => {
@@ -58,7 +59,10 @@ const Form = (props) => {
                         />
                     </div>
 
-
+                    <Tooltips title={locale.helperText.add_contact} aria-label="add-contact"><div style={{ float: "right", marginTop: 12 }}>
+                        <Button size="small" component={Link} to={{ pathname: "/contact", state: { right: true } }} variant="contained" color="secondary"><AddIcon /></Button>
+                    </div>
+                    </Tooltips>
                 </Grid>
                 <Grid item xs={12} sm={6} md={6}>
 

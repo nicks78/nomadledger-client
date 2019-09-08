@@ -8,12 +8,13 @@ import { withStyles, Fab, Typography } from '@material-ui/core';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownloadOutlined'
 import Form from '../common/form'
 import Spinner from '../../../components/common/spinner'
-
+import Modal from '../common/modal'
 
 class EditQuote extends React.Component {
 
     state = {
-        reducer: "QUOTE"
+        reducer: "QUOTE",
+        openModal: false
     }
 
     componentWillUnmount() {
@@ -25,9 +26,18 @@ class EditQuote extends React.Component {
         this.props.getDocument(this.state.reducer, id);
     }
 
+    closeModal = () => {
+        this.setState({ openModal: false })
+    }
+
     handleDropDown = (event) => {
         var name = event.target.name;
         var value = event.target.value;
+
+        if (name === "vat" && value.btn) {
+            this.setState({ openModal: true })
+            return;
+        }
 
         if (name === "currency") {
             // Update each items with the correct currency rate
@@ -58,7 +68,7 @@ class EditQuote extends React.Component {
 
         return (
             <div className={classes.root}>
-
+                <Modal type="vat" open={this.state.openModal} onCloseModal={this.closeModal} />
 
 
                 <Form

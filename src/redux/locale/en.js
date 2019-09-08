@@ -362,6 +362,7 @@ const en = {
         type_message: "Type your message...",
         payment_terms: "Membership gives you full access to NomadLegder for 365 days",
         add_tags: "Once you create your tag, you can edit in two languages FR - EN ",
+        add_contact: "Add a new contact",
         trial_30: "Free 7-Day Trial",
         account_vat: "List all your VAT rates, you will need them to create your accounting documents",
         account_group: "Easily create contact groups to aid search filter",
