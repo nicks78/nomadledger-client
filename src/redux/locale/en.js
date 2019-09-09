@@ -344,7 +344,8 @@ const en = {
         size: "Size",
         color: "Colour",
         not_provided: "Not provided",
-        leads: "Leads"
+        leads: "Leads self-employed in France",
+        paid_member_btn: "Become a member"
     },
     helperText: {
         select_phone_code: "Phone code",

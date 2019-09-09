@@ -6,7 +6,7 @@ import { withStyles, Typography } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {cvtNumToUserPref} from '../../utils/help_function'
+import { cvtNumToUserPref } from '../../utils/help_function'
 
 const height = window.innerHeight;
 
@@ -36,62 +36,62 @@ class MobileView extends React.Component {
     const scrollTop = el.scrollTop;
     const toBottom = offsetHeight + scrollTop
 
-    if( toBottom  >=  scrollHeight ) {
-      if( !this.props.isFetching && this.props.services.length < this.props.total){
-          this.loadMoreData()
+    if (toBottom >= scrollHeight) {
+      if (!this.props.isFetching && this.props.services.length < this.props.total) {
+        this.loadMoreData()
       }
     }
   }
 
   loadMoreData = () => {
     this.props.getMoreData(this.props.reducer, `list?limit=10&skip=${this.state.skip}`);
-    this.setState({skip: this.state.skip +10 })
+    this.setState({ skip: this.state.skip + 10 })
   }
 
   renderCard = (service) => {
     return <Link to={`/${this.props.reducer.toLowerCase()}/view/${service._id.toLowerCase()}`}>
-            <Card className={this.props.classes.card} >
-            <div className={this.props.classes.details}>
-              <CardContent className={this.props.classes.content}>
-                <Typography variant="subtitle1" style={{textTransform: "capitalize", fontWeight: 300}}>
-                  {service.name}
-                  <span style={{position: "absolute", right: 24, fontWeight: 700, color: '#303030'}}>
-                    {cvtNumToUserPref(service.price)} {service.currency.en}
-                  </span>
-                </Typography>
-              </CardContent>
+      <Card className={this.props.classes.card} >
+        <div className={this.props.classes.details}>
+          <CardContent className={this.props.classes.content}>
+            <Typography variant="subtitle1" style={{ textTransform: "capitalize", fontWeight: 300 }}>
+              {service.name}
+              <span style={{ position: "absolute", right: 24, fontWeight: 700, color: '#303030' }}>
+                {cvtNumToUserPref(service.price)} {service.currency.en}
+              </span>
+            </Typography>
+          </CardContent>
 
-            </div>
+        </div>
 
-        </Card></Link>
+      </Card></Link>
   }
 
 
-  render () {
-    const { services, classes , locale} = this.props
+  render() {
+    const { services, classes, locale } = this.props
 
     return (
       <div className={classes.root} id="mobileView">
-      <Typography variant="h1" align="center" className={classes.title}>{locale.service.name}</Typography>
-      {
-         services.map((service, index) => {
+        <Typography variant="h1" align="center" className={classes.title}>{locale.service.name}</Typography>
+        {
+          services.map((service, index) => {
             return <div key={index} id="main">{this.renderCard(service)}</div>
-        })
-      }
-      {
-         this.props.isFetching ?
-             <div style={{textAlign: "center"}}><CircularProgress color="secondary" /></div>
-         : null
-      }
-      <br/><br/>
+          })
+        }
+        {
+          this.props.isFetching ?
+            <div style={{ textAlign: "center" }}><CircularProgress color="secondary" /></div>
+            : null
+        }
       </div>
-  )
+    )
   }
 }
 
 const styles = theme => ({
   root: {
-    minHeight: height + 10
+    minHeight: height + 10,
+    marginBottom: 24
   },
   title: {
     marginTop: 24,

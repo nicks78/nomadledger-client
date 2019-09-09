@@ -14,15 +14,15 @@ const styles = theme => ({
 
 const Buttons = (props) => {
 
-  const {classes, handleAction, side, open, color } = props
+  const { classes, handleAction, side, open, color } = props
 
   return (
-      <Fab color={color} aria-label="Add" className={classes.fab} onClick={ handleAction(side, open) }>
-        <AddIcon />
-      </Fab>
+    <Fab color={color} aria-label="Add" className={classes.fab} onClick={handleAction(side, open)}>
+      <AddIcon />
+    </Fab>
   )
 }
 
-const ApxButtonCircle =  withStyles(styles)(Buttons)
+const ApxButtonCircle = withStyles(styles)(Buttons)
 
 export default ApxButtonCircle

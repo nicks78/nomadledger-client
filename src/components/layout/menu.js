@@ -2,12 +2,7 @@ import React from 'react'
 import { NavLink } from "react-router-dom";
 import { DEFAULT_IMG } from '../../redux/constant'
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
+import { withStyles, List, ListItem, ListItemIcon, ListItemText, Divider, Hidden } from '@material-ui/core';
 import InsertChartIcon from '@material-ui/icons/InsertChartOutlined';
 import GroupIcon from '@material-ui/icons/GroupOutlined';
 import StoreIcon from '@material-ui/icons/StoreOutlined';
@@ -18,7 +13,6 @@ import ListAltIcon from '@material-ui/icons/ListAltOutlined';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalanceOutlined'
 import AssignmentIcon from '@material-ui/icons/AssignmentOutlined';
 import LanguageIcon from '@material-ui/icons/LanguageOutlined';
-import Hidden from '@material-ui/core/Hidden';
 import { Typography } from '@material-ui/core';
 
 const Styles = theme => ({
@@ -175,6 +169,7 @@ class MainMenu extends React.Component {
                         <ListItemText primary={locale.archive.name} />
                     </ListItem>
                 </List>
+
             </div>
         )
     }

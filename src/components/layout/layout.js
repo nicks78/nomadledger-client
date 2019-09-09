@@ -1,6 +1,6 @@
-import React  from 'react'
-import { withStyles } from '@material-ui/core/styles';
-import {DEFAULT_URL} from '../../redux/constant'
+import React from 'react'
+import { withStyles, Button } from '@material-ui/core';
+import { DEFAULT_URL } from '../../redux/constant'
 import { Link } from "react-router-dom";
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -47,7 +47,7 @@ const styles = theme => ({
 
     navIconHide: {
         [theme.breakpoints.up('md')]: {
-          display: 'none',
+            display: 'none',
         },
     },
 
@@ -59,7 +59,7 @@ const styles = theme => ({
         border: '1px solid transparent',
         borderBottomColor: 'rgba(0, 0, 0, 0.12)',
         [theme.breakpoints.up('md')]: {
-          width: '100%', //`calc(100% - ${drawerWidth}px)`,
+            width: '100%', //`calc(100% - ${drawerWidth}px)`,
         },
     },
     title: {
@@ -100,7 +100,7 @@ const styles = theme => ({
     },
     lang: {
         color: theme.palette.secondary.main,
-        marginLeft:  15,
+        marginLeft: 15,
         cursor: 'pointer',
         fontSize: 14,
         '&:hover': {
@@ -109,9 +109,13 @@ const styles = theme => ({
         }
     },
     img: {
-        maxHeight:"50px",
-        maxWidth:"100px",
-        width:"auto"
+        maxHeight: "50px",
+        maxWidth: "100px",
+        width: "auto"
+    },
+    btnPayment: {
+        textAlign: "center",
+        marginTop: 24
     }
 })
 
@@ -122,7 +126,7 @@ class Layout extends React.Component {
     };
 
     handleScroll = (e) => {
-      console.log(e)
+        console.log(e)
     }
 
     handleDrawerToggle = () => {
@@ -135,113 +139,119 @@ class Layout extends React.Component {
 
     handleClose = () => {
         this.setState({ anchorEl: null, mobileOpen: false });
-    };
+    }
 
 
     render() {
 
-    const { classes, locale, user, company } = this.props;
-    const { anchorEl } = this.state;
-    const open = Boolean(anchorEl);
+        const { classes, locale, user, company } = this.props;
+        const { anchorEl } = this.state;
+        const open = Boolean(anchorEl);
 
-    if(!user || !company){
-      return null
-    }
+        if (!user || !company) {
+            return null
+        }
 
-    return (
-        <div className={ classes.root} >
-            <AppBar className={classes.appBar} >
-                <Toolbar>
-                <IconButton
-                    color="inherit"
-                    aria-label="Open drawer"
-                    onClick={this.handleDrawerToggle}
-                    className={classes.navIconHide}
+        return (
+            <div className={classes.root} >
+                <AppBar className={classes.appBar} >
+                    <Toolbar>
+                        <IconButton
+                            color="inherit"
+                            aria-label="Open drawer"
+                            onClick={this.handleDrawerToggle}
+                            className={classes.navIconHide}
+                        >
+                            <MenuIcon className={classes.hamburger} />
+                        </IconButton>
+                        <Hidden smDown>
+                            <Typography >
+                                <img src={company.logo_company && company.logo_company.full_path !== "" ? company.logo_company.full_path : `${DEFAULT_URL}img/default_logo.png`} alt="logo" className={classes.img} />
+                            </Typography>
+                        </Hidden>
+
+                        <Typography className={classes.title} variant="h3">
+                            <Hidden smDown>{company.company_name ? company.company_name.toUpperCase() : "NomadLedger"}</Hidden>
+                        </Typography>
+
+                        <Typography>
+                            <Avatar
+                                component="span"
+                                onClick={this.handleMenu}
+                                alt={user.firstname || "firstname"}
+                                src={`${user.avatar.full_path || `${DEFAULT_URL}img/default_avatar.png`}`}
+                                className={this.props.location.pathname === "/account" ? classes.avatarActive : classes.avatar}
+                                style={{}}
+                            />
+                            <Menu
+                                id="menu-appbar"
+                                anchorEl={anchorEl}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={open}
+                                onClose={this.handleClose}
+                            >
+                                <MenuItem component={Link} onClick={this.handleClose} to="/account" >{locale.wording.my_account}</MenuItem>
+                                <MenuItem onClick={this.props.logout}>{locale.wording.logout}</MenuItem>
+                            </Menu>
+                        </Typography>
+                        <Typography variant="overline" className={classes.lang} onClick={() => { this.props._onChangeLocale(locale.lang === 'fr' ? 'en' : 'fr') }}>{locale.lang !== 'fr' ? 'EN' : 'FR'}</Typography>
+                    </Toolbar>
+                </AppBar>
+
+                <Hidden mdUp>
+                    <Drawer
+
+                        variant="temporary"
+                        anchor="left"
+                        open={this.state.mobileOpen}
+                        // onClick={() => this.setState({mobileOpen: false }) }
+                        onClose={this.handleDrawerToggle}
+                        classes={{
+                            paper: classes.drawerPaper,
+                        }}
+                        ModalProps={{
+                            keepMounted: true, // Better open performance on mobile.
+                        }}
                     >
-                    <MenuIcon className={ classes.hamburger }/>
-                </IconButton>
-                <Hidden smDown>
-                    <Typography >
-                        <img src={company.logo_company && company.logo_company.full_path !== "" ? company.logo_company.full_path :  `${DEFAULT_URL}img/default_logo.png` } alt="logo" className={classes.img} />
-                    </Typography>
+                        <MainMenu locale={locale} company={company} closeDrawer={() => { this.setState({ mobileOpen: false }) }} />
+                        <div className={classes.btnPayment}>
+                            <Button color="primary" variant="contained" size="small">Hey</Button>
+                        </div>
+                        <ApxCopyright />
+                    </Drawer>
                 </Hidden>
 
-                <Typography className={classes.title} variant="h3">
-                    <Hidden smDown>{company.company_name ? company.company_name.toUpperCase() : "NomadLedger"}</Hidden>
-                </Typography>
+                <Hidden smDown implementation="css">
+                    <Drawer
+                        variant="permanent"
+                        open
+                        classes={{
+                            paper: classes.drawerPaper,
+                        }}
+                    >
+                        <MainMenu locale={locale} company={company} />
+                        <div className={classes.btnPayment}>
+                            <Button color="secondary" component={Link} to={`/public/payment-gateway/${user.internalInfos_id.token}`} variant="contained" size="small">{locale.wording.paid_member_btn}</Button>
+                        </div>
+                        <ApxCopyright />
+                    </Drawer>
+                </Hidden>
 
-                <Typography>
-                <Avatar
-                    component="span"
-                    onClick={ this.handleMenu }
-                    alt={user.firstname || "firstname"}
-                    src={`${ user.avatar.full_path ||  `${DEFAULT_URL}img/default_avatar.png` }`}
-                    className={ this.props.location.pathname === "/account" ? classes.avatarActive : classes.avatar  }
-                    style={{  }}
-                />
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={open}
-                  onClose={this.handleClose}
-                >
-                  <MenuItem component={Link} onClick={this.handleClose}  to="/account" >{locale.wording.my_account}</MenuItem>
-                  <MenuItem onClick={this.props.logout}>{locale.wording.logout}</MenuItem>
-                </Menu>
-                </Typography>
-                    <Typography variant="overline" className={classes.lang} onClick={ () => { this.props._onChangeLocale(locale.lang === 'fr' ? 'en' : 'fr') } }>{ locale.lang !== 'fr' ? 'EN' : 'FR' }</Typography>
-                </Toolbar>
-            </AppBar>
-
-            <Hidden mdUp>
-                <Drawer
-
-                variant="temporary"
-                anchor="left"
-                open={this.state.mobileOpen}
-                // onClick={() => this.setState({mobileOpen: false }) }
-                onClose={this.handleDrawerToggle}
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
-                ModalProps={{
-                    keepMounted: true, // Better open performance on mobile.
-                }}
-            >
-                <MainMenu locale={ locale } company={company} closeDrawer={ ()  => { this.setState({ mobileOpen: false }) } }/>
-                    <ApxCopyright />
-                </Drawer>
-            </Hidden>
-
-            <Hidden smDown implementation="css">
-                <Drawer
-                    variant="permanent"
-                    open
-                    classes={{
-                        paper: classes.drawerPaper,
-                    }}
-                >
-                <MainMenu locale={ locale } company={company} />
-                <ApxCopyright />
-            </Drawer>
-            </Hidden>
-
-            <main className={classes.content} id="scrollable" >
-                <div className={classes.toolbar} />
+                <main className={classes.content} id="scrollable" >
+                    <div className={classes.toolbar} />
                     {this.props.children}
-            </main>
+                </main>
 
-        </div>
-    )
-  }
+            </div>
+        )
+    }
 }
 
 

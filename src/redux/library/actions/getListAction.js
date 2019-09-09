@@ -65,6 +65,7 @@ function setTotal(actionType, res) {
     subtype: actionType,
     isFetching: false,
     total: res.total,
+    access: res.access || false,
     rowsPerPageOptions: res.rowsPerPageOptions
   }
 }

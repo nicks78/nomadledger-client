@@ -347,7 +347,8 @@ const fr = {
         size: "Taille",
         color: "Couleur",
         not_provided: "Non renseigné",
-        leads: "prospects"
+        leads: "prospects auto entrepreneurs en France",
+        paid_member_btn: "Devenir membre"
 
     },
     helperText: {

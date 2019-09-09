@@ -88,23 +88,20 @@ class Contact extends Component {
 
     return (
       <div>
-        {
-          !isMobile ?
-            <div style={{ display: "flex", justifyContent: "flex-start", marginBottom: 24, alignItems: 'center' }}>
-              <AddContact progress={progress}
-                country={country}
-                contactGroup={contactGroup}
-                locale={locale}
-                createContact={createItem}
-                createContactState={createState}
-                newData={newContact}
-                isCreating={isCreating}
-                {...this.props} />
-              <Typography variant="caption" style={{ marginRight: 10 }}>{locale.wording.or}</Typography>
-              <GoogleContacts isCreating={uploadingContact} responseGoogle={this.responseGoogle} locale={locale} />
-            </div>
-            : null
-        }
+        <div style={{ display: "flex", justifyContent: "flex-start", marginBottom: 24, alignItems: 'center' }}>
+          <AddContact progress={progress}
+            country={country}
+            contactGroup={contactGroup}
+            locale={locale}
+            createContact={createItem}
+            createContactState={createState}
+            newData={newContact}
+            isCreating={isCreating}
+            {...this.props} />
+
+          {!isMobile ? <Typography variant="caption" style={{ marginRight: 10 }}>{locale.wording.or}</Typography> : null}
+          {!isMobile ? <GoogleContacts isCreating={uploadingContact} responseGoogle={this.responseGoogle} locale={locale} /> : null}
+        </div>
         {!isMobile ?
           <ApxPaper>
             <ApxTableToolBar

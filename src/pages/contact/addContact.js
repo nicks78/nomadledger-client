@@ -30,7 +30,6 @@ const AddContact = (props) => {
       fields: [
         { name: 'firstname', type: "text", required: true },
         { name: 'lastname', type: "text", required: true },
-        // { name: 'phone_code', type:"select", selections: country, helperText: "select_phone_code", required: true },
         { name: 'phoneNumber', type: "text", required: true, length: 15 },
         { name: 'email', type: "email", required: true }
       ]

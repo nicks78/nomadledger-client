@@ -1,6 +1,6 @@
 //src/redux/library/baseReducer.js
 
-import {updateArrayOfObject} from '../../utils/help_function'
+import { updateArrayOfObject } from '../../utils/help_function'
 
 
 class BaseState {
@@ -27,33 +27,33 @@ const baseReducer = (state = new BaseState(), action) => {
 
     switch (action.type) {
         case `REQUEST`:
-            return  {
+            return {
                 ...state,
                 isFetching: action.isFetching,
                 isError: action.isError,
                 list: []
             }
         case `REQUEST_CREATE`:
-            return  {
+            return {
                 ...state,
                 isCreating: action.isCreating,
                 isError: action.isError
             }
         case `UPLOAD_CONTACT`:
-            return  {
+            return {
                 ...state,
                 uploadingContact: action.uploadingContact,
                 isError: action.isError
             }
 
         case `REQUEST_UPLOAD`:
-            return  {
+            return {
                 ...state,
                 isUploading: action.isUploading,
                 isError: action.isError
             }
         case `REQUEST_UPDATE`:
-            return  {
+            return {
                 ...state,
                 isUpdating: action.isUpdating,
                 isError: action.isError
@@ -71,7 +71,7 @@ const baseReducer = (state = new BaseState(), action) => {
             }
 
         case `RECEIVE`:
-            return  {
+            return {
                 ...state,
                 isFetching: action.isFetching,
                 list: action.payload,
@@ -90,8 +90,8 @@ const baseReducer = (state = new BaseState(), action) => {
         case `STATE`:
             return {
                 ...state,
-                tmp_state: { ...state.tmp_state, [ action.payload.fieldName ] : action.payload.value },
-                item: { ...state.item, [ action.payload.fieldName ] : action.payload.value }
+                tmp_state: { ...state.tmp_state, [action.payload.fieldName]: action.payload.value },
+                item: { ...state.item, [action.payload.fieldName]: action.payload.value }
             }
 
         case `CREATE`:
@@ -103,7 +103,7 @@ const baseReducer = (state = new BaseState(), action) => {
                 receivedAt: Date.now(),
                 tmp_state: {},
                 item: null,
-                list: [ ...state.list, action.item ]
+                list: [...state.list, action.item]
             }
         case `UPDATE`:
             return {
@@ -117,8 +117,8 @@ const baseReducer = (state = new BaseState(), action) => {
         case `UPDATE_LIST`:
             return {
                 ...state,
-                list:  state.list.filter( (element) => { return element._id !== action.id }),
-                total: state.total -1,
+                list: state.list.filter((element) => { return element._id !== action.id }),
+                total: state.total - 1,
                 receivedAt: Date.now(),
             }
 
@@ -144,6 +144,7 @@ const baseReducer = (state = new BaseState(), action) => {
                 ...state,
                 total: action.total,
                 isFetching: action.isFetching,
+                access: action.access || false,
                 rowsPerPageOptions: action.rowsPerPageOptions
 
             }

@@ -28,8 +28,9 @@ class Marketing extends Component {
     }
 
     render() {
-        const { list, isFetching, locale, total, classes } = this.props
+        const { list, isFetching, locale, total, classes, access } = this.props
         const { reducer } = this.state
+        const titleBar = access ? locale.subheading.placeholder_search_leads : locale.marketing.h1
         return (
             <div>
                 <div className={classes.wrapTitle}>
@@ -43,8 +44,8 @@ class Marketing extends Component {
                         numSelected={0}
                         menus={null}
                         hideDateFilter={true}
-                        searchBar={true}
-                        title={isFetching ? locale.wording.loading : locale.subheading.placeholder_search_leads}
+                        searchBar={access}
+                        title={isFetching ? locale.wording.loading : titleBar}
                         selected={locale.wording.selected}
                         toExcel={false}
                         refresh={() => this.props.getItemList("ANNUAIRE", `/list`)}
@@ -81,15 +82,20 @@ class Marketing extends Component {
                             </TableBody>
                         </Table>
                     </div>
-                    <Pagination
-                        total={total || 0}
-                        rowsPerPageOptions={this.props.rowsPerPageOptions || []}
-                        label={locale.wording.label_rows_per_page}
-                        value={`search=${this.state.search_name}`}
-                        reducer={reducer}
-                        label2={locale.wording.of}
-                        onGetItemList={this.props.getItemList}
-                    />
+                    {
+                        access ?
+                            <Pagination
+                                total={total || 0}
+                                rowsPerPageOptions={this.props.rowsPerPageOptions || []}
+                                label={locale.wording.label_rows_per_page}
+                                value={`search=${this.state.search_name}`}
+                                reducer={reducer}
+                                label2={locale.wording.of}
+                                onGetItemList={this.props.getItemList}
+                            />
+                            : null
+                    }
+
                 </ApxPaper>
             </div>
         )
@@ -114,7 +120,8 @@ const mapStateToProps = (state) => {
         isFetching: state.library.annuaire.isFetching,
         list: state.library.annuaire.list,
         locale: state.locale.locale,
-        total: state.library.annuaire.total
+        total: state.library.annuaire.total,
+        access: state.library.annuaire.access,
     }
 }
 
