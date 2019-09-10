@@ -107,6 +107,7 @@ class Routes extends React.Component {
                         locale={locale} />
                     <Switch>
                         <Route exact path="/" component={Auth} />
+                        <Route path="/public/campaign/:cmp_id/lead/:id" component={Auth} />
                         <Route path="/login" component={Login} />
                         <Route exact path="/public" component={NotFound} />
                         <Route path="/public/confirm-email" component={ConfirmEmail} />
