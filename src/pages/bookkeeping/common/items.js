@@ -150,9 +150,9 @@ class Items extends Component {
                       {
                         canBeUpdated ?
                           <div className={classes.quantity}>
-                            <ArrowDropDownIcon className={classes.btnArrow} onClick={() => { this.props.addRemoveQuantity(reducer, item.item_id, "down") }} />
+                            <ArrowDropDownIcon className={classes.btnArrow} onClick={() => { this.props.addRemoveQuantity(reducer, item._id, "down") }} />
                             <span>{item.quantity}</span>
-                            <ArrowDropUpIcon className={classes.btnArrow} onClick={() => { this.props.addRemoveQuantity(reducer, item.item_id, "up") }} />
+                            <ArrowDropUpIcon className={classes.btnArrow} onClick={() => { this.props.addRemoveQuantity(reducer, item._id, "up") }} />
                           </div>
                           : <span>{item.quantity}</span>
                       }

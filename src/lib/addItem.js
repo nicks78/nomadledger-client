@@ -144,7 +144,7 @@ class Add extends Component {
             var date_1 = new Date().toLocaleDateString("en");
             var date_2 = new Date(this.props.newData.receipt_date.date).toLocaleDateString("en");
 
-            if (date_2 > date_1) {
+            if (date_2 < date_1) {
                 this.props.setNotification("error_date_expense", "error");
                 return;
             }
@@ -156,7 +156,7 @@ class Add extends Component {
     render() {
 
         const { locale, newData, classes, formFields, addBtnTitle, headerText, limitUploadFile, isUploading, progress, isCreating } = this.props
-        console.log(this.props)
+
         const formDrawer = (
             <div className={classes.formWindow}>
                 <form className={classes.container} onSubmit={this.onFormSubmit} autoComplete="off">

@@ -1,18 +1,18 @@
 //src/components/common/renderImage.js
 
 import React from 'react'
-import {DEFAULT_URL} from '../../redux/constant'
-import {randomString} from '../../utils/help_function'
+import { DEFAULT_URL } from '../../redux/constant'
+import { randomString } from '../../utils/help_function'
 
-const renderImage =(props) => {
+const renderImage = (props) => {
 
-    const { img } = props
+  const { img } = props
 
-    if(img && img.full_path){
-      return <a href={ img.full_path } target="_blank"><img alt={ img.org_name } height="30" src={img.full_path } /></a>
-    }else{
-      return <img alt={randomString(5)} height="30" src={ `${DEFAULT_URL}img/default_logo.jpg` } />
-    }
+  if (img && img.full_path) {
+    return <a href={img.full_path} target="_blank"><img alt={img.org_name} height="30" src={img.full_path} /></a>
+  } else {
+    return <img alt={randomString(5)} height="30" src={`${DEFAULT_URL}img/default_logo.jpg`} />
+  }
 }
 
 export default renderImage;

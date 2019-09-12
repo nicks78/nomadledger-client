@@ -49,6 +49,7 @@ class Home extends Component {
         const { width } = this.state
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         const isMobile = width <= 500
+        const showStat = mainStat ? mainStat.sumExpenses || mainStat.count : false
 
         if (isFetching || isFetchingTask) {
             return <Spinner />
@@ -82,7 +83,7 @@ class Home extends Component {
                                 {locale.wording.statistics}
                             </Typography>
                             {
-                                mainStat && mainStat.count ?
+                                showStat ?
                                     <BarCharts chartData={mainStat} id="mainStat" currency={currency.value || "-"} />
                                     : <EmptyChart user={this.props.user} locale={locale} />
                             }
