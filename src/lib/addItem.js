@@ -141,10 +141,10 @@ class Add extends Component {
 
         if (this.props.reducer === "EXPENSE") {
 
-            var date_1 = new Date().toLocaleDateString("en");
-            var date_2 = new Date(this.props.newData.receipt_date.date).toLocaleDateString("en");
+            var date_1 = new Date().getTime();
+            var date_2 = new Date(this.props.newData.receipt_date.date).getTime();
 
-            if (date_2 < date_1) {
+            if (date_2 > date_1) {
                 this.props.setNotification("error_date_expense", "error");
                 return;
             }
