@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import ApxExpanded from '../components/common/expanded'
-import ApxUpload from '../components/common/upload'
+import UploadFile from './file/upload'
 import ApxForm from '../components/common/form'
 import ApxRightDrawer from '../components/common/rightDrawer'
 import Spinner from '../components/common/spinner'
@@ -13,7 +13,6 @@ import ApxButtonCircle from '../components/common/buttonCircle'
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Hidden from '@material-ui/core/Hidden';
 import { checkNumFormatRegex } from '../utils/help_function'
-import { resizeFile } from '../utils/resizeFile'
 import { setNotification } from '../redux/notification/actions'
 
 
@@ -85,72 +84,33 @@ class Add extends Component {
         var value = event.target.value;
 
         if (fieldName === "price" || fieldName === "selling_price" || fieldName === "buying_price") {
-
             if (checkNumFormatRegex(value) === false) {
                 this.props.setNotification("error_422_price", 'warning');
                 return
             }
         }
-
-        if (fieldName === 'doc') { // If input file
-            // Resize file before upload
-            var file = event.target.files[0];
-            if (!file) { return; }
-            resizeFile(file, this.callback)
-
-            return;
-        } else {
-            this.props.createItemState(this.props.reducer, fieldName, value)
-        }
-
+        this.props.createItemState(this.props.reducer, fieldName, value)
     }
-
-    // Callback after resizing image
-    callback = (file) => {
-        var value = this.handleFile(file)
-        this.props.createItemState(this.props.reducer, "doc", value)
-    }
-
-    handleFile(file) {
-        var imagesArray = this.props.newData.doc ? this.props.newData.doc : [];
-        if (file) {
-            if (file.type === 'image/png' || file.type === 'image/jpeg') { // Check file format
-                file.blob = URL.createObjectURL(file)
-                imagesArray.push(file)
-            } else {
-                this.props.setNotification("error_file_not_allowed", 'warning');
-            }
-        }
-        return imagesArray
-    }
-
-    handleRemoveItem = (id, field, fieldName) => {
-        var images = this.props.newData.doc;
-        var newImages = [];
-        for (var i = 0; i < images.length; i++) {
-            if (images[i][field] !== id) {
-                newImages.push(images[i]);
-            }
-        }
-        this.props.createItemState(this.props.reducer, fieldName, newImages)
-    }
-
 
     onFormSubmit = (e) => {
         e.preventDefault();
 
-        if (this.props.reducer === "EXPENSE") {
+        // Expense date cannot be above of current date
+        if (!this.checkDateExpense()) { return; }
 
+        this.props.createItem(this.props.reducer, this.props.newData)
+    }
+
+    checkDateExpense = () => {
+        if (this.props.reducer === "EXPENSE") {
             var date_1 = new Date().getTime();
             var date_2 = new Date(this.props.newData.receipt_date.date).getTime();
 
             if (date_2 > date_1) {
                 this.props.setNotification("error_date_expense", "error");
-                return;
+                return false;
             }
         }
-
-        this.props.createItem(this.props.reducer, this.props.newData)
     }
 
     render() {
@@ -172,11 +132,11 @@ class Add extends Component {
                     <div className={classes.card}>
                         {limitUploadFile > 0 ?
                             <ApxExpanded heading={locale.subheading.label_assets}>
-                                <ApxUpload onChange={(event) => { this.handleChange(event) }}
+                                <UploadFile
+                                    getImages={(arrayImages) => { this.props.createItemState(this.props.reducer, "doc", arrayImages) }}
                                     docType="all"
-                                    removeItem={this.handleRemoveItem}
                                     images={newData.doc || []}
-                                    title={locale.wording.upload}
+                                    btnLabel={locale.wording.upload}
                                     limitUploadFile={limitUploadFile} />
                             </ApxExpanded>
                             : null
