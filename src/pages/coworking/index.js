@@ -67,14 +67,14 @@ class Coworking extends Component {
 
     render() {
 
-        const { classes, locale, listCoworking, isCreating } = this.props
+        const { classes, locale, listCoworking } = this.props
         const { width } = this.state
         const isMobile = width <= 550
 
         return (
             <div className={classes.root}>
                 <Hidden only={['xs', 'sm']}>
-                    <Button variant="contained" component={Link} to={`/coworking/add`} color="primary" disabled={isCreating} className={classes.button} >{isCreating ? locale.wording.loading : locale.wording.create}</Button>
+                    <Button variant="contained" component={Link} to={`/coworking/add`} color="primary" className={classes.button} >{locale.wording.create}</Button>
                 </Hidden>
                 <Hidden only={['lg', 'xl', 'md']}>
                     <Typography align="center" className={classes.title} variant="h1">{locale.coworking.name}</Typography>
@@ -94,7 +94,7 @@ class Coworking extends Component {
                 </Grid>
                 <div className={classes.root}>
 
-                    <GridList cellHeight={160} className={classes.gridList} cols={isMobile ? 2 : 3}>
+                    <GridList cellHeight={200} className={classes.gridList} cols={isMobile ? 2 : 3}>
                         {
                             listCoworking.map((place, index) => {
                                 return <GridListTile key={index}>

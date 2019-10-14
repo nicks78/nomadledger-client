@@ -62,7 +62,7 @@ class Account extends Component {
 
   render() {
 
-    const { classes, company, user, userIsFetching, companyIsFetching, locale } = this.props
+    const { classes, company, user, userIsFetching, companyIsFetching } = this.props
 
     if (userIsFetching || companyIsFetching) {
       return <Spinner />
@@ -114,8 +114,6 @@ const mapStateToProps = (state) => {
     userIsFetching: state.account.user.isFetching,
     userReceivedAt: state.account.user.receivedAt,
     user: state.account.user.item,
-
-    locale: state.locale.locale,
   }
 }
 

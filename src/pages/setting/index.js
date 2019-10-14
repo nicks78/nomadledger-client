@@ -3,8 +3,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withStyles, Paper, Typography, Grid, Divider } from '@material-ui/core';
-import ApxAlert from '../../components/common/alert'
-import Spinner from '../../components/common/spinner'
 import AddCategory from './addCategory'
 import AddVat from './addVat'
 import AddContactGroup from './addContactGroup'
@@ -13,9 +11,6 @@ import Tooltips from '../../components/common/tooltips';
 
 
 const styles = theme => ({
-    paper: {
-        height: "100%"
-    },
     title: {
         marginBottom: 24
     },

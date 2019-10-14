@@ -94,9 +94,8 @@ class Add extends Component {
 
     onFormSubmit = (e) => {
         e.preventDefault();
-
         // Expense date cannot be above of current date
-        if (!this.checkDateExpense()) { return; }
+        this.checkDateExpense()
 
         this.props.createItem(this.props.reducer, this.props.newData)
     }
@@ -108,7 +107,7 @@ class Add extends Component {
 
             if (date_2 > date_1) {
                 this.props.setNotification("error_date_expense", "error");
-                return false;
+                return;
             }
         }
     }
@@ -133,9 +132,9 @@ class Add extends Component {
                         {limitUploadFile > 0 ?
                             <ApxExpanded heading={locale.subheading.label_assets}>
                                 <UploadFile
-                                    getImages={(arrayImages) => { this.props.createItemState(this.props.reducer, "doc", arrayImages) }}
+                                    getImages={(arrayImages) => { this.props.createItemState(this.props.reducer, "images", arrayImages) }}
                                     docType="all"
-                                    images={newData.doc || []}
+                                    images={newData.images || []}
                                     btnLabel={locale.wording.upload}
                                     limitUploadFile={limitUploadFile} />
                             </ApxExpanded>

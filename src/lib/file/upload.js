@@ -92,7 +92,7 @@ class UploadFile extends React.Component {
                             type="file"
                         />
                         <label htmlFor={idInput}>
-                            <Button letiant="outlined" color="secondary" component="span" className={classes.button}>
+                            <Button variant="outlined" color="secondary" component="span" className={classes.button}>
                                 {btnLabel}
                             </Button>
                         </label>

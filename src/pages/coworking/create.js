@@ -1,8 +1,9 @@
 //manager/src/pages/expense/addExpense.js
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createStateCoworking } from './redux/actions'
-import { TextField, withStyles, Typography, Grid, Divider } from '@material-ui/core'
+import { createStateCoworking, createCoworking, resetCoworking } from './redux/actions'
+import { TextField, withStyles, Typography, Grid, Divider, Button } from '@material-ui/core'
+import ApxBackBtn from '../../components/common/backBtn'
 import ApxPaper from '../../components/common/paper'
 import ApxSelect from '../../components/common/select'
 import UploadFile from '../../lib/file/upload'
@@ -13,31 +14,22 @@ const lang = localStorage.getItem('locale')
 
 export class Create extends Component {
 
-    getCountry = (e) => {
-        console.log(e)
+
+    componentWillMount() {
+        this.props.resetCoworking()
     }
 
     handleTags = (e, key = null) => {
         let array = this.props.coworking.tags || [];
         let value = e.target.value
 
-        if (key === "Enter") {
+        if (value.indexOf(" ") >= 1) {
             this.props.createStateCoworking("tag", "")
-            array = ['#' + this.formatString(value), ...array];
+            array = [...array, '#' + value];
             this.props.createStateCoworking("tags", array)
         } else {
             this.props.createStateCoworking("tag", value)
         }
-    }
-
-    formatString = (value) => {
-        let newVal = value.replace(/#/g, "_");
-        let splited = newVal.split(" ");
-        for (let x = 1; x < splited.length; x++) {
-            splited[x] = splited[x].charAt(0).toUpperCase() + splited[x].slice(1)
-        }
-
-        return splited.join("")
     }
 
     deleteTag = (tag) => {
@@ -51,15 +43,22 @@ export class Create extends Component {
         this.props.createStateCoworking("tags", tags)
     }
 
+    onSubmitForm = (e) => {
+        e.preventDefault()
+        this.props.createCoworking()
+    }
+
     render() {
 
-        const { coworking, locale, country, classes } = this.props
+        const { coworking, locale, country, classes, isFetching } = this.props
 
         return (
             <ApxPaper styled={{ padding: window.innerWidth <= 500 ? 12 : 24 }}>
+                <ApxBackBtn />
                 <Typography variant="h1" align="center" className={classes.title}>{locale.coworking.create_h1}</Typography>
-                <div >
-                    <Typography variant="h2" align="left">{locale.coworking.create_h2_form}</Typography>
+                <Typography variant="caption" align="center">{locale.coworking.create_subtitle}</Typography>
+                <form onSubmit={this.onSubmitForm} className={classes.form}>
+                    <Typography variant="h6" align="left">{locale.coworking.create_h2_form}</Typography>
                     <Grid container spacing={24}>
                         <Grid item xs={6}>
                             <Grid container spacing={8}>
@@ -67,6 +66,7 @@ export class Create extends Component {
                                     <TextField
                                         label={locale.wording.name}
                                         variant="outlined"
+                                        required
                                         name="name"
                                         margin="dense"
                                         fullWidth
@@ -78,10 +78,10 @@ export class Create extends Component {
                                     <TextField
                                         label={locale.wording.email}
                                         variant="outlined"
-                                        name="name"
+                                        name="email"
                                         margin="dense"
                                         fullWidth
-                                        value={coworking.name || ""}
+                                        value={coworking.email || ""}
                                         onChange={(e) => { this.props.createStateCoworking(e.target.name, e.target.value) }}
                                     />
                                 </Grid>
@@ -89,10 +89,10 @@ export class Create extends Component {
                                     <TextField
                                         label={locale.wording.phoneNumber}
                                         variant="outlined"
-                                        name="name"
+                                        name="phoneNumber"
                                         margin="dense"
                                         fullWidth
-                                        value={coworking.name || ""}
+                                        value={coworking.phoneNumber || ""}
                                         onChange={(e) => { this.props.createStateCoworking(e.target.name, e.target.value) }}
                                     />
                                 </Grid>
@@ -100,10 +100,10 @@ export class Create extends Component {
                                     <TextField
                                         label={locale.wording.url}
                                         variant="outlined"
-                                        name="name"
+                                        name="url"
                                         margin="dense"
                                         fullWidth
-                                        value={coworking.name || ""}
+                                        value={coworking.url || ""}
                                         onChange={(e) => { this.props.createStateCoworking(e.target.name, e.target.value) }}
                                     />
                                 </Grid>
@@ -111,10 +111,10 @@ export class Create extends Component {
                                     <TextField
                                         label={locale.wording.fb_page}
                                         variant="outlined"
-                                        name="name"
+                                        name="fb_page"
                                         margin="dense"
                                         fullWidth
-                                        value={coworking.name || ""}
+                                        value={coworking.fb_page || ""}
                                         onChange={(e) => { this.props.createStateCoworking(e.target.name, e.target.value) }}
                                     />
                                 </Grid>
@@ -127,7 +127,8 @@ export class Create extends Component {
                                         fullWidth
                                         label={locale.wording.addresses_street}
                                         variant="outlined"
-                                        name="name"
+                                        name="address"
+                                        required
                                         margin="dense"
                                         value={coworking.address || ""}
                                         onChange={(e) => { this.props.createStateCoworking(e.target.name, e.target.value) }}
@@ -138,7 +139,7 @@ export class Create extends Component {
                                         fullWidth
                                         label={locale.wording.addresses_zip}
                                         variant="outlined"
-                                        name="name"
+                                        name="zip_code"
                                         margin="dense"
                                         value={coworking.zip_code || ""}
                                         onChange={(e) => { this.props.createStateCoworking(e.target.name, e.target.value) }}
@@ -149,7 +150,8 @@ export class Create extends Component {
                                         fullWidth
                                         label={locale.wording.addresses_city}
                                         variant="outlined"
-                                        name="name"
+                                        required
+                                        name="city"
                                         margin="dense"
                                         value={coworking.city || ""}
                                         onChange={(e) => { this.props.createStateCoworking(e.target.name, e.target.value) }}
@@ -159,68 +161,97 @@ export class Create extends Component {
                                     <ApxSelect
                                         arrayField={country}
                                         field="country"
+                                        required={true}
                                         locale={locale}
                                         label={locale.wording.country}
                                         variant="outlined"
                                         name="country"
                                         value={coworking.country ? coworking.country[lang] : ""}
-                                        handleAction={(e) => { this.getCountry() }}
+                                        handleAction={(e) => { this.props.createStateCoworking(e.target.name, e.target.value) }}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        fullWidth
+                                        multiline
+                                        rows="3"
+                                        label={locale.wording.description}
+                                        variant="outlined"
+                                        name="description"
+                                        margin="dense"
+                                        value={coworking.description || ""}
+                                        onChange={(e) => { this.props.createStateCoworking(e.target.name, e.target.value) }}
                                     />
                                 </Grid>
                             </Grid>
                         </Grid>
                     </Grid>
-                </div>
-                <Divider className={classes.divider} />
+                    <Divider className={classes.divider} />
 
-                <Grid container spacing={24}>
-                    <Grid item xs={6}>
-                        <Typography variant="h2" align="left">{locale.coworking.create_h2_img}</Typography>
+                    <Grid container spacing={24}>
+                        <Grid item xs={6}>
+                            <Typography variant="h6" align="left">{locale.coworking.create_h2_img}</Typography>
 
-                        <UploadFile
-                            getImages={(arrayImages) => { this.props.createStateCoworking("images", arrayImages) }}
-                            docType="all"
-                            images={coworking.images || []}
-                            btnLabel={locale.wording.upload}
-                            limitUploadFile={10} />
+                            <UploadFile
+                                getImages={(arrayImages) => { this.props.createStateCoworking("images", arrayImages) }}
+                                docType="all"
+                                images={coworking.images || []}
+                                btnLabel={locale.wording.upload}
+                                limitUploadFile={10} />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Typography variant="h6" align="left">{locale.coworking.create_h2_tags}</Typography>
+                            <Typography variant="caption" style={{ fontSize: "80%" }} align="left">{locale.coworking.create_caption_tags}</Typography>
+                            <TextField
+                                fullWidth
+                                label={locale.wording.tags}
+                                variant="outlined"
+                                name="tags"
+                                margin="dense"
+                                style={{ marginBottom: 12 }}
+                                value={this.props.coworking.tag || ""}
+                                onChange={(e) => { this.handleTags(e) }}
+                            />
+                            {coworking.tags &&
+                                coworking.tags.map((tag, index) => {
+                                    return <ApxTag
+                                        key={index}
+                                        color="primary"
+                                        variant="outlined"
+                                        edit={false}
+                                        type="category_name"
+                                        obj={null}
+                                        canDelete={true}
+                                        actionTag={() => { this.deleteTag(tag) }}
+                                        label={tag}
+                                    />
+                                })
+                            }
+
+                        </Grid>
+
+
+
                     </Grid>
-                    <Grid item xs={6}>
-                        <Typography variant="h2" align="left">{locale.coworking.create_h2_tags}</Typography>
-                        <TextField
-                            fullWidth
-                            label={locale.wording.tags}
-                            variant="outlined"
-                            name="tags"
-                            margin="dense"
-                            style={{ marginBottom: 12 }}
-                            value={this.props.coworking.tag || ""}
-                            onKeyPress={(e) => { if (e.key === "Enter") { this.handleTags(e, e.key) } else { return null } }}
-                            onChange={(e) => { this.handleTags(e) }}
-                        />
-                        {coworking.tags &&
-                            coworking.tags.map((tag, index) => {
-                                return <ApxTag
-                                    key={index}
-                                    color="primary"
-                                    variant="outlined"
-                                    edit={false}
-                                    type="category_name"
-                                    obj={null}
-                                    canDelete={true}
-                                    actionTag={() => { this.deleteTag(tag) }}
-                                    label={tag}
-                                />
-                            })
-                        }
 
-                    </Grid>
+                    <Divider className={classes.divider} />
+                    <Typography variant="h6" align="left">{locale.coworking.create_h2_cmt}</Typography>
+                    <TextField
+                        fullWidth
+                        multiline
+                        rows="3"
+                        label={locale.wording.type_comment}
+                        variant="outlined"
+                        name="comment"
+                        margin="dense"
+                        value={coworking.comment || ""}
+                        onChange={(e) => { this.props.createStateCoworking(e.target.name, e.target.value) }}
+                    />
 
-
-
-                </Grid>
-
-                <Divider className={classes.divider} />
-                <Typography variant="h2" align="left">{locale.coworking.create_h2_cmt}</Typography>
+                    <div className={classes.btnWrapper}>
+                        <Button variant="contained" type="submit" to={`/coworking/add`} color="primary" disabled={isFetching} className={classes.button} >{isFetching ? locale.wording.loading : locale.wording.create}</Button>
+                    </div>
+                </form>
             </ApxPaper >
         )
     }
@@ -228,17 +259,32 @@ export class Create extends Component {
 
 const styles = theme => ({
     title: {
-        marginBottom: 24
+        marginBottom: 5
+    },
+    form: {
+        marginTop: 24
     },
     divider: {
         marginTop: 24,
         marginBottom: 24,
+    },
+    btnWrapper: {
+        display: "flex",
+        justifyContent: "flex-end",
+        marginTop: 24
+    },
+    button: {
+        color: 'white',
+        backgroundColor: theme.palette.yellow.dark,
+        width: 120,
+        marginBottom: 24
     }
 })
 
 const mapStateToProps = (state) => {
     return {
         locale: state.locale.locale,
+        isFetching: state.coworking.isFetching,
         coworking: state.coworking.item || {},
         country: state.helper.items.country,
     }
@@ -246,4 +292,4 @@ const mapStateToProps = (state) => {
 
 const StyledCreate = withStyles(styles)(Create)
 
-export default connect(mapStateToProps, { createStateCoworking })(StyledCreate)
+export default connect(mapStateToProps, { createStateCoworking, createCoworking, resetCoworking })(StyledCreate)

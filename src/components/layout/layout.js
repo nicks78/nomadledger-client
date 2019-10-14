@@ -180,7 +180,7 @@ class Layout extends React.Component {
                                 onClick={this.handleMenu}
                                 alt={user.firstname || "firstname"}
                                 src={`${user.avatar.full_path || `${DEFAULT_URL}img/default_avatar.png`}`}
-                                className={this.props.location.pathname === "/account" ? classes.avatarActive : classes.avatar}
+                                className={this.props.location.pathname === "/account" || this.props.location.pathname === "/setting" ? classes.avatarActive : classes.avatar}
                                 style={{}}
                             />
                             <Menu

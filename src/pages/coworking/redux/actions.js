@@ -27,8 +27,44 @@ export function getListCoworking(endPoint, fieldName) {
 
 // POST
 export const createCoworking = () => {
-    return dispatch => {
+    return (dispatch, getState) => {
         dispatch(requestCoworking());
+
+        let state = getState().coworking.item
+
+        const formData = new FormData();
+
+        // Set file
+        if (state.images) {
+            for (var x = 0; x < state.images.length; x++) {
+                formData.append("files", state.images[x]);
+            }
+        }
+
+        // Set input
+        formData.append('state', JSON.stringify(state));
+
+        axios.post(`${API_ENDPOINT}coworking/create`,
+            formData,
+            {
+                headers: {
+                    'content-type': 'application/form-data'
+                },
+                // onUploadProgress: progressEvent => { // Check progression for upload
+                //     var p = (progressEvent.loaded / progressEvent.total) * 100
+                //     // dispatch(progress(parseInt(p, 10)))
+                // }
+            })
+            .then(function (response) {
+                return response.data
+            })
+            .then(res => {
+                dispatch(setNotification("success_create", "success"))
+                dispatch(resetCoworking())
+            })
+            .catch(function (error) {
+                dispatch(setError(error));
+            })
 
     }
 }
@@ -69,4 +105,15 @@ export function createStateCoworking(fieldName, value) {
         type: "STATE_COWORKING",
         payload: { fieldName, value }
     }
+}
+
+export const resetCoworking = () => {
+    return {
+        type: "RESET_COWORKING"
+    }
+}
+
+
+export const progress = () => {
+
 }

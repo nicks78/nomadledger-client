@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
-import Modal from '../../pages/account/modal';
+import Modal from '../../pages/setting/modal';
 import Chip from '@material-ui/core/Chip';
 import DeleteIcon from '@material-ui/icons/DeleteOutlined'
 

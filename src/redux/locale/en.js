@@ -63,10 +63,12 @@ const en = {
         url: "/coworking",
         h3: "Accéder à ",
         create_h1: "Share a coworking space",
+        create_subtitle: "By adding photos, you confirm you have legal authority to share the images and acknowledge NomadLedger reserves the right to share the images.",
         create_h2_form: "General informations",
         create_h2_img: "Add images",
         create_h2_cmt: "Add comment",
         create_h2_tags: "Tags",
+        create_caption_tags: "Use underscore (_) for multiple word tag and type 'space' to validate",
     },
     archive: {
         name: "Archive",
@@ -245,6 +247,7 @@ const en = {
         quote: "Quote",
         refund: "Refund",
         description: "Description",
+        type_comment: "Type your comment",
 
         service_name: "Service name",
         product_name: "Product name",

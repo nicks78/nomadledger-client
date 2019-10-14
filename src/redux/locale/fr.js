@@ -63,10 +63,12 @@ const fr = {
         url: "/coworking",
         h3: "Accéder à ",
         create_h1: "Partager un coworking space",
+        create_subtitle: "En ajoutant des photos, vous confirmez que vous avez l'autorité légale pour partager les images et que vous reconnaissez que NomadLedger se réserve le droit de partager les images.",
         create_h2_form: "Informations général de l'espace de travail",
         create_h2_img: "Ajouter des images d'illustartion",
         create_h2_cmt: "Mettre un commentaire",
-        create_h2_tags: "Mot clé",
+        create_h2_tags: "Tags",
+        create_caption_tags: "Utilisez le tiret bas (_) pour un tag a multiple mots et tapez 'espace' pour valider",
         edit_h1: ""
     },
     archive: {
@@ -249,6 +251,7 @@ const fr = {
         quote: "Devis",
         refund: "Avoir",
         description: "Description",
+        type_comment: "Taper votre commentaire",
         pricing: "Prix",
 
         service_name: "Nom du service",
