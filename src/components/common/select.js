@@ -8,7 +8,7 @@ const styles = theme => ({
         width: '100%',
         marginTop: '0px',
         marginBottom: '3px',
-        fontWeight: 600,
+        fontWeight: 500,
         '& span': {
             color: theme.palette.secondary.main,
 

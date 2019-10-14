@@ -10,7 +10,7 @@ import reducers from './reducers';
 
 const logger = (store) => (next) => (action) => {
   if (typeof action !== "function") {
-    console.log("DISPATCH")
+    console.log("DISPATCH", action)
   }
   return next(action);
 }

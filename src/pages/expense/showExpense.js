@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import UploadImg from '../../lib/uploadImg'
+import UploadImg from '../../lib/file/uploadImg'
 import { setNotification } from '../../redux/notification/actions'
 import { getItem, createState, updateItem, resetState, uploadFileToServer } from '../../redux/library/actions'
 import { withStyles, TextField, Grid, Button, InputAdornment } from '@material-ui/core';

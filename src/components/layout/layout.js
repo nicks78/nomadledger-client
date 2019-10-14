@@ -10,11 +10,11 @@ import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import MainMenu from './menu'
-import ApxCopyright from '../common/copyright'
 import Avatar from '@material-ui/core/Avatar';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-// import Spinner from '../common/spinner'
+// import ApxCopyright from '../common/copyright'
+
 
 const drawerWidth = 240;
 
@@ -198,6 +198,7 @@ class Layout extends React.Component {
                                 onClose={this.handleClose}
                             >
                                 <MenuItem component={Link} onClick={this.handleClose} to="/account" >{locale.wording.my_account}</MenuItem>
+                                <MenuItem component={Link} onClick={this.handleClose} to="/setting" >{locale.wording.my_setting}</MenuItem>
                                 <MenuItem onClick={this.props.logout}>{locale.wording.logout}</MenuItem>
                             </Menu>
                         </Typography>
@@ -224,7 +225,6 @@ class Layout extends React.Component {
                         <div className={classes.btnPayment}>
                             <Button color="primary" variant="contained" size="small">Hey</Button>
                         </div>
-                        <ApxCopyright />
                     </Drawer>
                 </Hidden>
 
@@ -240,7 +240,6 @@ class Layout extends React.Component {
                         <div className={classes.btnPayment}>
                             <Button color="secondary" component={Link} to={`/public/payment-gateway/${user.internalInfos_id.token}`} variant="contained" size="small">{locale.wording.paid_member_btn}</Button>
                         </div>
-                        <ApxCopyright />
                     </Drawer>
                 </Hidden>
 
@@ -248,7 +247,6 @@ class Layout extends React.Component {
                     <div className={classes.toolbar} />
                     {this.props.children}
                 </main>
-
             </div>
         )
     }

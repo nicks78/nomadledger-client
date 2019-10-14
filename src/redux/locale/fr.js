@@ -57,6 +57,18 @@ const fr = {
         url: "/marketing",
         h3: "Accéder à "
     },
+    coworking: {
+        name: "Coworking",
+        h1: "Coworking",
+        url: "/coworking",
+        h3: "Accéder à ",
+        create_h1: "Partager un coworking space",
+        create_h2_form: "Informations général de l'espace de travail",
+        create_h2_img: "Ajouter des images d'illustartion",
+        create_h2_cmt: "Mettre un commentaire",
+        create_h2_tags: "Mot clé",
+        edit_h1: ""
+    },
     archive: {
         name: "Archive",
         url: "/archive",
@@ -132,7 +144,9 @@ const fr = {
         label_reply_quote: "Envoyez-nous vos commentaires",
         label_client_feedback: "Commentaire du client",
         event_history: "Historique des evenements",
-        placeholder_search_leads: "Recherche par secteur (ex: designer)"
+        placeholder_search_leads: "Recherche par secteur (ex: designer)",
+        change_pw: "Modifier son mot de passe",
+        change_pw_para: "Un lien vous sera envoyé, veuillez suivre les instructions."
 
     },
     wording: {
@@ -182,6 +196,7 @@ const fr = {
         addresses_zip: "Code postal",
         addresses_city: "Ville",
         addresses_country: "Pays",
+        country: "Pays",
         num_format: "Format des chiffres",
         receipt_date: "Date du reçu",
         repay: "Rembourser",
@@ -264,10 +279,10 @@ const fr = {
         discount: "Remise",
         discount_unit: "Remise (prix unitaire)",
         remove: "Supprimer",
+        approve: 'Approuver',
         draft: "Brouillon",
         pending: 'En attente',
         approved: 'Approuvé',
-        approve: 'Approuver',
         rejected: "Rejeté",
         rejecte: "Rejeter",
         pay: "Payer",
@@ -301,6 +316,7 @@ const fr = {
         selected: "Sélectionné",
         markdown: "Simple éditeur de texte pour vos devis",
         save_password: "Changer mon mot de passe",
+        send_pw_link: "Recevoir le lien",
         conversions: "Taux de conversion",
         last_modify: "Mis à jour le ",
         tag_name_en: "Nom de l'étiquette (Anglais)",
@@ -343,18 +359,23 @@ const fr = {
         invoice_ref: "Référence facture",
         refresh: "Recharger",
         my_account: "Mon compte",
+        my_setting: "Paramètres",
         weight: "Poids",
         size: "Taille",
         color: "Couleur",
         not_provided: "Non renseigné",
         leads: "prospects auto entrepreneurs en France",
-        paid_member_btn: "Devenir membre"
+        paid_member_btn: "Devenir membre",
+        url: "Website url",
+        fb_page: "Facebook page",
+        tags: "Ajouter des mot clé (ex: calme, café, wifi)"
 
     },
     helperText: {
         select_phone_code: "Code téléphone",
         select_country_code: "Pays",
         select_service_type: "Type de service",
+        search_coworking: "Rechercher par : nom, ville ou pays",
         select_num_format: "Format des chiffres",
         select_category: "Catégorie",
         select_contact: "Client",
@@ -413,6 +434,7 @@ const fr = {
         error_wrong_password: "Mot de passe incorrect",
         error_500: "Erreur serveur, veuillez recommencer ou contacter notre service support@nomadledger.com",
         error_400: "Les champs marqués avec une * sont obligatoires",
+        error_401: "Non autorisé",
         error_404: "Aucun élément trouvé, veuillez recommencer ou contacter notre service support@nomadledger.com",
         error_4044: "Fichier non trouvé, veuillez recommencer ou contacter notre service support@nomadledger.com",
         error_403_delete: "Cette donnée ne peux être supprimée. Cela signifie qu'elle est associée à un autre document.",
@@ -423,6 +445,7 @@ const fr = {
         error_session_token: "Session expiré, veuillez vous reconnecter",
         error_no_token: "Session expiré, veuillez vous reconnecter ou contacter notre service support@nomadledger.com",
         error_file_not_allowed: "Ce type de fichier n'est pas autorisé",
+        error_file_found: "Aucun fichier trouver",
         error_pw_not_match: "Mot de passe non identique",
         error_pw_min_8: "Votre mot de passe doit faire au minimum 8 caractères",
         error_500_upload: "Erreur téléchargement du fichier, veuillez recommencer ou contacter support@nomadledger.com",

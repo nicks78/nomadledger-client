@@ -12,6 +12,7 @@ import CachedIcon from '@material-ui/icons/CachedOutlined';
 import ListAltIcon from '@material-ui/icons/ListAltOutlined';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalanceOutlined'
 import AssignmentIcon from '@material-ui/icons/AssignmentOutlined';
+import DeckIcon from '@material-ui/icons/DeckOutlined';
 import LanguageIcon from '@material-ui/icons/LanguageOutlined';
 import { Typography } from '@material-ui/core';
 
@@ -111,7 +112,8 @@ class MainMenu extends React.Component {
         StoreIcon: StoreIcon,
         GroupIcon: GroupIcon,
         AssignmentIcon: AssignmentIcon,
-        LanguageIcon: LanguageIcon
+        LanguageIcon: LanguageIcon,
+        DeckIcon: DeckIcon
     }
 
     renderMenuBar = (menuName, iconName) => {
@@ -152,8 +154,8 @@ class MainMenu extends React.Component {
                     {this.renderMenuBar('product', "StoreIcon")}
 
                     <Divider className={classes.divider} />
-                    {this.renderMenuBar('marketing', "LanguageIcon")}
                     {this.renderMenuBar('contact', "GroupIcon")}
+                    {this.renderMenuBar('coworking', "DeckIcon")}
                     {this.renderMenuBar('task', "AssignmentIcon")}
 
                 </List>

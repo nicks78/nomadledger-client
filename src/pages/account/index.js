@@ -1,18 +1,13 @@
 //src/pages/account/index.js
 
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
-import { withStyles, Paper, Typography, Grid, Divider } from '@material-ui/core';
-import { getAccount, createState , updateDocument} from '../../redux/account/actions'
+import { connect } from 'react-redux'
+import { withStyles, Paper, Grid } from '@material-ui/core';
+import { getAccount, createState, updateDocument } from '../../redux/account/actions'
 import User from './user'
 import Company from './company'
-import ApxAlert  from '../../components/common/alert'
+import ApxAlert from '../../components/common/alert'
 import Spinner from '../../components/common/spinner'
-import AddCategory from './addCategory'
-import AddVat from './addVat'
-import AddContactGroup from './addContactGroup'
-import HelpIcon from '@material-ui/icons/HelpOutlined'
-import Tooltips from '../../components/common/tooltips';
 
 
 const styles = theme => ({
@@ -21,7 +16,7 @@ const styles = theme => ({
     marginBottom: 18
   },
   paper: {
-      height: "100%"
+    height: "100%"
   },
   control: {
     padding: theme.spacing.unit * 2,
@@ -47,16 +42,16 @@ const styles = theme => ({
 
 class Account extends Component {
 
-  componentDidMount(){
-      this.props.getAccount("USER")
-      this.props.getAccount("COMPANY")
+  componentDidMount() {
+    this.props.getAccount("USER")
+    this.props.getAccount("COMPANY")
   }
 
   handleFormEdit = (event, reducer) => {
     var name = event.target.name;
     var value = event.target.value
 
-    if(name === "autoRenewal"){
+    if (name === "autoRenewal") {
       value = event.target.checked;
     }
 
@@ -69,84 +64,41 @@ class Account extends Component {
 
     const { classes, company, user, userIsFetching, companyIsFetching, locale } = this.props
 
-    if( userIsFetching  || companyIsFetching   ){
+    if (userIsFetching || companyIsFetching) {
       return <Spinner />
     }
 
-    if( user === null || company === null  ){
+    if (user === null || company === null) {
       return <ApxAlert message="error_404" />
     }
     return (
       <div>
-          <Grid container className={classes.root} spacing={16}>
+        <Grid container className={classes.root} spacing={16}>
 
           <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <div className={classes.paddingContent}>
-                    <Company handleFormEdit={ this.handleFormEdit }/>
-                  </div>
-                </Paper>
-                </Grid>
-
+            <Paper className={classes.paper}>
+              <div className={classes.paddingContent}>
+                <Company handleFormEdit={this.handleFormEdit} />
+              </div>
+            </Paper>
           </Grid>
 
-
-          <Grid container spacing={24}
-              direction="row"
-              justify="space-between"
-              alignItems="stretch">
-
-                <Grid item xs={12} md={8} >
-                    <Grid container spacing={24} >
-                      <Grid item xs={12}>
-                          <Paper className={classes.paper} elevation={1}>
-                          <div className={classes.paddingContent}>
-                          <Typography variant="overline">
-                              {locale.subheading.param_company}
-                          </Typography>
-                          <br />
-                          <Grid container spacing={24}>
-
-                              <Grid item xs={12} md={6}>
-                                  <Typography variant="body1">
-                                    {locale.subheading.my_vat}&nbsp;<Tooltips title={locale.helperText.account_vat}  aria-label="vat"><HelpIcon className={ classes.iconHelp } /></Tooltips>
-                                  </Typography>
-                                  <Divider className={ classes.divider }/>
-                                  <AddVat />
-                              </Grid>
-                              <br />
-                              <Grid item xs={12} md={6}>
-                              <Typography variant="body1">
-                              {locale.subheading.contact_group}&nbsp;<Tooltips title={locale.helperText.account_group}  aria-label="group"><HelpIcon className={ classes.iconHelp } /></Tooltips>
-                                </Typography>
-                                <Divider className={ classes.divider }/>
-                                  <AddContactGroup />
-                              </Grid>
-                              <Grid item xs={12}>
+        </Grid>
 
 
-                                <Typography variant="body1"  >
-                                {locale.subheading.my_categories}&nbsp;<Tooltips title={locale.helperText.account_category}  aria-label="category"><HelpIcon className={ classes.iconHelp }  /></Tooltips>
-                                </Typography>
-                                <Divider className={ classes.divider }/>
-                                <AddCategory />
-                              </Grid>
-                          </Grid>
+        <Grid container spacing={24}
+          direction="row"
+          justify="space-between"
+          alignItems="stretch">
 
-                          </div>
-                          </Paper>
-                      </Grid>
-                    </Grid>
-                </Grid>
-
-              <Grid item xs={12} md={4}>
-                  <Paper className={classes.paper}>
-                    <div className={classes.paddingContent}>
-                        <User handleFormEdit={ this.handleFormEdit }/>
-                    </div>
-                  </Paper>
-              </Grid>
+          <Grid item xs={12} md={6} sm={6}>
+            <Paper className={classes.paper}>
+              <div className={classes.paddingContent}>
+                <User handleFormEdit={this.handleFormEdit} />
+              </div>
+            </Paper>
           </Grid>
+        </Grid>
       </div>
     )
   }
@@ -155,15 +107,15 @@ class Account extends Component {
 const mapStateToProps = (state) => {
 
   return {
-      companyIsFetching: state.account.company.isFetching,
-      companyReceivedAt: state.account.company.receivedAt,
-      company: state.account.company.item,
+    companyIsFetching: state.account.company.isFetching,
+    companyReceivedAt: state.account.company.receivedAt,
+    company: state.account.company.item,
 
-      userIsFetching: state.account.user.isFetching,
-      userReceivedAt: state.account.user.receivedAt,
-      user: state.account.user.item,
+    userIsFetching: state.account.user.isFetching,
+    userReceivedAt: state.account.user.receivedAt,
+    user: state.account.user.item,
 
-      locale: state.locale.locale,
+    locale: state.locale.locale,
   }
 }
 

@@ -6,7 +6,6 @@ import { getLocale, initLocale } from '../redux/locale/actions'
 import { setNotification } from '../redux/notification/actions'
 import { getLogout } from '../redux/auth/actions'
 import PrivateRoute from './privateRoute'
-// import CacheBuster from '../CacheBuster';
 
 // Common
 import SnackBar from '../lib/snackBar'
@@ -41,6 +40,7 @@ import ShowService from '../pages/service/showService'
 
 // Account
 import Account from '../pages/account'
+import Setting from '../pages/setting'
 
 // Expense
 import Expense from '../pages/expense'
@@ -57,8 +57,10 @@ import BookkeepingRoute from './bookkeeping'
 import NotFound from './notFound'
 import Layout from '../components/layout/layout'
 
-// Marketing
-import Marketing from '../pages/marketing'
+// Coworking
+import Coworking from '../pages/coworking'
+import CreateCoworking from '../pages/coworking/create'
+import EditCoworking from '../pages/coworking/edit'
 
 // Archive
 import Archive from '../pages/archive'
@@ -126,6 +128,7 @@ class Routes extends React.Component {
                                         <PrivateRoute exact path="/dashboard" component={Home} auth={isLoggedIn} />
 
                                         <PrivateRoute exact path="/account" component={Account} auth={isLoggedIn} />
+                                        <PrivateRoute exact path="/setting" component={Setting} auth={isLoggedIn} />
 
                                         <PrivateRoute exact path="/contact" component={Contact} auth={isLoggedIn} />
                                         <PrivateRoute path="/contact/view/:id" component={ShowContact} auth={isLoggedIn} />
@@ -145,7 +148,9 @@ class Routes extends React.Component {
 
                                         <PrivateRoute exact path="/email-content" component={Email} auth={isLoggedIn} />
 
-                                        <PrivateRoute exact path="/marketing" component={Marketing} auth={isLoggedIn} />
+                                        <PrivateRoute exact path="/coworking" component={Coworking} auth={isLoggedIn} />
+                                        <PrivateRoute path="/coworking/add" component={CreateCoworking} auth={isLoggedIn} />
+                                        <PrivateRoute path="/coworking/view/:id" component={EditCoworking} auth={isLoggedIn} />
 
                                         <PrivateRoute exact path="/template" component={Template} auth={isLoggedIn} />
 
@@ -154,14 +159,17 @@ class Routes extends React.Component {
                                         <PrivateRoute path="*" component={NotFound} auth={isLoggedIn} />
 
                                     </Switch>
+
                                 </Layout>
                                 : null
 
                         }
+
                         <Route component={NotFound} />
 
                     </Switch>
                 </React.Fragment>
+
             </Router>
         )
     }

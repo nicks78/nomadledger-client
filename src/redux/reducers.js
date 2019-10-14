@@ -20,6 +20,9 @@ import downloadReducer from './download/downloadReducer'
 import contractReducer from './contract/contractReducer'
 import marketingReducer from './marketing/marketingReducer'
 
+// v2 
+import coworkingReducer from '../pages/coworking/redux/coworkingReducer'
+
 export default combineReducers({
     locale: localeReducer,
     library: libraryReducer,
@@ -35,5 +38,6 @@ export default combineReducers({
     error: errorReducer,
     download: downloadReducer,
     contract: contractReducer,
-    marketing: marketingReducer
+    marketing: marketingReducer,
+    coworking: coworkingReducer
 })
