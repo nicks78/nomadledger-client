@@ -29,6 +29,7 @@ class Coworking extends Component {
     componentWillUnmount() {
         var el = document.getElementById('scrollable');
         el.removeEventListener('scroll', this.handleScroll);
+        el.removeEventListener('resize', this.getWindowWidth);
     }
 
 
@@ -103,11 +104,7 @@ class Coworking extends Component {
                                         title={place.name.toUpperCase()}
                                         subtitle={<b>In: {place.city} | {place.country[lang]}</b>}
                                         className={classes.titleBar}
-                                        actionIcon={
-                                            <IconButton component={Link} to={`/coworking/view/${place._id}`} aria-label={`info about ${place.title}`} className={classes.icon}>
-                                                <InfoIcon />
-                                            </IconButton>
-                                        }
+
                                     />
                                 </GridListTile>
                             })
@@ -179,3 +176,10 @@ const StyledCoworking = withStyles(styles)(Coworking)
 export default connect(mapStateToProps, { getListCoworking })(StyledCoworking)
 
 
+
+
+// actionIcon={
+//     <IconButton component={Link} to={`/coworking/view/${place._id}`} aria-label={`info about ${place.title}`} className={classes.icon}>
+//         <InfoIcon />
+//     </IconButton>
+// }

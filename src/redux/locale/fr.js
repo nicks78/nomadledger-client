@@ -471,6 +471,7 @@ const fr = {
         error_422_selling_price: "Le champs prix de vente est obligatoire",
         error_422_indice: "Taux de TVA doit être un chiffre (ex: 19,60 ou 19.60)",
         error_422_name: "Veuillez indiquer un nom",
+        error_422_name_vat: "Veuillez indiquer un nom pour votre TVA",
         error_422_access_member: "Seule les membres NomadLedger ont accès à cette fonction.",
         error_422_cannot_be_edited: "Ne peut etre editer",
         error_422_cannot_be_send: "Ce document ne peut plus être envoyé",

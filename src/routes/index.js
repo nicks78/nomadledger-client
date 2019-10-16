@@ -60,7 +60,7 @@ import Layout from '../components/layout/layout'
 // Coworking
 import Coworking from '../pages/coworking'
 import CreateCoworking from '../pages/coworking/create'
-import EditCoworking from '../pages/coworking/edit'
+import ViewCoworking from '../pages/coworking/view'
 
 // Archive
 import Archive from '../pages/archive'
@@ -150,7 +150,7 @@ class Routes extends React.Component {
 
                                         <PrivateRoute exact path="/coworking" component={Coworking} auth={isLoggedIn} />
                                         <PrivateRoute path="/coworking/add" component={CreateCoworking} auth={isLoggedIn} />
-                                        <PrivateRoute path="/coworking/view/:id" component={EditCoworking} auth={isLoggedIn} />
+                                        <PrivateRoute path="/coworking/view/:id" component={ViewCoworking} auth={isLoggedIn} />
 
                                         <PrivateRoute exact path="/template" component={Template} auth={isLoggedIn} />
 

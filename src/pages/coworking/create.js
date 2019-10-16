@@ -56,7 +56,7 @@ export class Create extends Component {
             <ApxPaper styled={{ padding: window.innerWidth <= 500 ? 12 : 24 }}>
                 <ApxBackBtn />
                 <Typography variant="h1" align="center" className={classes.title}>{locale.coworking.create_h1}</Typography>
-                <Typography variant="caption" align="center">{locale.coworking.create_subtitle}</Typography>
+                <Typography variant="caption" style={{ fontSize: "75%" }} align="center">{locale.coworking.create_subtitle}</Typography>
                 <form onSubmit={this.onSubmitForm} className={classes.form}>
                     <Typography variant="h6" align="left">{locale.coworking.create_h2_form}</Typography>
                     <Grid container spacing={24}>

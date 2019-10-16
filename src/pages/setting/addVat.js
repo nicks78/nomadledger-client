@@ -3,24 +3,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { pushToDocument, getAccount } from '../../redux/account/actions'
-import { withStyles, TextField } from '@material-ui/core'
+import { withStyles, TextField, Fab } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/AddOutlined'
 import ApxTag from '../../components/common/tag'
 import Spinner from '../../components/common/spinner'
 import { cvtNumToUserPref } from '../../utils/help_function'
+import { setNotification } from '../../redux/notification/actions'
 
 
 
 
 const styles = theme => ({
-    root: {
-        padding: 24
-    },
-    title: {
-        marginBottom: 24
-    },
     addVat: {
-        position: 'relative'
+        position: 'relative',
+        marginTop: 24
     },
     textField: {
         width: '45%',
@@ -30,11 +26,7 @@ const styles = theme => ({
         position: 'absolute',
         bottom: 8,
         right: 0,
-        cursor: 'pointer',
-
-        '&:hover': {
-            color: theme.palette.secondary.main
-        }
+        cursor: 'pointer'
     },
     tagWrapper: {
         marginTop: 24
@@ -72,7 +64,7 @@ class AddVat extends Component {
     _pushToDoc = () => {
 
         if (this.state.name === '') {
-            alert(this.props.locale.message.error_422_name)
+            this.props.setNotification("error_422_name_vat", "error")
             return;
         }
 
@@ -143,8 +135,7 @@ class AddVat extends Component {
                         margin="normal"
                     />
 
-                    <AddIcon className={classes.addBtn} onClick={this._pushToDoc} />
-
+                    <Fab size="small" color="primary" onClick={this._pushToDoc} className={classes.addBtn}><AddIcon /></Fab>
 
                 </div>
 
@@ -189,4 +180,4 @@ const mapStateToProps = (state) => {
 
 const StyledAddVat = withStyles(styles)(AddVat);
 
-export default connect(mapStateToProps, { getAccount, pushToDocument })(StyledAddVat);
+export default connect(mapStateToProps, { getAccount, pushToDocument, setNotification })(StyledAddVat);

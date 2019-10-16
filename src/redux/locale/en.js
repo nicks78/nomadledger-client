@@ -466,6 +466,7 @@ const en = {
         error_422_selling_price: "Sell price field is required",
         error_422_indice: "VAT rate must be a number (ex:19.60)",
         error_422_name: "Must contain a name",
+        error_422_name_vat: "VAT must contain a name",
         error_422_access_member: "Only NomadLedger member have access to this function",
         error_422_cannot_be_edited: "Cannot be edited",
         error_422_cannot_be_send: "This document cannot be send anymore",

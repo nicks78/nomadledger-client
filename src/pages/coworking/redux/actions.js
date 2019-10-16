@@ -19,7 +19,26 @@ export function getListCoworking(endPoint, fieldName) {
                 dispatch(receiveCoworking(res.payload, fieldName, res.total))
             })
             .catch(function (error) {
-                dispatch(setNotification("error_500", "error"))
+                dispatch(setError(error));
+            })
+    }
+}
+
+// GET ONE
+export function getCoworking(id) {
+
+    return dispatch => {
+
+        dispatch(requestCoworking());
+
+        axios.get(`${API_ENDPOINT}coworking/${id}`)
+            .then(function (response) {
+                return response.data
+            })
+            .then(res => {
+                dispatch(setCoworking(res))
+            })
+            .catch(function (error) {
                 dispatch(setError(error));
             })
     }
@@ -77,6 +96,15 @@ export function receiveItems(fieldName, total) {
         payload: [],
         total: total,
         fieldName
+    }
+}
+
+const setCoworking = (item) => {
+    return {
+        type: "GET_COWORKING",
+        payload: item,
+        isFetching: false,
+        isError: false,
     }
 }
 

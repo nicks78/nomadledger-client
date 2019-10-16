@@ -1,7 +1,7 @@
 //src/redux/constant.js
 
-// const contant = "https://api.nomadledger.com"
-const contant = "http://localhost:8080"
+const contant = "https://api.nomadledger.com"
+// const contant = "http://localhost:8080"
 
 
 export const STRIPE_PUBLIC_KEY = "pk_live_UOsYUxwgIa6iEx2YZ3ZpzeUD00Z66V2uQV"
