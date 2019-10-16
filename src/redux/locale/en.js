@@ -579,7 +579,7 @@ const en = {
             whether you’re operating on your own or within a startup. Our software offers everything you need, from following up on 
             leads to <strong>managing invoices</strong>. Get started now and get your <strong>business growing</strong>.  `,
             title_list: "No hidden fees, just a flat monthly rate.",
-            listItem: ["Edit commercial documents", "Generate PDFs", "Export in Excel format", "Manage your contacts", "Manage your services/products", "Task manager", "Auto calculate VAT", "Import Ggoogle contacts", "Track your revenues", "Manage your expenses", "Access to more than 29 000 leads (France)"],
+            listItem: ["Edit commercial documents", "Generate PDFs", "Export in Excel format", "Manage your contacts", "Manage your services/products", "Task manager", "Auto calculate VAT", "Import Ggoogle contacts", "Track your revenues", "Manage your expenses"],
             btn: "Create an account"
         },
         partners: {

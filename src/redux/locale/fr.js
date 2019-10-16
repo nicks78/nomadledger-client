@@ -584,7 +584,7 @@ const fr = {
             price_sub: `par mois`,
             title_list: "Pas de frais cachés, juste un tarif mensuel fixe.",
             paragraphe: `Profitez d’un <strong>accès illimité</strong> à une solution à part entière pour gérer les documents professionnels de votre entreprise et plus encore, que vous travailliez seul ou au sein d’une startup. Notre logiciel offre tout ce dont vous avez besoin, du suivi de vos prospects à la <strong>gestion des factures</strong>. Commencez dès maintenant et développez votre entreprise.`,
-            listItem: ["Edition de documents", "Creation de PDF", "Export format Excel", "Gérer vos contacts", "Gérer vos services/produits", "Task manager", "Calcule automatique des TVA", "Importer vos contacts Google", "Suivi de votre chiffre d’affaire", "Gérer vos dépenses", "Accéder à plus de 29 000 prospects (France)"],
+            listItem: ["Edition de documents", "Creation de PDF", "Export format Excel", "Gérer vos contacts", "Gérer vos services/produits", "Task manager", "Calcule automatique des TVA", "Importer vos contacts Google", "Suivi de votre chiffre d’affaire", "Gérer vos dépenses"],
             btn: "Créer un compte"
         },
         partners: {
